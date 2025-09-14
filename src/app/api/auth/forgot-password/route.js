@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import User from '@/models/User';
+import User from '../../../../models/User';
 import crypto from 'crypto';
-import { sendEmail } from '@/lib/email';
+import { sendEmail } from '../../../../lib/email';
 
 // Request password reset
 export async function POST(request) {

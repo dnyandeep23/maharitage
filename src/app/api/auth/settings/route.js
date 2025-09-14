@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { withAuth } from '@/middleware/auth';
-import User from '@/models/User';
+import { withAuth } from '../../../../middleware/auth';
+import User from '../../../../models/User';
 
 export async function PUT(request) {
   const authError = await withAuth(request);

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import User from '@/models/User';
+import User from '../../../../models/User';
 import crypto from 'crypto';
 
 export async function POST(request) {
