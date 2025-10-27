@@ -16,7 +16,7 @@ export async function POST(request) {
 
   try {
     const body = await request.json();
-    console.log('Login request body:', body);
+    // console.log('Login request body:', body);
 
     const { email, password, role } = body;
 

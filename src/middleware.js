@@ -39,7 +39,7 @@ const PROTECTED_PREFIXES = [
 
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;
-  console.log("🧭 Checking path:", pathname);
+  // console.log('🧭 Checking path:', pathname);
 
   // 🟢 Skip middleware for static files, Next internals, and images
   if (

@@ -103,7 +103,7 @@ const AIPage = () => {
         console.log("Fetched chats response:", res);
         if (res.ok) {
           const data = await res.json();
-          console.log("Fetched chats:", res);
+          // console.log("Fetched chats:", res);
 
           console.log("Fetched chats:", data);
           setChats(data.chats);

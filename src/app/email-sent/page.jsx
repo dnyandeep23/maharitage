@@ -39,7 +39,7 @@ const EmailSentContent = () => {
     }, [email]);
 
     const handleResend = async () => {
-        console.log("handleResend")
+        // console.log("handleResend")
         setResendStatus('sending');
         try {
             const response = await fetch('/api/auth/resend-verification', {

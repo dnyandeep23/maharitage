@@ -18,7 +18,7 @@ export async function withAuth(req) {
       error: 'Invalid or expired token'
     }, { status: 401 });
   }
-  console.log(user)
+  // console.log(user)
   req.user = user;
   return null;
 }

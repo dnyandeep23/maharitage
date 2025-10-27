@@ -26,7 +26,7 @@ const Footer = () => {
       window.open(href, '_blank');
     } else {
       // Handle internal navigation
-      console.log(`Navigate to: ${href}`);
+      // console.log(`Navigate to: ${href}`);
     }
   };
 

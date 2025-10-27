@@ -18,7 +18,7 @@ export async function POST(request) {
     console.log("Resend request for email:", email);
 
     if (!email) {
-      console.log("Resend failed: Email is required.");
+      // console.log("Resend failed: Email is required.");
       return NextResponse.json(
         { success: false, error: "Email is required" },
         { status: 400 }

@@ -5,7 +5,7 @@ import connectDB from "../../../../lib/mongoose.js";
 import { handleApiError } from "../../../../middleware/auth.js";
 
 export async function POST(request) {
-  console.log("--- Verify Email Request Received ---");
+  // console.log("--- Verify Email Request Received ---");
   try {
     await connectDB();
     console.log("Database connected successfully.");

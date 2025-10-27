@@ -17,7 +17,7 @@ export async function GET(request) {
     console.log(request.user.role);
     console.log(request.user.email);
     console.log(request.user.username);
-    console.log("Fetched chats:");
+    // console.log("Fetched chats:");
     console.log(chats);
     return NextResponse.json({ chats });
   } catch (error) {

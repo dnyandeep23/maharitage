@@ -29,7 +29,7 @@ export async function POST(request) {
   try {
     const temp = await request.json();
     const { username, email, password, role } = temp;
-    console.log("Processing registration request...");
+    // console.log("Processing registration request...");
 
     // Validate input
     if (!username || !email || !password || !role) {

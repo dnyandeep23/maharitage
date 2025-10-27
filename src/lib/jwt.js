@@ -87,7 +87,7 @@ export const verifyTokenMiddleware = async (token) => {
   }
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET);
-    console.log('Middleware Token Payload:', payload);
+    // console.log('Middleware Token Payload:', payload);
     return payload; // Token is valid
   } catch (error) {
     console.error('Middleware Token Verification Error:', error.message);

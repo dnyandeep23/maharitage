@@ -55,7 +55,7 @@ const ResetPasswordContent = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       if (data.success) {
         setToast({ show: true, message: 'Password reset successful. You can now log in with your new password.', type: 'success' });

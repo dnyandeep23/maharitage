@@ -42,7 +42,7 @@ const VerifyEmailContent = () => {
         });
         console.log(response);
         const data = await response.json();
-        console.log("Data" + data);
+        // console.log("Data" + data);
 
         if (data.success) {
           setVerificationStatus("success");
