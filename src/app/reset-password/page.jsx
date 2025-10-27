@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
@@ -10,7 +10,7 @@ import { Lock, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Toast from '../component/Toast';
 
-const ResetPassword = () => {
+const ResetPasswordContent = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -185,6 +185,12 @@ const ResetPassword = () => {
       />
     </div>
   );
-};
+}
+
+const ResetPassword = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ResetPasswordContent />
+  </Suspense>
+);
 
 export default ResetPassword;

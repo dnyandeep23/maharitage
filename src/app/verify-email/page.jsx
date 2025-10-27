@@ -9,7 +9,7 @@ import Modal from '../component/Modal';
 import login_bg from '../../assets/images/login_bg.png';
 import { motion } from 'framer-motion';
 
-const VerifyEmail = () => {
+const VerifyEmailContent = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
   const [verificationStatus, setVerificationStatus] = useState('verifying');
@@ -138,6 +138,13 @@ const VerifyEmail = () => {
       />
     </div>
   );
-};
+}
+
+const VerifyEmail = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <VerifyEmailContent />
+  </Suspense>
+);
+
 
 export default VerifyEmail;
