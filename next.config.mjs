@@ -1,16 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['mongoose'],
-    esmExternals: 'loose',
+  serverExternalPackages: ['mongoose'],
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
+
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': './src'
+      '@': './src',
     };
     return config;
-  }
+  },
 };
 
 export default nextConfig;

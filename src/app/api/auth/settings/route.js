@@ -1,66 +1,64 @@
 import { NextResponse } from 'next/server';
-import { withAuth } from '../../../../middleware/auth';
+import { withAuth, handleApiError } from '../../../middleware/auth';
 import User from '../../../../models/User';
+import dbConnect from '../../../../lib/mongoose';
 
-export async function PUT(request) {
-  const authError = await withAuth(request);
-  if (authError) return authError;
-
-  try {
-    const { preferences } = await request.json();
-
-    const user = await User.findByIdAndUpdate(
-      request.user.id,
-      {
-        'profile.preferences': preferences,
-        updatedAt: new Date()
-      },
-      { new: true, runValidators: true }
-    ).select('-password');
-
-    if (!user) {
-      return NextResponse.json({
-        success: false,
-        error: 'User not found'
-      }, { status: 404 });
-    }
-
-    return NextResponse.json({
-      success: true,
-      data: user.profile.preferences
-    });
-  } catch (error) {
-    return NextResponse.json({
-      success: false,
-      error: 'Error updating user preferences'
-    }, { status: 500 });
-  }
-}
-
+// ✅ GET /api/auth/settings
 export async function GET(request) {
-  const authError = await withAuth(request);
-  if (authError) return authError;
-
   try {
+    await dbConnect();
+    const authError = await withAuth(request);
+    if (authError) return authError;
+
     const user = await User.findById(request.user.id)
       .select('profile.preferences')
       .lean();
 
     if (!user) {
-      return NextResponse.json({
-        success: false,
-        error: 'User not found'
-      }, { status: 404 });
+      return NextResponse.json(
+        { success: false, error: 'User not found' },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json({
       success: true,
-      data: user.profile.preferences
+      message: 'Preferences fetched successfully',
+      data: user.profile.preferences,
     });
   } catch (error) {
+    return handleApiError(error);
+  }
+}
+
+// ✅ PUT /api/auth/settings
+export async function PUT(request) {
+  try {
+    await dbConnect();
+    const authError = await withAuth(request);
+    if (authError) return authError;
+
+    const { preferences } = await request.json();
+
+    const updatedUser = await User.findByIdAndUpdate(
+      request.user.id,
+      { 'profile.preferences': preferences, updatedAt: new Date() },
+      { new: true, runValidators: true }
+    ).select('-password');
+
+    if (!updatedUser) {
+      return NextResponse.json(
+        { success: false, error: 'User not found' },
+        { status: 404 }
+      );
+    }
+
     return NextResponse.json({
-      success: false,
-      error: 'Error fetching user preferences'
-    }, { status: 500 });
+      success: true,
+      message: 'Preferences updated successfully',
+      data: updatedUser.profile.preferences,
+    });
+  } catch (error) {
+    return handleApiError(error);
   }
 }

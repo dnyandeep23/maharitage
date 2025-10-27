@@ -1,6 +1,10 @@
 "use client";
-import { ApiProvider } from "../contexts/ApiContext";
+import { AuthProvider } from "../contexts/AuthContext.jsx";
 
 export function ClientLayout({ children }) {
-  return <ApiProvider>{children}</ApiProvider>;
+  return (
+    <AuthProvider>
+      {children}
+    </AuthProvider>
+  );
 }

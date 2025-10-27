@@ -1,25 +1,29 @@
-"use client";
-import React, { useState, useRef, useEffect } from "react";
+'use client';
+
+import React, { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import Header from "../component/Header";
-import Footer from "../component/Footer";
-import Modal from "../component/Modal";
-import login_bg from "../../assets/images/login_bg.png";
-import Image from "next/image";
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { motion } from "framer-motion";
-import { ROLES, ROLE_CONFIG, getDashboardPath } from "../../lib/roles";
-import { useApi } from "../../contexts/ApiContext";
+import Header from '../component/Header';
+import Footer from '../component/Footer';
+import login_bg from '../../assets/images/login_bg.png';
+import Image from 'next/image';
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ROLES, ROLE_CONFIG } from '../../lib/roles';
+import { useAuth } from '../../contexts/AuthContext.jsx';
+import { useRouter } from 'next/navigation';
+import Toast from '../component/Toast';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState(ROLES.PUBLIC_USER);
   const [isLoading, setIsLoading] = useState(false);
   const [highlightStyle, setHighlightStyle] = useState({});
-  const [modal, setModal] = useState({ isOpen: false, type: "", title: "", message: "" });
+  const [toast, setToast] = useState({ show: false, message: '', type: '' });
   const tabRefs = useRef({});
+  const router = useRouter();
+  const { login } = useAuth();
 
   const toggleRole = (newRole) => {
     if (newRole !== role) {
@@ -33,59 +37,30 @@ const Login = () => {
     }
   };
 
-  const showModal = (type, title, message) => {
-    setModal({ isOpen: true, type, title, message });
-  };
-
-  const closeModal = () => {
-    setModal({ isOpen: false, type: "", title: "", message: "" });
-  };
-
-  const { login } = useApi();
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!email || !password) {
-      showModal("warning", "Missing Information", "Please enter both email and password.");
+      setToast({ show: true, message: 'Please enter both email and password.', type: 'error' });
       return;
     }
-    
+
     if (password.length < 6) {
-      showModal("error", "Invalid Password", "Password must be at least 6 characters long.");
+      setToast({ show: true, message: 'Password must be at least 6 characters long.', type: 'error' });
       return;
     }
 
     setIsLoading(true);
     try {
-      const result = await login(email, password, role);
-
-      if (result.success) {
-        showModal("success", "Login Successful", result.message);
-        
-        // Get role-specific dashboard path and redirect
-        const dashboardPath = getDashboardPath(result.user.role);
-        setTimeout(() => {
-          window.location.href = dashboardPath;
-        }, 1500);
-      } else {
-        showModal("error", "Login Failed", result.error);
-      }
+      await login(email, password, role);
+      handleNavigation('/');
     } catch (error) {
-      showModal("error", "Login Failed", "An error occurred while trying to log in. Please try again.");
+      setToast({ show: true, message: error.message || 'An error occurred during login.', type: 'error' });
+    } finally {
       setIsLoading(false);
     }
   };
 
-  // Role display names mapping
-  const roleDisplay = {
-    "public-user": "Public User",
-    "research-expert": "Research Expert",
-    "admin": "Admin"
-  };
-  const roles = ["public-user", "research-expert", "admin"];
-
-  // Update highlight position and size based on active tab
   useEffect(() => {
     const activeTab = tabRefs.current[role];
     if (activeTab) {
@@ -99,7 +74,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative font-inter">
-      {/* Background */}
+      {toast.show && <Toast message={toast.message} type={toast.type} onDone={() => setToast({ show: false, message: '', type: '' })} />}
       <div className="absolute inset-0 -z-20 w-full h-full">
         <Image
           src={login_bg}
@@ -110,20 +85,16 @@ const Login = () => {
         />
       </div>
 
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/60 -z-10" />
 
-      {/* Header */}
       <Header
         handleNavigation={handleNavigation}
         currentPath={usePathname()}
         variant="minimal"
       />
 
-      {/* Main Section */}
       <div className="w-full flex flex-col items-center justify-center h-screen">
         <div className="w-full max-w-7xl flex flex-col md:flex-row gap-28">
-          {/* Left Section */}
           <div className="flex-1 flex flex-col justify-center items-start text-white">
             <h2 className="text-8xl md:text-6xl font-bold mb-6">
               Welcome back to Maharitage
@@ -137,7 +108,7 @@ const Login = () => {
                 Don't have an account?{" "}
                 <span
                   className="text-green-400 font-bold cursor-pointer hover:underline"
-                  onClick={() => handleNavigation("/register")}
+                  onClick={() => handleNavigation('/register')}
                 >
                   Sign Up
                 </span>
@@ -145,38 +116,31 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Right Section - Login Card */}
           <div className="flex-1 flex flex-col justify-center items-center">
             <div className="relative w-full max-w-lg bg-white/15 rounded-[8rem] rounded-br-[10rem] rounded-bl-[15rem] p-16 shadow-xl border border-white/30">
-              
-              {/* Role Tabs with Animation */}
-              <div className="relative flex justify-center items-center bg-white/10 rounded-full p-1 mb-10 border border-white/20 w-full">
-                {/* Sliding Highlight */}
+              <div className="relative flex justify-center items-center rounded-full p-1 mb-10 w-full">
                 <motion.div
                   className="absolute top-1 bottom-1 rounded-full bg-green-900/90 backdrop-blur-sm shadow-lg"
                   style={highlightStyle}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                 />
-                
+
                 {Object.entries(ROLE_CONFIG).map(([roleKey, roleData]) => (
                   <button
                     key={roleKey}
                     ref={(el) => (tabRefs.current[roleKey] = el)}
                     onClick={() => toggleRole(roleKey)}
-                    className={`relative z-10 px-6 py-3 text-sm font-medium transition-colors duration-300 rounded-full whitespace-nowrap flex-1 text-center ${
-                      role === roleKey
-                        ? "text-white"
-                        : "text-white/70 hover:text-white"
-                    }`}
+                    className={`relative z-10 px-6 py-3 text-sm font-medium transition-colors duration-300 rounded-full whitespace-nowrap flex-1 text-center ${role === roleKey
+                      ? 'text-white'
+                      : 'text-white/70 hover:text-white'
+                      }`}
                   >
                     {roleData.display}
                   </button>
                 ))}
               </div>
 
-              {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Email */}
                 <div className="relative">
                   <Mail className="absolute left-5 top-4 text-green-900 w-5 h-5" />
                   <input
@@ -189,11 +153,10 @@ const Login = () => {
                   />
                 </div>
 
-                {/* Password */}
                 <div className="relative">
                   <Lock className="absolute left-5 top-4 text-green-900 w-5 h-5" />
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     className="w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -209,18 +172,16 @@ const Login = () => {
                   </button>
                 </div>
 
-                {/* Forgot Password */}
                 <div className="text-right text-sm">
                   <button
                     type="button"
                     className="text-green-400 hover:underline"
-                    onClick={() => handleNavigation("/forgot-password")}
+                    onClick={() => handleNavigation('/forgot-password')}
                   >
                     Forgot password?
                   </button>
                 </div>
 
-                {/* Submit */}
                 <div className="flex justify-end pt-4">
                   <button
                     type="submit"
@@ -246,20 +207,10 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer
         quickLinks={[]}
         contactInfo={{}}
         handleNavigation={handleNavigation}
-      />
-
-      {/* Modal */}
-      <Modal
-        isOpen={modal.isOpen}
-        onClose={closeModal}
-        type={modal.type}
-        title={modal.title}
-        message={modal.message}
       />
     </div>
   );

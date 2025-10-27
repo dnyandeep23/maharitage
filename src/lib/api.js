@@ -18,14 +18,14 @@ const getAuthHeader = () => {
 };
 
 export const api = {
-  async login(email, password) {
+  async login(email, password, role) {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, role }),
       });
       
       const data = await handleResponse(response);
@@ -38,13 +38,13 @@ export const api = {
     }
   },
 
-  async register(name, email, password) {
-    const response = await fetch(`${BASE_URL}/auth/register`, {
+  async register(name, email, password, role) {
+    const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password, role }),
     });
     
     const data = await response.json();

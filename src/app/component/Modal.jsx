@@ -21,25 +21,25 @@ const Modal = ({ isOpen, onClose, type, title, message }) => {
     switch (type) {
       case "success":
         return {
-          bg: "bg-green-50",
+          bg: "bg-black/20",
           border: "border-green-200",
-          button: "bg-green-500 hover:bg-green-600",
+          button: "bg-green-500/60 hover:bg-green-600/60",
         };
       case "error":
         return {
-          bg: "bg-red-50",
+          bg: "bg-black/20",
           border: "border-red-200",
           button: "bg-red-500 hover:bg-red-600",
         };
       case "warning":
         return {
-          bg: "bg-yellow-50",
+          bg: "bg-black/20",
           border: "border-yellow-200",
           button: "bg-yellow-500 hover:bg-yellow-600",
         };
       default:
         return {
-          bg: "bg-gray-50",
+          bg: "bg-black/20",
           border: "border-gray-200",
           button: "bg-gray-500 hover:bg-gray-600",
         };
@@ -66,7 +66,7 @@ const Modal = ({ isOpen, onClose, type, title, message }) => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className={`relative w-full max-w-md ${colors.bg} rounded-2xl shadow-2xl ${colors.border} border-2 overflow-hidden`}
+              className={`relative w-full max-w-md ${colors.bg} rounded-2xl shadow-2xl ${colors.border} border overflow-hidden`}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -95,7 +95,7 @@ const Modal = ({ isOpen, onClose, type, title, message }) => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="text-xl font-bold text-gray-900 mb-4"
+                  className="text-xl font-bold text-gray-200 mb-4"
                 >
                   {title}
                 </motion.h3>
@@ -105,7 +105,7 @@ const Modal = ({ isOpen, onClose, type, title, message }) => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="text-gray-600 text-sm leading-relaxed mb-8"
+                  className="text-gray-300 text-sm leading-relaxed mb-8"
                 >
                   {message}
                 </motion.p>

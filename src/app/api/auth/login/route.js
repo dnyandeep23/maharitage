@@ -2,8 +2,9 @@
 import { NextResponse } from 'next/server';
 import connectDB from '../../../../lib/mongoose.js';
 import User from '../../../../models/User.js';
-import { generateToken } from '../../../../lib/jwt.js';
+import { generateToken, generateVerificationToken } from '../../../../lib/jwt.js';
 import { handleApiError } from '../../../../middleware/auth.js';
+import { sendEmail, getVerificationEmailTemplate } from '../../../../lib/email.js';
 
 export async function POST(request) {
   try {
@@ -15,6 +16,8 @@ export async function POST(request) {
 
   try {
     const body = await request.json();
+    console.log('Login request body:', body);
+
     const { email, password, role } = body;
 
     // Validate required fields
@@ -23,7 +26,7 @@ export async function POST(request) {
       if (!email) missingFields.push('email');
       if (!password) missingFields.push('password');
       if (!role) missingFields.push('role');
-      
+
       return NextResponse.json({
         success: false,
         error: 'Validation error',
@@ -53,6 +56,29 @@ export async function POST(request) {
       }, { status: 403 });
     }
 
+    if (!user.isEmailVerified) {
+      // Resend verification email
+      const verificationToken = await generateVerificationToken(user);
+      const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${verificationToken}`;
+      const emailTemplate = getVerificationEmailTemplate(user.username, verificationUrl);
+      await sendEmail({
+        to: user.email,
+        subject: emailTemplate.subject,
+        html: emailTemplate.html
+      });
+
+      const resultPayload = {
+        success: false,
+        errorCode: 'EMAIL_NOT_VERIFIED',
+        error: 'EMAIL_NOT_VERIFIED',
+        message: 'Please verify your email. A new verification email has been sent.'
+      };
+
+      console.log('🚀 Sending response:', resultPayload);
+
+      return NextResponse.json(resultPayload, { status: 403 });
+    }
+
     if (user.status !== 'active') {
       return NextResponse.json({
         success: false,
@@ -72,10 +98,10 @@ export async function POST(request) {
     }
 
     // Build response user without password
-    const userObj = user.toObject();
-    delete userObj.password;
+    var userObj = user.toObject();
+    userObj = (({ password, lastlogin, createdAt, updatedAt, __v, status, ...rest }) => rest)(userObj);
 
-    const token = generateToken(userObj);
+    const token = await generateToken(userObj);
 
     // Return cookie + JSON payload (cookie is HTTP only)
     const response = NextResponse.json({

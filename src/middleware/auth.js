@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { verifyToken, getTokenFromHeader } from '../lib/jwt.js';
+import { verifyTokenMiddleware, getTokenFromHeader } from '../lib/jwt.js';
 
 export async function withAuth(req) {
   const token = getTokenFromHeader(req);
-  
+
   if (!token) {
     return NextResponse.json({
       success: false,
@@ -11,14 +11,14 @@ export async function withAuth(req) {
     }, { status: 401 });
   }
 
-  const user = verifyToken(token);
+  const user = await verifyTokenMiddleware(token);
   if (!user) {
     return NextResponse.json({
       success: false,
       error: 'Invalid or expired token'
     }, { status: 401 });
   }
-
+  console.log(user)
   req.user = user;
   return null;
 }
@@ -36,7 +36,7 @@ export function handleApiError(error) {
   // Handle Mongoose Validation Errors
   if (error.name === 'ValidationError') {
     const validationErrors = {};
-    
+
     // Collect all validation errors
     Object.keys(error.errors).forEach(key => {
       validationErrors[key] = error.errors[key].message;

@@ -1,40 +1,45 @@
 import { NextResponse } from 'next/server';
 import User from '../../../../models/User';
-import crypto from 'crypto';
-import { sendEmail } from '../../../../lib/email';
+import { generatePasswordResetToken } from '../../../../lib/jwt';
+import { sendEmail, getPasswordResetEmailTemplate } from '../../../../lib/email';
+import { handleApiError } from '../../../../middleware/auth';
+import connectDB from '../../../../lib/mongoose';
 
 // Request password reset
 export async function POST(request) {
   try {
+    await connectDB();
+  } catch (err) {
+    console.error('DB connection error', err);
+    return NextResponse.json({ success: false, error: 'Database connection failed' }, { status: 500 });
+  }
+
+  try {
     const { email } = await request.json();
 
+    if (!email) {
+      return NextResponse.json({ success: false, error: 'Email is required' }, { status: 400 });
+    }
+
     const user = await User.findOne({ email });
+
     if (!user) {
+      // To prevent user enumeration, we send a success-like response even if the user doesn't exist.
       return NextResponse.json({
-        success: false,
+        success: true,
         message: 'If an account exists with this email, a password reset link will be sent.'
       });
     }
 
-    // Generate reset token
-    const resetToken = crypto.randomBytes(32).toString('hex');
-    user.resetPasswordToken = crypto
-      .createHash('sha256')
-      .update(resetToken)
-      .digest('hex');
-    user.resetPasswordExpiry = Date.now() + 30 * 60 * 1000; // 30 minutes
-
-    await user.save();
-
-    // Create reset URL
+    const resetToken = await generatePasswordResetToken(user);
     const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${resetToken}`;
 
-    // Send email
     try {
+      const emailTemplate = getPasswordResetEmailTemplate(user.username, resetUrl);
       await sendEmail({
         to: user.email,
-        subject: 'Password Reset Request',
-        text: `You requested a password reset. Click here to reset your password: ${resetUrl}`
+        subject: emailTemplate.subject,
+        html: emailTemplate.html
       });
 
       return NextResponse.json({
@@ -42,19 +47,10 @@ export async function POST(request) {
         message: 'Password reset link sent to email'
       });
     } catch (error) {
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpiry = undefined;
-      await user.save();
-
-      return NextResponse.json({
-        success: false,
-        error: 'Error sending reset email'
-      }, { status: 500 });
+      console.error('Error sending reset email:', error);
+      return handleApiError(new Error('Could not send password reset email.'));
     }
   } catch (error) {
-    return NextResponse.json({
-      success: false,
-      error: 'Error processing password reset request'
-    }, { status: 500 });
+    return handleApiError(error);
   }
 }

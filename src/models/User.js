@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
     trim: true,
     minlength: [3, 'Username must be at least 3 characters long']
   },
+  chats: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Chat',
+  }],
   email: {
     type: String,
     required: [true, 'Please provide your email'],

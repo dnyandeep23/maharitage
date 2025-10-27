@@ -1,30 +1,64 @@
-'use client'
+'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import '../fonts.css';
 import PropTypes from 'prop-types';
-import { Book, User, Languages, Menu, X, LogOut, Settings } from 'lucide-react';
+import {
+  Book,
+  User,
+  Languages,
+  Menu,
+  X,
+  LogOut,
+  Settings,
+  House,
+  LayoutDashboard
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useApi } from '../../contexts/ApiContext';
+import { useAuth } from '../../contexts/AuthContext.jsx';
 
 const Header = ({
-  handleNavigation,
   currentPath = '/',
-  variant = 'full', // "full" or "minimal"
+  variant = 'full',
   bgColor = 'bg-white',
   textColor = 'text-green-900',
   activeColor = 'bg-green-600 text-white',
   buttonColor = 'bg-green-600 text-white',
   buttonHover = 'hover:bg-green-700',
-  navActive = 'bg-green-100/50 text-green-700',
-  navInactive = 'text-green-900 hover:bg-green-100',
-  logoColor = 'text-green-900',
+  navActive = variant === 'minimal'
+    ? 'bg-green-200/40 text-green-100 text-xs font-inter'
+    : 'bg-green-100/50 text-green-700 text-xs font-inter',
+  navInactive = variant === 'minimal'
+    ? 'text-green-200 text-xs hover:bg-green-200/30'
+    : 'text-green-900 text-xs hover:bg-green-100',
+  logoColor = variant !== 'minimal' ? 'text-green-700' : 'text-green-200',
   borderColor = 'border-green-200'
 }) => {
-  const { user, isAuthenticated, logout } = useApi();
+  const { user, logout } = useAuth();
   const [hoveredNav, setHoveredNav] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef(null);
+
+  // 🌗 Theme setup variables
+  const lightTheme = {
+    bg: 'bg-white',
+    text: 'text-green-900',
+    accent: 'bg-green-600 text-white'
+  };
+
+  const darkTheme = {
+    bg: 'bg-gray-900',
+    text: 'text-green-100',
+    accent: 'bg-green-500 text-gray-900'
+  };
+
+  const theme = lightTheme; // 🌓 You can switch to darkTheme dynamically later.
+
+  const handleNavigation = (path) => {
+    if (window.location.pathname !== path) {
+      window.location.href = path;
+    }
+  };
 
   // Handle clicking outside of profile menu
   useEffect(() => {
@@ -47,27 +81,29 @@ const Header = ({
     }
   };
 
-  // Reusable nav items for full header
+  // 🧭 Define nav items (conditionally includes Dashboard if logged in)
   const navItems = [
-    { path: '/', label: 'Home', icon: (
-        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-          <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      )
-    },
+    { path: '/', label: 'Home', icon: <House className="w-5 h-5" /> },
     { path: '/about', label: 'About Us', icon: <Book className="w-5 h-5" /> },
     { path: '/contact', label: 'Contact Us', icon: <User className="w-5 h-5" /> },
-    { path: 'language', label: 'Language', icon: <Languages className="w-5 h-5" />, isModal: true }
+    { path: 'language', label: 'Language', icon: <Languages className="w-5 h-5" />, isModal: true },
   ];
 
-  // Helper function to render nav button (used in both variants)
+  if (user) {
+    navItems.splice(1, 0, {
+      path: '/dashboard',
+      label: 'Dashboard',
+      icon: <LayoutDashboard className="w-5 h-5" />
+    });
+  }
+
+  // 🔘 Reusable nav button
   const renderNavButton = (item) => {
     const isActive = currentPath === item.path;
     const isHovered = hoveredNav === item.path;
-    const buttonClasses =
-      isHovered
-        ? `${navActive}`
-        : isActive && !hoveredNav
+    const buttonClasses = isHovered
+      ? `${navActive}`
+      : isActive && !hoveredNav
         ? `${navActive}`
         : `${navInactive}`;
 
@@ -81,11 +117,14 @@ const Header = ({
         }
         onMouseEnter={() => setHoveredNav(item.path)}
         onMouseLeave={() => setHoveredNav(null)}
-        className={`px-4 py-1 rounded-full font-medium flex items-center gap-2 transition-all duration-200 hover:scale-105 hover:shadow-md group ${buttonClasses}`}
+        className={`px-4 py-1 cursor-pointer rounded-full text-sm font-medium flex items-center gap-2 transition-all duration-200 hover:scale-105 hover:shadow-md group ${buttonClasses}`}
         style={{ fontFamily: 'Inter' }}
       >
         {item.icon}
-        <span className="hidden max-w-0 group-hover:max-w-xs group-hover:block transition-all duration-300 whitespace-nowrap">
+        <span
+          className="hidden max-w-0 group-hover:max-w-xs group-hover:block transition-all duration-300 whitespace-nowrap"
+          style={{ fontFamily: 'Inter' }}
+        >
           {item.label}
         </span>
       </button>
@@ -93,24 +132,28 @@ const Header = ({
   };
 
   return (
-    <header className={`fixed top-2 sm:top-5 left-2 sm:left-4 right-2 sm:right-4 z-50 ${bgColor}/30 backdrop-blur-md shadow-sm border-b rounded-full ${borderColor}`}>
-      <div className="px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
+    <header
+      className={`fixed top-1 sm:top-3 left-2 sm:left-3 right-2 sm:right-3 z-50 ${theme.bg}/30 backdrop-blur-md text-sm shadow-sm border-b rounded-full ${borderColor}`}
+    >
+      <div className="px-2 sm:px-3 py-0.5 sm:py-2 flex items-center justify-between relative">
         {/* Logo */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center space-x-2 sm:space-x-4"
         >
-          <span className={`font-cinzel-decorative text-lg sm:text-2xl pl-2 sm:pl-10 font-bold tracking-wider ${logoColor}`}>
+          <span
+            className={`font-cinzel-decorative text-sm sm:text-xl cursor-pointer pl-1 sm:pl-6 font-bold tracking-wider ${logoColor}`}
+            onClick={() => handleNavigation('/')}
+          >
             MAHARITAGE
           </span>
         </motion.div>
 
-        {/* Full header variant */}
         {variant === 'full' && (
           <>
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-4">
+            {/* 🧭 Centered Navigation */}
+            <nav className="hidden md:flex items-center justify-center flex-1 space-x-4 absolute left-1/2 -translate-x-1/2">
               <AnimatePresence>
                 {navItems.map((item, index) => (
                   <motion.div
@@ -125,15 +168,14 @@ const Header = ({
               </AnimatePresence>
             </nav>
 
-            {/* Auth Buttons or Profile */}
+            {/* 👤 Auth/Profile Section */}
             <div className="hidden md:flex items-center space-x-4">
-              {isAuthenticated ? (
+              {user ? (
                 <div className="relative">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                    className={`w-10 h-10 rounded-full font-medium ${buttonColor} flex items-center justify-center text-lg uppercase shadow transition-all duration-300`}
-                    style={{ fontFamily: 'Inter' }}
+                    className={`w-8 h-8 rounded-full font-medium ${buttonColor} flex items-center justify-center text-sm uppercase shadow transition-all duration-300`}
                   >
                     {user?.name?.[0] || user?.email?.[0] || 'U'}
                   </motion.button>
@@ -162,15 +204,15 @@ const Header = ({
                               setIsProfileMenuOpen(false);
                               handleNavigation('/dashboard/settings');
                             }}
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full"
+                            className="flex items-center px-4 py-1 text-sm text-gray-700 hover:bg-gray-100 w-full"
                           >
                             <Settings className="w-4 h-4 mr-2" />
                             Settings
                           </button>
-                          
+
                           <button
                             onClick={handleLogout}
-                            className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 w-full"
+                            className="flex items-center px-4 py-1 text-sm text-red-600 hover:bg-red-50 w-full"
                           >
                             <LogOut className="w-4 h-4 mr-2" />
                             Logout
@@ -185,7 +227,7 @@ const Header = ({
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     onClick={() => handleNavigation('/login')}
-                    className={`px-4 py-2 rounded-full font-medium ${textColor} transition-all duration-300`}
+                    className={`px-4 py-1.5 rounded-full font-medium ${textColor} transition-all duration-300`}
                     style={{ fontFamily: 'Inter' }}
                   >
                     Login
@@ -194,7 +236,7 @@ const Header = ({
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handleNavigation('/register')}
-                    className={`px-6 py-2 rounded-full font-medium ${buttonColor} ${buttonHover} shadow transition-all duration-300`}
+                    className={`px-6 py-1.5 rounded-full font-medium ${buttonColor} ${buttonHover} shadow transition-all duration-300`}
                     style={{ fontFamily: 'Inter' }}
                   >
                     Register
@@ -203,7 +245,7 @@ const Header = ({
               )}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* 📱 Mobile Menu Button */}
             <div className="md:hidden">
               <motion.button
                 whileHover={{ scale: 1.1 }}
@@ -217,15 +259,16 @@ const Header = ({
           </>
         )}
 
-        {/* Minimal header variant (only Home button) */}
+        {/* Minimal header variant */}
         {variant === 'minimal' && (
-          <nav className="flex items-center pr-4">
-            {renderNavButton(navItems[0])} {/* Only Home button */}
+          <nav className="flex items-center pr-4 space-x-4">
+            {renderNavButton(navItems[0])}
+            {renderNavButton(navItems[3])}
           </nav>
         )}
       </div>
 
-      {/* Mobile Navigation Menu */}
+      {/* 📱 Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && variant === 'full' && (
           <motion.div
@@ -248,9 +291,8 @@ const Header = ({
                     }
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`px-4 py-2 rounded-full font-medium ${
-                    currentPath === item.path ? navActive : navInactive
-                  } transition-all duration-200`}
+                  className={`px-4 py-2 rounded-full font-light ${currentPath === item.path ? navActive : navInactive
+                    } transition-all duration-200`}
                   style={{ fontFamily: 'Inter' }}
                 >
                   <div className="flex items-center gap-2">
@@ -260,7 +302,7 @@ const Header = ({
                 </motion.button>
               ))}
               <div className="flex flex-col space-y-2 pt-2 border-t border-amber-100">
-                {isAuthenticated ? (
+                {user ? (
                   <>
                     <div className="px-4 py-2 border-b">
                       <p className="text-sm font-medium text-gray-900 truncate">
@@ -301,8 +343,7 @@ const Header = ({
                         handleNavigation('/login');
                         setIsMobileMenuOpen(false);
                       }}
-                      className={`px-4 py-2 rounded-full font-medium ${textColor} hover:bg-amber-50 transition-all duration-200`}
-                      style={{ fontFamily: 'Inter' }}
+                      className={`px-4 cursor-pointer text-white hover:text-black font-bold py-2 rounded-full ${textColor} hover:bg-amber-50 transition-all duration-200`}
                     >
                       Login
                     </motion.button>
@@ -312,8 +353,7 @@ const Header = ({
                         handleNavigation('/register');
                         setIsMobileMenuOpen(false);
                       }}
-                      className={`px-4 py-2 rounded-full font-medium ${buttonColor} ${buttonHover} shadow`}
-                      style={{ fontFamily: 'Inter' }}
+                      className={`px-4 cursor-pointer py-2 text-lg max-h-full rounded-full font-medium ${buttonColor} ${buttonHover} shadow`}
                     >
                       Register
                     </motion.button>

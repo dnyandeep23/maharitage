@@ -1,43 +1,42 @@
 import { NextResponse } from 'next/server';
 import User from '../../../../models/User';
-import crypto from 'crypto';
+import { verifyToken } from '../../../../lib/jwt';
+import { handleApiError } from '../../../../middleware/auth';
+import connectDB from '../../../../lib/mongoose';
 
 export async function POST(request) {
   try {
+    await connectDB();
+  } catch (err) {
+    console.error('DB connection error', err);
+    return NextResponse.json({ success: false, error: 'Database connection failed' }, { status: 500 });
+  }
+
+  try {
     const { token, password } = await request.json();
 
-    // Hash token
-    const resetPasswordToken = crypto
-      .createHash('sha256')
-      .update(token)
-      .digest('hex');
-
-    const user = await User.findOne({
-      resetPasswordToken,
-      resetPasswordExpiry: { $gt: Date.now() }
-    });
-
-    if (!user) {
-      return NextResponse.json({
-        success: false,
-        error: 'Invalid or expired reset token'
-      }, { status: 400 });
+    if (!token || !password) {
+      return NextResponse.json({ success: false, error: 'Token and password are required' }, { status: 400 });
     }
 
-    // Set new password
+    const decoded = await verifyToken(token);
+
+    if (!decoded) {
+      return NextResponse.json({ success: false, error: 'Invalid or expired token' }, { status: 400 });
+    }
+
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 });
+    }
+
     user.password = password;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpiry = undefined;
     await user.save();
 
-    return NextResponse.json({
-      success: true,
-      message: 'Password reset successful'
-    });
+    return NextResponse.json({ success: true, message: 'Password reset successful' });
   } catch (error) {
-    return NextResponse.json({
-      success: false,
-      error: 'Error resetting password'
-    }, { status: 500 });
+    console.error('Reset Password Error:', error);
+    return handleApiError(error);
   }
 }

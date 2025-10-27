@@ -1,15 +1,18 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from '../../../../middleware/auth';
 import User from '../../../../models/User';
-
+import connectDB from '../../../../lib/mongoose.js';
 // Get current user profile
 export async function GET(request) {
+
   const authError = await withAuth(request);
   if (authError) return authError;
-  console.log('login backend hit');
+  // console.log(request.user)
+  // console.log('login backend hit');
+  await connectDB();
   try {
     const user = await User.findById(request.user.id).select('-password');
-    
+
     if (!user) {
       return NextResponse.json({
         success: false,
@@ -22,6 +25,7 @@ export async function GET(request) {
       data: user
     });
   } catch (error) {
+    console.error('Error fetching user profile:', error);
     return NextResponse.json({
       success: false,
       error: 'Error fetching user profile'
@@ -37,7 +41,7 @@ export async function PUT(request) {
   try {
     const userData = await request.json();
     const allowedUpdates = ['name', 'profile'];
-    
+
     // Filter out non-allowed updates
     const updates = Object.keys(userData)
       .filter(key => allowedUpdates.includes(key))
@@ -48,7 +52,7 @@ export async function PUT(request) {
 
     const user = await User.findByIdAndUpdate(
       request.user.id,
-      { 
+      {
         ...updates,
         updatedAt: new Date()
       },

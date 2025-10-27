@@ -1,22 +1,36 @@
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
+  host: process.env.EMAIL_HOST,       // smtp-relay.brevo.com
+  port: Number(process.env.EMAIL_PORT) || 587,
+  secure: false,                      // use STARTTLS (Brevo’s standard)
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
-  }
+    user: process.env.EMAIL_USER,     // your Brevo account email
+    pass: process.env.EMAIL_PASSWORD, // your Brevo SMTP key
+  },
+  tls: {
+    rejectUnauthorized: true,         // verify TLS certificate
+  },
 });
 
 export async function sendEmail({ to, subject, text, html }) {
   try {
     const mailOptions = {
-      from: process.env.EMAIL_FROM,
+      from: `Maharitage <${process.env.EMAIL_FROM}`,
+      replyTo: process.env.EMAIL_REPLY_TO,
       to,
       subject,
       text,
-      html
+      html: `
+        ${html}
+        <p style="font-size:12px;color:#888;">Sent via Brevo • ${new Date().toLocaleString()}</p>
+      `,
+      headers: {
+        'X-Mailer': 'Nodemailer via Brevo',
+        'X-Priority': '1',        // high importance
+        'X-MSMail-Priority': 'High',
+        'Importance': 'High'
+      },
     };
 
     await transporter.sendMail(mailOptions);
@@ -33,17 +47,20 @@ export function getVerificationEmailTemplate(name, verificationUrl) {
     subject: 'Verify Your Email Address',
     text: `Hi ${name},\n\nPlease click the following link to verify your email address: ${verificationUrl}\n\nThis link will expire in 24 hours.\n\nIf you didn't create an account, you can safely ignore this email.`,
     html: `
-      <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2>Verify Your Email Address</h2>
-        <p>Hi ${name},</p>
-        <p>Please click the following link to verify your email address:</p>
-        <p>
-          <a href="${verificationUrl}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
-            Verify Email
-          </a>
-        </p>
-        <p>This link will expire in 24 hours.</p>
-        <p>If you didn't create an account, you can safely ignore this email.</p>
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333;">
+        <h1 style="font-family: 'Cinzel Decorative', cursive; color: #2E7D32; text-align: center;">MahaRitage</h1>
+        <div style="padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+          <h2>Verify Your Email Address</h2>
+          <p>Hi ${name},</p>
+          <p>Please click the following link to verify your email address:</p>
+          <p style="text-align: center;">
+            <a href="${verificationUrl}" style="display: inline-block; padding: 12px 24px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">
+              Verify Email
+            </a>
+          </p>
+          <p>This link will expire in 24 hours.</p>
+          <p>If you didn't create an account, you can safely ignore this email.</p>
+        </div>
       </div>
     `
   };
@@ -53,19 +70,22 @@ export function getVerificationEmailTemplate(name, verificationUrl) {
 export function getPasswordResetEmailTemplate(name, resetUrl) {
   return {
     subject: 'Reset Your Password',
-    text: `Hi ${name},\n\nYou requested to reset your password. Click the following link to reset it: ${resetUrl}\n\nThis link will expire in 30 minutes.\n\nIf you didn't request this, you can safely ignore this email.`,
+    text: `Hi ${name},\n\nYou requested to reset your password. Click the following link to reset it: ${resetUrl}\n\nThis link will expire in 24 hours.\n\nIf you didn't request this, you can safely ignore this email.`,
     html: `
-      <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2>Reset Your Password</h2>
-        <p>Hi ${name},</p>
-        <p>You requested to reset your password. Click the following link to reset it:</p>
-        <p>
-          <a href="${resetUrl}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
-            Reset Password
-          </a>
-        </p>
-        <p>This link will expire in 30 minutes.</p>
-        <p>If you didn't request this, you can safely ignore this email.</p>
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333;">
+        <h1 style="font-family: 'Cinzel Decorative', cursive; color: #2E7D32; text-align: center;">MahaRitage</h1>
+        <div style="padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+          <h2>Reset Your Password</h2>
+          <p>Hi ${name},</p>
+          <p>You requested to reset your password. Click the following link to reset it:</p>
+          <p style="text-align: center;">
+            <a href="${resetUrl}" style="display: inline-block; padding: 12px 24px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">
+              Reset Password
+            </a>
+          </p>
+          <p>This link will expire in 24 hours.</p>
+          <p>If you didn't request this, you can safely ignore this email.</p>
+        </div>
       </div>
     `
   };
