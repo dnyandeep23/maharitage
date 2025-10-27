@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 
-const SearchPage = () => {
+const SearchPageContent = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get('q');
   const [searchResults, setSearchResults] = useState([]);
@@ -55,6 +55,13 @@ const SearchPage = () => {
       <Footer handleNavigation={handleNavigation} />
     </div>
   );
-};
+}
+
+const SearchPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <SearchPageContent />
+  </Suspense>
+);
+
 
 export default SearchPage;
