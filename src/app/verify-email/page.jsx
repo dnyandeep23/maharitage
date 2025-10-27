@@ -1,55 +1,68 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Image from 'next/image';
-import Header from '../component/Header';
-import Footer from '../component/Footer';
-import Modal from '../component/Modal';
-import login_bg from '../../assets/images/login_bg.png';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import Image from "next/image";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
+import Modal from "../component/Modal";
+import login_bg from "../../assets/images/login_bg.png";
+import { motion } from "framer-motion";
 
 const VerifyEmailContent = () => {
   const searchParams = useSearchParams();
-  const token = searchParams.get('token');
-  const [verificationStatus, setVerificationStatus] = useState('verifying');
-  const [modal, setModal] = useState({ isOpen: false, type: '', title: '', message: '' });
+  const token = searchParams.get("token");
+  const [verificationStatus, setVerificationStatus] = useState("verifying");
+  const [modal, setModal] = useState({
+    isOpen: false,
+    type: "",
+    title: "",
+    message: "",
+  });
 
   useEffect(() => {
     const verifyEmail = async () => {
       if (!token) {
-        setVerificationStatus('failed');
-        showModal('error', 'Verification Failed', 'No verification token found.');
+        setVerificationStatus("failed");
+        showModal(
+          "error",
+          "Verification Failed",
+          "No verification token found."
+        );
         return;
       }
 
       try {
-        const response = await fetch('/api/auth/verify-email', {
-          method: 'POST',
+        const response = await fetch("/api/auth/verify-email", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ token }),
         });
-        console.log(response)
+        console.log(response);
         const data = await response.json();
-        console.log("Data" + data)
+        console.log("Data" + data);
 
         if (data.success) {
-          setVerificationStatus('success');
-          showModal('success', 'Verification Successful', data.message);
+          setVerificationStatus("success");
+          showModal("success", "Verification Successful", data.message);
 
           // Redirect to login page after a delay
           setTimeout(() => {
-            window.location.href = '/login';
+            window.location.href = "/login";
           }, 2000); // 2-second delay before redirecting
         } else {
-          setVerificationStatus('failed');
-          showModal('error', 'Verification Failed', data.error);
+          setVerificationStatus("failed");
+          showModal("error", "Verification Failed", data.error);
         }
       } catch (error) {
-        setVerificationStatus('failed');
-        showModal('error', 'Verification Failed', 'An error occurred while verifying your email.');
+        setVerificationStatus("failed");
+        showModal(
+          "error",
+          "Verification Failed",
+          "An error occurred while verifying your email."
+        );
       }
     };
 
@@ -61,11 +74,11 @@ const VerifyEmailContent = () => {
   };
 
   const closeModal = () => {
-    setModal({ isOpen: false, type: '', title: '', message: '' });
+    setModal({ isOpen: false, type: "", title: "", message: "" });
   };
 
   const handleNavigation = (path) => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.location.href = path;
     }
   };
@@ -96,24 +109,33 @@ const VerifyEmailContent = () => {
           transition={{ duration: 0.5 }}
           className="w-full max-w-lg bg-white/15 rounded-lg p-8 shadow-xl border border-white/30 text-white text-center"
         >
-          {verificationStatus === 'verifying' && (
+          {verificationStatus === "verifying" && (
             <>
-              <h2 className="text-3xl font-bold mb-4">Verifying your email...</h2>
+              <h2 className="text-3xl font-bold mb-4">
+                Verifying your email...
+              </h2>
               <p>Please wait while we verify your email address.</p>
             </>
           )}
-          {verificationStatus === 'success' && (
+          {verificationStatus === "success" && (
             <>
-              <h2 className="text-3xl font-bold mb-4 text-green-400">Email Verified!</h2>
-              <p className="mb-6">Your email has been successfully verified. You will be redirected to the login page shortly.</p>
+              <h2 className="text-3xl font-bold mb-4 text-green-400">
+                Email Verified!
+              </h2>
+              <p className="mb-6">
+                Your email has been successfully verified. You will be
+                redirected to the login page shortly.
+              </p>
             </>
           )}
-          {verificationStatus === 'failed' && (
+          {verificationStatus === "failed" && (
             <>
-              <h2 className="text-3xl font-bold mb-4 text-red-500">Verification Failed</h2>
+              <h2 className="text-3xl font-bold mb-4 text-red-500">
+                Verification Failed
+              </h2>
               <p className="mb-6">{modal.message}</p>
               <button
-                onClick={() => handleNavigation('/register')}
+                onClick={() => handleNavigation("/register")}
                 className="bg-green-700 hover:bg-green-800 cursor-pointer text-white font-bold py-2 px-4 rounded"
               >
                 Go to Register
@@ -138,13 +160,12 @@ const VerifyEmailContent = () => {
       />
     </div>
   );
-}
+};
 
 const VerifyEmail = () => (
   <Suspense fallback={<div>Loading...</div>}>
     <VerifyEmailContent />
   </Suspense>
 );
-
 
 export default VerifyEmail;
