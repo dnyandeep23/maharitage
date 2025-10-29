@@ -43,7 +43,9 @@ export async function POST(request) {
 
     console.log("Generating new verification token...");
     const verificationToken = await generateVerificationToken(user);
-    const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${verificationToken}`;
+    const verificationUrl = `${
+      process.env.NEXT_PUBLIC_APP_URL
+    }/verify-email?token=${encodeURIComponent(verificationToken)}`;
     const emailTemplate = getVerificationEmailTemplate(
       user.username,
       verificationUrl

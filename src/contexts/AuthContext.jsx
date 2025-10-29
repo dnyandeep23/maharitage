@@ -1,8 +1,13 @@
-
-"use client"
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { api } from '../lib/api';
-import { useRouter, usePathname } from 'next/navigation';
+"use client";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import { api } from "../lib/api";
+import { useRouter, usePathname } from "next/navigation";
 
 const AuthContext = createContext(null);
 
@@ -14,10 +19,10 @@ export const AuthProvider = ({ children }) => {
   const pathname = usePathname();
 
   const fetchUser = useCallback(async () => {
-    const token = localStorage.getItem('auth-token');
+    const token = localStorage.getItem("auth-token");
     if (token) {
       try {
-        const response = await fetch('/api/auth/me', {
+        const response = await fetch("/api/auth/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -27,11 +32,11 @@ export const AuthProvider = ({ children }) => {
           setUser(data.data);
         } else {
           setUser(null);
-          localStorage.removeItem('auth-token');
+          localStorage.removeItem("auth-token");
         }
       } catch (error) {
         setUser(null);
-        localStorage.removeItem('auth-token');
+        localStorage.removeItem("auth-token");
       }
     }
     setLoading(false);
@@ -44,18 +49,26 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password, role) => {
     try {
       const data = await api.login(email, password, role);
+      console.log("Login data:", data);
       setUser(data.user);
-      const returnUrl = pathname || '/';
+      const returnUrl = pathname || "/";
       router.replace(returnUrl);
     } catch (error) {
+      if (
+        error.message ===
+        "Please verify your email. A new verification email has been sent."
+      ) {
+        router.replace("/email-sent?email=" + email);
+      }
       setError(error.message);
       throw error;
     }
   };
 
-  const register = async (name, email, password, role) => {
+  const register = async (username, email, password, role) => {
     try {
-      const data = await api.register(name, email, password, role);
+      const data = await api.register(username, email, password, role);
+      console.log("Registration data:", data);
       return data;
     } catch (error) {
       setError(error.message);
@@ -64,9 +77,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('auth-token');
+    localStorage.removeItem("auth-token");
     setUser(null);
-    router.push('/login');
+    router.push("/login");
   };
 
   const value = {
@@ -85,7 +98,7 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

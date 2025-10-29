@@ -9,10 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^4.4.3",
     "@google/genai": "^1.27.0",
     "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^3.0.2",
+    "disposable-email-domains": "^1.0.62",
     "framer-motion": "^12.23.12",
+    "install": "^0.13.0",
     "jose": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.544.0",
@@ -20,9 +23,9 @@
     "mongoose": "^8.18.1",
     "next": "15.5.3",
     "nodemailer": "^7.0.6",
+    "npm": "^11.6.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "@fingerprintjs/fingerprintjs": "^4.4.3"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

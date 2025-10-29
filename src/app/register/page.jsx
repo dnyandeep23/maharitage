@@ -1,36 +1,36 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
-import Header from '../component/Header';
-import Footer from '../component/Footer';
-import login_bg from '../../assets/images/login_bg.png';
-import Image from 'next/image';
-import { Mail, Lock, Eye, EyeOff, User } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useAuth } from '../../contexts/AuthContext.jsx';
-import Toast from '../component/Toast';
+import React, { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
+import login_bg from "../../assets/images/login_bg.png";
+import Image from "next/image";
+import { Mail, Lock, Eye, EyeOff, User } from "lucide-react";
+import { motion } from "framer-motion";
+import { useAuth } from "../../contexts/AuthContext.jsx";
+import Toast from "../component/Toast";
 
 const Register = () => {
   const { register } = useAuth();
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [role, setRole] = useState('public-user');
+  const [role, setRole] = useState("public-user");
   const [isLoading, setIsLoading] = useState(false);
   const [highlightStyle, setHighlightStyle] = useState({});
-  const [toast, setToast] = useState({ show: false, message: '', type: '' });
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const tabRefs = useRef({});
 
   const roleDisplay = {
-    'public-user': 'Public User',
-    'research-expert': 'Research Expert',
-    'admin': 'Admin'
+    "public-user": "Public User",
+    "research-expert": "Research Expert",
+    admin: "Admin",
   };
 
   const handleNavigation = (path) => {
@@ -39,9 +39,9 @@ const Register = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -49,28 +49,48 @@ const Register = () => {
     const { username, email, password, confirmPassword } = formData;
 
     if (!username || !email || !password || !confirmPassword) {
-      setToast({ show: true, message: 'Please fill in all required fields.', type: 'error' });
+      setToast({
+        show: true,
+        message: "Please fill in all required fields.",
+        type: "error",
+      });
       return false;
     }
 
     if (username.length < 3) {
-      setToast({ show: true, message: 'Username must be at least 3 characters long.', type: 'error' });
+      setToast({
+        show: true,
+        message: "Username must be at least 3 characters long.",
+        type: "error",
+      });
       return false;
     }
 
     if (password.length < 6) {
-      setToast({ show: true, message: 'Password must be at least 6 characters long.', type: 'error' });
+      setToast({
+        show: true,
+        message: "Password must be at least 6 characters long.",
+        type: "error",
+      });
       return false;
     }
 
     if (password !== confirmPassword) {
-      setToast({ show: true, message: 'Passwords do not match. Please try again.', type: 'error' });
+      setToast({
+        show: true,
+        message: "Passwords do not match. Please try again.",
+        type: "error",
+      });
       return false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setToast({ show: true, message: 'Please enter a valid email address.', type: 'error' });
+      setToast({
+        show: true,
+        message: "Please enter a valid email address.",
+        type: "error",
+      });
       return false;
     }
 
@@ -86,16 +106,28 @@ const Register = () => {
 
     setIsLoading(true);
     try {
-      await register(formData.username, formData.email, formData.password, role);
+      await register(
+        formData.username,
+        formData.email,
+        formData.password,
+        role
+      );
+
       window.location.href = `/email-sent?email=${formData.email}`;
     } catch (error) {
-      setToast({ show: true, message: error.message || 'An error occurred while trying to register. Please try again.', type: 'error' });
+      setToast({
+        show: true,
+        message:
+          error.message ||
+          "An error occurred while trying to register. Please try again.",
+        type: "error",
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const roles = ['public-user', 'research-expert'];
+  const roles = ["public-user", "research-expert"];
 
   useEffect(() => {
     const activeTab = tabRefs.current[role];
@@ -110,7 +142,13 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative font-inter">
-      {toast.show && <Toast message={toast.message} type={toast.type} onDone={() => setToast({ show: false, message: '', type: '' })} />}
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onDone={() => setToast({ show: false, message: "", type: "" })}
+        />
+      )}
       <div className="absolute inset-0 -z-20 w-full h-full">
         <Image
           src={login_bg}
@@ -136,14 +174,15 @@ const Register = () => {
               Join Maharitage Community
             </h2>
             <p className="text-lg text-gray-200">
-              Create your account to explore Maharashtra's rich heritage, contribute to research, and connect with fellow enthusiasts.
+              Create your account to explore Maharashtra's rich heritage,
+              contribute to research, and connect with fellow enthusiasts.
             </p>
             <div className="mt-24 text-lg">
               <p>
                 Already have an account?{" "}
                 <span
                   className="text-green-400 font-bold cursor-pointer hover:underline"
-                  onClick={() => handleNavigation('/login')}
+                  onClick={() => handleNavigation("/login")}
                 >
                   Sign In
                 </span>
@@ -153,12 +192,11 @@ const Register = () => {
 
           <div className="flex-1 flex flex-col justify-center items-center">
             <div className="relative w-full max-w-lg bg-white/15 rounded-[8rem] rounded-br-[10rem] rounded-bl-[15rem] p-16 shadow-xl border border-white/30">
-
               <div className="relative flex justify-center items-center  rounded-full p-1 mb-10 w-full">
                 <motion.div
                   className="absolute top-1 bottom-1 rounded-full bg-green-900/90 backdrop-blur-sm shadow-lg"
                   animate={highlightStyle}
-                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 />
 
                 {roles.map((r, index) => (
@@ -166,10 +204,11 @@ const Register = () => {
                     key={r}
                     ref={(el) => (tabRefs.current[r] = el)}
                     onClick={() => setRole(r)}
-                    className={`relative z-10 px-6 py-3 text-sm font-medium transition-colors duration-300 rounded-full whitespace-nowrap flex-1 text-center ${role === r
-                      ? 'text-white'
-                      : 'text-white/70 hover:text-white'
-                      }`}
+                    className={`relative z-10 px-6 py-3 text-sm font-medium transition-colors duration-300 rounded-full whitespace-nowrap flex-1 text-center ${
+                      role === r
+                        ? "text-white"
+                        : "text-white/70 hover:text-white"
+                    }`}
                   >
                     {roleDisplay[r]}
                   </button>
@@ -206,7 +245,7 @@ const Register = () => {
                 <div className="relative">
                   <Lock className="absolute left-5 top-4 text-green-900 w-5 h-5" />
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     className="w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
                     value={formData.password}
@@ -226,7 +265,7 @@ const Register = () => {
                 <div className="relative">
                   <Lock className="absolute left-5 top-4 text-green-900 w-5 h-5" />
                   <input
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
                     className="w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
                     value={formData.confirmPassword}
@@ -239,7 +278,11 @@ const Register = () => {
                     className="absolute right-4 top-4 text-green-900"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
-                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    {showConfirmPassword ? (
+                      <EyeOff size={20} />
+                    ) : (
+                      <Eye size={20} />
+                    )}
                   </button>
                 </div>
 
@@ -258,18 +301,36 @@ const Register = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className={`self-end w-36 bg-white/70 hover:bg-white text-green-900 py-3.5 rounded-full font-semibold transition-all duration-200 shadow-md text-base flex items-center justify-center ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+                    className={`self-end w-36 bg-white/70 hover:bg-white text-green-900 py-3.5 rounded-full font-semibold transition-all duration-200 shadow-md text-base flex items-center justify-center ${
+                      isLoading ? "opacity-75 cursor-not-allowed" : ""
+                    }`}
                   >
                     {isLoading ? (
                       <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-green-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <svg
+                          className="animate-spin -ml-1 mr-2 h-4 w-4 text-green-900"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
                         </svg>
                         Registering...
                       </>
                     ) : (
-                      'Register'
+                      "Register"
                     )}
                   </button>
                 </div>
