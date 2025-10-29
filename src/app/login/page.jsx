@@ -14,8 +14,8 @@ import { useRouter } from "next/navigation";
 import Toast from "../component/Toast";
 
 const Login = () => {
-  const [email, setEmail] = useState("mr.dnyandeepgaonkar@gmail.com");
-  const [password, setPassword] = useState("Dnyandeep");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState(ROLES.PUBLIC_USER);
   const [isLoading, setIsLoading] = useState(false);
