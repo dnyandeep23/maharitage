@@ -21,7 +21,6 @@ export async function POST(request) {
 
   try {
     const { username, email, password, role } = await request.json();
-    console.log("Registration data received:", { username, email, role });
 
     if (!username || !email || !password || !role) {
       return NextResponse.json(
