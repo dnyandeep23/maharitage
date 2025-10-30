@@ -92,10 +92,10 @@ const Header = ({ currentPath = "/", variant = "full", theme = "light" }) => {
   // 🧭 Navigation items
   const navItems = [
     { path: "/", label: "Home", icon: <House className="w-5 h-5" /> },
-    { path: "/about", label: "About Us", icon: <Book className="w-5 h-5" /> },
+    { path: "/docs", label: "Docs", icon: <Book className="w-5 h-5" /> },
     {
-      path: "/contact",
-      label: "Contact Us",
+      path: "/about",
+      label: "About Us",
       icon: <User className="w-5 h-5" />,
     },
     {
