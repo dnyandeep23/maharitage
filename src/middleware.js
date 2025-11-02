@@ -13,6 +13,8 @@ const UNPROTECTED_API_ROUTES = [
   "/api/auth/forget-password",
   "/api/auth/reset-password",
   "/api/ai",
+  "/api/sites",
+  "/api/sites/:id*",
 ];
 
 const PUBLIC_ROUTES = [
@@ -28,6 +30,7 @@ const PUBLIC_ROUTES = [
   "/forgot-password",
   "/search",
   "/ai",
+  "/cave/:path*",
 ];
 
 const PROTECTED_PREFIXES = [
@@ -66,7 +69,7 @@ export async function middleware(request) {
 
   // 🧩 Extract token from cookie or header
   const token =
-    request.cookies.get("auth-token")?.value ||
+    (await request.cookies.get("auth-token")?.value) ||
     request.headers.get("authorization")?.split(" ")[1];
 
   // 🔒 If no token but accessing a protected route → redirect

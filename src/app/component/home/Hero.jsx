@@ -52,7 +52,7 @@ const Hero = ({
             }}
           >
             Maha
-            <span className="text-transparent bg-clip-text bg-gradient-to-br from-60% from-[#14c604] to-green-950">
+            <span className="text-transparent bg-clip-text bg-gradient-to-br from-green-600 to-green-400">
               rashtra
             </span>
           </h1>
