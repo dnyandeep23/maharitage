@@ -9,7 +9,7 @@ import ApiDocs from "./home/ApiDocs";
 import AIFloatingButton from "./AIFloatingButton";
 import bg_img from "../../assets/images/bg_image.png";
 
-export default function HomeClient({ sites }) {
+export default function HomeClient() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [activeIcon, setActiveIcon] = useState("search"); // 'search' or 'ai'
@@ -83,11 +83,7 @@ export default function HomeClient({ sites }) {
         searchOptions={searchOptions}
       />
 
-      <Explore
-        featuredSites={sites}
-        heroData={heroData}
-        handleNavigation={handleNavigation}
-      />
+      <Explore heroData={heroData} handleNavigation={handleNavigation} />
 
       <Features />
 
