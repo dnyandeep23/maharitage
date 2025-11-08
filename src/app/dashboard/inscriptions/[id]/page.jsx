@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import ModifyInscription from '../../components/admin/ModifyInscription';
-import Loading from '../../../loading';
+import React, { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import Loading from "../../../loading";
 
 const ModifyInscriptionPage = () => {
   const { id } = useParams();
@@ -18,7 +17,7 @@ const ModifyInscriptionPage = () => {
           const data = await response.json();
           setInscription(data);
         } catch (error) {
-          console.error('Error fetching inscription:', error);
+          console.error("Error fetching inscription:", error);
         }
         setLoading(false);
       };
@@ -38,7 +37,13 @@ const ModifyInscriptionPage = () => {
     return <div>Inscription not found</div>;
   }
 
-  return <ModifyInscription inscription={inscription} onUpdate={handleUpdate} siteId={inscription.site_id} />;
+  return (
+    <ModifyInscription
+      inscription={inscription}
+      onUpdate={handleUpdate}
+      siteId={inscription.site_id}
+    />
+  );
 };
 
 export default ModifyInscriptionPage;

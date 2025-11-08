@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import ModifySite from '../../components/admin/ModifySite';
-import Loading from '../../../loading';
+import React, { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import Loading from "../../../loading";
 
 const ModifySitePage = () => {
   const { id } = useParams();
@@ -18,7 +17,7 @@ const ModifySitePage = () => {
           const data = await response.json();
           setSite(data);
         } catch (error) {
-          console.error('Error fetching site:', error);
+          console.error("Error fetching site:", error);
         }
         setLoading(false);
       };
