@@ -1,60 +1,59 @@
-
 // Role definitions and configurations for the application
 export const ROLES = {
-  PUBLIC_USER: 'public-user',
-  RESEARCH_EXPERT: 'research-expert',
-  ADMIN: 'admin'
+  PUBLIC_USER: "public-user",
+  RESEARCH_EXPERT: "research-expert",
+  ADMIN: "admin",
 };
 
 // Role-specific configuration including display names, paths, and access controls
 export const ROLE_CONFIG = {
   [ROLES.PUBLIC_USER]: {
     id: ROLES.PUBLIC_USER,
-    display: 'Public User',
-    dashboardPath: '/dashboard',
+    display: "Public User",
+    dashboardPath: "/dashboard",
     allowedPaths: [
-      '/dashboard',
-      '/profile',
-      '/settings',
-      '/api/auth/me',
-      '/api/ai/chats',
-      '/api/ai/chat'
+      "/dashboard",
+      "/profile",
+      "/settings",
+      "/api/auth/me",
+      "/api/ai/chats",
+      "/api/ai/chat",
+      "/api/api-keys",
+      "/api/api-keys/:id",
+      "/ai",
+      "/cave/*",
     ],
-    nav: [
-      { label: 'Dashboard', path: '/dashboard' },
-      { label: 'My Profile', path: '/profile' },
-      { label: 'Settings', path: '/settings' }
-    ]
+    nav: [{ label: "Dashboard", path: "/dashboard" }],
   },
   [ROLES.RESEARCH_EXPERT]: {
     id: ROLES.RESEARCH_EXPERT,
-    display: 'Research Expert',
-    dashboardPath: '/dashboard',
+    display: "Research Expert",
+    dashboardPath: "/dashboard",
     allowedPaths: [
-      '/dashboard',
-      '/research',
-      '/profile',
-      '/settings',
-      '/api/auth/me'
+      "/dashboard",
+      "/research",
+      "/profile",
+      "/settings",
+      "/api/auth/me",
+      "/api/sites/last-id",
+      "/api/sites",
+      "/api/sites/*/last-inscription-id",
+      "/api/research-requests",
+      "/api/api-keys",
+      "/api/api-keys/:id",
+      "/api/ai/chats",
+      "/api/ai/chat/:id",
+      "/api/ai",
     ],
-    nav: [
-      { label: 'Research Dashboard', path: '/dashboard' },
-      { label: 'Research Projects', path: '/research' },
-      { label: 'Profile', path: '/profile' },
-      { label: 'Settings', path: '/settings' }
-    ]
+    nav: [{ label: "Research Dashboard", path: "/dashboard" }],
   },
   [ROLES.ADMIN]: {
     id: ROLES.ADMIN,
-    display: 'Admin',
-    dashboardPath: '/dashboard',
-    allowedPaths: ['*'], // Admin has access to all paths
-    nav: [
-      { label: 'Admin Dashboard', path: '/dashboard' },
-      { label: 'User Management', path: '/admin/users' },
-      { label: 'Site Settings', path: '/admin/settings' }
-    ]
-  }
+    display: "Admin",
+    dashboardPath: "/dashboard",
+    allowedPaths: ["*"], // Admin has access to all paths
+    nav: [{ label: "Admin Dashboard", path: "/dashboard" }],
+  },
 };
 
 // Helper Functions
@@ -74,7 +73,7 @@ export function getRoleDisplay(role) {
  * @returns {string} Dashboard path for the role
  */
 export function getDashboardPath(role) {
-  return ROLE_CONFIG[role]?.dashboardPath || '/dashboard';
+  return ROLE_CONFIG[role]?.dashboardPath || "/dashboard";
 }
 
 /**
@@ -87,13 +86,17 @@ export function canAccessPath(role, path) {
   const config = ROLE_CONFIG[role];
   if (!config) return false;
 
-  // Admin has access to everything
+  // Admin can access everything
   if (role === ROLES.ADMIN) return true;
 
-  // Check if path exactly matches or is under an allowed path
-  return config.allowedPaths.some(allowedPath =>
-    path === allowedPath || path.startsWith(`${allowedPath}/`)
-  );
+  return config.allowedPaths.some((allowedPath) => {
+    const pattern = allowedPath
+      .replace(/:[^/]+/g, "[^/]+") // Convert :id, :path, etc.
+      .replace(/\*/g, ".*"); // Convert * wildcard
+
+    const regex = new RegExp(`^${pattern}$`);
+    return regex.test(path);
+  });
 }
 
 /**

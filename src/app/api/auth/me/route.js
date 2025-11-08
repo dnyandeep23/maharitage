@@ -7,8 +7,6 @@ export async function GET(request) {
 
   const authError = await withAuth(request);
   if (authError) return authError;
-  // console.log(request.user)
-  // console.log('login backend hit');
   await connectDB();
   try {
     const user = await User.findById(request.user.id).select('-password');
@@ -25,7 +23,6 @@ export async function GET(request) {
       data: user
     });
   } catch (error) {
-    console.error('Error fetching user profile:', error);
     return NextResponse.json({
       success: false,
       error: 'Error fetching user profile'
@@ -73,7 +70,7 @@ export async function PUT(request) {
   } catch (error) {
     return NextResponse.json({
       success: false,
-      error: 'Error updating user profile'
+      message: 'Error updating user profile'
     }, { status: 500 });
   }
 }

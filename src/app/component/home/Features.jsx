@@ -31,13 +31,13 @@ const Features = () => {
 
     return (
         <section className="py-16 bg-white">
-            <div className=" mx-auto px-4 sm:px-6 lg:px-8"> <div className="mx-auto px-24 text-center ">
+            <div className=" mx-auto px-4 sm:px-6 lg:px-8">            <div className="mx-auto px-4 sm:px-6 lg:px-8 text-center ">
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3 font-inter">
                     Features
                 </h2>
-                <div className='flex justify-between gap-80'>
-                    <div className="w-full h-0.5 bg-black/20 mx-auto mb-0"></div>
-                    <div className="w-full h-0.5 bg-black/20 mx-auto mb-0"></div>
+                <div className='flex justify-center items-center gap-4 sm:gap-8'>
+                    <div className="flex-grow h-0.5 bg-black/20"></div>
+                    <div className="flex-grow h-0.5 bg-black/20"></div>
                 </div>
                 <p className="text-gray-600  max-w-2xl mx-auto leading-relaxed mt-2 text-base">
                     Immerse yourself in Maharashtra's heritage through our carefully
@@ -46,7 +46,7 @@ const Features = () => {
             </div>
 
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-2 py-16 gap-8 align-middle items-center mx-40">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 py-16 gap-8 align-middle items-center px-4 sm:px-6 lg:px-8">
                     {features.map((feature, index) => (
                         <div
                             key={index}
@@ -61,7 +61,7 @@ const Features = () => {
                                 {feature.title}
                             </h3>
                             <p
-                                className="text-[#175002] w-80 m-auto text-center text-base leading-relaxed"
+                                className="text-[#175002] text-center text-base leading-relaxed"
 
                             >
                                 {feature.description}

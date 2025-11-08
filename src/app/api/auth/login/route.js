@@ -16,7 +16,6 @@ export async function POST(request) {
   try {
     await connectDB();
   } catch (err) {
-    console.error("DB connection error", err);
     return NextResponse.json(
       { success: false, error: "Database connection failed" },
       { status: 500 }
@@ -25,7 +24,7 @@ export async function POST(request) {
 
   try {
     const body = await request.json();
-    // console.log('Login request body:', body);
+    
 
     const { email, password, role } = body;
 
@@ -98,8 +97,6 @@ export async function POST(request) {
           "Please verify your email. A new verification email has been sent.",
       };
 
-      console.log("🚀 Sending response:", resultPayload);
-
       return NextResponse.json(resultPayload, { status: 403 });
     }
 
@@ -151,7 +148,6 @@ export async function POST(request) {
       { status: 200 }
     );
 
-    // console.log('Login successful for user:', response);
     // cookie options: httpOnly true
     response.cookies.set("auth-token", token, {
       httpOnly: true,

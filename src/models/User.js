@@ -1,43 +1,40 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, 'Please provide a username'],
+    required: [true, "Please provide a username"],
     unique: true,
     trim: true,
-    minlength: [3, 'Username must be at least 3 characters long']
+    minlength: [3, "Username must be at least 3 characters long"],
   },
-  chats: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Chat',
-  }],
   email: {
     type: String,
-    required: [true, 'Please provide your email'],
+    required: [true, "Please provide your email"],
     unique: true,
     lowercase: true,
-    match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email']
+    match: [/^\S+@\S+\.\S+$/, "Please provide a valid email"],
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
-    minlength: [8, 'Password must be at least 8 characters long'],
-    select: false
+    required: [true, "Please provide a password"],
+    minlength: [8, "Password must be at least 8 characters long"],
+    select: false,
   },
   role: {
     type: String,
     enum: {
-      values: ['public-user', 'research-expert', 'admin'],
-      message: '{VALUE} is not a valid role. Must be one of: public-user, research-expert, admin'
+      values: ["public-user", "research-expert", "admin"],
+      message:
+        "{VALUE} is not a valid role. Must be one of: public-user, research-expert, admin",
     },
-    default: 'public-user',
-    required: [true, 'Please specify a role']
+    default: "public-user",
+    required: [true, "Please specify a role"],
   },
   isEmailVerified: {
     type: Boolean,
-    default: false
+    default: false,
   },
   verificationToken: String,
   verificationTokenExpiry: Date,
@@ -46,8 +43,8 @@ const userSchema = new mongoose.Schema({
   lastLogin: Date,
   status: {
     type: String,
-    enum: ['active', 'inactive', 'suspended'],
-    default: 'active'
+    enum: ["active", "inactive", "suspended"],
+    default: "active",
   },
   profile: {
     avatar: String,
@@ -57,34 +54,34 @@ const userSchema = new mongoose.Schema({
     preferences: {
       language: {
         type: String,
-        default: 'en'
+        default: "en",
       },
       notifications: {
         email: {
           type: Boolean,
-          default: true
+          default: true,
         },
         push: {
           type: Boolean,
-          default: true
-        }
-      }
-    }
+          default: true,
+        },
+      },
+    },
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 // Hash password before saving
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
-  
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -95,25 +92,25 @@ userSchema.pre('save', async function(next) {
 });
 
 // Method to compare password
-userSchema.methods.comparePassword = async function(candidatePassword) {
+userSchema.methods.comparePassword = async function (candidatePassword) {
   try {
     return await bcrypt.compare(candidatePassword, this.password);
   } catch (error) {
-    throw new Error('Error comparing passwords');
+    throw new Error("Error comparing passwords");
   }
 };
 
 // Update the updatedAt timestamp before update operations
-userSchema.pre('updateOne', function() {
+userSchema.pre("updateOne", function () {
   this.set({ updatedAt: new Date() });
 });
 
 // Check if the model is already initialized to avoid re-initialization
 let UserModel;
 try {
-  UserModel = mongoose.model('User');
+  UserModel = mongoose.model("User");
 } catch {
-  UserModel = mongoose.model('User', userSchema);
+  UserModel = mongoose.model("User", userSchema);
 }
 
 export default UserModel;

@@ -11,7 +11,7 @@ const ApiDocs = ({ handleNavigation }) => {
                         <FileText className="w-16 h-16" />
                     </div>
                     <h2
-                        className="text-4xl font-bold text-gray-800 mb-6"
+                        className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6"
                         style={{
                             fontFamily: "'Playfair Display', 'Times New Roman', serif",
                             letterSpacing: '0.02em'

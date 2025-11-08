@@ -5,7 +5,7 @@ import Image from "next/image";
 import img from "../../assets/images/elephanta_slide.png";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, History } from "lucide-react";
 import ImageModal from "../component/ImageModal";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../contexts/AuthContext";
@@ -117,7 +117,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
                   <img
                     src={url}
                     alt={`Inscription image ${index + 1}`}
-                    className="w-full h-96 object-cover"
+                    className="w-full h-64 sm:h-80 md:h-96 object-cover"
                   />
                 </div>
               ))}
@@ -142,7 +142,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
         </div>
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-2xl sm:text-3xl font-bold">
               {inscription.Inscription_id
                 ? `Inscription ${
                     inscription.Inscription_id.split("_")[1] || ""
@@ -309,19 +309,19 @@ export default function CaveClient({ site }) {
   return (
     <div className=" w-full h-full text-black bg-green-50">
       <div className="">
-        <Header />
+        <Header theme="dark" />
       </div>
-      <div className="relative w-screen h-[85vh]">
+      <div className="relative w-screen h-[50vh] sm:h-[70vh] lg:h-[85vh]">
         <Image
           src={site.Gallary && site.Gallary.length > 0 ? site.Gallary[0] : img}
           alt={site.site_name || "Cave Image"}
           fill
-          className="object-cover rounded-b-[155px]"
+          className="object-cover rounded-b-3xl sm:rounded-b-[155px]"
         />
-        <div className="w-full h-full z-10 absolute top-0 right-0 bg-black/40 rounded-b-[155px]"></div>
-        <div className="w-full h-full z-20 absolute top-0 right-0 flex justify-center items-center">
+        <div className="w-full h-full z-10 absolute top-0 right-0 bg-black/40 rounded-b-3xl sm:rounded-b-[155px]"></div>
+        <div className="w-full h-full z-20 absolute top-0 right-0 flex justify-center items-center px-4">
           <h1
-            className="text-9xl font-extrabold text-stroke  uppercase"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold text-stroke text-center uppercase"
             style={{ fontfamily: "Inter" }}
           >
             {site.site_name}
@@ -353,7 +353,7 @@ export default function CaveClient({ site }) {
                     >
                       {site.Gallary?.map((img, index) => (
                         <div
-                          className="w-1/3 h-80 flex-shrink-0 mx-4 relative group cursor-pointer"
+                          className="w-full sm:w-1/2 md:w-1/3 h-64 sm:h-72 md:h-80 flex-shrink-0 mx-4 relative group cursor-pointer"
                           onClick={() => handleImageClick(img)}
                           key={index}
                         >
@@ -493,6 +493,78 @@ export default function CaveClient({ site }) {
                         )}
                       </div>
                     </div>
+                  )}
+                </div>
+              </div>
+              <div>
+                <p className="text-3xl mt-10 mx-6 font-bold">
+                  Historical Context
+                </p>
+                <div className="mt-4  ml-8 space-y-4">
+                  <div className="flex items-center gap-2 text-base font-black ">
+                    Period.{" "}
+                    <span className="text-green-800">{site.period}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-base font-black ">
+                    Ruler or Dynasty.{" "}
+                    <span className="text-green-800">
+                      {site.historical_context.ruler_or_dynasty}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-base font-black ">
+                    Approximated Date.{" "}
+                    <span className="text-green-800">
+                      {site.historical_context.approx_date}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-base font-black ">
+                    Related Figure.{" "}
+                    <span className="flex gap-1 text-green-800">
+                      {site.historical_context?.related_figures &&
+                      site.historical_context.related_figures.length > 0 ? (
+                        site.historical_context.related_figures.map(
+                          (fig, idx) => (
+                            <div
+                              key={idx}
+                              className="px-2.5 bg-green-200 border-2 border-green-800/10 rounded-full"
+                            >
+                              {fig}
+                            </div>
+                          )
+                        )
+                      ) : (
+                        <div className="text-gray-500 italic">
+                          No related figures
+                        </div>
+                      )}
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-2 text-base font-black ">
+                    <p className="w-[18%]">Cultural Significance.</p>
+                    <span className="text-green-800">
+                      {site.historical_context.cultural_significance}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-10">
+                <p className="text-3xl mx-6 font-bold">
+                  Verification Authority
+                </p>
+                <div className="mt-4 mx-6 text-lg">
+                  {site.verification_authority?.curated_by &&
+                  site.verification_authority?.curated_by.length > 0 ? (
+                    <ul className="list-disc ">
+                      {site.verification_authority?.curated_by.map(
+                        (ref, index) => (
+                          <li className="mb-2">{ref}</li>
+                        )
+                      )}
+                    </ul>
+                  ) : (
+                    <p className="text-gray-500 italic">
+                      No references available.
+                    </p>
                   )}
                 </div>
               </div>

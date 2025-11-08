@@ -11,7 +11,7 @@ export async function GET(request, context) {
 
   try {
     const { params } = await context;
-    const { id } = params;
+    const { id } = await params;
     const chat = await Chat.findById(id);
 
     if (!chat) {
@@ -24,7 +24,6 @@ export async function GET(request, context) {
 
     return NextResponse.json({ messages: chat.messages });
   } catch (error) {
-    console.error("Error fetching chat:", error);
     return NextResponse.json({ error: "Error fetching chat" }, { status: 500 });
   }
 }

@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { verifyTokenMiddleware } from "./lib/jwt";
 import { canAccessPath, ROLE_CONFIG } from "./lib/roles";
-
-// ✅ Define route categories
-const UNPROTECTED_API_ROUTES = [
+// ✅ PUBLIC routes (no token needed)
+const PUBLIC_ROUTES = [
   "/api/auth/login",
   "/api/auth/register",
   "/api/auth/forgot-password",
@@ -12,13 +11,12 @@ const UNPROTECTED_API_ROUTES = [
   "/api/auth/verify-email",
   "/api/auth/forget-password",
   "/api/auth/reset-password",
-  "/api/ai",
   "/api/sites",
-  "/api/sites/:id*",
-];
-
-const PUBLIC_ROUTES = [
+  "/api/sites/:id",
+  "/api/sites/home",
+  "/api/ai",
   "/",
+  "/search",
   "/login",
   "/register",
   "/forgot-password",
@@ -27,101 +25,91 @@ const PUBLIC_ROUTES = [
   "/verify-email",
   "/email-sent",
   "/reset-password",
-  "/forgot-password",
-  "/search",
-  "/ai",
   "/cave/:path*",
 ];
 
-const PROTECTED_PREFIXES = [
-  "/dashboard",
-  "/api/protected",
-  "/profile",
-  "/settings",
+// ✅ Protected prefixes (token required)
+const PROTECTED_ROUTES = [
+  "/dashboard/:path*",
+  "/api/:path*", // protect all /api except explicit public ones
 ];
+
+// 🚫 Block unauthenticated access
+
+function matchRoutePattern(pathname, patterns) {
+  return patterns.some((route) => {
+    const pattern = route.replace(/:[^/]+/g, "[^/]+").replace(/\*/g, ".*");
+    return new RegExp(`^${pattern}$`).test(pathname);
+  });
+}
 
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;
-  // console.log('🧭 Checking path:', pathname);
 
-  // 🟢 Skip middleware for static files, Next internals, and images
+  // Skip static assets
   if (
     pathname.startsWith("/_next/") ||
-    pathname.startsWith("/public/") ||
-    pathname.endsWith(".ico") ||
-    pathname.endsWith(".png") ||
-    pathname.endsWith(".jpg")
+    pathname.match(/\.(ico|png|jpg|jpeg|svg)$/)
   ) {
     return NextResponse.next();
   }
 
-  // 🟢 Allow unprotected API routes (like login/register)
-  if (UNPROTECTED_API_ROUTES.includes(pathname)) {
-    // console.log('✅ Skipping unprotected API route:', pathname);
+  const isPublic = matchRoutePattern(pathname, PUBLIC_ROUTES);
+  if (isPublic) {
     return NextResponse.next();
   }
 
-  // 🔐 Determine if route needs protection
-  const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
-  const isProtectedRoute = PROTECTED_PREFIXES.some((prefix) =>
-    pathname.startsWith(prefix)
-  );
+  const isProtected = matchRoutePattern(pathname, PROTECTED_ROUTES);
 
-  // 🧩 Extract token from cookie or header
-  const token =
-    (await request.cookies.get("auth-token")?.value) ||
-    request.headers.get("authorization")?.split(" ")[1];
+  // 🔑 Try token or API key
+  const authHeader = request.headers.get("Authorization");
+  let user = null;
 
-  // 🔒 If no token but accessing a protected route → redirect
-  if (!token && isProtectedRoute) {
-    // console.log('🚫 No token found, redirecting to /login');
+  try {
+    if (authHeader?.startsWith("Bearer ")) {
+      // JWT
+      const token = authHeader.split(" ")[1];
+      const decoded = await verifyTokenMiddleware(token);
+      if (decoded) user = decoded;
+    } else if (authHeader?.startsWith("ApiKey ")) {
+      // API Key
+      const apiKey = authHeader.split(" ")[1];
+      const response = await fetch(
+        new URL("/api/auth/verify-apikey", request.url).toString(),
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ apiKey }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        user = data.user;
+      }
+    }
+  } catch (err) {
+    
+  }
+
+  if (!user && isProtected) {
+    if (pathname.startsWith("/api/")) {
+      return new NextResponse(
+        JSON.stringify({ success: false, message: "Authentication failed" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  // 🧾 If token exists, verify and check access
-  if (token) {
-    try {
-      const decoded = await verifyTokenMiddleware(token);
-      if (!decoded) {
-        throw new Error("Invalid or expired token");
-      }
-      const requestHeaders = new Headers(request.headers);
-      requestHeaders.set("authorization", `Bearer ${token}`);
-
-      // 🧠 Role-based access control
-      if (!canAccessPath(decoded.role, pathname)) {
-        // console.log('🚫 Access denied:', {
-        //   user: decoded.email,
-        //   role: decoded.role,
-        //   path: pathname,
-        // });
-
-        const dashboardPath = ROLE_CONFIG[decoded.role]?.dashboardPath || "/";
-        return NextResponse.redirect(new URL(dashboardPath, request.url));
-      }
-
-      // ✅ Allow access
-      return NextResponse.next({
-        request: { headers: requestHeaders },
-      });
-    } catch (error) {
-      // console.error('Token verification failed:', error.message);
-      if (!isPublicRoute) {
-        return NextResponse.redirect(new URL("/login", request.url));
-      }
-    }
+  if (user && !canAccessPath(user.role, pathname)) {
+    const redirectPath = ROLE_CONFIG[user.role]?.dashboardPath || "/";
+    return NextResponse.redirect(new URL(redirectPath, request.url));
   }
 
-  // // 🟢 Default: allow request
-  // return NextResponse.next();
+  return NextResponse.next();
 }
-
-// ✅ Middleware runs only on these paths
+// ✅ Apply middleware only on these paths
 export const config = {
-  matcher: [
-    "/dashboard/:path*",
-    "/api/:path*",
-    "/profile/:path*",
-    "/settings/:path*",
-  ],
+  matcher: ["/:path*"],
 };

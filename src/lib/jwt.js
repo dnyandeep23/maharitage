@@ -1,9 +1,11 @@
-import { SignJWT, jwtVerify } from 'jose';
+import { SignJWT, jwtVerify } from "jose";
 
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'your-secret-key');
-const JWT_EXPIRES_IN = '7d';
-const EMAIL_VERIFICATION_EXPIRES_IN = '1d';
-const PASSWORD_RESET_EXPIRES_IN = '1d';
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET || "your-secret-key"
+);
+const JWT_EXPIRES_IN = "7d";
+const EMAIL_VERIFICATION_EXPIRES_IN = "1d";
+const PASSWORD_RESET_EXPIRES_IN = "1d";
 
 // Helper to convert time strings (e.g., "7d", "1h") to seconds
 const getExpirationSeconds = (timeString) => {
@@ -11,11 +13,11 @@ const getExpirationSeconds = (timeString) => {
   const unit = timeString.slice(-1);
 
   switch (unit) {
-    case 'd':
+    case "d":
       return value * 24 * 60 * 60;
-    case 'h':
+    case "h":
       return value * 60 * 60;
-    case 'm':
+    case "m":
       return value * 60;
     default:
       return value;
@@ -32,7 +34,7 @@ export const generateToken = async (user) => {
     username: user.username,
     role: user.role,
   })
-    .setProtectedHeader({ alg: 'HS256' })
+    .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime(Math.floor(Date.now() / 1000) + expiresInSec)
     .setIssuedAt()
     .sign(JWT_SECRET);
@@ -43,7 +45,7 @@ export const generateVerificationToken = async (user) => {
   const expiresInSec = getExpirationSeconds(EMAIL_VERIFICATION_EXPIRES_IN);
 
   return await new SignJWT({ id: user._id, email: user.email })
-    .setProtectedHeader({ alg: 'HS256' })
+    .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime(Math.floor(Date.now() / 1000) + expiresInSec)
     .setIssuedAt()
     .sign(JWT_SECRET);
@@ -54,7 +56,7 @@ export const generatePasswordResetToken = async (user) => {
   const expiresInSec = getExpirationSeconds(PASSWORD_RESET_EXPIRES_IN);
 
   return await new SignJWT({ id: user._id.toString(), email: user.email })
-    .setProtectedHeader({ alg: 'HS256' })
+    .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime(Math.floor(Date.now() / 1000) + expiresInSec)
     .setIssuedAt()
     .sign(JWT_SECRET);
@@ -66,16 +68,15 @@ export const verifyToken = async (token) => {
     const { payload } = await jwtVerify(token, JWT_SECRET);
     return payload;
   } catch (error) {
-    console.error('JWT Verification Error:', error.message);
     return null;
   }
 };
 
 // ✅ Extract Token from Request Headers
 export const getTokenFromHeader = (req) => {
-  const authHeader = req.headers.get('authorization');
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    return authHeader.split(' ')[1];
+  const authHeader = req.headers.get("authorization");
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    return authHeader.split(" ")[1];
   }
   return null;
 };
@@ -87,10 +88,9 @@ export const verifyTokenMiddleware = async (token) => {
   }
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET);
-    // console.log('Middleware Token Payload:', payload);
+    
     return payload; // Token is valid
   } catch (error) {
-    console.error('Middleware Token Verification Error:', error.message);
     return null; // Token is invalid or expired
   }
 };
@@ -100,7 +100,6 @@ export const getUserIdFromToken = async (token) => {
     const { payload } = await jwtVerify(token, JWT_SECRET);
     return payload.id;
   } catch (error) {
-    console.error('JWT Verification Error:', error.message);
     return null;
   }
 };

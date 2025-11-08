@@ -32,7 +32,6 @@ export async function GET(request) {
         { status: 404 }
       );
     }
-    // console.log('isEmailVerified:', user.isEmailVerified);
     return NextResponse.json({
       success: user.isEmailVerified,
       isEmailVerified: user.isEmailVerified,

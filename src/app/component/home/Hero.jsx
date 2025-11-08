@@ -45,7 +45,7 @@ const Hero = ({
         <div className="text-center text-white max-w-6xl mx-auto px-4">
           {/* Main Heading */}
           <h1
-            className="text-6xl md:text-8xl font-bold mb-3 tracking-wider leading-none font-cinzel-decorative drop-shadow-xl"
+            className="text-4xl sm:text-6xl md:text-8xl font-bold mb-3 tracking-wider leading-none font-cinzel-decorative drop-shadow-xl"
             style={{
               textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
               letterSpacing: "0.1em",
@@ -59,7 +59,7 @@ const Hero = ({
 
           {/* Subtitle */}
           <h2
-            className="text-2xl flex font-bold justify-end font-cinzel-decorative md:text-4xl mb-10 tracking-widest opacity-95"
+            className="text-xl sm:text-2xl flex font-bold justify-end font-cinzel-decorative md:text-4xl mb-10 tracking-widest opacity-95"
             style={{
               textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
               letterSpacing: "0.2em",
@@ -104,7 +104,7 @@ const Hero = ({
                     ? "Search heritage sites..."
                     : "Ask AI about heritage sites..."
                 }
-                className="flex-1 px-4 py-4 text-gray-800 placeholder-gray-500 focus:outline-none"
+                className="flex-1 px-4 py-3 sm:py-4 text-gray-800 placeholder-gray-500 focus:outline-none"
                 style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
                 disabled={isLoading}
               />
@@ -113,7 +113,7 @@ const Hero = ({
               <button
                 type="submit"
                 disabled={isLoading}
-                className="bg-green-600 rounded-full hover:bg-green-700 text-white px-8 py-4 transition-colors duration-200 disabled:opacity-50 font-medium"
+                className="bg-green-600 rounded-full hover:bg-green-700 text-white px-6 py-3 sm:px-8 sm:py-4 transition-colors duration-200 disabled:opacity-50 font-medium"
                 style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
               >
                 {isLoading ? (

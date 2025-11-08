@@ -3,10 +3,25 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import dashboardImage from "../../../assets/images/dashboard-bg.png";
 import Header from "../../component/Header";
-import { LayoutDashboard, FileText } from "lucide-react";
-import Footer from "../../component/Footer";
+import {
+  LayoutDashboard,
+  FileText,
+  User,
+  PlusSquare,
+  FilePlus,
+  List,
+  Key,
+} from "lucide-react";
 import AIFloatingButton from "../../component/AIFloatingButton";
+import ManageSites from "./shared/ManageSites";
+import ManageInscriptions from "./shared/ManageInscriptions";
+import AddSiteForm from "./shared/AddSiteForm";
+import AddInscriptionForm from "./shared/AddInscriptionForm";
+import MySubmissions from "./researchExpert/MySubmissions";
 import Sidebar from "./Sidebar";
+import Profile from "./shared/Profile";
+import ApiKeyManagement from "./shared/ApiKeyManagement";
+import Footer from "../../component/Footer";
 
 const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
   const router = useRouter();
@@ -19,26 +34,348 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
 
   const sidebarSections = [
     [
-      { name: "Dashboard", icon: <LayoutDashboard size={20} />, onClick: () => handleSelectItem('Dashboard') },
+      {
+        name: "Dashboard",
+        icon: <LayoutDashboard size={20} />,
+        onClick: () => handleSelectItem("Dashboard"),
+      },
     ],
     [
-      { name: "Submissions", icon: <FileText size={20} />, onClick: () => handleSelectItem('Submissions') },
+      {
+        name: "Profile",
+        icon: <User size={20} />,
+        onClick: () => handleSelectItem("Profile"),
+      },
+      {
+        name: "API Keys",
+        icon: <Key size={20} />,
+        onClick: () => handleSelectItem("API Keys"),
+      },
+    ],
+    [
+      {
+        name: "Manage Sites",
+        icon: <List size={20} />,
+        onClick: () => handleSelectItem("Manage Sites"),
+      },
+      {
+        name: "Manage Inscriptions",
+        icon: <FileText size={20} />,
+        onClick: () => handleSelectItem("Manage Inscriptions"),
+      },
+      {
+        name: "Add Site",
+        icon: <PlusSquare size={20} />,
+        onClick: () => handleSelectItem("Add Site"),
+      },
+      {
+        name: "Add Inscription",
+        icon: <FilePlus size={20} />,
+        onClick: () => handleSelectItem("Add Inscription"),
+      },
+    ],
+    [
+      {
+        name: "Submissions",
+        icon: <FileText size={20} />,
+        onClick: () => handleSelectItem("Submissions"),
+      },
     ],
     [
       {
         name: "Logout",
         onClick: async () => {
           try {
-            await fetch('/api/auth/logout', { method: 'POST' });
-            localStorage.removeItem('auth-token');
-            router.push('/login');
+            await fetch("/api/auth/logout", { method: "POST" });
+            localStorage.removeItem("auth-token");
+            router.push("/login");
           } catch (error) {
-            console.error('Logout error:', error);
+            console.error("Logout error:", error);
           }
         },
       },
     ],
   ];
+
+  const handleAddSiteSubmit = async (
+    e,
+    siteData,
+    images,
+    rawSiteName,
+    setRawSiteName,
+    setSiteData,
+    setImages,
+    setMessage,
+    setIsLoading
+  ) => {
+    e.preventDefault();
+    setMessage(null);
+    setIsLoading(true);
+
+    if (rawSiteName.trim().length < 4) {
+      setMessage({
+        type: "error",
+        text: "Site name must be at least 4 characters long.",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    if (images.length === 0) {
+      setMessage({ type: "error", text: "At least one image is required." });
+      setIsLoading(false);
+      return;
+    }
+
+    if (!siteData.Site_discription.trim()) {
+      setMessage({ type: "error", text: "Description is required." });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("type", "site");
+      formData.append("action", "add");
+      formData.append("data", JSON.stringify(siteData));
+      formData.append("researchExpertId", user.id);
+      formData.append("changesDescription", "New site submission");
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+
+      const response = await fetch("/api/research-requests", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage({
+          type: "success",
+          text: "Site addition request submitted successfully for review!",
+        });
+        // Clear form
+        setSiteData({
+          site_id: "",
+          site_name: "",
+          location: {
+            latitude: "",
+            longitude: "",
+            district: "",
+            state: "Maharashtra",
+            country: "India",
+          },
+          Site_discription: "",
+          heritage_type: "",
+          period: "",
+          historical_context: {
+            ruler_or_dynasty: "",
+            approx_date: "",
+            related_figures: [],
+            cultural_significance: "",
+          },
+          verification_authority: {
+            curated_by: [],
+          },
+          references: [],
+          Gallary: [],
+          Inscriptions: [],
+        });
+        setRawSiteName("");
+        setImages([]);
+      } else {
+        setMessage({
+          type: "error",
+          text: result.message || "Failed to submit site addition request.",
+        });
+      }
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text: "An error occurred. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleAddInscriptionSubmit = async (
+    e,
+    inscriptionData,
+    images,
+    selectedSite,
+    setInscriptionData,
+    setImages,
+    setMessage,
+    setIsLoading
+  ) => {
+    e.preventDefault();
+    setMessage(null);
+    setIsLoading(true);
+
+    if (!inscriptionData.discription.trim()) {
+      setMessage({ type: "error", text: "Description is required." });
+      setIsLoading(false);
+      return;
+    }
+
+    if (images.length === 0) {
+      setMessage({ type: "error", text: "At least one image is required." });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("type", "inscription");
+      formData.append("action", "add");
+      formData.append(
+        "data",
+        JSON.stringify({ ...inscriptionData, siteId: selectedSite })
+      );
+      formData.append("researchExpertId", user.id);
+      formData.append("changesDescription", "New inscription submission");
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+
+      const response = await fetch("/api/research-requests", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage({
+          type: "success",
+          text: "Inscription addition request submitted successfully for review!",
+        });
+        setInscriptionData({
+          Inscription_id: "",
+          discription: "",
+          original_script: "",
+          language_detected: "",
+          translations: {
+            english: null,
+            hindi: null,
+          },
+        });
+      }
+    } catch {
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleModifySiteSubmit = async (
+    e,
+    siteData,
+    images,
+    rawSiteName,
+    setMessage,
+    setIsLoading
+  ) => {
+    e.preventDefault();
+    setMessage(null);
+    setIsLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("type", "site");
+      formData.append("action", "modify");
+      formData.append("data", JSON.stringify(siteData));
+      formData.append("researchExpertId", user.id);
+      formData.append("changesDescription", "Site modification");
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+
+      const response = await fetch("/api/research-requests", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage({
+          type: "success",
+          text: "Site modification request submitted successfully for review!",
+        });
+      } else {
+        setMessage({
+          type: "error",
+          text: result.message || "Failed to submit site modification request.",
+        });
+      }
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text: "An error occurred. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleModifyInscriptionSubmit = async (
+    e,
+    inscriptionData,
+    images,
+    selectedSite,
+    setMessage,
+    setIsLoading
+  ) => {
+    e.preventDefault();
+    setMessage(null);
+    setIsLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("type", "inscription");
+      formData.append("action", "modify");
+      formData.append(
+        "data",
+        JSON.stringify({ ...inscriptionData, siteId: selectedSite })
+      );
+      formData.append("researchExpertId", user.id);
+      formData.append("changesDescription", "Inscription modification");
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+
+      const response = await fetch("/api/research-requests", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage({
+          type: "success",
+          text: "Inscription modification request submitted successfully for review!",
+        });
+      } else {
+        setMessage({
+          type: "error",
+          text:
+            result.message ||
+            "Failed to submit inscription modification request.",
+        });
+      }
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text: "An error occurred. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -61,11 +398,16 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
 
           {/* Dashboard Content */}
           <div className="absolute inset-0 flex justify-center items-center gap-5 z-30">
-            <Sidebar user={user} sidebarSections={sidebarSections} router={router} />
+            <Sidebar
+              user={user}
+              sidebarSections={sidebarSections}
+              router={router}
+              selectedItem={selectedItem}
+            />
 
             {/* Main Section */}
             <div className="w-[75%] h-[80vh] p-10 rounded-4xl bg-[#FFFD99]/50 overflow-y-auto">
-              {selectedItem === 'Dashboard' && (
+              {selectedItem === "Dashboard" && (
                 <>
                   <p className="text-green-950 font-bold text-xl">
                     Welcome,
@@ -82,11 +424,15 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
                       <span className="font-semibold text-green-800">
                         Maharitage
                       </span>
-                      , your expertise is vital. This is your space to review submissions, contribute to articles, and collaborate with other experts to ensure the historical accuracy and richness of the content we provide.
+                      , your expertise is vital. This is your space to review
+                      submissions, contribute to articles, and collaborate with
+                      other experts to ensure the historical accuracy and
+                      richness of the content we provide.
                     </p>
 
                     <blockquote className="italic border-l-4 border-green-700 pl-4">
-                      “Through rigorous research and collaboration, we can piece together the mosaic of our past.”
+                      “Through rigorous research and collaboration, we can piece
+                      together the mosaic of our past.”
                     </blockquote>
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -102,16 +448,43 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
                     </div>
 
                     <blockquote className="italic border-l-4 border-green-700 pl-4">
-                      “Every fact verified, every story told, adds another layer to our collective heritage.”
+                      “Every fact verified, every story told, adds another layer
+                      to our collective heritage.”
                     </blockquote>
 
                     <p className="leading-relaxed">
-                      Your contributions are invaluable in our mission to create a comprehensive and authoritative resource on Maharashtra's heritage. Thank you for your dedication to scholarly excellence.
+                      Your contributions are invaluable in our mission to create
+                      a comprehensive and authoritative resource on
+                      Maharashtra's heritage. Thank you for your dedication to
+                      scholarly excellence.
                     </p>
                   </div>
                 </>
               )}
-              {selectedItem === 'Submissions' && <div>Submissions Content</div>}
+              {selectedItem === "Profile" && <Profile user={user} />}
+              {selectedItem === "API Keys" && <ApiKeyManagement />}
+              {selectedItem === "Manage Sites" && (
+                <ManageSites
+                  showDelete={false}
+                  handleSubmit={handleModifySiteSubmit}
+                />
+              )}
+              {selectedItem === "Manage Inscriptions" && (
+                <ManageInscriptions
+                  showDelete={false}
+                  handleSubmit={handleModifyInscriptionSubmit}
+                />
+              )}
+              {selectedItem === "Add Site" && (
+                <AddSiteForm handleSubmit={handleAddSiteSubmit} />
+              )}
+              {selectedItem === "Add Inscription" && (
+                <AddInscriptionForm
+                  handleSelectItem={handleSelectItem}
+                  handleSubmit={handleAddInscriptionSubmit}
+                />
+              )}
+              {selectedItem === "Submissions" && <MySubmissions />}
             </div>
           </div>
         </div>

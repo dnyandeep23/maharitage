@@ -3,10 +3,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import dashboardImage from "../../../assets/images/dashboard-bg.png";
 import Header from "../../component/Header";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, User, Key } from "lucide-react";
 import Footer from "../../component/Footer";
 import AIFloatingButton from "../../component/AIFloatingButton";
 import Sidebar from "./Sidebar";
+import Profile from "./shared/Profile";
+import ApiKeyManagement from "./shared/ApiKeyManagement";
 
 const PublicUserDashboard = ({ user, selectedItem, handleSelectItem }) => {
   const router = useRouter();
@@ -19,18 +21,32 @@ const PublicUserDashboard = ({ user, selectedItem, handleSelectItem }) => {
 
   const sidebarSections = [
     [
-      { name: "Dashboard", icon: <LayoutDashboard size={20} />, onClick: () => handleSelectItem('Dashboard') },
+      {
+        name: "Dashboard",
+        icon: <LayoutDashboard size={20} />,
+        onClick: () => handleSelectItem("Dashboard"),
+      },
+      {
+        name: "Profile",
+        icon: <User size={20} />,
+        onClick: () => handleSelectItem("Profile"),
+      },
+      {
+        name: "API Keys",
+        icon: <Key size={20} />,
+        onClick: () => handleSelectItem("API Keys"),
+      },
     ],
     [
       {
         name: "Logout",
         onClick: async () => {
           try {
-            await fetch('/api/auth/logout', { method: 'POST' });
-            localStorage.removeItem('auth-token');
-            router.push('/login');
+            await fetch("/api/auth/logout", { method: "POST" });
+            localStorage.removeItem("auth-token");
+            router.push("/login");
           } catch (error) {
-            console.error('Logout error:', error);
+            console.error("Logout error:", error);
           }
         },
       },
@@ -58,11 +74,16 @@ const PublicUserDashboard = ({ user, selectedItem, handleSelectItem }) => {
 
           {/* Dashboard Content */}
           <div className="absolute inset-0 flex justify-center items-center gap-5 z-30">
-            <Sidebar user={user} sidebarSections={sidebarSections} router={router} />
+            <Sidebar
+              user={user}
+              sidebarSections={sidebarSections}
+              router={router}
+              selectedItem={selectedItem}
+            />
 
             {/* Main Section */}
             <div className="w-[75%] h-[80vh] p-10 rounded-4xl bg-[#FFFD99]/50 overflow-y-auto">
-              {selectedItem === 'Dashboard' && (
+              {selectedItem === "Dashboard" && (
                 <>
                   <p className="text-green-950 font-bold text-xl">
                     Welcome,
@@ -79,17 +100,18 @@ const PublicUserDashboard = ({ user, selectedItem, handleSelectItem }) => {
                       <span className="font-semibold text-green-800">
                         Maharitage
                       </span>{" "}
-                      — a digital gateway to explore, preserve, and celebrate the
-                      cultural and historical legacy of Maharashtra. From ancient
-                      temples to majestic forts, every corner tells a story of
-                      devotion, courage, and artistry. Through this platform, you
-                      can discover heritage sites, follow restoration efforts, and
-                      take part in protecting the identity that defines us.
+                      — a digital gateway to explore, preserve, and celebrate
+                      the cultural and historical legacy of Maharashtra. From
+                      ancient temples to majestic forts, every corner tells a
+                      story of devotion, courage, and artistry. Through this
+                      platform, you can discover heritage sites, follow
+                      restoration efforts, and take part in protecting the
+                      identity that defines us.
                     </p>
 
                     <blockquote className="italic border-l-4 border-green-700 pl-4">
-                      “Heritage is not just about monuments — it’s about keeping our
-                      roots alive through awareness and action.”
+                      “Heritage is not just about monuments — it’s about keeping
+                      our roots alive through awareness and action.”
                     </blockquote>
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -110,14 +132,16 @@ const PublicUserDashboard = ({ user, selectedItem, handleSelectItem }) => {
                     </blockquote>
 
                     <p className="leading-relaxed">
-                      Your contribution helps revive lost chapters of our history
-                      and make them accessible to all. Together, let’s build a
-                      bridge between our glorious past and a sustainable future —
-                      where heritage meets innovation.
+                      Your contribution helps revive lost chapters of our
+                      history and make them accessible to all. Together, let’s
+                      build a bridge between our glorious past and a sustainable
+                      future — where heritage meets innovation.
                     </p>
                   </div>
                 </>
               )}
+              {selectedItem === "Profile" && <Profile user={user} />}
+              {selectedItem === "API Keys" && <ApiKeyManagement />}
             </div>
           </div>
         </div>

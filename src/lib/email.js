@@ -36,8 +36,7 @@ export async function sendEmail({ to, subject, text, html }) {
     await transporter.sendMail(mailOptions);
     return true;
   } catch (error) {
-    console.error('Email error:', error);
-    throw new Error('Error sending email');
+    throw new Error(`Error sending email: ${error.message}`);
   }
 }
 
@@ -66,7 +65,25 @@ export function getVerificationEmailTemplate(name, verificationUrl) {
   };
 }
 
-// Template for password reset email
+export async function sendNewAdminEmail(to, username, temporaryPassword) {
+  const subject = 'Your new admin account on Maharitage';
+  const text = `Hello ${username},\n\nAn admin account has been created for you on Maharitage.\n\nYour temporary password is: ${temporaryPassword}\n\nPlease log in and change your password as soon as possible.\n\nThank you,\nThe Maharitage Team`;
+  const html = `
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; color: #333;">
+      <h1 style="font-family: 'Cinzel Decorative', cursive; color: #2E7D32; text-align: center;">MahaRitage</h1>
+      <div style="padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+        <h2>Welcome to the Maharitage Admin Team!</h2>
+        <p>Hi ${username},</p>
+        <p>An admin account has been created for you on Maharitage.</p>
+        <p>Your temporary password is: <strong>${temporaryPassword}</strong></p>
+        <p>Please log in and change your password as soon as possible.</p>
+        <p>Thank you,<br/>The Maharitage Team</p>
+      </div>
+    </div>
+  `;
+
+  await sendEmail({ to, subject, text, html });
+}// Template for password reset email
 export function getPasswordResetEmailTemplate(name, resetUrl) {
   return {
     subject: 'Reset Your Password',

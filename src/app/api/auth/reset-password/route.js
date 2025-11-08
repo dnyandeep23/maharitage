@@ -8,7 +8,6 @@ export async function POST(request) {
   try {
     await connectDB();
   } catch (err) {
-    console.error('DB connection error', err);
     return NextResponse.json({ success: false, error: 'Database connection failed' }, { status: 500 });
   }
 
@@ -36,7 +35,6 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true, message: 'Password reset successful' });
   } catch (error) {
-    console.error('Reset Password Error:', error);
     return handleApiError(error);
   }
 }

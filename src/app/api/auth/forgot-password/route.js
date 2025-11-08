@@ -10,7 +10,6 @@ export async function POST(request) {
   try {
     await connectDB();
   } catch (err) {
-    console.error('DB connection error', err);
     return NextResponse.json({ success: false, error: 'Database connection failed' }, { status: 500 });
   }
 
@@ -47,7 +46,6 @@ export async function POST(request) {
         message: 'Password reset link sent to email'
       });
     } catch (error) {
-      console.error('Error sending reset email:', error);
       return handleApiError(new Error('Could not send password reset email.'));
     }
   } catch (error) {

@@ -20,7 +20,7 @@ const Explore = ({ heroData }) => {
   useEffect(() => {
     const fetchSites = async () => {
       try {
-        const response = await fetch("/api/sites");
+        const response = await fetch("/api/sites/home");
         // console.log("Fetching sites from /api/sites" + response);
         const data = await response.json();
         // console.log("API Response:", data);
@@ -122,9 +122,8 @@ const Explore = ({ heroData }) => {
                 onClick={() => navigate.push(`/cave/${site.site_id}`)}
               >
                 <div className="relative w-full h-full rounded-3xl">
-                  <div>
                     <Image
-                      src={site?.Gallary[0]}
+                      src={site?.Gallary?.[0] && site.Gallary[0].startsWith('http') ? site.Gallary[0] : '/placeholder.svg'}
                       alt={site.site_name}
                       fill
                       priority={isActive}
@@ -149,7 +148,6 @@ const Explore = ({ heroData }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
                   {isActive && (
                     <div className="absolute bottom-8 right-8 flex gap-2 z-40">
                       <button

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import aboutImg from "../../assets/images/about.png";
-import about_content from "../../assets/images/about_content.svg";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { ChevronDown, ChevronUp, Mail, Phone } from "lucide-react";
@@ -61,24 +60,26 @@ function About() {
   };
   return (
     <div className="w-screen bg-[#EAFFE1]">
-      <Header theme="light" />
-      <div className="w-full h-94 rounded-b-[190px] relative ">
+      <Header theme="light" currentPath="/about" />
+      <div className="w-full h-64 sm:h-96 relative overflow-hidden">
         <Image
           src={aboutImg}
           alt="About"
           fill
-          className="object-cover max-h-96 rounded-b-[190px] "
+          className="object-cover"
           priority
         />
-        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center font-bold text-7xl text-white/65 rounded-b-[190px] bg-black/40">
-          <p className="mt-20">About Us</p>
+        <div className="absolute inset-0 flex justify-center items-center font-bold text-white/65 bg-black/40">
+          <p className="text-4xl sm:text-7xl mt-10 sm:mt-20">About Us</p>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-[#EAFFE1] rounded-t-[100%] transform translate-y-1/2"></div>
       </div>
-      <div className="mt-10 h-full text-black   rounded-full relative">
-        <Image src={about_content}></Image>
-        <div className="absolute top-[20%] left-[5%] w-3xl">
-          <p className="text-6xl font-extrabold ">Maharitage</p>
-          <p className="mt-10 text-xl">
+      <div className="relative z-10 bg-[#EAFFE1] pt-10 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-black mb-6">
+            Maharitage
+          </p>
+          <p className="text-base sm:text-lg text-gray-800 leading-relaxed">
             Welcome to Maharitage — your digital gateway to the timeless beauty,
             culture, and heritage of Maharashtra.
             <br />
@@ -121,7 +122,7 @@ function About() {
 
         {/* Content */}
         <div className="relative z-10 w-full flex flex-col items-center">
-          <p className="text-3xl md:text-4xl font-black text-black tracking-[0.6rem] mb-10">
+          <p className="text-3xl md:text-4xl font-black text-black mb-10">
             FAQ
           </p>
 
@@ -160,12 +161,12 @@ function About() {
           </div>
         </div>
       </div>
-      <section className="bg-[#f3fee7] rounded-t-[40%] mt-16 pt-36 text-black pb-16 px-14 md:px-20 font-inter">
+      <section className="bg-[#f3fee7] rounded-t-3xl sm:rounded-t-[40%] mt-16 pt-36 text-black pb-16 px-4 sm:px-6 md:px-20 font-inter">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
           – Get in touch –
         </h2>
 
-        <div className="flex flex-col px-24 md:flex-row justify-center items-start gap-12">
+        <div className="flex flex-col px-4 sm:px-6 md:flex-row justify-center items-start gap-12">
           {/* Left Side */}
           <div className="flex flex-col gap-6 w-full md:w-[40%]">
             <p className="text-sm text-gray-700">

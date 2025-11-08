@@ -29,9 +29,12 @@ export const api = {
       });
 
       const data = await handleResponse(response);
+      
       if (data.data?.token) {
-        localStorage.setItem("auth-token", data.data.token);
+        
+        this.setToken(data.data.token);
       }
+      
       return data.data;
     } catch (error) {
       throw error;
@@ -57,17 +60,18 @@ export const api = {
   },
 
   // Helper method to set auth token in localStorage
+  // Helper method to set auth token in localStorage
   setToken(token) {
-    localStorage.setItem("authToken", token);
+    localStorage.setItem("auth-token", token);
   },
 
   // Helper method to get auth token from localStorage
   getToken() {
-    return localStorage.getItem("authToken");
+    return localStorage.getItem("auth-token");
   },
 
   // Helper method to remove auth token from localStorage
   removeToken() {
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("auth-token");
   },
 };

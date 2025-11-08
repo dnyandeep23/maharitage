@@ -3,7 +3,8 @@ module.exports = {
     content: [
         "./app/**/*.{js,ts,jsx,tsx}",
         "./pages/**/*.{js,ts,jsx,tsx}",
-        "./components/**/*.{js,ts,jsx,tsx}"
+        "./components/**/*.{js,ts,jsx,tsx}",
+        "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
         extend: {
@@ -16,10 +17,16 @@ module.exports = {
                     '0%, 100%': { borderColor: 'transparent' },
                     '50%': { borderColor: 'currentColor' },
                 },
+                progress: {
+                    '0%': { width: '0%' },
+                    '50%': { width: '100%' },
+                    '100%': { width: '0%' },
+                },
             },
             animation: {
                 typewriter: 'typewriter 3s steps(30) forwards',
                 blinkCaret: 'blinkCaret 0.75s step-end infinite',
+                progress: 'progress 2s ease-in-out infinite',
             },
         },
     },

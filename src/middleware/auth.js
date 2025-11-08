@@ -18,14 +18,11 @@ export async function withAuth(req) {
       error: 'Invalid or expired token'
     }, { status: 401 });
   }
-  // console.log(user)
   req.user = user;
   return null;
 }
 
 export function handleApiError(error) {
-  console.error('API Error:', error.toString());
-
   // Default error response
   const response = {
     success: false,

@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         });
+
         const data = await response.json();
         if (data.success) {
           setUser(data.data);
@@ -48,9 +49,9 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password, role) => {
     try {
-      const data = await api.login(email, password, role);
-      console.log("Login data:", data);
-      setUser(data.user);
+      await api.login(email, password, role);
+      // console.log("Login data:", data);
+      await fetchUser(); // Call fetchUser to update user state consistently
       const returnUrl = pathname || "/";
       router.replace(returnUrl);
     } catch (error) {
@@ -68,7 +69,6 @@ export const AuthProvider = ({ children }) => {
   const register = async (username, email, password, role) => {
     try {
       const data = await api.register(username, email, password, role);
-      console.log("Registration data:", data);
       return data;
     } catch (error) {
       setError(error.message);

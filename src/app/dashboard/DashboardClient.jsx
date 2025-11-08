@@ -1,16 +1,20 @@
-'use client';
+"use client";
 
-import { useState, Suspense } from 'react';
-import Loading from '../loading';
-import React from 'react';
-import { ROLES } from '../../lib/roles';
+import { useState, Suspense } from "react";
+import Loading from "../loading";
+import React from "react";
+import { ROLES } from "../../lib/roles";
 
-const PublicUserDashboard = React.lazy(() => import('./components/PublicUserDashboard'));
-const ResearchExpertDashboard = React.lazy(() => import('./components/ResearchExpertDashboard'));
-const AdminDashboard = React.lazy(() => import('./components/AdminDashboard'));
+const PublicUserDashboard = React.lazy(() =>
+  import("./components/PublicUserDashboard")
+);
+const ResearchExpertDashboard = React.lazy(() =>
+  import("./components/ResearchExpertDashboard")
+);
+const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
 
 export default function DashboardClient({ user }) {
-  const [selectedItem, setSelectedItem] = useState('Dashboard');
+  const [selectedItem, setSelectedItem] = useState("Dashboard");
 
   const handleSelectItem = (item) => {
     setSelectedItem(item);
@@ -19,18 +23,36 @@ export default function DashboardClient({ user }) {
   const renderRoleSpecificDashboard = () => {
     switch (user?.role) {
       case ROLES.ADMIN:
-        return <AdminDashboard user={user} selectedItem={selectedItem} handleSelectItem={handleSelectItem} />;
+        return (
+          <AdminDashboard
+            user={user}
+            selectedItem={selectedItem}
+            handleSelectItem={handleSelectItem}
+          />
+        );
       case ROLES.RESEARCH_EXPERT:
-        return <ResearchExpertDashboard user={user} selectedItem={selectedItem} handleSelectItem={handleSelectItem} />;
+        return (
+          <ResearchExpertDashboard
+            user={user}
+            selectedItem={selectedItem}
+            handleSelectItem={handleSelectItem}
+          />
+        );
       case ROLES.PUBLIC_USER:
       default:
-        return <PublicUserDashboard user={user} selectedItem={selectedItem} handleSelectItem={handleSelectItem} />;
+        return (
+          <PublicUserDashboard
+            user={user}
+            selectedItem={selectedItem}
+            handleSelectItem={handleSelectItem}
+          />
+        );
     }
   };
 
   return (
     <Suspense fallback={<Loading />}>
-      {renderRoleSpecificDashboard()}
+      <div className="text-green-800">{renderRoleSpecificDashboard()}</div>
     </Suspense>
   );
 }
