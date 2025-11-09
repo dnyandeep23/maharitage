@@ -51,7 +51,7 @@ export const ROLE_CONFIG = {
     id: ROLES.ADMIN,
     display: "Admin",
     dashboardPath: "/dashboard",
-    allowedPaths: ["*"], // Admin has access to all paths
+    allowedPaths: ["*"],
     nav: [{ label: "Admin Dashboard", path: "/dashboard" }],
   },
 };

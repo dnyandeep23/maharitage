@@ -9,6 +9,7 @@ import {
   XCircle,
 } from "lucide-react";
 import DiffViewer from "../components/DiffViewer";
+import { api } from "../../../../lib/api";
 
 const statusIcons = {
   pending: <HelpCircle size={16} className="mr-1" />,
@@ -41,7 +42,12 @@ const ReviewRequests = () => {
 
   const fetchRequests = async () => {
     try {
-      const response = await fetch("/api/research-requests");
+      const response = await fetch("/api/research-requests", {
+        headers: {
+          Authorization: `Bearer ${api.getToken()}`,
+        },
+        method: "GET",
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch requests");
       }
@@ -59,6 +65,7 @@ const ReviewRequests = () => {
       const response = await fetch(`/api/research-requests/${requestId}`, {
         method: "PUT",
         headers: {
+          Authorization: `Bearer ${api.getToken()}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ status, adminFeedback: feedback }),

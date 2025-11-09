@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useAuth } from '../../../../contexts/AuthContext';
+import React, { useState } from "react";
+import { useAuth } from "../../../../contexts/AuthContext";
+import { api } from "../../../../lib/api";
 
 const AddAdmin = () => {
   const { user } = useAuth();
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,11 +17,11 @@ const AddAdmin = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/admins', {
-        method: 'POST',
+      const response = await fetch("/api/admins", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${api.getToken()}`,
         },
         body: JSON.stringify({ email, username }),
       });
@@ -28,21 +29,29 @@ const AddAdmin = () => {
       const result = await response.json();
 
       if (response.ok) {
-        setMessage({ type: 'success', text: 'Admin created successfully!' });
-        setEmail('');
-        setUsername('');
+        setMessage({ type: "success", text: "Admin created successfully!" });
+        setEmail("");
+        setUsername("");
       } else {
-        setMessage({ type: 'error', text: result.message || 'Failed to create admin.' });
+        setMessage({
+          type: "error",
+          text: result.message || "Failed to create admin.",
+        });
       }
     } catch (error) {
-        if (error instanceof Response) {
-            const result = await error.json();
-            setMessage({ type: 'error', text: result.message || 'An error occurred. Please try again.' });
-        } else {
-            setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
-        }
-    }
-    finally {
+      if (error instanceof Response) {
+        const result = await error.json();
+        setMessage({
+          type: "error",
+          text: result.message || "An error occurred. Please try again.",
+        });
+      } else {
+        setMessage({
+          type: "error",
+          text: "An error occurred. Please try again.",
+        });
+      }
+    } finally {
       setIsLoading(false);
     }
   };
@@ -57,9 +66,9 @@ const AddAdmin = () => {
       {message && (
         <div
           className={`p-4 mb-4 text-sm rounded-lg ${
-            message.type === 'success'
-              ? 'bg-green-100 text-green-700'
-              : 'bg-red-100 text-red-700'
+            message.type === "success"
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
           }`}
         >
           {message.text}
@@ -67,7 +76,12 @@ const AddAdmin = () => {
       )}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+          <label
+            htmlFor="username"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Username
+          </label>
           <input
             type="text"
             id="username"
@@ -78,7 +92,12 @@ const AddAdmin = () => {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Email
+          </label>
           <input
             type="email"
             id="email"

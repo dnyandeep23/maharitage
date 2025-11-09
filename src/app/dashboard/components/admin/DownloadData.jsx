@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { api } from "../../../../lib/api";
 
 const DownloadData = () => {
-  const token = localStorage.getItem("auth-token");
   const [sites, setSites] = useState([]);
   const [selectedSite, setSelectedSite] = useState("");
   const [message, setMessage] = useState(null);
@@ -25,7 +25,7 @@ const DownloadData = () => {
     try {
       const response = await fetch("/api/sites/download", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${api.getToken()}`,
         },
       });
       if (!response.ok) {

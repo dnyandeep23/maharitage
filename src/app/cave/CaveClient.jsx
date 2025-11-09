@@ -111,7 +111,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
               {inscription.image_urls.map((url, index) => (
                 <div
                   key={index}
-                  className="w-full flex-shrink-0"
+                  className="w-full shrink-0"
                   onClick={() => onImageClick(url)}
                 >
                   <img
@@ -155,7 +155,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
                 onClick={() => setLanguage("en")}
                 className={`px-3 py-1 rounded-full cursor-pointer  text-sm font-medium ${
                   language === "en"
-                    ? "bg-gradient-to-br from-green-600 to-green-900 text-white"
+                    ? "bg-linear-to-br from-green-600 to-green-900 text-white"
                     : "border-green-900 border text-green-800"
                 }`}
               >
@@ -165,7 +165,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
                 onClick={() => setLanguage("mr")}
                 className={`px-3 py-1  rounded-full cursor-pointer text-sm font-medium ${
                   language === "mr"
-                    ? "bg-gradient-to-br from-green-600 to-green-900 text-white"
+                    ? "bg-linear-to-br from-green-600 to-green-900 text-white"
                     : "border-green-900 border text-green-800"
                 }`}
               >
@@ -349,63 +349,72 @@ export default function CaveClient({ site }) {
                   <div className="overflow-hidden">
                     <div
                       className="flex transition-transform duration-700 ease-in-out"
-                      style={{ transform: `translateX(-${current * 33.33}%)` }}
+                      style={{
+                        transform: `translateX(-${
+                          inscriptionCurrent * 33.33
+                        }%)`,
+                      }}
                     >
-                      {site.Gallary?.map((img, index) => (
-                        <div
-                          className="w-full sm:w-1/2 md:w-1/3 h-64 sm:h-72 md:h-80 flex-shrink-0 mx-4 relative group cursor-pointer"
-                          onClick={() => handleImageClick(img)}
-                          key={index}
-                        >
-                          <img
-                            src={img}
-                            alt={`Gallery ${index}`}
-                            className="w-full h-full object-cover rounded-2xl bg-gray-300"
-                          />
-                          <div className="absolute bottom-0 left-0 w-full h-full rounded-2xl bg-black/30 flex items-end justify-center transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <span className="text-white p-4 text-xl font-semibold">
-                              Expand
-                            </span>
-                          </div>
+                      {site.Gallary && site.Gallary.length > 0 ? (
+                        site.Gallary.map((inscript, index) => (
+                                                      <div
+                                                        key={index}
+                                                        className="w-1/3 shrink-0 p-2 cursor-pointer"
+                                                        onClick={() => handleImageClick(site.Gallary[index])}
+                                                      >
+                                                        <img
+                                                          src={site.Gallary[index]}
+                                                          alt={`Inscription ${index}`}
+                                                          className="w-full h-80 object-cover rounded-2xl bg-gray-300"
+                                                        />
+                                                      </div>                        ))
+                      ) : (
+                        <div className="w-full text-center font-extrabold text-5xl text-gray-400 py-10">
+                          No inscriptions found at this location.
                         </div>
-                      ))}
+                      )}
                     </div>
                   </div>
                 )}
 
-                <div className="flex justify-end mt-2 gap-2">
-                  <button
-                    onClick={prevSlide}
-                    disabled={current === 0}
-                    className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                      current === 0
-                        ? "opacity-50 cursor-not-allowed"
-                        : "hover:border-lime-200 hover:bg-lime-200"
-                    }`}
-                  >
-                    <ChevronLeft />
-                  </button>
-                  <div className="relative group">
+                {site.Inscriptions && site.Inscriptions.length > 0 && (
+                  <div className="flex justify-end gap-2">
                     <button
-                      onClick={nextSlide}
-                      disabled={
-                        !site.Gallary || current >= site.Gallary.length - 3
-                      }
+                      onClick={prevInscription}
+                      disabled={inscriptionCurrent === 0}
                       className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                        !site.Gallary || current >= site.Gallary.length - 3
+                        inscriptionCurrent === 0
                           ? "opacity-50 cursor-not-allowed"
                           : "hover:border-lime-200 hover:bg-lime-200"
                       }`}
                     >
-                      <ChevronRight />
+                      <ChevronLeft />
                     </button>
-                    {(!site.Gallary || current >= site.Gallary.length - 3) && (
-                      <div className="absolute bottom-full mb-2 w-max px-2 py-1 bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                        Gallery end
-                      </div>
-                    )}
+                    <div className="relative group">
+                      <button
+                        onClick={nextInscription}
+                        disabled={
+                          !site.Inscriptions ||
+                          inscriptionCurrent >= site.Inscriptions.length - 3
+                        }
+                        className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
+                          !site.Inscriptions ||
+                          inscriptionCurrent >= site.Inscriptions.length - 3
+                            ? "opacity-50 cursor-not-allowed"
+                            : "hover:border-lime-200 hover:bg-lime-200"
+                        }`}
+                      >
+                        <ChevronRight />
+                      </button>
+                      {(!site.Inscriptions ||
+                        inscriptionCurrent >= site.Inscriptions.length - 3) && (
+                        <div className="absolute bottom-full mb-2 w-max px-2 py-1 bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                          Inscriptions end
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
             <div className="mt-10 mx-6">
@@ -434,7 +443,7 @@ export default function CaveClient({ site }) {
                           site.Inscriptions.map((inscript, index) => (
                             <div
                               key={index}
-                              className="w-1/3 flex-shrink-0 p-2 cursor-pointer"
+                              className="w-1/3 shrink-0 p-2 cursor-pointer"
                               onClick={() =>
                                 handleInscriptionClick(inscript.Inscription_id)
                               }

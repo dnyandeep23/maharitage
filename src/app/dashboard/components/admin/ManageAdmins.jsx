@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { Trash2 } from "lucide-react";
 import ConfirmationModal from "../components/ConfirmationModal";
+import { api } from "../../../../lib/api";
 
 const ManageAdmins = () => {
   const { user } = useAuth();
@@ -18,7 +19,7 @@ const ManageAdmins = () => {
       try {
         const response = await fetch("/api/admins", {
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${api.getToken()}`,
           },
         });
         const data = await response.json();

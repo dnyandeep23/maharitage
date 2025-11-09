@@ -4,15 +4,15 @@ import User from "../../../models/User";
 import { sendNewAdminEmail } from "../../../lib/email";
 import crypto from "crypto";
 
-import { adminAuth } from "../../../middleware/adminAuth";
-
 async function getAdmins(request) {
   await connectDB();
 
   try {
-    
+    console.log("Getting admins...");
+
     const admins = await User.find({ role: "admin" });
-    
+    console.log(admins);
+
     return NextResponse.json(admins);
   } catch (error) {
     return NextResponse.json(
@@ -58,5 +58,5 @@ async function createAdmin(request) {
   }
 }
 
-export const GET = adminAuth(getAdmins);
-export const POST = adminAuth(createAdmin);
+export const GET = getAdmins;
+export const POST = createAdmin;

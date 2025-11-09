@@ -4,8 +4,10 @@ import User from "../models/User";
 export const adminAuth =
   (handler) =>
   async (req, ...args) => {
-    const authHeader = req.headers.get("authorization");
+    const authHeader = req.headers.get("Authorization");
+    console.log("Auth Header:", authHeader);
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      console.log("No valid Authorization header found");
       return new Response(JSON.stringify({ message: "Unauthorized" }), {
         status: 401,
       });

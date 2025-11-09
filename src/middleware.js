@@ -43,6 +43,8 @@ function matchRoutePattern(pathname, patterns) {
   });
 }
 
+const ADMIN_API_ROUTES = ["/api/admins", "/api/research-requests"];
+
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;
 
@@ -88,9 +90,7 @@ export async function middleware(request) {
         user = data.user;
       }
     }
-  } catch (err) {
-    
-  }
+  } catch (err) {}
 
   if (!user && isProtected) {
     if (pathname.startsWith("/api/")) {
@@ -102,9 +102,19 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (user && !canAccessPath(user.role, pathname)) {
-    const redirectPath = ROLE_CONFIG[user.role]?.dashboardPath || "/";
-    return NextResponse.redirect(new URL(redirectPath, request.url));
+  if (user) {
+    const isAdminRoute = matchRoutePattern(pathname, ADMIN_API_ROUTES);
+    if (isAdminRoute && user.role !== "admin") {
+      return new NextResponse(
+        JSON.stringify({ success: false, message: "Forbidden" }),
+        { status: 403, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    if (!canAccessPath(user.role, pathname)) {
+      const redirectPath = ROLE_CONFIG[user.role]?.dashboardPath || "/";
+      return NextResponse.redirect(new URL(redirectPath, request.url));
+    }
   }
 
   return NextResponse.next();
