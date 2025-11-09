@@ -152,6 +152,25 @@ const AIComponent = () => {
   const [isAnonymousLimited, setIsAnonymousLimited] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [imagePreview, setImagePreview] = useState({ isOpen: false, src: "" });
+  const [initialMessage, setInitialMessage] = useState(
+    `The Ajanta Caves, a UNESCO World Heritage Site nestled in the Aurangabad district of Maharashtra, stand as an unparalleled testament to ancient Indian art and the evolution of Buddhist monastic life. These 30 rock-cut Buddhist cave monuments date from the 2nd century BCE to approximately 480 CE, offering a profound journey through time.
+
+[Image: /placeholder.svg]
+
+Carved into a 75-meter (246 ft) wall of rock in the U-shaped gorge of the Waghur River, the Ajanta complex comprises ancient monasteries (Viharas) for living, studying, and meditating, as well as worship-halls (Chaityas). The construction unfolded in two distinct phases: the first around the 2nd century BCE, and the second, a more prolific period, from 400 to 650 CE, or more precisely, between 460–480 CE during the flourishing Vakataka dynasty.
+
+The caves are universally celebrated as masterpieces of Buddhist religious art, showcasing some of the finest surviving examples of ancient Indian art. The paintings and rock-cut sculptures are particularly expressive, conveying emotions through gesture, pose, and form. These murals vividly depict the past lives and rebirths of the Buddha, known as Jataka tales, alongside intricate rock-cut sculptures of various Buddhist deities.
+
+[Image: /placeholder.svg]
+
+While vibrant mural paintings were common in ancient India, Caves 1, 2, 16, and 17 of Ajanta preserve the largest surviving corpus of these ancient Indian wall-paintings. Textual records indicate that these caves served not only as a monsoon retreat for monks but also as a crucial resting point for merchants and pilgrims traversing ancient South Asian trade routes.
+
+Several important inscriptions found within the caves offer invaluable historical insights. For instance, an early Sanskrit inscription in Brahmi script in Cave 10, dating to around the 2nd century BCE, records "The gift of a cave-façade by Vasisthiputra Katahadi," highlighting early lay patronage. Later, during the Vakataka period, Cave 16, a grand Mahayana monastery, features an inscription by Varahadeva, the prime minister of King Harishena. This inscription details the excavation and gifting of the cave as a merit-earning act, reflecting the religious harmony and deep devotion of the era. Similarly, King Upendragupta sponsored at least five caves, including Cave 17, as recorded in its long inscription.
+
+[Image: /placeholder.svg]
+
+After centuries of being shrouded by dense jungle, the Ajanta Caves were accidentally rediscovered in 1819 by a colonial British officer, Captain John Smith, during a tiger-hunting expedition, bringing these wonders to Western attention. Today, the Ajanta Caves remain a beacon of Maharashtra's rich heritage, protected by the Archaeological Survey of India (ASI) and continuing to inspire awe and reverence for its artistic and spiritual grandeur.`
+  );
 
   const handleOpenImagePreview = (src) => {
     setImagePreview({ isOpen: true, src });
@@ -160,6 +179,13 @@ const AIComponent = () => {
   const handleCloseImagePreview = () => {
     setImagePreview({ isOpen: false, src: "" });
   };
+
+  useEffect(() => {
+    if (messages.length === 0 && initialMessage) {
+      setMessages([{ role: "ai", parts: [{ text: initialMessage }] }]);
+      setIsChatActive(true);
+    }
+  }, [messages, initialMessage]);
 
   useEffect(() => {
     const getFingerprint = async () => {
@@ -440,7 +466,7 @@ const AIComponent = () => {
 
   const ImagePreviewModal = ({ src, onClose }) => (
     <div
-      className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[100]"
+      className="fixed inset-0 bg-bl5 flex items-center justify-center z-50"
       onClick={onClose}
     >
       <div
@@ -484,17 +510,19 @@ const AIComponent = () => {
       {/* ===== Sidebar ===== */}
       <aside
         className={`fixed inset-y-0 left-0 z-40 flex flex-col justify-between p-4 border-r border-green-100 transition-all duration-300 ease-in-out lg:relative lg:translate-x-0 ${
-          isSidebarOpen ? "w-72 bg-green-50 translate-x-0" : "w-72 -translate-x-full bg-white lg:w-0"
+          isSidebarOpen
+            ? "w-72 bg-green-50 translate-x-0"
+            : "w-72 -translate-x-full bg-white lg:w-0"
         }`}
       >
         {isSidebarOpen && (
           <>
             <div>
               <div className="flex items-center mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-800 to-green-950 rounded-2xl flex items-center justify-center text-white font-bold text-lg mr-3">
+                <div className="w-10 h-10 bg-linear-to-br from-green-600 to-green-950 rounded-2xl flex items-center justify-center text-white font-bold text-lg mr-3">
                   H
                 </div>
-                <h1 className="text-xl font-semibold bg-gradient-to-br text-transparent from-green-600 to-green-950 bg-clip-text">
+                <h1 className="text-xl font-semibold bg-linear-to-br text-transparent from-green-600 to-green-950 bg-clip-text">
                   HeritageX
                 </h1>
               </div>
@@ -540,7 +568,7 @@ const AIComponent = () => {
                   <p className="px-2 flex flex-col gap-2">
                     <span>
                       Login to{" "}
-                      <span className="text-transparent bg-gradient-to-br from-green-500 to-green-900 bg-clip-text ">
+                      <span className="text-transparent bg-linear-to-br from-green-500 to-green-900 bg-clip-text ">
                         store your chats
                       </span>{" "}
                     </span>
@@ -550,7 +578,7 @@ const AIComponent = () => {
                     </span>
                   </p>
                   <div
-                    className="mt-4 px-5 py-2 bg-gradient-to-br from-green-500 to-green-900 hover:bg-gradient-to-tl text-white rounded-full transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
+                    className="mt-4 px-5 py-2 bg-linear-to-br from-green-500 to-green-900 hover:bg-gradient-to-tl text-white rounded-full transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
                     onClick={() => {
                       router.push("/login");
                     }}

@@ -94,14 +94,14 @@ const EmailSentContent = () => {
                 variant="minimal"
             /> */}
 
-      <div className="w-full flex flex-col items-center justify-center h-screen">
+      <div className="w-full flex flex-col items-center justify-center h-screen px-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="w-full max-w-lg bg-white/15 rounded-lg p-8 shadow-xl border border-white/30 text-white text-center"
         >
-          <h2 className="text-3xl font-bold mb-4">Check Your Email</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Check Your Email</h2>
           <p className="mb-6">
             We've sent a verification link to <strong>{email}</strong>. Please
             check your inbox and click the link to activate your account.

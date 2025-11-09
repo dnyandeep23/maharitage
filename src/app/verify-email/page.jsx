@@ -101,7 +101,7 @@ const VerifyEmailContent = () => {
         variant="minimal"
       />
 
-      <div className="w-full flex flex-col items-center justify-center h-screen">
+      <div className="w-full flex flex-col items-center justify-center h-screen px-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -110,7 +110,7 @@ const VerifyEmailContent = () => {
         >
           {verificationStatus === "verifying" && (
             <>
-              <h2 className="text-3xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">
                 Verifying your email...
               </h2>
               <p>Please wait while we verify your email address.</p>

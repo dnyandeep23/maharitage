@@ -519,14 +519,14 @@ export default function CaveClient({ site }) {
                   </div>
                   <div className="flex items-center gap-2 text-base font-black ">
                     Related Figure.{" "}
-                    <span className="flex gap-1 text-green-800">
+                    <div className="flex flex-wrap gap-2 items-center text-green-800">
                       {site.historical_context?.related_figures &&
                       site.historical_context.related_figures.length > 0 ? (
                         site.historical_context.related_figures.map(
                           (fig, idx) => (
                             <div
                               key={idx}
-                              className="px-2.5 bg-green-200 border-2 border-green-800/10 rounded-full"
+                              className="px-3 py-1 bg-green-200 border border-green-800/10 rounded-full"
                             >
                               {fig}
                             </div>
@@ -537,7 +537,7 @@ export default function CaveClient({ site }) {
                           No related figures
                         </div>
                       )}
-                    </span>
+                    </div>
                   </div>
                   <div className="flex items-start gap-2 text-base font-black ">
                     <p className="w-[18%]">Cultural Significance.</p>

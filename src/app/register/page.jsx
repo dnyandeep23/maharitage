@@ -168,16 +168,16 @@ const Register = () => {
       />
 
       <div className="w-full flex flex-col items-center justify-center min-h-screen py-20">
-        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-28">
+        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-10 md:gap-28 px-4 md:px-0">
           <div className="flex-1 flex flex-col justify-center items-start text-white">
-            <h2 className="text-8xl md:text-6xl font-bold mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               Join Maharitage Community
             </h2>
-            <p className="text-lg text-gray-200">
+            <p className="text-base md:text-lg text-gray-200">
               Create your account to explore Maharashtra's rich heritage,
               contribute to research, and connect with fellow enthusiasts.
             </p>
-            <div className="mt-24 text-lg">
+            <div className="mt-12 md:mt-24 text-base md:text-lg">
               <p>
                 Already have an account?{" "}
                 <span

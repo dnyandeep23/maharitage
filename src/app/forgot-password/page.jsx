@@ -79,16 +79,16 @@ const ForgotPassword = () => {
 
       {/* Main Section */}
       <div className="w-full flex flex-col items-center justify-center h-screen">
-        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-28">
+        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-10 md:gap-28 px-4 md:px-0">
           {/* Left Section */}
           <div className="flex-1 flex flex-col justify-center items-start text-white">
-            <h2 className="text-8xl md:text-6xl font-bold mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               Forgot Your Password?
             </h2>
-            <p className="text-lg text-gray-200">
+            <p className="text-base md:text-lg text-gray-200">
               Enter your email address below and we'll send you a link to reset your password.
             </p>
-            <div className="mt-24 text-lg">
+            <div className="mt-12 md:mt-24 text-base md:text-lg">
               <p>
                 Remember your password?{" "}
                 <span
