@@ -10,7 +10,6 @@ import cloudinary from "../../../../lib/cloudinary";
 export async function GET(req, { params }) {
   await connectDB();
   const { id } = params;
-
   try {
     const request = await TempSite.findById(id).populate(
       "researchExpertId",
@@ -88,9 +87,7 @@ export async function PUT(req, { params }) {
             await Promise.all(
               publicIds.map((publicId) => cloudinary.uploader.destroy(publicId))
             );
-          } catch (cloudinaryError) {
-            
-          }
+          } catch (cloudinaryError) {}
         }
       }
       tempSite.status = "rejected";

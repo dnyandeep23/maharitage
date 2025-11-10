@@ -22,6 +22,7 @@ import Sidebar from "./Sidebar";
 import Profile from "./shared/Profile";
 import ApiKeyManagement from "./shared/ApiKeyManagement";
 import Footer from "../../component/Footer";
+import { api } from "@/lib/api";
 
 const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
   const router = useRouter();
@@ -147,6 +148,9 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
       const response = await fetch("/api/research-requests", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${api.getToken()}`,
+        },
       });
 
       const result = await response.json();
@@ -244,6 +248,9 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
       const response = await fetch("/api/research-requests", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${api.getToken()}`,
+        },
       });
 
       const result = await response.json();
@@ -296,6 +303,9 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
       const response = await fetch("/api/research-requests", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${api.getToken()}`,
+        },
       });
 
       const result = await response.json();
@@ -350,6 +360,9 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
       const response = await fetch("/api/research-requests", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${api.getToken()}`,
+        },
       });
 
       const result = await response.json();

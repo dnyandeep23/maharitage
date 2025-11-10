@@ -43,7 +43,7 @@ function matchRoutePattern(pathname, patterns) {
   });
 }
 
-const ADMIN_API_ROUTES = ["/api/admins", "/api/research-requests"];
+const ADMIN_API_ROUTES = ["/api/admins"];
 
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;

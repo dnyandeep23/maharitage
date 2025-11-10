@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import DiffViewer from "../components/DiffViewer";
 import { Clock, CheckCircle, XCircle, HelpCircle } from "lucide-react";
+import { api } from "@/lib/api";
 
 const statusIcons = {
   pending: <HelpCircle size={16} className="mr-1" />,
@@ -24,7 +25,6 @@ const MySubmissions = () => {
   const [error, setError] = useState(null);
   const [expanded, setExpanded] = useState(null);
   const [loadingOriginal, setLoadingOriginal] = useState(null);
-
   useEffect(() => {
     if (user && user._id) {
       fetchSubmissions();
@@ -34,8 +34,16 @@ const MySubmissions = () => {
   const fetchSubmissions = async () => {
     try {
       setLoading(true);
+      console.log("Fetching submissions for user ID:", user._id);
+      console.log("user:", api.getToken());
       const response = await fetch(
-        `/api/research-requests?researchExpertId=${user._id}`
+        `/api/research-requests?researchExpertId=${user._id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${api.getToken()}`,
+          },
+        }
       );
       console.log("Response status:", response);
       if (!response.ok) {
@@ -126,12 +134,13 @@ const MySubmissions = () => {
                       Loading original data...
                     </div>
                   ) : (
-                                        <DiffViewer
-                                            original={submission.originalSite}
-                                            modified={submission}
-                                            action={submission.action}
-                                            type={submission.type}
-                                        />                  )}
+                    <DiffViewer
+                      original={submission.originalSite}
+                      modified={submission}
+                      action={submission.action}
+                      type={submission.type}
+                    />
+                  )}
                   {submission.adminFeedback && (
                     <div className="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
                       <p className="text-sm font-semibold text-yellow-800">
