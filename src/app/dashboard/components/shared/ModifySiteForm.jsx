@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import dynamic from "next/dynamic";
 import ChipInput from "../components/ChipInput";
@@ -14,14 +14,42 @@ const MapPicker = dynamic(() => import("../components/MapPicker"), {
 
 import Loading from "../../../../app/loading";
 
+function siteReducer(state, action) {
+  switch (action.type) {
+    case "UPDATE_FIELD":
+      return { ...state, [action.field]: action.value };
+    case "UPDATE_NESTED_FIELD":
+      return {
+        ...state,
+        [action.parent]: {
+          ...state[action.parent],
+          [action.field]: action.value,
+        },
+      };
+    case "ADD_REFERENCE":
+      return { ...state, references: [...state.references, action.reference] };
+    case "REMOVE_REFERENCE":
+      return {
+        ...state,
+        references: state.references.filter((_, i) => i !== action.index),
+      };
+    case "REMOVE_IMAGE":
+      return {
+        ...state,
+        Gallary: state.Gallary.filter((_, i) => i !== action.index),
+      };
+    default:
+      return state;
+  }
+}
+
 const ModifySiteForm = ({
   site: initialSite,
   onUpdate,
   onCancel,
   handleSubmit,
 }) => {
-  const { user } = useAuth();
-  const [siteData, setSiteData] = useState(initialSite);
+  const [siteData, dispatch] = useReducer(siteReducer, initialSite);
   const [rawSiteName, setRawSiteName] = useState(initialSite.site_name);
   const [images, setImages] = useState([]);
   const [message, setMessage] = useState(null);
@@ -49,47 +77,49 @@ const ModifySiteForm = ({
 
     if (parent) {
       if (isArray) {
-        setSiteData((prev) => ({
-          ...prev,
-          [parent]: {
-            ...prev[parent],
-            [field]: value.split(",").map((item) => item.trim()),
-          },
-        }));
+        dispatch({
+          type: "UPDATE_NESTED_FIELD",
+          parent,
+          field,
+          value: value.split(",").map((item) => item.trim()),
+        });
       } else {
-        setSiteData((prev) => ({
-          ...prev,
-          [parent]: {
-            ...prev[parent],
-            [name]: value,
-          },
-        }));
+        dispatch({ type: "UPDATE_NESTED_FIELD", parent, field: name, value });
       }
     } else if (isArray) {
-      setSiteData((prev) => ({
-        ...prev,
-        [field]: value.split(",").map((item) => item.trim()),
-      }));
+      dispatch({
+        type: "UPDATE_FIELD",
+        field,
+        value: value.split(",").map((item) => item.trim()),
+      });
     } else {
-      setSiteData((prev) => ({ ...prev, [name]: value }));
+      dispatch({ type: "UPDATE_FIELD", field: name, value });
     }
   };
 
   const handleSiteNameChange = (e) => {
     setRawSiteName(e.target.value);
     const normalizedName = normalizeSiteName(e.target.value);
-    setSiteData((prev) => ({ ...prev, site_name: normalizedName }));
+    dispatch({
+      type: "UPDATE_FIELD",
+      field: "site_name",
+      value: normalizedName,
+    });
   };
 
   const handleMapLocationChange = ({ lat, lng }) => {
-    setSiteData((prev) => ({
-      ...prev,
-      location: {
-        ...prev.location,
-        latitude: lat,
-        longitude: lng,
-      },
-    }));
+    dispatch({
+      type: "UPDATE_NESTED_FIELD",
+      parent: "location",
+      field: "latitude",
+      value: lat,
+    });
+    dispatch({
+      type: "UPDATE_NESTED_FIELD",
+      parent: "location",
+      field: "longitude",
+      value: lng,
+    });
   };
 
   const getInitialPosition = () => {
@@ -101,10 +131,7 @@ const ModifySiteForm = ({
   };
 
   const handleRemoveImage = (index) => {
-    setSiteData((prev) => ({
-      ...prev,
-      Gallary: prev.Gallary.filter((_, i) => i !== index),
-    }));
+    dispatch({ type: "REMOVE_IMAGE", index });
   };
 
   if (isLoading) {
@@ -333,13 +360,12 @@ const ModifySiteForm = ({
               <ChipInput
                 value={siteData.historical_context.related_figures}
                 onChange={(newValue) =>
-                  setSiteData((prev) => ({
-                    ...prev,
-                    historical_context: {
-                      ...prev.historical_context,
-                      related_figures: newValue,
-                    },
-                  }))
+                  dispatch({
+                    type: "UPDATE_NESTED_FIELD",
+                    parent: "historical_context",
+                    field: "related_figures",
+                    value: newValue,
+                  })
                 }
                 placeholder="Add a figure"
               />
@@ -375,13 +401,12 @@ const ModifySiteForm = ({
               <ChipInput
                 value={siteData.verification_authority.curated_by}
                 onChange={(newValue) =>
-                  setSiteData((prev) => ({
-                    ...prev,
-                    verification_authority: {
-                      ...prev.verification_authority,
-                      curated_by: newValue,
-                    },
-                  }))
+                  dispatch({
+                    type: "UPDATE_NESTED_FIELD",
+                    parent: "verification_authority",
+                    field: "curated_by",
+                    value: newValue,
+                  })
                 }
                 placeholder="Add a curator"
               />
@@ -427,10 +452,7 @@ const ModifySiteForm = ({
           <h3 className="text-lg font-semibold">References</h3>
           <ReferenceInput
             onAdd={(newReference) =>
-              setSiteData((prev) => ({
-                ...prev,
-                references: [...prev.references, newReference],
-              }))
+              dispatch({ type: "ADD_REFERENCE", reference: newReference })
             }
           />
           <div className="space-y-2">
@@ -447,12 +469,7 @@ const ModifySiteForm = ({
                 </div>
                 <button
                   type="button"
-                  onClick={() =>
-                    setSiteData((prev) => ({
-                      ...prev,
-                      references: prev.references.filter((_, i) => i !== index),
-                    }))
-                  }
+                  onClick={() => dispatch({ type: "REMOVE_REFERENCE", index })}
                   className="text-red-500 hover:text-red-700"
                 >
                   <X size={20} />

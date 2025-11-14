@@ -71,30 +71,31 @@ const Hero = ({
           {/* ✅ Search Bar with Dropdown */}
           <form
             onSubmit={handleSearch}
-            className="relative max-w-4xl mx-auto mb-8 search-dropdown-container"
+            className="relative w-full max-w-4xl mx-auto mb-6 px-3 sm:px-0 search-dropdown-container"
           >
-            {/* Search Bar */}
-            <div className="flex items-center bg-white w-full rounded-full shadow-2xl relative z-20">
-              {/* Icon + Toggle */}
-              <div className="flex items-center">
-                <div
-                  className="flex items-center gap-2 px-4 cursor-pointer hover:text-green-600 transition-colors py-2"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                >
-                  {activeIcon === "search" ? (
-                    <Search className="w-5 h-5 text-gray-400" />
-                  ) : (
-                    <Bot className="w-5 h-5 text-green-600" />
-                  )}
-                  <ChevronRight
-                    className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
-                      isDropdownOpen ? "rotate-[270deg]" : "rotate-90"
-                    }`}
-                  />
-                </div>
+            {/* Search Wrapper */}
+            <div
+              className="flex items-center bg-white w-full rounded-full shadow-xl relative z-20
+                  pl-4 md:pl-4 xl:pl-4 sm:pl-3"
+            >
+              {/* Icon Toggle */}
+              <div
+                className="flex items-center gap-2 pr-2 sm:pr-4 cursor-pointer hover:text-green-600 transition-colors"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                {activeIcon === "search" ? (
+                  <Search className="w-5 h-5 text-gray-400" />
+                ) : (
+                  <Bot className="w-5 h-5 text-green-600" />
+                )}
+
+                <ChevronRight
+                  className={`w-4 h-4 text-gray-400 transition-transform duration-200 
+        ${isDropdownOpen ? "rotate-270" : "rotate-90"}`}
+                />
               </div>
 
-              {/* Input */}
+              {/* Input Field */}
               <input
                 type="text"
                 value={searchQuery}
@@ -104,38 +105,43 @@ const Hero = ({
                     ? "Search heritage sites..."
                     : "Ask AI about heritage sites..."
                 }
-                className="flex-1 px-4 py-3 sm:py-4 text-gray-800 placeholder-gray-500 focus:outline-none"
-                style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
+                className="flex-1 px-2 sm:px-3 text-gray-800 placeholder-gray-500 
+                 focus:outline-none text-sm sm:text-base"
                 disabled={isLoading}
+                style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
               />
 
               {/* Search Button */}
               <button
                 type="submit"
                 disabled={isLoading}
-                className="bg-green-600 rounded-full hover:bg-green-700 text-white px-6 py-3 sm:px-8 sm:py-4 transition-colors duration-200 disabled:opacity-50 font-medium"
+                className="bg-green-600 rounded-full hover:bg-green-700 text-white
+                 px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition-colors 
+                 duration-200 disabled:opacity-50 font-medium whitespace-nowrap"
                 style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
               >
-                {isLoading ? (
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  "Search"
-                )}
+                {isLoading ? "Searching..." : "Search"}
               </button>
             </div>
 
-            {/* ✅ Dropdown (placed below bar, not inside) */}
+            {/* Dropdown */}
             {isDropdownOpen && (
-              <div className="absolute top-[calc(100%+0.5rem)] left-0 w-40 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 animate-fadeIn">
+              <div
+                className="absolute top-[calc(100%+0.5rem)] left-3 sm:left-0 w-44 sm:w-40 
+                    bg-white rounded-xl shadow-2xl border border-gray-100 py-2 
+                    z-50 animate-fadeIn"
+              >
                 {searchOptions.map((option) => (
                   <button
                     key={option.id}
                     type="button"
-                    className={`w-full flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                      activeIcon === option.id
-                        ? "text-green-600 bg-gray-50"
-                        : "text-gray-600"
-                    }`}
+                    className={`w-full flex items-center gap-3 px-4 py-2 text-sm 
+                     hover:bg-gray-50 transition-colors 
+                     ${
+                       activeIcon === option.id
+                         ? "text-green-600 bg-gray-50"
+                         : "text-gray-600"
+                     }`}
                     onClick={() => {
                       setActiveIcon(option.id);
                       setIsDropdownOpen(false);
@@ -150,6 +156,7 @@ const Hero = ({
                     >
                       {option.icon}
                     </div>
+
                     {option.label}
                   </button>
                 ))}

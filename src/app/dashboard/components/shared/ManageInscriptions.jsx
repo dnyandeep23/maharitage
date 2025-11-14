@@ -143,7 +143,9 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
                     {inscription.Inscription_id}
                   </p>
                   <p className="text-sm text-gray-600">
-                    {inscription.discription.substring(0, 100)}...
+                    {inscription.description?.substring(0, 100) ||
+                      "No description available"}
+                    ...
                   </p>
                 </div>
                 <div className="flex space-x-2">

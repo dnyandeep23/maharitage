@@ -1,27 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { inter, playfairDisplay, cinzelDecorative } from "./fonts";
 import "./globals.css";
 import { ClientLayout } from "./client-layout";
 import { AuthProvider } from "../contexts/AuthContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = {
   title: "Maharitage",
-  description:
-    "Explore and Discover Maharashtra's Rich Heritage with AI-Powered Insights",
+  description: "Preserving Maharashtra's magnificent cave heritage.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfairDisplay.variable} ${cinzelDecorative.variable}`}
+    >
       <head>
         <link
           rel="icon"
@@ -39,9 +31,7 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-title" content="MyWebSite" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <ClientLayout>
           <AuthProvider>{children}</AuthProvider>
         </ClientLayout>

@@ -30,8 +30,8 @@ import {
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Toast from "../component/Toast";
-import LoadingSpinner from "../component/LoadingSpinner";
 import Image from "next/image";
+import Loading from "../loading";
 
 // ✅ Loading animation
 const LoadingAnimation = () => (
@@ -53,8 +53,11 @@ const MessageRenderer = ({ text, onImageClick }) => {
     for (const part of parts) {
       if (isImage) {
         result.push({ type: "image", url: part });
-      } else if (part.trim()) {
-        result.push({ type: "text", content: part });
+      } else {
+        const cleanedPart = part.replace(/\*\*/g, "").trim();
+        if (cleanedPart) {
+          result.push({ type: "text", content: cleanedPart });
+        }
       }
       isImage = !isImage;
     }
@@ -136,6 +139,7 @@ const AIComponent = () => {
   const messagesContainerRef = useRef(null);
   const messagesEndRef = useRef(null);
   const abortControllerRef = useRef(null);
+  const toastTimeoutRef = useRef(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isAtBottom, setIsAtBottom] = useState(true);
@@ -152,25 +156,7 @@ const AIComponent = () => {
   const [isAnonymousLimited, setIsAnonymousLimited] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [imagePreview, setImagePreview] = useState({ isOpen: false, src: "" });
-  const [initialMessage, setInitialMessage] = useState(
-    `The Ajanta Caves, a UNESCO World Heritage Site nestled in the Aurangabad district of Maharashtra, stand as an unparalleled testament to ancient Indian art and the evolution of Buddhist monastic life. These 30 rock-cut Buddhist cave monuments date from the 2nd century BCE to approximately 480 CE, offering a profound journey through time.
-
-[Image: /placeholder.svg]
-
-Carved into a 75-meter (246 ft) wall of rock in the U-shaped gorge of the Waghur River, the Ajanta complex comprises ancient monasteries (Viharas) for living, studying, and meditating, as well as worship-halls (Chaityas). The construction unfolded in two distinct phases: the first around the 2nd century BCE, and the second, a more prolific period, from 400 to 650 CE, or more precisely, between 460–480 CE during the flourishing Vakataka dynasty.
-
-The caves are universally celebrated as masterpieces of Buddhist religious art, showcasing some of the finest surviving examples of ancient Indian art. The paintings and rock-cut sculptures are particularly expressive, conveying emotions through gesture, pose, and form. These murals vividly depict the past lives and rebirths of the Buddha, known as Jataka tales, alongside intricate rock-cut sculptures of various Buddhist deities.
-
-[Image: /placeholder.svg]
-
-While vibrant mural paintings were common in ancient India, Caves 1, 2, 16, and 17 of Ajanta preserve the largest surviving corpus of these ancient Indian wall-paintings. Textual records indicate that these caves served not only as a monsoon retreat for monks but also as a crucial resting point for merchants and pilgrims traversing ancient South Asian trade routes.
-
-Several important inscriptions found within the caves offer invaluable historical insights. For instance, an early Sanskrit inscription in Brahmi script in Cave 10, dating to around the 2nd century BCE, records "The gift of a cave-façade by Vasisthiputra Katahadi," highlighting early lay patronage. Later, during the Vakataka period, Cave 16, a grand Mahayana monastery, features an inscription by Varahadeva, the prime minister of King Harishena. This inscription details the excavation and gifting of the cave as a merit-earning act, reflecting the religious harmony and deep devotion of the era. Similarly, King Upendragupta sponsored at least five caves, including Cave 17, as recorded in its long inscription.
-
-[Image: /placeholder.svg]
-
-After centuries of being shrouded by dense jungle, the Ajanta Caves were accidentally rediscovered in 1819 by a colonial British officer, Captain John Smith, during a tiger-hunting expedition, bringing these wonders to Western attention. Today, the Ajanta Caves remain a beacon of Maharashtra's rich heritage, protected by the Archaeological Survey of India (ASI) and continuing to inspire awe and reverence for its artistic and spiritual grandeur.`
-  );
+  const [initialMessage, setInitialMessage] = useState(``);
 
   const handleOpenImagePreview = (src) => {
     setImagePreview({ isOpen: true, src });
@@ -180,12 +166,12 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
     setImagePreview({ isOpen: false, src: "" });
   };
 
-  useEffect(() => {
-    if (messages.length === 0 && initialMessage) {
-      setMessages([{ role: "ai", parts: [{ text: initialMessage }] }]);
-      setIsChatActive(true);
-    }
-  }, [messages, initialMessage]);
+  // useEffect(() => {
+  //   if (messages.length === 0 && initialMessage) {
+  //     setMessages([{ role: "ai", parts: [{ text: initialMessage }] }]);
+  //     setIsChatActive(true);
+  //   }
+  // }, [messages, initialMessage]);
 
   useEffect(() => {
     const getFingerprint = async () => {
@@ -194,6 +180,24 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
       setFingerprint(visitorId);
     };
     getFingerprint();
+  }, []);
+
+  // Monitor device width and manage sidebar visibility
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      // Close sidebar on mobile (<1024px / lg breakpoint), open on larger screens
+      setIsSidebarOpen(width >= 1024);
+    };
+
+    // Set initial state based on current window width
+    handleResize();
+
+    // Add resize listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const fetchChats = useCallback(async () => {
@@ -270,7 +274,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
 
   const handleNewChat = () => {
     setCurrentChatId(null);
-    setIsChatActive(true);
+    setIsChatActive(false);
     setMessages([]);
     sessionStorage.removeItem("currentChatId");
   };
@@ -300,25 +304,23 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
   };
 
   const showToast = (type, message) => {
+    // Clear any existing timeout
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current);
+    }
+
     setToast({ type, message });
-    setTimeout(() => setToast({ type: "", message: "" }), 3000);
+
+    // Set new timeout to clear toast after 3 seconds
+    toastTimeoutRef.current = setTimeout(() => {
+      setToast({ type: "", message: "" });
+      toastTimeoutRef.current = null;
+    }, 3000);
   };
 
   const handleFileUpload = (e, type) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (uploads.length >= 5) {
-      showToast("error", "You can upload a maximum of 5 files!");
-      return;
-    }
-    const newUpload = {
-      name: file.name,
-      type,
-      preview: type === "image" ? URL.createObjectURL(file) : null,
-    };
-    setUploads((prev) => [...prev, newUpload]);
-    setIsModalOpen(false);
-    showToast("success", `${file.name} uploaded successfully!`);
+    console.log("File upload attempted");
+    showToast("warning", "File upload coming soon!");
   };
 
   const handleQuery = async (e, customQuery) => {
@@ -455,7 +457,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
             <input
               type="file"
               accept="application/pdf"
-              onChange={(e) => handleFileUpload(e, "pdf")}
+              onChange={(e) => handleFileUpload(e)}
               className="hidden"
             />
           </label>
@@ -466,25 +468,25 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
 
   const ImagePreviewModal = ({ src, onClose }) => (
     <div
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999]"
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
       onClick={onClose}
     >
       <div
-        className="relative max-w-5xl w-full p-4 max-h-[90vh] flex items-center justify-center"
+        className="relative max-w-[95vw] w-auto h-full max-h-[95vh] p-4 flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
         <Image
           src={src}
           alt="Preview"
-          width={1200}
-          height={800}
-          className="object-contain rounded-xl shadow-xl max-h-[85vh] w-auto"
+          width={2400}
+          height={2000}
+          className="object-fill rounded-xl shadow-xl w-full h-full"
         />
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 bg-black/60 hover:bg-black/80 rounded-full text-white transition"
+          className="absolute top-8 right-8 p-2 text-black bg-white/49 hover:bg-white/80 rounded-full transition"
         >
           <X size={22} />
         </button>
@@ -580,7 +582,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
                     </span>
                   </p>
                   <div
-                    className="mt-4 px-5 py-2 bg-linear-to-br from-green-500 to-green-900 hover:bg-gradient-to-tl text-white rounded-full transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
+                    className="mt-4 px-5 py-2 bg-linear-to-br from-green-500 to-green-900 hover:bg-linear-to-tl text-white rounded-full transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
                     onClick={() => {
                       router.push("/login");
                     }}
@@ -615,7 +617,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
       {/* Overlay for small screens when sidebar is open */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/10 z-30 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         ></div>
       )}
@@ -675,7 +677,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
                 }`}
               >
                 {msg.role === "ai" && (
-                  <div className="w-10 h-10 bg-green-800 rounded-full flex items-center justify-center text-white flex-shrink-0">
+                  <div className="w-10 h-10 bg-green-800 rounded-full flex items-center justify-center text-white shrink-0">
                     <Bot size={24} />
                   </div>
                 )}
@@ -696,7 +698,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
                   )}
                 </div>
                 {msg.role === "user" && (
-                  <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
+                  <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold shrink-0">
                     {user?.username?.[0]?.toUpperCase() || "A"}
                   </div>
                 )}
@@ -743,7 +745,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
                 type="button"
                 className="cursor-pointer"
                 onClick={() => {
-                  showToast("warning", "File upload coming soon!");
+                  showToast("warning", "File upload is coming soon!");
                 }}
                 disabled={isAnonymousLimited}
               >
@@ -768,7 +770,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
                   type="submit"
                   onClick={handleQuery}
                   disabled={!query.trim() || isAnonymousLimited}
-                  className="bg-gradient-to-br from-green-600 to-green-800 disabled:from-gray-300 disabled:to-gray-400 rounded-full text-white p-2 transition hover:scale-105 active:scale-95"
+                  className="bg-linear-to-br from-green-600 to-green-800 disabled:from-gray-300 disabled:to-gray-400 rounded-full text-white p-2 transition hover:scale-105 active:scale-95"
                 >
                   <ArrowUp className="w-5 h-5" />
                 </button>
@@ -782,9 +784,7 @@ After centuries of being shrouded by dense jungle, the Ajanta Caves were acciden
 };
 
 const AIPage = () => (
-  <Suspense
-    fallback={<LoadingSpinner message="Initializing AI Assistant..." />}
-  >
+  <Suspense fallback={<Loading />}>
     <AIComponent />
   </Suspense>
 );

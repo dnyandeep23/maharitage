@@ -19,7 +19,7 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 // 🧩 Unified Theme Configuration
 const THEME_CONFIG = {
   light: {
-    headerBg: "bg-white/5 hover:bg-white/40",
+    headerBg: "bg-white/5 text-green-900 hover:bg-white/40",
     text: "text-green-900",
     accent: "bg-green-600 text-white",
     hoverAccent: "hover:bg-green-700",
@@ -33,7 +33,7 @@ const THEME_CONFIG = {
     menuBg: "bg-white/95",
   },
   dark: {
-    headerBg: "bg-gray-900/5 hover:bg-gray-900/40",
+    headerBg: "bg-gray-900/5 text-green-100 hover:bg-gray-900/40",
     text: "text-green-100",
     accent: "bg-green-500 text-gray-900",
     hoverAccent: "hover:bg-green-400",
@@ -154,7 +154,7 @@ const Header = ({ currentPath = "/", variant = "full", theme = "light" }) => {
 
   return (
     <header
-      className={`fixed top-1 sm:top-3 left-2 sm:left-3 right-2 sm:right-3 z-50 ${colors.headerBg} backdrop-blur-md text-sm shadow-sm border-b rounded-full ${colors.border}`}
+      className={`fixed  top-1 sm:top-3 left-2 sm:left-3 right-2 sm:right-3 z-50 ${colors.headerBg} backdrop-blur-md text-sm shadow-sm border-b rounded-full ${colors.border}`}
     >
       <div className="px-2 sm:px-3 py-0.5 sm:py-2 flex items-center justify-between relative">
         {/* Logo */}

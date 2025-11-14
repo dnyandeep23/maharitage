@@ -61,16 +61,24 @@ const Sidebar = ({ user, sidebarSections, selectedItem }) => {
       </div>
 
       {/* User Info */}
-      <div className="flex bg-[#FFFD99] relative gap-3 rounded-4xl p-2 items-center text-green-950 z-10">
-        <p className="py-0.5 absolute top-2 right-4 px-2 bg-gradient-to-br from-green-600/60 to-green-950/60 text-[8px] text-white rounded-full font-medium">
+      <div className="flex bg-[#FFFD99] w-full max-w-full relative gap-3 rounded-4xl p-2 items-center text-green-950 z-10">
+        <p className="py-0.5 absolute top-2 right-4 px-2 bg-linear-to-br from-green-600/60 to-green-950/60 text-[8px] text-white rounded-full font-medium">
           {user?.role}
         </p>
-        <p className="py-2 px-4 uppercase rounded-full bg-gradient-to-br from-green-600 to-green-950 text-white text-xl h-12 w-12 font-bold flex justify-center items-center">
+
+        <p className="py-2 px-4 uppercase rounded-full bg-linear-to-br from-green-600 to-green-950 text-white text-xl h-12 w-12 font-bold flex justify-center items-center">
           {user?.username[0]}
         </p>
-        <div className="w-56">
+
+        {/* Main text container */}
+        <div className="flex flex-col min-w-0">
+          {" "}
+          {/* <-- IMPORTANT */}
           <p className="text-sm font-bold truncate">{user?.username}</p>
-          <p className="text-xs font-medium truncate">{user?.email}</p>
+          {/* Email with truncate */}
+          <p className="text-xs font-medium truncate block max-w-[140px] sm:max-w-[200px] md:max-w-[250px]">
+            {user?.email}
+          </p>
         </div>
       </div>
     </div>

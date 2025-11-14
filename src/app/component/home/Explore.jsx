@@ -14,24 +14,27 @@ const Explore = ({ heroData }) => {
   const containerRef = useRef(null);
   const [sites, setSites] = useState([]);
   const navigate = useRouter();
-  const slideWidth = 900;
-  const gap = 0.1;
+
+  // 🔥 Responsive slide width
+  const getSlideWidth = () => {
+    if (typeof window === "undefined") return 900;
+    if (window.innerWidth < 480) return window.innerWidth * 0.85; // mobile
+    if (window.innerWidth < 768) return window.innerWidth * 0.75; // tablet
+    if (window.innerWidth < 1024) return 650; // small laptop
+    return 900; // desktop
+  };
+
+  const [slideWidth, setSlideWidth] = useState(getSlideWidth());
+  const gap = 2;
 
   useEffect(() => {
     const fetchSites = async () => {
       try {
         const response = await fetch("/api/sites/home");
-        // console.log("Fetching sites from /api/sites" + response);
         const data = await response.json();
-        // console.log("API Response:", data);
         setSites(data);
-        // console.log("Fetched sites:", sites);
-      } catch (error) {
-        // console.error("Failed to fetch sites:", error);
-      } finally {
-      }
+      } catch (e) {}
     };
-
     fetchSites();
   }, []);
 
@@ -39,6 +42,7 @@ const Explore = ({ heroData }) => {
     const updateWidth = () => {
       if (containerRef.current) {
         setContainerWidth(containerRef.current.offsetWidth);
+        setSlideWidth(getSlideWidth());
       }
     };
     updateWidth();
@@ -51,45 +55,44 @@ const Explore = ({ heroData }) => {
     return () => clearInterval(interval);
   }, [sites.length]);
 
-  const handleNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % sites.length);
-  };
-
-  const handlePrev = () => {
+  const handleNext = () => setCurrentSlide((prev) => (prev + 1) % sites.length);
+  const handlePrev = () =>
     setCurrentSlide((prev) => (prev - 1 + sites.length) % sites.length);
-  };
 
   const offset = currentSlide * (slideWidth + gap);
 
-  if (!sites || !heroData) {
-    return null;
-  }
-  const handleLocationClick = (latitude, longitude) => {
-    if (latitude && longitude) {
-      const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
-      window.open(mapsUrl, "_blank"); // opens in new tab
-    } else {
-      alert("Location not available");
-    }
+  if (!sites || !heroData) return null;
+
+  const handleLocationClick = (lat, lon) => {
+    if (!lat || !lon) return alert("Location not available");
+    window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
   };
+
   return (
-    <section className=" w-full max-w-full h-screen mt-20 bg-gray-50 overflow-hidden">
-      <div className="mx-auto px-24 text-center ">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3 font-inter">
+    <section className="w-full max-w-full min-h-screen mt-12 md:mt-20 bg-gray-50 overflow-hidden">
+      {/* Header */}
+      <div className="mx-auto px-6 sm:px-12 lg:px-24 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 font-inter mb-3">
           {heroData.tagline}
         </h2>
-        <div className="flex justify-between gap-80">
-          <div className="w-full h-0.5 bg-black/20 mx-auto mb-0"></div>
-          <div className="w-full h-0.5 bg-black/20 mx-auto mb-0"></div>
+
+        <div className="flex justify-center gap-8 md:gap-80">
+          <div className="w-20 md:w-full h-0.5 bg-black/20"></div>
+          <div className="w-20 md:w-full h-0.5 bg-black/20"></div>
         </div>
-        <p className="text-gray-600  max-w-2xl mx-auto leading-relaxed mt-0 font-inter">
+
+        <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed mt-4 font-inter text-sm md:text-base">
           {heroData.description}
         </p>
       </div>
 
-      <div ref={containerRef} className=" w-full h-full overflow-hidden">
+      {/* Carousel */}
+      <div
+        ref={containerRef}
+        className="w-full h-[90vh] overflow-hidden mt-4 md:mt-6"
+      >
         <div
-          className="flex items-center h-[83%] transition-transform duration-700 ease-in-out"
+          className="flex items-center transition-transform duration-700 ease-in-out"
           style={{
             transform: `translateX(-${offset}px)`,
             gap: `${gap}px`,
@@ -106,57 +109,62 @@ const Explore = ({ heroData }) => {
             return (
               <div
                 key={site.site_id}
-                className="relative cursor-pointer rounded-3xl overflow-hidden  shadow-2xs transition-all duration-700 ease-in-out"
+                className="relative cursor-pointer rounded-3xl overflow-hidden shadow-xl transition-all duration-700 ease-in-out"
                 style={{
                   width: `${slideWidth}px`,
                   height: "70vh",
+                  aspectRatio: "16/9",
                   flexShrink: 0,
-                  transform: isActive
-                    ? "scale(1.05)"
-                    : isPrevious || isNext
-                    ? "scale(0.9)"
-                    : "scale(0.8)",
-                  zIndex: isActive ? 20 : isPrevious || isNext ? 15 : 10,
-                  opacity: isActive ? 1 : isPrevious || isNext ? 0.9 : 0.7,
+                  transform: isActive ? "scale(1)" : "scale(0.85)",
+                  zIndex: isActive ? 20 : 10,
+                  opacity: isActive ? 1 : 0.75,
                 }}
                 onClick={() => navigate.push(`/cave/${site.site_id}`)}
               >
                 <div className="relative w-full h-full rounded-3xl">
-                    <Image
-                      src={site?.Gallary?.[0] && site.Gallary[0].startsWith('http') ? site.Gallary[0] : '/placeholder.svg'}
-                      alt={site.site_name}
-                      fill
-                      priority={isActive}
-                      className="object-cover rounded-3xl"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6">
-                      <div>
-                        <h3 className="text-3xl font-extrabold text-white mb-1 tracking-wide">
-                          {site.site_name}
-                        </h3>
-                        <p
-                          className="text-green-100 text-sm flex items-center"
-                          onClick={() =>
-                            handleLocationClick(
-                              site.location.latitude,
-                              site.location.longitude
-                            )
-                          }
-                        >
-                          <LocationIcon className="w-4 h-4 mr-2" />
-                          {site.location.district}, {site.location.state}
-                        </p>
-                      </div>
-                    </div>
+                  <Image
+                    src={
+                      site?.Gallary?.[0] && site.Gallary[0].startsWith("http")
+                        ? site.Gallary[0]
+                        : "/placeholder.svg"
+                    }
+                    alt={site.site_name}
+                    fill
+                    priority={isActive}
+                    className="object-cover rounded-3xl"
+                  />
+
+                  {/* Gradient + Text */}
+                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-4 md:p-6">
+                    <h3 className="text-xl md:text-3xl font-extrabold text-white tracking-wide mb-1">
+                      {site.site_name}
+                    </h3>
+
+                    <p
+                      className="text-green-100 w-44 md:w-full text-xs md:text-sm flex items-center cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLocationClick(
+                          site.location.latitude,
+                          site.location.longitude
+                        );
+                      }}
+                    >
+                      <LocationIcon className="w-6 h-6 mr-2" />
+                      {site.location.district}, {site.location.state}
+                    </p>
+                  </div>
+
+                  {/* Nav Buttons */}
                   {isActive && (
-                    <div className="absolute bottom-8 right-8 flex gap-2 z-40">
+                    <div className="absolute bottom-6 right-6 flex gap-3 z-40">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handlePrev();
+                          handleNext();
                         }}
-                        aria-label="Previous"
-                        className=" border-green-300 hover:bg-green-800 hover:text-white -rotate-90 text-white rounded-full transition duration-300 cursor-pointer"
+                        aria-label="Next"
+                        className="border-green-300 hover:bg-green-800 hover:text-white -rotate-90 text-white rounded-full transition duration-300 cursor-pointer"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +188,7 @@ const Explore = ({ heroData }) => {
                           handleNext();
                         }}
                         aria-label="Next"
-                        className=" border-green-300 hover:bg-green-800 hover:text-white rotate-90 text-white rounded-full transition duration-300 cursor-pointer"
+                        className="border-green-300 hover:bg-green-800 hover:text-white rotate-90 text-white rounded-full transition duration-300 cursor-pointer"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

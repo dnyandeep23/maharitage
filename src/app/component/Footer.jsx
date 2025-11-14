@@ -1,29 +1,47 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Globe } from 'lucide-react';
+import React, { use } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Globe,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
+  const router = useRouter();
   const quickLinks = [
     { name: "Elephanta Cave", href: "/caves/elephanta" },
-    { name: "Ajanta Caves", href: "/caves/ajanta" },  
-    { name: "Ellora Cave", href: "/caves/ellora" }
+    { name: "Ajanta Caves", href: "/caves/ajanta" },
+    { name: "Ellora Cave", href: "/caves/ellora" },
   ];
 
   const contactInfo = {
-    email: "info@maharitage.com",
-    phone: "+91 98765 43210",
-    address: "Mumbai, Maharashtra"
+    email: "Currently Unavailable",
+    phone: "Currently Unavailable",
+    address: "Mumbai, Maharashtra",
   };
 
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com/maharitage", label: "Facebook" },
+    {
+      icon: Facebook,
+      href: "https://facebook.com/maharitage",
+      label: "Facebook",
+    },
     { icon: Twitter, href: "https://twitter.com/maharitage", label: "Twitter" },
-    { icon: Instagram, href: "https://instagram.com/maharitage", label: "Instagram" },
-    { icon: Globe, href: "https://maharitage.com", label: "Website" }
+    {
+      icon: Instagram,
+      href: "https://instagram.com/maharitage",
+      label: "Instagram",
+    },
+    { icon: Globe, href: "https://maharitage.com", label: "Website" },
   ];
 
   const handleNavigation = (href) => {
-    if (href.startsWith('http')) {
-      window.open(href, '_blank');
+    if (href.startsWith("http")) {
+      window.open(href, "_blank");
     } else {
       // Handle internal navigation
       // console.log(`Navigate to: ${href}`);
@@ -47,11 +65,15 @@ const Footer = () => {
               <h2 className="text-4xl font-bold tracking-wide mb-4 font-cinzel-decorative">
                 MAHARITAGE
               </h2>
-              <p className="text-green-100 text-lg leading-relaxed max-w-md" style={{ fontFamily: "'Inter', sans-serif" }}>
-                Preserving and promoting Maharashtra's magnificent cave heritage for future generations.
+              <p
+                className="text-green-100 text-lg leading-relaxed max-w-md"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                Preserving and promoting Maharashtra's magnificent cave heritage
+                for future generations.
               </p>
             </div>
-            
+
             {/* Social Links */}
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => {
@@ -72,7 +94,10 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="lg:col-span-1">
-            <h3 className="text-2xl font-semibold mb-8 text-green-100" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h3
+              className="text-2xl font-semibold mb-8 text-green-100"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
               Quick Links
             </h3>
             <ul className="space-y-4">
@@ -84,7 +109,9 @@ const Footer = () => {
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     <span className="w-2 h-2 bg-green-400 rounded-full group-hover:bg-white transition-colors duration-300"></span>
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      {link.name}
+                    </span>
                   </button>
                 </li>
               ))}
@@ -93,7 +120,10 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="lg:col-span-1">
-            <h3 className="text-2xl font-semibold mb-8 text-green-100" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h3
+              className="text-2xl font-semibold mb-8 text-green-100"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
               Contact Us
             </h3>
             <div className="space-y-6">
@@ -102,9 +132,13 @@ const Footer = () => {
                   <Mail className="w-5 h-5 text-green-200" />
                 </div>
                 <div>
-                  <p className="text-green-100 text-sm font-medium mb-1">Email</p>
-                  <p className="text-white text-lg hover:text-green-200 transition-colors duration-300 cursor-pointer" 
-                     onClick={() => window.open(`mailto:${contactInfo.email}`)}>
+                  <p className="text-green-100 text-sm font-medium mb-1">
+                    Email
+                  </p>
+                  <p
+                    className="text-white text-lg hover:text-green-200 transition-colors duration-300 cursor-pointer"
+                    onClick={() => window.open(`mailto:${contactInfo.email}`)}
+                  >
                     {contactInfo.email}
                   </p>
                 </div>
@@ -115,9 +149,13 @@ const Footer = () => {
                   <Phone className="w-5 h-5 text-green-200" />
                 </div>
                 <div>
-                  <p className="text-green-100 text-sm font-medium mb-1">Phone</p>
-                  <p className="text-white text-lg hover:text-green-200 transition-colors duration-300 cursor-pointer"
-                     onClick={() => window.open(`tel:${contactInfo.phone}`)}>
+                  <p className="text-green-100 text-sm font-medium mb-1">
+                    Phone
+                  </p>
+                  <p
+                    className="text-white text-lg hover:text-green-200 transition-colors duration-300 cursor-pointer"
+                    onClick={() => window.open(`tel:${contactInfo.phone}`)}
+                  >
                     {contactInfo.phone}
                   </p>
                 </div>
@@ -128,7 +166,9 @@ const Footer = () => {
                   <MapPin className="w-5 h-5 text-green-200" />
                 </div>
                 <div>
-                  <p className="text-green-100 text-sm font-medium mb-1">Location</p>
+                  <p className="text-green-100 text-sm font-medium mb-1">
+                    Location
+                  </p>
                   <p className="text-white text-lg">{contactInfo.address}</p>
                 </div>
               </div>
@@ -139,15 +179,31 @@ const Footer = () => {
         {/* Divider */}
         <div className="mt-12 lg:mt-16 pt-6 lg:pt-8 border-t border-green-700/50">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-            <p className="text-green-200 text-xs sm:text-sm text-center lg:text-left" style={{ fontFamily: "'Inter', sans-serif" }}>
-              © 2025 Maharitage. All rights reserved. | Preserving Maharashtra's Cave Heritage
+            <p
+              className="text-green-200 text-xs sm:text-sm text-center lg:text-left"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              © 2025 Maharitage. All rights reserved. | Preserving Maharashtra's
+              Cave Heritage
             </p>
-            
+
             {/* Additional Links */}
             <div className="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-green-200">
-              <button className="hover:text-white transition-colors duration-300">Privacy Policy</button>
-              <button className="hover:text-white transition-colors duration-300">Terms of Service</button>
-              <button className="hover:text-white transition-colors duration-300">Sitemap</button>
+              <button
+                className="hover:text-white transition-colors duration-300"
+                onClick={() => router.push("/privacy-policy")}
+              >
+                Privacy Policy
+              </button>
+              <button
+                className="hover:text-white transition-colors duration-300"
+                onClick={() => router.push("/terms-and-conditions")}
+              >
+                Terms of Service
+              </button>
+              <button className="hover:text-white transition-colors duration-300">
+                Sitemap
+              </button>
             </div>
           </div>
         </div>

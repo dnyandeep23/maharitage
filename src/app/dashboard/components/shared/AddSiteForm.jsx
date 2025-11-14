@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import dynamic from "next/dynamic";
 import ChipInput from "../components/ChipInput";
@@ -14,35 +14,65 @@ const MapPicker = dynamic(() => import("../components/MapPicker"), {
 
 import Loading from "../../../../app/loading";
 
+const initialState = {
+  site_id: "",
+  site_name: "",
+  location: {
+    latitude: "",
+    longitude: "",
+    district: "",
+    state: "Maharashtra",
+    country: "India",
+  },
+  Site_discription: "",
+  heritage_type: "",
+  period: "",
+  historical_context: {
+    ruler_or_dynasty: "",
+    approx_date: "",
+    related_figures: [],
+    cultural_significance: "",
+  },
+  verification_authority: {
+    curated_by: [],
+  },
+  references: [],
+  Gallary: [],
+  Inscriptions: [],
+};
+
+function siteReducer(state, action) {
+  switch (action.type) {
+    case "UPDATE_FIELD":
+      return { ...state, [action.field]: action.value };
+    case "UPDATE_NESTED_FIELD":
+      return {
+        ...state,
+        [action.parent]: {
+          ...state[action.parent],
+          [action.field]: action.value,
+        },
+      };
+    case "SET_SITE_ID_AND_NAME":
+      return { ...state, site_id: action.site_id, site_name: action.site_name };
+    case "RESET_SITE_ID_AND_NAME":
+      return { ...state, site_id: "", site_name: "" };
+    case "ADD_REFERENCE":
+      return { ...state, references: [...state.references, action.reference] };
+    case "REMOVE_REFERENCE":
+      return {
+        ...state,
+        references: state.references.filter((_, i) => i !== action.index),
+      };
+    default:
+      return state;
+  }
+}
+
 const AddSiteForm = ({ handleSubmit }) => {
   const { user } = useAuth();
   const [lastSiteId, setLastSiteId] = useState(null);
-  const [siteData, setSiteData] = useState({
-    site_id: "",
-    site_name: "",
-    location: {
-      latitude: "",
-      longitude: "",
-      district: "",
-      state: "Maharashtra",
-      country: "India",
-    },
-    Site_discription: "",
-    heritage_type: "",
-    period: "",
-    historical_context: {
-      ruler_or_dynasty: "",
-      approx_date: "",
-      related_figures: [],
-      cultural_significance: "",
-    },
-    verification_authority: {
-      curated_by: [],
-    },
-    references: [],
-    Gallary: [],
-    Inscriptions: [],
-  });
+  const [siteData, dispatch] = useReducer(siteReducer, initialState);
   const [rawSiteName, setRawSiteName] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,13 +111,13 @@ const AddSiteForm = ({ handleSubmit }) => {
       const newSiteId = `${namePrefix.charAt(0).toUpperCase()}${namePrefix
         .slice(1)
         .toLowerCase()}${newIdNumber}`;
-      setSiteData((prevData) => ({
-        ...prevData,
+      dispatch({
+        type: "SET_SITE_ID_AND_NAME",
         site_id: newSiteId,
         site_name: normalizedName,
-      }));
+      });
     } else if (lastSiteId) {
-      setSiteData((prevData) => ({ ...prevData, site_id: "", site_name: "" }));
+      dispatch({ type: "RESET_SITE_ID_AND_NAME" });
     }
   }, [rawSiteName, lastSiteId]);
 
@@ -102,29 +132,23 @@ const AddSiteForm = ({ handleSubmit }) => {
 
     if (parent) {
       if (isArray) {
-        setSiteData((prev) => ({
-          ...prev,
-          [parent]: {
-            ...prev[parent],
-            [field]: value.split(",").map((item) => item.trim()),
-          },
-        }));
+        dispatch({
+          type: "UPDATE_NESTED_FIELD",
+          parent,
+          field,
+          value: value.split(",").map((item) => item.trim()),
+        });
       } else {
-        setSiteData((prev) => ({
-          ...prev,
-          [parent]: {
-            ...prev[parent],
-            [name]: value,
-          },
-        }));
+        dispatch({ type: "UPDATE_NESTED_FIELD", parent, field: name, value });
       }
     } else if (isArray) {
-      setSiteData((prev) => ({
-        ...prev,
-        [field]: value.split(",").map((item) => item.trim()),
-      }));
+      dispatch({
+        type: "UPDATE_FIELD",
+        field,
+        value: value.split(",").map((item) => item.trim()),
+      });
     } else {
-      setSiteData((prev) => ({ ...prev, [name]: value }));
+      dispatch({ type: "UPDATE_FIELD", field: name, value });
     }
   };
 
@@ -133,14 +157,18 @@ const AddSiteForm = ({ handleSubmit }) => {
   };
 
   const handleMapLocationChange = ({ lat, lng }) => {
-    setSiteData((prev) => ({
-      ...prev,
-      location: {
-        ...prev.location,
-        latitude: lat,
-        longitude: lng,
-      },
-    }));
+    dispatch({
+      type: "UPDATE_NESTED_FIELD",
+      parent: "location",
+      field: "latitude",
+      value: lat,
+    });
+    dispatch({
+      type: "UPDATE_NESTED_FIELD",
+      parent: "location",
+      field: "longitude",
+      value: lng,
+    });
   };
 
   const getInitialPosition = () => {
@@ -380,13 +408,12 @@ const AddSiteForm = ({ handleSubmit }) => {
               <ChipInput
                 value={siteData.historical_context.related_figures}
                 onChange={(newValue) =>
-                  setSiteData((prev) => ({
-                    ...prev,
-                    historical_context: {
-                      ...prev.historical_context,
-                      related_figures: newValue,
-                    },
-                  }))
+                  dispatch({
+                    type: "UPDATE_NESTED_FIELD",
+                    parent: "historical_context",
+                    field: "related_figures",
+                    value: newValue,
+                  })
                 }
                 placeholder="Add a figure"
               />
@@ -422,13 +449,12 @@ const AddSiteForm = ({ handleSubmit }) => {
               <ChipInput
                 value={siteData.verification_authority.curated_by}
                 onChange={(newValue) =>
-                  setSiteData((prev) => ({
-                    ...prev,
-                    verification_authority: {
-                      ...prev.verification_authority,
-                      curated_by: newValue,
-                    },
-                  }))
+                  dispatch({
+                    type: "UPDATE_NESTED_FIELD",
+                    parent: "verification_authority",
+                    field: "curated_by",
+                    value: newValue,
+                  })
                 }
                 placeholder="Add a curator"
               />
@@ -450,10 +476,7 @@ const AddSiteForm = ({ handleSubmit }) => {
           <h3 className="text-lg font-semibold">References</h3>
           <ReferenceInput
             onAdd={(newReference) =>
-              setSiteData((prev) => ({
-                ...prev,
-                references: [...prev.references, newReference],
-              }))
+              dispatch({ type: "ADD_REFERENCE", reference: newReference })
             }
           />
           <div className="space-y-2">
@@ -470,12 +493,7 @@ const AddSiteForm = ({ handleSubmit }) => {
                 </div>
                 <button
                   type="button"
-                  onClick={() =>
-                    setSiteData((prev) => ({
-                      ...prev,
-                      references: prev.references.filter((_, i) => i !== index),
-                    }))
-                  }
+                  onClick={() => dispatch({ type: "REMOVE_REFERENCE", index })}
                   className="text-red-500 hover:text-red-700"
                 >
                   <X size={20} />

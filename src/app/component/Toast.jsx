@@ -1,30 +1,35 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { CircleCheck, CircleX, TriangleAlert } from "lucide-react";
 
-const Toast = ({ message, type, onDone }) => {
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-      if (onDone) {
-        onDone();
-      }
-    }, 3000); // Auto-hide after 3 seconds
-
-    return () => clearTimeout(timer);
-  }, [onDone]);
-
-  if (!visible) return null;
-
-  const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+const Toast = ({ message, type, onClose }) => {
+  const bgColor =
+    type === "success"
+      ? "bg-green-500"
+      : type === "warning"
+      ? "bg-yellow-500"
+      : type === "error"
+      ? "bg-red-500"
+      : "bg-gray-700";
 
   return (
     <div
-      className={`fixed bottom-5 right-5 text-white px-6 py-3 rounded-lg shadow-lg transition-opacity duration-300 ${bgColor}`}
+      className={`fixed top-1 right-[10%] left-[10%] text-white w-fit mx-auto px-6 py-3 rounded-lg shadow-lg animate-fade-in flex items-center gap-4 z-[999] ${bgColor}`}
+      role="alert"
     >
-      {message}
+      {type === "success" && <CircleCheck />}
+      {type === "warning" && <TriangleAlert />}
+      {type === "error" && <CircleX />}
+      <span>{message}</span>
+      {onClose && (
+        <button
+          onClick={onClose}
+          aria-label="Close"
+          className="text-xl font-bold leading-none hover:text-gray-200"
+        >
+          &times;
+        </button>
+      )}
     </div>
   );
 };

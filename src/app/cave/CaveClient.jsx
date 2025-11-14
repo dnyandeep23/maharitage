@@ -102,7 +102,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
         onBack={onBack}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-        <div className="relative">
+        <div className="relative order-1">
           <div className="overflow-hidden rounded-lg">
             <div
               className="flex transition-transform duration-700 ease-in-out"
@@ -140,7 +140,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
             </button>
           </div>
         </div>
-        <div>
+        <div className="order-2">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl sm:text-3xl font-bold">
               {inscription.Inscription_id
@@ -328,7 +328,7 @@ export default function CaveClient({ site }) {
           </h1>
         </div>
       </div>
-      <div className="mt-20 mx-10 md:mx-28">
+      <div className="mt-16 sm:mt-20 mx-4 sm:mx-10 md:mx-28">
         {selectedInscription ? (
           <InscriptionDetail
             inscription={site.Inscriptions.find(
@@ -341,7 +341,7 @@ export default function CaveClient({ site }) {
         ) : (
           <>
             <div>
-              <p className="text-3xl mx-6 font-bold">
+              <p className="text-2xl sm:text-3xl font-bold">
                 Explore {site.site_name} Gallery
               </p>
               <div className="mt-4">
@@ -350,24 +350,25 @@ export default function CaveClient({ site }) {
                     <div
                       className="flex transition-transform duration-700 ease-in-out"
                       style={{
-                        transform: `translateX(-${
-                          inscriptionCurrent * 33.33
-                        }%)`,
+                        transform: `translateX(-${current * 100}%)`,
                       }}
                     >
                       {site.Gallary && site.Gallary.length > 0 ? (
                         site.Gallary.map((inscript, index) => (
-                                                      <div
-                                                        key={index}
-                                                        className="w-1/3 shrink-0 p-2 cursor-pointer"
-                                                        onClick={() => handleImageClick(site.Gallary[index])}
-                                                      >
-                                                        <img
-                                                          src={site.Gallary[index]}
-                                                          alt={`Inscription ${index}`}
-                                                          className="w-full h-80 object-cover rounded-2xl bg-gray-300"
-                                                        />
-                                                      </div>                        ))
+                          <div
+                            key={index}
+                            className="w-full md:w-1/2 lg:w-1/3 shrink-0 p-2 cursor-pointer"
+                            onClick={() =>
+                              handleImageClick(site.Gallary[index])
+                            }
+                          >
+                            <img
+                              src={site.Gallary[index]}
+                              alt={`Gallery image ${index + 1}`}
+                              className="w-full h-64 sm:h-80 object-cover rounded-2xl bg-gray-300"
+                            />
+                          </div>
+                        ))
                       ) : (
                         <div className="w-full text-center font-extrabold text-5xl text-gray-400 py-10">
                           No inscriptions found at this location.
@@ -377,13 +378,13 @@ export default function CaveClient({ site }) {
                   </div>
                 )}
 
-                {site.Inscriptions && site.Inscriptions.length > 0 && (
+                {site.Gallary && site.Gallary.length > 3 && (
                   <div className="flex justify-end gap-2">
                     <button
-                      onClick={prevInscription}
-                      disabled={inscriptionCurrent === 0}
+                      onClick={prevSlide}
+                      disabled={current === 0}
                       className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                        inscriptionCurrent === 0
+                        current === 0
                           ? "opacity-50 cursor-not-allowed"
                           : "hover:border-lime-200 hover:bg-lime-200"
                       }`}
@@ -392,14 +393,12 @@ export default function CaveClient({ site }) {
                     </button>
                     <div className="relative group">
                       <button
-                        onClick={nextInscription}
+                        onClick={nextSlide}
                         disabled={
-                          !site.Inscriptions ||
-                          inscriptionCurrent >= site.Inscriptions.length - 3
+                          !site.Gallary || current >= site.Gallary.length - 3
                         }
                         className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                          !site.Inscriptions ||
-                          inscriptionCurrent >= site.Inscriptions.length - 3
+                          !site.Gallary || current >= site.Gallary.length - 3
                             ? "opacity-50 cursor-not-allowed"
                             : "hover:border-lime-200 hover:bg-lime-200"
                         }`}
@@ -407,9 +406,9 @@ export default function CaveClient({ site }) {
                         <ChevronRight />
                       </button>
                       {(!site.Inscriptions ||
-                        inscriptionCurrent >= site.Inscriptions.length - 3) && (
+                        current >= site.Gallary.length - 3) && (
                         <div className="absolute bottom-full mb-2 w-max px-2 py-1 bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                          Inscriptions end
+                          Gallery end
                         </div>
                       )}
                     </div>
@@ -417,15 +416,15 @@ export default function CaveClient({ site }) {
                 )}
               </div>
             </div>
-            <div className="mt-10 mx-6">
-              <p className="text-3xl font-bold">Info.</p>
+            <div className="mt-10">
+              <p className="text-2xl sm:text-3xl font-bold">Info.</p>
               <div className="mt-6 text-lg text-justify flex flex-col gap-8">
                 {site.Site_discription}
               </div>
             </div>
             <div className="mt-20 relative ">
               <div>
-                <p className="text-3xl mx-6 font-bold">
+                <p className="text-2xl sm:text-3xl font-bold">
                   Inscriptions at {site.site_name}
                 </p>
                 <div className="mt-4">
@@ -443,14 +442,14 @@ export default function CaveClient({ site }) {
                           site.Inscriptions.map((inscript, index) => (
                             <div
                               key={index}
-                              className="w-1/3 shrink-0 p-2 cursor-pointer"
+                              className="w-full md:w-1/2 lg:w-1/3 shrink-0 p-2 cursor-pointer"
                               onClick={() =>
                                 handleInscriptionClick(inscript.Inscription_id)
                               }
                             >
                               <img
                                 src={inscript?.image_urls?.[0]}
-                                alt={`Inscription ${index}`}
+                                alt={`Inscription ${index + 1}`}
                                 className="w-full h-80 object-cover rounded-2xl bg-gray-300"
                               />
                             </div>
@@ -506,11 +505,11 @@ export default function CaveClient({ site }) {
                 </div>
               </div>
               <div>
-                <p className="text-3xl mt-10 mx-6 font-bold">
+                <p className="text-2xl sm:text-3xl mt-10 font-bold">
                   Historical Context
                 </p>
-                <div className="mt-4  ml-8 space-y-4">
-                  <div className="flex items-center gap-2 text-base font-black ">
+                <div className="mt-4 ml-2 sm:ml-8 space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-base font-black ">
                     Period.{" "}
                     <span className="text-green-800">{site.period}</span>
                   </div>
@@ -520,13 +519,13 @@ export default function CaveClient({ site }) {
                       {site.historical_context.ruler_or_dynasty}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-base font-black ">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-base font-black ">
                     Approximated Date.{" "}
                     <span className="text-green-800">
                       {site.historical_context.approx_date}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-base font-black ">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-base font-black ">
                     Related Figure.{" "}
                     <div className="flex flex-wrap gap-2 items-center text-green-800">
                       {site.historical_context?.related_figures &&
@@ -548,19 +547,21 @@ export default function CaveClient({ site }) {
                       )}
                     </div>
                   </div>
-                  <div className="flex items-start gap-2 text-base font-black ">
-                    <p className="w-[18%]">Cultural Significance.</p>
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-2 text-base font-black ">
+                    <p className="w-full sm:w-[18%] shrink-0">
+                      Cultural Significance.
+                    </p>
                     <span className="text-green-800">
                       {site.historical_context.cultural_significance}
                     </span>
                   </div>
                 </div>
               </div>
-              <div className="mt-10">
-                <p className="text-3xl mx-6 font-bold">
+              <div className="mt-10 ">
+                <p className="text-2xl sm:text-3xl font-bold">
                   Verification Authority
                 </p>
-                <div className="mt-4 mx-6 text-lg">
+                <div className="mt-4 text-lg">
                   {site.verification_authority?.curated_by &&
                   site.verification_authority?.curated_by.length > 0 ? (
                     <ul className="list-disc ">
@@ -577,9 +578,9 @@ export default function CaveClient({ site }) {
                   )}
                 </div>
               </div>
-              <div className="mt-10">
-                <p className="text-3xl mx-6 font-bold">Source</p>
-                <div className="mt-4 mx-6 text-lg">
+              <div className="mt-10 ">
+                <p className="text-2xl sm:text-3xl font-bold">Source</p>
+                <div className="mt-4 text-lg">
                   {site.references && site.references.length > 0 ? (
                     <ul className="list-disc ">
                       {site.references.map((ref, index) => (
@@ -631,7 +632,7 @@ export default function CaveClient({ site }) {
       </div>
       <div className="h-96 w-screen"></div>
       <div>
-        <Footer quickLinks={[]} contactInfo={{}} handleNavigation={() => {}} />
+        <Footer />
       </div>
       {isModalOpen && (
         <ImageModal

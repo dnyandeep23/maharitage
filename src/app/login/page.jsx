@@ -24,22 +24,6 @@ const Login = () => {
   const tabRefs = useRef({});
   const router = useRouter();
   const { login } = useAuth();
-  const [isDesktop, setIsDesktop] = useState(true); // Assume desktop by default
-
-  useEffect(() => {
-    const checkDevice = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-
-    // Initial check
-    checkDevice();
-
-    // Add event listener for window resize
-    window.addEventListener("resize", checkDevice);
-
-    // Cleanup event listener on component unmount
-    return () => window.removeEventListener("resize", checkDevice);
-  }, []);
 
   const toggleRole = (newRole) => {
     if (newRole !== role) {
@@ -109,17 +93,7 @@ const Login = () => {
           onDone={() => setToast({ show: false, message: "", type: "" })}
         />
       )}
-      {!isDesktop && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-white text-gray-800 p-8 rounded-lg shadow-lg text-center max-w-sm mx-auto">
-            <h3 className="text-xl font-bold mb-4">Desktop View Recommended</h3>
-            <p>
-              This website is currently optimized for desktop devices only.
-              Please switch to a desktop for the best experience.
-            </p>
-          </div>
-        </div>
-      )}
+
       <div className="absolute inset-0 -z-20 w-full h-full">
         <Image
           src={login_bg}
@@ -163,7 +137,7 @@ const Login = () => {
           </div>
 
           <div className="flex-1 flex flex-col justify-center items-center">
-            <div className="relative w-full max-w-lg bg-white/15 rounded-[8rem] rounded-br-[10rem] rounded-bl-[15rem] p-4 xl:p-16 shadow-xl border border-white/30">
+            <div className="relative w-full max-w-lg bg-white/15 rounded-[8rem] pt-12 md:pt-0 pb-20 md:pb-0    rounded-br-[10rem] rounded-bl-[15rem] p-4 xl:p-14 shadow-xl border border-white/30">
               <div className="relative flex justify-center items-center rounded-full p-1 mb-10 w-full">
                 <motion.div
                   className="absolute top-1 bottom-1 rounded-full bg-green-900/90 backdrop-blur-sm shadow-lg"
@@ -176,7 +150,7 @@ const Login = () => {
                     key={roleKey}
                     ref={(el) => (tabRefs.current[roleKey] = el)}
                     onClick={() => toggleRole(roleKey)}
-                    className={`relative z-10 px-6 py-3 text-sm font-medium transition-colors duration-300 rounded-full whitespace-nowrap flex-1 text-center ${
+                    className={`relative z-10 px-4 md:px-6 py-3  text-sm font-medium transition-colors duration-300 rounded-full whitespace-nowrap flex-1 text-center ${
                       role === roleKey
                         ? "text-white"
                         : "text-white/70 hover:text-white"
@@ -186,7 +160,6 @@ const Login = () => {
                   </button>
                 ))}
               </div>
-
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="relative">
                   <Mail className="absolute left-5 top-4 text-green-900 w-5 h-5" />

@@ -44,7 +44,7 @@ const SearchPageContent = () => {
   return (
     <div className="min-h-screen flex flex-col text-gray-900  bg-green-50">
       <Header />
-      <main className="flex-grow p-8 pt-24">
+      <main className="grow p-8 pt-24">
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleSearch} className="relative mb-8">
             <input
@@ -98,7 +98,7 @@ const SearchPageContent = () => {
                         className="relative rounded-full bg-white hover:bg-green-800 transition-all duration-500 px-5 py-2 text-sm font-semibold "
                         onClick={() => router.push(`/cave/${site.site_id}`)}
                       >
-                        <p className="text-transparent bg-clip-text bg-gradient-to-br from-green-600 to-green-900 group-hover:text-white transition-all duration-500">
+                        <p className="text-transparent bg-clip-text bg-linear-to-br from-green-600 to-green-900 group-hover:text-white transition-all duration-500">
                           - Read More -
                         </p>
                       </button>
