@@ -302,8 +302,10 @@ export default function CaveClient({ site }) {
   };
 
   const handleInscriptionClick = (inscriptionId) => {
-    setSelectedInscription(inscriptionId);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (user) {
+      setSelectedInscription(inscriptionId);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -557,14 +559,14 @@ export default function CaveClient({ site }) {
                   </div>
                 </div>
               </div>
-              <div className="mt-10 ">
+              <div className="mt-10 text-green-800">
                 <p className="text-2xl sm:text-3xl font-bold">
                   Verification Authority
                 </p>
                 <div className="mt-4 text-lg">
                   {site.verification_authority?.curated_by &&
                   site.verification_authority?.curated_by.length > 0 ? (
-                    <ul className="list-disc ">
+                    <ul className="  ">
                       {site.verification_authority?.curated_by.map(
                         (ref, index) => (
                           <li className="mb-2">{ref}</li>
@@ -578,18 +580,18 @@ export default function CaveClient({ site }) {
                   )}
                 </div>
               </div>
-              <div className="mt-10 ">
+              <div className="mt-10 text-green-800">
                 <p className="text-2xl sm:text-3xl font-bold">Source</p>
                 <div className="mt-4 text-lg">
                   {site.references && site.references.length > 0 ? (
-                    <ul className="list-disc ">
+                    <ul className=" text-green-800">
                       {site.references.map((ref, index) => (
                         <Link
                           href={ref.url}
                           className="hover:text-green-800"
                           key={index}
                         >
-                          <li className="mb-2">
+                          <li className="mb-2 ">
                             {ref.title} — {ref.author}, {ref.year}
                           </li>
                         </Link>
@@ -603,7 +605,7 @@ export default function CaveClient({ site }) {
                 </div>
               </div>
               {!user && (
-                <div className="w-full h-full absolute top-1/6 flex rounded-t-[10%] justify-center items-start right-0 bg-gradient-to-b from-green-50/70 via-green-50/100 to-green-50/100">
+                <div className="w-full h-full absolute top-1/6 flex rounded-t-[10%] justify-center items-start right-0 bg-linear-to-b from-green-50/70 via-green-50/100 z-20 to-green-50/100">
                   <div className="group relative">
                     <button
                       className="-mt-6 text-2xl font-bold border-green-600 hover:border-t-4 hover:border-b-0 cursor-pointer transition-all ease-in-out duration-500  bg-[#a5fc72] px-20 rounded-full border-b-6 py-4"
@@ -613,10 +615,10 @@ export default function CaveClient({ site }) {
                     </button>
 
                     <span
-                      className="absolute top-[125%] left-1/2 -translate-x-1/2 min-w-72 bg-green-900 text-white text-center 
+                      className="absolute top-[125%] left-1/2 -translate-x-1/2 min-w-72 z-999 bg-green-900 text-white text-center 
                rounded-lg py-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible 
-               transition-opacity duration-700 z-10 
-               after:content-[''] after:absolute after:top-[-10px] after:left-1/2 after:-translate-x-1/2 
+               transition-opacity duration-700  
+               after:content-[''] after:absolute after:-top-2.5 after:left-1/2 after:-translate-x-1/2 
                after:border-[6px] after:border-solid 
                after:border-t-transparent after:border-x-transparent border-b-6  border-b-green-600 after:border-b-green-900"
                     >

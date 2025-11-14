@@ -48,7 +48,7 @@ const THEME_CONFIG = {
   },
 };
 
-const Header = ({ currentPath = "/", variant = "full", theme = "light" }) => {
+const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
   const { user, logout } = useAuth();
   const [hoveredNav, setHoveredNav] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -98,12 +98,12 @@ const Header = ({ currentPath = "/", variant = "full", theme = "light" }) => {
       label: "About Us",
       icon: <User className="w-5 h-5" />,
     },
-    {
-      path: "language",
-      label: "Language",
-      icon: <Languages className="w-5 h-5" />,
-      isModal: true,
-    },
+    // {
+    //   path: "language",
+    //   label: "Language",
+    //   icon: <Languages className="w-5 h-5" />,
+    //   isModal: true,
+    // },
   ];
 
   if (user) {
@@ -116,8 +116,8 @@ const Header = ({ currentPath = "/", variant = "full", theme = "light" }) => {
 
   // 🔘 Reusable nav button
   const renderNavButton = (item) => {
-    const isActive = currentPath === item.path;
-    const isHovered = hoveredNav === item.path;
+    const isActive = currentPath === item?.path;
+    const isHovered = hoveredNav === item?.path;
 
     const buttonClasses =
       isHovered || isActive
@@ -130,9 +130,9 @@ const Header = ({ currentPath = "/", variant = "full", theme = "light" }) => {
 
     return (
       <button
-        key={item.path}
+        key={item?.path}
         onClick={() =>
-          item.isModal
+          item?.isModal
             ? window.dispatchEvent(new CustomEvent("open-language-modal"))
             : handleNavigation(item.path)
         }
@@ -141,12 +141,12 @@ const Header = ({ currentPath = "/", variant = "full", theme = "light" }) => {
         className={`px-4 py-1 cursor-pointer rounded-full text-sm font-medium flex items-center gap-2 transition-all duration-200 hover:scale-105 hover:shadow-md group ${buttonClasses}`}
         style={{ fontFamily: "Inter" }}
       >
-        {item.icon}
+        {item?.icon}
         <span
           className="hidden max-w-0 group-hover:max-w-xs group-hover:block transition-all duration-300 whitespace-nowrap"
           style={{ fontFamily: "Inter" }}
         >
-          {item.label}
+          {item?.label}
         </span>
       </button>
     );
@@ -302,9 +302,6 @@ const Header = ({ currentPath = "/", variant = "full", theme = "light" }) => {
                   whileHover={{ scale: 1.02 }}
                   onClick={() => {
                     if (item.isModal) {
-                      window.dispatchEvent(
-                        new CustomEvent("open-language-modal")
-                      );
                     } else {
                       handleNavigation(item.path);
                     }

@@ -1,21 +1,14 @@
-import React, { use } from "react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  Twitter,
-  Instagram,
-  Globe,
-} from "lucide-react";
+import React from "react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const router = useRouter();
+
   const quickLinks = [
-    { name: "Elephanta Cave", href: "/caves/elephanta" },
-    { name: "Ajanta Caves", href: "/caves/ajanta" },
-    { name: "Ellora Cave", href: "/caves/ellora" },
+    { name: "Kanheri Cave", href: "/cave/Kan0004" },
+    { name: "Ajanta Caves", href: "/cave/Aja0003" },
+    { name: "Ellora Cave", href: "/cave/Ell0001" },
   ];
 
   const contactInfo = {
@@ -24,32 +17,16 @@ const Footer = () => {
     address: "Mumbai, Maharashtra",
   };
 
-  const socialLinks = [
-    {
-      icon: Facebook,
-      href: "https://facebook.com/maharitage",
-      label: "Facebook",
-    },
-    { icon: Twitter, href: "https://twitter.com/maharitage", label: "Twitter" },
-    {
-      icon: Instagram,
-      href: "https://instagram.com/maharitage",
-      label: "Instagram",
-    },
-    { icon: Globe, href: "https://maharitage.com", label: "Website" },
-  ];
-
   const handleNavigation = (href) => {
     if (href.startsWith("http")) {
       window.open(href, "_blank");
     } else {
-      // Handle internal navigation
-      // console.log(`Navigate to: ${href}`);
+      router.push(href);
     }
   };
 
   return (
-    <footer className="bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 text-white relative overflow-hidden">
+    <footer className="bg-linear-to-br from-green-900 via-green-800 to-emerald-900 text-white relative overflow-hidden">
       {/* Decorative background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-32 -translate-y-32"></div>
@@ -72,23 +49,6 @@ const Footer = () => {
                 Preserving and promoting Maharashtra's magnificent cave heritage
                 for future generations.
               </p>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => {
-                const IconComponent = social.icon;
-                return (
-                  <button
-                    key={index}
-                    onClick={() => handleNavigation(social.href)}
-                    className="group bg-green-800/50 hover:bg-white/20 p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg backdrop-blur-sm"
-                    aria-label={social.label}
-                  >
-                    <IconComponent className="w-5 h-5 text-green-100 group-hover:text-white transition-colors duration-200" />
-                  </button>
-                );
-              })}
             </div>
           </div>
 
@@ -195,15 +155,27 @@ const Footer = () => {
               >
                 Privacy Policy
               </button>
+
               <button
                 className="hover:text-white transition-colors duration-300"
                 onClick={() => router.push("/terms-and-conditions")}
               >
                 Terms of Service
               </button>
-              <button className="hover:text-white transition-colors duration-300">
-                Sitemap
-              </button>
+
+              {/* Sitemap with Tooltip */}
+              <div className="relative group">
+                <button className="hover:text-white transition-colors duration-300">
+                  Sitemap
+                </button>
+
+                <div
+                  className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                                bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-lg whitespace-nowrap"
+                >
+                  Coming Soon
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,8 +1,6 @@
 import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Loading from "../../loading";
-import { headers } from "next/headers";
-
 // Lazy-load CaveClient for better performance
 const CaveClient = dynamic(() => import("../CaveClient"), {
   loading: () => <Loading />,
@@ -11,15 +9,13 @@ const CaveClient = dynamic(() => import("../CaveClient"), {
 async function fetchSite(id) {
   try {
     // Construct the absolute URL for server-side fetch
-    const host = headers().get("host");
-    const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-    const baseUrl = `${protocol}://${host}`;
-    const url = `${baseUrl}/api/sites/${id}`;
 
-    const response = await fetch(url, {
-      cache: "no-store", // Ensures fresh data on each request
-    });
-
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/sites/${id}`,
+      {
+        cache: "no-store",
+      }
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch site data");
     }
@@ -31,7 +27,7 @@ async function fetchSite(id) {
 }
 
 export default async function CavePage({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const site = await fetchSite(id);
 
   if (!site) {
