@@ -7,6 +7,7 @@ import {
   MapPin as LocationIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Loading from "@/app/loading";
 
 const Explore = ({ heroData }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -14,6 +15,7 @@ const Explore = ({ heroData }) => {
   const containerRef = useRef(null);
   const [sites, setSites] = useState([]);
   const navigate = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   // 🔥 Responsive slide width
   const getSlideWidth = () => {
@@ -30,10 +32,14 @@ const Explore = ({ heroData }) => {
   useEffect(() => {
     const fetchSites = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch("/api/sites/home");
         const data = await response.json();
         setSites(data);
-      } catch (e) {}
+      } catch (e) {
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchSites();
   }, []);
@@ -71,6 +77,12 @@ const Explore = ({ heroData }) => {
   return (
     <section className="w-full max-w-full min-h-screen mt-12 md:mt-20 bg-gray-50 overflow-hidden">
       {/* Header */}
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-white/80 z-50 flex justify-center items-center">
+          <Loading />
+        </div>
+      )}
       <div className="mx-auto px-6 sm:px-12 lg:px-24 text-center">
         <h2 className="text-3xl md:text-5xl font-bold text-gray-800 font-inter mb-3">
           {heroData.tagline}

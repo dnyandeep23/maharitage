@@ -38,9 +38,9 @@ To get a local copy up and running, follow these simple steps.
     git clone https://github.com/your_username/maharitage.git
     ```
 
-2.  Install NPM packages
+2.  **Navigate to the project directory**
     ```sh
-    npm install
+    cd maharitage
     ```
 3.  **Install NPM packages**
 
@@ -54,10 +54,11 @@ To get a local copy up and running, follow these simple steps.
 
     Create a `.env.local` file in the root of the project and add your secret keys.
 
-    ```
-    GEMINI_API_KEY=your_gemini_api_key
-    JWT_SECRET=your_jwt_secret
-    MONGODB_URI=your_mongodb_uri
+    ```env
+    # .env.local
+    MONGODB_URI="your_mongodb_connection_string"
+    NEXT_PUBLIC_API_URL="http://localhost:3000"
+    JWT_SECRET="your_super_secret_jwt_key"
     ```
 
 5.  Run the development server
