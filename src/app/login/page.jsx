@@ -137,7 +137,7 @@ const Login = () => {
           </div>
 
           <div className="flex-1 flex flex-col justify-center items-center">
-            <div className="relative w-full max-w-lg bg-white/15 rounded-[8rem] pt-12 md:pt-0 pb-20 md:pb-0    rounded-br-[10rem] rounded-bl-[15rem] p-4 xl:p-14 shadow-xl border border-white/30">
+            <div className="relative w-full max-w-lg bg-white/15 rounded-[8rem] pt-12 pb-20 rounded-br-[10rem] rounded-bl-[15rem] p-4 xl:p-14 shadow-xl border border-white/30">
               <div className="relative flex justify-center items-center rounded-full p-1 mb-10 w-full">
                 <motion.div
                   className="absolute top-1 bottom-1 rounded-full bg-green-900/90 backdrop-blur-sm shadow-lg"

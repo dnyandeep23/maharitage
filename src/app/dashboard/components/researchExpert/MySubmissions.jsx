@@ -3,6 +3,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import DiffViewer from "../components/DiffViewer";
 import { Clock, CheckCircle, XCircle, HelpCircle } from "lucide-react";
 import { api } from "@/lib/api";
+import LoadingButton from "../components/LoadingButton";
 
 const statusIcons = {
   pending: <HelpCircle size={16} className="mr-1" />,
@@ -70,7 +71,7 @@ const MySubmissions = () => {
   };
 
   if (loading) {
-    return <div className="text-green-950">Loading your submissions...</div>;
+    return <LoadingButton />;
   }
 
   if (error) {

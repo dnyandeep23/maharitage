@@ -10,7 +10,12 @@ import Sidebar from "./Sidebar";
 import Profile from "./shared/Profile";
 import ApiKeyManagement from "./shared/ApiKeyManagement";
 
-const PublicUserDashboard = ({ user, selectedItem, handleSelectItem }) => {
+const PublicUserDashboard = ({
+  user,
+  selectedItem,
+  handleSelectItem,
+  showToast,
+}) => {
   const router = useRouter();
   const stats = [
     { label: "Heritage Sites", value: 5 },
@@ -141,7 +146,7 @@ const PublicUserDashboard = ({ user, selectedItem, handleSelectItem }) => {
                 </>
               )}
               {selectedItem === "Profile" && <Profile user={user} />}
-              {selectedItem === "API Keys" && <ApiKeyManagement />}
+              {selectedItem === "API Keys" && <ApiKeyManagement showToast={showToast} />}
             </div>
           </div>
         </div>

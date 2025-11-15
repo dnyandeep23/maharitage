@@ -4,6 +4,7 @@ import { useState, Suspense, useEffect } from "react";
 import Loading from "../loading";
 import React from "react";
 import { ROLES } from "../../lib/roles";
+import Toast from "../component/Toast";
 
 const PublicUserDashboard = React.lazy(() =>
   import("./components/PublicUserDashboard")
@@ -18,6 +19,18 @@ const DesktopOnlyView = React.lazy(() =>
 
 export default function DashboardClient({ user }) {
   const [isDesktop, setIsDesktop] = useState(true); // Assume desktop initially
+  const [toast, setToast] = useState({
+    message: "",
+    type: "success",
+    show: false,
+  });
+
+  const showToast = (message, type = "success") => {
+    setToast({ message, type, show: true });
+    setTimeout(() => {
+      setToast({ message: "", type: "success", show: false });
+    }, 3000);
+  };
 
   useEffect(() => {
     const checkDevice = () => {
@@ -44,32 +57,20 @@ export default function DashboardClient({ user }) {
   };
 
   const renderRoleSpecificDashboard = () => {
+    const props = {
+      user,
+      selectedItem,
+      handleSelectItem,
+      showToast,
+    };
     switch (user?.role) {
       case ROLES.ADMIN:
-        return (
-          <AdminDashboard
-            user={user}
-            selectedItem={selectedItem}
-            handleSelectItem={handleSelectItem}
-          />
-        );
+        return <AdminDashboard {...props} />;
       case ROLES.RESEARCH_EXPERT:
-        return (
-          <ResearchExpertDashboard
-            user={user}
-            selectedItem={selectedItem}
-            handleSelectItem={handleSelectItem}
-          />
-        );
+        return <ResearchExpertDashboard {...props} />;
       case ROLES.PUBLIC_USER:
       default:
-        return (
-          <PublicUserDashboard
-            user={user}
-            selectedItem={selectedItem}
-            handleSelectItem={handleSelectItem}
-          />
-        );
+        return <PublicUserDashboard {...props} />;
     }
   };
 
@@ -77,6 +78,13 @@ export default function DashboardClient({ user }) {
     <Suspense fallback={<Loading />}>
       {isDesktop ? (
         <div className="flex min-h-screen text-green-800">
+          {toast.show && (
+            <Toast
+              message={toast.message}
+              type={toast.type}
+              onClose={() => setToast({ ...toast, show: false })}
+            />
+          )}
           {renderRoleSpecificDashboard()}
         </div>
       ) : (

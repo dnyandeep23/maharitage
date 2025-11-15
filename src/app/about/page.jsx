@@ -6,6 +6,8 @@ import aboutImg from "../../assets/images/about.png";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { ChevronDown, ChevronUp, Mail, Phone } from "lucide-react";
+import Toast from "../component/Toast";
+
 const faqs = [
   {
     question: "What is Maharitage?",
@@ -54,13 +56,65 @@ const faqs = [
 
 function About() {
   const [openIndex, setOpenIndex] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log(response);
+      if (response.ok) {
+        setToast({
+          show: true,
+          message: "Message sent successfully!",
+          type: "success",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Failed to send message.");
+      }
+    } catch (error) {
+      setToast({
+        show: true,
+        message: "An error occurred. Please try again.",
+        type: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="w-screen bg-[#EAFFE1]">
       <Header theme="light" currentPath="/about" />
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast({ show: false, message: "", type: "" })}
+        />
+      )}
       <div className="w-full h-64 sm:h-96 relative overflow-hidden">
         <Image
           src={aboutImg}
@@ -116,9 +170,9 @@ function About() {
           </p>
         </div>
       </div>
-      <div className="relative mt-14 py-32 flex flex-col items-center overflow-hidden">
+      <div className="relative mt-14 py-44  flex flex-col items-center overflow-hidden">
         {/* Curved Background Layer */}
-        <div className="absolute -left-[10vw] -right-[10vw] top-0 h-full bg-[#CDFFBE] rounded-[60%] z-0"></div>
+        <div className="absolute -left-[10vw] -right-[10vw] top-0 h-full bg-[#CDFFBE] rounded-[35%]  md:rounded-[60%] z-0"></div>
 
         {/* Content */}
         <div className="relative z-10 w-full flex flex-col items-center">
@@ -189,7 +243,9 @@ function About() {
               <div className="flex items-center gap-4 bg-[#e3f7cf] rounded-full px-4 py-3 w-fit md:w-full">
                 <Phone className="text-gray-700" size={22} />
                 <div>
-                  <p className="font-semibold text-gray-900">+91 98765 43210</p>
+                  <p className="font-semibold text-gray-900">
+                    Currently Not Available
+                  </p>
                   <p className="text-xs text-gray-600">From 10 am to 7 pm</p>
                 </div>
               </div>
@@ -198,7 +254,7 @@ function About() {
                 <Mail className="text-gray-700" size={22} />
                 <div>
                   <p className="font-semibold text-gray-900">
-                    info@maharitage.com
+                    maharitage.maharastra@gmail.com
                   </p>
                   <p className="text-xs text-gray-600">24×7 Available</p>
                 </div>
@@ -213,14 +269,18 @@ function About() {
               Drop me a message below !!
             </h3>
 
-            <form className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div>
                 <label className="text-sm font-medium text-gray-700">
                   Full Name
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Enter your name"
+                  required
                   className="w-full border-b border-gray-300 focus:border-gray-700 outline-none py-2 bg-transparent"
                 />
               </div>
@@ -231,7 +291,11 @@ function About() {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Enter your email"
+                  required
                   className="w-full border-b border-gray-300 focus:border-gray-700 outline-none py-2 bg-transparent"
                 />
               </div>
@@ -241,19 +305,26 @@ function About() {
                   Message
                 </label>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Write your message..."
                   maxLength={400}
                   rows={4}
+                  required
                   className="w-full border-b border-gray-300 focus:border-gray-700 outline-none py-2 bg-transparent resize-none"
                 ></textarea>
-                <p className="text-right text-xs text-gray-500">0/400</p>
+                <p className="text-right text-xs text-gray-500">
+                  {formData.message.length}/400
+                </p>
               </div>
 
               <button
                 type="submit"
-                className="bg-[#c9ea94] text-black font-semibold py-3 rounded-full hover:bg-[#b8e176] transition-all"
+                disabled={loading}
+                className="bg-[#c9ea94] text-black font-semibold py-3 rounded-full hover:bg-[#b8e176] transition-all disabled:bg-gray-400"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>

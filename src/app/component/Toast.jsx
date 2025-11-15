@@ -14,7 +14,7 @@ const Toast = ({ message, type, onClose }) => {
 
   return (
     <div
-      className={`fixed top-1 right-[10%] left-[10%] text-white w-fit mx-auto px-6 py-3 rounded-lg shadow-lg animate-fade-in flex items-center gap-4 z-[999] ${bgColor}`}
+      className={`fixed top-1 right-[10%] left-[10%] text-white w-fit mx-auto px-6 py-3 rounded-lg shadow-lg animate-fade-in flex items-center gap-4 z-[9999] ${bgColor}`}
       role="alert"
     >
       {type === "success" && <CircleCheck />}

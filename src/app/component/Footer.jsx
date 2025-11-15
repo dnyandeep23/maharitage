@@ -12,7 +12,7 @@ const Footer = () => {
   ];
 
   const contactInfo = {
-    email: "Currently Unavailable",
+    email: "maharitage.maharastra@gmail.com",
     phone: "Currently Unavailable",
     address: "Mumbai, Maharashtra",
   };

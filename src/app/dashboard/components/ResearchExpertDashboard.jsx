@@ -24,7 +24,12 @@ import ApiKeyManagement from "./shared/ApiKeyManagement";
 import Footer from "../../component/Footer";
 import { api } from "@/lib/api";
 
-const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
+const ResearchExpertDashboard = ({
+  user,
+  selectedItem,
+  handleSelectItem,
+  showToast,
+}) => {
   const router = useRouter();
   const stats = [
     { label: "Reviewed Articles", value: 50 },
@@ -475,7 +480,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
                 </>
               )}
               {selectedItem === "Profile" && <Profile user={user} />}
-              {selectedItem === "API Keys" && <ApiKeyManagement />}
+              {selectedItem === "API Keys" && <ApiKeyManagement showToast={showToast} />}
               {selectedItem === "Manage Sites" && (
                 <ManageSites
                   showDelete={false}

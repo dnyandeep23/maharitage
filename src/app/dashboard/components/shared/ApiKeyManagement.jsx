@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
-import Toast from "../../../component/Toast";
 import { Plus, Trash2, Copy, Check, Key, Clock, BarChart2 } from "lucide-react";
 import { api } from "../../../../lib/api";
 import ProgressBar from "../../../component/ProgressBar";
 
-const ApiKeyManagement = () => {
+const ApiKeyManagement = ({ showToast }) => {
   const { user } = useAuth();
   const token = api.getToken();
   const [apiKeys, setApiKeys] = useState([]);
@@ -13,15 +12,7 @@ const ApiKeyManagement = () => {
   const [loading, setLoading] = useState(false);
   const [creating, setCreating] = useState(false);
   const [deleting, setDeleting] = useState(null);
-  const [toastMessage, setToastMessage] = useState(null);
-  const [toastType, setToastType] = useState("success");
   const [copiedKey, setCopiedKey] = useState(null);
-
-  const showToast = (message, type) => {
-    setToastMessage(message);
-    setToastType(type);
-    setTimeout(() => setToastMessage(null), 3000);
-  };
 
   useEffect(() => {
     if (user && token) {
@@ -248,13 +239,6 @@ const ApiKeyManagement = () => {
           </ul>
         )}
       </div>
-      {toastMessage && (
-        <Toast
-          message={toastMessage}
-          type={toastType}
-          onDone={() => setToastMessage(null)}
-        />
-      )}
     </div>
   );
 };

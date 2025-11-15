@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import DiffViewer from "../components/DiffViewer";
 import { api } from "../../../../lib/api";
+import LoadingButton from "../components/LoadingButton";
 
 const statusIcons = {
   pending: <HelpCircle size={16} className="mr-1" />,
@@ -141,7 +142,7 @@ const ReviewRequests = () => {
   };
 
   if (loading) {
-    return <div className="text-green-950">Loading requests...</div>;
+    return <LoadingButton />;
   }
 
   if (error) {

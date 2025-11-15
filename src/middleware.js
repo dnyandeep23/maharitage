@@ -15,6 +15,7 @@ const PUBLIC_ROUTES = [
   "/api/sites/:id",
   "/api/sites/home",
   "/api/ai",
+  "/api/contact",
   "/",
   "/search",
   "/login",
