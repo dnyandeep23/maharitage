@@ -182,18 +182,13 @@ const AIComponent = () => {
     getFingerprint();
   }, []);
 
-  // Monitor device width and manage sidebar visibility
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      // Close sidebar on mobile (<1024px / lg breakpoint), open on larger screens
       setIsSidebarOpen(width >= 1024);
     };
 
-    // Set initial state based on current window width
     handleResize();
-
-    // Add resize listener
     window.addEventListener("resize", handleResize);
 
     // Cleanup
