@@ -173,7 +173,7 @@ const Explore = ({ heroData }) => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleNext();
+                          handlePrev();
                         }}
                         aria-label="Next"
                         className="border-green-300 hover:bg-green-800 hover:text-white -rotate-90 text-white rounded-full transition duration-300 cursor-pointer"

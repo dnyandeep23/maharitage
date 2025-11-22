@@ -166,13 +166,6 @@ const AIComponent = () => {
     setImagePreview({ isOpen: false, src: "" });
   };
 
-  // useEffect(() => {
-  //   if (messages.length === 0 && initialMessage) {
-  //     setMessages([{ role: "ai", parts: [{ text: initialMessage }] }]);
-  //     setIsChatActive(true);
-  //   }
-  // }, [messages, initialMessage]);
-
   useEffect(() => {
     const getFingerprint = async () => {
       const fp = await FingerprintJS.load();
