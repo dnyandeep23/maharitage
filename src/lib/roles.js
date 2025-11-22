@@ -17,7 +17,7 @@ export const ROLE_CONFIG = {
       "/settings",
       "/api/auth/me",
       "/api/ai/chats",
-      "/api/ai/chat",
+      "/api/ai/chat/:id",
       "/api/api-keys",
       "/api/api-keys/:id",
       "/ai",
