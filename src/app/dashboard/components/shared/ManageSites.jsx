@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import ModifySiteForm from "./ModifySiteForm";
 import ConfirmationModal from "../components/ConfirmationModal";
 
-import Loading from "../../../../app/loading";
+import LoadingButton from "../components/LoadingButton";
+import { api } from "@/lib/api";
 
 const ManageSites = ({ showDelete = false, handleSubmit }) => {
   const [sites, setSites] = useState([]);
@@ -12,6 +13,7 @@ const ManageSites = ({ showDelete = false, handleSubmit }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [siteToDelete, setSiteToDelete] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fetchSites = async () => {
@@ -55,10 +57,13 @@ const ManageSites = ({ showDelete = false, handleSubmit }) => {
 
   const handleConfirmDelete = async () => {
     if (!siteToDelete) return;
-
+    setIsDeleting(true);
     try {
       const response = await fetch(`/api/sites/${siteToDelete.site_id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${api.getToken()}`,
+        },
       });
 
       if (response.ok) {
@@ -66,13 +71,14 @@ const ManageSites = ({ showDelete = false, handleSubmit }) => {
       }
     } catch (error) {
       console.error("Error deleting site:", error);
+    } finally {
+      setIsDeleting(false);
+      handleCloseModal();
     }
-
-    handleCloseModal();
   };
 
-  if (isLoading) {
-    return <Loading />;
+  if (isLoading || isDeleting) {
+    return <LoadingButton />;
   }
 
   if (editingSite) {

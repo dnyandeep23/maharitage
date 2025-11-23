@@ -39,6 +39,7 @@ export async function GET(req) {
 
 async function createSite(req) {
   try {
+    console.log("Creating new site");
     await connectDB();
     const formData = await req.formData();
     const siteData = JSON.parse(formData.get("siteData"));

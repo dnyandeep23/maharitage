@@ -11,6 +11,7 @@ import React, {
 import { useAuth } from "../../contexts/AuthContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
+import AIChatLoading from "./AIChatLoading";
 import {
   Plus,
   History,
@@ -157,6 +158,7 @@ const AIComponent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [imagePreview, setImagePreview] = useState({ isOpen: false, src: "" });
   const [initialMessage, setInitialMessage] = useState(``);
+  const [isChatLoading, setIsChatLoading] = useState(false);
 
   const handleOpenImagePreview = (src) => {
     setImagePreview({ isOpen: true, src });
@@ -238,6 +240,7 @@ const AIComponent = () => {
   }, [user, fetchChats]);
 
   const handleSelectChat = async (chatId) => {
+    setIsChatLoading(true);
     setCurrentChatId(chatId);
     sessionStorage.setItem("currentChatId", chatId);
     try {
@@ -256,8 +259,14 @@ const AIComponent = () => {
           }))
         );
         setIsChatActive(true);
+      } else {
+        throw new Error("Failed to load chat.");
       }
-    } catch (error) {}
+    } catch (error) {
+      showToast("error", error.message);
+    } finally {
+      setIsChatLoading(false);
+    }
   };
 
   const handleNewChat = () => {
@@ -307,7 +316,7 @@ const AIComponent = () => {
   };
 
   const handleFileUpload = (e, type) => {
-    console.log("File upload attempted");
+    // console.log("File upload attempted");
     showToast("warning", "File upload coming soon!");
   };
 
@@ -456,7 +465,7 @@ const AIComponent = () => {
 
   const ImagePreviewModal = ({ src, onClose }) => (
     <div
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in"
       onClick={onClose}
     >
       <div
@@ -468,7 +477,7 @@ const AIComponent = () => {
           alt="Preview"
           width={2400}
           height={2000}
-          className="object-fill rounded-xl shadow-xl w-full h-full"
+          className="object-contain rounded-xl shadow-xl"
         />
 
         {/* Close Button */}
@@ -657,41 +666,49 @@ const AIComponent = () => {
             onScroll={handleScroll}
             className="overflow-y-auto px-4 sm:px-10 py-6 space-y-6"
           >
-            {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`flex items-start gap-4 ${
-                  msg.role === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                {msg.role === "ai" && (
-                  <div className="w-10 h-10 bg-green-800 rounded-full flex items-center justify-center text-white shrink-0">
-                    <Bot size={24} />
-                  </div>
-                )}
-                <div
-                  className={`px-5 py-3 rounded-2xl max-w-[75%] shadow-sm prose ${
-                    msg.role === "user"
-                      ? "bg-green-800 text-white rounded-br-none"
-                      : "bg-gray-100 text-gray-800 rounded-bl-none"
-                  }`}
-                >
-                  {msg.role === "ai" ? (
-                    <MessageRenderer
-                      text={msg.parts[0].text}
-                      onImageClick={handleOpenImagePreview}
-                    />
-                  ) : (
-                    <p>{msg.parts[0].text}</p>
-                  )}
-                </div>
-                {msg.role === "user" && (
-                  <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold shrink-0">
-                    {user?.username?.[0]?.toUpperCase() || "A"}
-                  </div>
-                )}
+            {isChatLoading ? (
+              <div className="flex justify-center items-center h-full">
+                <AIChatLoading />
               </div>
-            ))}
+            ) : (
+              <>
+                {messages.map((msg, i) => (
+                  <div
+                    key={i}
+                    className={`flex items-start gap-4 ${
+                      msg.role === "user" ? "justify-end" : "justify-start"
+                    }`}
+                  >
+                    {msg.role === "ai" && (
+                      <div className="w-10 h-10 bg-green-800 rounded-full flex items-center justify-center text-white shrink-0">
+                        <Bot size={24} />
+                      </div>
+                    )}
+                    <div
+                      className={`px-5 py-3 rounded-2xl max-w-[75%] shadow-sm prose ${
+                        msg.role === "user"
+                          ? "bg-green-800 text-white rounded-br-none"
+                          : "bg-gray-100 text-gray-800 rounded-bl-none"
+                      }`}
+                    >
+                      {msg.role === "ai" ? (
+                        <MessageRenderer
+                          text={msg.parts[0].text}
+                          onImageClick={handleOpenImagePreview}
+                        />
+                      ) : (
+                        <p>{msg.parts[0].text}</p>
+                      )}
+                    </div>
+                    {msg.role === "user" && (
+                      <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold shrink-0">
+                        {user?.username?.[0]?.toUpperCase() || "A"}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )}
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-gray-100 rounded-2xl p-4">

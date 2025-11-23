@@ -26,10 +26,13 @@ import DownloadData from "./admin/DownloadData";
 import AddAdmin from "./admin/AddAdmin";
 import ManageAdmins from "./admin/ManageAdmins";
 import ReviewRequests from "./admin/ReviewRequests";
+import Notification from "./Notification";
+import { api } from "@/lib/api";
 
 const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
   const router = useRouter();
   const [token, setToken] = useState(null);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -122,7 +125,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
     images,
     rawSiteName,
     setRawSiteName,
-    setSiteData,
+    dispatch,
     setImages,
     setMessage,
     setIsLoading
@@ -172,32 +175,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
       if (response.ok) {
         setMessage({ type: "success", text: "Site added successfully!" });
         // Clear form
-        setSiteData({
-          site_id: "",
-          site_name: "",
-          location: {
-            latitude: "",
-            longitude: "",
-            district: "",
-            state: "Maharashtra",
-            country: "India",
-          },
-          Site_discription: "",
-          heritage_type: "",
-          period: "",
-          historical_context: {
-            ruler_or_dynasty: "",
-            approx_date: "",
-            related_figures: [],
-            cultural_significance: "",
-          },
-          verification_authority: {
-            curated_by: [],
-          },
-          references: [],
-          Gallary: [],
-          Inscriptions: [],
-        });
+        dispatch({ type: "RESET_FORM" });
         setRawSiteName("");
         setImages([]);
       } else {
@@ -211,6 +189,61 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
         type: "error",
         text: "An error occurred. Please try again.",
       });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleModifySiteSubmit = async (
+    e,
+    siteData,
+    images,
+    rawSiteName,
+    setMessage,
+    setIsLoading,
+    onUpdate,
+    onCancel
+  ) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage(null);
+
+    const formData = new FormData();
+    formData.append("siteData", JSON.stringify(siteData));
+    images.forEach((image) => {
+      formData.append("images", image);
+    });
+
+    try {
+      const response = await fetch(`/api/sites/${siteData.site_id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage({ type: "success", text: "Site updated successfully!" });
+        onUpdate(result.site);
+        setTimeout(() => {
+          setMessage(null);
+        }, 2000);
+      } else {
+        setMessage({
+          type: "error",
+          text: result.message || "Failed to update site.",
+        });
+        setTimeout(() => setMessage(null), 2000);
+      }
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text: "An error occurred. Please try again.",
+      });
+      setTimeout(() => setMessage(null), 2000);
     } finally {
       setIsLoading(false);
     }
@@ -341,6 +374,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
 
             {/* Main Section */}
             <div className="w-[75%] h-[80vh] p-10 rounded-4xl bg-[#FFFD99]/50 overflow-y-auto">
+              <Notification message={message?.text} type={message?.type} />
               {selectedItem === "Dashboard" && (
                 <>
                   <p className="text-green-950 font-bold text-xl">
@@ -403,7 +437,10 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
               {selectedItem === "Manage Admins" && <ManageAdmins />}
               {selectedItem === "Add Admin" && <AddAdmin />}
               {selectedItem === "Manage Sites" && (
-                <ManageSites showDelete={true} />
+                <ManageSites
+                  showDelete={true}
+                  handleSubmit={handleModifySiteSubmit}
+                />
               )}
               {selectedItem === "Add Site" && (
                 <AddSiteForm handleSubmit={handleAddSiteSubmit} />

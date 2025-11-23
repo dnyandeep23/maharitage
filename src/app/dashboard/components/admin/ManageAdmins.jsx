@@ -5,12 +5,14 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import { Trash2 } from "lucide-react";
 import ConfirmationModal from "../components/ConfirmationModal";
 import { api } from "../../../../lib/api";
+import LoadingButton from "../components/LoadingButton";
 
 const ManageAdmins = () => {
   const { user } = useAuth();
   const [admins, setAdmins] = useState([]);
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [adminToDelete, setAdminToDelete] = useState(null);
 
@@ -51,12 +53,12 @@ const ManageAdmins = () => {
 
   const handleConfirmDelete = async () => {
     if (!adminToDelete) return;
-
+    setIsDeleting(true);
     try {
       const response = await fetch(`/api/admins/${adminToDelete._id}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${api.getToken()}`,
         },
       });
 
@@ -87,12 +89,14 @@ const ManageAdmins = () => {
           text: "An error occurred. Please try again.",
         });
       }
+    } finally {
+      setIsDeleting(false);
+      handleCloseModal();
     }
-    handleCloseModal();
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (isLoading || isDeleting) {
+    return <LoadingButton />;
   }
 
   return (

@@ -109,7 +109,7 @@ async function updateInscription(req, { params }) {
 
 async function deleteInscription(request, { params }) {
   await connectDB();
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const site = await Site.findOne({ "Inscriptions.Inscription_id": id });

@@ -44,6 +44,7 @@ export async function POST(req) {
   await connectDB();
 
   try {
+    console.log("Received new research request");
     const formData = await req.formData();
     const type = formData.get("type");
     const action = formData.get("action");
@@ -52,6 +53,7 @@ export async function POST(req) {
     const files = formData.getAll("images");
 
     let tempSite;
+    console.log(formData);
 
     const imageUrls = await Promise.all(
       files.map(async (file) => {
@@ -74,22 +76,29 @@ export async function POST(req) {
         tempSite = new TempSite({ ...data, researchExpertId, type, action });
         await tempSite.save();
       } else if (action === "modify") {
-        const site = await Site.findOne({ site_id: data.site_id }).lean();
-        tempSite = new TempSite({
+        const site = await Site.findOne({ site_id: data.site_id })
+          .select("-_id")
+          .lean();
+        const tempSiteDoc = new TempSite({
           ...site,
           ...data,
           researchExpertId,
           type,
           action,
         });
+
+        const { _id, __v, ...cleanData } = tempSiteDoc.toObject();
+
+        const tempSite = new TempSite(cleanData);
         await tempSite.save();
       }
     } else if (type === "inscription") {
       data.image_urls = imageUrls;
 
-      const site = await Site.findOne({ site_id: data.siteId }).lean();
+      const site = await Site.findOne({ site_id: data.site_id })
+        .select("-_id")
+        .lean();
       tempSite = new TempSite({ ...site, researchExpertId, type, action });
-
       if (action === "add") {
         tempSite.Inscriptions.push(data);
       } else if (action === "modify") {
@@ -139,6 +148,7 @@ export async function POST(req) {
     );
   } catch (error) {
     // Log the error and return an error response
+    console.error("Error submitting request:", error);
     return NextResponse.json(
       { message: "Error submitting request", error: error.message },
       { status: 500 }

@@ -12,7 +12,7 @@ const MapPicker = dynamic(() => import("../components/MapPicker"), {
   ssr: false,
 });
 
-import Loading from "../../../../app/loading";
+import LoadingButton from "../components/LoadingButton";
 
 const initialState = {
   site_id: "",
@@ -64,6 +64,8 @@ function siteReducer(state, action) {
         ...state,
         references: state.references.filter((_, i) => i !== action.index),
       };
+    case "RESET_FORM":
+      return initialState;
     default:
       return state;
   }
@@ -180,7 +182,7 @@ const AddSiteForm = ({ handleSubmit }) => {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingButton />;
   }
 
   return (
@@ -205,7 +207,7 @@ const AddSiteForm = ({ handleSubmit }) => {
             images,
             rawSiteName,
             setRawSiteName,
-            setSiteData,
+            dispatch,
             setImages,
             setMessage,
             setIsLoading

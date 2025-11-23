@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import dashboardImage from "../../../assets/images/dashboard-bg.png";
@@ -23,14 +23,11 @@ import Profile from "./shared/Profile";
 import ApiKeyManagement from "./shared/ApiKeyManagement";
 import Footer from "../../component/Footer";
 import { api } from "@/lib/api";
+import Notification from "./Notification";
 
-const ResearchExpertDashboard = ({
-  user,
-  selectedItem,
-  handleSelectItem,
-  showToast,
-}) => {
+const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
   const router = useRouter();
+  const [message, setMessage] = useState(null);
   const stats = [
     { label: "Reviewed Articles", value: 50 },
     { label: "Pending Submissions", value: 10 },
@@ -109,13 +106,11 @@ const ResearchExpertDashboard = ({
     images,
     rawSiteName,
     setRawSiteName,
-    setSiteData,
+    dispatch,
     setImages,
-    setMessage,
     setIsLoading
   ) => {
     e.preventDefault();
-    setMessage(null);
     setIsLoading(true);
 
     if (rawSiteName.trim().length < 4) {
@@ -123,18 +118,21 @@ const ResearchExpertDashboard = ({
         type: "error",
         text: "Site name must be at least 4 characters long.",
       });
+      setTimeout(() => setMessage(null), 2000);
       setIsLoading(false);
       return;
     }
 
     if (images.length === 0) {
       setMessage({ type: "error", text: "At least one image is required." });
+      setTimeout(() => setMessage(null), 2000);
       setIsLoading(false);
       return;
     }
 
     if (!siteData.Site_discription.trim()) {
       setMessage({ type: "error", text: "Description is required." });
+      setTimeout(() => setMessage(null), 2000);
       setIsLoading(false);
       return;
     }
@@ -165,33 +163,9 @@ const ResearchExpertDashboard = ({
           type: "success",
           text: "Site addition request submitted successfully for review!",
         });
+        setTimeout(() => setMessage(null), 2000);
         // Clear form
-        setSiteData({
-          site_id: "",
-          site_name: "",
-          location: {
-            latitude: "",
-            longitude: "",
-            district: "",
-            state: "Maharashtra",
-            country: "India",
-          },
-          Site_discription: "",
-          heritage_type: "",
-          period: "",
-          historical_context: {
-            ruler_or_dynasty: "",
-            approx_date: "",
-            related_figures: [],
-            cultural_significance: "",
-          },
-          verification_authority: {
-            curated_by: [],
-          },
-          references: [],
-          Gallary: [],
-          Inscriptions: [],
-        });
+        dispatch({ type: "RESET_FORM" });
         setRawSiteName("");
         setImages([]);
       } else {
@@ -199,12 +173,14 @@ const ResearchExpertDashboard = ({
           type: "error",
           text: result.message || "Failed to submit site addition request.",
         });
+        setTimeout(() => setMessage(null), 2000);
       }
     } catch (error) {
       setMessage({
         type: "error",
         text: "An error occurred. Please try again.",
       });
+      setTimeout(() => setMessage(null), 2000);
     } finally {
       setIsLoading(false);
     }
@@ -217,21 +193,21 @@ const ResearchExpertDashboard = ({
     selectedSite,
     setInscriptionData,
     setImages,
-    setMessage,
     setIsLoading
   ) => {
     e.preventDefault();
-    setMessage(null);
     setIsLoading(true);
 
     if (!inscriptionData.discription.trim()) {
       setMessage({ type: "error", text: "Description is required." });
+      setTimeout(() => setMessage(null), 2000);
       setIsLoading(false);
       return;
     }
 
     if (images.length === 0) {
       setMessage({ type: "error", text: "At least one image is required." });
+      setTimeout(() => setMessage(null), 2000);
       setIsLoading(false);
       return;
     }
@@ -242,7 +218,7 @@ const ResearchExpertDashboard = ({
       formData.append("action", "add");
       formData.append(
         "data",
-        JSON.stringify({ ...inscriptionData, siteId: selectedSite })
+        JSON.stringify({ ...inscriptionData, site_id: selectedSite })
       );
       formData.append("researchExpertId", user.id);
       formData.append("changesDescription", "New inscription submission");
@@ -265,6 +241,7 @@ const ResearchExpertDashboard = ({
           type: "success",
           text: "Inscription addition request submitted successfully for review!",
         });
+        setTimeout(() => setMessage(null), 2000);
         setInscriptionData({
           Inscription_id: "",
           discription: "",
@@ -275,8 +252,19 @@ const ResearchExpertDashboard = ({
             hindi: null,
           },
         });
+      } else {
+        setMessage({
+          type: "error",
+          text: result.message || "Failed to submit request.",
+        });
+        setTimeout(() => setMessage(null), 2000);
       }
     } catch {
+      setMessage({
+        type: "error",
+        text: "An error occurred. Please try again.",
+      });
+      setTimeout(() => setMessage(null), 2000);
     } finally {
       setIsLoading(false);
     }
@@ -288,10 +276,11 @@ const ResearchExpertDashboard = ({
     images,
     rawSiteName,
     setMessage,
-    setIsLoading
+    setIsLoading,
+    onUpdate,
+    onCancel
   ) => {
     e.preventDefault();
-    setMessage(null);
     setIsLoading(true);
 
     try {
@@ -320,17 +309,23 @@ const ResearchExpertDashboard = ({
           type: "success",
           text: "Site modification request submitted successfully for review!",
         });
+        setTimeout(() => {
+          setMessage(null);
+          onCancel();
+        }, 2000);
       } else {
         setMessage({
           type: "error",
           text: result.message || "Failed to submit site modification request.",
         });
+        setTimeout(() => setMessage(null), 2000);
       }
     } catch (error) {
       setMessage({
         type: "error",
         text: "An error occurred. Please try again.",
       });
+      setTimeout(() => setMessage(null), 2000);
     } finally {
       setIsLoading(false);
     }
@@ -340,21 +335,32 @@ const ResearchExpertDashboard = ({
     e,
     inscriptionData,
     images,
-    selectedSite,
-    setMessage,
+    siteId,
     setIsLoading
   ) => {
     e.preventDefault();
-    setMessage(null);
     setIsLoading(true);
-
+    console.log(
+      "Submitting modification for inscription:",
+      inscriptionData,
+      " on site:",
+      siteId,
+      " with images:",
+      images,
+      "loading state:",
+      setIsLoading
+    );
     try {
       const formData = new FormData();
       formData.append("type", "inscription");
       formData.append("action", "modify");
+      console.log("Inscription Data being sent:", {
+        ...inscriptionData,
+        siteId,
+      });
       formData.append(
         "data",
-        JSON.stringify({ ...inscriptionData, siteId: selectedSite })
+        JSON.stringify({ ...inscriptionData, site_id: siteId })
       );
       formData.append("researchExpertId", user.id);
       formData.append("changesDescription", "Inscription modification");
@@ -377,6 +383,7 @@ const ResearchExpertDashboard = ({
           type: "success",
           text: "Inscription modification request submitted successfully for review!",
         });
+        setTimeout(() => setMessage(null), 2000);
       } else {
         setMessage({
           type: "error",
@@ -384,12 +391,14 @@ const ResearchExpertDashboard = ({
             result.message ||
             "Failed to submit inscription modification request.",
         });
+        setTimeout(() => setMessage(null), 2000);
       }
     } catch (error) {
       setMessage({
         type: "error",
         text: "An error occurred. Please try again.",
       });
+      setTimeout(() => setMessage(null), 2000);
     } finally {
       setIsLoading(false);
     }
@@ -425,6 +434,7 @@ const ResearchExpertDashboard = ({
 
             {/* Main Section */}
             <div className="w-[75%] h-[80vh] p-10 rounded-4xl bg-[#FFFD99]/50 overflow-y-auto">
+              <Notification message={message?.text} type={message?.type} />
               {selectedItem === "Dashboard" && (
                 <>
                   <p className="text-green-950 font-bold text-xl">
@@ -480,17 +490,21 @@ const ResearchExpertDashboard = ({
                 </>
               )}
               {selectedItem === "Profile" && <Profile user={user} />}
-              {selectedItem === "API Keys" && <ApiKeyManagement showToast={showToast} />}
+              {selectedItem === "API Keys" && (
+                <ApiKeyManagement setMessage={setMessage} />
+              )}
               {selectedItem === "Manage Sites" && (
                 <ManageSites
                   showDelete={false}
                   handleSubmit={handleModifySiteSubmit}
+                  setMessage={setMessage}
                 />
               )}
               {selectedItem === "Manage Inscriptions" && (
                 <ManageInscriptions
                   showDelete={false}
                   handleSubmit={handleModifyInscriptionSubmit}
+                  setMessage={setMessage}
                 />
               )}
               {selectedItem === "Add Site" && (

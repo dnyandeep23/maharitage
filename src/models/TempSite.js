@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const TempSiteSchema = new mongoose.Schema({
-  site_id: { type: String, required: true, unique: true },
+  site_id: { type: String, required: true },
   site_name: { type: String, required: true },
   location: {
     latitude: Number,
@@ -47,12 +47,12 @@ const TempSiteSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ['pending', 'approved', 'rejected', 'needs_update'],
-    default: 'pending',
+    enum: ["pending", "approved", "rejected", "needs_update"],
+    default: "pending",
   },
   researchExpertId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
   adminFeedback: {
@@ -76,4 +76,5 @@ const TempSiteSchema = new mongoose.Schema({
 
 TempSiteSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
-export default mongoose.models.TempSite || mongoose.model('TempSite', TempSiteSchema);
+export default mongoose.models.TempSite ||
+  mongoose.model("TempSite", TempSiteSchema);

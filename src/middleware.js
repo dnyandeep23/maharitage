@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { verifyTokenMiddleware } from "./lib/jwt";
 import { canAccessPath, ROLE_CONFIG } from "./lib/roles";
-// ✅ PUBLIC routes (no token needed)
+
 const PUBLIC_ROUTES = [
   "/api/auth/login",
   "/api/auth/register",
@@ -29,13 +29,10 @@ const PUBLIC_ROUTES = [
   "/cave/:path*",
 ];
 
-// ✅ Protected prefixes (token required)
 const PROTECTED_ROUTES = [
   "/dashboard/:path*",
-  "/api/:path*", // protect all /api except explicit public ones
+  "/api/:path*", 
 ];
-
-// 🚫 Block unauthenticated access
 
 function matchRoutePattern(pathname, patterns) {
   return patterns.some((route) => {
@@ -46,38 +43,64 @@ function matchRoutePattern(pathname, patterns) {
 
 const ADMIN_API_ROUTES = ["/api/admins"];
 
+const allowedOrigins = [process.env.NEXT_PUBLIC_APP_URL];
+
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;
+  const origin = request.headers.get("origin");
 
-  // Skip static assets
+  // CORS pre-flight request
+  if (request.method === "OPTIONS" && pathname.startsWith("/api/")) {
+    const headers = new Headers();
+    headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+    if (pathname.startsWith("/api/v1/")) {
+      headers.set("Access-Control-Allow-Origin", "*");
+    } else if (origin && allowedOrigins.includes(origin)) {
+      headers.set("Access-Control-Allow-Origin", origin);
+    }
+
+    return new NextResponse(null, { status: 204, headers });
+  }
+
+  const response = NextResponse.next();
+
+  // Set CORS headers for actual requests
+  if (pathname.startsWith("/api/")) {
+    if (pathname.startsWith("/api/v1/")) {
+      response.headers.set("Access-Control-Allow-Origin", "*");
+    } else if (origin && allowedOrigins.includes(origin)) {
+      response.headers.set("Access-Control-Allow-Origin", origin);
+    }
+  }
+
+
   if (
     pathname.startsWith("/_next/") ||
     pathname.match(/\.(ico|png|jpg|jpeg|svg)$/)
   ) {
-    return NextResponse.next();
+    return response;
   }
 
   const isPublic = matchRoutePattern(pathname, PUBLIC_ROUTES);
   if (isPublic) {
-    return NextResponse.next();
+    return response;
   }
 
   const isProtected = matchRoutePattern(pathname, PROTECTED_ROUTES);
 
-  // 🔑 Try token or API key
   const authHeader = request.headers.get("Authorization");
   let user = null;
 
   try {
     if (authHeader?.startsWith("Bearer ")) {
-      // JWT
       const token = authHeader.split(" ")[1];
       const decoded = await verifyTokenMiddleware(token);
       if (decoded) user = decoded;
     } else if (authHeader?.startsWith("ApiKey ")) {
-      // API Key
       const apiKey = authHeader.split(" ")[1];
-      const response = await fetch(
+      const res = await fetch(
         new URL("/api/auth/verify-apikey", request.url).toString(),
         {
           method: "POST",
@@ -86,8 +109,8 @@ export async function middleware(request) {
         }
       );
 
-      if (response.ok) {
-        const data = await response.json();
+      if (res.ok) {
+        const data = await res.json();
         user = data.user;
       }
     }
@@ -118,9 +141,8 @@ export async function middleware(request) {
     }
   }
 
-  return NextResponse.next();
+  return response;
 }
-// ✅ Apply middleware only on these paths
 export const config = {
   matcher: ["/:path*"],
 };

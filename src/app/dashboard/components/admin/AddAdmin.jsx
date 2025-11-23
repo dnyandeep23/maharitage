@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { api } from "../../../../lib/api";
+import LoadingButton from "../components/LoadingButton";
 
 const AddAdmin = () => {
   const { user } = useAuth();
@@ -57,7 +58,7 @@ const AddAdmin = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingButton />;
   }
 
   return (

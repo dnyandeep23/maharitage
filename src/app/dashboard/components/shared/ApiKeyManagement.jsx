@@ -3,6 +3,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import { Plus, Trash2, Copy, Check, Key, Clock, BarChart2 } from "lucide-react";
 import { api } from "../../../../lib/api";
 import ProgressBar from "../../../component/ProgressBar";
+import LoadingButton from "../components/LoadingButton";
 
 const ApiKeyManagement = ({ showToast }) => {
   const { user } = useAuth();
@@ -136,11 +137,6 @@ const ApiKeyManagement = ({ showToast }) => {
             {creating ? "Creating..." : "Create Key"}
           </button>
         </div>
-        {creating && (
-          <div className="mt-4">
-            <ProgressBar size="sm" />
-          </div>
-        )}
         {apiKeys.length >= 3 && (
           <p className="text-red-500 text-sm mt-3">
             You have reached the maximum of 3 API keys.
@@ -152,7 +148,7 @@ const ApiKeyManagement = ({ showToast }) => {
         <h3 className="text-2xl font-semibold text-emerald-800 mb-4">
           Your API Keys
         </h3>
-        {loading && <ProgressBar />}
+        {loading && <LoadingButton />}
         {!loading && apiKeys.length === 0 && (
           <div className="text-center py-12 border-2 border-dashed border-gray-700 rounded-lg">
             <Key className="mx-auto h-12 w-12 text-gray-500" />
@@ -198,9 +194,7 @@ const ApiKeyManagement = ({ showToast }) => {
                     className="group relative flex items-center justify-center rounded-md bg-red-600/50 px-4 py-2 text-sm font-medium text-white transition-all duration-1000 ease-in-out hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  focus:ring-offset-gray-900 disabled:opacity-70"
                   >
                     {deleting === key._id ? (
-                      <div className="w-20">
-                        <ProgressBar size="sm" />
-                      </div>
+                      "Deleting..."
                     ) : (
                       <>
                         <span className="flex items-center justify-center transition-transform duration-500 ease-in group-hover:-translate-x-2">

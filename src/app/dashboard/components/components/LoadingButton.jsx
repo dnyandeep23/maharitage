@@ -5,24 +5,51 @@ export default function LoadingButton() {
         type="button"
         className="
           relative overflow-visible
-          inline-flex rounded-full items-center text-body 
-          bg-neutral-primary-soft border border-default
-          hover:bg-neutral-secondary-medium hover:text-heading
-          focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs 
-          font-medium leading-5 text-sm px-4 py-2.5
+          inline-flex rounded-full items-center
+          bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600
+          text-white border-2 border-emerald-300/30
+          hover:from-emerald-500 hover:via-teal-500 hover:to-green-500
+          hover:border-emerald-200/50 hover:shadow-2xl hover:shadow-emerald-500/30
+          focus:ring-4 focus:ring-emerald-300/50 shadow-xl shadow-emerald-600/40
+          font-medium leading-5 text-sm px-6 py-4
+          transition-all duration-300
+          backdrop-blur-sm
         "
       >
-        {/* Wave repelling effect */}
+        {/* Multiple wave effects */}
         <span
           className="
-            absolute inset-0 rounded-full border-2 border-neutral-tertiary
-            animate-wave 
+            absolute inset-0 rounded-full border-2 border-emerald-300
+            animate-wave1 opacity-0
           "
+          style={{
+            animation: "wave 2s ease-out infinite",
+          }}
+        ></span>
+
+        <span
+          className="
+            absolute inset-0 rounded-full border-2 border-teal-300
+            animate-wave2 opacity-0
+          "
+          style={{
+            animation: "wave 2s ease-out 0.5s infinite",
+          }}
+        ></span>
+
+        <span
+          className="
+            absolute inset-0 rounded-full border-2 border-green-300
+            animate-wave3 opacity-0
+          "
+          style={{
+            animation: "wave 2s ease-out 1s infinite",
+          }}
         ></span>
 
         <svg
           aria-hidden="true"
-          className="w-4 h-4 text-neutral-tertiary animate-spin fill-brand me-2 z-10"
+          className="w-4 h-4 text-emerald-200 animate-spin fill-white me-2 z-10 drop-shadow-lg"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -37,8 +64,26 @@ export default function LoadingButton() {
           />
         </svg>
 
-        <span className="z-10">Loading...</span>
+        <span className="z-10 font-semibold tracking-wide drop-shadow-md">
+          Loading...
+        </span>
       </button>
+
+      <style>{`
+        @keyframes wave {
+          0% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          50% {
+            opacity: 0.4;
+          }
+          100% {
+            transform: scale(2.5);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 }

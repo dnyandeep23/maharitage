@@ -11,6 +11,7 @@ import {
 import DiffViewer from "../components/DiffViewer";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
+import { set } from "mongoose";
 
 const statusIcons = {
   pending: <HelpCircle size={16} className="mr-1" />,
@@ -53,6 +54,7 @@ const ReviewRequests = () => {
         throw new Error("Failed to fetch requests");
       }
       const data = await response.json();
+
       setRequests(data);
     } catch (err) {
       setError(err.message);
@@ -63,26 +65,32 @@ const ReviewRequests = () => {
 
   const handleAction = async (requestId, status, feedback = null) => {
     try {
+      setLoading(true);
       const response = await fetch(`/api/research-requests/${requestId}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${api.getToken()}`,
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify({ status, adminFeedback: feedback }),
       });
 
       if (!response.ok) {
         throw new Error("Failed to update request status");
       }
-
-      await response.json();
+      console.log("Response:", response);
+      const data = await response.json();
+      console.log("Data:", data);
       fetchRequests(); // Refresh the list
       setFeedbackModalOpen(false);
       setAdminFeedback("");
       setCurrentRequest(null);
     } catch (err) {
+      console.error(err);
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 

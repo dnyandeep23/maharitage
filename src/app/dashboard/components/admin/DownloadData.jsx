@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import { api } from "../../../../lib/api";
+import LoadingButton from "../components/LoadingButton";
 
 const DownloadData = () => {
   const [sites, setSites] = useState([]);
   const [selectedSite, setSelectedSite] = useState("");
   const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSites = async () => {
@@ -16,12 +18,15 @@ const DownloadData = () => {
         setSites(data);
       } catch (error) {
         console.error("Error fetching sites:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchSites();
   }, []);
 
   const handleDownloadAll = async () => {
+    setLoading(true);
     try {
       const response = await fetch("/api/sites/download", {
         headers: {
@@ -41,6 +46,8 @@ const DownloadData = () => {
       a.remove();
     } catch (error) {
       setMessage({ type: "error", text: error.message });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,12 +56,13 @@ const DownloadData = () => {
       setMessage({ type: "error", text: "Please select a site." });
       return;
     }
+    setLoading(true);
     try {
       const response = await fetch(
         `/api/sites/download?site_id=${selectedSite}`,
         {
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${api.getToken()}`,
           },
         }
       );
@@ -72,8 +80,14 @@ const DownloadData = () => {
       a.remove();
     } catch (error) {
       setMessage({ type: "error", text: error.message });
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <LoadingButton />;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

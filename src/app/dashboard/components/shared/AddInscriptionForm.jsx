@@ -7,7 +7,7 @@ import ChipInput from "../components/ChipInput";
 import ImageUpload from "../components/ImageUpload";
 import { X } from "lucide-react";
 
-import Loading from "../../../loading";
+import LoadingButton from "../components/LoadingButton";
 
 const AddInscriptionForm = ({ handleSelectItem, handleSubmit }) => {
   const { user } = useAuth();
@@ -76,7 +76,7 @@ const AddInscriptionForm = ({ handleSelectItem, handleSubmit }) => {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingButton />;
   }
 
   return (

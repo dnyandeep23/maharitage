@@ -57,6 +57,7 @@ export async function PUT(req, { params }) {
         upsert: true,
         new: true,
       });
+      tempSite.status = "approved";
       tempSite.expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
       await tempSite.save();
     } else if (status === "rejected") {

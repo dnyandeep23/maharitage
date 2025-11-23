@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import ModifyInscriptionForm from "./ModifyInscriptionForm";
 import ConfirmationModal from "../components/ConfirmationModal";
 
-import Loading from "../../../../app/loading";
+import LoadingButton from "../components/LoadingButton";
+import { api } from "@/lib/api";
 
 const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
   const [sites, setSites] = useState([]);
@@ -13,6 +14,7 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inscriptionToDelete, setInscriptionToDelete] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fetchSites = async () => {
@@ -71,12 +73,15 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
 
   const handleConfirmDelete = async () => {
     if (!inscriptionToDelete) return;
-
+    setIsDeleting(true);
     try {
       const response = await fetch(
         `/api/inscriptions/${inscriptionToDelete.Inscription_id}`,
         {
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${api.getToken()}`,
+          },
         }
       );
 
@@ -97,13 +102,14 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
       }
     } catch (error) {
       console.error("Error deleting inscription:", error);
+    } finally {
+      setIsDeleting(false);
+      handleCloseModal();
     }
-
-    handleCloseModal();
   };
 
-  if (isLoading) {
-    return <Loading />;
+  if (isLoading || isDeleting) {
+    return <LoadingButton />;
   }
 
   if (editingInscription) {
@@ -112,7 +118,7 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
         inscription={editingInscription}
         onUpdate={handleUpdate}
         onCancel={handleCancel}
-        siteId={editingInscription.site_id}
+        siteId={selectedSite.site_id}
         handleSubmit={handleSubmit}
       />
     );
@@ -123,7 +129,7 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
       <div className="container mx-auto px-4 py-8">
         <button
           onClick={() => setSelectedSite(null)}
-          className="mb-4 text-green-600 hover:underline"
+          className="mb-4 text-green-800 hover:underline"
         >
           {" "}
           &larr; Back to Sites

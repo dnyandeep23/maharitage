@@ -39,6 +39,7 @@ export const ROLE_CONFIG = {
       "/api/sites",
       "/api/sites/*/last-inscription-id",
       "/api/research-requests",
+      "/api/research-requests/:id",
       "/api/api-keys",
       "/api/api-keys/:id",
       "/api/ai/chats",

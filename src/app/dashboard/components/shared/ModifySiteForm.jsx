@@ -160,7 +160,9 @@ const ModifySiteForm = ({
             images,
             rawSiteName,
             setMessage,
-            setIsLoading
+            setIsLoading,
+            onUpdate,
+            onCancel
           )
         }
         className="space-y-6"
