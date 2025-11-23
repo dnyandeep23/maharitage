@@ -222,7 +222,7 @@ const AIComponent = () => {
         }
       } catch (error) {
       } finally {
-        setIsChatListLoading(false);
+        // setIsChatListLoading(false);
       }
     }
   }, [user]);
@@ -571,9 +571,7 @@ const AIComponent = () => {
                           }`}
                         >
                           <MessageSquare className="w-5 h-5 text-gray-600" />
-                          <span className="text-sm truncate">
-                            {chat.title}
-                          </span>
+                          <span className="text-sm truncate">{chat.title}</span>
                         </div>
                       ))
                     )}
