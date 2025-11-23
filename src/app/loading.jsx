@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-const Loading = () => {
+const Loading = ({ to }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-green-200 z-[9999] overflow-hidden">
       {/* Ripple Circles */}
@@ -40,7 +40,7 @@ const Loading = () => {
 
           {/* Subtitle */}
           <p className="text-sm text-gray-500 font-medium mb-2">
-            Setting things up for you
+            {to ? `Taking you to ${to}...` : "Setting things up for you"}
           </p>
 
           {/* Dots */}

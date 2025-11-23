@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Loading from "../../loading";
 // Lazy-load CaveClient for better performance
 const CaveClient = dynamic(() => import("../CaveClient"), {
-  loading: () => <Loading />,
+  loading: () => <Loading to="Cave" />,
 });
 
 async function fetchSite(id) {
@@ -39,7 +39,7 @@ export default async function CavePage({ params }) {
   }
 
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading to={site.site_name} />}>
       <CaveClient site={site} />
     </Suspense>
   );

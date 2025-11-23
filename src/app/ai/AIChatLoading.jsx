@@ -25,7 +25,7 @@ export default function AIChatLoading() {
 
             {/* Lightning effects */}
             <Zap
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-yellow-400 absolute -top-2 -right-2 sm:-top-3 sm:-right-3 md:-top-4 md:-right-4 drop-shadow-lg"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-green-900 absolute -top-2 -right-2 sm:-top-3 sm:-right-3 md:-top-4 md:-right-4 drop-shadow-lg"
               style={{ animation: "zap 1.5s ease-in-out infinite" }}
             />
             <Zap

@@ -12,6 +12,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import AIChatLoading from "./AIChatLoading";
+import ChatSpin from "./ChatSpin";
 import {
   Plus,
   History,
@@ -136,7 +137,7 @@ const MessageRenderer = ({ text, onImageClick }) => {
 };
 
 const AIComponent = () => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const messagesContainerRef = useRef(null);
   const messagesEndRef = useRef(null);
   const abortControllerRef = useRef(null);
@@ -159,6 +160,11 @@ const AIComponent = () => {
   const [imagePreview, setImagePreview] = useState({ isOpen: false, src: "" });
   const [initialMessage, setInitialMessage] = useState(``);
   const [isChatLoading, setIsChatLoading] = useState(false);
+  const [isChatListLoading, setIsChatListLoading] = useState(false);
+
+  if (authLoading) {
+    return <Loading to="AI Chat" />;
+  }
 
   const handleOpenImagePreview = (src) => {
     setImagePreview({ isOpen: true, src });
@@ -192,6 +198,7 @@ const AIComponent = () => {
 
   const fetchChats = useCallback(async () => {
     if (user) {
+      setIsChatListLoading(true);
       try {
         const headers = {
           "Content-Type": "application/json",
@@ -213,7 +220,10 @@ const AIComponent = () => {
 
           setChats(data.chats);
         }
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setIsChatListLoading(false);
+      }
     }
   }, [user]);
 
@@ -549,18 +559,24 @@ const AIComponent = () => {
                     </div>
                   </div>
                   <div className="space-y-2 overflow-y-scroll h-[calc(100vh-250px)]">
-                    {chats.map((chat) => (
-                      <div
-                        key={chat._id}
-                        onClick={() => handleSelectChat(chat._id)}
-                        className={`flex items-center gap-3 text-gray-700 hover:bg-green-100 rounded-lg px-3 py-2 cursor-pointer transition ${
-                          currentChatId === chat._id ? "bg-green-100" : ""
-                        }`}
-                      >
-                        <MessageSquare className="w-5 h-5 text-gray-600" />
-                        <span className="text-sm truncate">{chat.title}</span>
-                      </div>
-                    ))}
+                    {isChatListLoading ? (
+                      <ChatSpin />
+                    ) : (
+                      chats.map((chat) => (
+                        <div
+                          key={chat._id}
+                          onClick={() => handleSelectChat(chat._id)}
+                          className={`flex items-center gap-3 text-gray-700 hover:bg-green-100 rounded-lg px-3 py-2 cursor-pointer transition ${
+                            currentChatId === chat._id ? "bg-green-100" : ""
+                          }`}
+                        >
+                          <MessageSquare className="w-5 h-5 text-gray-600" />
+                          <span className="text-sm truncate">
+                            {chat.title}
+                          </span>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               ) : (
