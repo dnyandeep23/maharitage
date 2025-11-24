@@ -1,5 +1,5 @@
 const getInternalApiToken = () => {
-  const token = process.env.NEXT_APP_X_ACCESS_TOKEN_INTERNAL;
+  const token = process.env.NEXT_PUBLIC_X_ACCESS_TOKEN_INTERNAL;
   if (!token) {
     console.error(
       "NEXT_APP_X_ACCESS_TOKEN_INTERNAL is not set in environment variables."

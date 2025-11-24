@@ -223,7 +223,7 @@ const AIComponent = () => {
         }
       } catch (error) {
       } finally {
-        // setIsChatListLoading(false);
+        setIsChatListLoading(false);
       }
     }
   }, [user]);
