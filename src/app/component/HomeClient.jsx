@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Header from "./Header";
 import Footer from "./Footer";
 import Hero from "./home/Hero";
@@ -10,6 +11,7 @@ import AIFloatingButton from "./AIFloatingButton";
 import bg_img from "../../assets/images/bg_image.png";
 
 export default function HomeClient() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [activeIcon, setActiveIcon] = useState("search"); // 'search' or 'ai'
@@ -28,30 +30,20 @@ export default function HomeClient() {
     backgroundImage: bg_img,
   };
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       setIsLoading(true);
-      try {
-        if (activeIcon === "search") {
-          window.location.href = `/search?q=${encodeURIComponent(
-            searchQuery.trim()
-          )}`;
-        } else {
-          window.location.href = `/ai?q=${encodeURIComponent(
-            searchQuery.trim()
-          )}`;
-        }
-      } catch (error) {
-        console.error("Search error:", error);
-      } finally {
-        setIsLoading(false);
+      if (activeIcon === "search") {
+        router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      } else {
+        router.push(`/ai?q=${encodeURIComponent(searchQuery.trim())}`);
       }
     }
   };
 
   const handleNavigation = (path) => {
-    window.location.href = path;
+    router.push(path);
   };
 
   return (

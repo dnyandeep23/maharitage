@@ -4,6 +4,7 @@ import DiffViewer from "../components/DiffViewer";
 import { Clock, CheckCircle, XCircle, HelpCircle } from "lucide-react";
 import { api } from "@/lib/api";
 import LoadingButton from "../components/LoadingButton";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const statusIcons = {
   pending: <HelpCircle size={16} className="mr-1" />,
@@ -37,7 +38,7 @@ const MySubmissions = () => {
       setLoading(true);
       console.log("Fetching submissions for user ID:", user._id);
       console.log("user:", api.getToken());
-      const response = await fetch(
+      const response = await fetchWithInternalToken(
         `/api/research-requests?researchExpertId=${user._id}`,
         {
           headers: {

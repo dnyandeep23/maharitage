@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Toast from '../component/Toast';
+import { fetchWithInternalToken } from '../../lib/fetch';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ const ForgotPassword = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('/api/auth/forgot-password', {
+      const response = await fetchWithInternalToken('/api/auth/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

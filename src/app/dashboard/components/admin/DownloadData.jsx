@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const DownloadData = () => {
   const [sites, setSites] = useState([]);
@@ -13,11 +14,16 @@ const DownloadData = () => {
   useEffect(() => {
     const fetchSites = async () => {
       try {
-        const response = await fetch("/api/sites");
+        const response = await fetchWithInternalToken("/api/sites");
         const data = await response.json();
-        setSites(data);
+        if (Array.isArray(data)) {
+          setSites(data);
+        } else {
+          setSites([]);
+        }
       } catch (error) {
         console.error("Error fetching sites:", error);
+        setSites([]);
       } finally {
         setLoading(false);
       }
@@ -28,7 +34,7 @@ const DownloadData = () => {
   const handleDownloadAll = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/sites/download", {
+      const response = await fetchWithInternalToken("/api/sites/download", {
         headers: {
           Authorization: `Bearer ${api.getToken()}`,
         },
@@ -58,7 +64,7 @@ const DownloadData = () => {
     }
     setLoading(true);
     try {
-      const response = await fetch(
+      const response = await fetchWithInternalToken(
         `/api/sites/download?site_id=${selectedSite}`,
         {
           headers: {

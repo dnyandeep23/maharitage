@@ -7,6 +7,7 @@ import ChipInput from "../components/ChipInput";
 import ReferenceInput from "../components/ReferenceInput";
 import ImageUpload from "../components/ImageUpload";
 import { X } from "lucide-react";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const MapPicker = dynamic(() => import("../components/MapPicker"), {
   ssr: false,
@@ -83,7 +84,7 @@ const AddSiteForm = ({ handleSubmit }) => {
   useEffect(() => {
     const fetchLastSiteId = async () => {
       try {
-        const response = await fetch("/api/sites/last-id");
+        const response = await fetchWithInternalToken("/api/sites/last-id");
         const data = await response.json();
         setLastSiteId(data.last_id);
       } catch (error) {

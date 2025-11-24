@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Loading from "../../../loading";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const ModifySitePage = () => {
   const { id } = useParams();
@@ -13,7 +14,7 @@ const ModifySitePage = () => {
     if (id) {
       const fetchSite = async () => {
         try {
-          const response = await fetch(`/api/sites/${id}`);
+          const response = await fetchWithInternalToken(`/api/sites/${id}`);
           const data = await response.json();
           setSite(data);
         } catch (error) {

@@ -8,6 +8,7 @@ import Footer from "../component/Footer";
 import login_bg from "../../assets/images/login_bg.png";
 import { motion } from "framer-motion";
 import Modal from "../component/Modal";
+import { fetchWithInternalToken } from "../../lib/fetch";
 
 const EmailSentContent = () => {
   const searchParams = useSearchParams();
@@ -23,7 +24,7 @@ const EmailSentContent = () => {
 
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(
+        const response = await fetchWithInternalToken(
           `/api/auth/verification-status?email=${email}`
         );
         const data = await response.json();
@@ -43,7 +44,7 @@ const EmailSentContent = () => {
     // console.log("handleResend")
     setResendStatus("sending");
     try {
-      const response = await fetch("/api/auth/resend-verification", {
+      const response = await fetchWithInternalToken("/api/auth/resend-verification", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

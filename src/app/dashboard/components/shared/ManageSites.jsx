@@ -6,6 +6,7 @@ import ConfirmationModal from "../components/ConfirmationModal";
 
 import LoadingButton from "../components/LoadingButton";
 import { api } from "@/lib/api";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const ManageSites = ({ showDelete = false, handleSubmit }) => {
   const [sites, setSites] = useState([]);
@@ -18,11 +19,16 @@ const ManageSites = ({ showDelete = false, handleSubmit }) => {
   useEffect(() => {
     const fetchSites = async () => {
       try {
-        const response = await fetch("/api/sites");
+        const response = await fetchWithInternalToken("/api/sites");
         const data = await response.json();
-        setSites(data);
+        if (Array.isArray(data)) {
+          setSites(data);
+        } else {
+          setSites([]);
+        }
       } catch (error) {
         console.error("Error fetching sites:", error);
+        setSites([]);
       } finally {
         setIsLoading(false);
       }
@@ -59,7 +65,7 @@ const ManageSites = ({ showDelete = false, handleSubmit }) => {
     if (!siteToDelete) return;
     setIsDeleting(true);
     try {
-      const response = await fetch(`/api/sites/${siteToDelete.site_id}`, {
+      const response = await fetchWithInternalToken(`/api/sites/${siteToDelete.site_id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${api.getToken()}`,

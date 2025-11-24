@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const AddAdmin = () => {
   const { user } = useAuth();
@@ -18,7 +19,7 @@ const AddAdmin = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/admins", {
+      const response = await fetchWithInternalToken("/api/admins", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,3 +1,4 @@
+import { fetchWithInternalToken } from "./fetch";
 const API_BASE_URL = "/api";
 
 // Helper function to handle API responses
@@ -20,7 +21,7 @@ const getAuthHeader = () => {
 export const api = {
   async login(email, password, role) {
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetchWithInternalToken(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +43,7 @@ export const api = {
   },
 
   async register(username, email, password, role) {
-    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+    const response = await fetchWithInternalToken(`${API_BASE_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

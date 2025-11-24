@@ -28,6 +28,7 @@ import ManageAdmins from "./admin/ManageAdmins";
 import ReviewRequests from "./admin/ReviewRequests";
 import Notification from "./Notification";
 import { api } from "@/lib/api";
+import { fetchWithInternalToken } from "../../../lib/fetch";
 
 const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
   const router = useRouter();
@@ -108,7 +109,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
         name: "Logout",
         onClick: async () => {
           try {
-            await fetch("/api/auth/logout", { method: "POST" });
+            await fetchWithInternalToken("/api/auth/logout", { method: "POST" });
             localStorage.removeItem("auth-token");
             router.push("/login");
           } catch (error) {
@@ -162,7 +163,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
     });
 
     try {
-      const response = await fetch("/api/sites", {
+      const response = await fetchWithInternalToken("/api/sites", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -215,7 +216,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
     });
 
     try {
-      const response = await fetch(`/api/sites/${siteData.site_id}`, {
+      const response = await fetchWithInternalToken(`/api/sites/${siteData.site_id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -283,7 +284,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
     });
 
     try {
-      const response = await fetch("/api/inscriptions", {
+      const response = await fetchWithInternalToken("/api/inscriptions", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

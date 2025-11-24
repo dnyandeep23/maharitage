@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import ChipInput from "../components/ChipInput";
 import ImageUpload from "../components/ImageUpload";
 import { X } from "lucide-react";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 import LoadingButton from "../components/LoadingButton";
 
@@ -31,11 +32,16 @@ const AddInscriptionForm = ({ handleSelectItem, handleSubmit }) => {
   useEffect(() => {
     const fetchSites = async () => {
       try {
-        const response = await fetch("/api/sites");
+        const response = await fetchWithInternalToken("/api/sites");
         const data = await response.json();
-        setSites(data);
+        if (Array.isArray(data)) {
+          setSites(data);
+        } else {
+          setSites([]);
+        }
       } catch (error) {
         console.error("Error fetching sites:", error);
+        setSites([]);
       }
     };
     fetchSites();
@@ -45,7 +51,7 @@ const AddInscriptionForm = ({ handleSelectItem, handleSubmit }) => {
     if (selectedSite) {
       const fetchLastInscriptionId = async () => {
         try {
-          const response = await fetch(
+          const response = await fetchWithInternalToken(
             `/api/sites/${selectedSite}/last-inscription-id`
           );
           const data = await response.json();

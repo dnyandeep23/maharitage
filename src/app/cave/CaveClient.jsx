@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../../contexts/AuthContext";
 import AIFloatingButton from "../component/AIFloatingButton";
 import Link from "next/link";
+import { fetchWithInternalToken } from "../../lib/fetch";
 
 const Breadcrumb = ({ siteName, inscriptionId, onBack }) => {
   return (
@@ -57,7 +58,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
     }
 
     try {
-      const response = await fetch(
+      const response = await fetchWithInternalToken(
         `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=mr&dt=t&q=${encodeURIComponent(
           text
         )}`

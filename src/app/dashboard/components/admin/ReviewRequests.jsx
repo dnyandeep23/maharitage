@@ -12,6 +12,7 @@ import DiffViewer from "../components/DiffViewer";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
 import { set } from "mongoose";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const statusIcons = {
   pending: <HelpCircle size={16} className="mr-1" />,
@@ -44,7 +45,7 @@ const ReviewRequests = () => {
 
   const fetchRequests = async () => {
     try {
-      const response = await fetch("/api/research-requests", {
+      const response = await fetchWithInternalToken("/api/research-requests", {
         headers: {
           Authorization: `Bearer ${api.getToken()}`,
         },
@@ -66,7 +67,7 @@ const ReviewRequests = () => {
   const handleAction = async (requestId, status, feedback = null) => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/research-requests/${requestId}`, {
+      const response = await fetchWithInternalToken(`/api/research-requests/${requestId}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${api.getToken()}`,
@@ -118,7 +119,7 @@ const ReviewRequests = () => {
 
   const fetchOriginalSite = async (siteId) => {
     try {
-      const response = await fetch(`/api/sites/${siteId}`);
+      const response = await fetchWithInternalToken(`/api/sites/${siteId}`);
       if (!response.ok) {
         throw new Error("Failed to fetch original site data");
       }

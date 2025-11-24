@@ -13,6 +13,9 @@ async function fetchSite(id) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_APP_URL}/api/sites/${id}`,
       {
+        headers: {
+          "x-access-token-internal": process.env.X_ACCESS_TOKEN_INTERNAL,
+        },
         cache: "no-store",
       }
     );

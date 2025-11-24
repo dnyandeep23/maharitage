@@ -8,6 +8,7 @@ import {
 } from "react";
 import { api } from "../lib/api";
 import { useRouter, usePathname } from "next/navigation";
+import { fetchWithInternalToken } from "../lib/fetch";
 
 const AuthContext = createContext(null);
 
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("auth-token");
     if (token) {
       try {
-        const response = await fetch("/api/auth/me", {
+        const response = await fetchWithInternalToken("/api/auth/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

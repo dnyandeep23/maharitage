@@ -7,6 +7,7 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { ChevronDown, ChevronUp, Mail, Phone } from "lucide-react";
 import Toast from "../component/Toast";
+import { fetchWithInternalToken } from "../../lib/fetch";
 
 const faqs = [
   {
@@ -77,7 +78,7 @@ function About() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetchWithInternalToken("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -5,6 +5,7 @@ import { connectDB } from "../lib/mongoose";
 export async function apiKeyAuth(req) {
   await connectDB();
   const apiKey = req.headers.get("x-api-key");
+  console.log("API Key:", apiKey);
 
   if (!apiKey) {
     return NextResponse.json({ message: "API Key missing" }, { status: 401 });

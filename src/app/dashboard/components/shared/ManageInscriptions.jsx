@@ -6,6 +6,7 @@ import ConfirmationModal from "../components/ConfirmationModal";
 
 import LoadingButton from "../components/LoadingButton";
 import { api } from "@/lib/api";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
   const [sites, setSites] = useState([]);
@@ -19,11 +20,17 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
   useEffect(() => {
     const fetchSites = async () => {
       try {
-        const response = await fetch("/api/sites");
+        const response = await fetchWithInternalToken("/api/sites");
         const data = await response.json();
-        setSites(data);
+        console.log(data);
+        if (Array.isArray(data)) {
+          setSites(data);
+        } else {
+          setSites([]);
+        }
       } catch (error) {
         console.error("Error fetching sites:", error);
+        setSites([]);
       } finally {
         setIsLoading(false);
       }
@@ -75,7 +82,7 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
     if (!inscriptionToDelete) return;
     setIsDeleting(true);
     try {
-      const response = await fetch(
+      const response = await fetchWithInternalToken(
         `/api/inscriptions/${inscriptionToDelete.Inscription_id}`,
         {
           method: "DELETE",

@@ -34,6 +34,7 @@ import remarkGfm from "remark-gfm";
 import Toast from "../component/Toast";
 import Image from "next/image";
 import Loading from "../loading";
+import { fetchWithInternalToken } from "../../lib/fetch";
 
 // ✅ Loading animation
 const LoadingAnimation = () => (
@@ -210,7 +211,7 @@ const AIComponent = () => {
             headers["Authorization"] = `Bearer ${token}`;
           }
         }
-        const res = await fetch("/api/ai/chats", {
+        const res = await fetchWithInternalToken("/api/ai/chats", {
           headers,
           method: "GET",
         });
@@ -255,7 +256,7 @@ const AIComponent = () => {
     sessionStorage.setItem("currentChatId", chatId);
     try {
       const token = localStorage.getItem("auth-token");
-      const res = await fetch(`/api/ai/chat/${chatId}`, {
+      const res = await fetchWithInternalToken(`/api/ai/chat/${chatId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -363,7 +364,7 @@ const AIComponent = () => {
           headers["Authorization"] = `Bearer ${token}`;
         }
       }
-      const res = await fetch("/api/ai", {
+      const res = await fetchWithInternalToken("/api/ai", {
         method: "POST",
         headers,
         body: JSON.stringify({

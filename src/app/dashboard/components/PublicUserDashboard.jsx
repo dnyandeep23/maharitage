@@ -9,6 +9,7 @@ import AIFloatingButton from "../../component/AIFloatingButton";
 import Sidebar from "./Sidebar";
 import Profile from "./shared/Profile";
 import ApiKeyManagement from "./shared/ApiKeyManagement";
+import { fetchWithInternalToken } from "../../../lib/fetch";
 
 const PublicUserDashboard = ({
   user,
@@ -47,7 +48,7 @@ const PublicUserDashboard = ({
         name: "Logout",
         onClick: async () => {
           try {
-            await fetch("/api/auth/logout", { method: "POST" });
+            await fetchWithInternalToken("/api/auth/logout", { method: "POST" });
             localStorage.removeItem("auth-token");
             router.push("/login");
           } catch (error) {

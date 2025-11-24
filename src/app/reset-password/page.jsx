@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { Lock, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Toast from '../component/Toast';
+import { fetchWithInternalToken } from '../../lib/fetch';
 
 const ResetPasswordContent = () => {
   const [password, setPassword] = useState('');
@@ -46,7 +47,7 @@ const ResetPasswordContent = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('/api/auth/reset-password', {
+      const response = await fetchWithInternalToken('/api/auth/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

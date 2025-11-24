@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Loading from "../../../loading";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const ModifyInscriptionPage = () => {
   const { id } = useParams();
@@ -13,7 +14,7 @@ const ModifyInscriptionPage = () => {
     if (id) {
       const fetchInscription = async () => {
         try {
-          const response = await fetch(`/api/inscriptions/${id}`);
+          const response = await fetchWithInternalToken(`/api/inscriptions/${id}`);
           const data = await response.json();
           setInscription(data);
         } catch (error) {

@@ -24,6 +24,7 @@ import ApiKeyManagement from "./shared/ApiKeyManagement";
 import Footer from "../../component/Footer";
 import { api } from "@/lib/api";
 import Notification from "./Notification";
+import { fetchWithInternalToken } from "../../../lib/fetch";
 
 const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
   const router = useRouter();
@@ -89,7 +90,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
         name: "Logout",
         onClick: async () => {
           try {
-            await fetch("/api/auth/logout", { method: "POST" });
+            await fetchWithInternalToken("/api/auth/logout", { method: "POST" });
             localStorage.removeItem("auth-token");
             router.push("/login");
           } catch (error) {
@@ -148,7 +149,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
         formData.append("images", image);
       });
 
-      const response = await fetch("/api/research-requests", {
+      const response = await fetchWithInternalToken("/api/research-requests", {
         method: "POST",
         body: formData,
         headers: {
@@ -226,7 +227,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
         formData.append("images", image);
       });
 
-      const response = await fetch("/api/research-requests", {
+      const response = await fetchWithInternalToken("/api/research-requests", {
         method: "POST",
         body: formData,
         headers: {
@@ -294,7 +295,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
         formData.append("images", image);
       });
 
-      const response = await fetch("/api/research-requests", {
+      const response = await fetchWithInternalToken("/api/research-requests", {
         method: "POST",
         body: formData,
         headers: {
@@ -368,7 +369,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
         formData.append("images", image);
       });
 
-      const response = await fetch("/api/research-requests", {
+      const response = await fetchWithInternalToken("/api/research-requests", {
         method: "POST",
         body: formData,
         headers: {

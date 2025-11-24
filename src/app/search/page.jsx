@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import { Search, BrainCircuit } from "lucide-react";
+import { fetchWithInternalToken } from "../../lib/fetch";
 
 const SearchPageContent = () => {
   const searchParams = useSearchParams();
@@ -19,7 +20,7 @@ const SearchPageContent = () => {
       if (initialQuery) {
         setIsLoading(true);
         try {
-          const response = await fetch(`/api/sites?q=${initialQuery}`);
+          const response = await fetchWithInternalToken(`/api/sites?q=${initialQuery}`);
           const data = await response.json();
           setSearchResults(data);
         } catch (error) {

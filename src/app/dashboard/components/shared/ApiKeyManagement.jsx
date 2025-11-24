@@ -4,6 +4,7 @@ import { Plus, Trash2, Copy, Check, Key, Clock, BarChart2 } from "lucide-react";
 import { api } from "../../../../lib/api";
 import ProgressBar from "../../../component/ProgressBar";
 import LoadingButton from "../components/LoadingButton";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const ApiKeyManagement = ({ showToast }) => {
   const { user } = useAuth();
@@ -24,7 +25,7 @@ const ApiKeyManagement = ({ showToast }) => {
   const fetchApiKeys = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/api-keys", {
+      const response = await fetchWithInternalToken("/api/api-keys", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +51,7 @@ const ApiKeyManagement = ({ showToast }) => {
     }
     setCreating(true);
     try {
-      const response = await fetch("/api/api-keys", {
+      const response = await fetchWithInternalToken("/api/api-keys", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +78,7 @@ const ApiKeyManagement = ({ showToast }) => {
   const deleteApiKey = async (id) => {
     setDeleting(id);
     try {
-      const response = await fetch(`/api/api-keys/${id}`, {
+      const response = await fetchWithInternalToken(`/api/api-keys/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

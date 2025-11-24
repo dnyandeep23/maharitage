@@ -3,12 +3,6 @@ import connectDB from "../../../../../lib/mongoose";
 import Site from "../../../../../models/Site";
 
 export async function GET(req) {
-  const apiKey = req.headers.get("x-api-key");
-
-  if (apiKey !== "MAHARITAGE_TEST_KEY") {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
-
   try {
     await connectDB();
     const { searchParams } = new URL(req.url);

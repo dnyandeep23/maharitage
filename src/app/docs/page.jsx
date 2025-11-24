@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Code, Database, Key, Globe, Search } from "lucide-react";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import ApiPlayground from "../component/ApiPlayground";
 
 const ApiDocs = () => {
   const [selectedEndpoint, setSelectedEndpoint] = useState("getAllSites");
@@ -18,7 +19,7 @@ const ApiDocs = () => {
       parameters: [],
       requestExample: `curl -X GET \
   '/api/v1/sites' \
-  -H 'X-API-Key: MAHARITAGE_TEST_KEY'`,
+  -H 'Authorization: ApiKey YOUR_API_KEY'`,
       responseExample: `[
   {
     "site_id": "MH-AUR-001",
@@ -39,7 +40,7 @@ const ApiDocs = () => {
     getSiteById: {
       title: "Get Site Details",
       method: "GET",
-      path: "/api/v1/sites/{id}",
+      path: "/api/v1/sites/MH-AUR-001",
       description:
         "Retrieve detailed information for a single heritage site, including its image gallery.",
       parameters: [
@@ -51,7 +52,7 @@ const ApiDocs = () => {
       ],
       requestExample: `curl -X GET \
   '/api/v1/sites/MH-AUR-001' \
-  -H 'X-API-Key: MAHARITAGE_TEST_KEY'`,
+  -H 'Authorization: ApiKey YOUR_API_KEY'`,
       responseExample: `{
   "site_name": "Ajanta Caves",
   "location": {
@@ -78,7 +79,7 @@ const ApiDocs = () => {
     getInscriptionsForSite: {
       title: "List Site Inscriptions",
       method: "GET",
-      path: "/api/v1/sites/{id}/inscriptions",
+      path: "/api/v1/sites/MH-AUR-001/inscriptions",
       description:
         "Lists all inscriptions linked to a specific heritage site. Returns a summary for each inscription.",
       parameters: [
@@ -90,7 +91,7 @@ const ApiDocs = () => {
       ],
       requestExample: `curl -X GET \
   '/api/v1/sites/MH-AUR-001/inscriptions' \
-  -H 'X-API-Key: MAHARITAGE_TEST_KEY'`,
+  -H 'Authorization: ApiKey YOUR_API_KEY'`,
       responseExample: `[
   {
     "Inscription_id": "INS-AUR-001-01",
@@ -107,7 +108,7 @@ const ApiDocs = () => {
     getInscriptionById: {
       title: "Get Inscription Details",
       method: "GET",
-      path: "/api/v1/inscriptions/{id}",
+      path: "/api/v1/inscriptions/INS-AUR-001-01",
       description:
         "Retrieve detailed information for a single inscription, including images and translations.",
       parameters: [
@@ -119,7 +120,7 @@ const ApiDocs = () => {
       ],
       requestExample: `curl -X GET \
   '/api/v1/inscriptions/INS-AUR-001-01' \
-  -H 'X-API-Key: MAHARITAGE_TEST_KEY'`,
+  -H 'Authorization: ApiKey YOUR_API_KEY'`,
       responseExample: `{
   "Inscription_id": "INS-AUR-001-01",
   "image_urls": ["https://res.cloudinary.com/maharitage/image/upload/v1/inscriptions/aur_001_insc_01.jpg"],
@@ -135,25 +136,26 @@ const ApiDocs = () => {
     getAllInscriptions: {
       title: "List All Inscriptions",
       method: "GET",
-      path: "/api/v1/inscriptions?site_name={site_name}",
+      path: "/api/v1/inscriptions?site_name=Ajanta%20Caves",
       description:
         "Retrieve a list of all inscriptions across all heritage sites, or filter by a specific site name. Each inscription includes its associated site information.",
       parameters: [
         {
           name: "site_name",
           type: "string",
-          description: "Optional: Filter inscriptions by the name of the heritage site.",
+          description:
+            "Optional: Filter inscriptions by the name of the heritage site.",
         },
       ],
       requestExample: `// Get all inscriptions
 curl -X GET \
   '/api/v1/inscriptions' \
-  -H 'X-API-Key: MAHARITAGE_TEST_KEY'
+  -H 'Authorization: ApiKey YOUR_API_KEY'
 
 // Get inscriptions from 'Ajanta Caves'
 curl -X GET \
-  '/api/v1/inscriptions?site_name=Ajanta Caves' \
-  -H 'X-API-Key: MAHARITAGE_TEST_KEY'`,
+  '/api/v1/inscriptions?site_name=Ajanta%20Caves' \
+  -H 'Authorization: ApiKey YOUR_API_KEY'`,
       responseExample: `// Response for /api/v1/inscriptions?site_name=Ajanta Caves
 [
   {
@@ -175,7 +177,7 @@ curl -X GET \
     searchSites: {
       title: "Search Sites",
       method: "GET",
-      path: "/api/v1/sites/search?q={query}",
+      path: "/api/v1/sites/search?q=Ajanta",
       description:
         "Search for heritage sites by keyword. The search covers name, description, period, district, and dynasty.",
       parameters: [
@@ -187,7 +189,7 @@ curl -X GET \
       ],
       requestExample: `curl -X GET \
   '/api/v1/sites/search?q=Ajanta' \
-  -H 'X-API-Key: MAHARITAGE_TEST_KEY'`,
+  -H 'Authorization: ApiKey YOUR_API_KEY'`,
       responseExample: `[
   {
     "site_id": "MH-AUR-001",
@@ -207,7 +209,9 @@ curl -X GET \
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 sm:px-6 bg-gradient-to-b from-green-100 to-gray-50">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-5xl font-bold mb-6">API Documentation</h1>
+          <h1 className="text-3xl sm:text-5xl font-bold mb-6">
+            API Documentation
+          </h1>
           <p className="text-lg sm:text-xl text-gray-600">
             Your complete guide to integrating Maharashtra's rich heritage data
             into your applications.
@@ -219,15 +223,16 @@ curl -X GET \
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-8">Quick Start</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[{
+            {[
+              {
                 icon: <Key className="w-6 h-6 text-green-600" />,
-                title: "1. Use Test API Key",
-                desc: "Use the provided test API key to start exploring the API.",
+                title: "1. Get API Key",
+                desc: "Generate your personal API key from the dashboard.",
               },
               {
                 icon: <Code className="w-6 h-6 text-green-600" />,
                 title: "2. Make a Request",
-                desc: "Use your favorite HTTP client to make requests to our endpoints.",
+                desc: "Use our interactive playground or your own tools to call the API.",
               },
               {
                 icon: <Database className="w-6 h-6 text-green-600" />,
@@ -272,13 +277,14 @@ curl -X GET \
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-6">Authentication</h2>
           <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-xl font-semibold mb-2">Public Test API Key</h3>
+            <h3 className="text-xl font-semibold mb-2">API Key</h3>
             <p className="text-gray-600 mb-4">
-              For testing and demonstration purposes, you can use the public
-              test API key. Include it in the request header as follows:
+              To access the API, you need to include an API key in your request
+              headers. You can generate a new key from your dashboard. The test
+              key is rate-limited.
             </p>
             <code className="block bg-gray-200 p-4 rounded-md text-sm">
-              X-API-Key: MAHARITAGE_TEST_KEY
+              Authorization: ApiKey YOUR_API_KEY
             </code>
             <p className="mt-4 text-sm text-gray-500">
               All API requests must be made over HTTPS. Calls made over plain
@@ -305,7 +311,8 @@ curl -X GET \
                 }`}
                 onClick={() => setSelectedEndpoint(key)}
               >
-                {endpoint.method} {endpoint.path.split("?")[0].substring(0, 20)}
+                {endpoint.method}{" "}
+                {endpoint.path.split("?")[0].substring(0, 20)}
                 {endpoint.path.length > 20 ? "..." : ""}
               </button>
             ))}
@@ -376,6 +383,7 @@ curl -X GET \
                         <code>{endpoint.responseExample}</code>
                       </pre>
                     </div>
+                    <ApiPlayground endpoint={endpoint} />
                   </div>
                 )
             )}
@@ -388,7 +396,8 @@ curl -X GET \
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-6">Response Codes</h2>
           <div className="bg-white p-6 rounded-2xl shadow-md space-y-3">
-            {[{
+            {[
+              {
                 code: 200,
                 color: "bg-green-500",
                 text: "Success - Request completed successfully.",
@@ -433,4 +442,3 @@ curl -X GET \
 };
 
 export default ApiDocs;
-

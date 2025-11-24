@@ -6,6 +6,7 @@ import { Trash2 } from "lucide-react";
 import ConfirmationModal from "../components/ConfirmationModal";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
+import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const ManageAdmins = () => {
   const { user } = useAuth();
@@ -19,7 +20,7 @@ const ManageAdmins = () => {
   useEffect(() => {
     const fetchAdmins = async () => {
       try {
-        const response = await fetch("/api/admins", {
+        const response = await fetchWithInternalToken("/api/admins", {
           headers: {
             Authorization: `Bearer ${api.getToken()}`,
           },
@@ -55,7 +56,7 @@ const ManageAdmins = () => {
     if (!adminToDelete) return;
     setIsDeleting(true);
     try {
-      const response = await fetch(`/api/admins/${adminToDelete._id}`, {
+      const response = await fetchWithInternalToken(`/api/admins/${adminToDelete._id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${api.getToken()}`,

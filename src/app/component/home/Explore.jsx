@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Loading from "@/app/loading";
+import { fetchWithInternalToken } from "../../../lib/fetch";
 
 const Explore = ({ heroData }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -33,10 +34,15 @@ const Explore = ({ heroData }) => {
     const fetchSites = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/api/sites/home");
+        const response = await fetchWithInternalToken("/api/sites/home");
         const data = await response.json();
-        setSites(data);
+        if (Array.isArray(data)) {
+          setSites(data);
+        } else {
+          setSites([]);
+        }
       } catch (e) {
+        setSites([]);
       } finally {
         setIsLoading(false);
       }

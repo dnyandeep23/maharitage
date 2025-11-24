@@ -8,6 +8,7 @@ import Footer from "../component/Footer";
 import Modal from "../component/Modal";
 import login_bg from "../../assets/images/login_bg.png";
 import { motion } from "framer-motion";
+import { fetchWithInternalToken } from "../../lib/fetch";
 
 const VerifyEmailContent = () => {
   const searchParams = useSearchParams();
@@ -33,7 +34,7 @@ const VerifyEmailContent = () => {
       }
 
       try {
-        const response = await fetch("/api/auth/verify-email", {
+        const response = await fetchWithInternalToken("/api/auth/verify-email", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
