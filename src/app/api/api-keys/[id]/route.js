@@ -24,7 +24,7 @@ export async function DELETE(req, { params }) {
     }
 
     const user = await User.findById(decoded.id);
-    
+
     if (!user) {
       return NextResponse.json(
         { message: "User not found for token" },
@@ -32,8 +32,8 @@ export async function DELETE(req, { params }) {
       );
     }
 
-    const { id } = params;
-    
+    const { id } = await params;
+
     const apiKey = await ApiKey.findOneAndDelete({ _id: id, user: user._id });
 
     if (!apiKey) {
@@ -59,7 +59,7 @@ export async function PUT(req, { params }) {
   await connectDB();
   try {
     const token = req.headers.get("authorization")?.split(" ")[1];
-    
+
     if (!token) {
       return NextResponse.json(
         { message: "Unauthorized: No token provided" },
@@ -68,7 +68,7 @@ export async function PUT(req, { params }) {
     }
 
     const decoded = verifyTokenMiddleware(token);
-    
+
     if (!decoded || !decoded.id) {
       return NextResponse.json(
         { message: "Unauthorized: Invalid token" },
@@ -77,7 +77,7 @@ export async function PUT(req, { params }) {
     }
 
     const user = await User.findById(decoded.id);
-    
+
     if (!user) {
       return NextResponse.json(
         { message: "User not found for token" },
@@ -85,7 +85,7 @@ export async function PUT(req, { params }) {
       );
     }
 
-    const { id } = params;
+    const { id } = await params;
     const { name } = await req.json();
 
     if (!name) {

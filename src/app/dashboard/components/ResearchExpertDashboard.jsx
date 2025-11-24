@@ -58,24 +58,24 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
     ],
     [
       {
-        name: "Manage Sites",
+        name: "Suggest Site Changes",
         icon: <List size={20} />,
-        onClick: () => handleSelectItem("Manage Sites"),
+        onClick: () => handleSelectItem("Suggest Site Changes"),
       },
       {
-        name: "Manage Inscriptions",
+        name: "Suggest Inscription Changes",
         icon: <FileText size={20} />,
-        onClick: () => handleSelectItem("Manage Inscriptions"),
+        onClick: () => handleSelectItem("Suggest Inscription Changes"),
       },
       {
-        name: "Add Site",
+        name: "Suggest New Site",
         icon: <PlusSquare size={20} />,
-        onClick: () => handleSelectItem("Add Site"),
+        onClick: () => handleSelectItem("Suggest New Site"),
       },
       {
-        name: "Add Inscription",
+        name: "Suggest New Inscription",
         icon: <FilePlus size={20} />,
-        onClick: () => handleSelectItem("Add Inscription"),
+        onClick: () => handleSelectItem("Suggest New Inscription"),
       },
     ],
     [
@@ -90,7 +90,9 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
         name: "Logout",
         onClick: async () => {
           try {
-            await fetchWithInternalToken("/api/auth/logout", { method: "POST" });
+            await fetchWithInternalToken("/api/auth/logout", {
+              method: "POST",
+            });
             localStorage.removeItem("auth-token");
             router.push("/login");
           } catch (error) {
@@ -494,24 +496,24 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
               {selectedItem === "API Keys" && (
                 <ApiKeyManagement setMessage={setMessage} />
               )}
-              {selectedItem === "Manage Sites" && (
+              {selectedItem === "Suggest Site Changes" && (
                 <ManageSites
                   showDelete={false}
                   handleSubmit={handleModifySiteSubmit}
                   setMessage={setMessage}
                 />
               )}
-              {selectedItem === "Manage Inscriptions" && (
+              {selectedItem === "Suggest Inscription Changes" && (
                 <ManageInscriptions
                   showDelete={false}
                   handleSubmit={handleModifyInscriptionSubmit}
                   setMessage={setMessage}
                 />
               )}
-              {selectedItem === "Add Site" && (
+              {selectedItem === "Suggest New Site" && (
                 <AddSiteForm handleSubmit={handleAddSiteSubmit} />
               )}
-              {selectedItem === "Add Inscription" && (
+              {selectedItem === "Suggest New Inscription" && (
                 <AddInscriptionForm
                   handleSelectItem={handleSelectItem}
                   handleSubmit={handleAddInscriptionSubmit}

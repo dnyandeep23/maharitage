@@ -100,7 +100,7 @@ const ManageSites = ({ showDelete = false, handleSubmit }) => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Manage Sites</h2>
+      <h2 className="text-2xl font-bold mb-6">Suggest Changes to Sites</h2>
       <div className="space-y-4">
         {sites.map((site) => (
           <div
@@ -118,7 +118,7 @@ const ManageSites = ({ showDelete = false, handleSubmit }) => {
                 onClick={() => handleModify(site)}
                 className="px-4 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
-                Modify
+                Suggest Changes
               </button>
               {showDelete && (
                 <button

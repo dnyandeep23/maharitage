@@ -87,7 +87,7 @@ const AddInscriptionForm = ({ handleSelectItem, handleSubmit }) => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Add New Inscription</h2>
+      <h2 className="text-2xl font-bold mb-6">Suggest a New Inscription</h2>
       {message && (
         <div
           className={`p-4 mb-4 text-sm rounded-lg ${
@@ -128,7 +128,7 @@ const AddInscriptionForm = ({ handleSelectItem, handleSubmit }) => {
               value={selectedSite}
               onChange={(e) => {
                 if (e.target.value === "add_new_site") {
-                  handleSelectItem("Add Site");
+                  handleSelectItem("Suggest New Site");
                 } else {
                   setSelectedSite(e.target.value);
                 }
@@ -144,7 +144,7 @@ const AddInscriptionForm = ({ handleSelectItem, handleSubmit }) => {
                   {site.site_name}
                 </option>
               ))}
-              <option value="add_new_site">+ Add New Site</option>
+              <option value="add_new_site">+ Suggest New Site</option>
             </select>
           </div>
           <div>
@@ -229,7 +229,7 @@ const AddInscriptionForm = ({ handleSelectItem, handleSubmit }) => {
               type="submit"
               className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >
-              Add Inscription
+              Submit Suggestion
             </button>
           </div>
         </div>

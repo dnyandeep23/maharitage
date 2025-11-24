@@ -60,6 +60,8 @@ export default function HomeClient() {
         navInactive="text-black hover:bg-green-100"
         logoColor="text-black"
         borderColor="border-gray-200"
+        currentPath="/"
+        theme="light"
       />
 
       <Hero

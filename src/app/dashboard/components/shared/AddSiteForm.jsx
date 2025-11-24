@@ -188,7 +188,7 @@ const AddSiteForm = ({ handleSubmit }) => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Add New Site</h2>
+      <h2 className="text-2xl font-bold mb-6">Suggest a New Site</h2>
       {message && (
         <div
           className={`p-4 mb-4 text-sm rounded-lg ${
@@ -512,7 +512,7 @@ const AddSiteForm = ({ handleSubmit }) => {
               type="submit"
               className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >
-              Add Site
+              Submit Suggestion
             </button>
           </div>
         </div>
