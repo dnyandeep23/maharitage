@@ -25,7 +25,11 @@
     "mongodb": "^6.19.0",
     "mongoose": "^8.18.1",
     "multer": "^2.0.2",
+<<<<<<< HEAD
     "next": "15.5.9",
+=======
+    "next": "latest",
+>>>>>>> c82977a (update v0.1.4)
     "nodemailer": "^7.0.6",
     "npm": "^11.6.2",
     "react": "19.1.0",
@@ -42,7 +46,7 @@
     "@types/node": "24.3.1",
     "@types/react": "19.1.12",
     "eslint": "^9",
-    "eslint-config-next": "15.5.3",
+    "eslint-config-next": "latest",
     "tailwindcss": "^4"
   }
 }
