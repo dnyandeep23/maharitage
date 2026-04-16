@@ -13,6 +13,7 @@ const MAX_GEMINI_RETRIES = 3;
 
 // ⚡ Model fallback chain
 const MODEL_FALLBACK_CHAIN = [
+  "gemini-3.1-pro-preview",
   "gemini-3.1-flash-lite-preview",
   "gemini-3-flash-preview",
   "gemini-2.5-flash",
