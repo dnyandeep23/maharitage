@@ -34,6 +34,7 @@ import {
   Trophy,
   Brain,
   Zap,
+  LightbulbIcon,
   Home,
   ChevronRight,
   Settings2,
@@ -1161,21 +1162,12 @@ const AIComponent = () => {
                         "rgba(255,255,255,0.04)")
                     }
                   >
-                    {mode === "quiz" ? (
-                      <div
-                        className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                        style={{ background: "rgba(16,185,129,0.15)" }}
-                      >
-                        <Zap className="w-4 h-4 text-emerald-400" />
-                      </div>
-                    ) : (
-                      <div
-                        className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                        style={{ background: "rgba(16,185,129,0.15)" }}
-                      >
-                        <Brain className="w-4 h-4 text-emerald-400" />
-                      </div>
-                    )}
+                    <div
+                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ background: "rgba(16,185,129,0.15)" }}
+                    >
+                      <LightbulbIcon className="w-4 h-4 text-emerald-400" />
+                    </div>
                     <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
                       {text}
                     </span>
