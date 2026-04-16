@@ -18,7 +18,6 @@ import {
   History,
   MessageSquare,
   Loader,
-  LightbulbIcon,
   Bot,
   Square,
   ArrowUp,
@@ -28,6 +27,16 @@ import {
   Paperclip,
   PanelLeft,
   PanelRight,
+  GraduationCap,
+  Sparkles,
+  BookOpenCheck,
+  RotateCcw,
+  Trophy,
+  Brain,
+  Zap,
+  Home,
+  ChevronRight,
+  Settings2,
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -36,15 +45,21 @@ import Image from "next/image";
 import Loading from "../loading";
 import { fetchWithInternalToken } from "../../lib/fetch";
 
-// ✅ Loading animation
-const LoadingAnimation = () => (
-  <div className="flex items-center space-x-1">
-    <div className="w-2 h-2 bg-green-700 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-    <div className="w-2 h-2 bg-green-700 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-    <div className="w-2 h-2 bg-green-700 rounded-full animate-bounce"></div>
+// ─── Shimmer Loading Skeleton ───────────────────────────────────────────────
+const ShimmerSkeleton = () => (
+  <div className="flex items-start gap-3">
+    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600/30 to-teal-700/20 flex items-center justify-center shrink-0 border border-white/10">
+      <Bot size={18} className="text-emerald-400/60" />
+    </div>
+    <div className="flex flex-col gap-2 w-64">
+      <div className="h-3 rounded-full bg-white/10 animate-pulse w-full" />
+      <div className="h-3 rounded-full bg-white/8 animate-pulse w-4/5" />
+      <div className="h-3 rounded-full bg-white/6 animate-pulse w-3/5" />
+    </div>
   </div>
 );
 
+// ─── Message Renderer ────────────────────────────────────────────────────────
 const MessageRenderer = ({ text, onImageClick }) => {
   const contentParts = useMemo(() => {
     if (!text) return [];
@@ -57,9 +72,8 @@ const MessageRenderer = ({ text, onImageClick }) => {
       if (isImage) {
         result.push({ type: "image", url: part });
       } else {
-        const cleanedPart = part.replace(/\*\*/g, "").trim();
-        if (cleanedPart) {
-          result.push({ type: "text", content: cleanedPart });
+        if (part.trim()) {
+          result.push({ type: "text", content: part.trim() });
         }
       }
       isImage = !isImage;
@@ -77,29 +91,60 @@ const MessageRenderer = ({ text, onImageClick }) => {
               remarkPlugins={[remarkGfm]}
               components={{
                 p: ({ node, children }) => (
-                  <p className="mb-4 last:mb-0">{children}</p>
+                  <p className="mb-3 leading-relaxed last:mb-0 text-slate-200">
+                    {children}
+                  </p>
                 ),
                 h1: ({ node, children }) => (
-                  <h1 className="text-2xl font-bold my-4">{children}</h1>
+                  <h1 className="text-xl font-bold my-4 text-white">{children}</h1>
                 ),
                 h2: ({ node, children }) => (
-                  <h2 className="text-xl font-bold my-3">{children}</h2>
+                  <h2 className="text-lg font-bold my-3 text-white">{children}</h2>
                 ),
                 h3: ({ node, children }) => (
-                  <h3 className="text-lg font-bold my-2">{children}</h3>
+                  <h3 className="text-base font-semibold my-2 text-emerald-300">{children}</h3>
+                ),
+                strong: ({ node, children }) => (
+                  <strong className="font-semibold text-emerald-300">{children}</strong>
                 ),
                 ul: ({ node, children }) => (
-                  <ul className="list-disc list-inside mb-4 pl-4">
+                  <ul className="list-disc list-inside mb-3 pl-4 space-y-1 text-slate-300">
                     {children}
                   </ul>
                 ),
                 ol: ({ node, children }) => (
-                  <ol className="list-decimal list-inside mb-4 pl-4">
+                  <ol className="list-decimal list-inside mb-3 pl-4 space-y-1 text-slate-300">
                     {children}
                   </ol>
                 ),
                 li: ({ node, children }) => (
-                  <li className="mb-2">{children}</li>
+                  <li className="mb-1.5 text-slate-300">{children}</li>
+                ),
+                table: ({ node, children }) => (
+                  <div className="overflow-x-auto my-4 rounded-xl border border-white/10">
+                    <table className="w-full text-sm border-collapse">
+                      {children}
+                    </table>
+                  </div>
+                ),
+                thead: ({ node, children }) => (
+                  <thead className="bg-emerald-900/40">{children}</thead>
+                ),
+                th: ({ node, children }) => (
+                  <th className="px-4 py-2.5 text-left font-semibold text-emerald-300 border-b border-white/10 text-xs uppercase tracking-wider">
+                    {children}
+                  </th>
+                ),
+                td: ({ node, children }) => (
+                  <td className="px-4 py-2.5 border-b border-white/5 text-slate-300">
+                    {children}
+                  </td>
+                ),
+                hr: () => <hr className="my-4 border-white/10" />,
+                code: ({ node, children }) => (
+                  <code className="px-1.5 py-0.5 rounded-md bg-white/10 text-emerald-300 text-sm font-mono">
+                    {children}
+                  </code>
                 ),
               }}
             >
@@ -111,20 +156,20 @@ const MessageRenderer = ({ text, onImageClick }) => {
           return (
             <div
               key={index}
-              className="my-4 cursor-pointer"
+              className="my-4 cursor-zoom-in"
               onClick={() => onImageClick(part.url)}
             >
-              <div className="relative group overflow-hidden rounded-lg max-w-xl ">
+              <div className="relative group overflow-hidden rounded-2xl border border-white/10 bg-black/20 max-w-2xl shadow-xl">
                 <Image
                   src={part.url}
-                  alt={"Heritage image"}
-                  width={500}
-                  height={200}
-                  className="rounded-lg object-contain w-full h-full shadow-lg transition-transform duration-300 group-hover:scale-105"
+                  alt="Heritage image"
+                  width={1200}
+                  height={800}
+                  className="rounded-2xl object-cover w-full h-auto max-h-[420px] transition-transform duration-500 group-hover:scale-[1.03]"
                 />
-                <div className="absolute inset-0 bg-black/20 bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
-                  <div className="text-white font-bold px-4 py-2 rounded-full bg-black/25 bg-opacity-50 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                    Click to Enlarge
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 group-hover:from-black/70 transition-all duration-300 flex items-end justify-end p-3">
+                  <div className="text-white text-xs font-medium px-3 py-1.5 rounded-full bg-black/50 backdrop-blur border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    🔍 Click to Enlarge
                   </div>
                 </div>
               </div>
@@ -137,6 +182,81 @@ const MessageRenderer = ({ text, onImageClick }) => {
   );
 };
 
+// ─── Premium Quiz Option Buttons ────────────────────────────────────────────
+const QuizOptionButtons = ({ text, onSelect, disabled }) => {
+  const [selected, setSelected] = useState(null);
+
+  const options = useMemo(() => {
+    if (!text) return [];
+    const optionRegex = /^\s*([A-D])\s*[).:\-]\s*(.+)$/gm;
+    const found = [];
+    let match;
+    while ((match = optionRegex.exec(text)) !== null) {
+      found.push({ letter: match[1], text: match[2].trim() });
+    }
+    return found.length >= 2 && found.length <= 6 ? found : [];
+  }, [text]);
+
+  // Reset selection when text changes (new question)
+  useEffect(() => {
+    setSelected(null);
+  }, [text]);
+
+  if (options.length === 0) return null;
+
+  const letterColors = {
+    A: "from-blue-500 to-blue-600",
+    B: "from-violet-500 to-purple-600",
+    C: "from-amber-500 to-orange-500",
+    D: "from-rose-500 to-pink-600",
+  };
+
+  return (
+    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      {options.map((opt) => (
+        <button
+          key={opt.letter}
+          onClick={() => {
+            if (!disabled && !selected) {
+              setSelected(opt.letter);
+              onSelect(opt.letter);
+            }
+          }}
+          disabled={disabled || !!selected}
+          className={`
+            group flex items-center gap-3 px-4 py-3.5 rounded-2xl border text-left
+            transition-all duration-200 relative overflow-hidden
+            ${
+              selected === opt.letter
+                ? "border-emerald-400/60 bg-emerald-500/20 shadow-lg shadow-emerald-500/20 scale-[0.98]"
+                : selected
+                ? "border-white/5 bg-white/3 opacity-40 cursor-not-allowed"
+                : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:shadow-lg hover:shadow-black/20 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
+            }
+          `}
+        >
+          {/* Subtle shimmer on hover */}
+          {!selected && !disabled && (
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white/3 to-transparent" />
+          )}
+          <span
+            className={`w-8 h-8 shrink-0 rounded-xl bg-gradient-to-br ${letterColors[opt.letter] || "from-slate-500 to-slate-600"} flex items-center justify-center font-bold text-white text-sm shadow-sm`}
+          >
+            {opt.letter}
+          </span>
+          <span className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors leading-snug">
+            {opt.text}
+          </span>
+          {!selected && !disabled && (
+            <ChevronRight className="ml-auto w-4 h-4 text-white/20 group-hover:text-white/50 transition-colors shrink-0" />
+          )}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// ─── Main AI Component ───────────────────────────────────────────────────────
 const AIComponent = () => {
   const { user, loading: authLoading } = useAuth();
   const messagesContainerRef = useRef(null);
@@ -145,12 +265,12 @@ const AIComponent = () => {
   const toastTimeoutRef = useRef(null);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isAtBottom, setIsAtBottom] = useState(true);
+  const isAtBottomRef = useRef(true);
+
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState([]);
   const [isChatActive, setIsChatActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [uploads, setUploads] = useState([]);
   const [toast, setToast] = useState({ type: "", message: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [fingerprint, setFingerprint] = useState(null);
@@ -159,96 +279,72 @@ const AIComponent = () => {
   const [isAnonymousLimited, setIsAnonymousLimited] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [imagePreview, setImagePreview] = useState({ isOpen: false, src: "" });
-  const [initialMessage, setInitialMessage] = useState(``);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [isChatListLoading, setIsChatListLoading] = useState(false);
+  const [mode, setMode] = useState("chat");
+  const [quizTopic, setQuizTopic] = useState("");
+  const [quizDifficulty, setQuizDifficulty] = useState("Easy");
+  const [quizQuestionCount, setQuizQuestionCount] = useState(5);
+  const [quizQuestionType, setQuizQuestionType] = useState("MCQ");
+  const [quizSessionActive, setQuizSessionActive] = useState(false);
 
-  if (authLoading) {
-    return <Loading to="AI Chat" />;
-  }
-
-  const handleOpenImagePreview = (src) => {
+  const handleOpenImagePreview = (src) =>
     setImagePreview({ isOpen: true, src });
-  };
-
-  const handleCloseImagePreview = () => {
+  const handleCloseImagePreview = () =>
     setImagePreview({ isOpen: false, src: "" });
-  };
 
   useEffect(() => {
-    const getFingerprint = async () => {
-      const fp = await FingerprintJS.load();
-      const { visitorId } = await fp.get();
-      setFingerprint(visitorId);
-    };
-    getFingerprint();
+    FingerprintJS.load().then((fp) =>
+      fp.get().then(({ visitorId }) => setFingerprint(visitorId))
+    );
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      setIsSidebarOpen(width >= 1024);
-    };
-
+    const handleResize = () => setIsSidebarOpen(window.innerWidth >= 1024);
     handleResize();
     window.addEventListener("resize", handleResize);
-
-    // Cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const fetchChats = useCallback(async () => {
-    if (user) {
-      setIsChatListLoading(true);
-      try {
-        const headers = {
+    if (!user) return;
+    setIsChatListLoading(true);
+    try {
+      const token = localStorage.getItem("auth-token");
+      const res = await fetchWithInternalToken("/api/ai/chats", {
+        headers: {
           "Content-Type": "application/json",
-        };
-
-        if (user) {
-          const token = localStorage.getItem("auth-token");
-          if (token) {
-            headers["Authorization"] = `Bearer ${token}`;
-          }
-        }
-        const res = await fetchWithInternalToken("/api/ai/chats", {
-          headers,
-          method: "GET",
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-
-          setChats(data.chats);
-        }
-      } catch (error) {
-      } finally {
-        setIsChatListLoading(false);
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        method: "GET",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setChats(data.chats);
       }
+    } catch (_) {
+    } finally {
+      setIsChatListLoading(false);
     }
   }, [user]);
 
   useEffect(() => {
-    const queryFromUrl = searchParams.get("q");
-    if (queryFromUrl) {
-      setQuery(queryFromUrl);
-    }
+    const q = searchParams.get("q");
+    if (q) setQuery(q);
   }, [searchParams]);
 
   useEffect(() => {
-    const fetchAndSetChats = async () => {
-      if (user) {
-        await fetchChats();
-        const storedChatId = sessionStorage.getItem("currentChatId");
-        if (storedChatId) {
-          handleSelectChat(storedChatId);
-        } else {
-          setIsChatActive(false);
-        }
-      }
-    };
-    fetchAndSetChats();
+    if (!user) return;
+    fetchChats().then(() => {
+      const stored = sessionStorage.getItem("currentChatId");
+      if (stored) handleSelectChat(stored);
+      else setIsChatActive(false);
+    });
   }, [user, fetchChats]);
+
+  useEffect(() => {
+    if (!user) setMode("chat");
+  }, [user]);
 
   const handleSelectChat = async (chatId) => {
     setIsChatLoading(true);
@@ -257,9 +353,7 @@ const AIComponent = () => {
     try {
       const token = localStorage.getItem("auth-token");
       const res = await fetchWithInternalToken(`/api/ai/chat/${chatId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
         const data = await res.json();
@@ -270,9 +364,8 @@ const AIComponent = () => {
           }))
         );
         setIsChatActive(true);
-      } else {
-        throw new Error("Failed to load chat.");
-      }
+        setQuizSessionActive(false);
+      } else throw new Error("Failed to load chat.");
     } catch (error) {
       showToast("error", error.message);
     } finally {
@@ -280,71 +373,92 @@ const AIComponent = () => {
     }
   };
 
-  const handleNewChat = () => {
+  const handleNewChat = useCallback(() => {
     setCurrentChatId(null);
     setIsChatActive(false);
     setMessages([]);
+    setQuizSessionActive(false);
     sessionStorage.removeItem("currentChatId");
-  };
+  }, []);
 
   const suggestions = [
     "Tell me about Ajanta Caves.",
     "What is the history of Ellora Caves?",
-    "Tell me about Elephanta Caves.",
-    "What are the UNESCO Heritage sites in Maharashtra?",
+    "Describe Elephanta Caves.",
+    "UNESCO Heritage sites in Maharashtra?",
   ];
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const quizSuggestions = [
+    "Ajanta Caves",
+    "Maratha Empire",
+    "Raigad Fort",
+    "Maharashtra Inscriptions",
+  ];
+
+  const scrollToBottom = useCallback(() => {
+    requestAnimationFrame(() => {
+      const container = messagesContainerRef.current;
+      if (container) {
+        container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+      }
+    });
+  }, []);
 
   useEffect(() => {
-    if (isAtBottom) scrollToBottom();
-  }, [messages, isAtBottom, isLoading]);
+    if (isAtBottomRef.current) scrollToBottom();
+  }, [messages, isLoading, scrollToBottom]);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const container = messagesContainerRef.current;
     if (!container) return;
     const isBottom =
       container.scrollHeight - container.scrollTop <=
-      container.clientHeight + 1;
-    setIsAtBottom(isBottom);
-  };
+      container.clientHeight + 80;
+    isAtBottomRef.current = isBottom;
+  }, []);
 
   const showToast = (type, message) => {
-    // Clear any existing timeout
-    if (toastTimeoutRef.current) {
-      clearTimeout(toastTimeoutRef.current);
-    }
-
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
     setToast({ type, message });
-
-    // Set new timeout to clear toast after 3 seconds
     toastTimeoutRef.current = setTimeout(() => {
       setToast({ type: "", message: "" });
       toastTimeoutRef.current = null;
     }, 3000);
   };
 
-  const handleFileUpload = (e, type) => {
-    // console.log("File upload attempted");
-    showToast("warning", "File upload coming soon!");
-  };
+  const handleFileUpload = () => showToast("warning", "File upload coming soon!");
 
-  const handleQuery = async (e, customQuery) => {
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  const handleQuery = async (e, customQuery, startNewChat = false) => {
     e?.preventDefault();
+    let actualQuery = customQuery || query;
 
-    const actualQuery = customQuery || query;
+    // If quiz mode and no query text, build a meaningful quiz prompt
+    if (!actualQuery.trim() && mode === "quiz") {
+      const topicText = quizTopic.trim() || "diverse Maharashtra Heritage topics spanning monuments, dynasties, culture, and inscriptions";
+      actualQuery = `Generate a ${quizDifficulty} ${quizQuestionType} quiz with ${quizQuestionCount} questions on ${topicText}.`;
+    }
 
     if (!actualQuery.trim()) {
       showToast("warning", "Please type a question!");
       return;
     }
 
+    if (mode === "quiz" && !user) {
+      showToast("warning", "Please log in to access the quiz feature.");
+      return;
+    }
+
+    if (startNewChat) handleNewChat();
+
     if (!isChatActive) setIsChatActive(true);
+    if (mode === "quiz" && startNewChat) setQuizSessionActive(true);
 
     const newMessage = { role: "user", parts: [{ text: actualQuery }] };
-    const updatedMessages = [...messages, newMessage];
+    const currentMessages = startNewChat ? [] : messages;
+    const currentId = startNewChat ? null : currentChatId;
+    const updatedMessages = [...currentMessages, newMessage];
 
     setMessages(updatedMessages);
     setQuery("");
@@ -352,35 +466,77 @@ const AIComponent = () => {
 
     const controller = new AbortController();
     abortControllerRef.current = controller;
+    const retryDelays = [1000, 2000, 4000];
+    const maxAttempts = retryDelays.length + 1;
 
     try {
-      const headers = {
-        "Content-Type": "application/json",
-      };
-
+      const headers = { "Content-Type": "application/json" };
       if (user) {
         const token = localStorage.getItem("auth-token");
-        if (token) {
-          headers["Authorization"] = `Bearer ${token}`;
+        if (token) headers["Authorization"] = `Bearer ${token}`;
+      }
+
+      let data = null;
+
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        try {
+          const res = await fetchWithInternalToken("/api/ai", {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+              query: actualQuery,
+              messages: currentMessages,
+              chatId: user ? currentId : null,
+              fingerprint,
+              quizMode: mode === "quiz",
+              quizConfig: {
+                topic: quizTopic.trim(),
+                difficulty: quizDifficulty,
+                questionCount: quizQuestionCount,
+                questionType: quizQuestionType,
+              },
+            }),
+            signal: controller.signal,
+          });
+
+          let payload = {};
+          try {
+            payload = await res.json();
+          } catch (_) {}
+
+          if (res.ok) {
+            data = payload;
+            break;
+          }
+
+          const serverMessage = payload?.error || payload?.response || "";
+          const isLimited =
+            typeof serverMessage === "string" &&
+            serverMessage.includes("Query limit exceeded");
+          const isBusy =
+            res.status === 429 || res.status === 503 || res.status >= 500;
+
+          if (isLimited) throw new Error("Query limit exceeded");
+          if (isBusy && attempt < maxAttempts) {
+            showToast("warning", "AI is busy. Retrying…");
+            await sleep(retryDelays[attempt - 1]);
+            continue;
+          }
+          if (isBusy) throw new Error("Server is busy. Please try again.");
+          throw new Error("Unable to process your request right now.");
+        } catch (err) {
+          if (err.name === "AbortError") throw err;
+          if (err.message?.includes("Query limit exceeded")) throw err;
+          if (attempt < maxAttempts) {
+            showToast("warning", "AI is busy. Retrying…");
+            await sleep(retryDelays[attempt - 1]);
+            continue;
+          }
+          throw new Error("Server is busy. Please try again.");
         }
       }
-      const res = await fetchWithInternalToken("/api/ai", {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-          query: actualQuery,
-          messages: messages,
-          chatId: user ? currentChatId : null,
-          fingerprint,
-        }),
-        signal: controller.signal,
-      });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Something went wrong");
-      }
-      const data = await res.json();
+      if (!data) throw new Error("Server is busy. Please try again.");
 
       setMessages((prev) => [
         ...prev,
@@ -389,23 +545,31 @@ const AIComponent = () => {
 
       if (data.chatId) {
         setCurrentChatId(data.chatId);
-        if (!chats.some((chat) => chat._id === data.chatId)) {
-          fetchChats();
-        }
+        if (!chats.some((c) => c._id === data.chatId)) fetchChats();
       }
     } catch (error) {
-      if (error.message.includes("Query limit exceeded")) {
-        setIsAnonymousLimited(true);
+      if (error.name === "AbortError") {
+        showToast("warning", "Request stopped.");
+        return;
       }
-      showToast("error", error.message);
+      if (error.message?.includes("Query limit exceeded")) {
+        setIsAnonymousLimited(true);
+        showToast("error", "Free query limit reached. Please log in.");
+        return;
+      }
+      showToast("error", "Server is busy. Please try again in a few seconds.");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleSuggestion = (text) => {
-    setQuery(text);
-    handleQuery(null, text);
+    if (mode === "quiz") {
+      setQuizTopic(text);
+    } else {
+      setQuery(text);
+      handleQuery(null, text);
+    }
   };
 
   const handleStop = () => {
@@ -417,58 +581,55 @@ const AIComponent = () => {
     if (!timestamp) return "";
     const date = new Date(timestamp);
     const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-
     if (date.toDateString() === today.toDateString()) {
-      return date.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-      });
+      return date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
     }
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
 
+  if (authLoading) return <Loading to="AI Chat" />;
+
+  // ─── Modals ───────────────────────────────────────────────────────────────
   const FileUploadModal = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fade-in">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Add Files</h2>
-          <button onClick={() => setIsModalOpen(false)}>
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 px-4">
+      <div
+        className="bg-[#1a2332] border border-white/10 rounded-3xl p-6 w-full max-w-md shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-start mb-5">
+          <div>
+            <h2 className="text-lg font-semibold text-white">Attach Files</h2>
+            <p className="text-sm text-slate-400 mt-1">
+              Add context to improve responses.
+            </p>
+          </div>
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="p-1.5 rounded-full hover:bg-white/10 transition text-slate-400 hover:text-white"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
         <div className="space-y-3">
-          <label className="w-full flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
-            <FileText className="w-6 h-6 text-blue-500" />
-            <span>Upload a Document</span>
-            <input
-              type="file"
-              accept=".doc,.docx,.txt"
-              onChange={(e) => handleFileUpload(e, "document")}
-              className="hidden"
-            />
-          </label>
-          <label className="w-full flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
-            <ImageIcon className="w-6 h-6 text-green-500" />
-            <span>Upload an Image</span>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleFileUpload(e, "image")}
-              className="hidden"
-            />
-          </label>
-          <label className="w-full flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
-            <Paperclip className="w-6 h-6 text-red-500" />
-            <span>Upload a PDF</span>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={(e) => handleFileUpload(e)}
-              className="hidden"
-            />
-          </label>
+          {[
+            { icon: <FileText className="w-5 h-5 text-blue-400" />, label: "Upload a Document", accept: ".doc,.docx,.txt" },
+            { icon: <ImageIcon className="w-5 h-5 text-emerald-400" />, label: "Upload an Image", accept: "image/*" },
+            { icon: <Paperclip className="w-5 h-5 text-rose-400" />, label: "Upload a PDF", accept: "application/pdf" },
+          ].map(({ icon, label, accept }) => (
+            <label
+              key={label}
+              className="w-full flex items-center gap-4 p-4 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/5 hover:border-white/20 transition"
+            >
+              {icon}
+              <span className="font-medium text-slate-300">{label}</span>
+              <input
+                type="file"
+                accept={accept}
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+            </label>
+          ))}
         </div>
       </div>
     </div>
@@ -476,11 +637,11 @@ const AIComponent = () => {
 
   const ImagePreviewModal = ({ src, onClose }) => (
     <div
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in"
+      className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
       onClick={onClose}
     >
       <div
-        className="relative max-w-[95vw] w-auto h-full max-h-[95vh] p-4 flex items-center justify-center"
+        className="relative w-full max-w-6xl max-h-[92vh] rounded-2xl border border-white/10 bg-black/40 p-3 flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
         <Image
@@ -488,13 +649,11 @@ const AIComponent = () => {
           alt="Preview"
           width={2400}
           height={2000}
-          className="object-contain rounded-xl shadow-xl"
+          className="object-contain w-full h-auto max-h-[82vh] rounded-xl shadow-2xl"
         />
-
-        {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-8 right-8 p-2 text-black bg-white/49 hover:bg-white/80 rounded-full transition"
+          className="absolute top-4 right-4 p-2 text-white bg-black/60 hover:bg-black/80 rounded-full transition border border-white/20"
         >
           <X size={22} />
         </button>
@@ -502,8 +661,27 @@ const AIComponent = () => {
     </div>
   );
 
+  // ─── Render ───────────────────────────────────────────────────────────────
   return (
-    <div className="flex h-screen bg-white text-gray-800 overflow-hidden">
+    <div
+      className="flex h-[100dvh] w-full text-slate-100 overflow-hidden relative"
+      style={{
+        background:
+          "radial-gradient(ellipse at 20% 50%, #0d2818 0%, #0f1117 40%, #1a1a2e 70%, #0f1117 100%)",
+      }}
+    >
+      {/* Background mesh decoration */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div
+          className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-10 blur-3xl"
+          style={{ background: "radial-gradient(circle, #10b981, transparent)" }}
+        />
+        <div
+          className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full opacity-8 blur-3xl"
+          style={{ background: "radial-gradient(circle, #3b82f6, transparent)" }}
+        />
+      </div>
+
       {toast.message && (
         <Toast
           type={toast.type}
@@ -511,7 +689,7 @@ const AIComponent = () => {
           onClose={() => setToast({ type: "", message: "" })}
         />
       )}
-
+      {isModalOpen && <FileUploadModal />}
       {imagePreview.isOpen && (
         <ImagePreviewModal
           src={imagePreview.src}
@@ -519,105 +697,326 @@ const AIComponent = () => {
         />
       )}
 
-      {/* ===== Sidebar ===== */}
+      {/* ===== SIDEBAR ===== */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex flex-col justify-between p-4 border-r border-green-100 transition-all duration-300 ease-in-out lg:relative lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r transition-all duration-300 ease-in-out lg:relative lg:translate-x-0 ${
           isSidebarOpen
-            ? "w-72 bg-green-50 translate-x-0"
-            : "w-72 -translate-x-full bg-white lg:w-0"
+            ? "w-72 translate-x-0"
+            : "w-72 -translate-x-full lg:w-0"
         }`}
+        style={{
+          background: "rgba(15, 17, 23, 0.95)",
+          backdropFilter: "blur(24px)",
+          borderColor: "rgba(255,255,255,0.06)",
+        }}
       >
         {isSidebarOpen && (
           <>
-            <div>
-              <div className="flex items-center mb-6">
-                <div className="w-10 h-10 bg-linear-to-br from-green-600 to-green-950 rounded-2xl flex items-center justify-center text-white font-bold text-lg mr-3">
-                  H
-                </div>
-                <h1 className="text-xl font-semibold bg-linear-to-br text-transparent from-green-600 to-green-950 bg-clip-text">
-                  HeritageX
-                </h1>
-              </div>
-              {user ? (
-                <div className="h-full">
-                  <div className="flex justify-between items-center px-2 mb-2">
-                    <span className="text-sm font-semibold text-gray-600">
-                      Chats
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={handleNewChat}
-                        className="p-1 hover:bg-green-200 rounded-full"
-                      >
-                        <Plus size={16} />
-                      </button>
-                      <span className="relative group cursor-pointer">
-                        <History className="w-4" />
-                        <span className="absolute left-[110%] top-1/2 -translate-y-1/2 w-28 bg-green-800 text-white text-xs text-center rounded-md py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                          Only 30 days backup
-                        </span>
-                      </span>
-                    </div>
+            <div className="flex-1 min-h-0 flex flex-col overflow-hidden p-4">
+              {/* Logo */}
+              <div className="flex items-center gap-3 mb-6 shrink-0 pt-1">
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-emerald-900/40">
+                    H
                   </div>
-                  <div className="space-y-2 overflow-y-scroll h-[calc(100vh-250px)]">
+                  <div className="absolute inset-0 rounded-2xl ring-2 ring-emerald-400/20 animate-pulse" />
+                </div>
+                <div>
+                  <h1 className="text-base font-bold text-white tracking-tight">
+                    HeritageX
+                  </h1>
+                  <p className="text-[10px] text-emerald-400/70 font-medium tracking-widest uppercase">
+                    Maha-Heritage AI
+                  </p>
+                </div>
+              </div>
+
+              {user ? (
+                <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-hidden">
+                  {/* Mode Switcher */}
+                  <div
+                    className="rounded-2xl p-3 border shrink-0"
+                    style={{
+                      background: "rgba(255,255,255,0.04)",
+                      borderColor: "rgba(255,255,255,0.08)",
+                    }}
+                  >
+                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2.5 flex items-center gap-1.5">
+                      <Settings2 className="w-3 h-3" /> Mode
+                    </p>
+                    <div
+                      className="flex p-1 rounded-xl relative"
+                      style={{ background: "rgba(255,255,255,0.05)" }}
+                    >
+                      {["chat", "quiz"].map((m) => (
+                        <button
+                          key={m}
+                          onClick={() => setMode(m)}
+                          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all duration-200 capitalize flex items-center justify-center gap-1.5 z-10 ${
+                            mode === m
+                              ? "text-white"
+                              : "text-slate-400 hover:text-slate-200"
+                          }`}
+                          style={
+                            mode === m
+                              ? {
+                                  background:
+                                    "linear-gradient(135deg, #059669, #0d9488)",
+                                  boxShadow: "0 2px 8px rgba(5,150,105,0.3)",
+                                }
+                              : {}
+                          }
+                        >
+                          {m === "chat" ? (
+                            <Bot className="w-3.5 h-3.5" />
+                          ) : (
+                            <GraduationCap className="w-3.5 h-3.5" />
+                          )}
+                          {m}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Quiz Config */}
+                    {mode === "quiz" && (
+                      <div className="mt-3 space-y-2.5">
+                        <p className="text-xs text-slate-500">
+                          Leave topic blank for a full-dataset quiz.
+                        </p>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            value={quizTopic}
+                            onChange={(e) => setQuizTopic(e.target.value)}
+                            placeholder="Topic (optional)"
+                            className="w-full px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200 placeholder-slate-500"
+                            style={{
+                              background: "rgba(255,255,255,0.06)",
+                              border: "1px solid rgba(255,255,255,0.1)",
+                            }}
+                            onFocus={(e) =>
+                              (e.target.style.borderColor =
+                                "rgba(16,185,129,0.5)")
+                            }
+                            onBlur={(e) =>
+                              (e.target.style.borderColor =
+                                "rgba(255,255,255,0.1)")
+                            }
+                          />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <select
+                            value={quizDifficulty}
+                            onChange={(e) => setQuizDifficulty(e.target.value)}
+                            className="px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200"
+                            style={{
+                              background: "rgba(255,255,255,0.06)",
+                              border: "1px solid rgba(255,255,255,0.1)",
+                            }}
+                          >
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                          </select>
+                          <select
+                            value={quizQuestionType}
+                            onChange={(e) => setQuizQuestionType(e.target.value)}
+                            className="px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200"
+                            style={{
+                              background: "rgba(255,255,255,0.06)",
+                              border: "1px solid rgba(255,255,255,0.1)",
+                            }}
+                          >
+                            <option value="MCQ">MCQ</option>
+                            <option value="Short Answer">Short Ans.</option>
+                            <option value="Mixed">Mixed</option>
+                          </select>
+                        </div>
+                        <input
+                          type="number"
+                          min={1}
+                          max={20}
+                          value={quizQuestionCount}
+                          onChange={(e) => {
+                            const v = parseInt(e.target.value || "1", 10);
+                            setQuizQuestionCount(
+                              Number.isFinite(v)
+                                ? Math.min(Math.max(v, 1), 20)
+                                : 5
+                            );
+                          }}
+                          className="w-full px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200 placeholder-slate-500"
+                          placeholder="Questions (1-20)"
+                          style={{
+                            background: "rgba(255,255,255,0.06)",
+                            border: "1px solid rgba(255,255,255,0.1)",
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={(e) => handleQuery(e, "", true)}
+                          className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm rounded-xl font-semibold text-white transition-all duration-200 active:scale-[0.97] shadow-lg"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
+                            boxShadow: "0 4px 15px rgba(5,150,105,0.35)",
+                          }}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.boxShadow =
+                              "0 6px 20px rgba(5,150,105,0.5)")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.boxShadow =
+                              "0 4px 15px rgba(5,150,105,0.35)")
+                          }
+                        >
+                          <BookOpenCheck className="w-4 h-4" />
+                          Start New Quiz
+                        </button>
+
+                        {/* Quick topic suggestions */}
+                        <div>
+                          <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">
+                            Quick topics
+                          </p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {quizSuggestions.map((s) => (
+                              <button
+                                key={s}
+                                onClick={() => setQuizTopic(s)}
+                                className="text-xs px-2.5 py-1 rounded-lg text-emerald-400 transition-all"
+                                style={{
+                                  background: "rgba(16,185,129,0.1)",
+                                  border: "1px solid rgba(16,185,129,0.2)",
+                                }}
+                                onMouseEnter={(e) =>
+                                  (e.currentTarget.style.background =
+                                    "rgba(16,185,129,0.2)")
+                                }
+                                onMouseLeave={(e) =>
+                                  (e.currentTarget.style.background =
+                                    "rgba(16,185,129,0.1)")
+                                }
+                              >
+                                {s}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Chat List */}
+                  <div className="flex justify-between items-center px-1 shrink-0">
+                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
+                      Conversations
+                    </span>
+                    <button
+                      onClick={handleNewChat}
+                      className="p-1.5 rounded-lg hover:bg-white/10 transition text-slate-400 hover:text-white"
+                    >
+                      <Plus size={14} />
+                    </button>
+                  </div>
+                  <div className="flex-1 min-h-0 overflow-y-auto space-y-1 pr-1 scrollbar-thin">
                     {isChatListLoading ? (
                       <ChatSpin />
+                    ) : chats.length === 0 ? (
+                      <p className="text-xs text-slate-600 text-center py-6">
+                        No conversations yet
+                      </p>
                     ) : (
                       chats.map((chat) => (
                         <div
                           key={chat._id}
                           onClick={() => handleSelectChat(chat._id)}
-                          className={`flex items-center gap-3 text-gray-700 hover:bg-green-100 rounded-lg px-3 py-2 cursor-pointer transition ${
-                            currentChatId === chat._id ? "bg-green-100" : ""
+                          className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-150 group ${
+                            currentChatId === chat._id
+                              ? "text-white"
+                              : "text-slate-400 hover:text-white"
                           }`}
+                          style={
+                            currentChatId === chat._id
+                              ? {
+                                  background: "rgba(16,185,129,0.12)",
+                                  border: "1px solid rgba(16,185,129,0.2)",
+                                }
+                              : {
+                                  border: "1px solid transparent",
+                                }
+                          }
+                          onMouseEnter={(e) => {
+                            if (currentChatId !== chat._id)
+                              e.currentTarget.style.background =
+                                "rgba(255,255,255,0.04)";
+                          }}
+                          onMouseLeave={(e) => {
+                            if (currentChatId !== chat._id)
+                              e.currentTarget.style.background = "transparent";
+                          }}
                         >
-                          <MessageSquare className="w-5 h-5 text-gray-600" />
-                          <span className="text-sm truncate">{chat.title}</span>
+                          <MessageSquare className="w-3.5 h-3.5 shrink-0 text-emerald-500/60" />
+                          <span className="text-xs truncate">{chat.title}</span>
                         </div>
                       ))
                     )}
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col gap-4 font-bold text-black/40 h-[calc(100vh-250px)] justify-center items-center text-center">
-                  <Loader size={30} />
-                  <p className="px-2 flex flex-col gap-2">
-                    <span>
-                      Login to{" "}
-                      <span className="text-transparent bg-linear-to-br from-green-500 to-green-900 bg-clip-text ">
-                        store your chats
-                      </span>{" "}
-                    </span>
-                    <span className="  text-sm font-normal text-black/50">
-                      Your chat history stays safe - continue from where you
-                      left off!
-                    </span>
-                  </p>
+                // Not logged in
+                <div className="flex flex-col gap-4 flex-1 min-h-0 justify-center items-center text-center px-2">
                   <div
-                    className="mt-4 px-5 py-2 bg-linear-to-br from-green-500 to-green-900 hover:bg-linear-to-tl text-white rounded-full transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
-                    onClick={() => {
-                      router.push("/login");
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                    style={{ background: "rgba(16,185,129,0.1)" }}
+                  >
+                    <Brain className="w-7 h-7 text-emerald-400" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white text-sm mb-1">
+                      Save your chats
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      Log in to keep your conversation history and access quiz
+                      mode.
+                    </p>
+                  </div>
+                  <button
+                    className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all shadow-lg"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
+                      boxShadow: "0 4px 12px rgba(5,150,105,0.3)",
                     }}
+                    onClick={() => router.push("/login")}
                   >
                     Go to Login
-                  </div>
+                  </button>
                 </div>
               )}
             </div>
-            <div>
-              <p className="pt-4 mt-3 text-sm font-semibold text-gray-600 ">
-                Profile
-              </p>
-              <div className="flex items-center gap-3 mt-2">
-                <div className="py-1 px-3 border-2 border-green-700 rounded-full text-green-700 font-bold text-lg">
+
+            {/* Profile footer */}
+            <div
+              className="shrink-0 p-4 border-t"
+              style={{ borderColor: "rgba(255,255,255,0.06)" }}
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm text-white shrink-0"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
+                  }}
+                >
                   {user?.username?.[0]?.toUpperCase() || "A"}
                 </div>
-                <div>
-                  <p className="font-semibold text-green-800">
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-white truncate">
                     {user?.username || "Anonymous"}
                   </p>
-                  <p className="text-xs text-gray-500">
-                    {user?.email || "Anonymous@maharitage.in"}
+                  <p className="text-xs text-slate-500 truncate">
+                    {user?.email || "Browse as guest"}
                   </p>
                 </div>
               </div>
@@ -626,177 +1025,383 @@ const AIComponent = () => {
         )}
       </aside>
 
-      {/* Overlay for small screens when sidebar is open */}
+      {/* Sidebar overlay (mobile) */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/10 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/40 z-30 lg:hidden backdrop-blur-sm"
           onClick={() => setIsSidebarOpen(false)}
-        ></div>
+        />
       )}
 
-      {/* ===== Main Chat Section ===== */}
-      <main className="flex-1 grid grid-rows-[auto_1fr_auto] bg-white relative">
+      {/* ===== MAIN CONTENT ===== */}
+      <main className="flex-1 min-w-0 min-h-0 flex flex-col relative">
         {/* Top bar */}
-        <div className="flex justify-between items-center p-4 border-b border-gray-200 z-10">
+        <div
+          className="shrink-0 flex justify-between items-center px-4 py-3 z-10 border-b"
+          style={{
+            background: "rgba(15,17,23,0.8)",
+            backdropFilter: "blur(20px)",
+            borderColor: "rgba(255,255,255,0.06)",
+          }}
+        >
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 rounded-xl hover:bg-white/8 transition text-slate-400 hover:text-white"
+            >
+              {isSidebarOpen ? <PanelLeft size={18} /> : <PanelRight size={18} />}
+            </button>
+            {quizSessionActive && (
+              <div
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
+                style={{
+                  background: "rgba(16,185,129,0.12)",
+                  border: "1px solid rgba(16,185,129,0.25)",
+                  color: "#34d399",
+                }}
+              >
+                <Trophy className="w-3.5 h-3.5" />
+                Quiz in progress
+              </div>
+            )}
+            {mode === "quiz" && quizSessionActive && (
+              <button
+                onClick={() => {
+                  handleNewChat();
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-white transition"
+                style={{ border: "1px solid rgba(255,255,255,0.1)" }}
+              >
+                <RotateCcw className="w-3 h-3" /> New Quiz
+              </button>
+            )}
+          </div>
+
           <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 hover:bg-gray-100 rounded-full lg:hidden"
+            onClick={() => router.push("/")}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-slate-400 hover:text-white transition"
+            style={{ border: "1px solid rgba(255,255,255,0.1)" }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = "rgba(255,255,255,0.06)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = "transparent")
+            }
           >
-            {isSidebarOpen ? <PanelLeft /> : <PanelRight />}
-          </button>
-          <button
-            onClick={() => (window.location.href = "/")}
-            className="border border-gray-300 rounded-full px-5 py-1 text-gray-700 hover:bg-green-50 transition text-sm font-medium"
-          >
-            Home
+            <Home className="w-4 h-4" /> Home
           </button>
         </div>
 
-        {/* Middle Section */}
+        {/* Chat / Welcome area */}
         {!isChatActive ? (
-          <div className="flex flex-col items-center justify-center text-center bg-gray-50">
-            <h1 className="text-4xl font-bold mb-4">
-              Hello,{" "}
-              <span className="text-green-700">{user?.username || "User"}</span>
+          <div className="flex-1 min-h-0 flex flex-col items-center justify-center text-center px-4 py-10 overflow-y-auto">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-6"
+              style={{
+                background: "rgba(16,185,129,0.1)",
+                border: "1px solid rgba(16,185,129,0.2)",
+                color: "#34d399",
+              }}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              {mode === "quiz" ? "Quiz Master" : "AI Heritage Assistant"}
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-white">
+              {mode === "quiz" ? (
+                <>
+                  Ready to{" "}
+                  <span
+                    className="bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(135deg, #10b981, #0d9488)",
+                    }}
+                  >
+                    test your knowledge?
+                  </span>
+                </>
+              ) : (
+                <>
+                  Hello,{" "}
+                  <span
+                    className="bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(135deg, #10b981, #0d9488)",
+                    }}
+                  >
+                    {user?.username || "Explorer"}
+                  </span>
+                </>
+              )}
             </h1>
-            <p className="text-lg text-gray-500 mb-12">
-              How can I help you today?
+            <p className="text-slate-400 mb-10 max-w-xl text-sm sm:text-base leading-relaxed">
+              {mode === "quiz"
+                ? "Configure your quiz from the sidebar and click 'Start New Quiz', or pick a quick topic below."
+                : "Ask anything about Maharashtra's history, monuments, inscriptions, and rich cultural heritage."}
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4 sm:px-10 w-full max-w-4xl">
-              {suggestions.map((text, i) => (
-                <button
-                  key={i}
-                  onClick={() => handleSuggestion(text)}
-                  className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-100 transition text-left"
-                >
-                  <LightbulbIcon className="text-green-600 w-6 h-6" />
-                  <span className="font-medium text-gray-700">{text}</span>
-                </button>
-              ))}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-2xl">
+              {(mode === "quiz" ? quizSuggestions : suggestions).map(
+                (text, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleSuggestion(text)}
+                    className="group flex items-center gap-4 p-4 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
+                    style={{
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.background =
+                        "rgba(16,185,129,0.08)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.background =
+                        "rgba(255,255,255,0.04)")
+                    }
+                  >
+                    {mode === "quiz" ? (
+                      <div
+                        className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                        style={{ background: "rgba(16,185,129,0.15)" }}
+                      >
+                        <Zap className="w-4 h-4 text-emerald-400" />
+                      </div>
+                    ) : (
+                      <div
+                        className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                        style={{ background: "rgba(16,185,129,0.15)" }}
+                      >
+                        <Brain className="w-4 h-4 text-emerald-400" />
+                      </div>
+                    )}
+                    <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
+                      {text}
+                    </span>
+                    <ChevronRight className="ml-auto w-4 h-4 text-slate-600 group-hover:text-emerald-400 transition-colors shrink-0" />
+                  </button>
+                )
+              )}
             </div>
           </div>
         ) : (
           <div
             ref={messagesContainerRef}
             onScroll={handleScroll}
-            className="overflow-y-auto px-4 sm:px-10 py-6 space-y-6"
+            className="flex-1 min-h-0 overflow-y-auto px-4 sm:px-6 lg:px-10 py-6 space-y-5"
           >
-            {isChatLoading ? (
-              <div className="flex justify-center items-center h-full">
-                <AIChatLoading />
-              </div>
-            ) : (
-              <>
-                {messages.map((msg, i) => (
-                  <div
-                    key={i}
-                    className={`flex items-start gap-4 ${
-                      msg.role === "user" ? "justify-end" : "justify-start"
-                    }`}
-                  >
-                    {msg.role === "ai" && (
-                      <div className="w-10 h-10 bg-green-800 rounded-full flex items-center justify-center text-white shrink-0">
-                        <Bot size={24} />
-                      </div>
-                    )}
+            <div className="mx-auto w-full max-w-4xl space-y-5">
+              {isChatLoading ? (
+                <div className="flex justify-center items-center h-40">
+                  <AIChatLoading />
+                </div>
+              ) : (
+                messages.map((msg, i) => {
+                  const isLastAiMsg =
+                    msg.role === "ai" && i === messages.length - 1;
+                  const showQuizButtons =
+                    isLastAiMsg && mode === "quiz" && !isLoading;
+
+                  return (
                     <div
-                      className={`px-5 py-3 rounded-2xl max-w-[75%] shadow-sm prose ${
-                        msg.role === "user"
-                          ? "bg-green-800 text-white rounded-br-none"
-                          : "bg-gray-100 text-gray-800 rounded-bl-none"
+                      key={i}
+                      className={`flex items-end gap-3 ${
+                        msg.role === "user" ? "justify-end" : "justify-start"
                       }`}
                     >
-                      {msg.role === "ai" ? (
-                        <MessageRenderer
-                          text={msg.parts[0].text}
-                          onImageClick={handleOpenImagePreview}
-                        />
-                      ) : (
-                        <p>{msg.parts[0].text}</p>
+                      {msg.role === "ai" && (
+                        <div
+                          className="w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 shadow-lg mb-1"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, #059669, #0d9488)",
+                            boxShadow: "0 4px 12px rgba(5,150,105,0.3)",
+                          }}
+                        >
+                          <Bot size={16} className="text-white" />
+                        </div>
+                      )}
+                      <div
+                        className={`flex flex-col ${
+                          msg.role === "user" ? "items-end" : "items-start"
+                        } max-w-[88%] sm:max-w-[78%] lg:max-w-[72%]`}
+                      >
+                        <div
+                          className={`px-5 py-4 rounded-3xl text-sm leading-relaxed ${
+                            msg.role === "user"
+                              ? "rounded-br-lg text-white"
+                              : "rounded-bl-lg text-slate-200"
+                          }`}
+                          style={
+                            msg.role === "user"
+                              ? {
+                                  background:
+                                    "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
+                                  boxShadow:
+                                    "0 4px 20px rgba(5,150,105,0.25)",
+                                }
+                              : {
+                                  background: "rgba(255,255,255,0.05)",
+                                  border: "1px solid rgba(255,255,255,0.08)",
+                                  backdropFilter: "blur(8px)",
+                                  boxShadow:
+                                    "0 4px 20px rgba(0,0,0,0.2)",
+                                }
+                          }
+                        >
+                          {msg.role === "ai" ? (
+                            <MessageRenderer
+                              text={msg.parts[0].text}
+                              onImageClick={handleOpenImagePreview}
+                            />
+                          ) : (
+                            <p>{msg.parts[0].text}</p>
+                          )}
+                        </div>
+                        {showQuizButtons && (
+                          <QuizOptionButtons
+                            text={msg.parts[0].text}
+                            disabled={isLoading}
+                            onSelect={(letter) => handleQuery(null, letter)}
+                          />
+                        )}
+                      </div>
+                      {msg.role === "user" && (
+                        <div
+                          className="w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 font-bold text-sm text-white mb-1"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, #065f46, #0f766e)",
+                          }}
+                        >
+                          {user?.username?.[0]?.toUpperCase() || "A"}
+                        </div>
                       )}
                     </div>
-                    {msg.role === "user" && (
-                      <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold shrink-0">
-                        {user?.username?.[0]?.toUpperCase() || "A"}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </>
-            )}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-gray-100 rounded-2xl p-4">
-                  <LoadingAnimation />
+                  );
+                })
+              )}
+
+              {/* Loading shimmer */}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <ShimmerSkeleton />
                 </div>
-              </div>
-            )}
-            {isAnonymousLimited && (
-              <div className="text-center text-sm text-red-600 p-4 border border-red-300 rounded-lg bg-red-100 shadow-md">
-                You have reached your message limit. Please{" "}
-                <a href="/login" className="font-bold underline">
-                  log in
-                </a>{" "}
-                to continue chatting.
-              </div>
-            )}
-            <div ref={messagesEndRef} />
+              )}
+
+              {/* Anonymous limit */}
+              {isAnonymousLimited && (
+                <div
+                  className="text-center text-sm p-4 rounded-2xl"
+                  style={{
+                    background: "rgba(239,68,68,0.1)",
+                    border: "1px solid rgba(239,68,68,0.2)",
+                    color: "#f87171",
+                  }}
+                >
+                  You have reached your message limit.{" "}
+                  <a href="/login" className="font-bold underline text-rose-300">
+                    Log in
+                  </a>{" "}
+                  to continue chatting.
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
           </div>
         )}
 
-        {/* Bottom Section */}
-        <div className="px-4 sm:px-10 pb-6 pt-4 bg-white border-t border-gray-200">
-          <div className="relative">
+        {/* ── Input Bar ─────────────────────────────────────────────── */}
+        <div
+          className="shrink-0 px-4 sm:px-6 lg:px-10 py-4 border-t"
+          style={{
+            background: "rgba(15,17,23,0.8)",
+            backdropFilter: "blur(20px)",
+            borderColor: "rgba(255,255,255,0.06)",
+          }}
+        >
+          <div
+            className="relative mx-auto max-w-4xl rounded-2xl transition-all duration-200"
+            style={{
+              background: "rgba(255,255,255,0.06)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+            }}
+          >
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={
                 isAnonymousLimited
-                  ? "Please log in to continue"
-                  : "Ask me anything about Maharashtra Heritage..."
+                  ? "Please log in to continue…"
+                  : mode === "quiz"
+                  ? "Type your answer (A, B, C or D)…"
+                  : "Ask anything about Maharashtra Heritage…"
               }
-              className="w-full bg-gray-100 border-2 border-gray-200 rounded-full pl-12 pr-20 py-3 outline-none text-gray-800 placeholder-gray-500 transition focus:border-green-500 focus:ring-2 focus:ring-green-200"
+              className="w-full bg-transparent border-0 rounded-2xl pl-12 pr-14 py-4 outline-none text-slate-100 placeholder-slate-500 text-sm"
               onKeyDown={(e) => e.key === "Enter" && handleQuery(e)}
               disabled={isAnonymousLimited}
+              onFocus={(e) => {
+                e.currentTarget.parentElement.style.borderColor =
+                  "rgba(16,185,129,0.4)";
+                e.currentTarget.parentElement.style.boxShadow =
+                  "0 8px 32px rgba(0,0,0,0.3), 0 0 0 3px rgba(16,185,129,0.1)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.parentElement.style.borderColor =
+                  "rgba(255,255,255,0.1)";
+                e.currentTarget.parentElement.style.boxShadow =
+                  "0 8px 32px rgba(0,0,0,0.3)";
+              }}
             />
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
+            {/* Left button */}
+            <div className="absolute left-3 top-1/2 -translate-y-1/2">
               <button
                 type="button"
-                className="cursor-pointer"
-                onClick={() => {
-                  showToast("warning", "File upload is coming soon!");
-                }}
+                onClick={() => setIsModalOpen(true)}
                 disabled={isAnonymousLimited}
+                className="p-1.5 rounded-xl hover:bg-white/10 transition text-slate-500 hover:text-slate-300"
               >
-                <Plus
-                  className={`w-6 h-6 ${
-                    isAnonymousLimited ? "text-gray-400" : "text-gray-600"
-                  }`}
-                />
+                <Plus className="w-5 h-5" />
               </button>
             </div>
-            <div className="absolute right-2 top-1/2 -translate-y-1/2">
+            {/* Right button */}
+            <div className="absolute right-2.5 top-1/2 -translate-y-1/2">
               {isLoading ? (
                 <button
                   type="button"
                   onClick={handleStop}
-                  className="bg-red-500 hover:bg-red-600 rounded-full p-2 text-white transition"
+                  className="rounded-xl p-2.5 text-white transition active:scale-95"
+                  style={{ background: "rgba(239,68,68,0.8)" }}
                 >
-                  <Square className="w-5 h-5" />
+                  <Square className="w-4 h-4" />
                 </button>
               ) : (
                 <button
                   type="submit"
                   onClick={handleQuery}
-                  disabled={!query.trim() || isAnonymousLimited}
-                  className="bg-linear-to-br from-green-600 to-green-800 disabled:from-gray-300 disabled:to-gray-400 rounded-full text-white p-2 transition hover:scale-105 active:scale-95"
+                  disabled={
+                    isAnonymousLimited ||
+                    (!query.trim() && !(mode === "quiz"))
+                  }
+                  className="rounded-xl p-2.5 text-white transition hover:scale-105 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
+                    boxShadow: "0 4px 12px rgba(5,150,105,0.35)",
+                  }}
                 >
-                  <ArrowUp className="w-5 h-5" />
+                  <ArrowUp className="w-4 h-4" />
                 </button>
               )}
             </div>
           </div>
+          <p className="text-center text-[10px] text-slate-600 mt-2.5">
+            HeritageX is focused on Maharashtra heritage. Responses may not be
+            perfect.
+          </p>
         </div>
       </main>
     </div>
