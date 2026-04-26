@@ -1,4 +1,4 @@
-import { inter, playfairDisplay, cinzelDecorative } from "./fonts";
+import { inter, playfairDisplay, cinzelDecorative, lexend } from "./fonts";
 import "./globals.css";
 import { ClientLayout } from "./client-layout";
 import { AuthProvider } from "../contexts/AuthContext";
@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfairDisplay.variable} ${cinzelDecorative.variable}`}
+      className={`${inter.variable} ${playfairDisplay.variable} ${cinzelDecorative.variable} ${lexend.variable}`}
     >
       <head>
         <link

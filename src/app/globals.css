@@ -54,13 +54,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-inter: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-playfair-display: "Playfair Display", "Times New Roman", Times, serif;
+  --font-cinzel-decorative: "Cinzel Decorative", "Times New Roman", Times, serif;
+  --font-lexend: "Lexend", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 
@@ -75,7 +79,23 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.font-lexend {
+  font-family: var(--font-lexend);
+}
+
+.font-cinzel-decorative {
+  font-family: var(--font-cinzel-decorative);
+}
+
+.font-playfair-display {
+  font-family: var(--font-playfair-display);
 }
 
 @keyframes fade-in {

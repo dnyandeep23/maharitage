@@ -9,6 +9,24 @@ const chatSchema = new mongoose.Schema({
     type: String,
     default: 'New Chat',
   },
+  mode: {
+    type: String,
+    enum: ['chat', 'quiz'],
+    default: 'chat',
+  },
+  audienceType: {
+    type: String,
+    enum: ['general', 'student'],
+    default: 'general',
+  },
+  score: {
+    type: Number,
+    default: 0,
+  },
+  progress: {
+    type: Number,
+    default: 0,
+  },
   messages: [
     {
       sender: {

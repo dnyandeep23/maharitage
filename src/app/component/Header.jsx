@@ -16,11 +16,10 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../contexts/AuthContext.jsx";
 
-// 🧩 Unified Theme Configuration
 const THEME_CONFIG = {
   light: {
     headerBg: "bg-white/5 text-green-900 hover:bg-white/20",
-    headerBgScrolled: "bg-white/95 text-green-900 shadow-md backdrop-blur-xl border-green-200/50",
+    headerBgScrolled: "bg-white/75 text-green-900 shadow-md backdrop-blur-xl border-green-200/50",
     text: "text-green-900",
     accent: "bg-green-600 text-white",
     hoverAccent: "hover:bg-green-700",
