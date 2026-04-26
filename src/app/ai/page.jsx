@@ -138,6 +138,18 @@ const AIComponent = () => {
     sessionStorage.removeItem(currentChatStorageKey);
   }, [currentChatStorageKey]);
 
+  const handleStartFreshChat = useCallback(() => {
+    if (mode !== "chat") {
+      setMode("chat");
+    }
+    setCurrentChatId(null);
+    setIsChatActive(false);
+    setMessages([]);
+    setQuizSessionActive(false);
+    sessionStorage.removeItem(getChatStorageKey(audienceType, "chat"));
+    sessionStorage.removeItem(getChatStorageKey(audienceType, "quiz"));
+  }, [audienceType, mode]);
+
   useEffect(() => {
     if (!user) return;
     fetchChats().then(() => {
@@ -901,7 +913,7 @@ const AIComponent = () => {
                   {/* Chat List */}
                   <div className="px-1 shrink-0">
                     <button
-                      onClick={handleNewChat}
+                      onClick={handleStartFreshChat}
                       className="w-full rounded-2xl border border-dashed px-4 py-3 text-left transition-all duration-200 hover:bg-white/6 hover:border-emerald-400/30"
                       style={{
                         background: "rgba(255,255,255,0.03)",
