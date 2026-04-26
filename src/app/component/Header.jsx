@@ -19,21 +19,23 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 // 🧩 Unified Theme Configuration
 const THEME_CONFIG = {
   light: {
-    headerBg: "bg-white/5 text-green-900 hover:bg-white/40",
+    headerBg: "bg-white/5 text-green-900 hover:bg-white/20",
+    headerBgScrolled: "bg-white/95 text-green-900 shadow-md backdrop-blur-xl border-green-200/50",
     text: "text-green-900",
     accent: "bg-green-600 text-white",
     hoverAccent: "hover:bg-green-700",
     navActiveFull: "bg-green-100/50 text-green-700 text-xs font-inter",
-    navInactiveFull: "text-green-900 text-xs hover:bg-green-100",
-    navActiveMinimal: "bg-green-200/40 text-green-100 text-xs font-inter",
-    navInactiveMinimal: "text-green-200 text-xs hover:bg-green-200/30",
-    logo: "text-green-700",
-    border: "border-green-200",
+    navInactiveFull: "text-green-900 text-xs hover:bg-green-100/80",
+    navActiveMinimal: "bg-green-200/40 text-green-900 text-xs font-inter",
+    navInactiveMinimal: "text-green-800 text-xs hover:bg-green-200/50",
+    logo: "text-green-800",
+    border: "border-green-200/30",
     profileBg: "bg-white",
     menuBg: "bg-white/95",
   },
   dark: {
-    headerBg: "bg-gray-900/5 text-green-100 hover:bg-gray-900/40",
+    headerBg: "bg-gray-900/5 text-green-100 hover:bg-gray-900/20",
+    headerBgScrolled: "bg-gray-900/95 text-green-100 shadow-md backdrop-blur-xl border-green-700/50",
     text: "text-green-100",
     accent: "bg-green-500 text-gray-900",
     hoverAccent: "hover:bg-green-400",
@@ -42,7 +44,7 @@ const THEME_CONFIG = {
     navActiveMinimal: "bg-green-700/30 text-green-200 text-xs font-inter",
     navInactiveMinimal: "text-green-200 text-xs hover:bg-green-700/20",
     logo: "text-green-200",
-    border: "border-green-700",
+    border: "border-green-700/30",
     profileBg: "bg-gray-800",
     menuBg: "bg-gray-900/95",
   },
@@ -53,9 +55,12 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
   const [hoveredNav, setHoveredNav] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const profileMenuRef = useRef(null);
 
-  const colors = THEME_CONFIG[theme] || THEME_CONFIG.light;
+  // Switch to a readable solid theme when scrolled, otherwise use the provided theme prop.
+  const effectiveTheme = isScrolled ? "light" : theme;
+  const colors = THEME_CONFIG[effectiveTheme] || THEME_CONFIG.light;
 
   const handleNavigation = (path) => {
     if (window.location.pathname !== path) {
@@ -73,7 +78,16 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleLogout = async () => {
@@ -148,7 +162,7 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
 
   return (
     <header
-      className={`fixed top-1 sm:top-3 left-2 sm:left-3 right-2 sm:right-3 z-50 ${colors.headerBg} backdrop-blur-md text-sm shadow-sm border-b rounded-full ${colors.border}`}
+      className={`fixed top-1 sm:top-3 left-2 sm:left-3 right-2 sm:right-3 z-50 ${isScrolled ? colors.headerBgScrolled : colors.headerBg} backdrop-blur-md text-sm border-b rounded-full transition-all duration-300 ${colors.border}`}
     >
       <div className="px-2 sm:px-3 py-0.5 sm:py-2 flex items-center justify-between relative">
         {/* Logo */}

@@ -8,6 +8,7 @@ import {
   getVerificationEmailTemplate,
 } from "../../../../lib/email.js";
 import disposableDomains from "disposable-email-domains";
+import { isValidEmail, isValidPassword, isValidUsername } from "../../../../lib/validation.js";
 
 export async function POST(request) {
   try {
@@ -25,6 +26,27 @@ export async function POST(request) {
     if (!username || !email || !password || !role) {
       return NextResponse.json(
         { success: false, error: "All fields are required." },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidUsername(username)) {
+      return NextResponse.json(
+        { success: false, error: "Username must be 3-15 characters, contain only letters and numbers, and cannot be numbers only" },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid email format" },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidPassword(password)) {
+      return NextResponse.json(
+        { success: false, error: "Password must be at least 6 characters" },
         { status: 400 }
       );
     }

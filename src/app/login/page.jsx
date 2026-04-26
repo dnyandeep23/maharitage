@@ -12,6 +12,7 @@ import { ROLES, ROLE_CONFIG } from "../../lib/roles";
 import { useAuth } from "../../contexts/AuthContext.jsx";
 import { useRouter } from "next/navigation";
 import Toast from "../component/Toast";
+import { isValidEmail } from "../../lib/validation";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,6 +22,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [highlightStyle, setHighlightStyle] = useState({});
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
+  const [fieldErrors, setFieldErrors] = useState({});
   const tabRefs = useRef({});
   const router = useRouter();
   const { login } = useAuth();
@@ -39,22 +41,20 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errors = {};
 
     if (!email || !password) {
-      setToast({
-        show: true,
-        message: "Please enter both email and password.",
-        type: "error",
-      });
+      setToast({ show: true, message: "Please enter both email and password.", type: "error" });
       return;
     }
 
-    if (password.length < 6) {
-      setToast({
-        show: true,
-        message: "Password must be at least 6 characters long.",
-        type: "error",
-      });
+    if (!isValidEmail(email)) {
+      errors.email = "Invalid email format";
+    }
+
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
       return;
     }
 
@@ -165,19 +165,20 @@ const Login = () => {
                   <Mail className="absolute left-5 top-4 text-green-900 w-5 h-5" />
                   <input
                     type="email"
-                    className="w-full pl-14 pr-5 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
+                    className={`w-full pl-14 pr-5 py-3.5 bg-white/70 placeholder-gray-500 border ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-green-400'} rounded-full focus:outline-none focus:ring-2 text-gray-800 text-base`}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="someone@example.com"
                     required
                   />
+                  {fieldErrors.email && <p className="text-red-400 text-sm mt-1 px-4">{fieldErrors.email}</p>}
                 </div>
 
                 <div className="relative">
                   <Lock className="absolute left-5 top-4 text-green-900 w-5 h-5" />
                   <input
                     type={showPassword ? "text" : "password"}
-                    className="w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
+                    className={`w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border ${fieldErrors.password ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-green-400'} rounded-full focus:outline-none focus:ring-2 text-gray-800 text-base`}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="********"
@@ -190,6 +191,7 @@ const Login = () => {
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
+                  {fieldErrors.password && <p className="text-red-400 text-sm mt-1 px-4">{fieldErrors.password}</p>}
                 </div>
 
                 <div className="text-right text-sm">

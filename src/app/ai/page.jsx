@@ -539,14 +539,17 @@ const AIComponent = () => {
 
       if (!data) throw new Error("Server is busy. Please try again.");
 
+      const aiResponseText = data.success ? data.data.response : (data.response || "No response");
+      const returnedChatId = data.success ? data.data.chatId : data.chatId;
+
       setMessages((prev) => [
         ...prev,
-        { role: "ai", parts: [{ text: data.response }] },
+        { role: "ai", parts: [{ text: aiResponseText }] },
       ]);
 
-      if (data.chatId) {
-        setCurrentChatId(data.chatId);
-        if (!chats.some((c) => c._id === data.chatId)) fetchChats();
+      if (returnedChatId) {
+        setCurrentChatId(returnedChatId);
+        if (!chats.some((c) => c._id === returnedChatId)) fetchChats();
       }
     } catch (error) {
       if (error.name === "AbortError") {
@@ -558,7 +561,7 @@ const AIComponent = () => {
         showToast("error", "Free query limit reached. Please log in.");
         return;
       }
-      showToast("error", "Server is busy. Please try again in a few seconds.");
+      showToast("error", "AI is currently busy. Please try again.");
     } finally {
       setIsLoading(false);
     }
