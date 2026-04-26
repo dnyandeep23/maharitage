@@ -81,6 +81,13 @@ export async function POST(req) {
     quizConfig = {},
   } = await req.json();
 
+  if (!query || typeof query !== "string" || query.trim() === "") {
+    return NextResponse.json(
+      { success: false, error: "Query cannot be empty." },
+      { status: 400 }
+    );
+  }
+
   const authHeader = req.headers.get("Authorization");
   const token = authHeader?.split(" ")[1];
   const isQuizMode = Boolean(quizMode);
@@ -99,7 +106,8 @@ export async function POST(req) {
   // Quiz mode requires login
   if (isQuizMode && !user) {
     return NextResponse.json({
-      response: "Please log in to access the quiz feature.",
+      success: false,
+      error: "Please log in to access the quiz feature.",
       chatId: null,
     });
   }
@@ -108,7 +116,7 @@ export async function POST(req) {
   if (!user) {
     if (!fingerprint) {
       return NextResponse.json(
-        { error: "Fingerprint is required for anonymous users." },
+        { success: false, error: "Fingerprint is required for anonymous users." },
         { status: 400 }
       );
     }
@@ -116,7 +124,7 @@ export async function POST(req) {
     let usage = await AIUsage.findOne({ fingerprint });
     if (usage && usage.queryCount >= 3) {
       return NextResponse.json(
-        { error: "Query limit exceeded for anonymous users." },
+        { success: false, error: "Query limit exceeded for anonymous users." },
         { status: 429 }
       );
     }
@@ -433,7 +441,7 @@ Now provide a relevant, structured, and culturally rich answer following the rul
       }
     }
 
-    return NextResponse.json({ response: aiText, chatId: currentChatId });
+    return NextResponse.json({ success: true, data: { response: aiText, chatId: currentChatId } });
   } catch (error) {
     const status = extractErrorStatus(error);
     const isTransient = status === 429 || status === 503;
@@ -442,13 +450,13 @@ Now provide a relevant, structured, and culturally rich answer following the rul
 
     if (isTransient) {
       return NextResponse.json(
-        { error: "The AI model is currently busy. Please try again shortly." },
+        { success: false, error: "The AI model is currently busy. Please try again shortly." },
         { status: 503 }
       );
     }
 
     return NextResponse.json(
-      { error: "Failed to get response from AI." },
+      { success: false, error: "Failed to get response from AI." },
       { status: 500 }
     );
   }

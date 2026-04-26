@@ -10,6 +10,7 @@ import { Mail, Lock, Eye, EyeOff, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "../../contexts/AuthContext.jsx";
 import Toast from "../component/Toast";
+import { isValidEmail, isValidPassword, isValidUsername, getPasswordErrors } from "../../lib/validation";
 
 const Register = () => {
   const { register } = useAuth();
@@ -25,6 +26,7 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [highlightStyle, setHighlightStyle] = useState({});
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
+  const [fieldErrors, setFieldErrors] = useState({});
   const tabRefs = useRef({});
 
   const roleDisplay = {
@@ -47,50 +49,32 @@ const Register = () => {
 
   const validateForm = () => {
     const { username, email, password, confirmPassword } = formData;
+    const errors = {};
 
     if (!username || !email || !password || !confirmPassword) {
-      setToast({
-        show: true,
-        message: "Please fill in all required fields.",
-        type: "error",
-      });
+      setToast({ show: true, message: "Please fill in all required fields.", type: "error" });
       return false;
     }
 
-    if (username.length < 3) {
-      setToast({
-        show: true,
-        message: "Username must be at least 3 characters long.",
-        type: "error",
-      });
-      return false;
+    if (!isValidUsername(username)) {
+      errors.username = "Username must be 3-15 characters, contain only letters and numbers, and cannot be numbers only";
     }
 
-    if (password.length < 6) {
-      setToast({
-        show: true,
-        message: "Password must be at least 6 characters long.",
-        type: "error",
-      });
-      return false;
+    if (!isValidEmail(email)) {
+      errors.email = "Invalid email format";
+    }
+
+    if (!isValidPassword(password)) {
+      errors.password = getPasswordErrors(password)[0] || "Password must be at least 6 characters";
     }
 
     if (password !== confirmPassword) {
-      setToast({
-        show: true,
-        message: "Passwords do not match. Please try again.",
-        type: "error",
-      });
-      return false;
+      errors.confirmPassword = "Passwords do not match.";
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setToast({
-        show: true,
-        message: "Please enter a valid email address.",
-        type: "error",
-      });
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
       return false;
     }
 
@@ -221,12 +205,13 @@ const Register = () => {
                   <input
                     type="text"
                     name="username"
-                    className="w-full pl-14 pr-5 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
+                    className={`w-full pl-14 pr-5 py-3.5 bg-white/70 placeholder-gray-500 border ${fieldErrors.username ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-green-400'} rounded-full focus:outline-none focus:ring-2 text-gray-800 text-base`}
                     value={formData.username}
                     onChange={handleInputChange}
                     placeholder="Username"
                     required
                   />
+                  {fieldErrors.username && <p className="text-red-400 text-sm mt-1 px-4">{fieldErrors.username}</p>}
                 </div>
 
                 <div className="relative">
@@ -234,12 +219,13 @@ const Register = () => {
                   <input
                     type="email"
                     name="email"
-                    className="w-full pl-14 pr-5 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
+                    className={`w-full pl-14 pr-5 py-3.5 bg-white/70 placeholder-gray-500 border ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-green-400'} rounded-full focus:outline-none focus:ring-2 text-gray-800 text-base`}
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="someone@example.com"
                     required
                   />
+                  {fieldErrors.email && <p className="text-red-400 text-sm mt-1 px-4">{fieldErrors.email}</p>}
                 </div>
 
                 <div className="relative">
@@ -247,7 +233,7 @@ const Register = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
-                    className="w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
+                    className={`w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border ${fieldErrors.password ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-green-400'} rounded-full focus:outline-none focus:ring-2 text-gray-800 text-base`}
                     value={formData.password}
                     onChange={handleInputChange}
                     placeholder="Password (min 6 characters)"
@@ -260,6 +246,7 @@ const Register = () => {
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
+                  {fieldErrors.password && <p className="text-red-400 text-sm mt-1 px-4">{fieldErrors.password}</p>}
                 </div>
 
                 <div className="relative">
@@ -267,7 +254,7 @@ const Register = () => {
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
-                    className="w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
+                    className={`w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border ${fieldErrors.confirmPassword ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-green-400'} rounded-full focus:outline-none focus:ring-2 text-gray-800 text-base`}
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                     placeholder="Confirm Password"
@@ -284,6 +271,7 @@ const Register = () => {
                       <Eye size={20} />
                     )}
                   </button>
+                  {fieldErrors.confirmPassword && <p className="text-red-400 text-sm mt-1 px-4">{fieldErrors.confirmPassword}</p>}
                 </div>
 
                 <div className="text-xs text-center text-white/80 px-4">

@@ -11,6 +11,7 @@ import {
   sendEmail,
   getVerificationEmailTemplate,
 } from "../../../../lib/email.js";
+import { isValidEmail } from "../../../../lib/validation.js";
 
 export async function POST(request) {
   try {
@@ -42,6 +43,13 @@ export async function POST(request) {
           message: "Please provide all required fields",
           fields: missingFields,
         },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid email format" },
         { status: 400 }
       );
     }
