@@ -6,25 +6,20 @@ import React, {
   useEffect,
   useRef,
   useState,
-  useMemo,
 } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
-import AIChatLoading from "./AIChatLoading";
 import ChatSpin from "./ChatSpin";
+import StudentGameUI from "./StudentGameUI";
+import ProfessionalChatUI from "./ProfessionalChatUI";
 import {
   Plus,
-  History,
   MessageSquare,
-  Loader,
   Bot,
-  Square,
-  ArrowUp,
   X,
-  FileText,
+  Trash2,
   ImageIcon,
-  Paperclip,
   PanelLeft,
   PanelRight,
   GraduationCap,
@@ -33,245 +28,41 @@ import {
   RotateCcw,
   Trophy,
   Brain,
-  Zap,
-  LightbulbIcon,
   Home,
-  ChevronRight,
   Settings2,
+  User,
+  Gamepad2,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import Toast from "../component/Toast";
 import Image from "next/image";
 import Loading from "../loading";
 import { fetchWithInternalToken } from "../../lib/fetch";
 
-// ─── Shimmer Loading Skeleton ───────────────────────────────────────────────
-const ShimmerSkeleton = () => (
-  <div className="flex items-start gap-3">
-    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600/30 to-teal-700/20 flex items-center justify-center shrink-0 border border-white/10">
-      <Bot size={18} className="text-emerald-400/60" />
-    </div>
-    <div className="flex flex-col gap-2 w-64">
-      <div className="h-3 rounded-full bg-white/10 animate-pulse w-full" />
-      <div className="h-3 rounded-full bg-white/8 animate-pulse w-4/5" />
-      <div className="h-3 rounded-full bg-white/6 animate-pulse w-3/5" />
-    </div>
-  </div>
-);
+const getChatStorageKey = (audience, mode) =>
+  `currentChatId:${audience}:${mode}`;
 
-// ─── Message Renderer ────────────────────────────────────────────────────────
-const MessageRenderer = ({ text, onImageClick }) => {
-  const contentParts = useMemo(() => {
-    if (!text) return [];
-    const contentWithoutRefs = text.split("References:")[0].trim();
-    const imageRegex = /\[Image: (https?:\/\/[^\]]+)\]/g;
-    const parts = contentWithoutRefs.split(imageRegex);
-    const result = [];
-    let isImage = false;
-    for (const part of parts) {
-      if (isImage) {
-        result.push({ type: "image", url: part });
-      } else {
-        if (part.trim()) {
-          result.push({ type: "text", content: part.trim() });
-        }
-      }
-      isImage = !isImage;
-    }
-    return result;
-  }, [text]);
 
-  return (
-    <>
-      {contentParts.map((part, index) => {
-        if (part.type === "text") {
-          return (
-            <ReactMarkdown
-              key={index}
-              remarkPlugins={[remarkGfm]}
-              components={{
-                p: ({ node, children }) => (
-                  <p className="mb-3 leading-relaxed last:mb-0 text-slate-200">
-                    {children}
-                  </p>
-                ),
-                h1: ({ node, children }) => (
-                  <h1 className="text-xl font-bold my-4 text-white">{children}</h1>
-                ),
-                h2: ({ node, children }) => (
-                  <h2 className="text-lg font-bold my-3 text-white">{children}</h2>
-                ),
-                h3: ({ node, children }) => (
-                  <h3 className="text-base font-semibold my-2 text-emerald-300">{children}</h3>
-                ),
-                strong: ({ node, children }) => (
-                  <strong className="font-semibold text-emerald-300">{children}</strong>
-                ),
-                ul: ({ node, children }) => (
-                  <ul className="list-disc list-inside mb-3 pl-4 space-y-1 text-slate-300">
-                    {children}
-                  </ul>
-                ),
-                ol: ({ node, children }) => (
-                  <ol className="list-decimal list-inside mb-3 pl-4 space-y-1 text-slate-300">
-                    {children}
-                  </ol>
-                ),
-                li: ({ node, children }) => (
-                  <li className="mb-1.5 text-slate-300">{children}</li>
-                ),
-                table: ({ node, children }) => (
-                  <div className="overflow-x-auto my-4 rounded-xl border border-white/10">
-                    <table className="w-full text-sm border-collapse">
-                      {children}
-                    </table>
-                  </div>
-                ),
-                thead: ({ node, children }) => (
-                  <thead className="bg-emerald-900/40">{children}</thead>
-                ),
-                th: ({ node, children }) => (
-                  <th className="px-4 py-2.5 text-left font-semibold text-emerald-300 border-b border-white/10 text-xs uppercase tracking-wider">
-                    {children}
-                  </th>
-                ),
-                td: ({ node, children }) => (
-                  <td className="px-4 py-2.5 border-b border-white/5 text-slate-300">
-                    {children}
-                  </td>
-                ),
-                hr: () => <hr className="my-4 border-white/10" />,
-                code: ({ node, children }) => (
-                  <code className="px-1.5 py-0.5 rounded-md bg-white/10 text-emerald-300 text-sm font-mono">
-                    {children}
-                  </code>
-                ),
-              }}
-            >
-              {part.content}
-            </ReactMarkdown>
-          );
-        }
-        if (part.type === "image") {
-          return (
-            <div
-              key={index}
-              className="my-4 cursor-zoom-in"
-              onClick={() => onImageClick(part.url)}
-            >
-              <div className="relative group overflow-hidden rounded-2xl border border-white/10 bg-black/20 max-w-2xl shadow-xl">
-                <Image
-                  src={part.url}
-                  alt="Heritage image"
-                  width={1200}
-                  height={800}
-                  className="rounded-2xl object-cover w-full h-auto max-h-[420px] transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 group-hover:from-black/70 transition-all duration-300 flex items-end justify-end p-3">
-                  <div className="text-white text-xs font-medium px-3 py-1.5 rounded-full bg-black/50 backdrop-blur border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    🔍 Click to Enlarge
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        }
-        return null;
-      })}
-    </>
-  );
-};
-
-// ─── Premium Quiz Option Buttons ────────────────────────────────────────────
-const QuizOptionButtons = ({ text, onSelect, disabled }) => {
-  const [selected, setSelected] = useState(null);
-
-  const options = useMemo(() => {
-    if (!text) return [];
-    const optionRegex = /^\s*([A-D])\s*[).:\-]\s*(.+)$/gm;
-    const found = [];
-    let match;
-    while ((match = optionRegex.exec(text)) !== null) {
-      found.push({ letter: match[1], text: match[2].trim() });
-    }
-    return found.length >= 2 && found.length <= 6 ? found : [];
-  }, [text]);
-
-  // Reset selection when text changes (new question)
-  useEffect(() => {
-    setSelected(null);
-  }, [text]);
-
-  if (options.length === 0) return null;
-
-  const letterColors = {
-    A: "from-blue-500 to-blue-600",
-    B: "from-violet-500 to-purple-600",
-    C: "from-amber-500 to-orange-500",
-    D: "from-rose-500 to-pink-600",
-  };
-
-  return (
-    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-      {options.map((opt) => (
-        <button
-          key={opt.letter}
-          onClick={() => {
-            if (!disabled && !selected) {
-              setSelected(opt.letter);
-              onSelect(opt.letter);
-            }
-          }}
-          disabled={disabled || !!selected}
-          className={`
-            group flex items-center gap-3 px-4 py-3.5 rounded-2xl border text-left
-            transition-all duration-200 relative overflow-hidden
-            ${
-              selected === opt.letter
-                ? "border-emerald-400/60 bg-emerald-500/20 shadow-lg shadow-emerald-500/20 scale-[0.98]"
-                : selected
-                ? "border-white/5 bg-white/3 opacity-40 cursor-not-allowed"
-                : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:shadow-lg hover:shadow-black/20 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
-            }
-          `}
-        >
-          {/* Subtle shimmer on hover */}
-          {!selected && !disabled && (
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-transparent via-white/3 to-transparent" />
-          )}
-          <span
-            className={`w-8 h-8 shrink-0 rounded-xl bg-gradient-to-br ${letterColors[opt.letter] || "from-slate-500 to-slate-600"} flex items-center justify-center font-bold text-white text-sm shadow-sm`}
-          >
-            {opt.letter}
-          </span>
-          <span className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors leading-snug">
-            {opt.text}
-          </span>
-          {!selected && !disabled && (
-            <ChevronRight className="ml-auto w-4 h-4 text-white/20 group-hover:text-white/50 transition-colors shrink-0" />
-          )}
-        </button>
-      ))}
-    </div>
-  );
-};
 
 // ─── Main AI Component ───────────────────────────────────────────────────────
 const AIComponent = () => {
   const { user, loading: authLoading } = useAuth();
-  const messagesContainerRef = useRef(null);
-  const messagesEndRef = useRef(null);
   const abortControllerRef = useRef(null);
   const toastTimeoutRef = useRef(null);
+  const hasInitializedModeViewRef = useRef(false);
+  const suppressModeResetRef = useRef(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const isAtBottomRef = useRef(true);
 
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState([]);
   const [isChatActive, setIsChatActive] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isGlobalDragging, setIsGlobalDragging] = useState(false);
+  const [audienceType, setAudienceType] = useState("general");
+  const [isAudienceModalOpen, setIsAudienceModalOpen] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
   const [toast, setToast] = useState({ type: "", message: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [fingerprint, setFingerprint] = useState(null);
@@ -288,6 +79,11 @@ const AIComponent = () => {
   const [quizQuestionCount, setQuizQuestionCount] = useState(5);
   const [quizQuestionType, setQuizQuestionType] = useState("MCQ");
   const [quizSessionActive, setQuizSessionActive] = useState(false);
+  const [isQuizConfigExpanded, setIsQuizConfigExpanded] = useState(false);
+  const currentChatStorageKey = getChatStorageKey(audienceType, mode);
+  const visibleChats = chats.filter(
+    (chat) => (chat.audienceType || "general") === audienceType
+  );
 
   const handleOpenImagePreview = (src) =>
     setImagePreview({ isOpen: true, src });
@@ -334,23 +130,49 @@ const AIComponent = () => {
     if (q) setQuery(q);
   }, [searchParams]);
 
+  const handleNewChat = useCallback(() => {
+    setCurrentChatId(null);
+    setIsChatActive(false);
+    setMessages([]);
+    setQuizSessionActive(false);
+    sessionStorage.removeItem(currentChatStorageKey);
+  }, [currentChatStorageKey]);
+
   useEffect(() => {
     if (!user) return;
     fetchChats().then(() => {
-      const stored = sessionStorage.getItem("currentChatId");
+      const stored = sessionStorage.getItem(currentChatStorageKey);
       if (stored) handleSelectChat(stored);
       else setIsChatActive(false);
     });
-  }, [user, fetchChats]);
+  }, [currentChatStorageKey, user, fetchChats]);
 
   useEffect(() => {
     if (!user) setMode("chat");
   }, [user]);
 
+  useEffect(() => {
+    if (mode !== "quiz") {
+      setIsQuizConfigExpanded(false);
+    }
+  }, [mode]);
+
+  useEffect(() => {
+    if (!user) return;
+    if (!hasInitializedModeViewRef.current) {
+      hasInitializedModeViewRef.current = true;
+      return;
+    }
+    if (suppressModeResetRef.current) {
+      suppressModeResetRef.current = false;
+      return;
+    }
+    handleNewChat();
+  }, [audienceType, mode, user, handleNewChat]);
+
   const handleSelectChat = async (chatId) => {
     setIsChatLoading(true);
     setCurrentChatId(chatId);
-    sessionStorage.setItem("currentChatId", chatId);
     try {
       const token = localStorage.getItem("auth-token");
       const res = await fetchWithInternalToken(`/api/ai/chat/${chatId}`, {
@@ -358,14 +180,34 @@ const AIComponent = () => {
       });
       if (res.ok) {
         const data = await res.json();
+        const incomingMode = data.chat?.mode;
+        const incomingAudienceType = data.chat?.audienceType;
+        if (
+          (incomingMode && incomingMode !== mode) ||
+          (incomingAudienceType && incomingAudienceType !== audienceType)
+        ) {
+          suppressModeResetRef.current = true;
+        }
         setMessages(
           data.messages.map((msg) => ({
             role: msg.sender,
             parts: [{ text: msg.message }],
           }))
         );
+        if (data.chat?.mode) {
+          setMode(data.chat.mode);
+        }
+        if (data.chat?.audienceType) {
+          setAudienceType(data.chat.audienceType);
+        }
+        const storageAudience = data.chat?.audienceType || audienceType;
+        const storageMode = data.chat?.mode || mode;
+        sessionStorage.setItem(
+          getChatStorageKey(storageAudience, storageMode),
+          chatId
+        );
         setIsChatActive(true);
-        setQuizSessionActive(false);
+        setQuizSessionActive(data.chat?.mode === "quiz");
       } else throw new Error("Failed to load chat.");
     } catch (error) {
       showToast("error", error.message);
@@ -373,14 +215,6 @@ const AIComponent = () => {
       setIsChatLoading(false);
     }
   };
-
-  const handleNewChat = useCallback(() => {
-    setCurrentChatId(null);
-    setIsChatActive(false);
-    setMessages([]);
-    setQuizSessionActive(false);
-    sessionStorage.removeItem("currentChatId");
-  }, []);
 
   const suggestions = [
     "Tell me about Ajanta Caves.",
@@ -396,27 +230,6 @@ const AIComponent = () => {
     "Maharashtra Inscriptions",
   ];
 
-  const scrollToBottom = useCallback(() => {
-    requestAnimationFrame(() => {
-      const container = messagesContainerRef.current;
-      if (container) {
-        container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    if (isAtBottomRef.current) scrollToBottom();
-  }, [messages, isLoading, scrollToBottom]);
-
-  const handleScroll = useCallback(() => {
-    const container = messagesContainerRef.current;
-    if (!container) return;
-    const isBottom =
-      container.scrollHeight - container.scrollTop <=
-      container.clientHeight + 80;
-    isAtBottomRef.current = isBottom;
-  }, []);
 
   const showToast = (type, message) => {
     if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
@@ -427,13 +240,105 @@ const AIComponent = () => {
     }, 3000);
   };
 
-  const handleFileUpload = () => showToast("warning", "File upload coming soon!");
+  const handleDeleteChat = useCallback(
+    async (chatId) => {
+      try {
+        const token = localStorage.getItem("auth-token");
+        const res = await fetchWithInternalToken(`/api/ai/chat/${chatId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to delete chat.");
+        }
+
+        setChats((prev) => prev.filter((chat) => chat._id !== chatId));
+        if (currentChatId === chatId) {
+          handleNewChat();
+        }
+      } catch (error) {
+        showToast("error", error.message || "Unable to delete chat.");
+      }
+    },
+    [currentChatId, handleNewChat]
+  );
+
+  const processImageFiles = async (files) => {
+    if (!files || files.length === 0) return;
+    
+    if (selectedImages.length + files.length > 4) {
+      showToast("error", "You can upload a maximum of 4 images at a time.");
+      return;
+    }
+
+    const newImages = [];
+    
+    for (const file of Array.from(files)) {
+      if (!file.type.startsWith("image/")) {
+        showToast("error", "Only image files are supported.");
+        continue;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        showToast("error", `Image ${file.name} is larger than 5MB.`);
+        continue;
+      }
+
+      await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const base64String = e.target.result;
+          const base64Data = base64String.split(",")[1];
+          newImages.push({
+            id: Math.random().toString(36).substring(7),
+            file,
+            previewUrl: URL.createObjectURL(file),
+            base64: base64Data,
+            mimeType: file.type
+          });
+          resolve();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    if (newImages.length > 0) {
+      setSelectedImages((prev) => [...prev, ...newImages]);
+      setIsPopoverOpen(false);
+    }
+  };
+
+  const handleGlobalDragOver = (e) => {
+    e.preventDefault();
+    if (!isGlobalDragging) setIsGlobalDragging(true);
+  };
+
+  const handleGlobalDragLeave = (e) => {
+    e.preventDefault();
+    if (e.relatedTarget === null || e.relatedTarget?.nodeName === "HTML") {
+      setIsGlobalDragging(false);
+    }
+  };
+
+  const handleGlobalDrop = async (e) => {
+    e.preventDefault();
+    setIsGlobalDragging(false);
+    const files = e.dataTransfer.files;
+    if (files?.length) {
+      await processImageFiles(files);
+    }
+  };
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
   const handleQuery = async (e, customQuery, startNewChat = false) => {
     e?.preventDefault();
     let actualQuery = customQuery || query;
+    const isSilentQuizAnswer =
+      mode === "quiz" && /^[A-D]$/i.test(actualQuery.trim());
 
     // If quiz mode and no query text, build a meaningful quiz prompt
     if (!actualQuery.trim() && mode === "quiz") {
@@ -456,13 +361,38 @@ const AIComponent = () => {
     if (!isChatActive) setIsChatActive(true);
     if (mode === "quiz" && startNewChat) setQuizSessionActive(true);
 
-    const newMessage = { role: "user", parts: [{ text: actualQuery }] };
+    const newMessageParts = [{ text: actualQuery }];
+    let inlineDataArray = [];
+    let attachedImagesData = [];
+
+    if (selectedImages.length > 0) {
+      inlineDataArray = selectedImages.map(img => ({
+        mimeType: img.mimeType,
+        data: img.base64
+      }));
+      attachedImagesData = selectedImages.map(img => `data:${img.mimeType};base64,${img.base64}`);
+    }
+
+    const newMessage = {
+      role: "user",
+      parts: newMessageParts,
+      attachedImages: attachedImagesData,
+      hidden: isSilentQuizAnswer,
+    };
     const currentMessages = startNewChat ? [] : messages;
     const currentId = startNewChat ? null : currentChatId;
-    const updatedMessages = [...currentMessages, newMessage];
+    const updatedMessages = isSilentQuizAnswer
+      ? currentMessages
+      : [...currentMessages, newMessage];
 
     setMessages(updatedMessages);
     setQuery("");
+    
+    // Clear images immediately after submitting
+    selectedImages.forEach(img => {
+      if (img.previewUrl) URL.revokeObjectURL(img.previewUrl);
+    });
+    setSelectedImages([]);
     setIsLoading(true);
 
     const controller = new AbortController();
@@ -495,7 +425,9 @@ const AIComponent = () => {
                 difficulty: quizDifficulty,
                 questionCount: quizQuestionCount,
                 questionType: quizQuestionType,
+                audienceType,
               },
+              imageDatas: inlineDataArray,
             }),
             signal: controller.signal,
           });
@@ -581,63 +513,7 @@ const AIComponent = () => {
     setIsLoading(false);
   };
 
-  const formatTimestamp = (timestamp) => {
-    if (!timestamp) return "";
-    const date = new Date(timestamp);
-    const today = new Date();
-    if (date.toDateString() === today.toDateString()) {
-      return date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-    }
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  };
-
   if (authLoading) return <Loading to="AI Chat" />;
-
-  // ─── Modals ───────────────────────────────────────────────────────────────
-  const FileUploadModal = () => (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 px-4">
-      <div
-        className="bg-[#1a2332] border border-white/10 rounded-3xl p-6 w-full max-w-md shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex justify-between items-start mb-5">
-          <div>
-            <h2 className="text-lg font-semibold text-white">Attach Files</h2>
-            <p className="text-sm text-slate-400 mt-1">
-              Add context to improve responses.
-            </p>
-          </div>
-          <button
-            onClick={() => setIsModalOpen(false)}
-            className="p-1.5 rounded-full hover:bg-white/10 transition text-slate-400 hover:text-white"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-        <div className="space-y-3">
-          {[
-            { icon: <FileText className="w-5 h-5 text-blue-400" />, label: "Upload a Document", accept: ".doc,.docx,.txt" },
-            { icon: <ImageIcon className="w-5 h-5 text-emerald-400" />, label: "Upload an Image", accept: "image/*" },
-            { icon: <Paperclip className="w-5 h-5 text-rose-400" />, label: "Upload a PDF", accept: "application/pdf" },
-          ].map(({ icon, label, accept }) => (
-            <label
-              key={label}
-              className="w-full flex items-center gap-4 p-4 border border-white/10 rounded-2xl cursor-pointer hover:bg-white/5 hover:border-white/20 transition"
-            >
-              {icon}
-              <span className="font-medium text-slate-300">{label}</span>
-              <input
-                type="file"
-                accept={accept}
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-            </label>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
 
   const ImagePreviewModal = ({ src, onClose }) => (
     <div
@@ -673,7 +549,21 @@ const AIComponent = () => {
         background:
           "radial-gradient(ellipse at 20% 50%, #0d2818 0%, #0f1117 40%, #1a1a2e 70%, #0f1117 100%)",
       }}
+      onDragOver={handleGlobalDragOver}
+      onDragLeave={handleGlobalDragLeave}
+      onDrop={handleGlobalDrop}
     >
+      {/* Global Drag Overlay */}
+      {isGlobalDragging && (
+        <div className="absolute inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center pointer-events-none">
+          <div className="border-4 border-dashed border-emerald-500 rounded-3xl p-16 flex flex-col items-center justify-center bg-emerald-900/20 shadow-2xl shadow-emerald-500/20">
+            <ImageIcon className="w-16 h-16 text-emerald-400 mb-6 animate-bounce" />
+            <h2 className="text-3xl font-bold text-white tracking-wide">Drop image here</h2>
+            <p className="text-slate-300 mt-2 text-lg">to attach to your message</p>
+          </div>
+        </div>
+      )}
+
       {/* Background mesh decoration */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div
@@ -693,7 +583,63 @@ const AIComponent = () => {
           onClose={() => setToast({ type: "", message: "" })}
         />
       )}
-      {isModalOpen && <FileUploadModal />}
+
+      {/* Audience Selection Modal */}
+      {isAudienceModalOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-[#151821] border border-white/10 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl relative">
+            <button
+              onClick={() => setIsAudienceModalOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition"
+            >
+              <X size={20} />
+            </button>
+            <div className="p-8">
+              <h2 className="text-2xl font-bold text-white mb-2 text-center">Choose Your Audience</h2>
+              <p className="text-slate-400 text-sm text-center mb-8">Select how the AI should interact with you.</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button
+                  onClick={() => {
+                    setAudienceType("general");
+                    setIsAudienceModalOpen(false);
+                  }}
+                  className={`flex flex-col items-center text-center p-6 rounded-2xl border-2 transition-all duration-200 ${
+                    audienceType === "general"
+                      ? "border-emerald-500 bg-emerald-500/10"
+                      : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20"
+                  }`}
+                >
+                  <div className="w-14 h-14 rounded-full bg-blue-500/20 flex items-center justify-center mb-4 text-blue-400">
+                    <User size={28} />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">General</h3>
+                  <p className="text-xs text-slate-400">Professional, standard heritage exploration.</p>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setAudienceType("student");
+                    setIsAudienceModalOpen(false);
+                  }}
+                  className={`flex flex-col items-center text-center p-6 rounded-2xl border-2 transition-all duration-200 ${
+                    audienceType === "student"
+                      ? "border-emerald-500 bg-emerald-500/10"
+                      : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20"
+                  }`}
+                >
+                  <div className="w-14 h-14 rounded-full bg-amber-500/20 flex items-center justify-center mb-4 text-amber-400">
+                    <Gamepad2 size={28} />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">Student</h3>
+                  <p className="text-xs text-slate-400">Fun, gamified learning experience with rewards!</p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {imagePreview.isOpen && (
         <ImagePreviewModal
           src={imagePreview.src}
@@ -781,157 +727,217 @@ const AIComponent = () => {
                       ))}
                     </div>
 
+                    {/* Audience Switcher */}
+                    <div className="mt-4 flex items-center justify-between p-3 rounded-xl border border-white/5 bg-white/5">
+                      <div>
+                        <p className="text-xs font-semibold text-slate-300">Audience</p>
+                        <p className="text-[10px] text-emerald-400 capitalize">{audienceType} Mode</p>
+                      </div>
+                      <button
+                        onClick={() => setIsAudienceModalOpen(true)}
+                        className="px-3 py-1.5 text-xs font-medium rounded-lg bg-white/10 hover:bg-white/20 text-white transition"
+                      >
+                        Change
+                      </button>
+                    </div>
+
                     {/* Quiz Config */}
                     {mode === "quiz" && (
-                      <div className="mt-3 space-y-2.5">
-                        <p className="text-xs text-slate-500">
-                          Leave topic blank for a full-dataset quiz.
-                        </p>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            value={quizTopic}
-                            onChange={(e) => setQuizTopic(e.target.value)}
-                            placeholder="Topic (optional)"
-                            className="w-full px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200 placeholder-slate-500"
-                            style={{
-                              background: "rgba(255,255,255,0.06)",
-                              border: "1px solid rgba(255,255,255,0.1)",
-                            }}
-                            onFocus={(e) =>
-                              (e.target.style.borderColor =
-                                "rgba(16,185,129,0.5)")
-                            }
-                            onBlur={(e) =>
-                              (e.target.style.borderColor =
-                                "rgba(255,255,255,0.1)")
-                            }
-                          />
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                          <select
-                            value={quizDifficulty}
-                            onChange={(e) => setQuizDifficulty(e.target.value)}
-                            className="px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200"
-                            style={{
-                              background: "rgba(255,255,255,0.06)",
-                              border: "1px solid rgba(255,255,255,0.1)",
-                            }}
-                          >
-                            <option value="Easy">Easy</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Hard">Hard</option>
-                          </select>
-                          <select
-                            value={quizQuestionType}
-                            onChange={(e) => setQuizQuestionType(e.target.value)}
-                            className="px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200"
-                            style={{
-                              background: "rgba(255,255,255,0.06)",
-                              border: "1px solid rgba(255,255,255,0.1)",
-                            }}
-                          >
-                            <option value="MCQ">MCQ</option>
-                            <option value="Short Answer">Short Ans.</option>
-                            <option value="Mixed">Mixed</option>
-                          </select>
-                        </div>
-                        <input
-                          type="number"
-                          min={1}
-                          max={20}
-                          value={quizQuestionCount}
-                          onChange={(e) => {
-                            const v = parseInt(e.target.value || "1", 10);
-                            setQuizQuestionCount(
-                              Number.isFinite(v)
-                                ? Math.min(Math.max(v, 1), 20)
-                                : 5
-                            );
-                          }}
-                          className="w-full px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200 placeholder-slate-500"
-                          placeholder="Questions (1-20)"
-                          style={{
-                            background: "rgba(255,255,255,0.06)",
-                            border: "1px solid rgba(255,255,255,0.1)",
-                          }}
-                        />
+                      <div className="mt-3">
                         <button
                           type="button"
-                          onClick={(e) => handleQuery(e, "", true)}
-                          className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm rounded-xl font-semibold text-white transition-all duration-200 active:scale-[0.97] shadow-lg"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
-                            boxShadow: "0 4px 15px rgba(5,150,105,0.35)",
-                          }}
-                          onMouseEnter={(e) =>
-                            (e.currentTarget.style.boxShadow =
-                              "0 6px 20px rgba(5,150,105,0.5)")
+                          onClick={() =>
+                            setIsQuizConfigExpanded((prev) => !prev)
                           }
-                          onMouseLeave={(e) =>
-                            (e.currentTarget.style.boxShadow =
-                              "0 4px 15px rgba(5,150,105,0.35)")
-                          }
+                          className="w-full flex items-center justify-between rounded-xl border border-white/8 bg-white/5 px-3 py-3 text-left transition hover:bg-white/8"
                         >
-                          <BookOpenCheck className="w-4 h-4" />
-                          Start New Quiz
+                          <div>
+                            <p className="text-xs font-semibold text-slate-200">
+                              Quiz Setup
+                            </p>
+                            <p className="text-[11px] text-slate-500 mt-1">
+                              {quizTopic?.trim() || "All heritage topics"} ·{" "}
+                              {quizDifficulty} · {quizQuestionType} ·{" "}
+                              {quizQuestionCount} Qs
+                            </p>
+                          </div>
+                          {isQuizConfigExpanded ? (
+                            <ChevronUp className="w-4 h-4 text-slate-400" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4 text-slate-400" />
+                          )}
                         </button>
 
-                        {/* Quick topic suggestions */}
-                        <div>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">
-                            Quick topics
-                          </p>
-                          <div className="flex flex-wrap gap-1.5">
-                            {quizSuggestions.map((s) => (
-                              <button
-                                key={s}
-                                onClick={() => setQuizTopic(s)}
-                                className="text-xs px-2.5 py-1 rounded-lg text-emerald-400 transition-all"
+                        {isQuizConfigExpanded && (
+                          <div className="mt-3 space-y-2.5 max-h-[46vh] overflow-y-auto pr-1 scrollbar-thin">
+                            <p className="text-xs text-slate-500">
+                              Leave topic blank for a full-dataset quiz.
+                            </p>
+                            <div className="relative">
+                              <input
+                                type="text"
+                                value={quizTopic}
+                                onChange={(e) => setQuizTopic(e.target.value)}
+                                placeholder="Topic (optional)"
+                                className="w-full px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200 placeholder-slate-500"
                                 style={{
-                                  background: "rgba(16,185,129,0.1)",
-                                  border: "1px solid rgba(16,185,129,0.2)",
+                                  background: "rgba(255,255,255,0.06)",
+                                  border: "1px solid rgba(255,255,255,0.1)",
                                 }}
-                                onMouseEnter={(e) =>
-                                  (e.currentTarget.style.background =
-                                    "rgba(16,185,129,0.2)")
+                                onFocus={(e) =>
+                                  (e.target.style.borderColor =
+                                    "rgba(16,185,129,0.5)")
                                 }
-                                onMouseLeave={(e) =>
-                                  (e.currentTarget.style.background =
-                                    "rgba(16,185,129,0.1)")
+                                onBlur={(e) =>
+                                  (e.target.style.borderColor =
+                                    "rgba(255,255,255,0.1)")
                                 }
+                              />
+                            </div>
+                            <div className="grid grid-cols-2 gap-2">
+                              <select
+                                value={quizDifficulty}
+                                onChange={(e) => setQuizDifficulty(e.target.value)}
+                                className="px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200"
+                                style={{
+                                  background: "rgba(255,255,255,0.06)",
+                                  border: "1px solid rgba(255,255,255,0.1)",
+                                }}
                               >
-                                {s}
-                              </button>
-                            ))}
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                              </select>
+                              <select
+                                value={quizQuestionType}
+                                onChange={(e) => setQuizQuestionType(e.target.value)}
+                                className="px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200"
+                                style={{
+                                  background: "rgba(255,255,255,0.06)",
+                                  border: "1px solid rgba(255,255,255,0.1)",
+                                }}
+                              >
+                                <option value="MCQ">MCQ</option>
+                                <option value="Short Answer">Short Ans.</option>
+                                <option value="Mixed">Mixed</option>
+                              </select>
+                            </div>
+                            <input
+                              type="number"
+                              min={1}
+                              max={20}
+                              value={quizQuestionCount}
+                              onChange={(e) => {
+                                const v = parseInt(e.target.value || "1", 10);
+                                setQuizQuestionCount(
+                                  Number.isFinite(v)
+                                    ? Math.min(Math.max(v, 1), 20)
+                                    : 5
+                                );
+                              }}
+                              className="w-full px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200 placeholder-slate-500"
+                              placeholder="Questions (1-20)"
+                              style={{
+                                background: "rgba(255,255,255,0.06)",
+                                border: "1px solid rgba(255,255,255,0.1)",
+                              }}
+                            />
+                            <button
+                              type="button"
+                              onClick={(e) => handleQuery(e, "", true)}
+                              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm rounded-xl font-semibold text-white transition-all duration-200 active:scale-[0.97] shadow-lg"
+                              style={{
+                                background:
+                                  "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
+                                boxShadow: "0 4px 15px rgba(5,150,105,0.35)",
+                              }}
+                              onMouseEnter={(e) =>
+                                (e.currentTarget.style.boxShadow =
+                                  "0 6px 20px rgba(5,150,105,0.5)")
+                              }
+                              onMouseLeave={(e) =>
+                                (e.currentTarget.style.boxShadow =
+                                  "0 4px 15px rgba(5,150,105,0.35)")
+                              }
+                            >
+                              <BookOpenCheck className="w-4 h-4" />
+                              Start New Quiz
+                            </button>
+
+                            <div>
+                              <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">
+                                Quick topics
+                              </p>
+                              <div className="flex flex-wrap gap-1.5">
+                                {quizSuggestions.map((s) => (
+                                  <button
+                                    key={s}
+                                    onClick={() => setQuizTopic(s)}
+                                    className="text-xs px-2.5 py-1 rounded-lg text-emerald-400 transition-all"
+                                    style={{
+                                      background: "rgba(16,185,129,0.1)",
+                                      border: "1px solid rgba(16,185,129,0.2)",
+                                    }}
+                                    onMouseEnter={(e) =>
+                                      (e.currentTarget.style.background =
+                                        "rgba(16,185,129,0.2)")
+                                    }
+                                    onMouseLeave={(e) =>
+                                      (e.currentTarget.style.background =
+                                        "rgba(16,185,129,0.1)")
+                                    }
+                                  >
+                                    {s}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     )}
                   </div>
 
                   {/* Chat List */}
+                  <div className="px-1 shrink-0">
+                    <button
+                      onClick={handleNewChat}
+                      className="w-full rounded-2xl border border-dashed px-4 py-3 text-left transition-all duration-200 hover:bg-white/6 hover:border-emerald-400/30"
+                      style={{
+                        background: "rgba(255,255,255,0.03)",
+                        borderColor: "rgba(255,255,255,0.12)",
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-300 flex items-center justify-center">
+                          <Plus size={16} />
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-white">New Chat</p>
+                          <p className="text-[11px] text-slate-500">
+                            Start a fresh {audienceType} conversation
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
                   <div className="flex justify-between items-center px-1 shrink-0">
                     <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
                       Conversations
                     </span>
-                    <button
-                      onClick={handleNewChat}
-                      className="p-1.5 rounded-lg hover:bg-white/10 transition text-slate-400 hover:text-white"
-                    >
-                      <Plus size={14} />
-                    </button>
+                    <span className="text-[10px] text-slate-600 capitalize">
+                      {audienceType} only
+                    </span>
                   </div>
                   <div className="flex-1 min-h-0 overflow-y-auto space-y-1 pr-1 scrollbar-thin">
                     {isChatListLoading ? (
                       <ChatSpin />
-                    ) : chats.length === 0 ? (
+                    ) : visibleChats.length === 0 ? (
                       <p className="text-xs text-slate-600 text-center py-6">
                         No conversations yet
                       </p>
                     ) : (
-                      chats.map((chat) => (
+                      visibleChats.map((chat) => (
                         <div
                           key={chat._id}
                           onClick={() => handleSelectChat(chat._id)}
@@ -961,7 +967,34 @@ const AIComponent = () => {
                           }}
                         >
                           <MessageSquare className="w-3.5 h-3.5 shrink-0 text-emerald-500/60" />
-                          <span className="text-xs truncate">{chat.title}</span>
+                          <div className="min-w-0 flex-1">
+                            <span className="text-xs truncate block">{chat.title}</span>
+                            <div className="flex items-center gap-1.5 mt-1">
+                              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/8 text-slate-300 capitalize">
+                                {chat.audienceType || "general"}
+                              </span>
+                              <span
+                                className={`text-[10px] px-1.5 py-0.5 rounded-full capitalize ${
+                                  chat.mode === "quiz"
+                                    ? "bg-amber-500/15 text-amber-300"
+                                    : "bg-emerald-500/15 text-emerald-300"
+                                }`}
+                              >
+                                {chat.mode || "chat"}
+                              </span>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteChat(chat._id);
+                            }}
+                            className="p-1.5 rounded-lg text-slate-500 hover:text-red-300 hover:bg-red-500/10 transition opacity-0 group-hover:opacity-100"
+                            aria-label="Delete chat"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
                         </div>
                       ))
                     )}
@@ -1096,308 +1129,52 @@ const AIComponent = () => {
           </button>
         </div>
 
-        {/* Chat / Welcome area */}
-        {!isChatActive ? (
-          <div className="flex-1 min-h-0 flex flex-col items-center justify-center text-center px-4 py-10 overflow-y-auto">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-6"
-              style={{
-                background: "rgba(16,185,129,0.1)",
-                border: "1px solid rgba(16,185,129,0.2)",
-                color: "#34d399",
-              }}
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              {mode === "quiz" ? "Quiz Master" : "AI Heritage Assistant"}
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-white">
-              {mode === "quiz" ? (
-                <>
-                  Ready to{" "}
-                  <span
-                    className="bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(135deg, #10b981, #0d9488)",
-                    }}
-                  >
-                    test your knowledge?
-                  </span>
-                </>
-              ) : (
-                <>
-                  Hello,{" "}
-                  <span
-                    className="bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(135deg, #10b981, #0d9488)",
-                    }}
-                  >
-                    {user?.username || "Explorer"}
-                  </span>
-                </>
-              )}
-            </h1>
-            <p className="text-slate-400 mb-10 max-w-xl text-sm sm:text-base leading-relaxed">
-              {mode === "quiz"
-                ? "Configure your quiz from the sidebar and click 'Start New Quiz', or pick a quick topic below."
-                : "Ask anything about Maharashtra's history, monuments, inscriptions, and rich cultural heritage."}
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-2xl">
-              {(mode === "quiz" ? quizSuggestions : suggestions).map(
-                (text, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleSuggestion(text)}
-                    className="group flex items-center gap-4 p-4 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.background =
-                        "rgba(16,185,129,0.08)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background =
-                        "rgba(255,255,255,0.04)")
-                    }
-                  >
-                    <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ background: "rgba(16,185,129,0.15)" }}
-                    >
-                      <LightbulbIcon className="w-4 h-4 text-emerald-400" />
-                    </div>
-                    <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
-                      {text}
-                    </span>
-                    <ChevronRight className="ml-auto w-4 h-4 text-slate-600 group-hover:text-emerald-400 transition-colors shrink-0" />
-                  </button>
-                )
-              )}
-            </div>
-          </div>
-        ) : (
-          <div
-            ref={messagesContainerRef}
-            onScroll={handleScroll}
-            className="flex-1 min-h-0 overflow-y-auto px-4 sm:px-6 lg:px-10 py-6 space-y-5"
-          >
-            <div className="mx-auto w-full max-w-4xl space-y-5">
-              {isChatLoading ? (
-                <div className="flex justify-center items-center h-40">
-                  <AIChatLoading />
-                </div>
-              ) : (
-                messages.map((msg, i) => {
-                  const isLastAiMsg =
-                    msg.role === "ai" && i === messages.length - 1;
-                  const showQuizButtons =
-                    isLastAiMsg && mode === "quiz" && !isLoading;
-
-                  return (
-                    <div
-                      key={i}
-                      className={`flex items-end gap-3 ${
-                        msg.role === "user" ? "justify-end" : "justify-start"
-                      }`}
-                    >
-                      {msg.role === "ai" && (
-                        <div
-                          className="w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 shadow-lg mb-1"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, #059669, #0d9488)",
-                            boxShadow: "0 4px 12px rgba(5,150,105,0.3)",
-                          }}
-                        >
-                          <Bot size={16} className="text-white" />
-                        </div>
-                      )}
-                      <div
-                        className={`flex flex-col ${
-                          msg.role === "user" ? "items-end" : "items-start"
-                        } max-w-[88%] sm:max-w-[78%] lg:max-w-[72%]`}
-                      >
-                        <div
-                          className={`px-5 py-4 rounded-3xl text-sm leading-relaxed ${
-                            msg.role === "user"
-                              ? "rounded-br-lg text-white"
-                              : "rounded-bl-lg text-slate-200"
-                          }`}
-                          style={
-                            msg.role === "user"
-                              ? {
-                                  background:
-                                    "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
-                                  boxShadow:
-                                    "0 4px 20px rgba(5,150,105,0.25)",
-                                }
-                              : {
-                                  background: "rgba(255,255,255,0.05)",
-                                  border: "1px solid rgba(255,255,255,0.08)",
-                                  backdropFilter: "blur(8px)",
-                                  boxShadow:
-                                    "0 4px 20px rgba(0,0,0,0.2)",
-                                }
-                          }
-                        >
-                          {msg.role === "ai" ? (
-                            <MessageRenderer
-                              text={msg.parts[0].text}
-                              onImageClick={handleOpenImagePreview}
-                            />
-                          ) : (
-                            <p>{msg.parts[0].text}</p>
-                          )}
-                        </div>
-                        {showQuizButtons && (
-                          <QuizOptionButtons
-                            text={msg.parts[0].text}
-                            disabled={isLoading}
-                            onSelect={(letter) => handleQuery(null, letter)}
-                          />
-                        )}
-                      </div>
-                      {msg.role === "user" && (
-                        <div
-                          className="w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 font-bold text-sm text-white mb-1"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, #065f46, #0f766e)",
-                          }}
-                        >
-                          {user?.username?.[0]?.toUpperCase() || "A"}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })
-              )}
-
-              {/* Loading shimmer */}
-              {isLoading && (
-                <div className="flex justify-start">
-                  <ShimmerSkeleton />
-                </div>
-              )}
-
-              {/* Anonymous limit */}
-              {isAnonymousLimited && (
-                <div
-                  className="text-center text-sm p-4 rounded-2xl"
-                  style={{
-                    background: "rgba(239,68,68,0.1)",
-                    border: "1px solid rgba(239,68,68,0.2)",
-                    color: "#f87171",
-                  }}
-                >
-                  You have reached your message limit.{" "}
-                  <a href="/login" className="font-bold underline text-rose-300">
-                    Log in
-                  </a>{" "}
-                  to continue chatting.
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-          </div>
-        )}
-
-        {/* ── Input Bar ─────────────────────────────────────────────── */}
-        <div
-          className="shrink-0 px-4 sm:px-6 lg:px-10 py-4 border-t"
-          style={{
-            background: "rgba(15,17,23,0.8)",
-            backdropFilter: "blur(20px)",
-            borderColor: "rgba(255,255,255,0.06)",
-          }}
-        >
-          <div
-            className="relative mx-auto max-w-4xl rounded-2xl transition-all duration-200"
-            style={{
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+        {/* ── Conditional UI Rendering ─────────────────────── */}
+        {audienceType === "student" && mode === "quiz" ? (
+          <StudentGameUI
+            messages={messages}
+            isLoading={isLoading}
+            handleQuery={handleQuery}
+            onNewQuiz={() => handleQuery(null, "", true)}
+            quizConfig={{
+              topic: quizTopic,
+              difficulty: quizDifficulty,
+              questionCount: quizQuestionCount,
+              questionType: quizQuestionType,
             }}
-          >
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={
-                isAnonymousLimited
-                  ? "Please log in to continue…"
-                  : mode === "quiz"
-                  ? "Type your answer (A, B, C or D)…"
-                  : "Ask anything about Maharashtra Heritage…"
-              }
-              className="w-full bg-transparent border-0 rounded-2xl pl-12 pr-14 py-4 outline-none text-slate-100 placeholder-slate-500 text-sm"
-              onKeyDown={(e) => e.key === "Enter" && handleQuery(e)}
-              disabled={isAnonymousLimited}
-              onFocus={(e) => {
-                e.currentTarget.parentElement.style.borderColor =
-                  "rgba(16,185,129,0.4)";
-                e.currentTarget.parentElement.style.boxShadow =
-                  "0 8px 32px rgba(0,0,0,0.3), 0 0 0 3px rgba(16,185,129,0.1)";
-              }}
-              onBlur={(e) => {
-                e.currentTarget.parentElement.style.borderColor =
-                  "rgba(255,255,255,0.1)";
-                e.currentTarget.parentElement.style.boxShadow =
-                  "0 8px 32px rgba(0,0,0,0.3)";
-              }}
-            />
-            {/* Left button */}
-            <div className="absolute left-3 top-1/2 -translate-y-1/2">
-              <button
-                type="button"
-                onClick={() => setIsModalOpen(true)}
-                disabled={isAnonymousLimited}
-                className="p-1.5 rounded-xl hover:bg-white/10 transition text-slate-500 hover:text-slate-300"
-              >
-                <Plus className="w-5 h-5" />
-              </button>
-            </div>
-            {/* Right button */}
-            <div className="absolute right-2.5 top-1/2 -translate-y-1/2">
-              {isLoading ? (
-                <button
-                  type="button"
-                  onClick={handleStop}
-                  className="rounded-xl p-2.5 text-white transition active:scale-95"
-                  style={{ background: "rgba(239,68,68,0.8)" }}
-                >
-                  <Square className="w-4 h-4" />
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  onClick={handleQuery}
-                  disabled={
-                    isAnonymousLimited ||
-                    (!query.trim() && !(mode === "quiz"))
-                  }
-                  className="rounded-xl p-2.5 text-white transition hover:scale-105 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
-                    boxShadow: "0 4px 12px rgba(5,150,105,0.35)",
-                  }}
-                >
-                  <ArrowUp className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </div>
-          <p className="text-center text-[10px] text-slate-600 mt-2.5">
-            HeritageX is focused on Maharashtra heritage. Responses may not be
-            perfect.
-          </p>
-        </div>
+          />
+        ) : (
+          <ProfessionalChatUI
+            messages={messages}
+            isLoading={isLoading}
+            isChatActive={isChatActive}
+            isChatLoading={isChatLoading}
+            isAnonymousLimited={isAnonymousLimited}
+            mode={mode}
+            query={query}
+            setQuery={setQuery}
+            handleQuery={handleQuery}
+            handleSuggestion={handleSuggestion}
+            handleStop={handleStop}
+            handleOpenImagePreview={handleOpenImagePreview}
+            user={user}
+            suggestions={suggestions}
+            quizSuggestions={quizSuggestions}
+            quizSessionActive={quizSessionActive}
+            selectedImages={selectedImages}
+            setSelectedImages={setSelectedImages}
+            processImageFiles={processImageFiles}
+            isPopoverOpen={isPopoverOpen}
+            setIsPopoverOpen={setIsPopoverOpen}
+            audienceType={audienceType}
+            quizConfig={{
+              topic: quizTopic,
+              difficulty: quizDifficulty,
+              questionCount: quizQuestionCount,
+              questionType: quizQuestionType,
+            }}
+          />
+        )}
       </main>
     </div>
   );
