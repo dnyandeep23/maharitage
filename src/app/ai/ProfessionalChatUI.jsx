@@ -786,7 +786,7 @@ const ProfessionalChatUI = ({
                         >
                           {msg.role === "ai" ? (
                             <MessageRenderer
-                              text={msg.parts[0].text}
+                              text={msg.isStreaming ? msg.parts[0].text + " █" : msg.parts[0].text}
                               onImageClick={handleOpenImagePreview}
                             />
                           ) : (
@@ -955,7 +955,10 @@ const ProfessionalChatUI = ({
           </div>
         </div>
         <p className="text-center text-[10px] text-slate-600 mt-2.5">
-          HeritageX is focused on Maharashtra heritage. Responses may not be perfect.
+          HeritageX was developed to support academic activity at Sardar Patel Institute of Technology.
+        </p>
+        <p className="text-center text-[10px] text-slate-600 mt-1">
+          Developers: Dnyandeep Gaonkar, Rudrapratapsing Rajput, Shreeya Nemade
         </p>
       </div>
     </>

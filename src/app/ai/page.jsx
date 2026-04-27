@@ -444,31 +444,81 @@ const AIComponent = () => {
             signal: controller.signal,
           });
 
-          let payload = {};
-          try {
-            payload = await res.json();
-          } catch (_) {}
+          if (!res.ok) {
+            let payload = {};
+            try {
+              payload = await res.json();
+            } catch (_) {}
 
-          if (res.ok) {
-            data = payload;
-            break;
+            const serverMessage = payload?.error || payload?.response || "";
+            const isLimited =
+              typeof serverMessage === "string" &&
+              serverMessage.includes("Query limit exceeded");
+            const isBusy =
+              res.status === 429 || res.status === 503 || res.status >= 500;
+
+            if (isLimited) throw new Error("Query limit exceeded");
+            if (isBusy && attempt < maxAttempts) {
+              showToast("warning", "AI is busy. Retrying…");
+              await sleep(retryDelays[attempt - 1]);
+              continue;
+            }
+            if (isBusy) throw new Error("Server is busy. Please try again.");
+            throw new Error("Unable to process your request right now.");
           }
 
-          const serverMessage = payload?.error || payload?.response || "";
-          const isLimited =
-            typeof serverMessage === "string" &&
-            serverMessage.includes("Query limit exceeded");
-          const isBusy =
-            res.status === 429 || res.status === 503 || res.status >= 500;
-
-          if (isLimited) throw new Error("Query limit exceeded");
-          if (isBusy && attempt < maxAttempts) {
-            showToast("warning", "AI is busy. Retrying…");
-            await sleep(retryDelays[attempt - 1]);
-            continue;
+          // Successful streaming response
+          const returnedChatId = res.headers.get("X-Chat-Id");
+          if (returnedChatId) {
+            setCurrentChatId(returnedChatId);
+            if (!chats.some((c) => c._id === returnedChatId)) fetchChats();
           }
-          if (isBusy) throw new Error("Server is busy. Please try again.");
-          throw new Error("Unable to process your request right now.");
+
+          setMessages((prev) => [
+            ...prev,
+            { role: "ai", parts: [{ text: "" }], isStreaming: true },
+          ]);
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder("utf-8");
+          let done = false;
+          let text = "";
+
+          while (!done) {
+            const { value, done: readerDone } = await reader.read();
+            done = readerDone;
+            if (value) {
+              const chunk = decoder.decode(value, { stream: true });
+              
+              const charsPerTick = 3;
+              for (let i = 0; i < chunk.length; i += charsPerTick) {
+                text += chunk.slice(i, i + charsPerTick);
+                
+                setMessages((prev) => {
+                  const newMessages = [...prev];
+                  const lastMsg = newMessages[newMessages.length - 1];
+                  if (lastMsg && lastMsg.role === "ai") {
+                    lastMsg.parts[0].text = text;
+                  }
+                  return newMessages;
+                });
+                
+                await new Promise(r => setTimeout(r, 15));
+              }
+            }
+          }
+
+          setMessages((prev) => {
+            const newMessages = [...prev];
+            const lastMsg = newMessages[newMessages.length - 1];
+            if (lastMsg && lastMsg.role === "ai") {
+              lastMsg.isStreaming = false;
+            }
+            return newMessages;
+          });
+
+          data = { success: true };
+          break;
         } catch (err) {
           if (err.name === "AbortError") throw err;
           if (err.message?.includes("Query limit exceeded")) throw err;
@@ -482,19 +532,6 @@ const AIComponent = () => {
       }
 
       if (!data) throw new Error("Server is busy. Please try again.");
-
-      const aiResponseText = data.success ? data.data.response : (data.response || "No response");
-      const returnedChatId = data.success ? data.data.chatId : data.chatId;
-
-      setMessages((prev) => [
-        ...prev,
-        { role: "ai", parts: [{ text: aiResponseText }] },
-      ]);
-
-      if (returnedChatId) {
-        setCurrentChatId(returnedChatId);
-        if (!chats.some((c) => c._id === returnedChatId)) fetchChats();
-      }
     } catch (error) {
       if (error.name === "AbortError") {
         showToast("warning", "Request stopped.");
@@ -773,11 +810,24 @@ const AIComponent = () => {
                               {quizQuestionCount} Qs
                             </p>
                           </div>
-                          {isQuizConfigExpanded ? (
-                            <ChevronUp className="w-4 h-4 text-slate-400" />
-                          ) : (
-                            <ChevronDown className="w-4 h-4 text-slate-400" />
-                          )}
+                          <div className="flex items-center gap-2">
+                            {!isQuizConfigExpanded && (
+                              <div
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleQuery(e, "", true);
+                                }}
+                                className="px-2 py-1 text-[10px] font-bold bg-emerald-500/20 text-emerald-400 rounded hover:bg-emerald-500/30 transition shadow-sm cursor-pointer"
+                              >
+                                START
+                              </div>
+                            )}
+                            {isQuizConfigExpanded ? (
+                              <ChevronUp className="w-4 h-4 text-slate-400 shrink-0" />
+                            ) : (
+                              <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                            )}
+                          </div>
                         </button>
 
                         {isQuizConfigExpanded && (
@@ -1154,6 +1204,9 @@ const AIComponent = () => {
               questionCount: quizQuestionCount,
               questionType: quizQuestionType,
             }}
+            setQuizTopic={setQuizTopic}
+            setQuizDifficulty={setQuizDifficulty}
+            setQuizQuestionCount={setQuizQuestionCount}
           />
         ) : (
           <ProfessionalChatUI

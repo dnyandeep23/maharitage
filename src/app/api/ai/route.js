@@ -11,12 +11,16 @@ const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const RETRYABLE_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
 const MAX_GEMINI_RETRIES = 3;
 
-// ⚡ Model fallback chain
-const MODEL_FALLBACK_CHAIN = [
+// ⚡ Model fallback chains
+const VISION_MODEL_CHAIN = [
   "gemini-3.1-pro-preview",
+  "gemini-1.5-pro",
+];
+
+const TEXT_MODEL_CHAIN = [
   "gemini-3.1-flash-lite-preview",
   "gemini-3-flash-preview",
-
+  "gemini-1.5-flash",
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -48,11 +52,11 @@ function parseStudentPayload(text) {
   }
 }
 
-async function generateWithRetry(model, prompt) {
+async function generateStreamWithRetry(model, prompt) {
   let lastError = null;
   for (let attempt = 1; attempt <= MAX_GEMINI_RETRIES; attempt++) {
     try {
-      return await model.generateContent(prompt);
+      return await model.generateContentStream(prompt);
     } catch (error) {
       lastError = error;
       if (!isRetryableGeminiError(error) || attempt === MAX_GEMINI_RETRIES)
@@ -63,25 +67,69 @@ async function generateWithRetry(model, prompt) {
   throw lastError;
 }
 
-async function generateWithModelFallback(prompt) {
+async function generateStreamWithModelFallback(prompt, responseMimeType = "text/plain", hasImage = false) {
   let lastError = null;
-  for (let i = 0; i < MODEL_FALLBACK_CHAIN.length; i++) {
-    const modelName = MODEL_FALLBACK_CHAIN[i];
-    const model = ai.getGenerativeModel({ model: modelName });
+  const chain = hasImage ? VISION_MODEL_CHAIN : TEXT_MODEL_CHAIN;
+
+  for (let i = 0; i < chain.length; i++) {
+    const modelName = chain[i];
+    const model = ai.getGenerativeModel({ 
+      model: modelName,
+      generationConfig: responseMimeType === "application/json" ? { responseMimeType: "application/json" } : {}
+    });
     try {
-      const result = await generateWithRetry(model, prompt);
-      console.info(`AI response generated with model: ${modelName}`);
-      return { result, modelName };
+      const resultStream = await generateStreamWithRetry(model, prompt);
+      console.info(`AI stream generated with model: ${modelName}`);
+      return { resultStream, modelName };
     } catch (error) {
       lastError = error;
-      if (i < MODEL_FALLBACK_CHAIN.length - 1) {
+      if (i < chain.length - 1) {
         console.warn(
-          `Model ${modelName} failed. Falling back to ${MODEL_FALLBACK_CHAIN[i + 1]}.`
+          `Model ${modelName} failed. Falling back to ${chain[i + 1]}.`
         );
       }
     }
   }
   throw lastError;
+}
+
+// 📦 In-Memory Cache for Site Data
+let siteCache = {
+  data: [],
+  lastFetched: 0,
+};
+
+const CACHE_TTL = 1000 * 60 * 60; // 1 hour
+
+async function getCachedSites() {
+  if (siteCache.data.length > 0 && Date.now() - siteCache.lastFetched < CACHE_TTL) {
+    return siteCache.data;
+  }
+  const sites = await Site.find({}).lean();
+  siteCache.data = sites;
+  siteCache.lastFetched = Date.now();
+  return sites;
+}
+
+// 🖼️ Local Image Validation logic
+function validateImageLocally(imageUrl, matchedSites) {
+  // If no DB matches are found, we can't validate the image properly against the dataset
+  if (!matchedSites || matchedSites.length === 0) {
+    return { status: 'no_match', reason: 'No site context to validate against' };
+  }
+
+  // Check if the AI's generated URL perfectly matches any image in the current site's gallery
+  const targetSite = matchedSites[0];
+  const gallery = targetSite.Gallary || [];
+
+  if (gallery.includes(imageUrl)) {
+    return { status: 'exact_match', reason: 'Exact URL match in database' };
+  } else if (gallery.length > 0) {
+    // If it generated an image but the URL is wrong, we do a partial match to replace it
+    return { status: 'partial_match', reason: 'URL not in database, replacing with correct image' };
+  }
+
+  return { status: 'no_match', reason: 'Invalid image URL and no replacements available' };
 }
 
 export async function POST(req) {
@@ -543,13 +591,15 @@ the culture, art, monuments, and history of **Maharashtra**.
    "I'm sorry, but I'm designed to focus only on the heritage of Maharashtra."
 3. If unrelated to heritage or culture, reply:
    "I'm sorry, but I can only answer questions related to heritage, history, or culture as part of the Maha-Heritage."
-4. When responding, include images using this tag: **[Image: <URL>]** if available from Gallery Images.
-5. Do **not** include references or sources unless the user specifically asks for them.
-6. For normal chat mode, keep responses crisp and readable:
+4. If the user asks who developed, created, or made you, you MUST reply EXACTLY with:
+   "This bot is an academic project at Sardar Patel Institute of Technology driven by third-year students Dnyandeep Gaonkar, Rudrapratapsing Rajput, and Shreeya Nemade under the guidance of Professor Miss. Jyoti Ramteke."
+5. If your response needs an image to illustrate a site or monument, DO NOT write a URL. Instead, write EXACTLY: [Image needed: Exact Site Name] (e.g., [Image needed: Ajanta Caves]). Our local system will automatically provide the image.
+6. Do **not** include references or sources unless the user specifically asks for them.
+7. For normal chat mode, keep responses crisp and readable:
    - Start with a short summary (2-3 sentences)
    - Then 3-5 bullet points
    - Keep under 200 words unless user asks for detailed explanation
-7. Do not invent facts. If data is unavailable, say it clearly.
+8. Do not invent facts. If data is unavailable, say it clearly.
 
 🧠 **Database Context (${allContextSites.length} sites loaded):**
 ${siteContext}
@@ -578,51 +628,133 @@ Now provide a relevant, structured, and culturally rich answer following the rul
       });
     }
       
-    const { result, modelName } = await generateWithModelFallback(geminiPrompt);
-    const aiText =
-      result.response.text() ||
-      "I had trouble generating a response. Please try again.";
-    const studentPayload =
-      isQuizMode && audienceType === "student"
-        ? parseStudentPayload(aiText)
-        : null;
-
-    // 💾 Save chat if user is logged in
+    // 💾 Create chat document if user is logged in before streaming starts
     let currentChatId = chatId;
+    let chatDoc = null;
     if (user) {
-      let chat;
-      if (currentChatId) chat = await Chat.findById(currentChatId);
-      else {
-        chat = new Chat({
+      if (currentChatId) {
+        chatDoc = await Chat.findById(currentChatId);
+      } else {
+        chatDoc = new Chat({
           userId: user.id,
           title: query.substring(0, 30),
           mode: isQuizMode ? 'quiz' : 'chat',
           audienceType: audienceType,
           messages: [],
         });
-      }
-
-      if (chat) {
-        chat.messages.push({ sender: "user", message: query });
-        chat.messages.push({ sender: "ai", message: aiText });
-        chat.mode = isQuizMode ? "quiz" : "chat";
-        chat.audienceType = audienceType;
-        if (studentPayload) {
-          if (typeof studentPayload.finalScore === "number") {
-            chat.score = studentPayload.finalScore;
-          } else if (typeof studentPayload.score === "number") {
-            chat.score = studentPayload.score;
-          }
-          if (typeof studentPayload.progress === "number") {
-            chat.progress = studentPayload.progress;
-          }
-        }
-        await chat.save();
-        currentChatId = chat._id.toString();
+        await chatDoc.save();
+        currentChatId = chatDoc._id.toString();
       }
     }
 
-    return NextResponse.json({ success: true, data: { response: aiText, chatId: currentChatId } });
+    const hasImage = imageDatas && imageDatas.length > 0;
+    const { resultStream, modelName } = await generateStreamWithModelFallback(
+      geminiPrompt, 
+      isQuizMode && audienceType === "student" ? "application/json" : "text/plain",
+      hasImage
+    );
+
+    const encoder = new TextEncoder();
+    let accumulatedText = "";
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          const cachedSites = await getCachedSites();
+          let streamBuffer = "";
+
+          for await (const chunk of resultStream.stream) {
+            streamBuffer += chunk.text();
+
+            // Replace [Image needed: ...] tags with actual DB URLs
+            const imgRegex = /\[Image needed:\s*([^\]]+)\]/gi;
+            let match;
+            while ((match = imgRegex.exec(streamBuffer)) !== null) {
+               const queryName = match[1];
+               const site = cachedSites.find(s => 
+                 s.site_name?.toLowerCase().includes(queryName.toLowerCase()) || 
+                 queryName.toLowerCase().includes(s.site_name?.toLowerCase())
+               );
+               const imgUrl = site && site.Gallary && site.Gallary.length > 0 ? site.Gallary[0] : "";
+               
+               if (imgUrl) {
+                 streamBuffer = streamBuffer.replace(match[0], `[Image: ${imgUrl}]`);
+               } else {
+                 streamBuffer = streamBuffer.replace(match[0], "");
+               }
+            }
+
+            // Flush logic: retain buffer if there's an unclosed '['
+            const lastOpenBracket = streamBuffer.lastIndexOf('[');
+            const lastCloseBracket = streamBuffer.lastIndexOf(']');
+            
+            let safeToFlush = streamBuffer;
+            let retain = "";
+            
+            if (lastOpenBracket > lastCloseBracket) {
+               safeToFlush = streamBuffer.substring(0, lastOpenBracket);
+               retain = streamBuffer.substring(lastOpenBracket);
+            }
+            
+            if (safeToFlush.length > 0) {
+               accumulatedText += safeToFlush;
+               controller.enqueue(encoder.encode(safeToFlush));
+               streamBuffer = retain;
+            }
+          }
+
+          if (streamBuffer.length > 0) {
+             accumulatedText += streamBuffer;
+             controller.enqueue(encoder.encode(streamBuffer));
+          }
+
+          controller.close();
+
+          // Background task: save chat to DB
+          Promise.resolve().then(async () => {
+            let finalAiText = accumulatedText;
+
+            const studentPayload =
+              isQuizMode && audienceType === "student"
+                ? parseStudentPayload(finalAiText)
+                : null;
+
+            if (chatDoc) {
+              chatDoc.messages.push({ sender: "user", message: query });
+              chatDoc.messages.push({ sender: "ai", message: finalAiText });
+              chatDoc.mode = isQuizMode ? "quiz" : "chat";
+              chatDoc.audienceType = audienceType;
+              if (studentPayload) {
+                if (typeof studentPayload.finalScore === "number") {
+                  chatDoc.score = studentPayload.finalScore;
+                } else if (typeof studentPayload.score === "number") {
+                  chatDoc.score = studentPayload.score;
+                }
+                if (typeof studentPayload.progress === "number") {
+                  chatDoc.progress = studentPayload.progress;
+                }
+              }
+              await chatDoc.save();
+            }
+          }).catch(console.error);
+        } catch (error) {
+          console.error("Stream error:", error);
+          controller.error(error);
+        }
+      }
+    });
+
+    const responseHeaders = new Headers({
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive"
+    });
+
+    if (currentChatId) {
+      responseHeaders.set("X-Chat-Id", currentChatId);
+    }
+
+    return new Response(stream, { headers: responseHeaders });
   } catch (error) {
     const status = extractErrorStatus(error);
     const isTransient = status === 429 || status === 503;
