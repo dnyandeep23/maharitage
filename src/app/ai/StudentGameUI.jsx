@@ -927,13 +927,18 @@ const StudentGameUI = ({
                 </div>
 
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={!isLoading ? { scale: 1.05 } : {}}
+                  whileTap={!isLoading ? { scale: 0.95 } : {}}
                   onClick={onNewQuiz}
-                  className="flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-bold text-sm shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_4px_25px_rgba(16,185,129,0.4)] transition-all"
+                  disabled={isLoading}
+                  className={`flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-bold text-sm transition-all ${
+                    isLoading 
+                      ? "opacity-50 cursor-not-allowed" 
+                      : "shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_4px_25px_rgba(16,185,129,0.4)]"
+                  }`}
                 >
-                  <Sparkles className="w-4 h-4" />
-                  Start Quiz
+                  <Sparkles className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
+                  {isLoading ? "Starting..." : "Start Quiz"}
                 </motion.button>
               </div>
             )}
