@@ -52,11 +52,12 @@ function parseStudentPayload(text) {
   }
 }
 
-async function generateStreamWithRetry(model, prompt) {
+async function generateChatStreamWithRetry(model, history, userMessage) {
   let lastError = null;
   for (let attempt = 1; attempt <= MAX_GEMINI_RETRIES; attempt++) {
     try {
-      return await model.generateContentStream(prompt);
+      const chat = model.startChat({ history });
+      return await chat.sendMessageStream(userMessage);
     } catch (error) {
       lastError = error;
       if (!isRetryableGeminiError(error) || attempt === MAX_GEMINI_RETRIES)
@@ -67,7 +68,7 @@ async function generateStreamWithRetry(model, prompt) {
   throw lastError;
 }
 
-async function generateStreamWithModelFallback(prompt, responseMimeType = "text/plain", hasImage = false) {
+async function generateStreamWithModelFallback(systemInstruction, history, userMessage, responseMimeType = "text/plain", hasImage = false) {
   let lastError = null;
   const chain = hasImage ? VISION_MODEL_CHAIN : TEXT_MODEL_CHAIN;
 
@@ -75,10 +76,11 @@ async function generateStreamWithModelFallback(prompt, responseMimeType = "text/
     const modelName = chain[i];
     const model = ai.getGenerativeModel({ 
       model: modelName,
+      systemInstruction: systemInstruction,
       generationConfig: responseMimeType === "application/json" ? { responseMimeType: "application/json" } : {}
     });
     try {
-      const resultStream = await generateStreamWithRetry(model, prompt);
+      const resultStream = await generateChatStreamWithRetry(model, history, userMessage);
       console.info(`AI stream generated with model: ${modelName}`);
       return { resultStream, modelName };
     } catch (error) {
@@ -198,22 +200,33 @@ export async function POST(req) {
     await usage.save();
   }
 
-  // 🧠 Prepare conversation context — keep last 12 messages for multi-turn quiz accuracy
-  const contextMessages = (messages || []).slice(-12).map((msg) => ({
-    role: msg.role,
-    parts: (msg.parts || []).map((part) => ({ text: part.text })),
-  }));
-  contextMessages.push({ role: "user", parts: [{ text: query }] });
+  // 🧠 Build proper multi-turn chat history for Gemini (ChatGPT-style context)
+  const rawHistory = (messages || []).slice(-12).map((msg) => ({
+    role: msg.role === "ai" ? "model" : "user",
+    parts: (msg.parts || [])
+      .map((part) => ({ text: part.text || "" }))
+      .filter((p) => p.text.length > 0),
+  })).filter((msg) => msg.parts.length > 0);
 
-  const conversationContext = contextMessages
-    .map((msg, index) => {
-      const content = (msg.parts || [])
-        .map((part) => part?.text)
-        .filter(Boolean)
-        .join(" ");
-      return `${index + 1}. ${msg.role.toUpperCase()}: ${content}`;
-    })
-    .join("\n");
+  // Gemini requires history to start with "user" and alternate roles
+  // Merge consecutive same-role messages and ensure proper alternation
+  const chatHistory = [];
+  for (const msg of rawHistory) {
+    const last = chatHistory[chatHistory.length - 1];
+    if (last && last.role === msg.role) {
+      // Merge into the previous message
+      last.parts.push(...msg.parts);
+    } else {
+      chatHistory.push({ ...msg, parts: [...msg.parts] });
+    }
+  }
+  // If history starts with "model", drop it (Gemini requirement)
+  while (chatHistory.length > 0 && chatHistory[0].role === "model") {
+    chatHistory.shift();
+  }
+
+  // Build the current user message (may include images)
+  const currentUserParts = [{ text: query }];
 
   // 📊 Count AI turns so far — used to tell the model which question it's on
   const aiTurnCount = (messages || []).filter((m) => m.role === "ai").length;
@@ -604,9 +617,6 @@ the culture, art, monuments, and history of **Maharashtra**.
 🧠 **Database Context (${allContextSites.length} sites loaded):**
 ${siteContext}
 
-🗂️ **Recent Conversation Context:**
-${conversationContext || "No prior context."}
-
 📌 **Context Based on Query:**
 ${siteContextNote}
 
@@ -614,17 +624,14 @@ ${siteContextNote}
 ${isQuizMode ? "Quiz Mode Enabled" : "Normal Chat Mode"}
 ${quizModeRules}
 
-💬 **User Query:**
-"${query}"
-
 Now provide a relevant, structured, and culturally rich answer following the rules above.
 `;
 
-    // 🎯 Generate Gemini response
-    const geminiPrompt = [systemPrompt];
+    // 🎯 Generate Gemini response using multi-turn chat
+    // Add images to the user message if present
     if (imageDatas && imageDatas.length > 0) {
       imageDatas.forEach(img => {
-        geminiPrompt.push({ inlineData: { data: img.data, mimeType: img.mimeType } });
+        currentUserParts.push({ inlineData: { data: img.data, mimeType: img.mimeType } });
       });
     }
       
@@ -649,7 +656,9 @@ Now provide a relevant, structured, and culturally rich answer following the rul
 
     const hasImage = imageDatas && imageDatas.length > 0;
     const { resultStream, modelName } = await generateStreamWithModelFallback(
-      geminiPrompt, 
+      systemPrompt,
+      chatHistory,
+      currentUserParts,
       isQuizMode && audienceType === "student" ? "application/json" : "text/plain",
       hasImage
     );
