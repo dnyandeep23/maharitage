@@ -348,6 +348,8 @@ const AIComponent = () => {
 
   const handleQuery = async (e, customQuery, startNewChat = false) => {
     e?.preventDefault();
+    if (isLoading) return;
+    
     let actualQuery = customQuery || query;
     const isSilentQuizAnswer =
       mode === "quiz" && /^[A-D]$/i.test(actualQuery.trim());
@@ -483,28 +485,53 @@ const AIComponent = () => {
           const decoder = new TextDecoder("utf-8");
           let done = false;
           let text = "";
+          let prevDisplayLen = 0;
 
           while (!done) {
             const { value, done: readerDone } = await reader.read();
             done = readerDone;
             if (value) {
               const chunk = decoder.decode(value, { stream: true });
+              text += chunk;
               
-              const charsPerTick = 3;
-              for (let i = 0; i < chunk.length; i += charsPerTick) {
-                text += chunk.slice(i, i + charsPerTick);
+              // Strip any incomplete [Image: ...] tags so user never sees raw URLs
+              let displayText = text;
+              const lastOpenBracket = displayText.lastIndexOf('[Image:');
+              if (lastOpenBracket !== -1) {
+                const closingBracket = displayText.indexOf(']', lastOpenBracket);
+                if (closingBracket === -1) {
+                  // Tag not closed yet — hide the partial tag
+                  displayText = displayText.substring(0, lastOpenBracket);
+                }
+              }
+              
+              // Also strip any still-present [Image needed: ...] partial tags
+              const lastNeededTag = displayText.lastIndexOf('[Image needed:');
+              if (lastNeededTag !== -1) {
+                const closingNeeded = displayText.indexOf(']', lastNeededTag);
+                if (closingNeeded === -1) {
+                  displayText = displayText.substring(0, lastNeededTag);
+                }
+              }
+              
+              // Slow typewriter: render char by char from what we have
+              const charsPerTick = 2;
+              for (let i = prevDisplayLen; i < displayText.length; i += charsPerTick) {
+                const showUpTo = Math.min(i + charsPerTick, displayText.length);
+                const visibleText = displayText.substring(0, showUpTo);
                 
                 setMessages((prev) => {
                   const newMessages = [...prev];
                   const lastMsg = newMessages[newMessages.length - 1];
                   if (lastMsg && lastMsg.role === "ai") {
-                    lastMsg.parts[0].text = text;
+                    lastMsg.parts[0].text = visibleText;
                   }
                   return newMessages;
                 });
                 
-                await new Promise(r => setTimeout(r, 15));
+                await new Promise(r => setTimeout(r, 30));
               }
+              prevDisplayLen = displayText.length;
             }
           }
 
@@ -512,6 +539,8 @@ const AIComponent = () => {
             const newMessages = [...prev];
             const lastMsg = newMessages[newMessages.length - 1];
             if (lastMsg && lastMsg.role === "ai") {
+              // Set the complete text with all image tags intact
+              lastMsg.parts[0].text = text;
               lastMsg.isStreaming = false;
             }
             return newMessages;
@@ -551,6 +580,8 @@ const AIComponent = () => {
   const handleSuggestion = (text) => {
     if (mode === "quiz") {
       setQuizTopic(text);
+      // Auto-start the quiz with the selected topic
+      setTimeout(() => handleQuery(null, "", true), 50);
     } else {
       setQuery(text);
       handleQuery(null, text);
@@ -812,15 +843,20 @@ const AIComponent = () => {
                           </div>
                           <div className="flex items-center gap-2">
                             {!isQuizConfigExpanded && (
-                              <div
+                              <button
+                                disabled={isLoading}
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleQuery(e, "", true);
                                 }}
-                                className="px-2 py-1 text-[10px] font-bold bg-emerald-500/20 text-emerald-400 rounded hover:bg-emerald-500/30 transition shadow-sm cursor-pointer"
+                                className={`px-2 py-1 text-[10px] font-bold rounded transition shadow-sm ${
+                                  isLoading
+                                    ? "bg-emerald-500/10 text-emerald-400/50 cursor-not-allowed"
+                                    : "bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 cursor-pointer"
+                                }`}
                               >
-                                START
-                              </div>
+                                {isLoading ? "..." : "START"}
+                              </button>
                             )}
                             {isQuizConfigExpanded ? (
                               <ChevronUp className="w-4 h-4 text-slate-400 shrink-0" />
