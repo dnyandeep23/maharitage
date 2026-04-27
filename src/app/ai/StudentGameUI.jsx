@@ -476,6 +476,9 @@ const StudentGameUI = ({
   handleQuery,
   onNewQuiz,
   quizConfig,
+  setQuizTopic,
+  setQuizDifficulty,
+  setQuizQuestionCount,
 }) => {
   const latestAttemptRef = useRef(null);
   const [reportItems, setReportItems] = useState([]);
@@ -862,7 +865,7 @@ const StudentGameUI = ({
               </motion.div>
             ) : (
               /* Waiting for quiz to start */
-              <div className="text-center py-12">
+              <div className="text-center py-12 flex flex-col items-center">
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ repeat: Infinity, duration: 2 }}
@@ -870,16 +873,80 @@ const StudentGameUI = ({
                 >
                   🏛️
                 </motion.div>
-                <h3 className="text-white text-xl font-bold mb-2">
+                <h3 className="text-white text-2xl font-bold mb-2">
                   Ready to explore?
                 </h3>
-                <p className="text-white/50 text-sm mb-6">
-                  Start a quiz from the sidebar to begin your heritage adventure!
+                <p className="text-white/50 text-sm mb-8">
+                  Set up your heritage adventure and dive in!
                 </p>
+
+                {/* Minimal Setup */}
+                <div className="w-full max-w-sm space-y-4 text-left mb-8">
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-500 tracking-widest uppercase mb-1.5 ml-1">
+                      Topic
+                    </label>
+                    <input
+                      type="text"
+                      value={quizConfig?.topic || ""}
+                      onChange={(e) => setQuizTopic?.(e.target.value)}
+                      placeholder="e.g. Ajanta Caves, Shivaji Maharaj"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-500 tracking-widest uppercase mb-1.5 ml-1">
+                        Difficulty
+                      </label>
+                      <select
+                        value={quizConfig?.difficulty || "easy"}
+                        onChange={(e) => setQuizDifficulty?.(e.target.value)}
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors appearance-none cursor-pointer"
+                      >
+                        <option value="easy" className="bg-slate-900">Easy</option>
+                        <option value="medium" className="bg-slate-900">Medium</option>
+                        <option value="hard" className="bg-slate-900">Hard</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-500 tracking-widest uppercase mb-1.5 ml-1">
+                        Questions
+                      </label>
+                      <select
+                        value={quizConfig?.questionCount || 5}
+                        onChange={(e) => setQuizQuestionCount?.(Number(e.target.value))}
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors appearance-none cursor-pointer"
+                      >
+                        <option value={3} className="bg-slate-900">3 Questions</option>
+                        <option value={5} className="bg-slate-900">5 Questions</option>
+                        <option value={10} className="bg-slate-900">10 Questions</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={onNewQuiz}
+                  className="flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-bold text-sm shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_4px_25px_rgba(16,185,129,0.4)] transition-all"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Start Quiz
+                </motion.button>
               </div>
             )}
           </div>
         </div>
+      </div>
+      <div className="px-4 pb-5">
+        <p className="text-center text-[10px] text-white/35">
+          HeritageX was developed to support academic activity at Sardar Patel Institute of Technology.
+        </p>
+        <p className="text-center text-[10px] text-white/30 mt-1">
+          Developers: Dnyandeep Gaonkar, Rudrapratapsing Rajput, Shreeya Nemade
+        </p>
       </div>
     </div>
   );
