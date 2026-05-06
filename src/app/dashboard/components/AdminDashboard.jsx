@@ -21,7 +21,7 @@ import Profile from "./shared/Profile";
 import AddSiteForm from "./shared/AddSiteForm";
 import AddInscriptionForm from "./shared/AddInscriptionForm";
 import ManageSites from "./shared/ManageSites";
-import Manageinscriptions from "./shared/Manageinscriptions";
+import ManageInscriptions from "./shared/ManageInscriptions";
 import DownloadData from "./admin/DownloadData";
 import AddAdmin from "./admin/AddAdmin";
 import ManageAdmins from "./admin/ManageAdmins";
@@ -438,7 +438,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
               )}
               {selectedItem === "Profile" && <Profile user={user} />}
               {selectedItem === "Manage inscriptions" && (
-                <Manageinscriptions showDelete={true} />
+                <ManageInscriptions showDelete={true} />
               )}
               {selectedItem === "Download Data" && <DownloadData />}
               {selectedItem === "Manage Admins" && <ManageAdmins />}

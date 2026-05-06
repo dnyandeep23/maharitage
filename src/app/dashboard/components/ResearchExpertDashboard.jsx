@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import AIFloatingButton from "../../component/AIFloatingButton";
 import ManageSites from "./shared/ManageSites";
-import Manageinscriptions from "./shared/Manageinscriptions";
+import ManageInscriptions from "./shared/ManageInscriptions";
 import AddSiteForm from "./shared/AddSiteForm";
 import AddInscriptionForm from "./shared/AddInscriptionForm";
 import MySubmissions from "./researchExpert/MySubmissions";
@@ -504,7 +504,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
                 />
               )}
               {selectedItem === "Suggest Inscription Changes" && (
-                <Manageinscriptions
+                <ManageInscriptions
                   showDelete={false}
                   handleSubmit={handleModifyInscriptionSubmit}
                   setMessage={setMessage}
