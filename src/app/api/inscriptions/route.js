@@ -36,7 +36,7 @@ async function createInscription(req) {
       return NextResponse.json({ message: "Site not found" }, { status: 404 });
     }
 
-    site.Inscriptions.push(inscriptionData);
+    site.inscriptions.push(inscriptionData);
     await site.save();
 
     return NextResponse.json({

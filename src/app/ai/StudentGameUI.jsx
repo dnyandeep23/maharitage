@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Trophy,
@@ -15,8 +15,29 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { fetchWithInternalToken } from "../../lib/fetch";
+import QuizSkeleton from "./QuizSkeleton";
 
 const ANSWER_LETTERS = ["A", "B", "C", "D"];
+
+const extractInlineImageTag = (value) => {
+  if (typeof value !== "string") {
+    return { text: "", imageUrl: null };
+  }
+
+  const match = value.match(/\[Image:\s*([^\]]+)\]/i);
+  const imageUrl = match?.[1]?.trim() || null;
+  const text = value.replace(/\[Image:\s*[^\]]+\]/gi, "").trim();
+
+  return { text, imageUrl };
+};
+
+const normalizeDifficultyValue = (value) => {
+  if (typeof value !== "string") return "Easy";
+  const normalized = value.trim().toLowerCase();
+  if (normalized === "medium") return "Medium";
+  if (normalized === "hard") return "Hard";
+  return "Easy";
+};
 
 const createStudyLinks = (topic, question, site) => {
   if (site?.href) {
@@ -25,15 +46,40 @@ const createStudyLinks = (topic, question, site) => {
   const focus = encodeURIComponent(question || topic || "Maharashtra heritage");
   return [
     { label: "Search this topic", href: `/search?q=${focus}` },
-    { label: "Read heritage docs", href: "/docs" },
+    { label: "Explore heritage home", href: "/" },
   ];
+};
+
+const normalizeReportItem = (item = {}) => {
+  const selectedAnswer = item.selectedAnswer ?? null;
+  const correctAnswer = item.correctAnswer ?? null;
+  const isCorrect =
+    typeof item.isCorrect === "boolean"
+      ? item.isCorrect
+      : selectedAnswer && correctAnswer
+      ? selectedAnswer === correctAnswer
+      : null;
+  const status =
+    isCorrect === true
+      ? "correct"
+      : selectedAnswer
+      ? "incorrect"
+      : "unvisited";
+
+  return {
+    ...item,
+    selectedAnswer,
+    correctAnswer,
+    isCorrect,
+    status,
+  };
 };
 
 const resolveReportItems = (completeData, localReportItems) => {
   if (Array.isArray(completeData?.report) && completeData.report.length > 0) {
-    return completeData.report;
+    return completeData.report.map(normalizeReportItem);
   }
-  return localReportItems;
+  return (localReportItems || []).map(normalizeReportItem);
 };
 
 const buildDisplaySummary = (data, reportItems) => {
@@ -54,32 +100,319 @@ const buildDisplaySummary = (data, reportItems) => {
   return { totalQuestions, finalScore, pct, earnedXp };
 };
 
+const buildPerformanceLabel = (score, totalQuestions) => {
+  if (!totalQuestions) return "needs_improvement";
+  const ratio = score / totalQuestions;
+  if (ratio >= 0.8) return "excellent";
+  if (ratio >= 0.5) return "good";
+  return "needs_improvement";
+};
+
+const normalizeQuestionPayload = (payload) => {
+  if (!payload || typeof payload !== "object") return null;
+  const parsedQuestion = extractInlineImageTag(payload.question);
+  return {
+    ...payload,
+    question: parsedQuestion.text,
+    questionImage: parsedQuestion.imageUrl,
+    options: Array.isArray(payload.options) ? payload.options : [],
+  };
+};
+
+const getQuestionKey = (questionNumber) =>
+  Math.max((Number(questionNumber) || 1) - 1, 0);
+
+const upsertQuestionRecord = (prev, payload) => {
+  const normalizedQuestion = normalizeQuestionPayload(payload);
+  if (!normalizedQuestion) return prev;
+
+  const key = getQuestionKey(normalizedQuestion.questionNumber);
+  return {
+    ...prev,
+    [key]: {
+      ...prev[key],
+      questionNumber: normalizedQuestion.questionNumber,
+      question: normalizedQuestion.question,
+      questionImage: normalizedQuestion.questionImage,
+      options: normalizedQuestion.options,
+      totalQuestions: normalizedQuestion.totalQuestions,
+    },
+  };
+};
+
+const buildDerivedReportItems = (
+  questionsByIndex,
+  answers,
+  totalQuestions,
+  completeReport = []
+) => {
+  const completeReportMap = new Map(
+    (completeReport || []).map((item) => [getQuestionKey(item.questionNumber), item])
+  );
+  const total =
+    Number(totalQuestions) ||
+    Math.max(
+      Object.keys(questionsByIndex || {}).length,
+      Object.keys(answers || {}).length,
+      completeReportMap.size
+    );
+
+  const items = [];
+
+  for (let index = 0; index < total; index += 1) {
+    const question = questionsByIndex?.[index] || {};
+    const reportItem = completeReportMap.get(index) || {};
+    const selectedAnswer = answers?.[index] ?? reportItem.selectedAnswer ?? null;
+    const correctAnswer = question.correctAnswer || reportItem.correctAnswer || null;
+    const isCorrect =
+      correctAnswer && selectedAnswer
+        ? selectedAnswer === correctAnswer
+        : typeof reportItem.isCorrect === "boolean"
+        ? reportItem.isCorrect
+        : null;
+    const status =
+      isCorrect === true
+        ? "correct"
+        : selectedAnswer
+        ? "incorrect"
+        : "unvisited";
+
+    items.push({
+      questionNumber: question.questionNumber || reportItem.questionNumber || index + 1,
+      question:
+        question.question ||
+        reportItem.question ||
+        `Question ${index + 1} was not visited.`,
+      selectedAnswer,
+      correctAnswer,
+      isCorrect,
+      explanation:
+        question.explanation ||
+        reportItem.explanation ||
+        (selectedAnswer
+          ? ""
+          : "This question was not answered before the quiz ended."),
+      status,
+      site: reportItem.site,
+    });
+  }
+
+  return items;
+};
+
+const calculateQuizResults = (questionsByIndex, answers, totalQuestions) => {
+  const total = Number(totalQuestions) || Object.keys(questionsByIndex || {}).length;
+  let correct = 0;
+
+  for (let index = 0; index < total; index += 1) {
+    const correctAnswer = questionsByIndex?.[index]?.correctAnswer;
+    if (correctAnswer && answers?.[index] === correctAnswer) {
+      correct += 1;
+    }
+  }
+
+  const incorrect = Math.max(total - correct, 0);
+  const accuracy = total ? Math.round((correct / total) * 100) : 0;
+
+  return {
+    finalScore: correct,
+    totalQuestions: total,
+    incorrect,
+    accuracy,
+    performance: buildPerformanceLabel(correct, total),
+  };
+};
+
+const buildStudentSessionSnapshot = (messages, fallbackMeta, fallbackConfig) => {
+  if (!Array.isArray(messages) || messages.length === 0) return null;
+
+  let activeQuestion = null;
+  let pendingAnswer = null;
+  let reportItems = [];
+  let completeData = null;
+  let xp = 0;
+  let progress = 0;
+  let level = "Explorer";
+  let encouragement = "Welcome, explorer! Let's discover Maharashtra! 🗺️";
+  let totalQuestions = Number(fallbackConfig?.questionCount) || 0;
+
+  for (const msg of messages) {
+    const text = msg?.parts?.[0]?.text || "";
+    if (!text) continue;
+
+    if (msg.role === "user") {
+      const answer = text.trim().toUpperCase();
+      if (/^[A-D]$/.test(answer)) {
+        pendingAnswer = answer;
+      }
+      continue;
+    }
+
+    const data = parseAIResponse(text);
+    if (!data) continue;
+
+    if (typeof data.xp === "number") xp = data.xp;
+    if (typeof data.progress === "number") progress = data.progress;
+    if (typeof data.level === "string" && data.level) level = data.level;
+    if (typeof data.encouragement === "string" && data.encouragement) {
+      encouragement = data.encouragement;
+    }
+    if (typeof data.totalQuestions === "number" && data.totalQuestions > 0) {
+      totalQuestions = data.totalQuestions;
+    }
+
+    if (data.type === "question") {
+      activeQuestion = normalizeQuestionPayload(data);
+      continue;
+    }
+
+    if (data.type === "feedback") {
+      if (activeQuestion) {
+        reportItems.push({
+          questionNumber: activeQuestion.questionNumber,
+          question: activeQuestion.question,
+          selectedAnswer: pendingAnswer,
+          correctAnswer: data.correctAnswer,
+          isCorrect: data.isCorrect === true,
+          explanation: data.explanation || "",
+          status: data.isCorrect === true ? "correct" : "incorrect",
+        });
+      }
+      pendingAnswer = null;
+      activeQuestion = normalizeQuestionPayload(data.nextQuestion);
+      continue;
+    }
+
+    if (data.type === "complete") {
+      completeData = data;
+      activeQuestion = null;
+    }
+  }
+
+  if (completeData) {
+    return {
+      reportItems:
+        Array.isArray(completeData.report) && completeData.report.length > 0
+          ? completeData.report.map((item) => ({
+              ...item,
+              status: item.isCorrect ? "correct" : "incorrect",
+            }))
+          : reportItems,
+      completeData,
+      isAbandoned: false,
+    };
+  }
+
+  if (reportItems.length === 0 && !activeQuestion) return null;
+
+  const finalTotalQuestions =
+    totalQuestions ||
+    activeQuestion?.totalQuestions ||
+    Number(fallbackConfig?.questionCount) ||
+    reportItems.length;
+
+  const revisitReport = [...reportItems];
+
+  const highestQuestionNumber = revisitReport.reduce(
+    (max, item) => Math.max(max, item.questionNumber || 0),
+    0
+  );
+
+  const nextQuestionNumber = activeQuestion?.questionNumber || highestQuestionNumber + 1;
+
+  for (
+    let questionNumber = nextQuestionNumber;
+    questionNumber <= finalTotalQuestions;
+    questionNumber += 1
+  ) {
+    revisitReport.push({
+      questionNumber,
+      question:
+        activeQuestion && questionNumber === activeQuestion.questionNumber
+          ? activeQuestion.question
+          : `Question ${questionNumber} was not visited.`,
+      selectedAnswer: null,
+      correctAnswer: null,
+      isCorrect: null,
+      explanation:
+        activeQuestion && questionNumber === activeQuestion.questionNumber
+          ? "You left the quiz before answering this question."
+          : "This question was never reached before you left the quiz.",
+      status: "unvisited",
+    });
+  }
+  const computedProgress =
+    typeof fallbackMeta?.progress === "number"
+      ? fallbackMeta.progress
+      : finalTotalQuestions
+      ? Math.round((reportItems.length / finalTotalQuestions) * 100)
+      : 0;
+
+  return {
+    reportItems: revisitReport,
+    isAbandoned: true,
+    activeQuestion,
+    progress: computedProgress,
+    xp,
+    level,
+    encouragement,
+    totalQuestions: finalTotalQuestions,
+  };
+};
+
 const QuestionReportCard = ({ item, topic }) => (
   <div
     className="rounded-2xl p-4 text-left"
     style={{
-      background: item.isCorrect ? "rgba(16,185,129,0.1)" : "rgba(255,255,255,0.06)",
-      border: `1px solid ${item.isCorrect ? "rgba(16,185,129,0.2)" : "rgba(255,255,255,0.1)"}`,
+      background:
+        item.status === "correct"
+          ? "rgba(16,185,129,0.1)"
+          : item.status === "unvisited"
+          ? "rgba(59,130,246,0.08)"
+          : "rgba(255,255,255,0.06)",
+      border: `1px solid ${
+        item.status === "correct"
+          ? "rgba(16,185,129,0.2)"
+          : item.status === "unvisited"
+          ? "rgba(59,130,246,0.18)"
+          : "rgba(255,255,255,0.1)"
+      }`,
     }}
   >
     <div className="flex items-center justify-between gap-3">
       <span className="text-xs font-bold uppercase tracking-widest text-white/40">
         Question {item.questionNumber}
       </span>
-      <span className={`text-xs font-semibold ${item.isCorrect ? "text-emerald-400" : "text-amber-300"}`}>
-        {item.isCorrect ? "Correct" : "Needs improvement"}
+      <span
+        className={`text-xs font-semibold ${
+          item.status === "correct"
+            ? "text-emerald-400"
+            : item.status === "unvisited"
+            ? "text-sky-300"
+            : "text-amber-300"
+        }`}
+      >
+        {item.status === "correct"
+          ? "Correct"
+          : item.status === "unvisited"
+          ? "Unvisited"
+          : "Needs improvement"}
       </span>
     </div>
     <p className="mt-2 text-sm font-semibold text-white">{item.question}</p>
     <p className="mt-2 text-xs text-white/70">
-      Your answer: <span className="font-semibold text-white">{item.selectedAnswer || "Not captured"}</span>
-      {" · "}
-      Correct answer: <span className="font-semibold text-white">{item.correctAnswer || "N/A"}</span>
+      Your answer: <span className="font-semibold text-white">{item.selectedAnswer || "Not attempted"}</span>
+      {item.correctAnswer ? (
+        <>
+          {" · "}
+          Correct answer: <span className="font-semibold text-white">{item.correctAnswer}</span>
+        </>
+      ) : null}
     </p>
     {item.explanation && (
       <p className="mt-2 text-xs text-white/65">{item.explanation}</p>
     )}
-    {!item.isCorrect && (
+    {item.status === "incorrect" && (
       <div className="mt-3 flex flex-wrap gap-2">
         {createStudyLinks(topic, item.question, item.site).map((link) => (
           <a
@@ -104,13 +437,15 @@ const parseAIResponse = (text) => {
     if (jsonStr.startsWith("```")) {
       jsonStr = jsonStr.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
     }
-    return JSON.parse(jsonStr);
+    const parsed = JSON.parse(jsonStr);
+    return parsed && typeof parsed === "object" ? parsed : null;
   } catch {
     // Fallback: try to find JSON object in the text
     const match = text.match(/\{[\s\S]*\}/);
     if (match) {
       try {
-        return JSON.parse(match[0]);
+        const parsed = JSON.parse(match[0]);
+        return parsed && typeof parsed === "object" ? parsed : null;
       } catch {
         return null;
       }
@@ -207,6 +542,7 @@ const OptionButton = ({
   letter,
   text,
   isSelected,
+  isPending,
   isCorrect,
   isActuallyCorrect,
   isDisabled,
@@ -229,6 +565,11 @@ const OptionButton = ({
       border: "rgba(16,185,129,0.6)",
       shadow: "0 2px 0 rgba(16,185,129,0.3)",
     },
+    pending: {
+      bg: "linear-gradient(135deg, rgba(245,158,11,0.22), rgba(16,185,129,0.2))",
+      border: "rgba(245,158,11,0.8)",
+      shadow: "0 0 0 1px rgba(245,158,11,0.3), 0 12px 24px rgba(245,158,11,0.16)",
+    },
     correct: {
       bg: "rgba(16,185,129,0.3)",
       border: "rgba(16,185,129,0.8)",
@@ -249,6 +590,7 @@ const OptionButton = ({
   let state = "idle";
   if (isSelected && isCorrect === true) state = "correct";
   else if (isSelected && isCorrect === false) state = "wrong";
+  else if (isSelected && isPending) state = "pending";
   else if (isActuallyCorrect && isDisabled) state = "correct";
   else if (isSelected) state = "selected";
   else if (isDisabled) state = "disabled";
@@ -261,13 +603,14 @@ const OptionButton = ({
       whileTap={!isDisabled ? { scale: 0.97, y: 2 } : {}}
       onClick={() => !isDisabled && onClick()}
       disabled={isDisabled}
-      className="w-full text-left px-4 py-3.5 rounded-2xl flex items-center gap-3 transition-all duration-150 group"
+      className="w-full text-left px-4 py-3.5 rounded-2xl flex items-center gap-3 transition-all duration-150 group min-h-[72px]"
       style={{
         background: style.bg,
         border: `2px solid ${style.border}`,
         boxShadow: style.shadow,
         transform: isSelected ? "translateY(2px)" : "translateY(0)",
         cursor: isDisabled ? "not-allowed" : "pointer",
+        opacity: isDisabled && !isSelected ? 0.45 : 1,
       }}
     >
       <span
@@ -278,24 +621,42 @@ const OptionButton = ({
               ? "rgba(16,185,129,0.4)"
               : state === "wrong"
               ? "rgba(239,68,68,0.4)"
+              : state === "pending"
+              ? "rgba(245,158,11,0.35)"
               : "rgba(255,255,255,0.12)",
           color:
             state === "correct"
               ? "#6ee7b7"
               : state === "wrong"
               ? "#fca5a5"
+              : state === "pending"
+              ? "#fde68a"
               : "rgba(255,255,255,0.8)",
         }}
       >
         {letters[letter]}
       </span>
-      <span
-        className={`flex-1 text-sm font-medium ${
-          isDisabled && !isSelected ? "text-white/30" : "text-white/90"
-        }`}
-      >
-        {text}
-      </span>
+      <div className="flex-1 min-w-0">
+        <span
+          className={`block text-sm font-medium ${
+            isDisabled && !isSelected ? "text-white/30" : "text-white/90"
+          }`}
+        >
+          {text}
+        </span>
+        {state === "pending" && (
+          <span className="mt-1 block text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-200/90">
+            Answer locked
+          </span>
+        )}
+      </div>
+      {state === "pending" && (
+        <motion.span
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 0.9, ease: "linear" }}
+          className="w-5 h-5 rounded-full border-2 border-amber-200/30 border-t-amber-200 shrink-0"
+        />
+      )}
       {state === "correct" && (
         <motion.span
           initial={{ scale: 0 }}
@@ -327,8 +688,9 @@ const QuizCompleteScreen = ({ data, reportItems, quizConfig, onRestart }) => {
       : data.performance === "good"
       ? "👍"
       : "📚";
-  const totalCorrect = reportItems.filter((item) => item.isCorrect).length;
-  const totalIncorrect = reportItems.filter((item) => !item.isCorrect).length;
+  const totalCorrect = reportItems.filter((item) => item.status === "correct").length;
+  const totalIncorrect = reportItems.filter((item) => item.status === "incorrect").length;
+  const totalUnvisited = reportItems.filter((item) => item.status === "unvisited").length;
 
   return (
     <motion.div
@@ -389,8 +751,8 @@ const QuizCompleteScreen = ({ data, reportItems, quizConfig, onRestart }) => {
           <div className="text-[11px] uppercase tracking-widest text-white/45">Incorrect</div>
         </div>
         <div className="rounded-2xl p-4 bg-sky-500/10 border border-sky-400/20">
-          <div className="text-2xl font-black text-sky-300">{Math.max(0, totalIncorrect)}</div>
-          <div className="text-[11px] uppercase tracking-widest text-white/45">Improve</div>
+          <div className="text-2xl font-black text-sky-300">{Math.max(0, totalUnvisited)}</div>
+          <div className="text-[11px] uppercase tracking-widest text-white/45">Unvisited</div>
         </div>
       </div>
 
@@ -446,75 +808,249 @@ const QuizCompleteScreen = ({ data, reportItems, quizConfig, onRestart }) => {
 };
 
 // ─── Loading State ──────────────────────────────────────────────────────────
-const GameLoading = () => (
-  <div className="flex flex-col items-center justify-center gap-4 py-16">
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
-      className="w-12 h-12 rounded-2xl flex items-center justify-center"
-      style={{
-        background: "linear-gradient(135deg, #f59e0b, #ef4444)",
-        boxShadow: "0 8px 24px rgba(245,158,11,0.3)",
-      }}
-    >
-      <Sparkles className="w-6 h-6 text-white" />
-    </motion.div>
-    <motion.p
-      animate={{ opacity: [0.5, 1, 0.5] }}
-      transition={{ repeat: Infinity, duration: 1.5 }}
-      className="text-white/60 text-sm font-medium"
-    >
-      🎯 Preparing your next challenge...
-    </motion.p>
-  </div>
+const GameLoading = ({ label }) => <QuizSkeleton label={label} />;
+
+const QuestionLoadingOverlay = ({ label }) => (
+  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <QuizSkeleton label={label} variant="inline" />
+  </motion.div>
 );
+
+const createInitialGameState = () => ({
+  xp: 0,
+  progress: 0,
+  level: "Explorer",
+  questionNumber: 0,
+  totalQuestions: 5,
+  currentQuestion: null,
+  currentQuestionImage: null,
+  options: [],
+  encouragement: "Welcome, explorer! Let's discover Maharashtra! 🗺️",
+  isAnswered: false,
+  isCorrect: null,
+  correctAnswer: null,
+  explanation: "",
+  showFeedback: false,
+  pendingNextQuestion: null,
+  isComplete: false,
+  completeData: null,
+  showXPPopup: false,
+});
 
 // ─── Main Student Game UI ───────────────────────────────────────────────────
 const StudentGameUI = ({
   messages,
   isLoading,
   handleQuery,
+  handleStop,
+  chatMeta,
   onNewQuiz,
   quizConfig,
   setQuizTopic,
   setQuizDifficulty,
   setQuizQuestionCount,
+  setQuizQuestionType,
+  requestErrorSignal,
 }) => {
   const latestAttemptRef = useRef(null);
-  const [reportItems, setReportItems] = useState([]);
+  const nextQuestionTimeoutRef = useRef(null);
+  const answerTimeoutRef = useRef(null);
+  const reportLinksRequestKeyRef = useRef("");
+  const [answers, setAnswers] = useState({});
+  const [questionsByIndex, setQuestionsByIndex] = useState({});
   const [resolvedReportItems, setResolvedReportItems] = useState([]);
-  const [gameState, setGameState] = useState({
-    xp: 0,
-    progress: 0,
-    level: "Explorer",
-    questionNumber: 0,
-    totalQuestions: 5,
-    currentQuestion: null,
-    options: [],
-    encouragement: "Welcome, explorer! Let's discover Maharashtra! 🗺️",
-    isAnswered: false,
-    selectedAnswer: null,
-    isCorrect: null,
-    correctAnswer: null,
-    explanation: "",
-    showFeedback: false,
-    pendingNextQuestion: null,
-    isComplete: false,
-    completeData: null,
-    showXPPopup: false,
-  });
+  const [loadingLabel, setLoadingLabel] = useState("Preparing your next challenge...");
+  const [selected, setSelected] = useState(null);
+  const [locked, setLocked] = useState(false);
+  const [feedback, setFeedback] = useState(null);
+  const [submissionTimedOut, setSubmissionTimedOut] = useState(false);
+  const [gameState, setGameState] = useState(createInitialGameState);
 
-  const completeReportItems = resolveReportItems(gameState.completeData, reportItems);
+  const currentQuestionKey = getQuestionKey(gameState.questionNumber);
+  const currentSelectedAnswer = answers[currentQuestionKey] || null;
+  const reportItems = useMemo(
+    () =>
+      buildDerivedReportItems(
+        questionsByIndex,
+        answers,
+        gameState.totalQuestions,
+        gameState.completeData?.report || []
+      ),
+    [answers, gameState.completeData?.report, gameState.totalQuestions, questionsByIndex]
+  );
+  const completeReportItems = useMemo(
+    () => resolveReportItems(gameState.completeData, reportItems),
+    [gameState.completeData, reportItems]
+  );
+
+  const clearAnswerTimeout = useCallback(() => {
+    clearTimeout(answerTimeoutRef.current);
+    answerTimeoutRef.current = null;
+  }, []);
+
+  const resetTransientState = useCallback(() => {
+    answerLockedRef.current = false;
+    setLocked(false);
+    setFeedback(null);
+    setSubmissionTimedOut(false);
+    setGameState((prev) => ({
+      ...prev,
+      isAnswered: false,
+      isCorrect: null,
+      correctAnswer: null,
+      explanation: "",
+      showFeedback: false,
+      showXPPopup: false,
+    }));
+  }, []);
+
+  const advanceToPendingNextQuestion = useCallback((nextQuestionPayload) => {
+    clearTimeout(nextQuestionTimeoutRef.current);
+    const nextQuestion = nextQuestionPayload;
+    const nextQuestionKey = getQuestionKey(nextQuestion?.questionNumber);
+
+    setGameState((prev) => ({
+      ...prev,
+      currentQuestion: nextQuestion?.question || prev.currentQuestion,
+      currentQuestionImage:
+        nextQuestion?.questionImage || prev.currentQuestionImage,
+      options: nextQuestion?.options || prev.options,
+      questionNumber: nextQuestion?.questionNumber || prev.questionNumber,
+      totalQuestions: nextQuestion?.totalQuestions || prev.totalQuestions,
+      isAnswered: Boolean(answers[nextQuestionKey]),
+      isCorrect: null,
+      correctAnswer: null,
+      explanation: "",
+      showFeedback: false,
+      pendingNextQuestion: null,
+      showXPPopup: false,
+    }));
+    setSelected(answers[nextQuestionKey] || null);
+    setLocked(false);
+    setFeedback(null);
+    setSubmissionTimedOut(false);
+    answerLockedRef.current = false;
+  }, [answers]);
+
+  useEffect(() => {
+    setSelected(currentSelectedAnswer);
+    setLocked(false);
+    setFeedback(null);
+    setSubmissionTimedOut(false);
+    clearAnswerTimeout();
+  }, [gameState.questionNumber]);
+
+  useEffect(() => {
+    if (messages.length > 0 || chatMeta || isLoading) return;
+
+    clearTimeout(nextQuestionTimeoutRef.current);
+    answerLockedRef.current = false;
+    latestAttemptRef.current = null;
+    setAnswers({});
+    setQuestionsByIndex({});
+    setResolvedReportItems([]);
+    setSelected(null);
+    setLocked(false);
+    setFeedback(null);
+    setSubmissionTimedOut(false);
+    clearAnswerTimeout();
+    setGameState(createInitialGameState());
+  }, [chatMeta, isLoading, messages.length]);
+
+  useEffect(() => {
+    if (!chatMeta || messages.length === 0 || isLoading) return;
+
+    const snapshot = buildStudentSessionSnapshot(messages, chatMeta, quizConfig);
+    if (!snapshot) return;
+
+    const restoredAnswers = {};
+    const restoredQuestions = {};
+    snapshot.reportItems.forEach((item) => {
+      const key = getQuestionKey(item.questionNumber);
+      restoredQuestions[key] = {
+        ...(restoredQuestions[key] || {}),
+        questionNumber: item.questionNumber,
+        question: item.question,
+        correctAnswer: item.correctAnswer || restoredQuestions[key]?.correctAnswer || null,
+        explanation: item.explanation || restoredQuestions[key]?.explanation || "",
+      };
+      if (item.selectedAnswer) {
+        restoredAnswers[key] = item.selectedAnswer;
+      }
+    });
+
+    setAnswers(restoredAnswers);
+    setQuestionsByIndex(restoredQuestions);
+    setLocked(false);
+    setGameState((prev) => ({
+      ...prev,
+      xp:
+        snapshot.completeData?.xp ??
+        snapshot.xp ??
+        prev.xp,
+      progress:
+        snapshot.completeData?.progress ??
+        snapshot.progress ??
+        prev.progress,
+      level:
+        snapshot.completeData?.level ||
+        snapshot.level ||
+        prev.level,
+      encouragement:
+        snapshot.isAbandoned
+          ? "Welcome back! Let's continue where you left off."
+          : snapshot.completeData?.encouragement || prev.encouragement,
+      currentQuestion: snapshot.isAbandoned
+        ? snapshot.activeQuestion?.question || null
+        : null,
+      currentQuestionImage: snapshot.isAbandoned
+        ? snapshot.activeQuestion?.questionImage || null
+        : null,
+      options: snapshot.isAbandoned
+        ? snapshot.activeQuestion?.options || []
+        : [],
+      questionNumber: snapshot.isAbandoned
+        ? snapshot.activeQuestion?.questionNumber || prev.questionNumber
+        : snapshot.completeData?.totalQuestions ?? prev.questionNumber,
+      totalQuestions: snapshot.isAbandoned
+        ? snapshot.totalQuestions ?? prev.totalQuestions
+        : snapshot.completeData?.totalQuestions ?? prev.totalQuestions,
+      isAnswered: false,
+      isCorrect: null,
+      correctAnswer: null,
+      explanation: "",
+      showFeedback: false,
+      pendingNextQuestion: null,
+      isComplete: !snapshot.isAbandoned,
+      completeData: snapshot.isAbandoned ? null : snapshot.completeData,
+      showXPPopup: false,
+    }));
+  }, [chatMeta, isLoading, messages, quizConfig]);
 
   useEffect(() => {
     let ignore = false;
 
     const resolveLinks = async () => {
-      if (!gameState.isComplete) return;
+      if (!gameState.isComplete) {
+        reportLinksRequestKeyRef.current = "";
+        return;
+      }
       if (completeReportItems.length === 0) {
+        reportLinksRequestKeyRef.current = "";
         setResolvedReportItems([]);
         return;
       }
+
+      const requestKey = JSON.stringify({
+        topic: quizConfig?.topic || "",
+        items: completeReportItems,
+      });
+
+      if (reportLinksRequestKeyRef.current === requestKey) {
+        return;
+      }
+
+      reportLinksRequestKeyRef.current = requestKey;
 
       try {
         const res = await fetchWithInternalToken("/api/ai/report-links", {
@@ -546,6 +1082,31 @@ const StudentGameUI = ({
     };
   }, [completeReportItems, gameState.isComplete, quizConfig?.topic]);
 
+  useEffect(() => {
+    if (!isLoading) {
+      setLoadingLabel("Preparing your next challenge...");
+      return;
+    }
+
+    setLoadingLabel(
+      gameState.isAnswered
+        ? "Checking your answer..."
+        : "Preparing your next challenge..."
+    );
+
+    const t1 = setTimeout(() => {
+      setLoadingLabel("Reviewing heritage details...");
+    }, 1800);
+    const t2 = setTimeout(() => {
+      setLoadingLabel("Slow network detected. Still working...");
+    }, 4500);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [gameState.isAnswered, isLoading]);
+
   // Parse the latest AI message
   useEffect(() => {
     if (messages.length === 0) return;
@@ -557,44 +1118,63 @@ const StudentGameUI = ({
     if (!data) return;
 
     if (data.type === "question") {
+      const normalizedQuestion = normalizeQuestionPayload(data);
+      if (!normalizedQuestion) return;
       if (data.questionNumber === 1) {
-        setReportItems([]);
+        setAnswers({});
+        setQuestionsByIndex({});
       }
-      setGameState((prev) => ({
-        ...prev,
-        currentQuestion: data.question,
-        options: data.options || [],
-        questionNumber: data.questionNumber,
-        totalQuestions: data.totalQuestions,
-        xp: data.xp ?? prev.xp,
-        progress: data.progress ?? prev.progress,
-        level: data.level || prev.level,
-        encouragement: data.encouragement || prev.encouragement,
-        isAnswered: false,
-        selectedAnswer: null,
-        isCorrect: null,
-        correctAnswer: null,
-        explanation: "",
-        showFeedback: false,
-        pendingNextQuestion: null,
-        isComplete: false,
-        showXPPopup: false,
-      }));
-    } else if (data.type === "feedback") {
-      const attemptSnapshot = latestAttemptRef.current;
-      if (attemptSnapshot) {
-        setReportItems((prev) => [
+      setQuestionsByIndex((prev) =>
+        upsertQuestionRecord(data.questionNumber === 1 ? {} : prev, normalizedQuestion)
+      );
+      const questionKey = getQuestionKey(normalizedQuestion.questionNumber);
+      setGameState((prev) => {
+        const isSameQuestion =
+          prev.questionNumber === normalizedQuestion.questionNumber &&
+          prev.currentQuestion?.trim() === normalizedQuestion.question?.trim();
+        const persistedAnswer = answers[questionKey] || null;
+        return {
           ...prev,
-          {
-            questionNumber:
-              attemptSnapshot.questionNumber ?? prev.length + 1,
-            question: attemptSnapshot.question,
-            selectedAnswer: attemptSnapshot.selectedAnswer,
-            correctAnswer: data.correctAnswer,
-            explanation: data.explanation,
-            isCorrect: Boolean(data.isCorrect),
-          },
-        ]);
+          currentQuestion: normalizedQuestion.question,
+          currentQuestionImage: normalizedQuestion.questionImage,
+          options: normalizedQuestion.options,
+          questionNumber: normalizedQuestion.questionNumber,
+          totalQuestions: normalizedQuestion.totalQuestions,
+          xp: data.xp ?? prev.xp,
+          progress: data.progress ?? prev.progress,
+          level: data.level || prev.level,
+          encouragement: data.encouragement || prev.encouragement,
+          isAnswered: isSameQuestion ? prev.isAnswered : Boolean(persistedAnswer),
+          isCorrect: isSameQuestion ? prev.isCorrect : null,
+          correctAnswer: isSameQuestion ? prev.correctAnswer : null,
+          explanation: isSameQuestion ? prev.explanation : "",
+          showFeedback: isSameQuestion ? prev.showFeedback : false,
+          pendingNextQuestion: isSameQuestion ? prev.pendingNextQuestion : null,
+          isComplete: false,
+          showXPPopup: isSameQuestion ? prev.showXPPopup : false,
+        };
+      });
+    } else if (data.type === "feedback") {
+      const normalizedNextQuestion = normalizeQuestionPayload(data.nextQuestion);
+      const feedbackQuestionKey = getQuestionKey(data.questionNumber || gameState.questionNumber);
+      setQuestionsByIndex((prev) => ({
+        ...prev,
+        [feedbackQuestionKey]: {
+          ...(prev[feedbackQuestionKey] || {}),
+          questionNumber:
+            prev[feedbackQuestionKey]?.questionNumber ||
+            data.questionNumber ||
+            gameState.questionNumber,
+          question:
+            prev[feedbackQuestionKey]?.question ||
+            latestAttemptRef.current?.question ||
+            "",
+          correctAnswer: data.correctAnswer || null,
+          explanation: data.explanation || "",
+        },
+      }));
+      if (normalizedNextQuestion) {
+        setQuestionsByIndex((prev) => upsertQuestionRecord(prev, normalizedNextQuestion));
       }
       setGameState((prev) => ({
         ...prev,
@@ -604,33 +1184,19 @@ const StudentGameUI = ({
         xp: data.xp ?? prev.xp,
         progress: data.progress ?? prev.progress,
         encouragement: data.encouragement || prev.encouragement,
-        showFeedback: true,
+        showFeedback: false,
         showXPPopup: true,
-        pendingNextQuestion: data.nextQuestion || null,
+        pendingNextQuestion: normalizedNextQuestion,
       }));
+      setFeedback(data.isCorrect === true ? "correct" : "incorrect");
+      clearAnswerTimeout();
 
-      if (data.nextQuestion) {
-        setTimeout(() => {
-          setGameState((prev) => ({
-            ...prev,
-            currentQuestion: prev.pendingNextQuestion?.question || prev.currentQuestion,
-            options: prev.pendingNextQuestion?.options || prev.options,
-            questionNumber:
-              prev.pendingNextQuestion?.questionNumber || prev.questionNumber,
-            totalQuestions:
-              prev.pendingNextQuestion?.totalQuestions || prev.totalQuestions,
-            showFeedback: false,
-            isAnswered: false,
-            selectedAnswer: null,
-            isCorrect: null,
-            correctAnswer: null,
-            explanation: "",
-            pendingNextQuestion: null,
-            showXPPopup: false,
-          }));
-        }, 2500);
+      if (normalizedNextQuestion) {
+        clearTimeout(nextQuestionTimeoutRef.current);
+        advanceToPendingNextQuestion(normalizedNextQuestion);
       } else {
-        setTimeout(() => {
+        clearTimeout(nextQuestionTimeoutRef.current);
+        nextQuestionTimeoutRef.current = setTimeout(() => {
           setGameState((prev) => ({
             ...prev,
             showXPPopup: false,
@@ -639,64 +1205,173 @@ const StudentGameUI = ({
       }
       latestAttemptRef.current = null;
     } else if (data.type === "complete") {
+      const completeReport = Array.isArray(data.report) ? data.report : [];
+      let mergedQuestionsByIndex = questionsByIndex;
+      if (completeReport.length > 0) {
+        mergedQuestionsByIndex = { ...questionsByIndex };
+        completeReport.forEach((item) => {
+          const key = getQuestionKey(item.questionNumber);
+          mergedQuestionsByIndex[key] = {
+            ...mergedQuestionsByIndex[key],
+            questionNumber: item.questionNumber,
+            question: item.question,
+            correctAnswer:
+              item.correctAnswer || mergedQuestionsByIndex[key]?.correctAnswer || null,
+            explanation:
+              item.explanation || mergedQuestionsByIndex[key]?.explanation || "",
+          };
+        });
+        setQuestionsByIndex(mergedQuestionsByIndex);
+      }
+      const resultTotals = calculateQuizResults(
+        mergedQuestionsByIndex,
+        answers,
+        data.totalQuestions ?? gameState.totalQuestions
+      );
       setGameState((prev) => ({
         ...prev,
         isComplete: true,
-        completeData: data,
+        completeData: {
+          ...data,
+          finalScore: resultTotals.finalScore,
+          totalQuestions: resultTotals.totalQuestions,
+          performance: resultTotals.performance,
+        },
         xp: data.xp ?? prev.xp,
         progress: 100,
         showFeedback: false,
         isAnswered: false,
-        selectedAnswer: null,
         isCorrect: null,
         correctAnswer: null,
         explanation: "",
         currentQuestion: null,
+        currentQuestionImage: null,
         options: [],
         questionNumber: data.totalQuestions ?? prev.totalQuestions,
         totalQuestions: data.totalQuestions ?? prev.totalQuestions,
         pendingNextQuestion: null,
         showXPPopup: false,
       }));
+      setLocked(false);
     } else if (data.type === "error") {
       setGameState((prev) => ({
         ...prev,
         encouragement: data.message || "Hmm, try tapping A, B, C, or D! 🤔",
       }));
+      setLocked(false);
+      setFeedback(null);
+      clearAnswerTimeout();
     }
-  }, [messages]);
+  }, [advanceToPendingNextQuestion, answers, chatMeta, clearAnswerTimeout, gameState.questionNumber, gameState.totalQuestions, isLoading, messages, questionsByIndex]);
+
+  // Ref-based lock ensures the click is atomically registered before React re-renders
+  const answerLockedRef = useRef(false);
+
+  useEffect(() => {
+    if (!requestErrorSignal?.id) return;
+    answerLockedRef.current = false;
+    latestAttemptRef.current = null;
+    clearTimeout(nextQuestionTimeoutRef.current);
+    clearAnswerTimeout();
+    setLocked(false);
+    setFeedback(null);
+    setSubmissionTimedOut(false);
+    setGameState((prev) => ({
+      ...prev,
+      isAnswered: false,
+      isCorrect: null,
+      correctAnswer: null,
+      explanation: "",
+      showFeedback: false,
+      pendingNextQuestion: null,
+      showXPPopup: false,
+      encouragement:
+        requestErrorSignal.message ||
+        "We couldn't submit that answer. Please try again.",
+    }));
+  }, [requestErrorSignal]);
 
   const handleAnswerSelect = useCallback(
     (index) => {
-      if (gameState.isAnswered || isLoading) return;
+      if (answerLockedRef.current || locked || gameState.isAnswered || isLoading) return;
+      answerLockedRef.current = true;
+      const selectedLetter = ANSWER_LETTERS[index];
+      const questionKey = getQuestionKey(gameState.questionNumber);
+
+      setLocked(true);
+      setFeedback(null);
+      setSelected(selectedLetter);
+      setAnswers((prev) => ({
+        ...prev,
+        [questionKey]: selectedLetter,
+      }));
+      setSubmissionTimedOut(false);
 
       latestAttemptRef.current = {
         questionNumber: gameState.questionNumber,
         question: gameState.currentQuestion,
-        selectedAnswer: ANSWER_LETTERS[index],
+        selectedAnswer: selectedLetter,
       };
       setGameState((prev) => ({
         ...prev,
         isAnswered: true,
-        selectedAnswer: index,
+        isCorrect: null,
+        correctAnswer: null,
+        explanation: "",
+        showFeedback: false,
+        showXPPopup: false,
       }));
 
-      // Send the answer to the AI
-      handleQuery(null, ANSWER_LETTERS[index]);
+      clearAnswerTimeout();
+      answerTimeoutRef.current = setTimeout(() => {
+        setSubmissionTimedOut(true);
+        answerLockedRef.current = false;
+        setLocked(false);
+        setFeedback(null);
+        setGameState((prev) => ({
+          ...prev,
+          isAnswered: false,
+          isCorrect: null,
+          correctAnswer: null,
+          explanation: "",
+          showFeedback: false,
+          showXPPopup: false,
+          encouragement:
+            "This answer is taking too long. You can wait, retry, or continue.",
+        }));
+      }, 25000);
+
+      handleQuery(null, selectedLetter);
     },
-    [gameState.currentQuestion, gameState.isAnswered, gameState.questionNumber, isLoading, handleQuery]
+    [clearAnswerTimeout, gameState.currentQuestion, gameState.isAnswered, gameState.questionNumber, handleQuery, handleStop, isLoading, locked]
+  );
+
+
+  // Reset the ref lock when a new question arrives
+  useEffect(() => {
+    if (!locked) {
+      answerLockedRef.current = false;
+    }
+  }, [locked]);
+
+  useEffect(
+    () => () => {
+      clearTimeout(nextQuestionTimeoutRef.current);
+      clearTimeout(answerTimeoutRef.current);
+    },
+    []
   );
 
   // ─── Render ─────────────────────────────────────────────────────────────
   return (
     <div className="flex-1 min-h-0 flex flex-col overflow-y-auto">
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-6">
-        <div className="w-full max-w-lg mx-auto flex flex-col gap-5">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 sm:px-6">
+        <div className="w-full max-w-3xl mx-auto flex flex-col gap-5">
           {/* ── Stats HUD ────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 px-1"
+            className="grid grid-cols-1 gap-3 px-1 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center"
           >
             {/* XP */}
             <div
@@ -713,7 +1388,7 @@ const StudentGameUI = ({
             </div>
 
             {/* Progress */}
-            <div className="flex-1">
+            <div className="min-w-0">
               <AnimatedProgressBar progress={gameState.progress} />
             </div>
 
@@ -748,7 +1423,7 @@ const StudentGameUI = ({
           />
 
           {/* ── Main Content Area ────────────────────────────────── */}
-          <div className="relative">
+          <div className="relative min-h-[420px] w-full">
             <AnimatePresence mode="wait">
               {/* XP Popup */}
               {gameState.showXPPopup && (
@@ -768,7 +1443,7 @@ const StudentGameUI = ({
                 onRestart={onNewQuiz}
               />
             ) : isLoading && !gameState.currentQuestion ? (
-              <GameLoading />
+              <GameLoading label={loadingLabel} />
             ) : gameState.currentQuestion ? (
               <motion.div
                 key={gameState.questionNumber}
@@ -789,44 +1464,111 @@ const StudentGameUI = ({
                   <p className="text-white text-lg font-bold leading-relaxed text-center">
                     {gameState.currentQuestion}
                   </p>
+                  {gameState.currentQuestionImage ? (
+                    <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/20">
+                      <img
+                        src={gameState.currentQuestionImage}
+                        alt="Quiz reference"
+                        className="h-auto w-full object-cover"
+                      />
+                    </div>
+                  ) : null}
                 </div>
 
                 {/* Options */}
-                <div className="flex flex-col gap-3">
-      {gameState.options.map((opt, i) => (
-        <OptionButton
-          key={`${gameState.questionNumber}-${i}`}
-          letter={i}
-          text={opt}
-          isSelected={gameState.selectedAnswer === i}
-          isCorrect={
-            gameState.selectedAnswer === i
-              ? gameState.isCorrect
-              : null
-          }
-          isActuallyCorrect={
-            gameState.correctAnswer === ANSWER_LETTERS[i]
-          }
-          isDisabled={gameState.isAnswered}
-          onClick={() => handleAnswerSelect(i)}
-        />
-      ))}
+                <div className="grid gap-3">
+                  {gameState.options.map((opt, i) => (
+                    <OptionButton
+                      key={`${gameState.questionNumber}-${i}`}
+                      letter={i}
+                      text={opt}
+                      isSelected={selected === ANSWER_LETTERS[i]}
+                      isPending={
+                        selected === ANSWER_LETTERS[i] &&
+                        locked &&
+                        feedback == null
+                      }
+                      isCorrect={
+                        selected === ANSWER_LETTERS[i]
+                          ? gameState.isCorrect
+                          : null
+                      }
+                      isActuallyCorrect={
+                        gameState.correctAnswer === ANSWER_LETTERS[i]
+                      }
+                      isDisabled={locked}
+                      onClick={() => handleAnswerSelect(i)}
+                    />
+                  ))}
                 </div>
+
+                {locked && gameState.isCorrect == null && (
+                  <div className="mt-3 text-center">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-500/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-200">
+                      <motion.span
+                        animate={{ rotate: 360 }}
+                        transition={{ repeat: Infinity, duration: 0.9, ease: "linear" }}
+                        className="w-3.5 h-3.5 rounded-full border-2 border-amber-200/25 border-t-amber-200"
+                      />
+                      Checking answer
+                    </span>
+                  </div>
+                )}
+
+                {submissionTimedOut && (
+                  <div className="mt-4 rounded-2xl border border-red-400/20 bg-red-500/10 p-4">
+                    <p className="text-sm font-semibold text-red-300">
+                      This answer is taking more than 25 seconds.
+                    </p>
+                    <p className="mt-1 text-xs text-white/65">
+                      You can retry this question, or continue if the next question is already available.
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {gameState.pendingNextQuestion ? (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            handleStop?.();
+                            clearAnswerTimeout();
+                            advanceToPendingNextQuestion(gameState.pendingNextQuestion);
+                          }}
+                          className="inline-flex items-center gap-2 rounded-xl bg-emerald-500/20 px-3 py-2 text-xs font-semibold text-emerald-300 transition hover:bg-emerald-500/30"
+                        >
+                          <ArrowRight className="h-3.5 w-3.5" />
+                          Next Question
+                        </button>
+                      ) : null}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleStop?.();
+                          clearAnswerTimeout();
+                          resetTransientState();
+                          setSelected(null);
+                        }}
+                        className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:bg-white/15"
+                      >
+                        <RotateCcw className="h-3.5 w-3.5" />
+                        Retry Question
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 {/* Feedback Banner */}
                 <AnimatePresence>
-                  {gameState.showFeedback && (
+                  {feedback !== null && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       className="mt-4 rounded-2xl p-4 overflow-hidden"
                       style={{
-                        background: gameState.isCorrect
+                        background: feedback === "correct"
                           ? "rgba(16,185,129,0.15)"
                           : "rgba(239,68,68,0.15)",
                         border: `1px solid ${
-                          gameState.isCorrect
+                          feedback === "correct"
                             ? "rgba(16,185,129,0.3)"
                             : "rgba(239,68,68,0.3)"
                         }`,
@@ -834,12 +1576,12 @@ const StudentGameUI = ({
                     >
                       <p
                         className={`font-bold text-sm mb-1 ${
-                          gameState.isCorrect
+                          feedback === "correct"
                             ? "text-emerald-400"
                             : "text-red-400"
                         }`}
                       >
-                        {gameState.isCorrect
+                        {feedback === "correct"
                           ? "✨ Correct! +10 XP"
                           : `❌ The answer was ${gameState.correctAnswer}`}
                       </p>
@@ -851,17 +1593,11 @@ const StudentGameUI = ({
                 </AnimatePresence>
 
                 {/* Loading next */}
-                {isLoading && gameState.isAnswered && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="mt-4 text-center"
-                  >
-                    <span className="text-white/40 text-xs animate-pulse">
-                      Loading next question...
-                    </span>
-                  </motion.div>
-                )}
+                <AnimatePresence>
+                  {isLoading && gameState.isAnswered && (
+                    <QuestionLoadingOverlay label={loadingLabel} />
+                  )}
+                </AnimatePresence>
               </motion.div>
             ) : (
               /* Waiting for quiz to start */
@@ -881,7 +1617,7 @@ const StudentGameUI = ({
                 </p>
 
                 {/* Minimal Setup */}
-                <div className="w-full max-w-sm space-y-4 text-left mb-8">
+                <div className="w-full max-w-md space-y-4 text-left mb-8">
                   <div>
                     <label className="block text-[10px] font-bold text-slate-500 tracking-widest uppercase mb-1.5 ml-1">
                       Topic
@@ -894,19 +1630,19 @@ const StudentGameUI = ({
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-emerald-500/50 transition-colors"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <div>
                       <label className="block text-[10px] font-bold text-slate-500 tracking-widest uppercase mb-1.5 ml-1">
                         Difficulty
                       </label>
                       <select
-                        value={quizConfig?.difficulty || "easy"}
+                        value={normalizeDifficultyValue(quizConfig?.difficulty)}
                         onChange={(e) => setQuizDifficulty?.(e.target.value)}
                         className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors appearance-none cursor-pointer"
                       >
-                        <option value="easy" className="bg-slate-900">Easy</option>
-                        <option value="medium" className="bg-slate-900">Medium</option>
-                        <option value="hard" className="bg-slate-900">Hard</option>
+                        <option value="Easy" className="bg-slate-900">Easy</option>
+                        <option value="Medium" className="bg-slate-900">Medium</option>
+                        <option value="Hard" className="bg-slate-900">Hard</option>
                       </select>
                     </div>
                     <div>
@@ -924,12 +1660,28 @@ const StudentGameUI = ({
                       </select>
                     </div>
                   </div>
+                  <label className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/85">
+                    <input
+                      type="checkbox"
+                      checked={quizConfig?.questionType === "Image MCQ"}
+                      onChange={(e) =>
+                        setQuizQuestionType?.(
+                          e.target.checked ? "Image MCQ" : "MCQ"
+                        )
+                      }
+                      className="h-4 w-4 accent-emerald-500"
+                    />
+                    <span>
+                      Use image-based questions
+                    </span>
+                  </label>
                 </div>
 
                 <motion.button
+                  type="button"
                   whileHover={!isLoading ? { scale: 1.05 } : {}}
                   whileTap={!isLoading ? { scale: 0.95 } : {}}
-                  onClick={onNewQuiz}
+                  onClick={() => handleQuery(null, "", true)}
                   disabled={isLoading}
                   className={`flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-bold text-sm transition-all ${
                     isLoading 

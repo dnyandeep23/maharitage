@@ -31,7 +31,7 @@ const createStudyLinks = (topic, question, site) => {
   ];
 };
 
-const isHiddenQuizAnswerMessage = (msg, mode) =>
+const isQuizAnswerMessage = (msg, mode) =>
   mode === "quiz" &&
   msg?.role === "user" &&
   (msg?.hidden === true || /^[A-D]$/i.test(msg?.parts?.[0]?.text?.trim?.() || ""));
@@ -44,6 +44,18 @@ const parseQuestionBlock = (text) => {
     totalQuestions: Number(match[2]),
     question: match[3].trim(),
   };
+};
+
+const findNearestQuizAnswerBeforeIndex = (messages, endIndex) => {
+  for (let i = endIndex; i >= 0; i -= 1) {
+    const msg = messages[i];
+    if (msg?.role !== "user") continue;
+    const answer = msg?.parts?.[0]?.text?.trim?.().toUpperCase?.() || "";
+    if (/^[A-D]$/.test(answer)) {
+      return answer;
+    }
+  }
+  return null;
 };
 
 const parseFeedbackBlock = (text) => {
@@ -401,18 +413,17 @@ const QuizOptionButtons = ({ text, onSelect, disabled }) => {
     <div className="mt-4 flex flex-col gap-3">
       {options.map((opt) => {
         const isSelected = selected === opt.letter;
+        const isLocked = Boolean(selected) || disabled;
         return (
-          <label
+          <button
+            type="button"
             key={opt.letter}
-            onClick={(e) => {
-              if (disabled || selected) {
-                e.preventDefault();
-                return;
-              }
+            onClick={() => {
+              if (isLocked) return;
               setSelected(opt.letter);
               onSelect(opt.letter);
             }}
-            className="group relative flex items-start gap-4 p-4 rounded-2xl cursor-pointer transition-all"
+            className="group relative flex items-center gap-4 p-4 rounded-2xl text-left transition-all"
             style={{
               background: isSelected
                 ? "rgba(16,185,129,0.15)"
@@ -420,20 +431,21 @@ const QuizOptionButtons = ({ text, onSelect, disabled }) => {
               border: isSelected
                 ? "1px solid rgba(16,185,129,0.4)"
                 : "1px solid rgba(255,255,255,0.08)",
-              cursor: disabled || selected ? (isSelected ? "default" : "not-allowed") : "pointer",
+              cursor: isLocked ? (isSelected ? "default" : "not-allowed") : "pointer",
               opacity: selected && !isSelected ? 0.5 : 1,
+              minHeight: "64px",
             }}
           >
             <input
               type="radio"
-              name="quiz-option"
+              name={`quiz-option-${text.slice(0, 24)}`}
               value={opt.letter}
               checked={isSelected}
               readOnly
               className="sr-only peer"
             />
             <div
-              className="w-5 h-5 mt-0.5 rounded-full flex items-center justify-center transition-colors"
+              className="w-5 h-5 rounded-full flex items-center justify-center transition-colors shrink-0"
               style={{
                 border: isSelected ? "2px solid #10b981" : "2px solid rgba(255,255,255,0.3)",
                 background: isSelected ? "#10b981" : "transparent",
@@ -449,24 +461,74 @@ const QuizOptionButtons = ({ text, onSelect, disabled }) => {
                 <span className="mr-2 font-bold text-emerald-400">{opt.letter})</span>
                 {opt.text}
               </p>
+              {isSelected && (
+                <p className="mt-1 text-[11px] font-medium text-emerald-300/90">
+                  Selected. Checking your answer...
+                </p>
+              )}
             </div>
-          </label>
+          </button>
         );
       })}
     </div>
   );
 };
 
-// ─── Shimmer Loading Skeleton ───────────────────────────────────────────────
-const ShimmerSkeleton = () => (
-  <div className="flex items-start gap-3">
-    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600/30 to-teal-700/20 flex items-center justify-center shrink-0 border border-white/10">
-      <Bot size={18} className="text-emerald-400/60" />
+const BotTypingIndicator = () => (
+  <div className="flex items-end gap-3 justify-start">
+    <div
+      className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-lg mb-1"
+      style={{
+        background: "linear-gradient(135deg, #059669, #0d9488)",
+        boxShadow: "0 4px 12px rgba(5,150,105,0.3)",
+      }}
+    >
+      <Bot size={16} className="text-white" />
     </div>
-    <div className="flex flex-col gap-2 w-64">
-      <div className="h-3 rounded-full bg-white/10 animate-pulse w-full" />
-      <div className="h-3 rounded-full bg-white/8 animate-pulse w-4/5" />
-      <div className="h-3 rounded-full bg-white/6 animate-pulse w-3/5" />
+    <div
+      className="rounded-2xl rounded-bl-none px-5 py-4"
+      style={{
+        background: "rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        backdropFilter: "blur(8px)",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+      }}
+    >
+      <div className="flex items-center gap-1.5">
+        {[0, 1, 2].map((dot) => (
+          <span
+            key={dot}
+            className="w-2 h-2 rounded-full bg-emerald-300/90 animate-bounce"
+            style={{ animationDelay: `${dot * 0.15}s` }}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const QuizLoadingState = ({ label }) => (
+  <div className="rounded-3xl border border-white/10 bg-white/5 p-5 mb-6">
+    <div className="flex items-center gap-3 mb-4">
+      <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 border border-emerald-400/20 flex items-center justify-center">
+        <Sparkles className="w-5 h-5 text-emerald-300 animate-pulse" />
+      </div>
+      <div>
+        <p className="text-sm font-semibold text-white">{label}</p>
+        <p className="text-xs text-slate-500">
+          We are keeping your place while the next quiz step is prepared.
+        </p>
+      </div>
+    </div>
+    <div className="space-y-3">
+      <div className="h-5 rounded-full bg-white/10 animate-pulse w-2/3" />
+      <div className="h-16 rounded-2xl bg-white/7 animate-pulse" />
+      <div className="grid grid-cols-1 gap-3">
+        <div className="h-14 rounded-2xl bg-white/6 animate-pulse" />
+        <div className="h-14 rounded-2xl bg-white/6 animate-pulse" />
+        <div className="h-14 rounded-2xl bg-white/6 animate-pulse" />
+        <div className="h-14 rounded-2xl bg-white/6 animate-pulse" />
+      </div>
     </div>
   </div>
 );
@@ -507,6 +569,38 @@ const ProfessionalChatUI = ({
     return buildProfessionalQuizReport(messages, quizConfig?.topic);
   }, [messages, mode, quizConfig?.topic]);
   const [quizReport, setQuizReport] = useState(null);
+  const [quizLoadingLabel, setQuizLoadingLabel] = useState("Preparing quiz...");
+  const lastMessage = messages[messages.length - 1];
+  const showBotTypingIndicator =
+    isLoading &&
+    (!lastMessage ||
+      lastMessage.role === "user" ||
+      (lastMessage.role === "ai" &&
+        lastMessage.isStreaming &&
+        !(lastMessage.parts?.[0]?.text || "").trim()));
+
+  useEffect(() => {
+    if (!isLoading || mode !== "quiz") {
+      setQuizLoadingLabel("Preparing quiz...");
+      return;
+    }
+
+    setQuizLoadingLabel(
+      lastSubmittedQuizAnswer ? "Checking your answer..." : "Preparing quiz..."
+    );
+
+    const t1 = setTimeout(() => {
+      setQuizLoadingLabel("Reviewing heritage context...");
+    }, 1800);
+    const t2 = setTimeout(() => {
+      setQuizLoadingLabel("Low network detected. Still working...");
+    }, 4500);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [isLoading, lastSubmittedQuizAnswer, mode]);
 
   useEffect(() => {
     let ignore = false;
@@ -571,14 +665,23 @@ const ProfessionalChatUI = ({
       return;
     }
 
-    const lastAiMsg = [...messages].reverse().find((msg) => msg.role === "ai");
-    if (!lastAiMsg) return;
+    const lastAiIndex = [...messages]
+      .map((msg, index) => ({ msg, index }))
+      .reverse()
+      .find(({ msg }) => msg.role === "ai")?.index;
+    if (lastAiIndex == null) return;
+
+    const lastAiMsg = messages[lastAiIndex];
 
     const feedback = parseFeedbackBlock(lastAiMsg.parts?.[0]?.text || "");
     if (feedback) {
+      const latestPendingAnswer = findNearestQuizAnswerBeforeIndex(
+        messages,
+        lastAiIndex - 1
+      );
       setLatestQuizFeedback({
         ...feedback,
-        selectedAnswer: lastSubmittedQuizAnswer,
+        selectedAnswer: latestPendingAnswer || lastSubmittedQuizAnswer,
       });
     }
   }, [lastSubmittedQuizAnswer, messages, mode]);
@@ -722,11 +825,9 @@ const ProfessionalChatUI = ({
                   <ProfessionalQuizReport report={quizReport} />
                 )}
                 {messages.map((msg, i) => {
-                  if (isHiddenQuizAnswerMessage(msg, mode)) {
-                    return null;
-                  }
                   const isLastAiMsg = msg.role === "ai" && i === messages.length - 1;
-                  const showQuizButtons = isLastAiMsg && mode === "quiz" && !isLoading;
+                  const showQuizButtons = isLastAiMsg && mode === "quiz";
+                  const isQuizAnswer = isQuizAnswerMessage(msg, mode);
 
                   return (
                     <div
@@ -785,12 +886,38 @@ const ProfessionalChatUI = ({
                           }
                         >
                           {msg.role === "ai" ? (
-                            <MessageRenderer
-                              text={msg.isStreaming ? msg.parts[0].text + " █" : msg.parts[0].text}
-                              onImageClick={handleOpenImagePreview}
-                            />
+                            msg.isStreaming &&
+                            !(msg.parts?.[0]?.text || "").trim() ? (
+                              <div className="flex items-center gap-1.5 py-0.5">
+                                {[0, 1, 2].map((dot) => (
+                                  <span
+                                    key={dot}
+                                    className="w-2 h-2 rounded-full bg-emerald-300/90 animate-bounce"
+                                    style={{ animationDelay: `${dot * 0.15}s` }}
+                                  />
+                                ))}
+                              </div>
+                            ) : (
+                              <MessageRenderer
+                                text={msg.isStreaming ? msg.parts[0].text + " █" : msg.parts[0].text}
+                                onImageClick={handleOpenImagePreview}
+                              />
+                            )
                           ) : (
-                            <p>{msg.parts[0].text}</p>
+                            <div>
+                              {isQuizAnswer ? (
+                                <>
+                                  <p className="text-[11px] uppercase tracking-[0.18em] text-white/55 mb-1">
+                                    Selected Option
+                                  </p>
+                                  <p className="text-base font-semibold">
+                                    {msg.parts[0].text.trim().toUpperCase()}
+                                  </p>
+                                </>
+                              ) : (
+                                <p>{msg.parts[0].text}</p>
+                              )}
+                            </div>
                           )}
                         </div>
                         {showQuizButtons && (
@@ -808,7 +935,7 @@ const ProfessionalChatUI = ({
                     </div>
                   );
                 })}
-                {isLoading && <ShimmerSkeleton />}
+                {showBotTypingIndicator && <BotTypingIndicator />}
               </>
             )}
             <div ref={messagesEndRef} />

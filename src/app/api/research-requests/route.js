@@ -70,7 +70,7 @@ export async function POST(req) {
     );
 
     if (type === "site") {
-      data.Gallary = imageUrls;
+      data.gallary = imageUrls;
 
       if (action === "add") {
         tempSite = new TempSite({ ...data, researchExpertId, type, action });
@@ -100,13 +100,13 @@ export async function POST(req) {
         .lean();
       tempSite = new TempSite({ ...site, researchExpertId, type, action });
       if (action === "add") {
-        tempSite.Inscriptions.push(data);
+        tempSite.inscriptions.push(data);
       } else if (action === "modify") {
-        const inscriptionIndex = tempSite.Inscriptions.findIndex(
-          (i) => i.Inscription_id === data.Inscription_id
+        const inscriptionIndex = tempSite.inscriptions.findIndex(
+          (i) => i.inscription_id === data.inscription_id
         );
         if (inscriptionIndex > -1) {
-          tempSite.Inscriptions[inscriptionIndex] = data;
+          tempSite.inscriptions[inscriptionIndex] = data;
         }
       }
       await tempSite.save();

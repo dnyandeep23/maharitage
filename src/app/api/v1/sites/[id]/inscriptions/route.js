@@ -7,14 +7,14 @@ export async function GET(req, { params }) {
     await connectDB();
     const { id } = params;
 
-    const site = await Site.findOne({ site_id: id }).select("Inscriptions");
+    const site = await Site.findOne({ site_id: id }).select("inscriptions");
 
     if (!site) {
       return NextResponse.json({ message: "Site not found" }, { status: 404 });
     }
 
-    const inscriptions = site.Inscriptions.map((inscription) => ({
-      Inscription_id: inscription.Inscription_id,
+    const inscriptions = site.inscriptions.map((inscription) => ({
+      inscription_id: inscription.inscription_id,
       language_detected: inscription.language_detected,
       discription: inscription.discription,
     }));

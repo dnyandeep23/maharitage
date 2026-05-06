@@ -8,7 +8,7 @@ export async function GET(req, { params }) {
     const { id } = params;
 
     const site = await Site.findOne({ site_id: id }).select(
-      "site_name location heritage_type Site_discription period historical_context verification_authority Gallary"
+      "site_name location heritage_type site_discription period historical_context verification_authority gallary"
     );
 
     if (!site) {

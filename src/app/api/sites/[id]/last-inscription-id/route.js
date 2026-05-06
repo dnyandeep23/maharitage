@@ -12,9 +12,9 @@ export async function GET(request, { params }) {
       return NextResponse.json({ message: "Site not found" }, { status: 404 });
     }
 
-    const lastInscription = site.Inscriptions[site.Inscriptions.length - 1];
+    const lastInscription = site.inscriptions[site.inscriptions.length - 1];
     if (lastInscription) {
-      return NextResponse.json({ last_id: lastInscription.Inscription_id });
+      return NextResponse.json({ last_id: lastInscription.inscription_id });
     }
 
     return NextResponse.json({ last_id: "Insc_00" });

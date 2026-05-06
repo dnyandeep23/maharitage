@@ -68,11 +68,11 @@ export async function PUT(req, { params }) {
       };
 
       const imagesToDelete = [];
-      if (tempSite.Gallary) {
-        imagesToDelete.push(...tempSite.Gallary);
+      if (tempSite.gallary) {
+        imagesToDelete.push(...tempSite.gallary);
       }
-      if (tempSite.Inscriptions) {
-        tempSite.Inscriptions.forEach((inscription) => {
+      if (tempSite.inscriptions) {
+        tempSite.inscriptions.forEach((inscription) => {
           if (inscription.image_urls) {
             imagesToDelete.push(...inscription.image_urls);
           }

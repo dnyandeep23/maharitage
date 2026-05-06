@@ -29,6 +29,7 @@ const PUBLIC_ROUTES = [
   "/email-sent",
   "/reset-password",
   "/cave/:path*",
+  "/heritage/:path*",
   "/api/auth/verify-apikey",
 ];
 

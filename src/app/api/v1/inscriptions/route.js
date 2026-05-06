@@ -11,25 +11,25 @@ export async function GET(req) {
     let sites;
     if (siteNameQuery) {
       const regex = new RegExp(siteNameQuery, "i"); // Case-insensitive search
-      sites = await Site.find({ site_name: regex, "Inscriptions.0": { $exists: true } }).select(
-        "site_id site_name Inscriptions"
+      sites = await Site.find({ site_name: regex, "inscriptions.0": { $exists: true } }).select(
+        "site_id site_name inscriptions"
       );
     } else {
-      sites = await Site.find({ "Inscriptions.0": { $exists: true } }).select(
-        "site_id site_name Inscriptions"
+      sites = await Site.find({ "inscriptions.0": { $exists: true } }).select(
+        "site_id site_name inscriptions"
       );
     }
 
-    const allInscriptions = sites.flatMap((site) =>
-      site.Inscriptions.map((inscription) => ({
-        Inscription_id: inscription.Inscription_id,
+    const allinscriptions = sites.flatMap((site) =>
+      site.inscriptions.map((inscription) => ({
+        inscription_id: inscription.inscription_id,
         discription: inscription.discription,
         site_id: site.site_id,
         site_name: site.site_name,
       }))
     );
 
-    return NextResponse.json(allInscriptions);
+    return NextResponse.json(allinscriptions);
   } catch (error) {
     return NextResponse.json(
       { message: "Internal Server Error" },

@@ -99,7 +99,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
     <div>
       <Breadcrumb
         siteName={siteName}
-        inscriptionId={inscription.Inscription_id}
+        inscriptionId={inscription.inscription_id}
         onBack={onBack}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
@@ -144,9 +144,9 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
         <div className="order-2">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl sm:text-3xl font-bold">
-              {inscription.Inscription_id
+              {inscription.inscription_id
                 ? `Inscription ${
-                    inscription.Inscription_id.split("_")[1] || ""
+                    inscription.inscription_id.split("_")[1] || ""
                   }`
                 : "Unnamed Inscription"}
             </h2>
@@ -224,20 +224,20 @@ export default function CaveClient({ site }) {
   };
 
   const handleNextImage = () => {
-    const currentIndex = site.Gallary?.findIndex(
+    const currentIndex = site.gallary?.findIndex(
       (img) => img === selectedImage
     );
-    if (currentIndex < site.Gallary.length - 1) {
-      setSelectedImage(site.Gallary[currentIndex + 1]);
+    if (currentIndex < site.gallary.length - 1) {
+      setSelectedImage(site.gallary[currentIndex + 1]);
     }
   };
 
   const handlePrevImage = () => {
-    const currentIndex = site.Gallary?.findIndex(
+    const currentIndex = site.gallary?.findIndex(
       (img) => img === selectedImage
     );
     if (currentIndex > 0) {
-      setSelectedImage(site.Gallary[currentIndex - 1]);
+      setSelectedImage(site.gallary[currentIndex - 1]);
     }
   };
 
@@ -252,8 +252,8 @@ export default function CaveClient({ site }) {
   };
 
   const handleNextInscriptionImage = () => {
-    const inscription = site.Inscriptions.find(
-      (i) => i.Inscription_id === selectedInscription
+    const inscription = site.inscriptions.find(
+      (i) => i.inscription_id === selectedInscription
     );
     const currentIndex = inscription.image_urls.findIndex(
       (img) => img === selectedInscriptionImage
@@ -264,8 +264,8 @@ export default function CaveClient({ site }) {
   };
 
   const handlePrevInscriptionImage = () => {
-    const inscription = site.Inscriptions.find(
-      (i) => i.Inscription_id === selectedInscription
+    const inscription = site.inscriptions.find(
+      (i) => i.inscription_id === selectedInscription
     );
     const currentIndex = inscription.image_urls.findIndex(
       (img) => img === selectedInscriptionImage
@@ -276,7 +276,7 @@ export default function CaveClient({ site }) {
   };
 
   const nextSlide = () => {
-    if (site.Gallary && current < site.Gallary.length - 3) {
+    if (site.gallary && current < site.gallary.length - 3) {
       setCurrent(current + 1);
     }
   };
@@ -289,8 +289,8 @@ export default function CaveClient({ site }) {
 
   const nextInscription = () => {
     if (
-      site.Inscriptions &&
-      inscriptionCurrent < site.Inscriptions.length - 3
+      site.inscriptions &&
+      inscriptionCurrent < site.inscriptions.length - 3
     ) {
       setInscriptionCurrent(inscriptionCurrent + 1);
     }
@@ -316,7 +316,7 @@ export default function CaveClient({ site }) {
       </div>
       <div className="relative w-screen h-[50vh] sm:h-[70vh] lg:h-[85vh]">
         <Image
-          src={site.Gallary && site.Gallary.length > 0 ? site.Gallary[0] : img}
+          src={site.gallary && site.gallary.length > 0 ? site.gallary[0] : img}
           alt={site.site_name || "Cave Image"}
           fill
           className="object-cover rounded-b-3xl sm:rounded-b-[155px]"
@@ -334,8 +334,8 @@ export default function CaveClient({ site }) {
       <div className="mt-16 sm:mt-20 mx-4 sm:mx-10 md:mx-28">
         {selectedInscription ? (
           <InscriptionDetail
-            inscription={site.Inscriptions.find(
-              (i) => i.Inscription_id === selectedInscription
+            inscription={site.inscriptions.find(
+              (i) => i.inscription_id === selectedInscription
             )}
             siteName={site.site_name}
             onBack={() => setSelectedInscription(null)}
@@ -356,17 +356,17 @@ export default function CaveClient({ site }) {
                         transform: `translateX(-${current * 100}%)`,
                       }}
                     >
-                      {site.Gallary && site.Gallary.length > 0 ? (
-                        site.Gallary.map((inscript, index) => (
+                      {site.gallary && site.gallary.length > 0 ? (
+                        site.gallary.map((inscript, index) => (
                           <div
                             key={index}
                             className="w-full md:w-1/2 lg:w-1/3 shrink-0 p-2 cursor-pointer"
                             onClick={() =>
-                              handleImageClick(site.Gallary[index])
+                              handleImageClick(site.gallary[index])
                             }
                           >
                             <img
-                              src={site.Gallary[index]}
+                              src={site.gallary[index]}
                               alt={`Gallery image ${index + 1}`}
                               className="w-full h-64 sm:h-80 object-cover rounded-2xl bg-gray-300"
                             />
@@ -381,7 +381,7 @@ export default function CaveClient({ site }) {
                   </div>
                 )}
 
-                {site.Gallary && site.Gallary.length > 3 && (
+                {site.gallary && site.gallary.length > 3 && (
                   <div className="flex justify-end gap-2">
                     <button
                       onClick={prevSlide}
@@ -398,18 +398,18 @@ export default function CaveClient({ site }) {
                       <button
                         onClick={nextSlide}
                         disabled={
-                          !site.Gallary || current >= site.Gallary.length - 3
+                          !site.gallary || current >= site.gallary.length - 3
                         }
                         className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                          !site.Gallary || current >= site.Gallary.length - 3
+                          !site.gallary || current >= site.gallary.length - 3
                             ? "opacity-50 cursor-not-allowed"
                             : "hover:border-lime-200 hover:bg-lime-200"
                         }`}
                       >
                         <ChevronRight />
                       </button>
-                      {(!site.Inscriptions ||
-                        current >= site.Gallary.length - 3) && (
+                      {(!site.inscriptions ||
+                        current >= site.gallary.length - 3) && (
                         <div className="absolute bottom-full mb-2 w-max px-2 py-1 bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
                           Gallery end
                         </div>
@@ -422,13 +422,13 @@ export default function CaveClient({ site }) {
             <div className="mt-10">
               <p className="text-2xl sm:text-3xl font-bold">Info.</p>
               <div className="mt-6 text-lg text-justify flex flex-col gap-8">
-                {site.Site_discription}
+                {site.site_discription || site.site_description || site.description}
               </div>
             </div>
             <div className="mt-20 relative ">
               <div>
                 <p className="text-2xl sm:text-3xl font-bold">
-                  Inscriptions at {site.site_name}
+                  inscriptions at {site.site_name}
                 </p>
                 <div className="mt-4">
                   {isClient && (
@@ -441,13 +441,13 @@ export default function CaveClient({ site }) {
                           }%)`,
                         }}
                       >
-                        {site.Inscriptions && site.Inscriptions.length > 0 ? (
-                          site.Inscriptions.map((inscript, index) => (
+                        {site.inscriptions && site.inscriptions.length > 0 ? (
+                          site.inscriptions.map((inscript, index) => (
                             <div
                               key={index}
                               className="w-full md:w-1/2 lg:w-1/3 shrink-0 p-2 cursor-pointer"
                               onClick={() =>
-                                handleInscriptionClick(inscript.Inscription_id)
+                                handleInscriptionClick(inscript.inscription_id)
                               }
                             >
                               <img
@@ -466,7 +466,7 @@ export default function CaveClient({ site }) {
                     </div>
                   )}
 
-                  {site.Inscriptions && site.Inscriptions.length > 0 && (
+                  {site.inscriptions && site.inscriptions.length > 0 && (
                     <div className="flex justify-end gap-2">
                       <button
                         onClick={prevInscription}
@@ -483,23 +483,23 @@ export default function CaveClient({ site }) {
                         <button
                           onClick={nextInscription}
                           disabled={
-                            !site.Inscriptions ||
-                            inscriptionCurrent >= site.Inscriptions.length - 3
+                            !site.inscriptions ||
+                            inscriptionCurrent >= site.inscriptions.length - 3
                           }
                           className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                            !site.Inscriptions ||
-                            inscriptionCurrent >= site.Inscriptions.length - 3
+                            !site.inscriptions ||
+                            inscriptionCurrent >= site.inscriptions.length - 3
                               ? "opacity-50 cursor-not-allowed"
                               : "hover:border-lime-200 hover:bg-lime-200"
                           }`}
                         >
                           <ChevronRight />
                         </button>
-                        {(!site.Inscriptions ||
+                        {(!site.inscriptions ||
                           inscriptionCurrent >=
-                            site.Inscriptions.length - 3) && (
+                            site.inscriptions.length - 3) && (
                           <div className="absolute bottom-full mb-2 w-max px-2 py-1 bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                            Inscriptions end
+                            inscriptions end
                           </div>
                         )}
                       </div>
@@ -570,7 +570,7 @@ export default function CaveClient({ site }) {
                     <ul className="  ">
                       {site.verification_authority?.curated_by.map(
                         (ref, index) => (
-                          <li className="mb-2">{ref}</li>
+                          <li key={index} className="mb-2">{ref}</li>
                         )
                       )}
                     </ul>
@@ -586,17 +586,28 @@ export default function CaveClient({ site }) {
                 <div className="mt-4 text-lg">
                   {site.references && site.references.length > 0 ? (
                     <ul className=" text-green-800">
-                      {site.references.map((ref, index) => (
-                        <Link
-                          href={ref.url}
-                          className="hover:text-green-800"
-                          key={index}
-                        >
+                      {site.references.map((ref, index) => {
+                        const content = (
                           <li className="mb-2 ">
                             {ref.title} — {ref.author}, {ref.year}
                           </li>
-                        </Link>
-                      ))}
+                        );
+                        return ref.url ? (
+                          <Link
+                            href={ref.url}
+                            className="hover:text-green-800"
+                            key={index}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {content}
+                          </Link>
+                        ) : (
+                          <div key={index} className="text-gray-700">
+                            {content}
+                          </div>
+                        );
+                      })}
                     </ul>
                   ) : (
                     <p className="text-gray-500 italic">
@@ -639,7 +650,7 @@ export default function CaveClient({ site }) {
       </div>
       {isModalOpen && (
         <ImageModal
-          images={site.Gallary}
+          images={site.gallary}
           selectedImage={selectedImage}
           onClose={handleCloseModal}
           onNext={handleNextImage}
@@ -649,8 +660,8 @@ export default function CaveClient({ site }) {
       {isInscriptionModalOpen && (
         <ImageModal
           images={
-            site.Inscriptions.find(
-              (i) => i.Inscription_id === selectedInscription
+            site.inscriptions.find(
+              (i) => i.inscription_id === selectedInscription
             )?.image_urls
           }
           selectedImage={selectedInscriptionImage}

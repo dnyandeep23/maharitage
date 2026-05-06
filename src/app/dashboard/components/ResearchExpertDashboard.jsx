@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import AIFloatingButton from "../../component/AIFloatingButton";
 import ManageSites from "./shared/ManageSites";
-import ManageInscriptions from "./shared/ManageInscriptions";
+import Manageinscriptions from "./shared/Manageinscriptions";
 import AddSiteForm from "./shared/AddSiteForm";
 import AddInscriptionForm from "./shared/AddInscriptionForm";
 import MySubmissions from "./researchExpert/MySubmissions";
@@ -133,7 +133,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
       return;
     }
 
-    if (!siteData.Site_discription.trim()) {
+    if (!siteData.site_discription.trim()) {
       setMessage({ type: "error", text: "Description is required." });
       setTimeout(() => setMessage(null), 2000);
       setIsLoading(false);
@@ -246,7 +246,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
         });
         setTimeout(() => setMessage(null), 2000);
         setInscriptionData({
-          Inscription_id: "",
+          inscription_id: "",
           discription: "",
           original_script: "",
           language_detected: "",
@@ -504,7 +504,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
                 />
               )}
               {selectedItem === "Suggest Inscription Changes" && (
-                <ManageInscriptions
+                <Manageinscriptions
                   showDelete={false}
                   handleSubmit={handleModifyInscriptionSubmit}
                   setMessage={setMessage}

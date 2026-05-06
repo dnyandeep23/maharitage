@@ -142,8 +142,8 @@ const Explore = ({ heroData }) => {
                 <div className="relative w-full h-full rounded-3xl">
                   <Image
                     src={
-                      site?.Gallary?.[0] && site.Gallary[0].startsWith("http")
-                        ? site.Gallary[0]
+                      site?.gallary?.[0] && site.gallary[0].startsWith("http")
+                        ? site.gallary[0]
                         : "/placeholder.svg"
                     }
                     alt={site.site_name}

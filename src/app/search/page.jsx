@@ -88,7 +88,7 @@ const SearchPageContent = () => {
                       {site.location.district}, {site.location.state}
                     </p>
                     <p className="mt-4 text-gray-700">
-                      {site.Site_discription}
+                      {site.site_discription || site.site_description || site.description}
                     </p>
                   </div>
 
