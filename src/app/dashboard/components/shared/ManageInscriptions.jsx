@@ -8,7 +8,7 @@ import LoadingButton from "../components/LoadingButton";
 import { api } from "@/lib/api";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
 
-const Manageinscriptions = ({ showDelete = false, handleSubmit }) => {
+const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
   const [sites, setSites] = useState([]);
   const [selectedSite, setSelectedSite] = useState(null);
   const [editingInscription, setEditingInscription] = useState(null);
@@ -217,4 +217,4 @@ const Manageinscriptions = ({ showDelete = false, handleSubmit }) => {
   );
 };
 
-export default Manageinscriptions;
+export default ManageInscriptions;
