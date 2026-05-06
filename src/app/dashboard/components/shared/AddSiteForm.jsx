@@ -25,7 +25,7 @@ const initialState = {
     state: "Maharashtra",
     country: "India",
   },
-  Site_discription: "",
+  site_discription: "",
   heritage_type: "",
   period: "",
   historical_context: {
@@ -38,8 +38,8 @@ const initialState = {
     curated_by: [],
   },
   references: [],
-  Gallary: [],
-  Inscriptions: [],
+  gallary: [],
+  inscriptions: [],
 };
 
 function siteReducer(state, action) {
@@ -256,15 +256,15 @@ const AddSiteForm = ({ handleSubmit }) => {
             </div>
             <div>
               <label
-                htmlFor="Site_discription"
+                htmlFor="site_discription"
                 className="block text-sm font-medium text-gray-700"
               >
                 Description
               </label>
               <textarea
-                name="Site_discription"
-                id="Site_discription"
-                value={siteData.Site_discription}
+                name="site_discription"
+                id="site_discription"
+                value={siteData.site_discription}
                 onChange={handleChange}
                 rows="4"
                 required
@@ -464,7 +464,7 @@ const AddSiteForm = ({ handleSubmit }) => {
             </div>
             <div>
               <label
-                htmlFor="Gallary"
+                htmlFor="gallary"
                 className="block text-sm font-medium text-gray-700"
               >
                 Gallery Images

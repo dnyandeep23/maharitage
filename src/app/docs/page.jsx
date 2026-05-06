@@ -63,21 +63,21 @@ const ApiDocs = () => {
     "country": "India"
   },
   "heritage_type": "Cave Temple",
-  "Site_discription": "A series of 30 rock-cut Buddhist cave monuments...",
+  "site_discription": "A series of 30 rock-cut Buddhist cave monuments...",
   "period": "2nd Century BCE to 6th Century CE",
   "historical_context": {
     "ruler_or_dynasty": "Satavahana, Vakataka",
     "approx_date": "200 BCE - 600 CE"
   },
   "verification_authority": { "curated_by": ["ASI", "UNESCO"] },
-  "Gallary": [
+  "gallary": [
     "https://res.cloudinary.com/maharitage/image/upload/v1/sites/ajanta_cave_01.jpg",
     "https://res.cloudinary.com/maharitage/image/upload/v1/sites/ajanta_cave_02.jpg"
   ]
 }`,
     },
-    getInscriptionsForSite: {
-      title: "List Site Inscriptions",
+    getinscriptionsForSite: {
+      title: "List Site inscriptions",
       method: "GET",
       path: "/api/v1/sites/MH-AUR-001/inscriptions",
       description:
@@ -94,12 +94,12 @@ const ApiDocs = () => {
   -H 'Authorization: ApiKey YOUR_API_KEY'`,
       responseExample: `[
   {
-    "Inscription_id": "INS-AUR-001-01",
+    "inscription_id": "INS-AUR-001-01",
     "language_detected": "Prakrit",
     "discription": "Donation record by a royal minister."
   },
   {
-    "Inscription_id": "INS-AUR-001-02",
+    "inscription_id": "INS-AUR-001-02",
     "language_detected": "Sanskrit",
     "discription": "Poetic eulogy of a Buddhist monk."
   }
@@ -115,14 +115,14 @@ const ApiDocs = () => {
         {
           name: "{id}",
           type: "string",
-          description: "The unique Inscription_id of the inscription.",
+          description: "The unique inscription_id of the inscription.",
         },
       ],
       requestExample: `curl -X GET \
   '/api/v1/inscriptions/INS-AUR-001-01' \
   -H 'Authorization: ApiKey YOUR_API_KEY'`,
       responseExample: `{
-  "Inscription_id": "INS-AUR-001-01",
+  "inscription_id": "INS-AUR-001-01",
   "image_urls": ["https://res.cloudinary.com/maharitage/image/upload/v1/inscriptions/aur_001_insc_01.jpg"],
   "discription": "Donation record by a royal minister.",
   "original_script": "Brahmi",
@@ -133,8 +133,8 @@ const ApiDocs = () => {
   }
 }`,
     },
-    getAllInscriptions: {
-      title: "List All Inscriptions",
+    getAllinscriptions: {
+      title: "List All inscriptions",
       method: "GET",
       path: "/api/v1/inscriptions?site_name=Ajanta%20Caves",
       description:
@@ -159,13 +159,13 @@ curl -X GET \
       responseExample: `// Response for /api/v1/inscriptions?site_name=Ajanta Caves
 [
   {
-    "Inscription_id": "INS-AUR-001-01",
+    "inscription_id": "INS-AUR-001-01",
     "discription": "Donation record by a royal minister.",
     "site_id": "MH-AUR-001",
     "site_name": "Ajanta Caves"
   },
   {
-    "Inscription_id": "INS-AUR-001-02",
+    "inscription_id": "INS-AUR-001-02",
     "discription": "Poetic eulogy of a Buddhist monk.",
     "site_id": "MH-AUR-001",
     "site_name": "Ajanta Caves"

@@ -17,7 +17,7 @@ export async function GET(req) {
       sites = await Site.find({
         $or: [
           { site_name: regex },
-          { Site_discription: regex },
+          { site_discription: regex },
           { period: regex },
           { "location.district": regex },
           { "location.state": regex },
@@ -59,7 +59,7 @@ async function createSite(req) {
       })
     );
 
-    siteData.Gallary = imageUrls;
+    siteData.gallary = imageUrls;
 
     const newSite = new Site(siteData);
     await newSite.save();

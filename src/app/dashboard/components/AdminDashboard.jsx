@@ -21,11 +21,12 @@ import Profile from "./shared/Profile";
 import AddSiteForm from "./shared/AddSiteForm";
 import AddInscriptionForm from "./shared/AddInscriptionForm";
 import ManageSites from "./shared/ManageSites";
-import ManageInscriptions from "./shared/ManageInscriptions";
+import Manageinscriptions from "./shared/Manageinscriptions";
 import DownloadData from "./admin/DownloadData";
 import AddAdmin from "./admin/AddAdmin";
 import ManageAdmins from "./admin/ManageAdmins";
 import ReviewRequests from "./admin/ReviewRequests";
+import JSONUpload from "./shared/JSONUpload";
 import Notification from "./Notification";
 import { api } from "@/lib/api";
 import { fetchWithInternalToken } from "../../../lib/fetch";
@@ -63,9 +64,9 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
         onClick: () => handleSelectItem("Manage Sites"),
       },
       {
-        name: "Manage Inscriptions",
+        name: "Manage inscriptions",
         icon: <FileText size={20} />,
-        onClick: () => handleSelectItem("Manage Inscriptions"),
+        onClick: () => handleSelectItem("Manage inscriptions"),
       },
       {
         name: "Add Site",
@@ -76,6 +77,11 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
         name: "Add Inscription",
         icon: <FilePlus size={20} />,
         onClick: () => handleSelectItem("Add Inscription"),
+      },
+      {
+        name: "Upload JSON Data",
+        icon: <FilePlus size={20} />,
+        onClick: () => handleSelectItem("Upload JSON Data"),
       },
     ],
     [
@@ -150,7 +156,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
       return;
     }
 
-    if (!siteData.Site_discription.trim()) {
+    if (!siteData.site_discription.trim()) {
       setMessage({ type: "error", text: "Description is required." });
       setIsLoading(false);
       return;
@@ -300,7 +306,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
           text: "Inscription added successfully!",
         });
         setInscriptionData({
-          Inscription_id: "",
+          inscription_id: "",
           discription: "",
           original_script: "",
           language_detected: "",
@@ -431,8 +437,8 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
                 </>
               )}
               {selectedItem === "Profile" && <Profile user={user} />}
-              {selectedItem === "Manage Inscriptions" && (
-                <ManageInscriptions showDelete={true} />
+              {selectedItem === "Manage inscriptions" && (
+                <Manageinscriptions showDelete={true} />
               )}
               {selectedItem === "Download Data" && <DownloadData />}
               {selectedItem === "Manage Admins" && <ManageAdmins />}
@@ -452,6 +458,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
                   handleSubmit={handleAddInscriptionSubmit}
                 />
               )}
+              {selectedItem === "Upload JSON Data" && <JSONUpload />}
               {selectedItem === "Review Requests" && <ReviewRequests />}
             </div>
           </div>

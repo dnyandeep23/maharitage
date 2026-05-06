@@ -10,15 +10,15 @@ export async function GET(request, { params }) {
   const { id } = params;
 
   try {
-    const site = await Site.findOne({ "Inscriptions.Inscription_id": id });
+    const site = await Site.findOne({ "inscriptions.inscription_id": id });
     if (!site) {
       return NextResponse.json(
         { message: "Inscription not found" },
         { status: 404 }
       );
     }
-    const inscription = site.Inscriptions.find(
-      (insc) => insc.Inscription_id === id
+    const inscription = site.inscriptions.find(
+      (insc) => insc.inscription_id === id
     );
     return NextResponse.json(inscription);
   } catch (error) {
@@ -58,8 +58,8 @@ async function updateInscription(req, { params }) {
       return NextResponse.json({ message: "Site not found" }, { status: 404 });
     }
 
-    const inscriptionIndex = site.Inscriptions.findIndex(
-      (insc) => insc.Inscription_id === id
+    const inscriptionIndex = site.inscriptions.findIndex(
+      (insc) => insc.inscription_id === id
     );
     if (inscriptionIndex === -1) {
       return NextResponse.json(
@@ -68,7 +68,7 @@ async function updateInscription(req, { params }) {
       );
     }
 
-    const existingInscription = site.Inscriptions[inscriptionIndex];
+    const existingInscription = site.inscriptions[inscriptionIndex];
     const existingImageUrls = existingInscription.image_urls || [];
     const newImageUrls = inscriptionData.image_urls || [];
     const deletedImageUrls = existingImageUrls.filter(
@@ -89,7 +89,7 @@ async function updateInscription(req, { params }) {
       inscriptionData.image_urls = [...newImageUrls, ...imageUrls];
     }
 
-    site.Inscriptions[inscriptionIndex] = {
+    site.inscriptions[inscriptionIndex] = {
       ...existingInscription,
       ...inscriptionData,
     };
@@ -97,7 +97,7 @@ async function updateInscription(req, { params }) {
 
     return NextResponse.json({
       message: "Inscription updated successfully",
-      inscription: site.Inscriptions[inscriptionIndex],
+      inscription: site.inscriptions[inscriptionIndex],
     });
   } catch (error) {
     return NextResponse.json(
@@ -112,7 +112,7 @@ async function deleteInscription(request, { params }) {
   const { id } = await params;
 
   try {
-    const site = await Site.findOne({ "Inscriptions.Inscription_id": id });
+    const site = await Site.findOne({ "inscriptions.inscription_id": id });
     if (!site) {
       return NextResponse.json(
         { message: "Inscription not found" },
@@ -120,8 +120,8 @@ async function deleteInscription(request, { params }) {
       );
     }
 
-    const inscriptionIndex = site.Inscriptions.findIndex(
-      (insc) => insc.Inscription_id === id
+    const inscriptionIndex = site.inscriptions.findIndex(
+      (insc) => insc.inscription_id === id
     );
     if (inscriptionIndex === -1) {
       return NextResponse.json(
@@ -130,7 +130,7 @@ async function deleteInscription(request, { params }) {
       );
     }
 
-    const inscription = site.Inscriptions[inscriptionIndex];
+    const inscription = site.inscriptions[inscriptionIndex];
     if (inscription.image_urls && inscription.image_urls.length > 0) {
       const publicIdsToDelete = inscription.image_urls.map((url) => {
         const parts = url.split("/");
@@ -141,7 +141,7 @@ async function deleteInscription(request, { params }) {
       await cloudinary.api.delete_resources(publicIdsToDelete);
     }
 
-    site.Inscriptions.splice(inscriptionIndex, 1);
+    site.inscriptions.splice(inscriptionIndex, 1);
     await site.save();
 
     return NextResponse.json({ message: "Inscription deleted successfully" });

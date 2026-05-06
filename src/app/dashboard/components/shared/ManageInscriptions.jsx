@@ -8,7 +8,7 @@ import LoadingButton from "../components/LoadingButton";
 import { api } from "@/lib/api";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
 
-const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
+const Manageinscriptions = ({ showDelete = false, handleSubmit }) => {
   const [sites, setSites] = useState([]);
   const [selectedSite, setSelectedSite] = useState(null);
   const [editingInscription, setEditingInscription] = useState(null);
@@ -49,12 +49,12 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
 
   const handleUpdate = (updatedInscription) => {
     const updatedSite = { ...selectedSite };
-    const updatedInscriptions = updatedSite.Inscriptions.map((i) =>
-      i.Inscription_id === updatedInscription.Inscription_id
+    const updatedinscriptions = updatedSite.inscriptions.map((i) =>
+      i.inscription_id === updatedInscription.inscription_id
         ? updatedInscription
         : i
     );
-    updatedSite.Inscriptions = updatedInscriptions;
+    updatedSite.inscriptions = updatedinscriptions;
     setSelectedSite(updatedSite);
 
     const updatedSites = sites.map((s) =>
@@ -83,7 +83,7 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
     setIsDeleting(true);
     try {
       const response = await fetchWithInternalToken(
-        `/api/inscriptions/${inscriptionToDelete.Inscription_id}`,
+        `/api/inscriptions/${inscriptionToDelete.inscription_id}`,
         {
           method: "DELETE",
           headers: {
@@ -93,12 +93,12 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
       );
 
       if (response.ok) {
-        const updatedInscriptions = selectedSite.Inscriptions.filter(
-          (i) => i.Inscription_id !== inscriptionToDelete.Inscription_id
+        const updatedinscriptions = selectedSite.inscriptions.filter(
+          (i) => i.inscription_id !== inscriptionToDelete.inscription_id
         );
         const updatedSite = {
           ...selectedSite,
-          Inscriptions: updatedInscriptions,
+          inscriptions: updatedinscriptions,
         };
         setSelectedSite(updatedSite);
 
@@ -145,15 +145,15 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
           Suggest Inscription Changes for {selectedSite.site_name}
         </h2>
         <div className="space-y-4">
-          {selectedSite.Inscriptions &&
-            selectedSite.Inscriptions.map((inscription) => (
+          {selectedSite.inscriptions &&
+            selectedSite.inscriptions.map((inscription) => (
               <div
-                key={inscription.Inscription_id}
+                key={inscription.inscription_id}
                 className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md"
               >
                 <div>
                   <p className="font-semibold text-lg">
-                    {inscription.Inscription_id}
+                    {inscription.inscription_id}
                   </p>
                   <p className="text-sm text-gray-600">
                     {inscription.description?.substring(0, 100) ||
@@ -185,7 +185,7 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
             isOpen={isModalOpen}
             onClose={handleCloseModal}
             onConfirm={handleConfirmDelete}
-            requiredText={`delete inscription ${inscriptionToDelete.Inscription_id}`}
+            requiredText={`delete inscription ${inscriptionToDelete.inscription_id}`}
           />
         )}
       </div>
@@ -217,4 +217,4 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
   );
 };
 
-export default ManageInscriptions;
+export default Manageinscriptions;

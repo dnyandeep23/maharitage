@@ -5,23 +5,12 @@ import Chat from "../../../models/Chat";
 import AIUsage from "../../../models/AIUsage";
 import Site from "../../../models/Site";
 import { verifyToken } from "../../../lib/jwt";
+import { getModelChain } from "../../../lib/modelConfig";
 
 const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const RETRYABLE_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
 const MAX_GEMINI_RETRIES = 3;
-
-// ⚡ Model fallback chains
-const VISION_MODEL_CHAIN = [
-  "gemini-3.1-pro-preview",
-  "gemini-1.5-pro",
-];
-
-const TEXT_MODEL_CHAIN = [
-  "gemini-3.1-flash-lite-preview",
-  "gemini-3-flash-preview",
-  "gemini-1.5-flash",
-];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -32,7 +21,30 @@ function extractErrorStatus(error) {
   return error?.status || error?.response?.status || error?.cause?.status;
 }
 
+function extractErrorMessage(error) {
+  return (
+    error?.message ||
+    error?.statusText ||
+    error?.response?.statusText ||
+    ""
+  );
+}
+
+function isQuotaExceededError(error) {
+  const status = extractErrorStatus(error);
+  const message = extractErrorMessage(error).toLowerCase();
+  return (
+    status === 429 &&
+    (message.includes("quota exceeded") ||
+      message.includes("billing details") ||
+      message.includes("rate limit"))
+  );
+}
+
 function isRetryableGeminiError(error) {
+  if (isQuotaExceededError(error)) {
+    return false;
+  }
   const status = extractErrorStatus(error);
   return RETRYABLE_STATUS_CODES.has(status);
 }
@@ -50,6 +62,45 @@ function parseStudentPayload(text) {
       return null;
     }
   }
+}
+
+function getLatestStudentQuizState(messages = []) {
+  for (let i = messages.length - 1; i >= 0; i -= 1) {
+    const msg = messages[i];
+    if (msg?.role !== "ai") continue;
+    const payload = parseStudentPayload(msg?.parts?.[0]?.text || "");
+    if (!payload) continue;
+    if (payload.type === "feedback" && payload.nextQuestion) {
+      return {
+        currentQuestionNumber: Number(payload.questionNumber) || 1,
+        nextQuestionNumber:
+          Number(payload.nextQuestion.questionNumber) ||
+          (Number(payload.questionNumber) || 0) + 1,
+        totalQuestions: Number(payload.totalQuestions) || null,
+      };
+    }
+    if (payload.type === "question") {
+      const questionNumber = Number(payload.questionNumber) || 1;
+      return {
+        currentQuestionNumber: questionNumber,
+        nextQuestionNumber: questionNumber + 1,
+        totalQuestions: Number(payload.totalQuestions) || null,
+      };
+    }
+    if (payload.type === "complete") {
+      const totalQuestions = Number(payload.totalQuestions) || null;
+      return {
+        currentQuestionNumber: totalQuestions,
+        nextQuestionNumber: totalQuestions,
+        totalQuestions,
+      };
+    }
+  }
+  return {
+    currentQuestionNumber: 1,
+    nextQuestionNumber: 2,
+    totalQuestions: null,
+  };
 }
 
 async function generateChatStreamWithRetry(model, history, userMessage) {
@@ -70,7 +121,7 @@ async function generateChatStreamWithRetry(model, history, userMessage) {
 
 async function generateStreamWithModelFallback(systemInstruction, history, userMessage, responseMimeType = "text/plain", hasImage = false) {
   let lastError = null;
-  const chain = hasImage ? VISION_MODEL_CHAIN : TEXT_MODEL_CHAIN;
+  const chain = getModelChain();
 
   for (let i = 0; i < chain.length; i++) {
     const modelName = chain[i];
@@ -85,6 +136,9 @@ async function generateStreamWithModelFallback(systemInstruction, history, userM
       return { resultStream, modelName };
     } catch (error) {
       lastError = error;
+      if (isQuotaExceededError(error)) {
+        console.warn(`Model ${modelName} hit quota limits.`);
+      }
       if (i < chain.length - 1) {
         console.warn(
           `Model ${modelName} failed. Falling back to ${chain[i + 1]}.`
@@ -93,6 +147,18 @@ async function generateStreamWithModelFallback(systemInstruction, history, userM
     }
   }
   throw lastError;
+}
+
+function trimGeminiHistory(history = [], maxMessages) {
+  if (!Array.isArray(history) || history.length <= maxMessages) {
+    return history;
+  }
+
+  const trimmed = history.slice(-maxMessages);
+  while (trimmed.length > 0 && trimmed[0].role === "model") {
+    trimmed.shift();
+  }
+  return trimmed;
 }
 
 // 📦 In-Memory Cache for Site Data
@@ -122,7 +188,7 @@ function validateImageLocally(imageUrl, matchedSites) {
 
   // Check if the AI's generated URL perfectly matches any image in the current site's gallery
   const targetSite = matchedSites[0];
-  const gallery = targetSite.Gallary || [];
+  const gallery = targetSite.gallary || [];
 
   if (gallery.includes(imageUrl)) {
     return { status: 'exact_match', reason: 'Exact URL match in database' };
@@ -229,13 +295,14 @@ export async function POST(req) {
   const currentUserParts = [{ text: query }];
 
   // 📊 Count AI turns so far — used to tell the model which question it's on
-  const aiTurnCount = (messages || []).filter((m) => m.role === "ai").length;
-  // The next question to be asked is aiTurnCount + 1 (0 AI turns = about to ask Q1)
-  const currentQuestionNumber = aiTurnCount + 1;
-
   // Quiz config extraction
   const allowedDifficulties = new Set(["Easy", "Medium", "Hard"]);
-  const allowedQuestionTypes = new Set(["MCQ", "Short Answer", "Mixed"]);
+  const allowedQuestionTypes = new Set([
+    "MCQ",
+    "Short Answer",
+    "Mixed",
+    "Image MCQ",
+  ]);
   const quizTopic =
     typeof quizConfig?.topic === "string" ? quizConfig.topic.trim() : "";
   const quizDifficulty = allowedDifficulties.has(quizConfig?.difficulty)
@@ -248,63 +315,103 @@ export async function POST(req) {
     ? quizConfig.questionType
     : "MCQ";
   const audienceType = quizConfig?.audienceType || "general";
+  const isStudentQuizMode = isQuizMode && audienceType === "student";
+  const isStudentAnswer = isStudentQuizMode && /^[A-D]$/i.test(query.trim());
+  const studentQuizState = isStudentQuizMode
+    ? getLatestStudentQuizState(messages)
+    : null;
+  const currentQuestionNumber = isStudentQuizMode
+    ? isStudentAnswer
+      ? studentQuizState?.currentQuestionNumber || 1
+      : studentQuizState?.nextQuestionNumber || 1
+    : (messages || []).filter((m) => m.role === "ai").length + 1;
 
   try {
-    // ─── Database Context ─────────────────────────────────────────────────────
+    // ─── Database Context (with retry on stale connections) ───────────────────
 
-    let matchedSites = [];
-    let generalSites = [];
+    const runDbQueries = async () => {
+      let matchedSites = [];
+      let generalSites = [];
 
-    if (isQuizMode && !quizTopic) {
-      // 🌐 No topic given → sample broadly from the full dataset for variety
-      const totalCount = await Site.countDocuments();
-      const sampleSize = Math.min(15, totalCount);
-      // Use aggregation to get a random diverse sample
-      const randomSites = await Site.aggregate([
-        { $sample: { size: sampleSize } },
-      ]);
-      matchedSites = randomSites;
-    } else {
-      // 🔍 Keyword-based search when topic is given or it's chat mode
-      const siteQueryString = isQuizMode && quizTopic ? quizTopic : query;
+      if (isQuizMode && !quizTopic) {
+        const totalCount = await Site.countDocuments();
+        const sampleSize = Math.min(
+          isStudentQuizMode ? (isStudentAnswer ? 6 : 10) : 15,
+          totalCount
+        );
+        const randomSites = await Site.aggregate([
+          { $sample: { size: sampleSize } },
+        ]);
+        matchedSites = randomSites;
+      } else {
+        const siteQueryString = isQuizMode && quizTopic ? quizTopic : query;
 
-      const stopWords = new Set([
-        "tell", "me", "about", "what", "is", "the", "of", "in", "on",
-        "a", "an", "and", "or", "for", "to", "with", "quiz", "generate",
-        "create", "make", "questions", "question", "history", "heritage",
-        "maharashtra", "easy", "medium", "hard", "mcq", "mixed",
-      ]);
-      const keywords = (siteQueryString || "")
-        .toLowerCase()
-        .split(/\s+/)
-        .map((w) => w.replace(/[^a-z0-9]/g, ""))
-        .filter((w) => w.length > 2 && !stopWords.has(w));
+        const stopWords = new Set([
+          "tell", "me", "about", "what", "is", "the", "of", "in", "on",
+          "a", "an", "and", "or", "for", "to", "with", "quiz", "generate",
+          "create", "make", "questions", "question", "history", "heritage",
+          "maharashtra", "easy", "medium", "hard", "mcq", "mixed",
+        ]);
+        const keywords = (siteQueryString || "")
+          .toLowerCase()
+          .split(/\s+/)
+          .map((w) => w.replace(/[^a-z0-9]/g, ""))
+          .filter((w) => w.length > 2 && !stopWords.has(w));
 
-      const keywordConditions = keywords.map((kw) => {
-        const safeKw = escapeRegex(kw);
-        return {
-          $or: [
-            { site_name: { $regex: safeKw, $options: "i" } },
-            { Site_discription: { $regex: safeKw, $options: "i" } },
-            { "historical_context.cultural_significance": { $regex: safeKw, $options: "i" } },
-            { "historical_context.ruler_or_dynasty": { $regex: safeKw, $options: "i" } },
-            { heritage_type: { $regex: safeKw, $options: "i" } },
-            { "location.district": { $regex: safeKw, $options: "i" } },
-          ],
-        };
-      });
+        const keywordConditions = keywords.map((kw) => {
+          const safeKw = escapeRegex(kw);
+          return {
+            $or: [
+              { site_name: { $regex: safeKw, $options: "i" } },
+              { site_discription: { $regex: safeKw, $options: "i" } },
+              { "historical_context.cultural_significance": { $regex: safeKw, $options: "i" } },
+              { "historical_context.ruler_or_dynasty": { $regex: safeKw, $options: "i" } },
+              { heritage_type: { $regex: safeKw, $options: "i" } },
+              { "location.district": { $regex: safeKw, $options: "i" } },
+            ],
+          };
+        });
 
-      if (keywordConditions.length > 0) {
-        matchedSites = await Site.find({ $or: keywordConditions }).limit(6);
+        if (keywordConditions.length > 0) {
+          matchedSites = await Site.find({ $or: keywordConditions }).limit(
+            isStudentQuizMode ? 4 : 6
+          );
+        }
+      }
+
+      if (!isQuizMode || quizTopic) {
+        generalSites = await Site.find({
+          "location.state": { $regex: /maharashtra/i },
+        }).limit(8);
+      }
+
+      return { matchedSites, generalSites };
+    };
+
+    // Retry wrapper: reconnects on ECONNRESET / MongoServerSelectionError
+    let dbResult;
+    try {
+      dbResult = await runDbQueries();
+    } catch (dbErr) {
+      const isConnectionReset =
+        dbErr?.name === "MongoServerSelectionError" ||
+        dbErr?.cause?.code === "ECONNRESET" ||
+        String(dbErr?.message || "").includes("ECONNRESET");
+      if (isConnectionReset) {
+        console.warn("MongoDB connection reset detected — reconnecting and retrying...");
+        // Force a fresh connection
+        if (global.mongoose) {
+          global.mongoose.conn = null;
+          global.mongoose.promise = null;
+        }
+        await connectDB();
+        dbResult = await runDbQueries();
+      } else {
+        throw dbErr;
       }
     }
 
-    // Always load general Maharashtra sites as baseline context (for chat mode)
-    if (!isQuizMode || quizTopic) {
-      generalSites = await Site.find({
-        "location.state": { $regex: /maharashtra/i },
-      }).limit(8);
-    }
+    let { matchedSites, generalSites } = dbResult;
 
     // Merge: matched sites first, then general sites (dedup by _id)
     const seenIds = new Set();
@@ -319,29 +426,36 @@ export async function POST(req) {
 
     const siteContext = allContextSites
       .map((site) => {
-        const inscriptions = (site.Inscriptions || [])
-          .slice(0, 3)
-          .map(
-            (ins) =>
-              `- ID: ${ins.Inscription_id}
+        const inscriptions = isStudentQuizMode
+          ? ""
+          : (site.inscriptions || [])
+              .slice(0, 3)
+              .map(
+                (ins) =>
+                  `- ID: ${ins.inscription_id}
                Description: ${ins.discription}
                Language: ${ins.language_detected}
                Translation: ${ins.translations?.english || "N/A"}`
-          )
-          .join("\n");
+              )
+              .join("\n");
+
+        const galleryText =
+          quizQuestionType === "Image MCQ"
+            ? `Gallery Images: ${(site.gallary || []).slice(0, 2).join(", ") || "No images"}`
+            : "";
 
         return `📍 Site: ${site.site_name}
 Location: ${site.location?.district || ""}, ${site.location?.state || ""}, ${site.location?.country || ""}
 Type: ${site.heritage_type || "Unknown"}
 Period: ${site.period || "Unknown"}
-Description: ${site.Site_discription || "N/A"}
+Description: ${site.site_discription || "N/A"}
 Ruler/Dynasty: ${site.historical_context?.ruler_or_dynasty || "N/A"}
 Cultural Significance: ${site.historical_context?.cultural_significance || "N/A"}
 
-Inscriptions:
+inscriptions:
 ${inscriptions || "None"}
 
-Gallery Images: ${(site.Gallary || []).join(", ") || "No images"}
+${galleryText}
 ─────────────────────────────`;
       })
       .join("\n\n");
@@ -577,16 +691,24 @@ Rules:
 2. Difficulty: ${quizDifficulty} (Easy=direct facts, Medium=conceptual, Hard=analytical)
 3. Total questions: ${quizQuestionCount}
 4. Current question number: ${currentQuestionNumber}
+4a. If the latest user message is an answer choice, grade that answer for Question ${currentQuestionNumber} before moving on.
 5. Options MUST be exactly 4 strings with no A/B/C/D prefixes.
 6. Language must be kid-friendly, crisp, and factually accurate.
 7. Ask only one question at a time.
 8. Track score across the conversation context.
+8a. Keep questionNumber in feedback equal to the question just answered.
+8b. If there is a next question, nextQuestion.questionNumber must be exactly ${Math.min(
+      currentQuestionNumber + 1,
+      quizQuestionCount
+    )} unless the quiz is complete.
 9. For "question", fill question/options and set quiz-result fields to null or empty values.
 10. For "feedback", include isCorrect, correctAnswer, explanation, encouragement, and the next question in "nextQuestion" unless the quiz is over.
 11. For "complete", set progress to 100, include finalScore, performance, a full "report" array for all questions, and set nextQuestion to null.
 12. For invalid student input, return:
 {"type":"error","question":null,"questionNumber":${currentQuestionNumber},"totalQuestions":${quizQuestionCount},"options":[],"xp":0,"totalXp":0,"progress":0,"level":"Explorer","encouragement":"Please tap one of the answer buttons!","isCorrect":null,"correctAnswer":null,"explanation":"","finalScore":null,"performance":null,"message":"Please tap A, B, C, or D to answer!","report":[],"nextQuestion":null}
 13. NEVER return markdown or plain text. ONLY valid JSON.
+14. If Question Type is Image MCQ, include exactly one "[Image needed: Site Name]" tag inside the question text whenever it helps identify the monument or artwork.
+15. Question Type for this quiz is "${quizQuestionType}". If it is not "Image MCQ", DO NOT include any "[Image needed: ...]" tag, do not depend on images, and keep every student question fully answerable from text alone.
 `;
 
     const quizModeRules = isQuizMode
@@ -655,11 +777,15 @@ Now provide a relevant, structured, and culturally rich answer following the rul
     }
 
     const hasImage = imageDatas && imageDatas.length > 0;
+    const requestHistory = isStudentQuizMode
+      ? trimGeminiHistory(chatHistory, 6)
+      : chatHistory;
+
     const { resultStream, modelName } = await generateStreamWithModelFallback(
       systemPrompt,
-      chatHistory,
+      requestHistory,
       currentUserParts,
-      isQuizMode && audienceType === "student" ? "application/json" : "text/plain",
+      isStudentQuizMode ? "application/json" : "text/plain",
       hasImage
     );
 
@@ -684,7 +810,7 @@ Now provide a relevant, structured, and culturally rich answer following the rul
                  s.site_name?.toLowerCase().includes(queryName.toLowerCase()) || 
                  queryName.toLowerCase().includes(s.site_name?.toLowerCase())
                );
-               const imgUrl = site && site.Gallary && site.Gallary.length > 0 ? site.Gallary[0] : "";
+               const imgUrl = site && site.gallary && site.gallary.length > 0 ? site.gallary[0] : "";
                
                if (imgUrl) {
                  streamBuffer = streamBuffer.replace(match[0], `[Image: ${imgUrl}]`);
@@ -728,22 +854,34 @@ Now provide a relevant, structured, and culturally rich answer following the rul
                 ? parseStudentPayload(finalAiText)
                 : null;
 
-            if (chatDoc) {
-              chatDoc.messages.push({ sender: "user", message: query });
-              chatDoc.messages.push({ sender: "ai", message: finalAiText });
-              chatDoc.mode = isQuizMode ? "quiz" : "chat";
-              chatDoc.audienceType = audienceType;
+            if (currentChatId) {
+              const update = {
+                $push: {
+                  messages: {
+                    $each: [
+                      { sender: "user", message: query },
+                      { sender: "ai", message: finalAiText },
+                    ],
+                  },
+                },
+                $set: {
+                  mode: isQuizMode ? "quiz" : "chat",
+                  audienceType,
+                },
+              };
+
               if (studentPayload) {
                 if (typeof studentPayload.finalScore === "number") {
-                  chatDoc.score = studentPayload.finalScore;
+                  update.$set.score = studentPayload.finalScore;
                 } else if (typeof studentPayload.score === "number") {
-                  chatDoc.score = studentPayload.score;
+                  update.$set.score = studentPayload.score;
                 }
                 if (typeof studentPayload.progress === "number") {
-                  chatDoc.progress = studentPayload.progress;
+                  update.$set.progress = studentPayload.progress;
                 }
               }
-              await chatDoc.save();
+
+              await Chat.updateOne({ _id: currentChatId }, update);
             }
           }).catch(console.error);
         } catch (error) {
@@ -767,8 +905,20 @@ Now provide a relevant, structured, and culturally rich answer following the rul
   } catch (error) {
     const status = extractErrorStatus(error);
     const isTransient = status === 429 || status === 503;
+    const isQuotaError = isQuotaExceededError(error);
 
     console.error("Error generating AI response:", error);
+
+    if (isQuotaError) {
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "AI quota is exhausted for the configured Gemini models. Please try again later or switch to a billed API key.",
+        },
+        { status: 429 }
+      );
+    }
 
     if (isTransient) {
       return NextResponse.json(

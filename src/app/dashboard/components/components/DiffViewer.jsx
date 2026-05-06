@@ -49,10 +49,10 @@ const DiffViewer = ({ original, modified, action, type }) => {
 
     const getHighlight = (path, data) => {
         if (action === 'add' && type === 'inscription') {
-            const newInscriptionId = modified.Inscriptions[modified.Inscriptions.length - 1].Inscription_id;
-            if (path[0] === 'Inscriptions') {
-                const inscription = modified.Inscriptions[path[1]];
-                return inscription?.Inscription_id === newInscriptionId;
+            const newInscriptionId = modified.inscriptions[modified.inscriptions.length - 1].inscription_id;
+            if (path[0] === 'inscriptions') {
+                const inscription = modified.inscriptions[path[1]];
+                return inscription?.inscription_id === newInscriptionId;
             }
             return false;
         }

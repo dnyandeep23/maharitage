@@ -52,8 +52,8 @@ async function updateSite(req, { params }) {
       return NextResponse.json({ message: "Site not found" }, { status: 404 });
     }
 
-    const existingImageUrls = existingSite.Gallary || [];
-    const newImageUrls = siteData.Gallary || [];
+    const existingImageUrls = existingSite.gallary || [];
+    const newImageUrls = siteData.gallary || [];
     const deletedImageUrls = existingImageUrls.filter(
       (url) => !newImageUrls.includes(url)
     );
@@ -69,7 +69,7 @@ async function updateSite(req, { params }) {
     }
 
     if (imageUrls.length > 0) {
-      siteData.Gallary = [...newImageUrls, ...imageUrls];
+      siteData.gallary = [...newImageUrls, ...imageUrls];
     }
 
     const updatedSite = await Site.findOneAndUpdate({ site_id: id }, siteData, {
@@ -100,8 +100,8 @@ async function deleteSite(request, { params }) {
 
     const publicIdsToDelete = [];
 
-    if (site.Inscriptions && site.Inscriptions.length > 0) {
-      site.Inscriptions.forEach((inscription) => {
+    if (site.inscriptions && site.inscriptions.length > 0) {
+      site.inscriptions.forEach((inscription) => {
         if (inscription.image_urls && inscription.image_urls.length > 0) {
           const inscriptionPublicIds = inscription.image_urls.map((url) => {
             const parts = url.split("/");
@@ -114,8 +114,8 @@ async function deleteSite(request, { params }) {
       });
     }
 
-    if (site.Gallary && site.Gallary.length > 0) {
-      const sitePublicIds = site.Gallary.map((url) => {
+    if (site.gallary && site.gallary.length > 0) {
+      const sitePublicIds = site.gallary.map((url) => {
         const parts = url.split("/");
         const publicIdWithExtension = parts[parts.length - 1];
         const publicId = publicIdWithExtension.split(".")[0];

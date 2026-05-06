@@ -2,12 +2,15 @@
 
 import React, {
   Suspense,
+  startTransition,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useAudience } from "../../contexts/AudienceContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import ChatSpin from "./ChatSpin";
@@ -43,15 +46,29 @@ import { fetchWithInternalToken } from "../../lib/fetch";
 const getChatStorageKey = (audience, mode) =>
   `currentChatId:${audience}:${mode}`;
 
+const normalizeAudienceParam = (value) =>
+  value === "student" ? "student" : "general";
+
+const normalizeModeParam = (value, audience) => {
+  if (value === "chat") return "chat";
+  if (value === "quiz") return "quiz";
+  return audience === "student" ? "quiz" : "chat";
+};
+
+const getQuizRoute = (audience) =>
+  audience === "student" ? "/quiz/student" : "/quiz/general";
 
 
 // ─── Main AI Component ───────────────────────────────────────────────────────
 const AIComponent = () => {
   const { user, loading: authLoading } = useAuth();
+  const { audience, selectAudience, isReady: isAudienceReady } =
+    useAudience();
   const abortControllerRef = useRef(null);
   const toastTimeoutRef = useRef(null);
   const hasInitializedModeViewRef = useRef(false);
   const suppressModeResetRef = useRef(false);
+  const skipStoredChatRestoreRef = useRef(false);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -60,7 +77,6 @@ const AIComponent = () => {
   const [isChatActive, setIsChatActive] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isGlobalDragging, setIsGlobalDragging] = useState(false);
-  const [audienceType, setAudienceType] = useState("general");
   const [isAudienceModalOpen, setIsAudienceModalOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const [toast, setToast] = useState({ type: "", message: "" });
@@ -68,6 +84,7 @@ const AIComponent = () => {
   const [fingerprint, setFingerprint] = useState(null);
   const [chats, setChats] = useState([]);
   const [currentChatId, setCurrentChatId] = useState(null);
+  const [currentChatMeta, setCurrentChatMeta] = useState(null);
   const [isAnonymousLimited, setIsAnonymousLimited] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [imagePreview, setImagePreview] = useState({ isOpen: false, src: "" });
@@ -80,15 +97,28 @@ const AIComponent = () => {
   const [quizQuestionType, setQuizQuestionType] = useState("MCQ");
   const [quizSessionActive, setQuizSessionActive] = useState(false);
   const [isQuizConfigExpanded, setIsQuizConfigExpanded] = useState(false);
+  const [studentRequestError, setStudentRequestError] = useState({
+    id: 0,
+    message: "",
+  });
+  const audienceType = audience || "general";
   const currentChatStorageKey = getChatStorageKey(audienceType, mode);
-  const visibleChats = chats.filter(
-    (chat) => (chat.audienceType || "general") === audienceType
+  const visibleChats = useMemo(
+    () =>
+      chats.filter((chat) => (chat.audienceType || "general") === audienceType),
+    [audienceType, chats]
   );
 
   const handleOpenImagePreview = (src) =>
     setImagePreview({ isOpen: true, src });
   const handleCloseImagePreview = () =>
     setImagePreview({ isOpen: false, src: "" });
+
+  const stopActiveRequest = useCallback(() => {
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = null;
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
     FingerprintJS.load().then((fp) =>
@@ -130,34 +160,107 @@ const AIComponent = () => {
     if (q) setQuery(q);
   }, [searchParams]);
 
+  useEffect(() => {
+    if (!isAudienceReady) return;
+    setIsAudienceModalOpen(!audience);
+  }, [audience, isAudienceReady]);
+
   const handleNewChat = useCallback(() => {
+    stopActiveRequest();
     setCurrentChatId(null);
+    setCurrentChatMeta(null);
     setIsChatActive(false);
     setMessages([]);
     setQuizSessionActive(false);
     sessionStorage.removeItem(currentChatStorageKey);
-  }, [currentChatStorageKey]);
+  }, [currentChatStorageKey, stopActiveRequest]);
 
   const handleStartFreshChat = useCallback(() => {
-    if (mode !== "chat") {
-      setMode("chat");
-    }
+    stopActiveRequest();
     setCurrentChatId(null);
+    setCurrentChatMeta(null);
     setIsChatActive(false);
     setMessages([]);
     setQuizSessionActive(false);
     sessionStorage.removeItem(getChatStorageKey(audienceType, "chat"));
     sessionStorage.removeItem(getChatStorageKey(audienceType, "quiz"));
-  }, [audienceType, mode]);
+  }, [audienceType, mode, stopActiveRequest]);
+
+  const redirectToNewQuizPage = useCallback(
+    (targetAudience = audienceType) => {
+      const normalizedAudience = normalizeAudienceParam(targetAudience);
+      router.push(getQuizRoute(normalizedAudience));
+    },
+    [audienceType, router]
+  );
 
   useEffect(() => {
-    if (!user) return;
+    if (!isAudienceReady) return;
+
+    const hasAudienceParam = searchParams.has("audience");
+    const hasModeParam = searchParams.has("mode");
+    const hasNewQuizParam = searchParams.get("newQuiz") === "1";
+
+    if (!hasAudienceParam && !hasModeParam && !hasNewQuizParam) return;
+
+    const requestedAudience = hasAudienceParam
+      ? normalizeAudienceParam(searchParams.get("audience"))
+      : audienceType;
+    if (hasAudienceParam && !audience) {
+      selectAudience(requestedAudience);
+    }
+    const requestedMode = normalizeModeParam(
+      searchParams.get("mode"),
+      requestedAudience || audienceType
+    );
+
+    if (requestedMode !== mode) {
+      suppressModeResetRef.current = true;
+      setMode(requestedMode);
+    }
+
+    if (hasAudienceParam || hasModeParam || hasNewQuizParam) {
+      skipStoredChatRestoreRef.current = true;
+      const params = new URLSearchParams(searchParams.toString());
+      if (hasNewQuizParam) {
+        setCurrentChatId(null);
+        setCurrentChatMeta(null);
+        setIsChatActive(false);
+        setMessages([]);
+        setQuizSessionActive(false);
+        sessionStorage.removeItem(currentChatStorageKey);
+        sessionStorage.removeItem(getChatStorageKey(requestedAudience, "chat"));
+        sessionStorage.removeItem(getChatStorageKey(requestedAudience, "quiz"));
+      }
+      params.delete("audience");
+      params.delete("mode");
+      params.delete("newQuiz");
+      router.replace(`/ai${params.toString() ? `?${params}` : ""}`);
+    }
+  }, [
+    audience,
+    audienceType,
+    currentChatStorageKey,
+    isAudienceReady,
+    mode,
+    router,
+    searchParams,
+    selectAudience,
+  ]);
+
+  useEffect(() => {
+    if (!user || !isAudienceReady || !audience) return;
     fetchChats().then(() => {
+      if (skipStoredChatRestoreRef.current) {
+        skipStoredChatRestoreRef.current = false;
+        setIsChatActive(false);
+        return;
+      }
       const stored = sessionStorage.getItem(currentChatStorageKey);
       if (stored) handleSelectChat(stored);
       else setIsChatActive(false);
     });
-  }, [currentChatStorageKey, user, fetchChats]);
+  }, [audience, currentChatStorageKey, fetchChats, isAudienceReady, user]);
 
   useEffect(() => {
     if (!user) setMode("chat");
@@ -170,7 +273,7 @@ const AIComponent = () => {
   }, [mode]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !audience) return;
     if (!hasInitializedModeViewRef.current) {
       hasInitializedModeViewRef.current = true;
       return;
@@ -180,9 +283,10 @@ const AIComponent = () => {
       return;
     }
     handleNewChat();
-  }, [audienceType, mode, user, handleNewChat]);
+  }, [audience, audienceType, mode, user, handleNewChat]);
 
   const handleSelectChat = async (chatId) => {
+    stopActiveRequest();
     setIsChatLoading(true);
     setCurrentChatId(chatId);
     try {
@@ -195,8 +299,18 @@ const AIComponent = () => {
         const incomingMode = data.chat?.mode;
         const incomingAudienceType = data.chat?.audienceType;
         if (
-          (incomingMode && incomingMode !== mode) ||
-          (incomingAudienceType && incomingAudienceType !== audienceType)
+          incomingAudienceType &&
+          incomingAudienceType !== audienceType
+        ) {
+          sessionStorage.removeItem(currentChatStorageKey);
+          setCurrentChatId(null);
+          setCurrentChatMeta(null);
+          setIsChatActive(false);
+          setMessages([]);
+          throw new Error("This conversation belongs to a different audience.");
+        }
+        if (
+          incomingMode && incomingMode !== mode
         ) {
           suppressModeResetRef.current = true;
         }
@@ -206,11 +320,9 @@ const AIComponent = () => {
             parts: [{ text: msg.message }],
           }))
         );
+        setCurrentChatMeta(data.chat || null);
         if (data.chat?.mode) {
           setMode(data.chat.mode);
-        }
-        if (data.chat?.audienceType) {
-          setAudienceType(data.chat.audienceType);
         }
         const storageAudience = data.chat?.audienceType || audienceType;
         const storageMode = data.chat?.mode || mode;
@@ -222,7 +334,9 @@ const AIComponent = () => {
         setQuizSessionActive(data.chat?.mode === "quiz");
       } else throw new Error("Failed to load chat.");
     } catch (error) {
-      showToast("error", error.message);
+      if (error.name !== "AbortError") {
+        showToast("error", error.message);
+      }
     } finally {
       setIsChatLoading(false);
     }
@@ -239,7 +353,7 @@ const AIComponent = () => {
     "Ajanta Caves",
     "Maratha Empire",
     "Raigad Fort",
-    "Maharashtra Inscriptions",
+    "Maharashtra inscriptions",
   ];
 
 
@@ -354,10 +468,11 @@ const AIComponent = () => {
     const isSilentQuizAnswer =
       mode === "quiz" && /^[A-D]$/i.test(actualQuery.trim());
 
-    // If quiz mode and no query text, build a meaningful quiz prompt
-    if (!actualQuery.trim() && mode === "quiz") {
+    // If quiz mode and (no query text or starting a new quiz), build a meaningful quiz prompt
+    if ((!actualQuery.trim() || startNewChat) && mode === "quiz") {
       const topicText = quizTopic.trim() || "diverse Maharashtra Heritage topics spanning monuments, dynasties, culture, and inscriptions";
       actualQuery = `Generate a ${quizDifficulty} ${quizQuestionType} quiz with ${quizQuestionCount} questions on ${topicText}.`;
+      setQuery("");
     }
 
     if (!actualQuery.trim()) {
@@ -371,6 +486,9 @@ const AIComponent = () => {
     }
 
     if (startNewChat) handleNewChat();
+    if (audienceType === "student" && mode === "quiz") {
+      setStudentRequestError({ id: 0, message: "" });
+    }
 
     if (!isChatActive) setIsChatActive(true);
     if (mode === "quiz" && startNewChat) setQuizSessionActive(true);
@@ -395,9 +513,7 @@ const AIComponent = () => {
     };
     const currentMessages = startNewChat ? [] : messages;
     const currentId = startNewChat ? null : currentChatId;
-    const updatedMessages = isSilentQuizAnswer
-      ? currentMessages
-      : [...currentMessages, newMessage];
+    const updatedMessages = [...currentMessages, newMessage];
 
     setMessages(updatedMessages);
     setQuery("");
@@ -456,10 +572,14 @@ const AIComponent = () => {
             const isLimited =
               typeof serverMessage === "string" &&
               serverMessage.includes("Query limit exceeded");
+            const isQuotaError =
+              typeof serverMessage === "string" &&
+              /quota|billing|rate limit|exhausted/i.test(serverMessage);
             const isBusy =
               res.status === 429 || res.status === 503 || res.status >= 500;
 
             if (isLimited) throw new Error("Query limit exceeded");
+            if (isQuotaError) throw new Error(serverMessage);
             if (isBusy && attempt < maxAttempts) {
               showToast("warning", "AI is busy. Retrying…");
               await sleep(retryDelays[attempt - 1]);
@@ -514,22 +634,30 @@ const AIComponent = () => {
                 }
               }
               
-              // Slow typewriter: render char by char from what we have
-              const charsPerTick = 2;
-              for (let i = prevDisplayLen; i < displayText.length; i += charsPerTick) {
-                const showUpTo = Math.min(i + charsPerTick, displayText.length);
-                const visibleText = displayText.substring(0, showUpTo);
-                
-                setMessages((prev) => {
-                  const newMessages = [...prev];
-                  const lastMsg = newMessages[newMessages.length - 1];
-                  if (lastMsg && lastMsg.role === "ai") {
-                    lastMsg.parts[0].text = visibleText;
-                  }
-                  return newMessages;
-                });
-                
-                await new Promise(r => setTimeout(r, 30));
+              const shouldBufferStudentQuizResponse =
+                audienceType === "student" && mode === "quiz";
+
+              if (!shouldBufferStudentQuizResponse) {
+                const charsPerTick = 2;
+                for (
+                  let i = prevDisplayLen;
+                  i < displayText.length;
+                  i += charsPerTick
+                ) {
+                  const showUpTo = Math.min(i + charsPerTick, displayText.length);
+                  const visibleText = displayText.substring(0, showUpTo);
+
+                  setMessages((prev) => {
+                    const newMessages = [...prev];
+                    const lastMsg = newMessages[newMessages.length - 1];
+                    if (lastMsg && lastMsg.role === "ai") {
+                      lastMsg.parts[0].text = visibleText;
+                    }
+                    return newMessages;
+                  });
+
+                  await new Promise((r) => setTimeout(r, 30));
+                }
               }
               prevDisplayLen = displayText.length;
             }
@@ -551,6 +679,9 @@ const AIComponent = () => {
         } catch (err) {
           if (err.name === "AbortError") throw err;
           if (err.message?.includes("Query limit exceeded")) throw err;
+          if (/quota|billing|rate limit|exhausted/i.test(err.message || "")) {
+            throw err;
+          }
           if (attempt < maxAttempts) {
             showToast("warning", "AI is busy. Retrying…");
             await sleep(retryDelays[attempt - 1]);
@@ -566,12 +697,25 @@ const AIComponent = () => {
         showToast("warning", "Request stopped.");
         return;
       }
+      if (mode === "quiz" && audienceType === "student" && isSilentQuizAnswer) {
+        setMessages(currentMessages);
+        setStudentRequestError({
+          id: Date.now(),
+          message:
+            error.message || "We couldn't submit that answer. Please try again.",
+        });
+      }
       if (error.message?.includes("Query limit exceeded")) {
         setIsAnonymousLimited(true);
         showToast("error", "Free query limit reached. Please log in.");
         return;
       }
-      showToast("error", "AI is currently busy. Please try again.");
+      showToast(
+        "error",
+        /quota|billing|rate limit|exhausted/i.test(error.message || "")
+          ? error.message
+          : "AI is currently busy. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -584,16 +728,17 @@ const AIComponent = () => {
       setTimeout(() => handleQuery(null, "", true), 50);
     } else {
       setQuery(text);
-      handleQuery(null, text);
+      startTransition(() => {
+        handleQuery(null, text);
+      });
     }
   };
 
   const handleStop = () => {
-    abortControllerRef.current?.abort();
-    setIsLoading(false);
+    stopActiveRequest();
   };
 
-  if (authLoading) return <Loading to="AI Chat" />;
+  if (authLoading || !isAudienceReady) return <Loading to="AI Chat" />;
 
   const ImagePreviewModal = ({ src, onClose }) => (
     <div
@@ -668,20 +813,15 @@ const AIComponent = () => {
       {isAudienceModalOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-[#151821] border border-white/10 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl relative">
-            <button
-              onClick={() => setIsAudienceModalOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition"
-            >
-              <X size={20} />
-            </button>
             <div className="p-8">
               <h2 className="text-2xl font-bold text-white mb-2 text-center">Choose Your Audience</h2>
-              <p className="text-slate-400 text-sm text-center mb-8">Select how the AI should interact with you.</p>
+              <p className="text-slate-400 text-sm text-center mb-8">Select how the AI should interact with you. You can switch between modes anytime.</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <button
                   onClick={() => {
-                    setAudienceType("general");
+                    selectAudience("general");
+                    setMode("chat");
                     setIsAudienceModalOpen(false);
                   }}
                   className={`flex flex-col items-center text-center p-6 rounded-2xl border-2 transition-all duration-200 ${
@@ -699,7 +839,8 @@ const AIComponent = () => {
 
                 <button
                   onClick={() => {
-                    setAudienceType("student");
+                    selectAudience("student");
+                    setMode("quiz");
                     setIsAudienceModalOpen(false);
                   }}
                   className={`flex flex-col items-center text-center p-6 rounded-2xl border-2 transition-all duration-200 ${
@@ -814,15 +955,16 @@ const AIComponent = () => {
                         <p className="text-[10px] text-emerald-400 capitalize">{audienceType} Mode</p>
                       </div>
                       <button
+                        type="button"
                         onClick={() => setIsAudienceModalOpen(true)}
-                        className="px-3 py-1.5 text-xs font-medium rounded-lg bg-white/10 hover:bg-white/20 text-white transition"
+                        className="rounded-lg border border-emerald-400/20 bg-emerald-500/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-300 transition hover:bg-emerald-500/20"
                       >
-                        Change
+                        Switch Audience
                       </button>
                     </div>
 
                     {/* Quiz Config */}
-                    {mode === "quiz" && (
+                    {mode === "quiz" && audienceType === "general" && (
                       <div className="mt-3">
                         <button
                           type="button"
@@ -999,7 +1141,16 @@ const AIComponent = () => {
                   {/* Chat List */}
                   <div className="px-1 shrink-0">
                     <button
-                      onClick={handleStartFreshChat}
+                      type="button"
+                      onClick={() => {
+                        if (audienceType === "student" && mode === "quiz") {
+                          redirectToNewQuizPage("student");
+                        } else {
+                          mode === "quiz"
+                            ? redirectToNewQuizPage(audienceType)
+                            : handleStartFreshChat();
+                        }
+                      }}
                       className="w-full rounded-2xl border border-dashed px-4 py-3 text-left transition-all duration-200 hover:bg-white/6 hover:border-emerald-400/30"
                       style={{
                         background: "rgba(255,255,255,0.03)",
@@ -1011,9 +1162,11 @@ const AIComponent = () => {
                           <Plus size={16} />
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-white">New Chat</p>
+                          <p className="text-sm font-semibold text-white">
+                            {mode === "quiz" ? "New Quiz" : "New Chat"}
+                          </p>
                           <p className="text-[11px] text-slate-500">
-                            Start a fresh {audienceType} conversation
+                            Start a fresh {audienceType} {mode === "quiz" ? "quiz" : "conversation"}
                           </p>
                         </div>
                       </div>
@@ -1201,8 +1354,9 @@ const AIComponent = () => {
             )}
             {mode === "quiz" && quizSessionActive && (
               <button
+                type="button"
                 onClick={() => {
-                  handleNewChat();
+                  redirectToNewQuizPage(audienceType);
                 }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-white transition"
                 style={{ border: "1px solid rgba(255,255,255,0.1)" }}
@@ -1233,7 +1387,9 @@ const AIComponent = () => {
             messages={messages}
             isLoading={isLoading}
             handleQuery={handleQuery}
-            onNewQuiz={() => handleQuery(null, "", true)}
+            handleStop={handleStop}
+            chatMeta={currentChatMeta}
+            onNewQuiz={() => redirectToNewQuizPage("student")}
             quizConfig={{
               topic: quizTopic,
               difficulty: quizDifficulty,
@@ -1243,6 +1399,8 @@ const AIComponent = () => {
             setQuizTopic={setQuizTopic}
             setQuizDifficulty={setQuizDifficulty}
             setQuizQuestionCount={setQuizQuestionCount}
+            setQuizQuestionType={setQuizQuestionType}
+            requestErrorSignal={studentRequestError}
           />
         ) : (
           <ProfessionalChatUI

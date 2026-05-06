@@ -36,7 +36,7 @@ function siteReducer(state, action) {
     case "REMOVE_IMAGE":
       return {
         ...state,
-        Gallary: state.Gallary.filter((_, i) => i !== action.index),
+        gallary: state.gallary.filter((_, i) => i !== action.index),
       };
     default:
       return state;
@@ -207,15 +207,15 @@ const ModifySiteForm = ({
             </div>
             <div>
               <label
-                htmlFor="Site_discription"
+                htmlFor="site_discription"
                 className="block text-sm font-medium text-gray-700"
               >
                 Description
               </label>
               <textarea
-                name="Site_discription"
-                id="Site_discription"
-                value={siteData.Site_discription}
+                name="site_discription"
+                id="site_discription"
+                value={siteData.site_discription}
                 onChange={handleChange}
                 rows="4"
                 required
@@ -415,7 +415,7 @@ const ModifySiteForm = ({
             </div>
             <div>
               <label
-                htmlFor="Gallary"
+                htmlFor="gallary"
                 className="block text-sm font-medium text-gray-700"
               >
                 Gallery Images
@@ -427,8 +427,8 @@ const ModifySiteForm = ({
                 Current Images
               </label>
               <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {siteData.Gallary &&
-                  siteData.Gallary.map((image, index) => (
+                {siteData.gallary &&
+                  siteData.gallary.map((image, index) => (
                     <div key={index} className="relative">
                       <img
                         src={image}

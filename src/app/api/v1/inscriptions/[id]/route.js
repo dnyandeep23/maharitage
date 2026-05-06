@@ -7,7 +7,7 @@ export async function GET(req, { params }) {
     await connectDB();
     const { id } = params;
 
-    const site = await Site.findOne({ "Inscriptions.Inscription_id": id });
+    const site = await Site.findOne({ "inscriptions.inscription_id": id });
 
     if (!site) {
       return NextResponse.json(
@@ -16,8 +16,8 @@ export async function GET(req, { params }) {
       );
     }
 
-    const inscription = site.Inscriptions.find(
-      (insc) => insc.Inscription_id === id
+    const inscription = site.inscriptions.find(
+      (insc) => insc.inscription_id === id
     );
 
     if (!inscription) {

@@ -19,7 +19,7 @@ export async function GET(req) {
     const sites = await Site.find({
       $or: [
         { site_name: regex },
-        { Site_discription: regex },
+        { site_discription: regex },
         { period: regex },
         { "location.district": regex },
         { "location.state": regex },

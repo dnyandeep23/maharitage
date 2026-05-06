@@ -67,16 +67,16 @@ const ModifyInscriptionForm = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label
-              htmlFor="Inscription_id"
+              htmlFor="inscription_id"
               className="block text-sm font-medium text-gray-700"
             >
               Inscription ID
             </label>
             <input
               type="text"
-              name="Inscription_id"
-              id="Inscription_id"
-              value={inscriptionData.Inscription_id}
+              name="inscription_id"
+              id="inscription_id"
+              value={inscriptionData.inscription_id}
               required
               className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6 bg-gray-100"
               disabled

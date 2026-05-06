@@ -7,7 +7,7 @@ export async function GET() {
     await connectDB();
     const sites = await Site.find(
       {},
-      { site_id: 1, site_name: 1, location: 1, Gallary: { $slice: 1 }, _id: 0 }
+      { site_id: 1, site_name: 1, location: 1, gallary: { $slice: 1 }, _id: 0 }
     );
     return NextResponse.json(sites);
   } catch (error) {
