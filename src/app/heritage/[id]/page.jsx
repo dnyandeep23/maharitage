@@ -15,8 +15,8 @@ export default async function HeritageItemPage({ params }) {
   let data = null;
   try {
     // We dynamically import the db connection to ensure it's loaded
-    const dbConnect = (await import("@/lib/dbConnect")).default;
-    await dbConnect();
+    const connectDB = (await import("@/lib/mongoose")).default;
+    await connectDB();
     
     const Site = (await import("@/models/Site")).default;
     
