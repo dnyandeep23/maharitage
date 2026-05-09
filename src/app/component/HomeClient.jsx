@@ -61,7 +61,7 @@ export default function HomeClient() {
         logoColor="text-black"
         borderColor="border-gray-200"
         currentPath="/"
-        theme="light"
+        theme="hero"
       />
 
       <Hero

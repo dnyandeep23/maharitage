@@ -12,20 +12,22 @@ const keyAliases = {
   // Description variations
   "site_discription": "site_description",
   "sitedescription": "site_description",
-  "description": "site_description", // sometimes just description is used
   
   // Gallery variations
   "gallary": "gallery",
   "galleries": "gallery",
-  "images": "gallery", // Could be mapped to gallery if it's the main image array
+  "images": "gallery",
   
   // Naming variations
   "name": "site_name",
   "type": "heritage_type",
   
-  // Array items / nested
+  // Inscription variations — backward compat for capitalized keys in old datasets
   "inscription_id": "inscription_id",
-  "discription": "description", // nested inscription description
+  "Inscription_id": "inscription_id",
+  "Inscription_Id": "inscription_id",
+  "discription": "description",   // nested inscription description
+  "Discription": "description",
 };
 
 /**

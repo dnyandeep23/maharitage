@@ -137,13 +137,13 @@ const Explore = ({ heroData }) => {
                   zIndex: isActive ? 20 : 10,
                   opacity: isActive ? 1 : 0.75,
                 }}
-                onClick={() => navigate.push(`/cave/${site.site_id}`)}
+                onClick={() => navigate.push(`/heritage/${site.site_id}`)}
               >
                 <div className="relative w-full h-full rounded-3xl">
                   <Image
                     src={
-                      site?.gallary?.[0] && site.gallary[0].startsWith("http")
-                        ? site.gallary[0]
+                      (site?.gallery?.[0] || site?.gallary?.[0] || "").startsWith("http")
+                        ? (site?.gallery?.[0] || site?.gallary?.[0])
                         : "/placeholder.svg"
                     }
                     alt={site.site_name}
