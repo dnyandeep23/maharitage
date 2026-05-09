@@ -1,196 +1,1224 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import img from "../../assets/images/elephanta_slide.png";
+import React, { useEffect, useMemo, useState } from "react";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
-import { ChevronLeft, ChevronRight, History } from "lucide-react";
 import ImageModal from "../component/ImageModal";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../../contexts/AuthContext";
 import AIFloatingButton from "../component/AIFloatingButton";
-import Link from "next/link";
+import { useAuth } from "../../contexts/AuthContext";
 import { fetchWithInternalToken } from "../../lib/fetch";
+import {
+  ArrowLeft,
+  BookOpen,
+  Building2,
+  CalendarDays,
+  Castle,
+  ChevronLeft,
+  ChevronRight,
+  FileText,
+  Gem,
+  Image as ImageIcon,
+  Landmark,
+  Languages,
+  MapPin,
+  Milestone,
+  ScrollText,
+  Shield,
+  Sparkles,
+  Users,
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import "../fonts.css";
 
-const Breadcrumb = ({ siteName, inscriptionId, onBack }) => {
+const FIELD_LABELS = {
+  approx_date: "Approximate Date",
+  cultural_significance: "Cultural Significance",
+  defensive_design: "Defensive Design",
+  event_name: "Event",
+  original_script: "Original Script",
+  related_figures: "Related Figures",
+  ruler_or_dynasty: "Ruler or Dynasty",
+};
+
+const IMPORTANT_KEYS = new Set([
+  "name",
+  "title",
+  "id",
+  "description",
+  "details",
+  "images",
+  "image_urls",
+]);
+
+const IMAGE_KEYS = new Set(["image", "image_url", "image_urls", "images"]);
+
+const revealMotion = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0 },
+};
+
+const slideMotion = {
+  hidden: { opacity: 0, x: -28 },
+  show: { opacity: 1, x: 0 },
+};
+
+const normalizeType = (value) => String(value || "").trim().toLowerCase();
+
+const titleize = (value = "") =>
+  String(value)
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+const labelFor = (key) => FIELD_LABELS[key] || titleize(key);
+
+const getSiteDescription = (site) =>
+  site?.site_description || site?.site_discription || site?.description || "";
+
+const getInscriptionId = (inscription) =>
+  inscription?.inscription_id || inscription?.Inscription_id || inscription?.Inscription_Id || "";
+
+const getInscriptionDescription = (inscription) =>
+  inscription?.description || inscription?.discription || inscription?.Discription || "";
+
+const getHeroImage = (site, gallery) =>
+  site?.banner_image ||
+  site?.banner_url ||
+  site?.hero_image ||
+  site?.hero_url ||
+  site?.cover_image ||
+  site?.cover_url ||
+  site?.thumbnail ||
+  gallery?.[0] ||
+  "";
+
+const asArray = (value) => {
+  if (!value) return [];
+  return Array.isArray(value) ? value.filter(Boolean) : [value].filter(Boolean);
+};
+
+const isImageKey = (key = "") => IMAGE_KEYS.has(key);
+
+const isImageUrl = (value) =>
+  typeof value === "string" &&
+  (/^https?:\/\//i.test(value) || /\.(avif|gif|jpe?g|png|webp)(\?.*)?$/i.test(value));
+
+const collectImageUrls = (value) => {
+  if (!value) return [];
+  if (isImageUrl(value)) return [value];
+  if (Array.isArray(value)) return value.flatMap(collectImageUrls);
+  if (typeof value === "object") {
+    return Object.entries(value).flatMap(([key, nestedValue]) =>
+      isImageKey(key) ? collectImageUrls(nestedValue) : []
+    );
+  }
+  return [];
+};
+
+const formatObjectValue = (value) => {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  return Object.entries(value)
+    .filter(([key, item]) => !isImageKey(key) && item !== null && item !== undefined && item !== "")
+    .map(([key, item]) => {
+      const readable = Array.isArray(item)
+        ? item.filter(Boolean).join(", ")
+        : typeof item === "object"
+          ? formatObjectValue(item)
+          : String(item);
+      return readable ? `${labelFor(key)}: ${readable}` : null;
+    })
+    .filter(Boolean)
+    .join(" · ");
+};
+
+const renderPrimitive = (value) => {
+  if (value === null || value === undefined || value === "") return null;
+  if (Array.isArray(value)) return value.filter(Boolean).join(", ");
+  if (typeof value === "object") return formatObjectValue(value);
+  return String(value);
+};
+
+const MotionSection = ({ children, className = "" }) => (
+  <motion.section
+    variants={revealMotion}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true, amount: 0.18 }}
+    transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+    className={className}
+  >
+    {children}
+  </motion.section>
+);
+
+const LoadingImage = ({
+  className = "",
+  imgClassName = "",
+  loading = "lazy",
+  ...props
+}) => {
+  const [loaded, setLoaded] = useState(false);
+
   return (
-    <div className="flex items-center text-sm text-gray-500 mb-4">
-      <button
-        onClick={onBack}
-        className="hover:text-green-700 text-green-900 font-semibold cursor-pointer"
-      >
-        {siteName}
-      </button>
-      {inscriptionId && (
-        <>
-          <span className="mx-2">&gt;</span>
-          <span className="font-semibold cursor-pointer text-gray-400">
-            {inscriptionId}
-          </span>
-        </>
+    <div
+      className={`relative overflow-hidden bg-stone-200 ${className}`}
+    >
+      {/* Smooth skeleton without flash */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-r from-stone-200 via-stone-100 to-stone-200 transition-opacity duration-700 ${
+          loaded
+            ? "pointer-events-none opacity-0"
+            : "animate-pulse opacity-100"
+        }`}
+      />
+
+      <img
+        {...props}
+        loading={loading}
+        decoding="async"
+        ref={(node) => {
+          if (node?.complete && !loaded) setLoaded(true);
+        }}
+        onLoad={(event) => {
+          setLoaded(true);
+          props.onLoad?.(event);
+        }}
+        onError={(event) => {
+          setLoaded(true);
+          props.onError?.(event);
+        }}
+        className={`h-full w-full object-cover will-change-transform transition-[opacity,transform] duration-700 ease-out ${
+          loaded
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-[1.01]"
+        } ${imgClassName}`}
+      />
+    </div>
+  );
+};
+const SectionHeader = ({ eyebrow, title, description, icon: Icon }) => (
+  <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="max-w-3xl">
+      {eyebrow && (
+        <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.28em] text-stone-500">
+          {Icon && <Icon className="h-4 w-4" />}
+          <span>{eyebrow}</span>
+        </div>
       )}
+      <h2 className="font-cinzel-decorative text-3xl font-bold text-stone-950 sm:text-4xl">
+        {title}
+      </h2>
+      {description && (
+        <p className="mt-3 max-w-2xl text-base leading-7 text-stone-600">{description}</p>
+      )}
+    </div>
+  </div>
+);
+
+const EmptyState = ({ children }) => (
+  <div className="rounded-[2rem] border border-dashed border-stone-300 bg-white/70 px-6 py-12 text-center text-stone-500 shadow-sm">
+    {children}
+  </div>
+);
+
+const NarrativeText = ({ children, tone = "cave" }) => {
+  if (!children) return null;
+
+  return (
+    <div
+      className={`rounded-[2rem] border p-6 shadow-sm sm:p-8 ${
+        tone === "fort"
+          ? "border-amber-200/80 bg-[#fff9ed] text-stone-800"
+          : "border-emerald-100 bg-white text-stone-800"
+      }`}
+    >
+      <p className="max-w-none text-lg leading-9 text-justify first-letter:float-left first-letter:mr-3 first-letter:font-cinzel-decorative first-letter:text-6xl first-letter:font-bold first-letter:leading-[0.85] first-letter:text-stone-900">
+        {children}
+      </p>
     </div>
   );
 };
 
+const DataPill = ({ icon: Icon, label, value, tone = "cave" }) => {
+  const content = renderPrimitive(value);
+  if (!content) return null;
+
+  return (
+    <div
+      className={`flex items-start gap-3 rounded-2xl border px-4 py-3 ${
+        tone === "fort"
+          ? "border-amber-200 bg-amber-50/80"
+          : "border-emerald-100 bg-emerald-50/80"
+      }`}
+    >
+      {Icon && <Icon className={`mt-0.5 h-5 w-5 ${tone === "fort" ? "text-amber-800" : "text-emerald-800"}`} />}
+      <div>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-stone-500">{label}</p>
+        <p className="mt-1 text-sm font-semibold leading-6 text-stone-900">{content}</p>
+      </div>
+    </div>
+  );
+};
+
+const IconButton = ({ children, className = "", ...props }) => (
+  <button
+    {...props}
+    className={`inline-flex h-11 w-11 items-center justify-center rounded-full border border-stone-300 bg-white/90 text-stone-900 shadow-sm transition hover:bg-stone-950 hover:text-white disabled:pointer-events-none disabled:opacity-40 ${className}`}
+  >
+    {children}
+  </button>
+);
+
+const Hero = ({ site, gallery, isFort }) => {
+  const heroImage = getHeroImage(site, gallery);
+  const typeLabel = isFort ? "Fort Archive" : "Cave Archive";
+  const secondaryCount = isFort
+    ? Object.keys(site.architectural_features || {}).length
+    : asArray(site.inscriptions).length;
+  const toneClasses = isFort
+    ? "from-stone-950/72 via-stone-950/26 to-amber-950/8"
+    : "from-stone-950/70 via-stone-950/24 to-emerald-950/10";
+  const heroObjectPosition = isFort ? "object-[center_48%]" : "object-[center_36%]";
+
+  return (
+   <section className="relative min-h-[100svh] overflow-hidden bg-stone-950 text-white">
+  {/* Background Image Layer */}
+  {heroImage ? (
+    <div className="absolute inset-0 z-0">
+      <LoadingImage
+        src={heroImage}
+        alt={site.site_name || "Heritage site"}
+        loading="eager"
+        fetchPriority="high"
+        className="h-full w-full"
+        imgClassName={`${heroObjectPosition} h-full w-full object-cover scale-[1.03] saturate-[1.05] contrast-[1.02] brightness-[0.82]`}
+        onError={(event) => {
+          event.currentTarget.style.display = "none";
+        }}
+      />
+    </div>
+  ) : (
+    <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_30%_15%,#57534e,transparent_36%),linear-gradient(135deg,#1c1917,#292524)]" />
+  )}
+
+  {/* Cinematic Overlay Stack */}
+  <div className="absolute inset-0 z-[1] bg-gradient-to-br from-stone-950/55 via-stone-950/25 to-black/40" />
+
+  {/* Left cinematic readability gradient */}
+  <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/65 via-black/20 to-transparent" />
+
+  {/* Top atmospheric fade */}
+  <div className="absolute inset-x-0 top-0 z-[2] h-44 bg-gradient-to-b from-black/45 via-black/10 to-transparent" />
+
+  {/* Bottom transition blend */}
+  <div className="absolute inset-x-0 bottom-0 z-[2] h-52 bg-gradient-to-t from-[#F8F3EA] via-[#f7f3ea]/40 to-transparent" />
+
+  {/* Subtle vignette for cinematic depth */}
+  {/* <div className="absolute inset-0 z-[2] bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.32)_100%)]" /> */}
+
+  {/* Main Content */}
+  <div className="relative z-20 flex min-h-[100svh] items-center px-5 pb-24 pt-36 sm:px-10 sm:pt-40 lg:px-16">
+    <motion.div
+      initial="hidden"
+      animate="show"
+      variants={{ show: { transition: { staggerChildren: 0.12 } } }}
+      className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-center"
+    >
+      {/* Left Content */}
+      <div className="max-w-5xl">
+        <motion.div
+          variants={slideMotion}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] text-white/85 backdrop-blur-md"
+        >
+          {isFort ? (
+            <Shield className="h-4 w-4" />
+          ) : (
+            <ScrollText className="h-4 w-4" />
+          )}
+          {typeLabel}
+        </motion.div>
+
+        <motion.h1
+          variants={slideMotion}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-5xl text-balance font-cinzel-decorative text-5xl font-extrabold leading-[0.94] tracking-normal text-white sm:text-7xl lg:text-8xl"
+          style={{
+            textShadow:
+              "0 8px 30px rgba(0,0,0,0.55), 0 2px 10px rgba(0,0,0,0.35)",
+          }}
+        >
+          {site.site_name}
+        </motion.h1>
+
+        <motion.div
+          variants={revealMotion}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-7 flex max-w-4xl flex-wrap gap-3"
+        >
+          <DataPill
+            icon={MapPin}
+            label="Location"
+            value={site.location}
+            tone={isFort ? "fort" : "cave"}
+          />
+
+          <DataPill
+            icon={CalendarDays}
+            label="Period"
+            value={site.period}
+            tone={isFort ? "fort" : "cave"}
+          />
+        </motion.div>
+      </div>
+
+      {/* Summary Card */}
+      <motion.div
+        variants={revealMotion}
+        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-[2rem] border border-white/15 bg-white/10 p-5 text-white shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+      >
+        <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/65">
+          Record Summary
+        </p>
+
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+            <p className="text-3xl font-bold">{gallery.length}</p>
+            <p className="mt-1 text-sm text-white/70">
+              Gallery assets
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+            <p className="text-3xl font-bold">{secondaryCount}</p>
+            <p className="mt-1 text-sm text-white/70">
+              {isFort
+                ? "Architecture sections"
+                : "Inscriptions"}
+            </p>
+          </div>
+        </div>
+
+        <p className="mt-5 text-sm leading-6 text-white/75">
+          {isFort
+            ? "A strategic architectural record rendered from the live heritage dataset."
+            : "An archaeological site record rendered from the live heritage dataset."}
+        </p>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
+  );
+};
+
+const GallerySection = ({ gallery, siteName, onImageClick }) => {
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const visibleCount = Math.min(gallery.length, 3);
+  const maxIndex = Math.max(gallery.length - visibleCount, 0);
+
+  useEffect(() => {
+    setIndex((value) => Math.min(value, maxIndex));
+  }, [maxIndex]);
+
+  const visible = useMemo(
+    () => gallery.slice(index, index + visibleCount),
+    [gallery, index, visibleCount]
+  );
+
+  const canPrev = index > 0;
+  const canNext = index < maxIndex;
+
+  const handlePrev = () => {
+    if (!canPrev) return;
+
+    setDirection(-1);
+    setIndex((value) => Math.max(value - 1, 0));
+  };
+
+  const handleNext = () => {
+    if (!canNext) return;
+
+    setDirection(1);
+    setIndex((value) => Math.min(value + 1, maxIndex));
+  };
+
+  const cardTransition = {
+    layout: {
+      duration: 0.72,
+      ease: [0.22, 1, 0.36, 1],
+    },
+    flexGrow: {
+      duration: 0.72,
+      ease: [0.22, 1, 0.36, 1],
+    },
+    opacity: {
+      duration: 0.28,
+      ease: "easeOut",
+    },
+  };
+
+  return (
+    <MotionSection>
+      <SectionHeader
+        eyebrow="Visual archive"
+        title={`Gallery of ${siteName}`}
+        description="Field photographs and archive visuals preserved with the site record."
+        icon={ImageIcon}
+      />
+
+      {gallery.length ? (
+        <>
+          {/* Gallery */}
+          <div className="relative overflow-hidden rounded-[2.35rem]">
+            <motion.div
+              layout
+              className="flex h-[360px] gap-4 sm:h-[440px] sm:gap-5 lg:h-[520px]"
+            >
+              <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                {visible.map((url, itemIndex) => {
+                  const isActive = itemIndex === 0;
+                  const plateNumber = index + itemIndex + 1;
+
+                  return (
+                    <motion.button
+                      type="button"
+                      key={`${url}-${plateNumber}`}
+                      onClick={() => onImageClick(url)}
+                      layout
+                      initial={{
+                        x: direction > 0 ? 42 : -42,
+                        opacity: 0,
+                      }}
+                      animate={{
+                        x: 0,
+                        opacity: 1,
+                        flexGrow: isActive ? 1.75 : 1,
+                      }}
+                      exit={{
+                        x: direction > 0 ? -42 : 42,
+                        opacity: 0,
+                      }}
+                      transition={cardTransition}
+                      whileHover={{
+                        y: -4,
+                      }}
+                      className="group relative h-full min-w-0 basis-0 overflow-hidden rounded-[2.2rem] bg-stone-200 text-left shadow-[0_10px_40px_rgba(0,0,0,0.08)] will-change-[flex-grow,transform]"
+                      style={{ flexShrink: 1 }}
+                    >
+                      {/* Image */}
+                      <LoadingImage
+                        src={url}
+                        alt={`${siteName} gallery ${plateNumber}`}
+                        className="absolute inset-0 h-full w-full"
+                        imgClassName="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                        onError={(event) => {
+                          event.currentTarget.style.display =
+                            "none";
+                        }}
+                      />
+
+                      {/* Overlay */}
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-t transition-colors duration-500 ${
+                          isActive
+                            ? "from-black/58 via-black/8 to-transparent"
+                            : "from-black/45 via-black/5 to-transparent"
+                        }`}
+                      />
+
+                      {/* Active Highlight */}
+                      <motion.div
+                        aria-hidden="true"
+                        initial={false}
+                        animate={{ opacity: isActive ? 1 : 0 }}
+                        transition={{ duration: 0.35, ease: "easeOut" }}
+                        className="absolute inset-0 ring-1 ring-white/20"
+                      />
+
+                      {/* Plate Label */}
+                      <motion.span
+                        layout="position"
+                        initial={false}
+                        className="absolute bottom-4 left-4 rounded-full bg-white/92 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-stone-800 backdrop-blur-sm sm:bottom-5 sm:left-5 sm:px-4 sm:text-xs"
+                      >
+                        Plate {plateNumber}
+                      </motion.span>
+                    </motion.button>
+                  );
+                })}
+              </AnimatePresence>
+            </motion.div>
+          </div>
+
+          {/* Navigation */}
+          {gallery.length > 3 && (
+            <div className="mt-7 flex items-center justify-end gap-3">
+              <IconButton
+                onClick={handlePrev}
+                disabled={!canPrev}
+                aria-label="Previous gallery images"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </IconButton>
+
+              <IconButton
+                onClick={handleNext}
+                disabled={!canNext}
+                aria-label="Next gallery images"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </IconButton>
+            </div>
+          )}
+        </>
+      ) : (
+        <EmptyState>
+          No gallery images found.
+        </EmptyState>
+      )}
+    </MotionSection>
+  );
+};
+
+const InscriptionCard = ({ inscription, index, onClick }) => {
+  const inscriptionId = getInscriptionId(inscription);
+  const description = getInscriptionDescription(inscription);
+  const image = inscription?.image_urls?.[0];
+
+  return (
+    <button
+      type="button"
+      onClick={() => onClick(inscriptionId)}
+      className="group overflow-hidden rounded-[2rem] border border-emerald-100 bg-white text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+    >
+      <div className="relative h-64 overflow-hidden bg-stone-200">
+        {image ? (
+          <LoadingImage
+            src={image}
+            alt={inscriptionId || `Inscription ${index + 1}`}
+            className="h-full w-full"
+            imgClassName="transition duration-700 group-hover:scale-105"
+            onError={(event) => {
+              event.currentTarget.style.display = "none";
+            }}
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-stone-400">
+            <ScrollText className="h-10 w-10" />
+          </div>
+        )}
+        <div className="absolute left-4 top-4 rounded-full bg-emerald-950 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
+          Inscription {index + 1}
+        </div>
+      </div>
+      <div className="p-5">
+        <h3 className="text-xl font-bold text-stone-950">
+          {inscriptionId || "Unnamed Inscription"}
+        </h3>
+        {description && (
+          <p className="mt-3 line-clamp-3 text-sm leading-6 text-stone-600">{description}</p>
+        )}
+        <div className="mt-5 flex items-center gap-2 text-sm font-bold text-emerald-800">
+          <BookOpen className="h-4 w-4" />
+          Study record
+        </div>
+      </div>
+    </button>
+  );
+};
+
+const InscriptionsSection = ({ site, onInscriptionClick }) => {
+  const inscriptions = asArray(site.inscriptions);
+
+  return (
+    <MotionSection>
+      <SectionHeader
+        eyebrow="Epigraphic record"
+        title={`Inscriptions at ${site.site_name}`}
+        description="Each entry is shown only when it exists in the dataset, preserving the archaeological reading flow."
+        icon={ScrollText}
+      />
+      {inscriptions.length ? (
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {inscriptions.map((inscription, index) => (
+            <InscriptionCard
+              key={getInscriptionId(inscription) || index}
+              inscription={inscription}
+              index={index}
+              onClick={onInscriptionClick}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyState>No inscriptions found at this location.</EmptyState>
+      )}
+    </MotionSection>
+  );
+};
+
+const FieldValue = ({ value }) => {
+  if (value === null || value === undefined || value === "") return null;
+  if (Array.isArray(value)) {
+    const nonImageItems = value.filter((item) => !isImageUrl(item));
+    if (!nonImageItems.length) return null;
+
+    return (
+      <div className="flex flex-wrap gap-2">
+        {nonImageItems.filter(Boolean).map((item, index) => (
+          <span key={index} className="rounded-full bg-stone-100 px-3 py-1 text-sm text-stone-700">
+            {renderPrimitive(item)}
+          </span>
+        ))}
+      </div>
+    );
+  }
+  if (typeof value === "object") {
+    const entries = Object.entries(value).filter(([key]) => !isImageKey(key));
+    if (!entries.length) return null;
+
+    return (
+      <div className="space-y-3">
+        {entries.map(([key, nestedValue]) => (
+          <div key={key}>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-stone-500">{labelFor(key)}</p>
+            <p className="mt-1 text-sm leading-6 text-stone-700">{renderPrimitive(nestedValue)}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  return <p className="text-base leading-7 text-stone-700">{value}</p>;
+};
+
+const FeatureCard = ({ title, value, onImageClick }) => {
+  if (!value) return null;
+
+  if (typeof value === "string") {
+    return (
+      <motion.article
+        variants={revealMotion}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-[2rem] border border-amber-200 bg-white p-6 shadow-sm"
+      >
+        <h3 className="flex items-center gap-2 text-xl font-bold text-stone-950">
+          <Building2 className="h-5 w-5 text-amber-800" />
+          {title}
+        </h3>
+        <p className="mt-4 text-base leading-8 text-stone-700 text-justify">{value}</p>
+      </motion.article>
+    );
+  }
+
+  if (Array.isArray(value)) {
+    return (
+      <motion.article
+        variants={revealMotion}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-[2rem] border border-amber-200 bg-white p-6 shadow-sm"
+      >
+        <h3 className="flex items-center gap-2 text-xl font-bold text-stone-950">
+          <Building2 className="h-5 w-5 text-amber-800" />
+          {title}
+        </h3>
+        <div className="mt-5 grid gap-5 xl:grid-cols-2">
+          {value.map((item, index) => {
+            if (typeof item === "string") {
+              return (
+                <motion.div
+                  key={index}
+                  variants={revealMotion}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.04 }}
+                  className="rounded-2xl bg-amber-50 p-4 text-sm leading-6 text-stone-700"
+                >
+                  {item}
+                </motion.div>
+              );
+            }
+            if (!item || typeof item !== "object") return null;
+            const itemTitle = item.name || item.title || item.id || `${title} ${index + 1}`;
+            const itemDescription = item.description || item.details;
+            const images = collectImageUrls(item);
+            const extras = Object.entries(item).filter(([key]) => !IMPORTANT_KEYS.has(key));
+
+            return (
+              <motion.div
+                key={index}
+                variants={revealMotion}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.16 }}
+                transition={{ duration: 0.55, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-[1.5rem] bg-amber-50 p-5"
+              >
+                <p className="font-bold text-stone-950">{itemTitle}</p>
+                {itemDescription && <p className="mt-2 text-sm leading-6 text-stone-700">{itemDescription}</p>}
+                {extras.length > 0 && (
+                  <div className="mt-4 space-y-3">
+                    {extras.map(([key, nestedValue]) => (
+                      <div key={key}>
+                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-800">{labelFor(key)}</p>
+                        <FieldValue value={nestedValue} />
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {images.length > 0 && (
+                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                    {images.slice(0, 4).map((url, imageIndex) => (
+                      <button type="button" key={url} onClick={() => onImageClick(url)} className="group overflow-hidden rounded-2xl bg-stone-200 shadow-sm">
+                        <LoadingImage
+                          src={url}
+                          alt={`${itemTitle} ${imageIndex + 1}`}
+                          className="h-72 w-full"
+                          imgClassName="transition duration-700 group-hover:scale-105"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.article>
+    );
+  }
+
+  if (typeof value === "object") {
+    const images = collectImageUrls(value);
+    const entries = Object.entries(value).filter(([key]) => !isImageKey(key));
+
+    return (
+      <motion.article
+        variants={revealMotion}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-[2rem] border border-amber-200 bg-white p-6 shadow-sm"
+      >
+        <h3 className="flex items-center gap-2 text-xl font-bold text-stone-950">
+          <Building2 className="h-5 w-5 text-amber-800" />
+          {title}
+        </h3>
+        {entries.length > 0 && (
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            {entries.map(([key, nestedValue]) => (
+            <div key={key} className="rounded-2xl bg-amber-50 p-4">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-800">{labelFor(key)}</p>
+              <div className="mt-2">
+                <FieldValue value={nestedValue} />
+              </div>
+            </div>
+            ))}
+          </div>
+        )}
+        {images.length > 0 && (
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            {images.map((url, index) => (
+              <button
+                type="button"
+                key={`${url}-${index}`}
+                onClick={() => onImageClick(url)}
+                className="group overflow-hidden rounded-[1.5rem] bg-stone-200 shadow-sm"
+              >
+                <LoadingImage
+                  src={url}
+                  alt={`${title} ${index + 1}`}
+                  className="h-80 w-full lg:h-[420px]"
+                  imgClassName="transition duration-700 group-hover:scale-105"
+                />
+              </button>
+            ))}
+          </div>
+        )}
+      </motion.article>
+    );
+  }
+
+  return null;
+};
+
+const ChronologySection = ({ chronology }) => {
+  const items = Array.isArray(chronology)
+    ? chronology
+    : Object.entries(chronology || {}).map(([key, value]) => ({
+        dynasty: key,
+        details: value,
+      }));
+
+  if (!items.length) return null;
+
+  return (
+    <MotionSection>
+      <SectionHeader
+        eyebrow="Sovereignty"
+        title="Ruling Powers Chronology"
+        description="Political control and dynastic layers as recorded in the dataset."
+        icon={Castle}
+      />
+      <div className="relative space-y-5 before:absolute before:bottom-6 before:left-5 before:top-6 before:w-px before:bg-amber-300">
+        {items.map((entry, index) => (
+          <motion.article
+            key={index}
+            variants={slideMotion}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.24 }}
+            transition={{ duration: 0.55, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+            className="relative grid gap-4 pl-14 md:grid-cols-[220px_1fr]"
+          >
+            <div className="absolute left-0 top-2 flex h-10 w-10 items-center justify-center rounded-full border border-amber-300 bg-white text-amber-900 shadow-sm">
+              <CrownIcon />
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-800">
+                {entry.period || entry.year || `Phase ${index + 1}`}
+              </p>
+              {(entry.dynasty || entry.ruler || entry.name) && (
+                <h3 className="mt-1 text-xl font-bold text-stone-950">
+                  {entry.dynasty || entry.ruler || entry.name}
+                </h3>
+              )}
+            </div>
+            <div className="rounded-2xl border border-amber-200 bg-white p-5 shadow-sm">
+              <FieldValue value={entry.details || entry.description || entry} />
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </MotionSection>
+  );
+};
+
+const CrownIcon = () => <Gem className="h-4 w-4" />;
+
+const HistoricalEventsSection = ({ events }) => {
+  const items = Array.isArray(events)
+    ? events
+    : Object.entries(events || {}).map(([key, value]) => ({
+        year: key,
+        description: value,
+      }));
+
+  if (!items.length) return null;
+
+  return (
+    <MotionSection>
+      <SectionHeader
+        eyebrow="Campaigns and turning points"
+        title="Historical Events"
+        description="Strategic moments, battles, occupations, and recorded incidents from MongoDB."
+        icon={Milestone}
+      />
+      <div className="grid gap-4 md:grid-cols-2">
+        {items.map((event, index) => (
+          <motion.article
+            key={index}
+            variants={revealMotion}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.5, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-[2rem] border border-amber-200 bg-white p-6 shadow-sm"
+          >
+            {(event.year || event.period || event.date) && (
+              <span className="inline-flex rounded-full bg-stone-950 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
+                {event.year || event.period || event.date}
+              </span>
+            )}
+            {(event.event_name || event.title || event.name) && (
+              <h3 className="mt-4 text-xl font-bold text-stone-950">
+                {event.event_name || event.title || event.name}
+              </h3>
+            )}
+            <div className="mt-4">
+              <FieldValue value={event.description || event.details || event} />
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </MotionSection>
+  );
+};
+
+const FortSections = ({ site, onImageClick }) => {
+  const features = site.architectural_features;
+
+  return (
+    <div className="space-y-20">
+      {features && Object.keys(features).length > 0 && (
+        <MotionSection>
+          <SectionHeader
+            eyebrow="Architecture and defence"
+            title={`Architectural Features of ${site.site_name}`}
+            description="Fort pages replace inscriptions with architectural, strategic, and dynastic material from the same MongoDB record."
+            icon={Landmark}
+          />
+          <div className="grid gap-5">
+            {Object.entries(features).map(([key, value]) => (
+              <FeatureCard key={key} title={labelFor(key)} value={value} onImageClick={onImageClick} />
+            ))}
+          </div>
+        </MotionSection>
+      )}
+      <ChronologySection chronology={site.ruling_powers_chronology} />
+      <HistoricalEventsSection events={site.historical_events} />
+    </div>
+  );
+};
+
+const HistoricalContextSection = ({ site, tone }) => {
+  const context = site.historical_context || {};
+  const figures = asArray(context.related_figures);
+
+  return (
+    <MotionSection>
+      <SectionHeader
+        eyebrow="Historical context"
+        title="Context and Significance"
+        description="Core chronology and cultural interpretation connected to the site."
+        icon={FileText}
+      />
+      <div className="grid gap-4 lg:grid-cols-3">
+        <DataPill icon={CalendarDays} label="Period" value={site.period} tone={tone} />
+        <DataPill icon={Users} label="Ruler or Dynasty" value={context.ruler_or_dynasty} tone={tone} />
+        <DataPill icon={Milestone} label="Approximate Date" value={context.approx_date} tone={tone} />
+      </div>
+      {figures.length > 0 && (
+        <div className="mt-5 rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-stone-500">Related Figures</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {figures.map((figure, index) => (
+              <span key={index} className="rounded-full bg-stone-100 px-4 py-2 text-sm font-semibold text-stone-800">
+                {figure}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      {context.cultural_significance && (
+        <div className="mt-5 rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-stone-500">Cultural Significance</p>
+          <p className="mt-4 text-base leading-8 text-stone-700 text-justify">{context.cultural_significance}</p>
+        </div>
+      )}
+    </MotionSection>
+  );
+};
+
+const SourcesSection = ({ site, tone }) => {
+  const curatedBy = asArray(site.verification_authority?.curated_by);
+  const references = asArray(site.references);
+
+  return (
+    <MotionSection>
+      <SectionHeader
+        eyebrow="Scholarly apparatus"
+        title="Authority and Sources"
+        description="Curation and bibliographic details attached to the record."
+        icon={BookOpen}
+      />
+      <div className="grid gap-5 lg:grid-cols-2">
+        <div className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+          <h3 className="text-xl font-bold text-stone-950">Verification Authority</h3>
+          {curatedBy.length ? (
+            <ul className="mt-5 space-y-3">
+              {curatedBy.map((ref, index) => (
+                <li key={index} className="flex gap-3 text-sm leading-6 text-stone-700">
+                  <Sparkles className={`mt-1 h-4 w-4 shrink-0 ${tone === "fort" ? "text-amber-800" : "text-emerald-800"}`} />
+                  {ref}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-5 text-stone-500">No references available.</p>
+          )}
+        </div>
+        <div className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+          <h3 className="text-xl font-bold text-stone-950">Sources</h3>
+          {references.length ? (
+            <ul className="mt-5 space-y-3">
+              {references.map((ref, index) => {
+                const content = `${ref.title || "Untitled source"}${ref.author ? `, ${ref.author}` : ""}${ref.year ? ` (${ref.year})` : ""}`;
+                return (
+                  <li key={index} className="text-sm leading-6 text-stone-700">
+                    {ref.url ? (
+                      <Link href={ref.url} target="_blank" rel="noopener noreferrer" className="font-semibold underline decoration-stone-300 underline-offset-4 transition hover:text-stone-950">
+                        {content}
+                      </Link>
+                    ) : (
+                      content
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="mt-5 text-stone-500">No references available.</p>
+          )}
+        </div>
+      </div>
+    </MotionSection>
+  );
+};
+
+const LoginGate = ({ onLogin, tone }) => (
+  <div className="sticky bottom-6 z-20 mx-auto mt-10 max-w-3xl rounded-[2rem] border border-white/70 bg-white/90 p-4 shadow-2xl backdrop-blur">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p className="text-sm font-bold uppercase tracking-[0.18em] text-stone-500">Archive access</p>
+        <p className="mt-1 text-base font-semibold text-stone-900">Log in to continue reading the full record.</p>
+      </div>
+      <button
+        type="button"
+        onClick={onLogin}
+        className={`rounded-full px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 ${
+          tone === "fort" ? "bg-amber-800 hover:bg-amber-900" : "bg-emerald-800 hover:bg-emerald-900"
+        }`}
+      >
+        Read More
+      </button>
+    </div>
+  </div>
+);
+
+const Breadcrumb = ({ siteName, inscriptionId, onBack }) => (
+  <div className="mb-8 flex items-center gap-3 text-sm text-stone-500">
+    <button
+      type="button"
+      onClick={onBack}
+      className="inline-flex items-center gap-2 font-bold text-emerald-900 transition hover:text-stone-950"
+    >
+      <ArrowLeft className="h-4 w-4" />
+      {siteName}
+    </button>
+    {inscriptionId && (
+      <>
+        <span>/</span>
+        <span className="font-semibold text-stone-700">{inscriptionId}</span>
+      </>
+    )}
+  </div>
+);
+
 const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [language, setLanguage] = useState("en");
+  const description = getInscriptionDescription(inscription);
+  const images = asArray(inscription?.image_urls);
+  const inscriptionId = getInscriptionId(inscription);
   const [translatedDescription, setTranslatedDescription] = useState({
-    en: inscription.discription,
+    en: description,
     mr: "भाषांतर चालू आहे...",
   });
-  const nextImage = () => {
-    if (currentImage < inscription.image_urls.length - 1) {
-      setCurrentImage(currentImage + 1);
-    }
-  };
-
-  const prevImage = () => {
-    if (currentImage > 0) {
-      setCurrentImage(currentImage - 1);
-    }
-  };
-  async function translateToMarathi(text) {
-    if (!text || typeof text !== "string") {
-      return "⚠️ अवैध मजकूर.";
-    }
-
-    try {
-      const response = await fetchWithInternalToken(
-        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=mr&dt=t&q=${encodeURIComponent(
-          text
-        )}`
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // data[0] contains translation segments
-      const translatedText = data?.[0]?.map((item) => item[0]).join(" ");
-
-      return translatedText || "⚠️ भाषांतर उपलब्ध नाही.";
-    } catch (error) {
-      console.error("Google Translation Error:", error);
-      return "⚠️ भाषांतर करण्यात अडचण आली.";
-    }
-  }
 
   useEffect(() => {
-    const runTranslation = async () => {
-      if (inscription?.discription) {
-        const marathiText = await translateToMarathi(inscription.discription);
-        setTranslatedDescription({
-          en: inscription.discription,
-          mr: marathiText,
-        });
+    setTranslatedDescription({ en: description, mr: "भाषांतर चालू आहे..." });
+
+    const translateToMarathi = async (text) => {
+      if (!text || typeof text !== "string") return "भाषांतरासाठी मजकूर उपलब्ध नाही.";
+
+      try {
+        const response = await fetchWithInternalToken(
+          `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=mr&dt=t&q=${encodeURIComponent(text)}`
+        );
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const data = await response.json();
+        return data?.[0]?.map((item) => item[0]).join(" ") || "भाषांतर उपलब्ध नाही.";
+      } catch (error) {
+        console.error("Google Translation Error:", error);
+        return "भाषांतर करण्यात अडचण आली.";
       }
     };
-    runTranslation();
-  }, [inscription]);
+
+    let isMounted = true;
+    translateToMarathi(description).then((marathiText) => {
+      if (isMounted) setTranslatedDescription({ en: description, mr: marathiText });
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [description]);
 
   if (!inscription) return null;
 
+  const canPrev = currentImage > 0;
+  const canNext = currentImage < images.length - 1;
+
   return (
     <div>
-      <Breadcrumb
-        siteName={siteName}
-        inscriptionId={inscription.inscription_id}
-        onBack={onBack}
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-        <div className="relative order-1">
-          <div className="overflow-hidden rounded-lg">
-            <div
-              className="flex transition-transform duration-700 ease-in-out"
-              style={{ transform: `translateX(-${currentImage * 100}%)` }}
-            >
-              {inscription.image_urls.map((url, index) => (
-                <div
-                  key={index}
-                  className="w-full shrink-0"
-                  onClick={() => onImageClick(url)}
+      <Breadcrumb siteName={siteName} inscriptionId={inscriptionId} onBack={onBack} />
+      <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="relative overflow-hidden rounded-[2rem] bg-stone-200 shadow-sm">
+          {images.length ? (
+            <button type="button" onClick={() => onImageClick(images[currentImage])} className="block h-full w-full">
+              <LoadingImage
+                src={images[currentImage]}
+                alt={`${inscriptionId || "Inscription"} image ${currentImage + 1}`}
+                className="h-[620px] w-full"
+              />
+            </button>
+          ) : (
+            <div className="flex h-[620px] items-center justify-center text-stone-400">
+              <ScrollText className="h-12 w-12" />
+            </div>
+          )}
+          {images.length > 1 && (
+            <div className="absolute inset-x-5 top-1/2 flex -translate-y-1/2 justify-between">
+              <IconButton onClick={() => setCurrentImage((value) => Math.max(value - 1, 0))} disabled={!canPrev} aria-label="Previous inscription image">
+                <ChevronLeft className="h-5 w-5" />
+              </IconButton>
+              <IconButton onClick={() => setCurrentImage((value) => Math.min(value + 1, images.length - 1))} disabled={!canNext} aria-label="Next inscription image">
+                <ChevronRight className="h-5 w-5" />
+              </IconButton>
+            </div>
+          )}
+        </div>
+        <article className="rounded-[2rem] border border-emerald-100 bg-white p-6 shadow-sm sm:p-8">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-emerald-800">Inscription dossier</p>
+              <h2 className="mt-3 font-cinzel-decorative text-3xl font-bold text-stone-950 sm:text-4xl">
+                {inscriptionId || "Unnamed Inscription"}
+              </h2>
+            </div>
+            <div className="inline-flex rounded-full border border-stone-200 bg-stone-50 p-1">
+              {["en", "mr"].map((code) => (
+                <button
+                  type="button"
+                  key={code}
+                  onClick={() => setLanguage(code)}
+                  className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                    language === code ? "bg-emerald-900 text-white shadow-sm" : "text-stone-600 hover:text-stone-950"
+                  }`}
                 >
-                  <img
-                    src={url}
-                    alt={`Inscription image ${index + 1}`}
-                    className="w-full h-64 sm:h-80 md:h-96 object-cover"
-                  />
-                </div>
+                  {code === "en" ? "English" : "Marathi"}
+                </button>
               ))}
             </div>
           </div>
-          <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-4">
-            <button
-              onClick={prevImage}
-              disabled={currentImage === 0}
-              className="bg-black/50 text-white p-2 rounded-full disabled:opacity-50"
-            >
-              <ChevronLeft />
-            </button>
-            <button
-              onClick={nextImage}
-              disabled={currentImage === inscription.image_urls.length - 1}
-              className="bg-black/50 text-white p-2 rounded-full disabled:opacity-50"
-            >
-              <ChevronRight />
-            </button>
-          </div>
-        </div>
-        <div className="order-2">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl sm:text-3xl font-bold">
-              {inscription.inscription_id
-                ? `Inscription ${
-                    inscription.inscription_id.split("_")[1] || ""
-                  }`
-                : "Unnamed Inscription"}
-            </h2>
-
-            <div className="flex gap-2">
-              <button
-                onClick={() => setLanguage("en")}
-                className={`px-3 py-1 rounded-full cursor-pointer  text-sm font-medium ${
-                  language === "en"
-                    ? "bg-linear-to-br from-green-600 to-green-900 text-white"
-                    : "border-green-900 border text-green-800"
-                }`}
-              >
-                English
-              </button>
-              <button
-                onClick={() => setLanguage("mr")}
-                className={`px-3 py-1  rounded-full cursor-pointer text-sm font-medium ${
-                  language === "mr"
-                    ? "bg-linear-to-br from-green-600 to-green-900 text-white"
-                    : "border-green-900 border text-green-800"
-                }`}
-              >
-                Marathi
-              </button>
-            </div>
-          </div>
-          <p className="text-lg text-justify">
+          <p className="mt-8 text-lg leading-9 text-stone-700 text-justify">
             {translatedDescription[language]}
           </p>
-          <div className="mt-8">
-            <h3 className="text-2xl font-bold">Details</h3>
-            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <p className="font-semibold">Original Script:</p>
-                <p>{inscription.original_script}</p>
-              </div>
-              <div>
-                <p className="font-semibold">Language Detected:</p>
-                <p>{inscription.language_detected}</p>
-              </div>
-            </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <DataPill icon={ScrollText} label="Original Script" value={inscription.original_script} />
+            <DataPill icon={Languages} label="Language Detected" value={inscription.language_detected} />
           </div>
-        </div>
+        </article>
       </div>
     </div>
   );
@@ -198,20 +1226,21 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
 
 export default function CaveClient({ site }) {
   const { user } = useAuth();
-  const [current, setCurrent] = useState(0);
-  const [inscriptionCurrent, setInscriptionCurrent] = useState(0);
+  const router = useRouter();
   const [selectedInscription, setSelectedInscription] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isClient, setIsClient] = useState(false);
   const [isInscriptionModalOpen, setIsInscriptionModalOpen] = useState(false);
-  const [selectedInscriptionImage, setSelectedInscriptionImage] =
-    useState(null);
-  const router = useRouter();
+  const [selectedInscriptionImage, setSelectedInscriptionImage] = useState(null);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const gallery = useMemo(() => asArray(site?.gallery || site?.gallary), [site]);
+  const isFort = normalizeType(site?.h_type || site?.heritage_type).includes("fort");
+  const tone = isFort ? "fort" : "cave";
+  const description = getSiteDescription(site);
+  const inscriptions = asArray(site?.inscriptions);
+  const selectedInscriptionRecord = inscriptions.find(
+    (inscription) => getInscriptionId(inscription) === selectedInscription
+  );
 
   const handleImageClick = (img) => {
     setSelectedImage(img);
@@ -224,21 +1253,13 @@ export default function CaveClient({ site }) {
   };
 
   const handleNextImage = () => {
-    const currentIndex = site.gallary?.findIndex(
-      (img) => img === selectedImage
-    );
-    if (currentIndex < site.gallary.length - 1) {
-      setSelectedImage(site.gallary[currentIndex + 1]);
-    }
+    const currentIndex = gallery.findIndex((image) => image === selectedImage);
+    if (currentIndex < gallery.length - 1) setSelectedImage(gallery[currentIndex + 1]);
   };
 
   const handlePrevImage = () => {
-    const currentIndex = site.gallary?.findIndex(
-      (img) => img === selectedImage
-    );
-    if (currentIndex > 0) {
-      setSelectedImage(site.gallary[currentIndex - 1]);
-    }
+    const currentIndex = gallery.findIndex((image) => image === selectedImage);
+    if (currentIndex > 0) setSelectedImage(gallery[currentIndex - 1]);
   };
 
   const handleInscriptionImageClick = (img) => {
@@ -251,406 +1272,101 @@ export default function CaveClient({ site }) {
     setSelectedInscriptionImage(null);
   };
 
+  const selectedInscriptionImages = asArray(selectedInscriptionRecord?.image_urls);
+
   const handleNextInscriptionImage = () => {
-    const inscription = site.inscriptions.find(
-      (i) => i.inscription_id === selectedInscription
-    );
-    const currentIndex = inscription.image_urls.findIndex(
-      (img) => img === selectedInscriptionImage
-    );
-    if (currentIndex < inscription.image_urls.length - 1) {
-      setSelectedInscriptionImage(inscription.image_urls[currentIndex + 1]);
+    const currentIndex = selectedInscriptionImages.findIndex((img) => img === selectedInscriptionImage);
+    if (currentIndex < selectedInscriptionImages.length - 1) {
+      setSelectedInscriptionImage(selectedInscriptionImages[currentIndex + 1]);
     }
   };
 
   const handlePrevInscriptionImage = () => {
-    const inscription = site.inscriptions.find(
-      (i) => i.inscription_id === selectedInscription
-    );
-    const currentIndex = inscription.image_urls.findIndex(
-      (img) => img === selectedInscriptionImage
-    );
+    const currentIndex = selectedInscriptionImages.findIndex((img) => img === selectedInscriptionImage);
     if (currentIndex > 0) {
-      setSelectedInscriptionImage(inscription.image_urls[currentIndex - 1]);
-    }
-  };
-
-  const nextSlide = () => {
-    if (site.gallary && current < site.gallary.length - 3) {
-      setCurrent(current + 1);
-    }
-  };
-
-  const prevSlide = () => {
-    if (current > 0) {
-      setCurrent(current - 1);
-    }
-  };
-
-  const nextInscription = () => {
-    if (
-      site.inscriptions &&
-      inscriptionCurrent < site.inscriptions.length - 3
-    ) {
-      setInscriptionCurrent(inscriptionCurrent + 1);
-    }
-  };
-
-  const prevInscription = () => {
-    if (inscriptionCurrent > 0) {
-      setInscriptionCurrent(inscriptionCurrent - 1);
+      setSelectedInscriptionImage(selectedInscriptionImages[currentIndex - 1]);
     }
   };
 
   const handleInscriptionClick = (inscriptionId) => {
+    if (!inscriptionId) return;
     if (user) {
       setSelectedInscription(inscriptionId);
       window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      router.push("/login");
     }
   };
 
   return (
-    <div className=" w-full h-full text-black bg-green-50">
-      <div className="">
-        <Header theme="dark" />
-      </div>
-      <div className="relative w-screen h-[50vh] sm:h-[70vh] lg:h-[85vh]">
-        <Image
-          src={site.gallary && site.gallary.length > 0 ? site.gallary[0] : img}
-          alt={site.site_name || "Cave Image"}
-          fill
-          className="object-cover rounded-b-3xl sm:rounded-b-[155px]"
-        />
-        <div className="w-full h-full z-10 absolute top-0 right-0 bg-black/40 rounded-b-3xl sm:rounded-b-[155px]"></div>
-        <div className="w-full h-full z-20 absolute top-0 right-0 flex justify-center items-center px-4">
-          <h1
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold text-stroke text-center uppercase"
-            style={{ fontfamily: "Inter" }}
-          >
-            {site.site_name}
-          </h1>
-        </div>
-      </div>
-      <div className="mt-16 sm:mt-20 mx-4 sm:mx-10 md:mx-28">
-        {selectedInscription ? (
-          <InscriptionDetail
-            inscription={site.inscriptions.find(
-              (i) => i.inscription_id === selectedInscription
+    <div className="min-h-screen bg-[#f7f3ea] text-stone-950">
+      <Header theme="dark" />
+      <Hero site={site} gallery={gallery} isFort={isFort} />
+
+      <main className="mx-auto -mt-10 max-w-7xl px-5 pb-20 sm:px-10 lg:px-16">
+        <div className="relative z-10 rounded-[2.5rem] border border-white/70 bg-[#f7f3ea]/95 p-5 shadow-[0_30px_90px_rgba(41,37,36,0.14)] backdrop-blur sm:p-8 lg:p-10">
+          <AnimatePresence mode="wait">
+            {selectedInscription ? (
+              <motion.div
+                key="inscription-detail"
+                initial={{ opacity: 0, x: 36 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -24 }}
+                transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <InscriptionDetail
+                  inscription={selectedInscriptionRecord}
+                  siteName={site.site_name}
+                  onBack={() => setSelectedInscription(null)}
+                  onImageClick={handleInscriptionImageClick}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="site-detail"
+                initial={{ opacity: 0, x: -24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 24 }}
+                transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-20"
+              >
+                <GallerySection gallery={gallery} siteName={site.site_name} onImageClick={handleImageClick} />
+
+                <MotionSection>
+                  <SectionHeader
+                    eyebrow={isFort ? "Strategic archive" : "Archaeological reading"}
+                    title={isFort ? "Site Description" : "Historical Description"}
+                    description={
+                      isFort
+                        ? "A fort record benefits from clear spatial hierarchy, defensive vocabulary, and architectural emphasis."
+                        : "Long historical material is set for slower reading and scholarly inspection."
+                    }
+                    icon={isFort ? Shield : ScrollText}
+                  />
+                  <NarrativeText tone={tone}>{description}</NarrativeText>
+                </MotionSection>
+
+                {isFort ? (
+                  <FortSections site={site} onImageClick={handleImageClick} />
+                ) : (
+                  <InscriptionsSection site={site} onInscriptionClick={handleInscriptionClick} />
+                )}
+
+                <HistoricalContextSection site={site} tone={tone} />
+                <SourcesSection site={site} tone={tone} />
+
+                {!user && <LoginGate tone={tone} onLogin={() => router.push("/login")} />}
+              </motion.div>
             )}
-            siteName={site.site_name}
-            onBack={() => setSelectedInscription(null)}
-            onImageClick={handleInscriptionImageClick}
-          />
-        ) : (
-          <>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold">
-                Explore {site.site_name} Gallery
-              </p>
-              <div className="mt-4">
-                {isClient && (
-                  <div className="overflow-hidden">
-                    <div
-                      className="flex transition-transform duration-700 ease-in-out"
-                      style={{
-                        transform: `translateX(-${current * 100}%)`,
-                      }}
-                    >
-                      {site.gallary && site.gallary.length > 0 ? (
-                        site.gallary.map((inscript, index) => (
-                          <div
-                            key={index}
-                            className="w-full md:w-1/2 lg:w-1/3 shrink-0 p-2 cursor-pointer"
-                            onClick={() =>
-                              handleImageClick(site.gallary[index])
-                            }
-                          >
-                            <img
-                              src={site.gallary[index]}
-                              alt={`Gallery image ${index + 1}`}
-                              className="w-full h-64 sm:h-80 object-cover rounded-2xl bg-gray-300"
-                            />
-                          </div>
-                        ))
-                      ) : (
-                        <div className="w-full text-center font-extrabold text-5xl text-gray-400 py-10">
-                          No inscriptions found at this location.
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+          </AnimatePresence>
+        </div>
+      </main>
 
-                {site.gallary && site.gallary.length > 3 && (
-                  <div className="flex justify-end gap-2">
-                    <button
-                      onClick={prevSlide}
-                      disabled={current === 0}
-                      className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                        current === 0
-                          ? "opacity-50 cursor-not-allowed"
-                          : "hover:border-lime-200 hover:bg-lime-200"
-                      }`}
-                    >
-                      <ChevronLeft />
-                    </button>
-                    <div className="relative group">
-                      <button
-                        onClick={nextSlide}
-                        disabled={
-                          !site.gallary || current >= site.gallary.length - 3
-                        }
-                        className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                          !site.gallary || current >= site.gallary.length - 3
-                            ? "opacity-50 cursor-not-allowed"
-                            : "hover:border-lime-200 hover:bg-lime-200"
-                        }`}
-                      >
-                        <ChevronRight />
-                      </button>
-                      {(!site.inscriptions ||
-                        current >= site.gallary.length - 3) && (
-                        <div className="absolute bottom-full mb-2 w-max px-2 py-1 bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                          Gallery end
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="mt-10">
-              <p className="text-2xl sm:text-3xl font-bold">Info.</p>
-              <div className="mt-6 text-lg text-justify flex flex-col gap-8">
-                {site.site_discription || site.site_description || site.description}
-              </div>
-            </div>
-            <div className="mt-20 relative ">
-              <div>
-                <p className="text-2xl sm:text-3xl font-bold">
-                  inscriptions at {site.site_name}
-                </p>
-                <div className="mt-4">
-                  {isClient && (
-                    <div className="overflow-hidden">
-                      <div
-                        className="flex transition-transform duration-700 ease-in-out"
-                        style={{
-                          transform: `translateX(-${
-                            inscriptionCurrent * 33.33
-                          }%)`,
-                        }}
-                      >
-                        {site.inscriptions && site.inscriptions.length > 0 ? (
-                          site.inscriptions.map((inscript, index) => (
-                            <div
-                              key={index}
-                              className="w-full md:w-1/2 lg:w-1/3 shrink-0 p-2 cursor-pointer"
-                              onClick={() =>
-                                handleInscriptionClick(inscript.inscription_id)
-                              }
-                            >
-                              <img
-                                src={inscript?.image_urls?.[0]}
-                                alt={`Inscription ${index + 1}`}
-                                className="w-full h-80 object-cover rounded-2xl bg-gray-300"
-                              />
-                            </div>
-                          ))
-                        ) : (
-                          <div className="w-full text-center font-extrabold text-5xl text-gray-400 py-10">
-                            No inscriptions found at this location.
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+      <Footer />
 
-                  {site.inscriptions && site.inscriptions.length > 0 && (
-                    <div className="flex justify-end gap-2">
-                      <button
-                        onClick={prevInscription}
-                        disabled={inscriptionCurrent === 0}
-                        className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                          inscriptionCurrent === 0
-                            ? "opacity-50 cursor-not-allowed"
-                            : "hover:border-lime-200 hover:bg-lime-200"
-                        }`}
-                      >
-                        <ChevronLeft />
-                      </button>
-                      <div className="relative group">
-                        <button
-                          onClick={nextInscription}
-                          disabled={
-                            !site.inscriptions ||
-                            inscriptionCurrent >= site.inscriptions.length - 3
-                          }
-                          className={`bg-transparent border px-6 p-2 rounded-full shadow-md cursor-pointer transition-all ease-in-out duration-700 ${
-                            !site.inscriptions ||
-                            inscriptionCurrent >= site.inscriptions.length - 3
-                              ? "opacity-50 cursor-not-allowed"
-                              : "hover:border-lime-200 hover:bg-lime-200"
-                          }`}
-                        >
-                          <ChevronRight />
-                        </button>
-                        {(!site.inscriptions ||
-                          inscriptionCurrent >=
-                            site.inscriptions.length - 3) && (
-                          <div className="absolute bottom-full mb-2 w-max px-2 py-1 bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                            inscriptions end
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl mt-10 font-bold">
-                  Historical Context
-                </p>
-                <div className="mt-4 ml-2 sm:ml-8 space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-base font-black ">
-                    Period.{" "}
-                    <span className="text-green-800">{site.period}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-base font-black ">
-                    Ruler or Dynasty.{" "}
-                    <span className="text-green-800">
-                      {site.historical_context.ruler_or_dynasty}
-                    </span>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-base font-black ">
-                    Approximated Date.{" "}
-                    <span className="text-green-800">
-                      {site.historical_context.approx_date}
-                    </span>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-base font-black ">
-                    Related Figure.{" "}
-                    <div className="flex flex-wrap gap-2 items-center text-green-800">
-                      {site.historical_context?.related_figures &&
-                      site.historical_context.related_figures.length > 0 ? (
-                        site.historical_context.related_figures.map(
-                          (fig, idx) => (
-                            <div
-                              key={idx}
-                              className="px-3 py-1 bg-green-200 border border-green-800/10 rounded-full"
-                            >
-                              {fig}
-                            </div>
-                          )
-                        )
-                      ) : (
-                        <div className="text-gray-500 italic">
-                          No related figures
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-2 text-base font-black ">
-                    <p className="w-full sm:w-[18%] shrink-0">
-                      Cultural Significance.
-                    </p>
-                    <span className="text-green-800">
-                      {site.historical_context.cultural_significance}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-10 text-green-800">
-                <p className="text-2xl sm:text-3xl font-bold">
-                  Verification Authority
-                </p>
-                <div className="mt-4 text-lg">
-                  {site.verification_authority?.curated_by &&
-                  site.verification_authority?.curated_by.length > 0 ? (
-                    <ul className="  ">
-                      {site.verification_authority?.curated_by.map(
-                        (ref, index) => (
-                          <li key={index} className="mb-2">{ref}</li>
-                        )
-                      )}
-                    </ul>
-                  ) : (
-                    <p className="text-gray-500 italic">
-                      No references available.
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="mt-10 text-green-800">
-                <p className="text-2xl sm:text-3xl font-bold">Source</p>
-                <div className="mt-4 text-lg">
-                  {site.references && site.references.length > 0 ? (
-                    <ul className=" text-green-800">
-                      {site.references.map((ref, index) => {
-                        const content = (
-                          <li className="mb-2 ">
-                            {ref.title} — {ref.author}, {ref.year}
-                          </li>
-                        );
-                        return ref.url ? (
-                          <Link
-                            href={ref.url}
-                            className="hover:text-green-800"
-                            key={index}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {content}
-                          </Link>
-                        ) : (
-                          <div key={index} className="text-gray-700">
-                            {content}
-                          </div>
-                        );
-                      })}
-                    </ul>
-                  ) : (
-                    <p className="text-gray-500 italic">
-                      No references available.
-                    </p>
-                  )}
-                </div>
-              </div>
-              {!user && (
-                <div className="w-full h-full absolute top-1/6 flex rounded-t-[10%] justify-center items-start right-0 bg-linear-to-b from-green-50/70 via-green-50/100 z-20 to-green-50/100">
-                  <div className="group relative">
-                    <button
-                      className="-mt-6 text-2xl font-bold border-green-600 hover:border-t-4 hover:border-b-0 cursor-pointer transition-all ease-in-out duration-500  bg-[#a5fc72] px-20 rounded-full border-b-6 py-4"
-                      onClick={() => router.push("/login")}
-                    >
-                      Read More
-                    </button>
-
-                    <span
-                      className="absolute top-[125%] left-1/2 -translate-x-1/2 min-w-72 z-999 bg-green-900 text-white text-center 
-               rounded-lg py-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible 
-               transition-opacity duration-700  
-               after:content-[''] after:absolute after:-top-2.5 after:left-1/2 after:-translate-x-1/2 
-               after:border-[6px] after:border-solid 
-               after:border-t-transparent after:border-x-transparent border-b-6  border-b-green-600 after:border-b-green-900"
-                    >
-                      Please log in to continue.
-                      <br /> Click to go to the login page.
-                    </span>
-                  </div>
-                </div>
-              )}
-            </div>
-          </>
-        )}
-      </div>
-      <div className="h-96 w-screen"></div>
-      <div>
-        <Footer />
-      </div>
       {isModalOpen && (
         <ImageModal
-          images={site.gallary}
+          images={gallery}
           selectedImage={selectedImage}
           onClose={handleCloseModal}
           onNext={handleNextImage}
@@ -659,11 +1375,7 @@ export default function CaveClient({ site }) {
       )}
       {isInscriptionModalOpen && (
         <ImageModal
-          images={
-            site.inscriptions.find(
-              (i) => i.inscription_id === selectedInscription
-            )?.image_urls
-          }
+          images={selectedInscriptionImages}
           selectedImage={selectedInscriptionImage}
           onClose={handleCloseInscriptionModal}
           onNext={handleNextInscriptionImage}

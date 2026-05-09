@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ImageModal = ({ images, selectedImage, onClose, onNext, onPrev }) => {
     const [zoom, setZoom] = useState(1);
     const [panning, setPanning] = useState(false);
     const [panStart, setPanStart] = useState({ x: 0, y: 0 });
     const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.2, 3));
     const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.2, 1));
@@ -35,73 +37,94 @@ const ImageModal = ({ images, selectedImage, onClose, onNext, onPrev }) => {
     useEffect(() => {
         setZoom(1);
         setPanOffset({ x: 0, y: 0 });
+        setIsLoaded(false);
     }, [selectedImage]);
 
     if (!selectedImage) return null;
 
     return (
-        <div
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onClick={(e) => {
-                if (e.target === e.currentTarget) {
-                    onClose();
-                }
-            }}
-        >
-            <div className="relative w-full h-full flex items-center justify-center">
-                {/* Close Button */}
+        <AnimatePresence>
+            <motion.div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/90 p-4 backdrop-blur-md"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.22 }}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onClick={(e) => {
+                    if (e.target === e.currentTarget) {
+                        onClose();
+                    }
+                }}
+            >
+            <motion.div
+                className="relative flex h-full w-full items-center justify-center"
+                initial={{ opacity: 0, scale: 0.96, y: 18 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 18 }}
+                transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+            >
                 <button
                     onClick={onClose}
-                    className="absolute top-5 right-5 text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition-colors"
+                    aria-label="Close image viewer"
+                    className="absolute right-4 top-4 z-20 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-2xl backdrop-blur transition hover:bg-white hover:text-stone-950"
                 >
-                    <X size={30} />
+                    <X size={24} />
                 </button>
 
-                {/* Main Image */}
                 <div
-                    className="relative w-[80%] h-[80%] flex items-center justify-center"
+                    className="relative flex h-[88vh] w-full max-w-7xl items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-black/30 shadow-2xl"
                     onMouseDown={handleMouseDown}
                     style={{ cursor: zoom > 1 ? "move" : "default" }}
                 >
+                    <div
+                        className={`absolute inset-0 bg-linear-to-r from-stone-900 via-stone-800 to-stone-900 transition-opacity duration-500 ${
+                            isLoaded ? "opacity-0" : "animate-pulse opacity-100"
+                        }`}
+                    />
                     <Image
                         src={selectedImage}
                         alt=""
                         fill
-                        className="object-contain transition-transform duration-300"
+                        sizes="100vw"
+                        className={`object-contain transition duration-500 ${
+                            isLoaded ? "opacity-100" : "opacity-0"
+                        }`}
+                        onLoad={() => setIsLoaded(true)}
                         style={{
                             transform: `scale(${zoom}) translate(${panOffset.x}px, ${panOffset.y}px)`,
                         }}
                     />
                 </div>
 
-                {/* Controls */}
-                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-gray-800 bg-opacity-50 rounded-full p-2">
-                    <button onClick={handleZoomOut} className="text-white p-2 hover:bg-gray-700 rounded-full">
-                        <ZoomOut size={24} />
+                <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/15 bg-white/10 p-2 text-white shadow-2xl backdrop-blur-md">
+                    <button onClick={handleZoomOut} aria-label="Zoom out" className="rounded-full p-2 transition hover:bg-white hover:text-stone-950">
+                        <ZoomOut size={22} />
                     </button>
-                    <span className="text-white font-semibold">{Math.round(zoom * 100)}%</span>
-                    <button onClick={handleZoomIn} className="text-white p-2 hover:bg-gray-700 rounded-full">
-                        <ZoomIn size={24} />
+                    <span className="min-w-14 text-center text-sm font-semibold">{Math.round(zoom * 100)}%</span>
+                    <button onClick={handleZoomIn} aria-label="Zoom in" className="rounded-full p-2 transition hover:bg-white hover:text-stone-950">
+                        <ZoomIn size={22} />
                     </button>
                 </div>
 
-                {/* Navigation */}
                 <button
                     onClick={onPrev}
-                    className="cursor-pointer absolute left-5 top-1/2 -translate-y-1/2 text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition-colors"
+                    aria-label="Previous image"
+                    className="absolute left-4 top-1/2 z-20 inline-flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-2xl backdrop-blur transition hover:bg-white hover:text-stone-950"
                 >
-                    <ChevronLeft size={30} />
+                    <ChevronLeft size={24} />
                 </button>
                 <button
                     onClick={onNext}
-                    className="absolute cursor-pointer right-5 top-1/2 -translate-y-1/2 text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition-colors"
+                    aria-label="Next image"
+                    className="absolute right-4 top-1/2 z-20 inline-flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-2xl backdrop-blur transition hover:bg-white hover:text-stone-950"
                 >
-                    <ChevronRight size={30} />
+                    <ChevronRight size={24} />
                 </button>
-            </div>
-        </div>
+            </motion.div>
+            </motion.div>
+        </AnimatePresence>
     );
 };
 

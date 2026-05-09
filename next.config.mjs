@@ -12,6 +12,15 @@ const nextConfig = {
         protocol: "https",
         hostname: "res.cloudinary.com",
       },
+      // Allow any https image host for dynamic MongoDB data (uploaded images from Cloudinary etc.)
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
+      },
     ],
   },
 
