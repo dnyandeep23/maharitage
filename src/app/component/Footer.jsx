@@ -1,9 +1,12 @@
-import React from "react";
-import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { Mail, Phone, MapPin, ArrowUpRight, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const router = useRouter();
+  const [visitorCount, setVisitorCount] = useState(null);
 
   const quickLinks = [
     { name: "Kanheri Cave", href: "/heritage/Kan0004" },
@@ -25,6 +28,50 @@ const Footer = () => {
     }
   };
 
+  useEffect(() => {
+    let ignore = false;
+
+    const syncVisitorCount = async () => {
+      try {
+        const hasVisited = localStorage.getItem("maharitage:visited");
+        const visitInFlight = localStorage.getItem("maharitage:visit-in-flight");
+        const shouldIncrement = !hasVisited && !visitInFlight;
+
+        if (shouldIncrement) {
+          localStorage.setItem("maharitage:visit-in-flight", "true");
+        }
+
+        const response = await fetch("/api/visitors", {
+          method: shouldIncrement ? "POST" : "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (!response.ok) {
+          if (shouldIncrement) localStorage.removeItem("maharitage:visit-in-flight");
+          return;
+        }
+
+        const data = await response.json();
+        if (!ignore) {
+          setVisitorCount(Number(data.count) || 0);
+          if (shouldIncrement) {
+            localStorage.setItem("maharitage:visited", "true");
+            localStorage.removeItem("maharitage:visit-in-flight");
+          }
+        }
+      } catch (error) {
+        localStorage.removeItem("maharitage:visit-in-flight");
+        if (!ignore) setVisitorCount(null);
+      }
+    };
+
+    syncVisitorCount();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
   return (
     <footer className="relative overflow-hidden bg-[#071b15] text-[#fbf7ee]">
       <div className="absolute inset-0 heritage-texture opacity-[0.08]" />
@@ -43,6 +90,21 @@ const Footer = () => {
                 A cinematic digital archive for Maharashtra's forts, caves,
                 inscriptions, architecture, and living cultural memory.
               </p>
+            </div>
+            <div className="inline-flex items-center gap-3 rounded-2xl border border-[#d9c18a]/18 bg-white/6 px-4 py-3 shadow-[0_18px_44px_rgba(0,0,0,0.16)]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#d9c18a]/12 text-[#d9c18a]">
+                <Users className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#fbf7ee]/48">
+                  Website Visitors
+                </p>
+                <p className="text-xl font-extrabold text-white">
+                  {visitorCount === null
+                    ? "Loading"
+                    : visitorCount.toLocaleString("en-IN")}
+                </p>
+              </div>
             </div>
           </div>
 

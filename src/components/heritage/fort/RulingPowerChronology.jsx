@@ -32,7 +32,7 @@ export default function RulingPowerChronology({ chronology }) {
               <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 group-hover:shadow-lg transition-shadow">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
                   <h3 className="text-xl font-bold text-[#0f172a] uppercase tracking-wide">
-                    {entry.dynasty || entry.name || "Unknown Dynasty"}
+                    {entry.dynasty || entry.name || "Dynastic Phase"}
                   </h3>
                   {entry.period && (
                     <span className="text-sm font-semibold text-yellow-700 bg-yellow-100 px-3 py-1 rounded-full mt-2 md:mt-0 inline-block">
