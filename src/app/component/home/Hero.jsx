@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { Search, Bot, ChevronRight } from "lucide-react";
+import React, { useEffect } from "react";
+import { Search, Bot, ChevronRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import bg_img from "../../../assets/images/bg_image.png";
 
@@ -16,7 +16,6 @@ const Hero = ({
   setIsDropdownOpen,
   searchOptions,
 }) => {
-  // ✅ Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -31,8 +30,7 @@ const Hero = ({
   }, [isDropdownOpen]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-stone-950 pt-24 sm:pt-28">
-      {/* Background Image */}
+    <section className="relative min-h-[100svh] overflow-hidden bg-[#101b15] pt-24 sm:pt-28">
       <Image
         src={bg_img}
         alt="Hero Background"
@@ -42,35 +40,31 @@ const Hero = ({
         priority
       />
 
-      {/* Cinematic heritage-grade image treatment */}
-      <div className="absolute inset-0 bg-linear-to-br from-stone-950/70 via-stone-950/24 to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_28%,rgba(245,158,11,0.22),transparent_34%),radial-gradient(circle_at_82%_52%,rgba(22,101,52,0.18),transparent_34%)]" />
-      <div className="absolute inset-0 bg-linear-to-t from-stone-950/72 via-stone-950/8 to-stone-950/18" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-white via-white/55 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-br from-[#101b15]/86 via-stone-950/30 to-transparent" />
+      <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(217,193,138,0.18),transparent_28%),linear-gradient(275deg,rgba(18,51,39,0.2),transparent_38%)]" />
+      <div className="absolute inset-0 bg-linear-to-t from-[#101b15]/78 via-stone-950/8 to-stone-950/22" />
+      <div className="absolute inset-x-0 bottom-0 h-44 bg-linear-to-t from-[#f4ecdd] via-[#f4ecdd]/58 to-transparent" />
 
-      {/* Overlay Content */}
       <div className="relative z-10 flex min-h-[calc(100vh-6rem)] items-center">
-        <div className="mx-auto grid w-full max-w-7xl items-end gap-10 px-5 pb-16 pt-10 sm:px-8 lg:grid-cols-[1fr_420px] lg:px-14">
-          {/* Main Heading */}
+        <div className="mx-auto flex w-full max-w-7xl flex-col justify-end gap-8 px-4 pb-24 pt-10 sm:gap-10 sm:px-8 sm:pb-16 lg:px-14">
           <div className="max-w-5xl text-white">
-            <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.28em] text-white/85 shadow-[0_12px_40px_rgba(12,10,9,0.18)] backdrop-blur-md">
+            <div className="mb-5 inline-flex items-center rounded-full border border-white/18 bg-white/10 px-3.5 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-amber-50/88 shadow-[0_12px_40px_rgba(12,10,9,0.18)] backdrop-blur-md sm:mb-6 sm:px-4 sm:text-xs sm:tracking-[0.28em]">
               Digital Heritage Archive
             </div>
             <h1
-              className="font-cinzel-decorative text-5xl font-bold leading-[0.92] tracking-normal drop-shadow-2xl sm:text-7xl md:text-8xl lg:text-9xl"
+              className="font-cinzel-decorative text-[3.15rem] font-bold leading-[0.95] tracking-normal text-white drop-shadow-2xl min-[380px]:text-6xl sm:text-7xl md:text-8xl lg:text-9xl"
               style={{
                 textShadow: "0 8px 34px rgba(0,0,0,0.42)",
               }}
             >
               Maha
-              <span className="text-[#d8f2d3]">
+              <span className="text-[#d2ba7d]">
                 rashtra
               </span>
             </h1>
 
-            {/* Subtitle */}
             <h2
-              className="mt-4 font-cinzel-decorative text-xl font-bold uppercase tracking-[0.36em] text-amber-50/90 sm:text-2xl md:text-4xl"
+              className="mt-4 font-cinzel-decorative text-lg font-bold uppercase tracking-[0.22em] text-amber-50/90 sm:text-2xl sm:tracking-[0.36em] md:text-4xl"
               style={{
                 textShadow: "0 5px 24px rgba(0,0,0,0.36)",
               }}
@@ -78,37 +72,26 @@ const Hero = ({
               {heroData.subtitle}
             </h2>
 
-            <p className="mt-6 max-w-2xl text-base leading-7 text-white/82 sm:text-lg">
-              Explore Maharashtra through forts, caves, inscriptions, architecture, and living cultural memory.
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-white/82 sm:mt-6 sm:text-lg">
+              A cinematic record of forts, caves, inscriptions, architecture, and cultural memory across Maharashtra.
             </p>
           </div>
 
-          {/* ✅ Search Bar with Dropdown */}
           <form
             onSubmit={handleSearch}
-            className="relative w-full max-w-3xl search-dropdown-container lg:justify-self-end"
+            className="relative w-full max-w-4xl search-dropdown-container"
           >
-            <div className="mb-4 rounded-[2rem] border border-white/18 bg-white/10 p-4 text-white shadow-[0_24px_80px_rgba(12,10,9,0.28)] backdrop-blur-xl">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/62">
-                Begin Exploring
-              </p>
-              <p className="mt-2 text-sm leading-6 text-white/78">
-                Search verified heritage sites or ask the AI guide for context.
-              </p>
-            </div>
-            {/* Search Wrapper */}
             <div
-              className="relative z-20 flex w-full items-center rounded-full border border-white/35 bg-white/92 pl-3 shadow-[0_22px_70px_rgba(12,10,9,0.24)] ring-1 ring-white/60 backdrop-blur-xl transition focus-within:bg-white"
+              className="relative z-20 flex w-full flex-col items-stretch rounded-[1.35rem] border border-white/36 bg-[#f7f0e4]/92 p-2 shadow-[0_30px_100px_rgba(12,10,9,0.34)] ring-1 ring-white/55 backdrop-blur-2xl transition focus-within:bg-[#fffaf0] sm:flex-row sm:items-center sm:rounded-full sm:pl-3"
             >
-              {/* Icon Toggle */}
               <div
-                className="flex cursor-pointer items-center gap-2 rounded-full px-2 py-2 pr-2 text-stone-500 transition-colors hover:text-green-700 sm:pr-4"
+                className="flex cursor-pointer items-center gap-2 rounded-full px-2 py-2 pr-2 text-[#263a2d]/70 transition-colors hover:text-[#263a2d] sm:pr-4"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 {activeIcon === "search" ? (
                   <Search className="h-5 w-5" />
                 ) : (
-                  <Bot className="h-5 w-5 text-green-700" />
+                  <Bot className="h-5 w-5 text-[#566044]" />
                 )}
 
                 <ChevronRight
@@ -117,45 +100,43 @@ const Hero = ({
                 />
               </div>
 
-              {/* Input Field */}
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={
                   activeIcon === "search"
-                    ? "Search heritage sites..."
-                    : "Ask AI about heritage sites..."
+                    ? "Search forts, caves, inscriptions..."
+                    : "Ask for context, period, or site history..."
                 }
-                className="min-w-0 flex-1 bg-transparent px-2 text-sm text-stone-900 placeholder-stone-500 focus:outline-none sm:px-3 sm:text-base"
+                className="min-h-11 min-w-0 flex-1 bg-transparent px-2 text-base text-stone-900 placeholder-stone-500 focus:outline-none sm:px-3"
                 disabled={isLoading}
                 style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
               />
 
-              {/* Search Button */}
               <button
                 type="submit"
                 disabled={isLoading}
-                className="rounded-full bg-green-800 px-4 py-2 text-sm font-semibold whitespace-nowrap text-white transition-colors duration-200 hover:bg-green-900 disabled:opacity-50 sm:px-6 sm:py-3 sm:text-base"
+                className="mt-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#263a2d] px-4 py-2 text-sm font-semibold whitespace-nowrap text-[#f7f0e4] transition-colors duration-200 hover:bg-[#101b15] disabled:opacity-50 sm:m-1.5 sm:mt-1.5 sm:px-6 sm:py-3 sm:text-base"
                 style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
               >
-                {isLoading ? "Searching..." : "Search"}
+                {isLoading ? "Searching" : "Explore"}
+                <ArrowUpRight className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Dropdown */}
             {isDropdownOpen && (
               <div
-                className="absolute top-[calc(100%+0.6rem)] left-3 z-50 w-48 animate-fadeIn rounded-2xl border border-stone-200 bg-white/96 py-2 shadow-2xl backdrop-blur-xl sm:left-0"
+                className="absolute top-[calc(100%+0.6rem)] left-0 z-50 w-full animate-fadeIn rounded-2xl border border-stone-200/80 bg-[#fffaf0]/96 py-2 shadow-2xl backdrop-blur-xl sm:left-0 sm:w-52"
               >
                 {searchOptions.map((option) => (
                   <button
                     key={option.id}
                     type="button"
-                    className={`flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-stone-50 
+                    className={`flex w-full items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-[#eadcc4] 
                      ${
                        activeIcon === option.id
-                         ? "bg-stone-50 text-green-700"
+                         ? "bg-[#eadcc4] text-[#263a2d]"
                          : "text-stone-600"
                      }`}
                     onClick={() => {
@@ -166,7 +147,7 @@ const Hero = ({
                     <div
                       className={
                         activeIcon === option.id
-                          ? "text-green-600"
+                          ? "text-[#566044]"
                           : "text-gray-400"
                       }
                     >

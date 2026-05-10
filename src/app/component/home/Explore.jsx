@@ -1,7 +1,9 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
+  ArrowUpRight,
   ChevronLeft,
   ChevronRight,
   MapPin as LocationIcon,
@@ -9,26 +11,52 @@ import {
 import { useRouter } from "next/navigation";
 import Loading from "@/app/loading";
 import { fetchWithInternalToken } from "../../../lib/fetch";
+import ajantaSlide from "../../../assets/images/agenta_slide.png";
+import elephantaSlide from "../../../assets/images/elephanta_slide.png";
+import heroArchiveImage from "../../../assets/images/bg_image.png";
+
+const fallbackSites = [
+  {
+    site_id: "Aja0003",
+    site_name: "Ajanta Caves",
+    heritage_type: "Cave Archive",
+    gallery: [ajantaSlide],
+    location: {
+      district: "Aurangabad",
+      state: "Maharashtra",
+    },
+    isFallback: true,
+  },
+  {
+    site_id: "Ell0001",
+    site_name: "Ellora Caves",
+    heritage_type: "Rock-cut Complex",
+    gallery: [heroArchiveImage],
+    location: {
+      district: "Aurangabad",
+      state: "Maharashtra",
+    },
+    isFallback: true,
+  },
+  {
+    site_id: "Ele0002",
+    site_name: "Elephanta Caves",
+    heritage_type: "Island Cave Archive",
+    gallery: [elephantaSlide],
+    location: {
+      district: "Mumbai",
+      state: "Maharashtra",
+    },
+    isFallback: true,
+  },
+];
 
 const Explore = ({ heroData }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const containerRef = useRef(null);
+  const scrollerRef = useRef(null);
   const [sites, setSites] = useState([]);
-  const navigate = useRouter();
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
-  // 🔥 Responsive slide width
-  const getSlideWidth = () => {
-    if (typeof window === "undefined") return 900;
-    if (window.innerWidth < 480) return window.innerWidth * 0.85; // mobile
-    if (window.innerWidth < 768) return window.innerWidth * 0.75; // tablet
-    if (window.innerWidth < 1024) return 650; // small laptop
-    return 900; // desktop
-  };
-
-  const [slideWidth, setSlideWidth] = useState(getSlideWidth());
-  const gap = 2;
+  const navigate = useRouter();
 
   useEffect(() => {
     const fetchSites = async () => {
@@ -36,13 +64,9 @@ const Explore = ({ heroData }) => {
         setIsLoading(true);
         const response = await fetchWithInternalToken("/api/sites/home");
         const data = await response.json();
-        if (Array.isArray(data)) {
-          setSites(data);
-        } else {
-          setSites([]);
-        }
+        setSites(Array.isArray(data) && data.length ? data : fallbackSites);
       } catch (e) {
-        setSites([]);
+        setSites(fallbackSites);
       } finally {
         setIsLoading(false);
       }
@@ -50,28 +74,45 @@ const Explore = ({ heroData }) => {
     fetchSites();
   }, []);
 
-  useEffect(() => {
-    const updateWidth = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth);
-        setSlideWidth(getSlideWidth());
-      }
-    };
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
+  const scrollByCard = (direction) => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+    const card = scroller.querySelector("[data-archive-card]");
+    const distance = card
+      ? card.getBoundingClientRect().width + 24
+      : scroller.clientWidth * 0.82;
+    scroller.scrollBy({ left: direction * distance, behavior: "smooth" });
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => handleNext(), 5000);
+    if (!sites.length) return undefined;
+    const interval = setInterval(() => scrollByCard(1), 6500);
     return () => clearInterval(interval);
   }, [sites.length]);
 
-  const handleNext = () => setCurrentSlide((prev) => (prev + 1) % sites.length);
-  const handlePrev = () =>
-    setCurrentSlide((prev) => (prev - 1 + sites.length) % sites.length);
+  const handleScroll = () => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
 
-  const offset = currentSlide * (slideWidth + gap);
+    const cards = Array.from(scroller.querySelectorAll("[data-archive-card]"));
+    const center = scroller.scrollLeft + scroller.clientWidth / 2;
+    const nearest = cards.reduce(
+      (best, card, index) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const distance = Math.abs(center - cardCenter);
+        return distance < best.distance ? { index, distance } : best;
+      },
+      { index: 0, distance: Infinity }
+    );
+    setActiveIndex(nearest.index);
+  };
+
+  const handleWheel = (event) => {
+    const scroller = scrollerRef.current;
+    if (!scroller || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+    event.preventDefault();
+    scroller.scrollLeft += event.deltaY;
+  };
 
   if (!sites || !heroData) return null;
 
@@ -81,156 +122,148 @@ const Explore = ({ heroData }) => {
   };
 
   return (
-    <section className="w-full max-w-full min-h-screen mt-12 md:mt-20 bg-gray-50 overflow-hidden">
-      {/* Header */}
-      {/* Loading Overlay */}
+    <section className="heritage-surface heritage-texture w-full max-w-full overflow-hidden py-14 md:py-28">
       {isLoading && (
-        <div className="fixed inset-0 bg-white/80 z-50 flex justify-center items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#fbf7ee]/80 backdrop-blur-sm">
           <Loading />
         </div>
       )}
-      <div className="mx-auto px-6 sm:px-12 lg:px-24 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 font-inter mb-3">
-          {heroData.tagline}
-        </h2>
 
-        <div className="flex justify-center gap-8 md:gap-80">
-          <div className="w-20 md:w-full h-0.5 bg-black/20"></div>
-          <div className="w-20 md:w-full h-0.5 bg-black/20"></div>
+      <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-8 lg:px-14">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[#8f7244] sm:text-xs sm:tracking-[0.28em]">
+              Curated Sites
+            </p>
+            <h2 className="mt-3 max-w-3xl font-cinzel-decorative text-3xl font-bold leading-tight text-[#263a2d] md:text-5xl">
+              {heroData.tagline}
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700 md:text-base">
+              {heroData.description} across an evolving archive of landscapes, inscriptions, and built memory.
+            </p>
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => scrollByCard(-1)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#263a2d]/20 bg-[#f7f0e4]/80 text-[#263a2d] shadow-sm backdrop-blur transition hover:bg-[#263a2d] hover:text-[#f7f0e4]"
+              aria-label="Previous heritage site"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByCard(1)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#263a2d]/20 bg-[#f7f0e4]/80 text-[#263a2d] shadow-sm backdrop-blur transition hover:bg-[#263a2d] hover:text-[#f7f0e4]"
+              aria-label="Next heritage site"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
-
-        <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed mt-4 font-inter text-sm md:text-base">
-          {heroData.description}
-        </p>
       </div>
 
-      {/* Carousel */}
       <div
-        ref={containerRef}
-        className="w-full h-[90vh] overflow-hidden mt-4 md:mt-6"
+        ref={scrollerRef}
+        onScroll={handleScroll}
+        onWheel={handleWheel}
+        className="archive-scroll mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-7 sm:mt-10 sm:gap-6 sm:px-[max(1.25rem,calc((100vw-80rem)/2+3.5rem))]"
       >
-        <div
-          className="flex items-center transition-transform duration-700 ease-in-out"
-          style={{
-            transform: `translateX(-${offset}px)`,
-            gap: `${gap}px`,
-            paddingLeft: `${(containerWidth - slideWidth) / 2}px`,
-            paddingRight: `${(containerWidth - slideWidth) / 2}px`,
-          }}
-        >
-          {sites.map((site, index) => {
-            const isActive = index === currentSlide;
-            const isPrevious =
-              index === (currentSlide - 1 + sites.length) % sites.length;
-            const isNext = index === (currentSlide + 1) % sites.length;
+        {sites.map((site, index) => {
+          const isActive = index === activeIndex;
+          const imageUrl = site?.gallery?.[0] || site?.gallary?.[0] || "";
 
-            return (
-              <div
-                key={site.site_id}
-                className="relative cursor-pointer rounded-3xl overflow-hidden shadow-xl transition-all duration-700 ease-in-out"
-                style={{
-                  width: `${slideWidth}px`,
-                  height: "70vh",
-                  aspectRatio: "16/9",
-                  flexShrink: 0,
-                  transform: isActive ? "scale(1)" : "scale(0.85)",
-                  zIndex: isActive ? 20 : 10,
-                  opacity: isActive ? 1 : 0.75,
-                }}
-                onClick={() => navigate.push(`/heritage/${site.site_id}`)}
-              >
-                <div className="relative w-full h-full rounded-3xl">
-                  <Image
-                    src={
-                      (site?.gallery?.[0] || site?.gallary?.[0] || "").startsWith("http")
-                        ? (site?.gallery?.[0] || site?.gallary?.[0])
-                        : "/placeholder.svg"
-                    }
-                    alt={site.site_name}
-                    fill
-                    priority={isActive}
-                    className="object-cover rounded-3xl"
-                  />
+          return (
+            <button
+              type="button"
+              data-archive-card
+              key={site.site_id}
+              className={`touch-card group relative h-[420px] w-[86vw] max-w-[900px] shrink-0 snap-center overflow-hidden rounded-[1.35rem] text-left shadow-[0_28px_80px_rgba(21,18,13,0.18)] transition-[opacity,transform,box-shadow] duration-500 ease-out sm:h-[470px] sm:rounded-[2rem] md:h-[620px] md:w-[72vw] lg:w-[820px] ${
+                isActive
+                  ? "opacity-100 shadow-[0_34px_100px_rgba(21,18,13,0.24)]"
+                  : "opacity-80 hover:opacity-95"
+              }`}
+              onClick={() => navigate.push(`/heritage/${site.site_id}`)}
+            >
+              <Image
+                src={
+                  typeof imageUrl === "string"
+                    ? imageUrl.startsWith("http")
+                      ? imageUrl
+                      : "/placeholder.svg"
+                    : imageUrl || "/placeholder.svg"
+                }
+                alt={site.site_name}
+                fill
+                priority={index < 2}
+                sizes="(max-width: 768px) 82vw, (max-width: 1280px) 72vw, 820px"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+              />
 
-                  {/* Gradient + Text */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-4 md:p-6">
-                    <h3 className="text-xl md:text-3xl font-extrabold text-white tracking-wide mb-1">
+              <div className="absolute inset-0 bg-linear-to-t from-black/88 via-black/22 to-transparent" />
+              <div className="absolute inset-0 ring-1 ring-white/16" />
+
+              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-5 text-white md:p-8">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="rounded-full border border-white/18 bg-white/12 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-amber-50 backdrop-blur sm:text-[0.65rem] sm:tracking-[0.2em]">
+                    Plate {index + 1}
+                  </span>
+                  <span className="rounded-full border border-white/18 bg-white/12 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-white/78 backdrop-blur sm:text-[0.65rem] sm:tracking-[0.2em]">
+                    {site.heritage_type || site.h_type || "Heritage Site"}
+                  </span>
+                  {site.isFallback && (
+                    <span className="rounded-full border border-[#d2ba7d]/25 bg-[#d2ba7d]/18 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-amber-50 backdrop-blur sm:text-[0.65rem] sm:tracking-[0.2em]">
+                      Featured
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <h3 className="font-cinzel-decorative text-2xl font-bold leading-tight tracking-normal text-white md:text-4xl">
                       {site.site_name}
                     </h3>
 
                     <p
-                      className="text-green-100 w-44 md:w-full text-xs md:text-sm flex items-center cursor-pointer"
+                      className="mt-3 inline-flex items-center text-xs font-semibold uppercase tracking-[0.14em] text-amber-50/88 md:text-sm"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleLocationClick(
-                          site.location.latitude,
-                          site.location.longitude
+                          site.location?.latitude,
+                          site.location?.longitude
                         );
                       }}
                     >
-                      <LocationIcon className="w-6 h-6 mr-2" />
-                      {site.location.district}, {site.location.state}
+                      <LocationIcon className="mr-2 h-4 w-4" />
+                      {site.location?.district}, {site.location?.state}
                     </p>
                   </div>
-
-                  {/* Nav Buttons */}
-                  {isActive && (
-                    <div className="absolute bottom-6 right-6 flex gap-3 z-40">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handlePrev();
-                        }}
-                        aria-label="Next"
-                        className="border-green-300 hover:bg-green-800 hover:text-white -rotate-90 text-white rounded-full transition duration-300 cursor-pointer"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="40"
-                          height="40"
-                          viewBox="0 0 24 24"
-                        >
-                          <g fill="#e6ffae">
-                            <path d="m14.829 11.948l1.414-1.414L12 6.29l-4.243 4.243l1.415 1.414L11 10.12v7.537h2V10.12z" />
-                            <path
-                              fillRule="evenodd"
-                              d="M19.778 4.222c-4.296-4.296-11.26-4.296-15.556 0s-4.296 11.26 0 15.556s11.26 4.296 15.556 0s4.296-11.26 0-15.556m-1.414 1.414A9 9 0 1 0 5.636 18.364A9 9 0 0 0 18.364 5.636"
-                              clipRule="evenodd"
-                            />
-                          </g>
-                        </svg>
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleNext();
-                        }}
-                        aria-label="Next"
-                        className="border-green-300 hover:bg-green-800 hover:text-white rotate-90 text-white rounded-full transition duration-300 cursor-pointer"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="40"
-                          height="40"
-                          viewBox="0 0 24 24"
-                        >
-                          <g fill="#e6ffae">
-                            <path d="m14.829 11.948l1.414-1.414L12 6.29l-4.243 4.243l1.415 1.414L11 10.12v7.537h2V10.12z" />
-                            <path
-                              fillRule="evenodd"
-                              d="M19.778 4.222c-4.296-4.296-11.26-4.296-15.556 0s-4.296 11.26 0 15.556s11.26 4.296 15.556 0s4.296-11.26 0-15.556m-1.414 1.414A9 9 0 1 0 5.636 18.364A9 9 0 0 0 18.364 5.636"
-                              clipRule="evenodd"
-                            />
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                  )}
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/12 text-white backdrop-blur transition group-hover:bg-[#f7f0e4] group-hover:text-[#263a2d]">
+                    <ArrowUpRight className="h-5 w-5" />
+                  </span>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mx-auto mt-2 flex max-w-7xl justify-center gap-2 px-4 sm:px-8 lg:px-14">
+        {sites.map((site, index) => (
+          <button
+            key={site.site_id}
+            type="button"
+            aria-label={`Go to ${site.site_name}`}
+            onClick={() => {
+              const card = scrollerRef.current?.querySelectorAll("[data-archive-card]")?.[index];
+              card?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+            }}
+            className={`h-1.5 rounded-full transition-all ${
+              index === activeIndex ? "w-10 bg-[#263a2d]" : "w-2.5 bg-[#263a2d]/24"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

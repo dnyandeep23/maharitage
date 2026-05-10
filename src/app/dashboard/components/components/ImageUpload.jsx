@@ -29,18 +29,18 @@ const ImageUpload = ({ files, onFilesChange }) => {
     <div>
       <div
         {...getRootProps()}
-        className={`p-10 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors ${
-          isDragActive ? "border-green-600 bg-green-50" : "border-gray-300"
+        className={`cursor-pointer rounded-[1.5rem] border border-dashed p-10 text-center transition-colors ${
+          isDragActive ? "border-[#b9924a] bg-[#f1e8d5]" : "border-[#123327]/22 bg-[#fffdf7]/70"
         }`}
       >
         <input {...getInputProps()} />
         <div className="flex flex-col items-center">
-          <ImagePlus size={48} className="text-gray-400" />
+          <ImagePlus size={44} className="text-[#8a6a31]" />
           {isDragActive ? (
-            <p className="mt-2 text-gray-600">Drop the image files here ...</p>
+            <p className="mt-3 text-sm font-semibold text-[#123327]">Drop image files into the archive tray</p>
           ) : (
-            <p className="mt-2 text-gray-600">
-              Drag & drop image files here, or click to select
+            <p className="mt-3 text-sm leading-6 text-stone-600">
+              Drag gallery images here, or click to select archival plates
             </p>
           )}
         </div>
@@ -52,12 +52,12 @@ const ImageUpload = ({ files, onFilesChange }) => {
             <img
               src={URL.createObjectURL(file)}
               alt={file.name}
-              className="w-full h-32 object-cover rounded-lg"
+              className="h-32 w-full rounded-2xl object-cover"
             />
             <button
               type="button"
               onClick={() => removeFile(file)}
-              className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+              className="absolute right-2 top-2 rounded-full bg-red-600 p-1 text-white shadow hover:bg-red-700"
             >
               <X size={16} />
             </button>

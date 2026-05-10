@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import ChipInput from "../components/ChipInput";
 import ReferenceInput from "../components/ReferenceInput";
 import ImageUpload from "../components/ImageUpload";
-import { X } from "lucide-react";
+import { Castle, FileText, MapPin, Shield, X } from "lucide-react";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const MapPicker = dynamic(() => import("../components/MapPicker"), {
@@ -27,12 +27,31 @@ const initialState = {
   },
   site_discription: "",
   heritage_type: "",
+  h_type: "",
   period: "",
   historical_context: {
     ruler_or_dynasty: "",
     approx_date: "",
     related_figures: [],
     cultural_significance: "",
+  },
+  architecture: {
+    defensive_design: "",
+    entry_gates: "",
+    bastions: "",
+    water_systems: "",
+    materials: "",
+  },
+  preservation_details: {
+    current_condition: "",
+    managing_authority: "",
+    access_notes: "",
+    risk_factors: "",
+  },
+  fort_classification: {
+    terrain_type: "",
+    strategic_role: "",
+    elevation: "",
   },
   verification_authority: {
     curated_by: [],
@@ -152,6 +171,9 @@ const AddSiteForm = ({ handleSubmit }) => {
       });
     } else {
       dispatch({ type: "UPDATE_FIELD", field: name, value });
+      if (name === "heritage_type") {
+        dispatch({ type: "UPDATE_FIELD", field: "h_type", value });
+      }
     }
   };
 
@@ -186,15 +208,36 @@ const AddSiteForm = ({ handleSubmit }) => {
     return <LoadingButton />;
   }
 
+  const isFortEntry = /fort/i.test(siteData.heritage_type);
+  const inputClass =
+    "archive-input mt-1 block w-full rounded-2xl px-4 py-3 text-sm leading-6";
+  const textareaClass =
+    "archive-input mt-1 block w-full rounded-2xl px-4 py-3 text-sm leading-6";
+  const panelClass =
+    "museum-card rounded-[1.75rem] p-5 sm:p-6";
+  const sectionTitleClass =
+    "mb-4 flex items-center gap-2 font-cinzel-decorative text-xl font-bold text-[#123327]";
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Suggest a New Site</h2>
+    <div className="mx-auto max-w-6xl px-4 py-8 text-stone-900">
+      <div className="mb-8">
+        <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#8a6a31]">
+          Archival Intake
+        </p>
+        <h2 className="mt-2 font-cinzel-decorative text-3xl font-bold text-[#123327]">
+          Register Heritage Record
+        </h2>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-600">
+          Create a structured site record with gallery assets, historical context,
+          and fort-specific metadata for professional archival management.
+        </p>
+      </div>
       {message && (
         <div
-          className={`p-4 mb-4 text-sm rounded-lg ${
+          className={`mb-5 rounded-2xl border p-4 text-sm ${
             message.type === "success"
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-700"
+              ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+              : "border-red-200 bg-red-50 text-red-700"
           }`}
         >
           {message.text}
@@ -217,13 +260,16 @@ const AddSiteForm = ({ handleSubmit }) => {
         className="space-y-6"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Site Info */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Site Information</h3>
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <FileText className="h-5 w-5 text-[#8a6a31]" />
+              Site Identity
+            </h3>
+            <div className="space-y-4">
             <div>
               <label
                 htmlFor="site_id"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Site ID
               </label>
@@ -233,14 +279,14 @@ const AddSiteForm = ({ handleSubmit }) => {
                 id="site_id"
                 value={siteData.site_id}
                 required
-                className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                className={`${inputClass} opacity-70`}
                 disabled
               />
             </div>
             <div>
               <label
                 htmlFor="site_name"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Site Name
               </label>
@@ -251,13 +297,13 @@ const AddSiteForm = ({ handleSubmit }) => {
                 value={rawSiteName}
                 onChange={handleSiteNameChange}
                 required
-                className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                className={inputClass}
               />
             </div>
             <div>
               <label
                 htmlFor="site_discription"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Description
               </label>
@@ -268,29 +314,35 @@ const AddSiteForm = ({ handleSubmit }) => {
                 onChange={handleChange}
                 rows="4"
                 required
-                className="mt-1 block w-full rounded-lg border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                className={textareaClass}
               ></textarea>
             </div>
             <div>
               <label
                 htmlFor="heritage_type"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Heritage Type
               </label>
-              <input
-                type="text"
+              <select
                 name="heritage_type"
                 id="heritage_type"
                 value={siteData.heritage_type}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
-              />
+                className={inputClass}
+              >
+                <option value="">Select type</option>
+                <option value="Cave">Cave</option>
+                <option value="Fort">Fort</option>
+                <option value="Temple">Temple</option>
+                <option value="Monument">Monument</option>
+                <option value="Museum">Museum</option>
+              </select>
             </div>
             <div>
               <label
                 htmlFor="period"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Period
               </label>
@@ -300,14 +352,18 @@ const AddSiteForm = ({ handleSubmit }) => {
                 id="period"
                 value={siteData.period}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                className={inputClass}
               />
+            </div>
             </div>
           </div>
 
-          {/* Location */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Location</h3>
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <MapPin className="h-5 w-5 text-[#8a6a31]" />
+              Geographic Record
+            </h3>
+            <div className="space-y-4">
             <MapPicker
               onLocationChange={handleMapLocationChange}
               initialPosition={getInitialPosition()}
@@ -316,7 +372,7 @@ const AddSiteForm = ({ handleSubmit }) => {
               <div>
                 <label
                   htmlFor="latitude"
-                  className="block text-sm font-medium text-gray-700"
+                  className="archive-label block"
                 >
                   Latitude
                 </label>
@@ -326,13 +382,13 @@ const AddSiteForm = ({ handleSubmit }) => {
                   id="latitude"
                   value={siteData.location.latitude}
                   onChange={(e) => handleChange(e, "location")}
-                  className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                  className={inputClass}
                 />
               </div>
               <div>
                 <label
                   htmlFor="longitude"
-                  className="block text-sm font-medium text-gray-700"
+                  className="archive-label block"
                 >
                   Longitude
                 </label>
@@ -342,14 +398,14 @@ const AddSiteForm = ({ handleSubmit }) => {
                   id="longitude"
                   value={siteData.location.longitude}
                   onChange={(e) => handleChange(e, "location")}
-                  className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                  className={inputClass}
                 />
               </div>
             </div>
             <div>
               <label
                 htmlFor="district"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 District
               </label>
@@ -359,20 +415,24 @@ const AddSiteForm = ({ handleSubmit }) => {
                 id="district"
                 value={siteData.location.district}
                 onChange={(e) => handleChange(e, "location")}
-                className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                className={inputClass}
               />
+            </div>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Historical Context */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Historical Context</h3>
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <Castle className="h-5 w-5 text-[#8a6a31]" />
+              Historical Context
+            </h3>
+            <div className="space-y-4">
             <div>
               <label
                 htmlFor="ruler_or_dynasty"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Ruler/Dynasty
               </label>
@@ -382,13 +442,13 @@ const AddSiteForm = ({ handleSubmit }) => {
                 id="ruler_or_dynasty"
                 value={siteData.historical_context.ruler_or_dynasty}
                 onChange={(e) => handleChange(e, "historical_context")}
-                className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                className={inputClass}
               />
             </div>
             <div>
               <label
                 htmlFor="approx_date"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Approx. Date
               </label>
@@ -398,13 +458,13 @@ const AddSiteForm = ({ handleSubmit }) => {
                 id="approx_date"
                 value={siteData.historical_context.approx_date}
                 onChange={(e) => handleChange(e, "historical_context")}
-                className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                className={inputClass}
               />
             </div>
             <div>
               <label
                 htmlFor="related_figures"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Related Figures
               </label>
@@ -424,7 +484,7 @@ const AddSiteForm = ({ handleSubmit }) => {
             <div>
               <label
                 htmlFor="cultural_significance"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Cultural Significance
               </label>
@@ -434,18 +494,22 @@ const AddSiteForm = ({ handleSubmit }) => {
                 value={siteData.historical_context.cultural_significance}
                 onChange={(e) => handleChange(e, "historical_context")}
                 rows="3"
-                className="mt-1 block w-full rounded-lg border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+                className={textareaClass}
               ></textarea>
+            </div>
             </div>
           </div>
 
-          {/* Other Details */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Other Details</h3>
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <Shield className="h-5 w-5 text-[#8a6a31]" />
+              Authority & Gallery
+            </h3>
+            <div className="space-y-4">
             <div>
               <label
                 htmlFor="curated_by"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Curated By {"(Verification Authority)"}
               </label>
@@ -465,18 +529,130 @@ const AddSiteForm = ({ handleSubmit }) => {
             <div>
               <label
                 htmlFor="gallary"
-                className="block text-sm font-medium text-gray-700"
+                className="archive-label block"
               >
                 Gallery Images
               </label>
               <ImageUpload files={images} onFilesChange={setImages} />
             </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`grid grid-cols-1 gap-6 md:grid-cols-3 ${isFortEntry ? "" : "opacity-75"}`}>
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <Castle className="h-5 w-5 text-[#8a6a31]" />
+              Fort Classification
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="terrain_type" className="archive-label block">
+                  Terrain Type
+                </label>
+                <input
+                  type="text"
+                  name="terrain_type"
+                  id="terrain_type"
+                  value={siteData.fort_classification.terrain_type}
+                  onChange={(e) => handleChange(e, "fort_classification")}
+                  placeholder="Hill fort, sea fort, land fort"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="strategic_role" className="archive-label block">
+                  Strategic Role
+                </label>
+                <input
+                  type="text"
+                  name="strategic_role"
+                  id="strategic_role"
+                  value={siteData.fort_classification.strategic_role}
+                  onChange={(e) => handleChange(e, "fort_classification")}
+                  placeholder="Watch post, capital, coastal defense"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="elevation" className="archive-label block">
+                  Elevation
+                </label>
+                <input
+                  type="text"
+                  name="elevation"
+                  id="elevation"
+                  value={siteData.fort_classification.elevation}
+                  onChange={(e) => handleChange(e, "fort_classification")}
+                  className={inputClass}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <Shield className="h-5 w-5 text-[#8a6a31]" />
+              Architecture
+            </h3>
+            <div className="space-y-4">
+              {[
+                ["defensive_design", "Defensive Design"],
+                ["entry_gates", "Entry Gates"],
+                ["bastions", "Bastions"],
+                ["water_systems", "Water Systems"],
+                ["materials", "Materials"],
+              ].map(([field, label]) => (
+                <div key={field}>
+                  <label htmlFor={field} className="archive-label block">
+                    {label}
+                  </label>
+                  <input
+                    type="text"
+                    name={field}
+                    id={field}
+                    value={siteData.architecture[field]}
+                    onChange={(e) => handleChange(e, "architecture")}
+                    className={inputClass}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <FileText className="h-5 w-5 text-[#8a6a31]" />
+              Preservation
+            </h3>
+            <div className="space-y-4">
+              {[
+                ["current_condition", "Current Condition"],
+                ["managing_authority", "Managing Authority"],
+                ["access_notes", "Access Notes"],
+                ["risk_factors", "Risk Factors"],
+              ].map(([field, label]) => (
+                <div key={field}>
+                  <label htmlFor={field} className="archive-label block">
+                    {label}
+                  </label>
+                  <input
+                    type="text"
+                    name={field}
+                    id={field}
+                    value={siteData.preservation_details[field]}
+                    onChange={(e) => handleChange(e, "preservation_details")}
+                    className={inputClass}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* References */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">References</h3>
+        <div className={panelClass}>
+          <h3 className={sectionTitleClass}>References</h3>
           <ReferenceInput
             onAdd={(newReference) =>
               dispatch({ type: "ADD_REFERENCE", reference: newReference })
@@ -486,11 +662,11 @@ const AddSiteForm = ({ handleSubmit }) => {
             {siteData.references.map((ref, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between bg-green-100 p-2 rounded-full"
+                className="flex items-center justify-between rounded-2xl border border-[#123327]/10 bg-[#123327]/6 p-3"
               >
                 <div>
-                  <p className="font-semibold text-green-800">{ref.title}</p>
-                  <p className="text-sm text-green-600">
+                  <p className="font-semibold text-[#123327]">{ref.title}</p>
+                  <p className="text-sm text-[#123327]/70">
                     {ref.author} ({ref.year})
                   </p>
                 </div>
@@ -506,13 +682,13 @@ const AddSiteForm = ({ handleSubmit }) => {
           </div>
         </div>
 
-        <div className="pt-5">
+        <div className="pt-2">
           <div className="flex justify-end">
             <button
               type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              className="inline-flex justify-center rounded-full border border-transparent bg-[#123327] px-6 py-3 text-sm font-bold text-[#fbf7ee] shadow-[0_18px_40px_rgba(18,51,39,0.18)] transition hover:bg-[#071b15] focus:outline-none focus:ring-2 focus:ring-[#b9924a]"
             >
-              Submit Suggestion
+              Submit Record
             </button>
           </div>
         </div>

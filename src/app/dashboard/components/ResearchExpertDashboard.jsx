@@ -409,7 +409,7 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
 
   return (
     <div>
-      <div className="min-h-screen bg-white relative overflow-hidden">
+      <div className="min-h-screen bg-[#101b15] relative overflow-hidden">
         {/* Header */}
         <Header currentPath="/dashboard" theme="dark" />
 
@@ -423,11 +423,11 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
             className="w-full h-screen object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-20" />
+          <div className="absolute inset-0 bg-[#101b15]/76 z-10" />
+          <div className="absolute inset-0 z-20 bg-[radial-gradient(circle_at_25%_20%,rgba(143,114,68,0.2),transparent_32%),linear-gradient(to_top,#f4ecdd,rgba(244,236,221,0.42),transparent)]" />
 
           {/* Dashboard Content */}
-          <div className="absolute inset-0 flex justify-center items-center gap-5 z-30">
+          <div className="absolute inset-0 z-30 flex flex-col items-stretch justify-start gap-4 overflow-y-auto px-3 pb-24 pt-24 sm:px-5 lg:flex-row lg:items-center lg:justify-center lg:gap-5 lg:px-8 lg:pb-0 lg:pt-20">
             <Sidebar
               user={user}
               sidebarSections={sidebarSections}
@@ -436,61 +436,55 @@ const ResearchExpertDashboard = ({ user, selectedItem, handleSelectItem }) => {
             />
 
             {/* Main Section */}
-            <div className="w-[75%] h-[80vh] p-10 rounded-4xl bg-[#FFFD99]/50 overflow-y-auto">
+            <div className="dashboard-surface archive-scroll min-h-[64vh] w-full overflow-y-auto p-5 text-stone-900 sm:p-8 lg:h-[80vh] lg:w-[75%] lg:p-10">
               <Notification message={message?.text} type={message?.type} />
               {selectedItem === "Dashboard" && (
-                <>
-                  <p className="text-green-950 font-bold text-xl">
-                    Welcome,
-                    <span className="text-4xl font-extrabold text-green-700">
-                      {" "}
-                      {user?.username}
-                    </span>
-                  </p>
+                <div className="animate-fade-in">
+                  <div className="mb-8">
+                    <p className="text-xs font-bold uppercase tracking-[0.24em] text-stone-500">
+                      Research Console
+                    </p>
+                    <h1 className="mt-2 font-cinzel-decorative text-4xl font-bold leading-tight text-stone-900 sm:text-5xl">
+                      Welcome, {user?.username}
+                    </h1>
+                    <p className="mt-4 max-w-3xl text-lg leading-8 text-stone-600">
+                      Review records, propose corrections, submit new forts or
+                      inscriptions, and maintain scholarly context through an
+                      institutional archive workflow.
+                    </p>
+                  </div>
 
                   {/* Main Content */}
-                  <div className="flex flex-col gap-6 text-green-900 mt-4">
-                    <p className="leading-relaxed text-lg">
-                      As a Research Expert on{" "}
-                      <span className="font-semibold text-green-800">
-                        Maharitage
-                      </span>
-                      , your expertise is vital. This is your space to review
-                      submissions, contribute to articles, and collaborate with
-                      other experts to ensure the historical accuracy and
-                      richness of the content we provide.
-                    </p>
-
-                    <blockquote className="italic border-l-4 border-green-700 pl-4">
-                      “Through rigorous research and collaboration, we can piece
-                      together the mosaic of our past.”
-                    </blockquote>
-
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="flex flex-col gap-10">
+                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                       {stats.map((item, idx) => (
                         <div
                           key={idx}
-                          className="border border-dashed border-green-700 rounded-xl p-4 text-center"
+                          className="archive-stat-card p-5"
                         >
-                          <p className="text-2xl font-bold">{item.value}</p>
-                          <p className="text-sm font-medium">{item.label}</p>
+                          <p className="text-4xl font-bold text-stone-900">{item.value}</p>
+                          <p className="mt-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] text-stone-500">{item.label}</p>
                         </div>
                       ))}
                     </div>
 
-                    <blockquote className="italic border-l-4 border-green-700 pl-4">
-                      “Every fact verified, every story told, adds another layer
-                      to our collective heritage.”
-                    </blockquote>
-
-                    <p className="leading-relaxed">
-                      Your contributions are invaluable in our mission to create
-                      a comprehensive and authoritative resource on
-                      Maharashtra's heritage. Thank you for your dedication to
-                      scholarly excellence.
-                    </p>
+                    <div>
+                      <h3 className="font-bold text-xl text-stone-900 mb-4">Core Workflows</h3>
+                      <div className="grid gap-4 lg:grid-cols-3">
+                        {[
+                          { title: "Suggest Additions", desc: "Suggest new fort and cave records with gallery evidence" },
+                          { title: "Submit Corrections", desc: "Submit inscription changes for administrative review" },
+                          { title: "Track Submissions", desc: "Track institutional submission history" },
+                        ].map((item) => (
+                          <div key={item.title} className="archive-stat-card group flex cursor-pointer flex-col justify-center p-5 text-left">
+                            <span className="font-bold text-stone-900">{item.title}</span>
+                            <span className="mt-2 text-sm text-stone-500">{item.desc}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </>
+                </div>
               )}
               {selectedItem === "Profile" && <Profile user={user} />}
               {selectedItem === "API Keys" && (

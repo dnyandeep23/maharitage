@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 import {
   Book,
   User,
-  Languages,
   Menu,
   X,
   LogOut,
   Settings,
   House,
   LayoutDashboard,
+  Search,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../contexts/AuthContext.jsx";
@@ -19,12 +19,12 @@ import { useAuth } from "../../contexts/AuthContext.jsx";
 const THEME_CONFIG = {
   hero: {
     headerBg:
-      "bg-stone-950/18 text-white shadow-[0_18px_60px_rgba(12,10,9,0.18)] backdrop-blur-2xl border-white/20 ring-1 ring-white/10",
+      "bg-[#101b15]/28 text-white shadow-[0_20px_70px_rgba(12,10,9,0.28)] backdrop-blur-2xl border-white/18 ring-1 ring-white/12",
     headerBgScrolled:
-      "bg-white/82 text-stone-950 shadow-[0_18px_50px_rgba(41,37,36,0.12)] backdrop-blur-2xl border-stone-200/70 ring-1 ring-white/70",
+      "bg-[#f7f0e4]/90 text-stone-950 shadow-[0_18px_50px_rgba(41,37,36,0.12)] backdrop-blur-2xl border-[#cdbb9c]/70 ring-1 ring-white/70",
     text: "text-white",
-    accent: "bg-white text-stone-950",
-    hoverAccent: "hover:bg-amber-50",
+    accent: "bg-[#d2ba7d] text-[#101b15]",
+    hoverAccent: "hover:bg-[#e4cd92]",
     navActiveFull: "bg-white/18 text-white text-xs font-inter shadow-inner ring-1 ring-white/15",
     navInactiveFull: "text-white/88 text-xs hover:bg-white/14 hover:text-white",
     navActiveMinimal: "bg-white/16 text-white text-xs font-inter",
@@ -32,37 +32,37 @@ const THEME_CONFIG = {
     logo: "text-white",
     border: "border-white/18",
     profileBg: "bg-white/95 backdrop-blur-xl",
-    menuBg: "bg-stone-950/88 text-white border border-white/10",
+    menuBg: "bg-[#101b15]/94 text-white border border-white/10",
   },
   light: {
-    headerBg: "bg-white/5 text-green-900 hover:bg-white/20",
-    headerBgScrolled: "bg-white/75 text-green-900 shadow-md backdrop-blur-xl border-green-200/50",
-    text: "text-green-900",
-    accent: "bg-green-600 text-white",
-    hoverAccent: "hover:bg-green-700",
-    navActiveFull: "bg-green-100/50 text-green-700 text-xs font-inter",
-    navInactiveFull: "text-green-900 text-xs hover:bg-green-100/80",
-    navActiveMinimal: "bg-green-200/40 text-green-900 text-xs font-inter",
-    navInactiveMinimal: "text-green-800 text-xs hover:bg-green-200/50",
-    logo: "text-green-800",
-    border: "border-green-200/30",
-    profileBg: "bg-white",
-    menuBg: "bg-white/95",
+    headerBg: "bg-[#f7f0e4]/72 text-[#263a2d] hover:bg-[#f7f0e4]/88",
+    headerBgScrolled: "bg-[#f7f0e4]/90 text-[#263a2d] shadow-[0_18px_50px_rgba(41,37,36,0.12)] backdrop-blur-xl border-[#cdbb9c]/60",
+    text: "text-[#263a2d]",
+    accent: "bg-[#263a2d] text-[#f7f0e4]",
+    hoverAccent: "hover:bg-[#101b15]",
+    navActiveFull: "bg-[#263a2d]/10 text-[#263a2d] text-xs font-inter ring-1 ring-[#263a2d]/10",
+    navInactiveFull: "text-[#263a2d]/82 text-xs hover:bg-[#263a2d]/8 hover:text-[#263a2d]",
+    navActiveMinimal: "bg-[#263a2d]/10 text-[#263a2d] text-xs font-inter",
+    navInactiveMinimal: "text-[#263a2d]/82 text-xs hover:bg-[#263a2d]/8",
+    logo: "text-[#263a2d]",
+    border: "border-[#cdbb9c]/50",
+    profileBg: "bg-[#fffaf0]",
+    menuBg: "bg-[#fffaf0]/96",
   },
   dark: {
-    headerBg: "bg-gray-900/5 text-green-100 hover:bg-gray-900/20",
-    headerBgScrolled: "bg-gray-900/95 text-green-100 shadow-md backdrop-blur-xl border-green-700/50",
-    text: "text-green-100",
-    accent: "bg-green-500 text-gray-900",
-    hoverAccent: "hover:bg-green-400",
-    navActiveFull: "bg-green-500/30 text-green-200 text-xs font-inter",
-    navInactiveFull: "text-green-100 text-xs hover:bg-green-500/20",
-    navActiveMinimal: "bg-green-700/30 text-green-200 text-xs font-inter",
-    navInactiveMinimal: "text-green-200 text-xs hover:bg-green-700/20",
-    logo: "text-green-200",
-    border: "border-green-700/30",
-    profileBg: "bg-gray-800",
-    menuBg: "bg-gray-900/95",
+    headerBg: "bg-[#101b15]/24 text-[#f7f0e4] hover:bg-[#101b15]/34",
+    headerBgScrolled: "bg-[#101b15]/94 text-[#f7f0e4] shadow-md backdrop-blur-xl border-[#d2ba7d]/24",
+    text: "text-[#f7f0e4]",
+    accent: "bg-[#d2ba7d] text-[#101b15]",
+    hoverAccent: "hover:bg-[#e4cd92]",
+    navActiveFull: "bg-[#d2ba7d]/18 text-[#f7f0e4] text-xs font-inter ring-1 ring-[#d2ba7d]/20",
+    navInactiveFull: "text-[#f7f0e4]/84 text-xs hover:bg-white/10 hover:text-white",
+    navActiveMinimal: "bg-[#d2ba7d]/18 text-[#f7f0e4] text-xs font-inter",
+    navInactiveMinimal: "text-[#f7f0e4]/82 text-xs hover:bg-white/10",
+    logo: "text-[#f7f0e4]",
+    border: "border-[#d2ba7d]/22",
+    profileBg: "bg-[#263a2d]",
+    menuBg: "bg-[#101b15]/95",
   },
 };
 
@@ -117,6 +117,7 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
 
   const navItems = [
     { path: "/", label: "Home", icon: <House className="w-5 h-5" /> },
+    { path: "/search", label: "Search", icon: <Search className="w-5 h-5" /> },
     { path: "/docs", label: "Docs", icon: <Book className="w-5 h-5" /> },
     { path: "/about", label: "About Us", icon: <User className="w-5 h-5" /> },
   ];
@@ -129,7 +130,6 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
     });
   }
 
-  // 🔘 FIXED: Proper hover + active state priority
   const renderNavButton = (item) => {
     const isActive = currentPath === item.path;
     const isHovered = hoveredNav === item.path;
@@ -162,7 +162,7 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
         }
         onMouseEnter={() => setHoveredNav(item.path)}
         onMouseLeave={() => setHoveredNav(null)}
-        className={`px-3.5 py-2 cursor-pointer rounded-full text-sm font-medium flex items-center gap-2 transition-all duration-200 hover:shadow-md group ${buttonClasses}`}
+        className={`px-3.5 py-2 cursor-pointer rounded-full text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:shadow-[0_10px_30px_rgba(12,10,9,0.12)] group ${buttonClasses}`}
         style={{ fontFamily: "Inter" }}
       >
         {React.cloneElement(item.icon, {
@@ -180,10 +180,11 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
   };
 
   return (
+    <>
     <header
-      className={`fixed top-2 sm:top-4 left-3 right-3 z-50 ${isScrolled ? colors.headerBgScrolled : colors.headerBg} text-sm border rounded-full transition-all duration-300 ${colors.border}`}
+      className={`fixed top-3 left-3 right-3 z-50 mx-auto max-w-7xl ${isScrolled ? colors.headerBgScrolled : colors.headerBg} text-sm border rounded-full transition-all duration-300 ${colors.border}`}
     >
-      <div className="px-2.5 sm:px-4 py-1.5 sm:py-2.5 flex items-center justify-between relative">
+      <div className="px-2.5 py-1.5 sm:px-4 sm:py-2 flex items-center justify-between relative">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -200,7 +201,7 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
         {/* FULL VARIANT NAV */}
         {variant === "full" && (
           <>
-            <nav className="hidden md:flex items-center justify-center flex-1 gap-2 absolute left-1/2 -translate-x-1/2 rounded-full border border-white/8 bg-white/5 px-2 py-1 backdrop-blur-md">
+            <nav className="hidden md:flex items-center justify-center flex-1 gap-1.5 absolute left-1/2 -translate-x-1/2 rounded-full border border-white/12 bg-white/8 px-2 py-1 backdrop-blur-xl">
               <AnimatePresence>
                 {navItems.map((item, index) => (
                   <motion.div
@@ -234,7 +235,7 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         ref={profileMenuRef}
-                        className={`absolute right-0 mt-2 w-48 rounded-lg shadow-lg py-1 ${colors.profileBg} ring-1 ring-black/10`}
+                        className={`absolute right-0 mt-3 w-56 rounded-2xl shadow-[0_24px_70px_rgba(12,10,9,0.18)] py-2 ${colors.profileBg} ring-1 ring-black/10`}
                       >
                         <div className="px-4 py-2 border-b border-gray-200/30">
                           <p className="text-sm font-medium truncate">
@@ -283,6 +284,7 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className={`p-2 rounded-full ${colors.text} hover:bg-white/12`}
+                aria-label="Open menu"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </motion.button>
@@ -292,9 +294,9 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
 
         {/* MINIMAL VARIANT */}
         {variant === "minimal" && (
-          <nav className="flex items-center pr-4 space-x-4">
+          <nav className="flex items-center pr-2 sm:pr-4 space-x-1 sm:space-x-4">
             {renderNavButton(navItems[0])}
-            {renderNavButton(navItems[2])}
+            {renderNavButton(navItems[3] || navItems[2])}
           </nav>
         )}
       </div>
@@ -393,6 +395,31 @@ const Header = ({ currentPath = "", variant = "full", theme = "light" }) => {
         )}
       </AnimatePresence>
     </header>
+    {variant === "full" && (
+      <nav className="mobile-bottom-nav fixed inset-x-3 bottom-3 z-50 md:hidden">
+        <div className="grid grid-cols-4 gap-1 rounded-full border border-[#cdbb9c]/50 bg-[#fffaf0]/92 p-1.5 shadow-[0_18px_50px_rgba(25,22,17,0.18)] backdrop-blur-xl">
+          {navItems.slice(0, 4).map((item) => {
+            const isActive = currentPath === item.path;
+            return (
+              <button
+                key={item.path}
+                type="button"
+                onClick={() => handleNavigation(item.path)}
+                className={`flex min-h-12 flex-col items-center justify-center rounded-full px-2 text-[0.65rem] font-bold transition ${
+                  isActive
+                    ? "bg-[#263a2d] text-[#f7f0e4]"
+                    : "text-[#263a2d]/70 hover:bg-[#263a2d]/8"
+                }`}
+              >
+                {React.cloneElement(item.icon, { className: "h-4 w-4", strokeWidth: 2 })}
+                <span className="mt-0.5 leading-none">{item.label.replace(" Us", "")}</span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+    )}
+    </>
   );
 };
 

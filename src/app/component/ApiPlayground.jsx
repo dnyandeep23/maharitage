@@ -36,13 +36,13 @@ const ApiPlayground = ({ endpoint }) => {
   };
 
   return (
-    <div className="mt-6 border-t pt-6">
-      <h4 className="font-semibold mb-3 text-lg">API Playground</h4>
+    <div className="mt-6 border-t border-[#263a2d]/12 pt-6">
+      <h4 className="mb-3 font-cinzel-decorative text-xl font-bold text-[#123327]">API Playground</h4>
       <div className="space-y-4">
         <div>
           <label
             htmlFor="api-key-input"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="archive-label mb-1 block"
           >
             Your API Key
           </label>
@@ -51,14 +51,14 @@ const ApiPlayground = ({ endpoint }) => {
             type="text"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            className="archive-input w-full rounded-2xl px-4 py-3 shadow-sm"
             placeholder="Enter your API key"
           />
         </div>
         <button
           onClick={handleTryIt}
           disabled={loading}
-          className="inline-flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-gray-400"
+          className="archive-button px-5 py-3 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? (
             <>
@@ -77,10 +77,10 @@ const ApiPlayground = ({ endpoint }) => {
       {response && (
         <div className="mt-4">
           <h5 className="font-semibold mb-2 flex items-center gap-2">
-            <CheckCircle className="w-5 h-5 text-green-500" />
+            <CheckCircle className="h-5 w-5 text-[#566044]" />
             Response
           </h5>
-          <pre className="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto">
+          <pre className="overflow-x-auto rounded-2xl bg-[#101b15] p-4 text-sm text-[#f7f0e4] shadow-inner">
             <code>{JSON.stringify(response, null, 2)}</code>
           </pre>
         </div>
@@ -92,7 +92,7 @@ const ApiPlayground = ({ endpoint }) => {
             <AlertTriangle className="w-5 h-5 text-red-500" />
             Error
           </h5>
-          <pre className="bg-red-50 p-4 rounded-md text-sm text-red-800 overflow-x-auto">
+          <pre className="overflow-x-auto rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
             <code>{error}</code>
           </pre>
         </div>

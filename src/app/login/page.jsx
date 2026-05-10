@@ -85,7 +85,7 @@ const Login = () => {
   }, [role]);
 
   return (
-    <div className="min-h-screen flex flex-col relative font-inter">
+    <div className="auth-shell flex flex-col font-inter">
       {toast.show && (
         <Toast
           message={toast.message}
@@ -104,7 +104,7 @@ const Login = () => {
         />
       </div>
 
-      <div className="absolute inset-0 bg-black/60 -z-10" />
+      <div className="absolute inset-0 bg-[#071b15]/70 -z-10" />
 
       <Header
         handleNavigation={handleNavigation}
@@ -113,21 +113,22 @@ const Login = () => {
         theme="dark"
       />
 
-      <div className="w-full flex flex-col items-center justify-center h-[150vh] xl:h-screen">
-        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-10 md:gap-28 px-4 md:px-0">
+      <div className="w-full flex flex-col items-center justify-center min-h-screen py-28">
+        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-10 md:gap-28 px-5 sm:px-8 lg:px-14">
           <div className="flex-1 flex flex-col sm:mt14 justify-center items-start text-white">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              Welcome back to Maharitage
+            <p className="archive-kicker text-[#d9c18a]">Archive access</p>
+            <h2 className="mt-4 font-cinzel-decorative text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              Welcome back to MahaRitage
             </h2>
-            <p className="text-base md:text-lg text-gray-200">
+            <p className="text-base md:text-lg text-white/72 leading-8 max-w-xl">
               Access your account to explore heritage data, manage research, or
-              continue your journey into Maharashtra's caves.
+              continue your journey through Maharashtra's archive.
             </p>
             <div className="mt-12 md:mt-24 text-base md:text-lg">
               <p>
                 Don't have an account?{" "}
                 <span
-                  className="text-green-400 font-bold cursor-pointer hover:underline"
+                  className="text-[#d9c18a] font-bold cursor-pointer hover:underline"
                   onClick={() => handleNavigation("/register")}
                 >
                   Sign Up
@@ -137,10 +138,10 @@ const Login = () => {
           </div>
 
           <div className="flex-1 flex flex-col justify-center items-center">
-            <div className="relative w-full max-w-lg bg-white/15 rounded-[8rem] pt-12 pb-20 rounded-br-[10rem] rounded-bl-[15rem] p-4 xl:p-14 shadow-xl border border-white/30">
+            <div className="auth-panel relative w-full max-w-lg p-5 sm:p-8 xl:p-10">
               <div className="relative flex justify-center items-center rounded-full p-1 mb-10 w-full">
                 <motion.div
-                  className="absolute top-1 bottom-1 rounded-full bg-green-900/90 backdrop-blur-sm shadow-lg"
+                  className="absolute top-1 bottom-1 rounded-full bg-[#123327]/95 backdrop-blur-sm shadow-lg"
                   style={highlightStyle}
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 />
@@ -162,10 +163,10 @@ const Login = () => {
               </div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="relative">
-                  <Mail className="absolute left-5 top-4 text-green-900 w-5 h-5" />
+                  <Mail className="absolute left-5 top-4 text-[#123327] w-5 h-5" />
                   <input
                     type="email"
-                    className={`w-full pl-14 pr-5 py-3.5 bg-white/70 placeholder-gray-500 border ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-green-400'} rounded-full focus:outline-none focus:ring-2 text-gray-800 text-base`}
+                    className={`w-full pl-14 pr-5 py-3.5 bg-[#fffdf7]/88 placeholder-stone-500 border ${fieldErrors.email ? 'border-red-500 focus:ring-red-500' : 'border-[#d8c7a8] focus:ring-[#d9c18a]'} rounded-full focus:outline-none focus:ring-2 text-stone-800 text-base`}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="someone@example.com"
@@ -175,10 +176,10 @@ const Login = () => {
                 </div>
 
                 <div className="relative">
-                  <Lock className="absolute left-5 top-4 text-green-900 w-5 h-5" />
+                  <Lock className="absolute left-5 top-4 text-[#123327] w-5 h-5" />
                   <input
                     type={showPassword ? "text" : "password"}
-                    className={`w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border ${fieldErrors.password ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-green-400'} rounded-full focus:outline-none focus:ring-2 text-gray-800 text-base`}
+                    className={`w-full pl-14 pr-12 py-3.5 bg-[#fffdf7]/88 placeholder-stone-500 border ${fieldErrors.password ? 'border-red-500 focus:ring-red-500' : 'border-[#d8c7a8] focus:ring-[#d9c18a]'} rounded-full focus:outline-none focus:ring-2 text-stone-800 text-base`}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="********"
@@ -186,7 +187,7 @@ const Login = () => {
                   />
                   <button
                     type="button"
-                    className="absolute right-4 top-4 text-green-900"
+                    className="absolute right-4 top-4 text-[#123327]"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -197,7 +198,7 @@ const Login = () => {
                 <div className="text-right text-sm">
                   <button
                     type="button"
-                    className="text-green-400 hover:underline"
+                    className="text-[#d9c18a] hover:underline"
                     onClick={() => handleNavigation("/forgot-password")}
                   >
                     Forgot password?
@@ -208,7 +209,7 @@ const Login = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className={`self-end w-32 bg-white/70 hover:bg-white text-green-900 py-3.5 rounded-full font-semibold transition-all duration-200 shadow-md text-base flex items-center justify-center ${
+                    className={`self-end w-32 bg-[#d9c18a] hover:bg-[#ead8a5] text-[#071b15] py-3.5 rounded-full font-bold transition-all duration-200 shadow-md text-base flex items-center justify-center ${
                       isLoading ? "opacity-75 cursor-not-allowed" : ""
                     }`}
                   >

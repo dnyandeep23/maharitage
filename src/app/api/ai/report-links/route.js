@@ -154,7 +154,7 @@ export async function POST(request) {
           ? {
               site_id: site.site_id,
               site_name: site.site_name,
-              href: `/cave/${site.site_id}`,
+              href: `/heritage/${site.site_id}`,
             }
           : null,
       });

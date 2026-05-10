@@ -769,10 +769,10 @@ const AIComponent = () => {
   // ─── Render ───────────────────────────────────────────────────────────────
   return (
     <div
-      className="flex h-[100dvh] w-full text-slate-100 overflow-hidden relative"
+      className="relative flex h-[100dvh] w-full overflow-hidden text-[#fbf7ee]"
       style={{
         background:
-          "radial-gradient(ellipse at 20% 50%, #0d2818 0%, #0f1117 40%, #1a1a2e 70%, #0f1117 100%)",
+          "linear-gradient(135deg, #071b15 0%, #123327 48%, #15120d 100%)",
       }}
       onDragOver={handleGlobalDragOver}
       onDragLeave={handleGlobalDragLeave}
@@ -780,26 +780,16 @@ const AIComponent = () => {
     >
       {/* Global Drag Overlay */}
       {isGlobalDragging && (
-        <div className="absolute inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center pointer-events-none">
-          <div className="border-4 border-dashed border-emerald-500 rounded-3xl p-16 flex flex-col items-center justify-center bg-emerald-900/20 shadow-2xl shadow-emerald-500/20">
-            <ImageIcon className="w-16 h-16 text-emerald-400 mb-6 animate-bounce" />
-            <h2 className="text-3xl font-bold text-white tracking-wide">Drop image here</h2>
-            <p className="text-slate-300 mt-2 text-lg">to attach to your message</p>
+        <div className="pointer-events-none absolute inset-0 z-[100] flex items-center justify-center bg-[#071b15]/86 backdrop-blur-sm">
+          <div className="flex flex-col items-center justify-center rounded-[2rem] border-2 border-dashed border-[#d9c18a] bg-[#123327]/42 p-16 shadow-2xl">
+            <ImageIcon className="mb-6 h-16 w-16 animate-bounce text-[#d9c18a]" />
+            <h2 className="text-3xl font-bold tracking-wide text-white">Drop image here</h2>
+            <p className="mt-2 text-lg text-[#fbf7ee]/70">to attach to your heritage query</p>
           </div>
         </div>
       )}
 
-      {/* Background mesh decoration */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-10 blur-3xl"
-          style={{ background: "radial-gradient(circle, #10b981, transparent)" }}
-        />
-        <div
-          className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full opacity-8 blur-3xl"
-          style={{ background: "radial-gradient(circle, #3b82f6, transparent)" }}
-        />
-      </div>
+      <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(115deg,rgba(217,193,138,0.08),transparent_32%),linear-gradient(290deg,rgba(255,250,240,0.04),transparent_42%)]" />
 
       {toast.message && (
         <Toast
@@ -811,11 +801,14 @@ const AIComponent = () => {
 
       {/* Audience Selection Modal */}
       {isAudienceModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-[#151821] border border-white/10 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl relative">
+        <div className="animate-in fade-in fixed inset-0 z-[60] flex items-center justify-center bg-[#071b15]/68 p-4 backdrop-blur-sm duration-200">
+          <div className="museum-dark-panel relative w-full max-w-lg overflow-hidden">
             <div className="p-8">
-              <h2 className="text-2xl font-bold text-white mb-2 text-center">Choose Your Audience</h2>
-              <p className="text-slate-400 text-sm text-center mb-8">Select how the AI should interact with you. You can switch between modes anytime.</p>
+              <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.24em] text-[#d9c18a]">
+                AI Archive
+              </p>
+              <h2 className="mb-2 text-center font-cinzel-decorative text-2xl font-bold text-white">Choose Your Audience</h2>
+              <p className="mb-8 text-center text-sm text-[#fbf7ee]/62">Select how the assistant should guide the heritage experience.</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <button
@@ -824,17 +817,17 @@ const AIComponent = () => {
                     setMode("chat");
                     setIsAudienceModalOpen(false);
                   }}
-                  className={`flex flex-col items-center text-center p-6 rounded-2xl border-2 transition-all duration-200 ${
+                  className={`flex flex-col items-center text-center p-6 rounded-2xl border transition-all duration-200 ${
                     audienceType === "general"
-                      ? "border-emerald-500 bg-emerald-500/10"
-                      : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20"
+                      ? "border-[#d9c18a]/60 bg-[#d9c18a]/10"
+                      : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#d9c18a]/30"
                   }`}
                 >
-                  <div className="w-14 h-14 rounded-full bg-blue-500/20 flex items-center justify-center mb-4 text-blue-400">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#d9c18a]/14 text-[#d9c18a]">
                     <User size={28} />
                   </div>
                   <h3 className="text-lg font-bold text-white mb-2">General</h3>
-                  <p className="text-xs text-slate-400">Professional, standard heritage exploration.</p>
+                  <p className="text-xs text-[#fbf7ee]/58">Professional, standard heritage exploration.</p>
                 </button>
 
                 <button
@@ -843,17 +836,17 @@ const AIComponent = () => {
                     setMode("quiz");
                     setIsAudienceModalOpen(false);
                   }}
-                  className={`flex flex-col items-center text-center p-6 rounded-2xl border-2 transition-all duration-200 ${
+                  className={`flex flex-col items-center text-center p-6 rounded-2xl border transition-all duration-200 ${
                     audienceType === "student"
-                      ? "border-emerald-500 bg-emerald-500/10"
-                      : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20"
+                      ? "border-[#d9c18a]/60 bg-[#d9c18a]/10"
+                      : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#d9c18a]/30"
                   }`}
                 >
-                  <div className="w-14 h-14 rounded-full bg-amber-500/20 flex items-center justify-center mb-4 text-amber-400">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#b9924a]/18 text-[#d9c18a]">
                     <Gamepad2 size={28} />
                   </div>
                   <h3 className="text-lg font-bold text-white mb-2">Student</h3>
-                  <p className="text-xs text-slate-400">Fun, gamified learning experience with rewards!</p>
+                  <p className="text-xs text-[#fbf7ee]/58">Guided learning with quizzes and rewards.</p>
                 </button>
               </div>
             </div>
@@ -876,9 +869,9 @@ const AIComponent = () => {
             : "w-72 -translate-x-full lg:w-0"
         }`}
         style={{
-          background: "rgba(15, 17, 23, 0.95)",
+          background: "rgba(7, 27, 21, 0.94)",
           backdropFilter: "blur(24px)",
-          borderColor: "rgba(255,255,255,0.06)",
+          borderColor: "rgba(217,193,138,0.12)",
         }}
       >
         {isSidebarOpen && (
@@ -887,17 +880,17 @@ const AIComponent = () => {
               {/* Logo */}
               <div className="flex items-center gap-3 mb-6 shrink-0 pt-1">
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-emerald-900/40">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#d9c18a] text-lg font-black text-[#071b15] shadow-lg">
                     H
                   </div>
-                  <div className="absolute inset-0 rounded-2xl ring-2 ring-emerald-400/20 animate-pulse" />
+                  <div className="absolute inset-0 animate-pulse rounded-2xl ring-2 ring-[#d9c18a]/20" />
                 </div>
                 <div>
-                  <h1 className="text-base font-bold text-white tracking-tight">
-                    HeritageX
+                  <h1 className="font-cinzel-decorative text-base font-bold tracking-tight text-white">
+                    MahaRitage
                   </h1>
-                  <p className="text-[10px] text-emerald-400/70 font-medium tracking-widest uppercase">
-                    Maha-Heritage AI
+                  <p className="text-[10px] font-medium uppercase tracking-widest text-[#d9c18a]/74">
+                    Heritage AI
                   </p>
                 </div>
               </div>
@@ -932,8 +925,8 @@ const AIComponent = () => {
                             mode === m
                               ? {
                                   background:
-                                    "linear-gradient(135deg, #059669, #0d9488)",
-                                  boxShadow: "0 2px 8px rgba(5,150,105,0.3)",
+                                    "linear-gradient(135deg, #b9924a, #123327)",
+                                  boxShadow: "0 2px 8px rgba(185,146,74,0.24)",
                                 }
                               : {}
                           }
@@ -952,12 +945,12 @@ const AIComponent = () => {
                     <div className="mt-4 flex items-center justify-between p-3 rounded-xl border border-white/5 bg-white/5">
                       <div>
                         <p className="text-xs font-semibold text-slate-300">Audience</p>
-                        <p className="text-[10px] text-emerald-400 capitalize">{audienceType} Mode</p>
+                        <p className="text-[10px] capitalize text-[#d9c18a]">{audienceType} Mode</p>
                       </div>
                       <button
                         type="button"
                         onClick={() => setIsAudienceModalOpen(true)}
-                        className="rounded-lg border border-emerald-400/20 bg-emerald-500/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-300 transition hover:bg-emerald-500/20"
+                        className="rounded-lg border border-[#d9c18a]/24 bg-[#d9c18a]/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#d9c18a] transition hover:bg-[#d9c18a]/18"
                       >
                         Switch Audience
                       </button>

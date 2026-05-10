@@ -3,77 +3,27 @@ import React from "react";
 
 const Loading = ({ to }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-green-200 z-[9999] overflow-hidden">
-      {/* Ripple Circles */}
-      <div className="relative">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute top-1/2 left-1/2 w-[300px] h-[300px] border-2 border-emerald-500 rounded-full animate-[ripple_2.5s_ease-out_infinite]"
-            style={{
-              transform: "translate(-50%, -50%)",
-              animationDelay: `${i * 0.6}s`,
-            }}
-          ></div>
-        ))}
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#f7f3ea]">
+      <div className="absolute inset-0 heritage-texture opacity-60" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_18%,rgba(185,146,74,0.16),transparent_32%),linear-gradient(135deg,#fbf7ee,#e9ddc8)]" />
 
-        {/* Central Circle Container */}
-        <div className="relative w-[300px] h-[300px] flex flex-col items-center justify-center rounded-full border-2 border-emerald-500 bg-green-50 shadow-[0_10px_40px_rgba(16,185,129,0.1)] animate-fadeInUp">
-          {/* Wave Animation */}
-          <div className="flex items-center justify-center gap-1.5 h-10 mb-5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div
-                key={i}
-                className="w-1 bg-gradient-to-t from-emerald-500 to-emerald-300 rounded-full animate-[wave_1.2s_ease-in-out_infinite]"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              ></div>
-            ))}
-          </div>
-
-          {/* Title */}
-          <h1
-            className="text-4xl font-bold text-gray-900 mb-1"
-            style={{ fontFamily: "Cinzel Decorative" }}
-          >
-            MahaRitage
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-sm text-gray-500 font-medium mb-2">
-            {to ? `Taking you to ${to}...` : "Setting things up for you"}
-          </p>
-
-          {/* Dots */}
-          <div className="flex gap-2 mt-2">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div
-                key={i}
-                className="w-2 h-2 bg-emerald-500 rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"
-                style={{ animationDelay: `${i * 0.2}s` }}
-              ></div>
-            ))}
-          </div>
+      <div className="relative w-[min(90vw,360px)] border border-[#123327]/14 bg-[#fffdf7]/86 p-8 text-center shadow-[0_30px_90px_rgba(21,18,13,0.12)] backdrop-blur-xl">
+        <div className="mx-auto mb-6 h-1 w-28 overflow-hidden rounded-full bg-[#123327]/12">
+          <div className="h-full w-1/2 animate-[archiveLoad_1.4s_var(--ease-archive)_infinite] rounded-full bg-[#b9924a]" />
         </div>
+        <h1 className="font-cinzel-decorative text-4xl font-bold text-[#123327]">
+          MahaRitage
+        </h1>
+        <p className="mt-3 text-sm font-medium text-stone-500">
+          {to ? `Opening ${to}...` : "Preparing the archive..."}
+        </p>
       </div>
 
-      {/* Custom Keyframes via Tailwind */}
       <style>
         {`
-          @keyframes wave {
-            0%, 100% { transform: scaleY(0.5); }
-            50% { transform: scaleY(1); }
-          }
-          @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
-          }
-          @keyframes ripple {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+          @keyframes archiveLoad {
+            0% { transform: translateX(-120%); }
+            100% { transform: translateX(240%); }
           }
         `}
       </style>

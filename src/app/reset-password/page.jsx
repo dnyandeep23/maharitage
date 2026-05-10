@@ -72,7 +72,7 @@ const ResetPasswordContent = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative font-inter">
+    <div className="auth-shell flex flex-col font-inter">
       {toast.show && <Toast message={toast.message} type={toast.type} onDone={() => setToast({ show: false, message: '', type: '' })} />}
       {/* Background */}
       <div className="absolute inset-0 -z-20 w-full h-full">
@@ -86,7 +86,7 @@ const ResetPasswordContent = () => {
       </div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 -z-10" />
+      <div className="absolute inset-0 bg-[#071b15]/70 -z-10" />
 
       {/* Header */}
       <Header
@@ -96,28 +96,29 @@ const ResetPasswordContent = () => {
       />
 
       {/* Main Section */}
-      <div className="w-full flex flex-col items-center justify-center h-screen">
-        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-10 md:gap-28 px-4 md:px-0">
+      <div className="w-full flex flex-col items-center justify-center min-h-screen py-28">
+        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-10 md:gap-28 px-5 sm:px-8 lg:px-14">
           {/* Left Section */}
           <div className="flex-1 flex flex-col justify-center items-start text-white">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+            <p className="archive-kicker text-[#d9c18a]">Account security</p>
+            <h2 className="mt-4 font-cinzel-decorative text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Reset Your Password
             </h2>
-            <p className="text-base md:text-lg text-gray-200">
+            <p className="text-base md:text-lg text-white/72 leading-8 max-w-xl">
               Choose a new password for your account.
             </p>
           </div>
 
           {/* Right Section - Reset Password Card */}
           <div className="flex-1 flex flex-col justify-center items-center">
-            <div className="relative w-full max-w-lg bg-white/15 rounded-[8rem] rounded-br-[10rem] rounded-bl-[15rem] p-16 shadow-xl border border-white/30">
+            <div className="auth-panel relative w-full max-w-lg p-5 sm:p-8 xl:p-10">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Password */}
                 <div className="relative">
-                  <Lock className="absolute left-5 top-4 text-green-900 w-5 h-5" />
+                  <Lock className="absolute left-5 top-4 text-[#123327] w-5 h-5" />
                   <input
                     type={showPassword ? "text" : "password"}
-                    className="w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
+                    className="w-full pl-14 pr-12 py-3.5 bg-[#fffdf7]/88 placeholder-stone-500 border border-[#d8c7a8] rounded-full focus:outline-none focus:ring-2 focus:ring-[#d9c18a] text-stone-800 text-base"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="New Password"
@@ -125,7 +126,7 @@ const ResetPasswordContent = () => {
                   />
                   <button
                     type="button"
-                    className="absolute right-4 top-4 text-green-900"
+                    className="absolute right-4 top-4 text-[#123327]"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -134,10 +135,10 @@ const ResetPasswordContent = () => {
 
                 {/* Confirm Password */}
                 <div className="relative">
-                  <Lock className="absolute left-5 top-4 text-green-900 w-5 h-5" />
+                  <Lock className="absolute left-5 top-4 text-[#123327] w-5 h-5" />
                   <input
                     type={showCNFPassword ? "text" : "password"}
-                    className="w-full pl-14 pr-12 py-3.5 bg-white/70 placeholder-gray-500 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800 text-base"
+                    className="w-full pl-14 pr-12 py-3.5 bg-[#fffdf7]/88 placeholder-stone-500 border border-[#d8c7a8] rounded-full focus:outline-none focus:ring-2 focus:ring-[#d9c18a] text-stone-800 text-base"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm New Password"
@@ -145,7 +146,7 @@ const ResetPasswordContent = () => {
                   />
                   <button
                     type="button"
-                    className="absolute right-4 top-4 text-green-900"
+                    className="absolute right-4 top-4 text-[#123327]"
                     onClick={() => setShowCNFPassword(!showCNFPassword)}
                   >
                     {showCNFPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -157,7 +158,7 @@ const ResetPasswordContent = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className={`self-end w-48 bg-white/70 hover:bg-white text-green-900 py-3.5 rounded-full font-semibold transition-all duration-200 shadow-md text-base flex items-center justify-center ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+                    className={`self-end w-48 bg-[#d9c18a] hover:bg-[#ead8a5] text-[#071b15] py-3.5 rounded-full font-bold transition-all duration-200 shadow-md text-base flex items-center justify-center ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
                   >
                     {isLoading ? (
                       <>
