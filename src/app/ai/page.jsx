@@ -34,7 +34,6 @@ import {
   Home,
   Settings2,
   User,
-  Gamepad2,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
@@ -843,10 +842,10 @@ const AIComponent = () => {
                   }`}
                 >
                   <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#b9924a]/18 text-[#d9c18a]">
-                    <Gamepad2 size={28} />
+                    <GraduationCap size={28} />
                   </div>
                   <h3 className="text-lg font-bold text-white mb-2">Student</h3>
-                  <p className="text-xs text-[#fbf7ee]/58">Guided learning with quizzes and rewards.</p>
+                  <p className="text-xs text-[#fbf7ee]/58">Focused heritage learning with guided quizzes.</p>
                 </button>
               </div>
             </div>

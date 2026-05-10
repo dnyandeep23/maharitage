@@ -3,16 +3,10 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Trophy,
   Star,
-  Zap,
-  Heart,
-  PartyPopper,
   RotateCcw,
   ArrowRight,
   Sparkles,
-  X,
-  ChevronRight,
 } from "lucide-react";
 import { fetchWithInternalToken } from "../../lib/fetch";
 import QuizSkeleton from "./QuizSkeleton";
@@ -233,7 +227,7 @@ const buildStudentSessionSnapshot = (messages, fallbackMeta, fallbackConfig) => 
   let xp = 0;
   let progress = 0;
   let level = "Explorer";
-  let encouragement = "Welcome, explorer! Let's discover Maharashtra! 🗺️";
+  let encouragement = "Welcome. Let us begin with a focused heritage question.";
   let totalQuestions = Number(fallbackConfig?.questionCount) || 0;
 
   for (const msg of messages) {
@@ -457,23 +451,18 @@ const parseAIResponse = (text) => {
 // ─── Animated Progress Bar ──────────────────────────────────────────────────
 const AnimatedProgressBar = ({ progress, className = "" }) => (
   <div
-    className={`relative h-4 rounded-full overflow-hidden ${className}`}
-    style={{ background: "rgba(255,255,255,0.1)" }}
+    className={`relative h-2.5 overflow-hidden rounded-full ${className}`}
+    style={{ background: "rgba(251,247,238,0.12)" }}
   >
     <motion.div
       className="absolute inset-y-0 left-0 rounded-full"
       style={{
-        background: "linear-gradient(90deg, #f59e0b, #ef4444, #ec4899)",
+        background: "linear-gradient(90deg, #d9c18a, #9fb49d)",
       }}
       initial={{ width: 0 }}
       animate={{ width: `${progress}%` }}
       transition={{ type: "spring", stiffness: 60, damping: 15 }}
     />
-    <div className="absolute inset-0 flex items-center justify-center">
-      <span className="text-[10px] font-bold text-white drop-shadow-md">
-        {progress}%
-      </span>
-    </div>
   </div>
 );
 
@@ -488,10 +477,10 @@ const XPPopup = ({ xp, isCorrect }) => (
   >
     <span
       className={`text-2xl font-black ${
-        isCorrect ? "text-emerald-400" : "text-red-400"
+        isCorrect ? "text-[#d9c18a]" : "text-[#f0c9a8]"
       }`}
     >
-      {isCorrect ? `+${xp} XP 🎉` : "Try again! 💪"}
+      {isCorrect ? `+${xp} XP` : "Reviewing"}
     </span>
   </motion.div>
 );
@@ -503,8 +492,8 @@ const AaravAvatar = ({ encouragement, isThinking }) => (
       <motion.div
         animate={isThinking ? { rotate: [0, -5, 5, 0] } : {}}
         transition={{ repeat: Infinity, duration: 1.5 }}
-        className="w-16 h-16 rounded-2xl overflow-hidden shadow-lg"
-        style={{ border: "3px solid rgba(245,158,11,0.5)" }}
+        className="h-14 w-14 overflow-hidden rounded-2xl shadow-lg sm:h-16 sm:w-16"
+        style={{ border: "1px solid rgba(217,193,138,0.42)" }}
       >
         <img
           alt="Aarav Explorer"
@@ -516,9 +505,9 @@ const AaravAvatar = ({ encouragement, isThinking }) => (
         <motion.div
           animate={{ scale: [1, 1.3, 1] }}
           transition={{ repeat: Infinity, duration: 0.8 }}
-          className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center"
+          className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full border border-[#d9c18a]/40 bg-[#123327]"
         >
-          <span className="text-[10px]">💭</span>
+          <span className="mx-auto mt-[0.4rem] block h-1.5 w-1.5 rounded-full bg-[#d9c18a]" />
         </motion.div>
       )}
     </div>
@@ -526,13 +515,13 @@ const AaravAvatar = ({ encouragement, isThinking }) => (
       initial={{ opacity: 0, x: -10, scale: 0.9 }}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       key={encouragement}
-      className="px-4 py-2.5 rounded-2xl rounded-bl-none max-w-[260px]"
+      className="max-w-[min(24rem,calc(100vw-6rem))] rounded-2xl rounded-bl-md px-4 py-2.5"
       style={{
-        background: "rgba(255,255,255,0.1)",
-        border: "1px solid rgba(255,255,255,0.15)",
+        background: "rgba(251,247,238,0.08)",
+        border: "1px solid rgba(217,193,138,0.14)",
       }}
     >
-      <p className="text-white/90 text-sm font-medium">{encouragement}</p>
+      <p className="text-sm font-medium leading-6 text-[#fbf7ee]/82">{encouragement}</p>
     </motion.div>
   </div>
 );
@@ -551,34 +540,34 @@ const OptionButton = ({
   const letters = ["A", "B", "C", "D"];
   const colors = {
     idle: {
-      bg: "rgba(255,255,255,0.08)",
-      border: "rgba(255,255,255,0.12)",
-      shadow: "0 4px 0 rgba(0,0,0,0.3)",
+      bg: "rgba(251,247,238,0.07)",
+      border: "rgba(251,247,238,0.12)",
+      shadow: "0 12px 30px rgba(0,0,0,0.12)",
     },
     hover: {
-      bg: "rgba(255,255,255,0.14)",
-      border: "rgba(255,255,255,0.2)",
-      shadow: "0 4px 0 rgba(0,0,0,0.3)",
+      bg: "rgba(251,247,238,0.11)",
+      border: "rgba(217,193,138,0.28)",
+      shadow: "0 16px 38px rgba(0,0,0,0.18)",
     },
     selected: {
-      bg: "rgba(16,185,129,0.25)",
-      border: "rgba(16,185,129,0.6)",
-      shadow: "0 2px 0 rgba(16,185,129,0.3)",
+      bg: "rgba(217,193,138,0.16)",
+      border: "rgba(217,193,138,0.55)",
+      shadow: "0 14px 34px rgba(217,193,138,0.14)",
     },
     pending: {
-      bg: "linear-gradient(135deg, rgba(245,158,11,0.22), rgba(16,185,129,0.2))",
-      border: "rgba(245,158,11,0.8)",
-      shadow: "0 0 0 1px rgba(245,158,11,0.3), 0 12px 24px rgba(245,158,11,0.16)",
+      bg: "rgba(217,193,138,0.14)",
+      border: "rgba(217,193,138,0.62)",
+      shadow: "0 0 0 1px rgba(217,193,138,0.14), 0 18px 38px rgba(0,0,0,0.2)",
     },
     correct: {
-      bg: "rgba(16,185,129,0.3)",
-      border: "rgba(16,185,129,0.8)",
-      shadow: "0 0 20px rgba(16,185,129,0.3)",
+      bg: "rgba(94,142,105,0.24)",
+      border: "rgba(134,190,145,0.64)",
+      shadow: "0 16px 36px rgba(94,142,105,0.18)",
     },
     wrong: {
-      bg: "rgba(239,68,68,0.2)",
-      border: "rgba(239,68,68,0.6)",
-      shadow: "0 0 20px rgba(239,68,68,0.2)",
+      bg: "rgba(176,96,70,0.18)",
+      border: "rgba(240,169,141,0.5)",
+      shadow: "0 16px 36px rgba(176,96,70,0.14)",
     },
     disabled: {
       bg: "rgba(255,255,255,0.03)",
@@ -599,22 +588,21 @@ const OptionButton = ({
 
   return (
     <motion.button
-      whileHover={!isDisabled ? { scale: 1.02 } : {}}
-      whileTap={!isDisabled ? { scale: 0.97, y: 2 } : {}}
+      whileHover={!isDisabled ? { y: -1 } : {}}
+      whileTap={!isDisabled ? { scale: 0.99 } : {}}
       onClick={() => !isDisabled && onClick()}
       disabled={isDisabled}
-      className="w-full text-left px-4 py-3.5 rounded-2xl flex items-center gap-3 transition-all duration-150 group min-h-[72px]"
+      className="group flex min-h-[clamp(4.5rem,9vw,5.2rem)] w-full items-center gap-3 rounded-2xl px-[clamp(0.9rem,2vw,1.1rem)] py-[clamp(0.85rem,2vw,1rem)] text-left transition-all duration-200"
       style={{
         background: style.bg,
-        border: `2px solid ${style.border}`,
+        border: `1px solid ${style.border}`,
         boxShadow: style.shadow,
-        transform: isSelected ? "translateY(2px)" : "translateY(0)",
         cursor: isDisabled ? "not-allowed" : "pointer",
         opacity: isDisabled && !isSelected ? 0.45 : 1,
       }}
     >
       <span
-        className="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm shrink-0"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold"
         style={{
           background:
             state === "correct"
@@ -626,11 +614,11 @@ const OptionButton = ({
               : "rgba(255,255,255,0.12)",
           color:
             state === "correct"
-              ? "#6ee7b7"
+              ? "#c7f1cf"
               : state === "wrong"
-              ? "#fca5a5"
+              ? "#ffd0bf"
               : state === "pending"
-              ? "#fde68a"
+              ? "#f5dfaa"
               : "rgba(255,255,255,0.8)",
         }}
       >
@@ -638,7 +626,7 @@ const OptionButton = ({
       </span>
       <div className="flex-1 min-w-0">
         <span
-          className={`block text-sm font-medium ${
+          className={`block text-[clamp(0.92rem,1.7vw,1rem)] font-medium leading-6 ${
             isDisabled && !isSelected ? "text-white/30" : "text-white/90"
           }`}
         >
@@ -646,7 +634,7 @@ const OptionButton = ({
         </span>
         {state === "pending" && (
           <span className="mt-1 block text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-200/90">
-            Answer locked
+            Answer submitted
           </span>
         )}
       </div>
@@ -661,7 +649,7 @@ const OptionButton = ({
         <motion.span
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="text-emerald-400 text-lg"
+          className="text-lg text-[#c7f1cf]"
         >
           ✓
         </motion.span>
@@ -670,7 +658,7 @@ const OptionButton = ({
         <motion.span
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="text-red-400 text-lg"
+          className="text-lg text-[#ffd0bf]"
         >
           ✗
         </motion.span>
@@ -682,12 +670,12 @@ const OptionButton = ({
 // ─── Quiz Complete Screen ───────────────────────────────────────────────────
 const QuizCompleteScreen = ({ data, reportItems, quizConfig, onRestart }) => {
   const summary = buildDisplaySummary(data, reportItems);
-  const emoji =
+  const resultLabel =
     data.performance === "excellent"
-      ? "🏆"
+      ? "Excellent command"
       : data.performance === "good"
-      ? "👍"
-      : "📚";
+      ? "Strong progress"
+      : "Review recommended";
   const totalCorrect = reportItems.filter((item) => item.status === "correct").length;
   const totalIncorrect = reportItems.filter((item) => item.status === "incorrect").length;
   const totalUnvisited = reportItems.filter((item) => item.status === "unvisited").length;
@@ -696,32 +684,30 @@ const QuizCompleteScreen = ({ data, reportItems, quizConfig, onRestart }) => {
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="flex flex-col items-center justify-center text-center gap-6 py-8"
+      className="flex flex-col items-center justify-center gap-6 py-[clamp(1.5rem,4vw,2.5rem)] text-center"
     >
-      <motion.div
-        animate={{ rotate: [0, -10, 10, -10, 0] }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="text-7xl"
-      >
-        {emoji}
-      </motion.div>
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#d9c18a]/30 bg-[#d9c18a]/10 text-[#d9c18a] shadow-[0_24px_60px_rgba(0,0,0,0.22)]">
+        <Star className="h-7 w-7" />
+      </div>
 
       <div>
-        <h2 className="text-3xl font-black text-white mb-2">Quiz Complete!</h2>
-        <p className="text-white/60 text-sm">{data.message}</p>
+        <h2 className="mb-2 font-cinzel-decorative text-[clamp(1.7rem,4vw,2.45rem)] font-bold leading-tight text-white">
+          {resultLabel}
+        </h2>
+        <p className="mx-auto max-w-xl text-sm leading-6 text-white/62">{data.message}</p>
       </div>
 
       <div
-        className="rounded-3xl p-6 w-full max-w-xs"
+        className="w-full max-w-sm rounded-3xl p-[clamp(1.15rem,3vw,1.5rem)]"
         style={{
-          background: "rgba(255,255,255,0.08)",
-          border: "1px solid rgba(255,255,255,0.12)",
+          background: "rgba(251,247,238,0.08)",
+          border: "1px solid rgba(217,193,138,0.16)",
         }}
       >
-        <div className="text-5xl font-black text-white mb-2">
+        <div className="mb-2 text-[clamp(2.5rem,8vw,3.5rem)] font-black leading-none text-white">
           {summary.finalScore}/{summary.totalQuestions}
         </div>
-        <div className="text-sm text-white/50 mb-4">Score</div>
+        <div className="mb-4 text-sm text-white/50">Score</div>
 
         <div className="flex justify-center gap-6">
           <div className="text-center">
@@ -742,22 +728,22 @@ const QuizCompleteScreen = ({ data, reportItems, quizConfig, onRestart }) => {
       </div>
 
       <div className="grid grid-cols-3 gap-3 w-full">
-        <div className="rounded-2xl p-4 bg-emerald-500/10 border border-emerald-400/20">
+        <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-4">
           <div className="text-2xl font-black text-emerald-300">{totalCorrect}</div>
           <div className="text-[11px] uppercase tracking-widest text-white/45">Correct</div>
         </div>
-        <div className="rounded-2xl p-4 bg-amber-500/10 border border-amber-400/20">
+        <div className="rounded-2xl border border-amber-400/20 bg-amber-500/10 p-4">
           <div className="text-2xl font-black text-amber-300">{totalIncorrect}</div>
           <div className="text-[11px] uppercase tracking-widest text-white/45">Incorrect</div>
         </div>
-        <div className="rounded-2xl p-4 bg-sky-500/10 border border-sky-400/20">
+        <div className="rounded-2xl border border-sky-400/20 bg-sky-500/10 p-4">
           <div className="text-2xl font-black text-sky-300">{Math.max(0, totalUnvisited)}</div>
           <div className="text-[11px] uppercase tracking-widest text-white/45">Unvisited</div>
         </div>
       </div>
 
       {reportItems.length > 0 && (
-        <div className="w-full text-left rounded-3xl p-5 border border-white/10 bg-white/5">
+        <div className="w-full rounded-3xl border border-white/10 bg-white/5 p-[clamp(1rem,2.5vw,1.25rem)] text-left">
           <h3 className="text-lg font-bold text-white mb-4">Your Quiz Report</h3>
           <div className="space-y-3">
             {reportItems.map((item) => (
@@ -791,17 +777,17 @@ const QuizCompleteScreen = ({ data, reportItems, quizConfig, onRestart }) => {
       )}
 
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ y: -1 }}
+        whileTap={{ scale: 0.98 }}
         onClick={onRestart}
-        className="flex items-center gap-2 px-6 py-3 rounded-2xl text-white font-bold text-sm shadow-lg"
+        className="flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white shadow-lg"
         style={{
-          background: "linear-gradient(135deg, #059669, #0d9488)",
-          boxShadow: "0 8px 24px rgba(5,150,105,0.4)",
+          background: "linear-gradient(135deg, #123327, #566044)",
+          boxShadow: "0 18px 42px rgba(0,0,0,0.22)",
         }}
       >
         <RotateCcw className="w-4 h-4" />
-        Play Again
+        Start New Quiz
       </motion.button>
     </motion.div>
   );
@@ -825,7 +811,7 @@ const createInitialGameState = () => ({
   currentQuestion: null,
   currentQuestionImage: null,
   options: [],
-  encouragement: "Welcome, explorer! Let's discover Maharashtra! 🗺️",
+  encouragement: "Welcome. Let us begin with a focused heritage question.",
   isAnswered: false,
   isCorrect: null,
   correctAnswer: null,
@@ -1256,7 +1242,7 @@ const StudentGameUI = ({
     } else if (data.type === "error") {
       setGameState((prev) => ({
         ...prev,
-        encouragement: data.message || "Hmm, try tapping A, B, C, or D! 🤔",
+        encouragement: data.message || "Please answer with A, B, C, or D.",
       }));
       setLocked(false);
       setFeedback(null);
@@ -1365,8 +1351,8 @@ const StudentGameUI = ({
   // ─── Render ─────────────────────────────────────────────────────────────
   return (
     <div className="flex-1 min-h-0 flex flex-col overflow-y-auto">
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 sm:px-6">
-        <div className="w-full max-w-3xl mx-auto flex flex-col gap-5">
+      <div className="flex flex-1 flex-col items-center justify-center px-[clamp(1rem,3vw,1.75rem)] py-[clamp(1rem,3vw,1.75rem)]">
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-[clamp(0.9rem,2.3vw,1.25rem)]">
           {/* ── Stats HUD ────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -1375,14 +1361,14 @@ const StudentGameUI = ({
           >
             {/* XP */}
             <div
-              className="flex items-center gap-2 px-3 py-2 rounded-2xl"
+              className="flex items-center gap-2 rounded-2xl px-3 py-2"
               style={{
-                background: "rgba(245,158,11,0.15)",
-                border: "1px solid rgba(245,158,11,0.3)",
+                background: "rgba(217,193,138,0.12)",
+                border: "1px solid rgba(217,193,138,0.2)",
               }}
             >
-              <Star className="w-4 h-4 text-amber-400" />
-              <span className="text-amber-300 font-bold text-sm">
+              <Star className="h-4 w-4 text-[#d9c18a]" />
+              <span className="text-sm font-bold text-[#f1dfb7]">
                 {gameState.xp} XP
               </span>
             </div>
@@ -1396,11 +1382,11 @@ const StudentGameUI = ({
             <div
               className="px-3 py-2 rounded-2xl"
               style={{
-                background: "rgba(139,92,246,0.15)",
-                border: "1px solid rgba(139,92,246,0.3)",
+                background: "rgba(251,247,238,0.07)",
+                border: "1px solid rgba(251,247,238,0.12)",
               }}
             >
-              <span className="text-purple-300 font-bold text-xs uppercase tracking-wider">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#fbf7ee]/72">
                 {gameState.level}
               </span>
             </div>
@@ -1423,7 +1409,7 @@ const StudentGameUI = ({
           />
 
           {/* ── Main Content Area ────────────────────────────────── */}
-          <div className="relative min-h-[420px] w-full">
+          <div className="relative min-h-[min(31rem,70vh)] w-full">
             <AnimatePresence mode="wait">
               {/* XP Popup */}
               {gameState.showXPPopup && (
@@ -1454,22 +1440,22 @@ const StudentGameUI = ({
               >
                 {/* Question Card */}
                 <div
-                  className="rounded-3xl p-6 mb-4"
+                  className="mb-4 rounded-3xl p-[clamp(1.1rem,3vw,1.6rem)]"
                   style={{
-                    background: "rgba(255,255,255,0.07)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+                    background: "rgba(251,247,238,0.075)",
+                    border: "1px solid rgba(217,193,138,0.15)",
+                    boxShadow: "0 24px 70px rgba(0,0,0,0.22)",
                   }}
                 >
-                  <p className="text-white text-lg font-bold leading-relaxed text-center">
+                  <p className="text-center text-[clamp(1.05rem,2.6vw,1.35rem)] font-bold leading-relaxed text-white">
                     {gameState.currentQuestion}
                   </p>
                   {gameState.currentQuestionImage ? (
-                    <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/20">
+                    <div className="mt-4 aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-black/20">
                       <img
                         src={gameState.currentQuestionImage}
                         alt="Quiz reference"
-                        className="h-auto w-full object-cover"
+                        className="h-full w-full object-cover"
                       />
                     </div>
                   ) : null}
@@ -1504,11 +1490,11 @@ const StudentGameUI = ({
 
                 {locked && gameState.isCorrect == null && (
                   <div className="mt-3 text-center">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-500/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-200">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-[#d9c18a]/25 bg-[#d9c18a]/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#f1dfb7]">
                       <motion.span
                         animate={{ rotate: 360 }}
                         transition={{ repeat: Infinity, duration: 0.9, ease: "linear" }}
-                        className="w-3.5 h-3.5 rounded-full border-2 border-amber-200/25 border-t-amber-200"
+                        className="h-3.5 w-3.5 rounded-full border-2 border-[#f1dfb7]/25 border-t-[#f1dfb7]"
                       />
                       Checking answer
                     </span>
@@ -1582,8 +1568,8 @@ const StudentGameUI = ({
                         }`}
                       >
                         {feedback === "correct"
-                          ? "✨ Correct! +10 XP"
-                          : `❌ The answer was ${gameState.correctAnswer}`}
+                          ? "Correct. +10 XP"
+                          : `The answer was ${gameState.correctAnswer}`}
                       </p>
                       <p className="text-white/70 text-xs">
                         {gameState.explanation}
@@ -1601,23 +1587,19 @@ const StudentGameUI = ({
               </motion.div>
             ) : (
               /* Waiting for quiz to start */
-              <div className="text-center py-12 flex flex-col items-center">
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="text-5xl mb-4"
-                >
-                  🏛️
-                </motion.div>
-                <h3 className="text-white text-2xl font-bold mb-2">
-                  Ready to explore?
+              <div className="flex flex-col items-center py-[clamp(2rem,6vw,3.5rem)] text-center">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d9c18a]/24 bg-[#d9c18a]/10 text-[#d9c18a]">
+                  <Sparkles className="h-6 w-6" />
+                </div>
+                <h3 className="mb-2 font-cinzel-decorative text-[clamp(1.5rem,4vw,2rem)] font-bold leading-tight text-white">
+                  Begin a Heritage Quiz
                 </h3>
-                <p className="text-white/50 text-sm mb-8">
-                  Set up your heritage adventure and dive in!
+                <p className="mb-8 max-w-md text-sm leading-6 text-white/52">
+                  Choose a topic and the system will prepare a focused learning sequence.
                 </p>
 
                 {/* Minimal Setup */}
-                <div className="w-full max-w-md space-y-4 text-left mb-8">
+                <div className="mb-8 w-full max-w-md space-y-4 text-left">
                   <div>
                     <label className="block text-[10px] font-bold text-slate-500 tracking-widest uppercase mb-1.5 ml-1">
                       Topic
@@ -1627,7 +1609,7 @@ const StudentGameUI = ({
                       value={quizConfig?.topic || ""}
                       onChange={(e) => setQuizTopic?.(e.target.value)}
                       placeholder="e.g. Ajanta Caves, Shivaji Maharaj"
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                      className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/24 transition-colors focus:border-[#d9c18a]/50 focus:outline-none"
                     />
                   </div>
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -1638,7 +1620,7 @@ const StudentGameUI = ({
                       <select
                         value={normalizeDifficultyValue(quizConfig?.difficulty)}
                         onChange={(e) => setQuizDifficulty?.(e.target.value)}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors appearance-none cursor-pointer"
+                        className="w-full cursor-pointer appearance-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white transition-colors focus:border-[#d9c18a]/50 focus:outline-none"
                       >
                         <option value="Easy" className="bg-slate-900">Easy</option>
                         <option value="Medium" className="bg-slate-900">Medium</option>
@@ -1652,7 +1634,7 @@ const StudentGameUI = ({
                       <select
                         value={quizConfig?.questionCount || 5}
                         onChange={(e) => setQuizQuestionCount?.(Number(e.target.value))}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors appearance-none cursor-pointer"
+                        className="w-full cursor-pointer appearance-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white transition-colors focus:border-[#d9c18a]/50 focus:outline-none"
                       >
                         <option value={3} className="bg-slate-900">3 Questions</option>
                         <option value={5} className="bg-slate-900">5 Questions</option>
@@ -1669,7 +1651,7 @@ const StudentGameUI = ({
                           e.target.checked ? "Image MCQ" : "MCQ"
                         )
                       }
-                      className="h-4 w-4 accent-emerald-500"
+                      className="h-4 w-4 accent-[#d9c18a]"
                     />
                     <span>
                       Use image-based questions
@@ -1679,14 +1661,14 @@ const StudentGameUI = ({
 
                 <motion.button
                   type="button"
-                  whileHover={!isLoading ? { scale: 1.05 } : {}}
-                  whileTap={!isLoading ? { scale: 0.95 } : {}}
+                  whileHover={!isLoading ? { y: -1 } : {}}
+                  whileTap={!isLoading ? { scale: 0.98 } : {}}
                   onClick={() => handleQuery(null, "", true)}
                   disabled={isLoading}
-                  className={`flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full font-bold text-sm transition-all ${
+                  className={`flex items-center gap-2 rounded-full bg-[#123327] px-8 py-3.5 text-sm font-bold text-white transition-all ${
                     isLoading 
                       ? "opacity-50 cursor-not-allowed" 
-                      : "shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_4px_25px_rgba(16,185,129,0.4)]"
+                      : "shadow-[0_18px_44px_rgba(0,0,0,0.22)] hover:bg-[#1f4738]"
                   }`}
                 >
                   <Sparkles className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />

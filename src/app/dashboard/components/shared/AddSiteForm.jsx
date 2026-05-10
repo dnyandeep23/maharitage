@@ -1,12 +1,25 @@
 "use client";
 
 import React, { useState, useEffect, useReducer } from "react";
-import { useAuth } from "../../../../contexts/AuthContext";
 import dynamic from "next/dynamic";
 import ChipInput from "../components/ChipInput";
 import ReferenceInput from "../components/ReferenceInput";
 import ImageUpload from "../components/ImageUpload";
-import { Castle, FileText, MapPin, Shield, X } from "lucide-react";
+import {
+  Building2,
+  Castle,
+  FileText,
+  Images,
+  Landmark,
+  Layers3,
+  Map,
+  MapPin,
+  Mountain,
+  ScrollText,
+  Shield,
+  Sparkles,
+  X,
+} from "lucide-react";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const MapPicker = dynamic(() => import("../components/MapPicker"), {
@@ -41,6 +54,44 @@ const initialState = {
     bastions: "",
     water_systems: "",
     materials: "",
+    cave_architecture: "",
+    excavation_style: "",
+    sanctum_layout: "",
+    structural_style: "",
+  },
+  cave_metadata: {
+    cave_count: "",
+    excavation_period: "",
+    patronage: "",
+    iconography: "",
+  },
+  temple_metadata: {
+    deity_or_tradition: "",
+    mandapa_details: "",
+    shikhara_style: "",
+    ritual_usage: "",
+  },
+  inscription_metadata: {
+    script: "",
+    language: "",
+    material: "",
+    inscription_date: "",
+    transliteration_notes: "",
+  },
+  other_schema: {
+    architecture: false,
+    oral_history: false,
+    artifacts: false,
+    preservation_data: true,
+    timelines: false,
+    inscriptions: false,
+    gallery: true,
+    structural_metadata: false,
+  },
+  other_metadata: {
+    oral_history: "",
+    artifacts: "",
+    timeline: "",
   },
   preservation_details: {
     current_condition: "",
@@ -73,6 +124,14 @@ function siteReducer(state, action) {
           [action.field]: action.value,
         },
       };
+    case "TOGGLE_SCHEMA_FIELD":
+      return {
+        ...state,
+        other_schema: {
+          ...state.other_schema,
+          [action.field]: action.value,
+        },
+      };
     case "SET_SITE_ID_AND_NAME":
       return { ...state, site_id: action.site_id, site_name: action.site_name };
     case "RESET_SITE_ID_AND_NAME":
@@ -92,13 +151,15 @@ function siteReducer(state, action) {
 }
 
 const AddSiteForm = ({ handleSubmit }) => {
-  const { user } = useAuth();
   const [lastSiteId, setLastSiteId] = useState(null);
   const [siteData, dispatch] = useReducer(siteReducer, initialState);
   const [rawSiteName, setRawSiteName] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
+  const [optionalSections, setOptionalSections] = useState({
+    inscriptions: false,
+  });
 
   useEffect(() => {
     const fetchLastSiteId = async () => {
@@ -208,28 +269,97 @@ const AddSiteForm = ({ handleSubmit }) => {
     return <LoadingButton />;
   }
 
-  const isFortEntry = /fort/i.test(siteData.heritage_type);
+  const selectedType = siteData.heritage_type || "";
+  const isCaveEntry = /cave/i.test(selectedType);
+  const isFortEntry = /fort/i.test(selectedType);
+  const isTempleEntry = /temple/i.test(selectedType);
+  const isInscriptionEntry = /inscription/i.test(selectedType);
+  const isArchitectureEntry = /architecture/i.test(selectedType);
+  const isOtherEntry = /other/i.test(selectedType);
   const inputClass =
-    "archive-input mt-1 block w-full rounded-2xl px-4 py-3 text-sm leading-6";
+    "archive-input mt-1 block w-full rounded-2xl px-[clamp(0.85rem,2vw,1rem)] py-[clamp(0.75rem,1.8vw,0.9rem)] text-[clamp(0.92rem,1.5vw,0.98rem)] leading-6";
   const textareaClass =
-    "archive-input mt-1 block w-full rounded-2xl px-4 py-3 text-sm leading-6";
+    "archive-input mt-1 block w-full rounded-2xl px-[clamp(0.85rem,2vw,1rem)] py-[clamp(0.75rem,1.8vw,0.9rem)] text-[clamp(0.92rem,1.5vw,0.98rem)] leading-7";
   const panelClass =
-    "museum-card rounded-[1.75rem] p-5 sm:p-6";
+    "museum-card rounded-[1.25rem] p-[clamp(1rem,2.5vw,1.5rem)]";
   const sectionTitleClass =
-    "mb-4 flex items-center gap-2 font-cinzel-decorative text-xl font-bold text-[#123327]";
+    "mb-4 flex items-center gap-2 font-cinzel-decorative text-[clamp(1.05rem,2.4vw,1.35rem)] font-bold leading-tight text-[#123327]";
+
+  const toggleOptionalSection = (key) => {
+    setOptionalSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const renderTextField = (parent, field, label, placeholder = "", multiline = false) => (
+    <div key={`${parent}-${field}`}>
+      <label htmlFor={field} className="archive-label block">
+        {label}
+      </label>
+      {multiline ? (
+        <textarea
+          name={field}
+          id={field}
+          value={siteData[parent][field]}
+          onChange={(e) => handleChange(e, parent)}
+          rows="3"
+          placeholder={placeholder}
+          className={textareaClass}
+        />
+      ) : (
+        <input
+          type="text"
+          name={field}
+          id={field}
+          value={siteData[parent][field]}
+          onChange={(e) => handleChange(e, parent)}
+          placeholder={placeholder}
+          className={inputClass}
+        />
+      )}
+    </div>
+  );
+
+  const ToggleSection = ({ id, title, description, checked, onToggle, children }) => (
+    <div className="rounded-2xl border border-[#123327]/10 bg-[#fffaf0]/56 p-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h4 className="text-sm font-extrabold text-[#123327]">{title}</h4>
+          <p className="mt-1 text-xs leading-5 text-stone-600">{description}</p>
+        </div>
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-pressed={checked}
+          className={`relative h-8 w-14 shrink-0 rounded-full border transition ${
+            checked
+              ? "border-[#123327]/30 bg-[#123327]"
+              : "border-stone-300 bg-stone-200"
+          }`}
+        >
+          <span
+            className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition ${
+              checked ? "left-7" : "left-1"
+            }`}
+          />
+          <span className="sr-only">{id}</span>
+        </button>
+      </div>
+      {checked && <div className="mt-4 grid gap-4 sm:grid-cols-2">{children}</div>}
+    </div>
+  );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 text-stone-900">
+    <div className="mx-auto max-w-6xl px-[clamp(1rem,3vw,2rem)] py-[clamp(1.5rem,4vw,2.5rem)] text-stone-900">
       <div className="mb-8">
         <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#8a6a31]">
           Archival Intake
         </p>
-        <h2 className="mt-2 font-cinzel-decorative text-3xl font-bold text-[#123327]">
+        <h2 className="mt-2 font-cinzel-decorative text-[clamp(1.8rem,4vw,2.45rem)] font-bold leading-tight text-[#123327]">
           Register Heritage Record
         </h2>
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-600">
-          Create a structured site record with gallery assets, historical context,
-          and fort-specific metadata for professional archival management.
+        <p className="mt-3 max-w-3xl text-[clamp(0.92rem,1.8vw,1rem)] leading-7 text-stone-600">
+          Create a structured site record with only the metadata that belongs to
+          the selected heritage type. Optional archival layers stay hidden until
+          the record needs them.
         </p>
       </div>
       {message && (
@@ -259,7 +389,7 @@ const AddSiteForm = ({ handleSubmit }) => {
         }
         className="space-y-6"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)] lg:grid-cols-[minmax(0,1.02fr)_minmax(20rem,0.98fr)]">
           <div className={panelClass}>
             <h3 className={sectionTitleClass}>
               <FileText className="h-5 w-5 text-[#8a6a31]" />
@@ -334,9 +464,10 @@ const AddSiteForm = ({ handleSubmit }) => {
                 <option value="">Select type</option>
                 <option value="Cave">Cave</option>
                 <option value="Fort">Fort</option>
+                <option value="Inscription">Inscription</option>
                 <option value="Temple">Temple</option>
-                <option value="Monument">Monument</option>
-                <option value="Museum">Museum</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div>
@@ -422,7 +553,7 @@ const AddSiteForm = ({ handleSubmit }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)] lg:grid-cols-2">
           <div className={panelClass}>
             <h3 className={sectionTitleClass}>
               <Castle className="h-5 w-5 text-[#8a6a31]" />
@@ -503,7 +634,7 @@ const AddSiteForm = ({ handleSubmit }) => {
           <div className={panelClass}>
             <h3 className={sectionTitleClass}>
               <Shield className="h-5 w-5 text-[#8a6a31]" />
-              Authority & Gallery
+              Authority {isCaveEntry ? "" : "& Gallery"}
             </h3>
             <div className="space-y-4">
             <div>
@@ -526,21 +657,124 @@ const AddSiteForm = ({ handleSubmit }) => {
                 placeholder="Add a curator"
               />
             </div>
-            <div>
-              <label
-                htmlFor="gallary"
-                className="archive-label block"
-              >
-                Gallery Images
-              </label>
-              <ImageUpload files={images} onFilesChange={setImages} />
-            </div>
+            {!isCaveEntry && (
+              <div>
+                <label
+                  htmlFor="gallary"
+                  className="archive-label block"
+                >
+                  Gallery Images
+                </label>
+                <ImageUpload files={images} onFilesChange={setImages} />
+              </div>
+            )}
             </div>
           </div>
         </div>
 
-        <div className={`grid grid-cols-1 gap-6 md:grid-cols-3 ${isFortEntry ? "" : "opacity-75"}`}>
+        {isOtherEntry && (
           <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <Sparkles className="h-5 w-5 text-[#8a6a31]" />
+              Dynamic Heritage Schema
+            </h3>
+            <p className="mb-4 text-sm leading-6 text-stone-600">
+              Select the archival layers this record should store. The form will
+              reveal only the sections relevant to that custom record.
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ["architecture", "Architecture"],
+                ["oral_history", "Oral history"],
+                ["artifacts", "Artifacts"],
+                ["preservation_data", "Preservation"],
+                ["timelines", "Timelines"],
+                ["inscriptions", "Inscriptions"],
+                ["gallery", "Gallery"],
+                ["structural_metadata", "Structure"],
+              ].map(([field, label]) => (
+                <label
+                  key={field}
+                  className={`flex cursor-pointer items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm font-semibold transition ${
+                    siteData.other_schema[field]
+                      ? "border-[#123327]/28 bg-[#123327]/8 text-[#123327]"
+                      : "border-stone-200 bg-white/45 text-stone-600"
+                  }`}
+                >
+                  {label}
+                  <input
+                    type="checkbox"
+                    checked={siteData.other_schema[field]}
+                    onChange={(e) =>
+                      dispatch({
+                        type: "TOGGLE_SCHEMA_FIELD",
+                        field,
+                        value: e.target.checked,
+                      })
+                    }
+                    className="h-4 w-4 accent-[#123327]"
+                  />
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {isCaveEntry && (
+          <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)] xl:grid-cols-3">
+            <div className={panelClass}>
+              <h3 className={sectionTitleClass}>
+                <Mountain className="h-5 w-5 text-[#8a6a31]" />
+                Cave Metadata
+              </h3>
+              <div className="space-y-4">
+                {renderTextField("cave_metadata", "cave_count", "Cave Count", "e.g. 29 excavations")}
+                {renderTextField("cave_metadata", "excavation_period", "Excavation Period", "e.g. 2nd century BCE")}
+                {renderTextField("cave_metadata", "patronage", "Patronage", "Dynasty, guild, or donor record")}
+                {renderTextField("cave_metadata", "iconography", "Iconography", "Murals, sculptures, motifs", true)}
+              </div>
+            </div>
+
+            <div className={panelClass}>
+              <h3 className={sectionTitleClass}>
+                <Building2 className="h-5 w-5 text-[#8a6a31]" />
+                Cave Architecture
+              </h3>
+              <div className="space-y-4">
+                {renderTextField("architecture", "cave_architecture", "Spatial Layout", "Chaitya, vihara, shrine sequence")}
+                {renderTextField("architecture", "excavation_style", "Excavation Style", "Rock-cut method, facade type")}
+                {renderTextField("architecture", "materials", "Rock / Materials")}
+                {renderTextField("architecture", "structural_style", "Structural Style", "Pillars, cells, sanctum alignment")}
+              </div>
+            </div>
+
+            <div className={panelClass}>
+              <h3 className={sectionTitleClass}>
+                <Images className="h-5 w-5 text-[#8a6a31]" />
+                Cave Gallery
+              </h3>
+              <ImageUpload files={images} onFilesChange={setImages} />
+              <div className="mt-4">
+                <ToggleSection
+                  id="cave-inscriptions"
+                  title="Enable Inscriptions"
+                  description="Reveal epigraphic fields only when this cave record includes inscriptions."
+                  checked={optionalSections.inscriptions}
+                  onToggle={() => toggleOptionalSection("inscriptions")}
+                >
+                  {renderTextField("inscription_metadata", "script", "Script")}
+                  {renderTextField("inscription_metadata", "language", "Language")}
+                  {renderTextField("inscription_metadata", "inscription_date", "Date")}
+                  {renderTextField("inscription_metadata", "transliteration_notes", "Notes", "", true)}
+                </ToggleSection>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isFortEntry && (
+          <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)] xl:grid-cols-3">
+            <div className={panelClass}>
             <h3 className={sectionTitleClass}>
               <Castle className="h-5 w-5 text-[#8a6a31]" />
               Fort Classification
@@ -588,7 +822,7 @@ const AddSiteForm = ({ handleSubmit }) => {
                 />
               </div>
             </div>
-          </div>
+            </div>
 
           <div className={panelClass}>
             <h3 className={sectionTitleClass}>
@@ -598,9 +832,6 @@ const AddSiteForm = ({ handleSubmit }) => {
             <div className="space-y-4">
               {[
                 ["defensive_design", "Defensive Design"],
-                ["entry_gates", "Entry Gates"],
-                ["bastions", "Bastions"],
-                ["water_systems", "Water Systems"],
                 ["materials", "Materials"],
               ].map(([field, label]) => (
                 <div key={field}>
@@ -622,10 +853,93 @@ const AddSiteForm = ({ handleSubmit }) => {
 
           <div className={panelClass}>
             <h3 className={sectionTitleClass}>
-              <FileText className="h-5 w-5 text-[#8a6a31]" />
-              Preservation
+              <Map className="h-5 w-5 text-[#8a6a31]" />
+              Strategic Sections
             </h3>
             <div className="space-y-4">
+              {renderTextField("architecture", "entry_gates", "Gates")}
+              {renderTextField("architecture", "bastions", "Bastions")}
+              {renderTextField("architecture", "water_systems", "Water Systems")}
+              <ToggleSection
+                id="fort-inscriptions"
+                title="Enable inscriptions"
+                description="Fort inscriptions are optional and stay hidden unless this record includes epigraphic material."
+                checked={optionalSections.inscriptions}
+                onToggle={() => toggleOptionalSection("inscriptions")}
+              >
+                {renderTextField("inscription_metadata", "script", "Script")}
+                {renderTextField("inscription_metadata", "language", "Language")}
+                {renderTextField("inscription_metadata", "material", "Surface / Material")}
+                {renderTextField("inscription_metadata", "transliteration_notes", "Notes", "", true)}
+              </ToggleSection>
+            </div>
+          </div>
+        </div>
+        )}
+
+        {(isTempleEntry || isInscriptionEntry || isArchitectureEntry || (isOtherEntry && (siteData.other_schema.architecture || siteData.other_schema.structural_metadata || siteData.other_schema.inscriptions))) && (
+          <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)] lg:grid-cols-2">
+            {(isTempleEntry || isArchitectureEntry || siteData.other_schema.architecture || siteData.other_schema.structural_metadata) && (
+              <div className={panelClass}>
+                <h3 className={sectionTitleClass}>
+                  <Landmark className="h-5 w-5 text-[#8a6a31]" />
+                  Architectural Metadata
+                </h3>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {isTempleEntry && renderTextField("temple_metadata", "deity_or_tradition", "Deity / Tradition")}
+                  {isTempleEntry && renderTextField("temple_metadata", "mandapa_details", "Mandapa Details")}
+                  {isTempleEntry && renderTextField("temple_metadata", "shikhara_style", "Shikhara Style")}
+                  {renderTextField("architecture", "materials", "Materials")}
+                  {renderTextField("architecture", "structural_style", "Structural Style")}
+                  {renderTextField("architecture", "sanctum_layout", "Spatial / Sanctum Layout")}
+                </div>
+              </div>
+            )}
+
+            {(isInscriptionEntry || siteData.other_schema.inscriptions) && (
+              <div className={panelClass}>
+                <h3 className={sectionTitleClass}>
+                  <ScrollText className="h-5 w-5 text-[#8a6a31]" />
+                  Inscription Metadata
+                </h3>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {renderTextField("inscription_metadata", "script", "Script")}
+                  {renderTextField("inscription_metadata", "language", "Language")}
+                  {renderTextField("inscription_metadata", "material", "Material")}
+                  {renderTextField("inscription_metadata", "inscription_date", "Date")}
+                  <div className="sm:col-span-2">
+                    {renderTextField("inscription_metadata", "transliteration_notes", "Transliteration Notes", "", true)}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {isOtherEntry && (siteData.other_schema.oral_history || siteData.other_schema.artifacts || siteData.other_schema.timelines) && (
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <FileText className="h-5 w-5 text-[#8a6a31]" />
+              Cultural Record Layers
+            </h3>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {siteData.other_schema.oral_history &&
+                renderTextField("other_metadata", "oral_history", "Oral History", "Community memory, source, or interview notes", true)}
+              {siteData.other_schema.artifacts &&
+                renderTextField("other_metadata", "artifacts", "Artifacts", "Objects, fragments, catalog notes", true)}
+              {siteData.other_schema.timelines &&
+                renderTextField("other_metadata", "timeline", "Timeline", "Chronological events or phases", true)}
+            </div>
+          </div>
+        )}
+
+        {(selectedType && (isFortEntry || isTempleEntry || isArchitectureEntry || isInscriptionEntry || isOtherEntry || siteData.other_schema?.preservation_data)) && (
+          <div className={panelClass}>
+            <h3 className={sectionTitleClass}>
+              <Layers3 className="h-5 w-5 text-[#8a6a31]" />
+              Preservation & Access
+            </h3>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 ["current_condition", "Current Condition"],
                 ["managing_authority", "Managing Authority"],
@@ -648,7 +962,7 @@ const AddSiteForm = ({ handleSubmit }) => {
               ))}
             </div>
           </div>
-        </div>
+        )}
 
         {/* References */}
         <div className={panelClass}>

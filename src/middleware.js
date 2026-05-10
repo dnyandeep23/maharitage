@@ -17,6 +17,7 @@ const PUBLIC_ROUTES = [
   "/api/ai",
   "/api/ai/chat",
   "/api/contact",
+  "/api/visitors",
   "api/v1/:path*",
   "/",
   "/search",
@@ -166,8 +167,10 @@ export async function middleware(request) {
     );
   }
 
+  const isPublic = matchRoutePattern(pathname, PUBLIC_ROUTES);
+
   if (pathname.startsWith("/api/") && !pathname.startsWith("/api/v1/")) {
-    if (!authHeader?.startsWith("ApiKey ")) {
+    if (!isPublic && !authHeader?.startsWith("ApiKey ")) {
       const authResponse = await internalApiAuth(request);
       if (authResponse) {
         return authResponse;
@@ -195,7 +198,6 @@ export async function middleware(request) {
     return response;
   }
 
-  const isPublic = matchRoutePattern(pathname, PUBLIC_ROUTES);
   if (isPublic) {
     return response;
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState , useRef} from "react";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import ImageModal from "../component/ImageModal";
@@ -19,6 +19,8 @@ import {
   Gem,
   Image as ImageIcon,
   Landmark,
+  LockKeyhole,
+  LogIn,
   Languages,
   MapPin,
   Milestone,
@@ -31,6 +33,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import "../fonts.css";
+const GAP          = 20;   // px gap between cards
+const ACTIVE_RATIO = 1.55; // flex-like weight for the focal (first-visible) card
+const BASE_RATIO   = 1.00; // weight for every other card
+const DURATION     = 0.65; // seconds — shared by strip translate + card resize
+const EASE         = [0.22, 1, 0.36, 1]; // apple-style spring-out curve
+ 
+const TRANSITION = { duration: DURATION, ease: EASE };
+const HOVER_TRANSITION = { duration: 0.35, ease: EASE };
 
 const FIELD_LABELS = {
   approx_date: "Approximate Date",
@@ -92,6 +102,14 @@ const getHeroImage = (site, gallery) =>
   site?.thumbnail ||
   gallery?.[0] ||
   "";
+
+const getPreviewDescription = (description = "") => {
+  const words = String(description).trim().split(/\s+/).filter(Boolean);
+  if (words.length <= 80) return description;
+
+  const previewLength = Math.max(80, Math.round(words.length * 0.4));
+  return `${words.slice(0, previewLength).join(" ")}...`;
+};
 
 const asArray = (value) => {
   if (!value) return [];
@@ -227,13 +245,17 @@ const NarrativeText = ({ children, tone = "cave" }) => {
 
   return (
     <div
-      className={`museum-card-premium p-5 sm:p-8 ${
+      className={`museum-card-premium ${
         tone === "fort"
-          ? "text-stone-800"
-          : "text-stone-800"
+          ? "border-amber-200/80 bg-[#fff8ea] p-6 text-stone-800 shadow-[0_24px_70px_rgba(120,53,15,0.10)] sm:p-10"
+          : "p-5 text-stone-800 sm:p-8"
       }`}
     >
-      <p className="max-w-none text-base leading-8 text-left sm:text-lg sm:leading-9 sm:text-justify sm:first-letter:float-left sm:first-letter:mr-3 sm:first-letter:font-cinzel-decorative sm:first-letter:text-6xl sm:first-letter:font-bold sm:first-letter:leading-[0.85] sm:first-letter:text-stone-900">
+      <p
+        className={`max-w-none text-left text-base leading-8 sm:text-lg sm:leading-9 sm:text-justify sm:first-letter:float-left sm:first-letter:mr-3 sm:first-letter:font-cinzel-decorative sm:first-letter:text-6xl sm:first-letter:font-bold sm:first-letter:leading-[0.85] ${
+          tone === "fort" ? "sm:first-letter:text-amber-900" : "sm:first-letter:text-stone-900"
+        }`}
+      >
         {children}
       </p>
     </div>
@@ -272,7 +294,7 @@ const IconButton = ({ children, className = "", ...props }) => (
 
 const Hero = ({ site, gallery, isFort }) => {
   const heroImage = getHeroImage(site, gallery);
-  const typeLabel = isFort ? "Fort Archive" : "Cave Archive";
+  const typeLabel = isFort ? "Hilltop Fort Dossier" : "Cave Archive";
   const secondaryCount = isFort
     ? Object.keys(site.architectural_features || {}).length
     : asArray(site.inscriptions).length;
@@ -380,14 +402,14 @@ const Hero = ({ site, gallery, isFort }) => {
         className="museum-dark-panel p-5 text-white"
       >
         <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/65">
-          Record Summary
+          {isFort ? "Fort At A Glance" : "Archive Summary"}
         </p>
 
         <div className="mt-5 grid grid-cols-2 gap-3">
           <div className="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-inner">
             <p className="text-3xl font-bold">{gallery.length}</p>
             <p className="mt-1 text-sm text-white/70">
-              Gallery assets
+              {isFort ? "Visual Plates" : "Gallery Assets"}
             </p>
           </div>
 
@@ -395,7 +417,7 @@ const Hero = ({ site, gallery, isFort }) => {
             <p className="text-3xl font-bold">{secondaryCount}</p>
             <p className="mt-1 text-sm text-white/70">
               {isFort
-                ? "Architecture sections"
+                ? "Architectural Layers"
                 : "Inscriptions"}
             </p>
           </div>
@@ -403,8 +425,8 @@ const Hero = ({ site, gallery, isFort }) => {
 
         <p className="mt-5 text-sm leading-6 text-white/75">
           {isFort
-            ? "A strategic architectural record rendered from the live heritage dataset."
-            : "An archaeological site record rendered from the live heritage dataset."}
+            ? "A cinematic reading of ramparts, gateways, dynastic memory, and the terrain that shaped the fort's authority."
+            : "A guided archaeological reading of form, inscription, image, and historical context."}
         </p>
       </motion.div>
     </motion.div>
@@ -415,170 +437,212 @@ const Hero = ({ site, gallery, isFort }) => {
 
 const GallerySection = ({ gallery, siteName, onImageClick }) => {
   const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const containerRef = useRef(null);
+  const [cw, setCw] = useState(0);
+ 
+  /* ── constants ────────────────────────────────────────────────────────── */
+  const GAP          = 20;
+  const ACTIVE_RATIO = 1.55;
+  const BASE_RATIO   = 1.0;
+  const DURATION     = 0.65;
+  const EASE         = [0.22, 1, 0.36, 1];
+  const TRANSITION   = { duration: DURATION, ease: EASE };
+ 
   const visibleCount = Math.min(gallery.length, 3);
-  const maxIndex = Math.max(gallery.length - visibleCount, 0);
-
+ 
+  /* ── two-phase navigation ─────────────────────────────────────────────
+   *
+   *  Phase 1 — SCROLLING  (index 0 … lockIndex)
+   *    The window slides left one card per press. First visible = active.
+   *    Strip translates by (baseWidth + GAP) each step.
+   *
+   *  Phase 2 — LOCKED  (index lockIndex+1 … maxIndex)
+   *    The window freezes at the last three images.
+   *    The strip stops moving. The ACTIVE card walks right through the
+   *    window: left → centre → right.  A pure width-swap — total layout
+   *    width is always activeWidth + 2×baseWidth, so nothing jumps.
+   *
+   * ─────────────────────────────────────────────────────────────────────
+   *  Example  gallery.length = 7, visibleCount = 3
+   *
+   *  lockIndex = 4  (7 - 3)
+   *  maxIndex  = 6  (7 - 1)
+   *
+   *  index 0  →  window [0 1 2]   active 0   strip scrolls
+   *  index 1  →  window [1 2 3]   active 1   strip scrolls
+   *  index 2  →  window [2 3 4]   active 2   strip scrolls
+   *  index 3  →  window [3 4 5]   active 3   strip scrolls
+   *  index 4  →  window [4 5 6]   active 4   strip scrolls   ← lockIndex
+   *  index 5  →  window [4 5 6]   active 5   strip LOCKED
+   *  index 6  →  window [4 5 6]   active 6   strip LOCKED
+   * ─────────────────────────────────────────────────────────────────────*/
+  const lockIndex    = Math.max(gallery.length - visibleCount, 0);
+  const maxIndex     = Math.max(gallery.length - 1, 0);
+ 
+  // windowStart locks once index exceeds lockIndex
+  const windowStart  = Math.min(index, lockIndex);
+ 
   useEffect(() => {
-    setIndex((value) => Math.min(value, maxIndex));
+    setIndex((prev) => Math.min(prev, maxIndex));
   }, [maxIndex]);
-
-  const visible = useMemo(
-    () => gallery.slice(index, index + visibleCount),
-    [gallery, index, visibleCount]
-  );
-
-  const canPrev = index > 0;
-  const canNext = index < maxIndex;
-
-  const handlePrev = () => {
-    if (!canPrev) return;
-
-    setDirection(-1);
-    setIndex((value) => Math.max(value - 1, 0));
+ 
+  /* ── measure container ───────────────────────────────────────────────── */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => setCw(entry.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+ 
+  /* ── width arithmetic (fixed 3-card layout) ───────────────────────────
+   *
+   *  Widths are always computed for the standard 3-card window.
+   *  In the locked phase, total visible width stays identical regardless
+   *  of which card is active: activeWidth + 2×baseWidth = available.
+   *  No reflow, no layout shift — only values swap between cards.
+   * ─────────────────────────────────────────────────────────────────────*/
+  const available   = Math.max(cw - (visibleCount - 1) * GAP, 0);
+  const totalUnits  = ACTIVE_RATIO + (visibleCount - 1) * BASE_RATIO;
+  const activeWidth = totalUnits > 0 ? available * (ACTIVE_RATIO / totalUnits) : 0;
+  const baseWidth   = totalUnits > 0 ? available * (BASE_RATIO  / totalUnits) : 0;
+ 
+  /* ── strip translation ────────────────────────────────────────────────
+   *
+   *  Step size is (baseWidth + GAP) — uniform across all scrolling steps.
+   *  Once windowStart is clamped to lockIndex, stripX stops changing.
+   * ─────────────────────────────────────────────────────────────────────*/
+  const stripX = -windowStart * (baseWidth + GAP);
+ 
+  /* ── per-card target width ───────────────────────────────────────────── */
+  const getCardWidth = (i) => {
+    if (i === index)                                          return activeWidth; // focal
+    if (i >= windowStart && i < windowStart + visibleCount)  return baseWidth;   // visible sibling
+    return baseWidth; // off-screen (same settled width, no visual difference)
   };
-
-  const handleNext = () => {
-    if (!canNext) return;
-
-    setDirection(1);
-    setIndex((value) => Math.min(value + 1, maxIndex));
-  };
-
-  const cardTransition = {
-    layout: {
-      duration: 0.72,
-      ease: [0.22, 1, 0.36, 1],
-    },
-    flexGrow: {
-      duration: 0.72,
-      ease: [0.22, 1, 0.36, 1],
-    },
-    opacity: {
-      duration: 0.28,
-      ease: "easeOut",
-    },
-  };
-
+ 
+  const canPrev    = index > 0;
+  const canNext    = index < maxIndex;
+  const handlePrev = () => setIndex((i) => Math.max(i - 1, 0));
+  const handleNext = () => setIndex((i) => Math.min(i + 1, maxIndex));
+ 
+  /* ── render ─────────────────────────────────────────────────────────── */
   return (
     <MotionSection>
       <SectionHeader
         eyebrow="Visual archive"
         title={`Gallery of ${siteName}`}
-        description="Field photographs and archive visuals preserved with the site record."
+        description="Field photographs and archival views arranged as a visual companion to the monument."
         icon={ImageIcon}
       />
-
+ 
       {gallery.length ? (
         <>
+          {/* ── MOBILE ─────────────────────────────────────────────────── */}
           <div className="archive-scroll -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:hidden">
-            {gallery.map((url, itemIndex) => (
+            {gallery.map((url, i) => (
               <button
                 type="button"
-                key={`${url}-mobile-${itemIndex}`}
+                key={`${url}-mobile-${i}`}
                 onClick={() => onImageClick(url)}
-                className="touch-card premium-image-frame group relative h-[360px] w-[84vw] shrink-0 snap-center bg-stone-200 text-left"
+                className="
+                  touch-card premium-image-frame group relative h-[360px]
+                  w-[84vw] shrink-0 snap-center overflow-hidden rounded-[2rem]
+                  bg-stone-200 text-left
+                "
               >
                 <LoadingImage
                   src={url}
-                  alt={`${siteName} gallery ${itemIndex + 1}`}
+                  alt={`${siteName} gallery ${i + 1}`}
                   className="absolute inset-0 h-full w-full"
                   imgClassName="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-                  onError={(event) => {
-                    event.currentTarget.style.display = "none";
-                  }}
+                  onError={(e) => { e.currentTarget.style.display = "none"; }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/58 via-black/8 to-transparent" />
                 <span className="absolute bottom-4 left-4 rounded-full bg-white/92 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-stone-800 backdrop-blur-sm">
-                  Plate {itemIndex + 1}
+                  Plate {i + 1}
                 </span>
               </button>
             ))}
           </div>
-          {/* Gallery */}
-          <div className="relative hidden overflow-hidden rounded-[2.35rem] sm:block">
-            <motion.div
-              layout
-              className="flex h-[360px] gap-4 sm:h-[440px] sm:gap-5 lg:h-[520px]"
-            >
-              <AnimatePresence initial={false} custom={direction} mode="popLayout">
-                {visible.map((url, itemIndex) => {
-                  const isActive = itemIndex === 0;
-                  const plateNumber = index + itemIndex + 1;
-
+ 
+          {/* ── DESKTOP ────────────────────────────────────────────────── */}
+          <div
+            ref={containerRef}
+            className="relative hidden sm:block h-[440px] lg:h-[520px] overflow-hidden rounded-[2.35rem]"
+          >
+            {cw > 0 && (
+              <motion.div
+                className="absolute inset-y-0 left-0 flex items-stretch"
+                style={{ gap: GAP }}
+                animate={{ x: stripX }}
+                transition={TRANSITION}
+              >
+                {gallery.map((url, i) => {
+                  const isActive  = i === index;
+                  const cardWidth = getCardWidth(i);
+ 
                   return (
                     <motion.button
                       type="button"
-                      key={`${url}-${plateNumber}`}
+                      key={url}
                       onClick={() => onImageClick(url)}
-                      layout
-                      initial={{
-                        x: direction > 0 ? 42 : -42,
-                        opacity: 0,
-                      }}
-                      animate={{
-                        x: 0,
-                        opacity: 1,
-                        flexGrow: isActive ? 1.75 : 1,
-                      }}
-                      exit={{
-                        x: direction > 0 ? -42 : 42,
-                        opacity: 0,
-                      }}
-                      transition={cardTransition}
-                      whileHover={{
-                        y: -4,
-                      }}
-                      className="group relative h-full min-w-0 basis-0 overflow-hidden rounded-[2.2rem] bg-stone-200 text-left shadow-[0_10px_40px_rgba(0,0,0,0.08)] will-change-[flex-grow,transform]"
-                      style={{ flexShrink: 1 }}
+                      animate={{ width: cardWidth }}
+                      transition={TRANSITION}
+                      whileHover={{ y: -4, transition: { duration: 0.35, ease: EASE } }}
+                      className="
+                        group relative shrink-0 overflow-hidden rounded-[2.2rem]
+                        bg-stone-200 text-left
+                        shadow-[0_10px_40px_rgba(0,0,0,0.08)]
+                        will-change-transform
+                      "
+                      style={{ height: "100%" }}
                     >
-                      {/* Image */}
                       <LoadingImage
                         src={url}
-                        alt={`${siteName} gallery ${plateNumber}`}
+                        alt={`${siteName} gallery ${i + 1}`}
                         className="absolute inset-0 h-full w-full"
                         imgClassName="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-                        onError={(event) => {
-                          event.currentTarget.style.display =
-                            "none";
-                        }}
+                        onError={(e) => { e.currentTarget.style.display = "none"; }}
                       />
-
-                      {/* Overlay */}
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-t transition-colors duration-500 ${
-                          isActive
-                            ? "from-black/58 via-black/8 to-transparent"
-                            : "from-black/45 via-black/5 to-transparent"
-                        }`}
+ 
+                      {/* base vignette */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
+ 
+                      {/* active-boost vignette */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-t from-black/13 to-transparent"
+                        animate={{ opacity: isActive ? 1 : 0 }}
+                        transition={{ duration: 0.45, ease: "easeOut" }}
                       />
-
-                      {/* Active Highlight */}
+ 
+                      {/* focal-card ring */}
                       <motion.div
                         aria-hidden="true"
-                        initial={false}
                         animate={{ opacity: isActive ? 1 : 0 }}
                         transition={{ duration: 0.35, ease: "easeOut" }}
-                        className="absolute inset-0 ring-1 ring-white/20"
+                        className="absolute inset-0 rounded-[2.2rem] ring-1 ring-white/20"
                       />
-
-                      {/* Plate Label */}
-                      <motion.span
-                        layout="position"
-                        initial={false}
-                        className="absolute bottom-4 left-4 rounded-full bg-white/92 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-stone-800 backdrop-blur-sm sm:bottom-5 sm:left-5 sm:px-4 sm:text-xs"
+ 
+                      <span
+                        className="
+                          absolute bottom-4 left-4 rounded-full bg-black/10 border-2 border-white/15 hover:bg-white/92
+                          px-3 py-1.5 text-[0.65rem] font-bold uppercase
+                          tracking-[0.16em] text-white hover:text-stone-800 backdrop-blur-sm
+                          sm:bottom-5 sm:left-5 sm:px-4 sm:text-xs
+                        "
                       >
-                        Plate {plateNumber}
-                      </motion.span>
+                        click to view
+                      </span>
                     </motion.button>
                   );
                 })}
-              </AnimatePresence>
-            </motion.div>
+              </motion.div>
+            )}
           </div>
-
-          {/* Navigation */}
-          {gallery.length > 3 && (
+ 
+          {/* ── NAVIGATION ─────────────────────────────────────────────── */}
+          {gallery.length > 1 && (
             <div className="mt-7 flex items-center justify-end gap-3">
               <IconButton
                 onClick={handlePrev}
@@ -587,7 +651,6 @@ const GallerySection = ({ gallery, siteName, onImageClick }) => {
               >
                 <ChevronLeft className="h-5 w-5" />
               </IconButton>
-
               <IconButton
                 onClick={handleNext}
                 disabled={!canNext}
@@ -599,85 +662,7 @@ const GallerySection = ({ gallery, siteName, onImageClick }) => {
           )}
         </>
       ) : (
-        <EmptyState>
-          No gallery images found.
-        </EmptyState>
-      )}
-    </MotionSection>
-  );
-};
-
-const InscriptionCard = ({ inscription, index, onClick }) => {
-  const inscriptionId = getInscriptionId(inscription);
-  const description = getInscriptionDescription(inscription);
-  const image = inscription?.image_urls?.[0];
-
-  return (
-    <button
-      type="button"
-      onClick={() => onClick(inscriptionId)}
-      className="museum-card-premium group text-left transition hover:-translate-y-1"
-    >
-      <div className="relative h-64 overflow-hidden bg-stone-200">
-        {image ? (
-          <LoadingImage
-            src={image}
-            alt={inscriptionId || `Inscription ${index + 1}`}
-            className="h-full w-full"
-            imgClassName="transition duration-700 group-hover:scale-105"
-            onError={(event) => {
-              event.currentTarget.style.display = "none";
-            }}
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center text-stone-400">
-            <ScrollText className="h-10 w-10" />
-          </div>
-        )}
-        <div className="absolute left-4 top-4 rounded-full bg-[#263a2d] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
-          Inscription {index + 1}
-        </div>
-      </div>
-      <div className="p-5">
-        <h3 className="text-xl font-bold text-stone-950">
-          {inscriptionId || "Unnamed Inscription"}
-        </h3>
-        {description && (
-          <p className="mt-3 line-clamp-3 text-sm leading-6 text-stone-600">{description}</p>
-        )}
-        <div className="mt-5 flex items-center gap-2 text-sm font-bold text-[#566044]">
-          <BookOpen className="h-4 w-4" />
-          Study record
-        </div>
-      </div>
-    </button>
-  );
-};
-
-const InscriptionsSection = ({ site, onInscriptionClick }) => {
-  const inscriptions = asArray(site.inscriptions);
-
-  return (
-    <MotionSection>
-      <SectionHeader
-        eyebrow="Epigraphic record"
-        title={`Inscriptions at ${site.site_name}`}
-        description="Each entry is shown only when it exists in the dataset, preserving the archaeological reading flow."
-        icon={ScrollText}
-      />
-      {inscriptions.length ? (
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {inscriptions.map((inscription, index) => (
-            <InscriptionCard
-              key={getInscriptionId(inscription) || index}
-              inscription={inscription}
-              index={index}
-              onClick={onInscriptionClick}
-            />
-          ))}
-        </div>
-      ) : (
-        <EmptyState>No inscriptions found at this location.</EmptyState>
+        <EmptyState>No gallery images found.</EmptyState>
       )}
     </MotionSection>
   );
@@ -890,7 +875,7 @@ const ChronologySection = ({ chronology }) => {
       <SectionHeader
         eyebrow="Sovereignty"
         title="Ruling Powers Chronology"
-        description="Political control and dynastic layers as recorded in the dataset."
+        description="Dynasties, rulers, and changing centers of authority traced through the fort's political life."
         icon={Castle}
       />
       <div className="relative space-y-5 before:absolute before:bottom-6 before:left-5 before:top-6 before:w-px before:bg-amber-300">
@@ -944,7 +929,7 @@ const HistoricalEventsSection = ({ events }) => {
       <SectionHeader
         eyebrow="Campaigns and turning points"
         title="Historical Events"
-        description="Strategic moments, battles, occupations, and recorded incidents from MongoDB."
+        description="Battles, occupations, campaigns, and decisive moments that shaped the fort's legacy."
         icon={Milestone}
       />
       <div className="grid gap-4 md:grid-cols-2">
@@ -988,7 +973,7 @@ const FortSections = ({ site, onImageClick }) => {
           <SectionHeader
             eyebrow="Architecture and defence"
             title={`Architectural Features of ${site.site_name}`}
-            description="Fort pages replace inscriptions with architectural, strategic, and dynastic material from the same MongoDB record."
+            description="Ramparts, gates, bastions, water systems, and defensive planning presented as a layered architectural portrait."
             icon={Landmark}
           />
           <div className="grid gap-5">
@@ -1052,7 +1037,7 @@ const SourcesSection = ({ site, tone }) => {
       <SectionHeader
         eyebrow="Scholarly apparatus"
         title="Authority and Sources"
-        description="Curation and bibliographic details attached to the record."
+        description="Curatorial notes and source trails that support a careful historical reading."
         icon={BookOpen}
       />
       <div className="grid gap-5 lg:grid-cols-2">
@@ -1099,25 +1084,74 @@ const SourcesSection = ({ site, tone }) => {
   );
 };
 
-const LoginGate = ({ onLogin, tone }) => (
-  <div className="museum-card-premium sticky bottom-6 z-20 mx-auto mt-10 max-w-3xl p-4">
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <p className="text-sm font-bold uppercase tracking-[0.18em] text-stone-500">Archive access</p>
-        <p className="mt-1 text-base font-semibold text-stone-900">Log in to continue reading the full record.</p>
+const GuestArchiveLock = ({ onLogin, tone, isFort }) => {
+  const accent = tone === "fort" ? "text-amber-900" : "text-[#263a2d]";
+  const buttonClass =
+    tone === "fort"
+      ? "bg-amber-900 hover:bg-amber-950"
+      : "bg-[#263a2d] hover:bg-[#101b15]";
+  const lockedSections = isFort
+    ? ["Strategic analysis", "Dynastic chronology", "Architecture dossier", "Verified sources"]
+    : ["Inscription dossiers", "Historical context", "Curation notes", "Verified sources"];
+
+  return (
+    <MotionSection className="relative">
+      <div className="pointer-events-none absolute inset-x-0 -top-24 h-28 bg-gradient-to-b from-transparent to-[#f8f0e2]" />
+
+      <div className="relative overflow-hidden rounded-[2rem] border border-[#d5c2a0]/70 bg-[#f7edda]/78 shadow-[0_30px_90px_rgba(41,37,36,0.16)] backdrop-blur-2xl">
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.5),transparent_36%),radial-gradient(circle_at_20%_0%,rgba(185,146,74,0.2),transparent_34%)]" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-white/58 to-transparent" />
+
+        <div className="relative grid gap-6 p-5 sm:p-7 lg:grid-cols-[1fr_0.9fr] lg:p-8">
+          <div className="flex flex-col justify-center">
+            <div className={`mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#cdbb9c]/80 bg-white/62 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] ${accent}`}>
+              <LockKeyhole className="h-4 w-4" />
+              Member archive
+            </div>
+            <h3 className="font-cinzel-decorative text-2xl font-bold leading-tight text-stone-950 sm:text-3xl">
+              Continue the full entry
+            </h3>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-stone-700">
+              Sign in to unlock extended archival notes, source material, and deeper heritage interpretation.
+            </p>
+            <button
+              type="button"
+              onClick={onLogin}
+              className={`mt-6 inline-flex w-fit items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white shadow-[0_14px_32px_rgba(41,37,36,0.18)] transition hover:-translate-y-0.5 ${buttonClass}`}
+            >
+              <LogIn className="h-4 w-4" />
+              Log in to unlock
+            </button>
+          </div>
+
+          <div className="relative min-h-72 overflow-hidden rounded-[1.5rem] border border-white/62 bg-white/34 p-4">
+            <div className="absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-[#f7edda] via-[#f7edda]/88 to-transparent" />
+            <div className="space-y-3 blur-[2px]">
+              {lockedSections.map((section, index) => (
+                <div
+                  key={section}
+                  className="rounded-2xl border border-[#d8c7a8]/70 bg-white/56 p-4 shadow-sm"
+                  style={{ opacity: Math.max(0.34, 0.78 - index * 0.13) }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/80 ${accent}`}>
+                      <LockKeyhole className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-bold text-stone-900">{section}</p>
+                      <div className="mt-2 h-2 w-11/12 rounded-full bg-stone-300/70" />
+                      <div className="mt-2 h-2 w-7/12 rounded-full bg-stone-300/56" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-      <button
-        type="button"
-        onClick={onLogin}
-        className={`rounded-full px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 ${
-          tone === "fort" ? "bg-amber-800 hover:bg-amber-900" : "bg-[#263a2d] hover:bg-[#101b15]"
-        }`}
-      >
-        Read More
-      </button>
-    </div>
-  </div>
-);
+    </MotionSection>
+  );
+};
 
 const Breadcrumb = ({ siteName, inscriptionId, onBack }) => (
   <div className="mb-8 flex items-center gap-3 text-sm text-stone-500">
@@ -1261,6 +1295,8 @@ export default function CaveClient({ site }) {
   const isFort = normalizeType(site?.h_type || site?.heritage_type).includes("fort");
   const tone = isFort ? "fort" : "cave";
   const description = getSiteDescription(site);
+  const hasArchiveAccess = Boolean(user);
+  const visibleDescription = hasArchiveAccess ? description : getPreviewDescription(description);
   const inscriptions = asArray(site?.inscriptions);
   const selectedInscriptionRecord = inscriptions.find(
     (inscription) => getInscriptionId(inscription) === selectedInscription
@@ -1314,7 +1350,7 @@ export default function CaveClient({ site }) {
 
   const handleInscriptionClick = (inscriptionId) => {
     if (!inscriptionId) return;
-    if (user) {
+    if (hasArchiveAccess) {
       setSelectedInscription(inscriptionId);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -1362,24 +1398,33 @@ export default function CaveClient({ site }) {
                     title={isFort ? "Site Description" : "Historical Description"}
                     description={
                       isFort
-                        ? "A fort record benefits from clear spatial hierarchy, defensive vocabulary, and architectural emphasis."
+                        ? "A measured narrative of terrain, defence, architecture, and dynastic significance."
                         : "Long historical material is set for slower reading and scholarly inspection."
                     }
                     icon={isFort ? Shield : ScrollText}
                   />
-                  <NarrativeText tone={tone}>{description}</NarrativeText>
+                  <div className="relative">
+                    <NarrativeText tone={tone}>{visibleDescription}</NarrativeText>
+                    {!hasArchiveAccess && (
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 rounded-b-[1.75rem] bg-gradient-to-t from-[#f8f0e2] via-[#f8f0e2]/82 to-transparent" />
+                    )}
+                  </div>
                 </MotionSection>
 
-                {isFort ? (
-                  <FortSections site={site} onImageClick={handleImageClick} />
+                {hasArchiveAccess ? (
+                  <>
+                    {isFort ? (
+                      <FortSections site={site} onImageClick={handleImageClick} />
+                    ) : (
+                      <InscriptionsSection site={site} onInscriptionClick={handleInscriptionClick} />
+                    )}
+
+                    <HistoricalContextSection site={site} tone={tone} />
+                    <SourcesSection site={site} tone={tone} />
+                  </>
                 ) : (
-                  <InscriptionsSection site={site} onInscriptionClick={handleInscriptionClick} />
+                  <GuestArchiveLock tone={tone} isFort={isFort} onLogin={() => router.push("/login")} />
                 )}
-
-                <HistoricalContextSection site={site} tone={tone} />
-                <SourcesSection site={site} tone={tone} />
-
-                {!user && <LoginGate tone={tone} onLogin={() => router.push("/login")} />}
               </motion.div>
             )}
           </AnimatePresence>

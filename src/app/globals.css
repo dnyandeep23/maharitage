@@ -121,6 +121,34 @@ body {
 
 html {
   scroll-behavior: smooth;
+  font-size: clamp(15px, 0.55vw + 13px, 17px);
+}
+
+* {
+  min-width: 0;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+button,
+label,
+input,
+textarea,
+select {
+  overflow-wrap: break-word;
 }
 
 .font-inter {
@@ -140,13 +168,25 @@ html {
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-up {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .animate-fade-in {
@@ -294,7 +334,7 @@ html {
 }
 
 .archive-container {
-  width: min(100% - 2rem, 80rem);
+  width: min(100% - clamp(1.25rem, 4vw, 3rem), 80rem);
   margin-inline: auto;
 }
 
@@ -313,12 +353,13 @@ html {
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.02;
+  font-size: clamp(2rem, 5vw, 4.75rem);
 }
 
 .archive-copy {
   color: var(--heritage-ink-muted);
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
   line-height: 1.75;
 }
 
@@ -331,10 +372,10 @@ html {
   border: 1px solid rgba(18, 51, 39, 0.18);
   background: var(--heritage-forest);
   color: var(--heritage-ivory);
-  font-size: 0.9rem;
+  font-size: clamp(0.86rem, 1.3vw, 0.94rem);
   font-family: var(--font-ui);
   font-weight: 800;
-  padding: 0.8rem 1.2rem;
+  padding: clamp(0.72rem, 1.5vw, 0.86rem) clamp(1rem, 2.4vw, 1.25rem);
   box-shadow: 0 14px 34px rgba(18, 51, 39, 0.14);
   transition: transform 220ms var(--ease-archive), background 220ms var(--ease-archive), box-shadow 220ms var(--ease-archive);
 }
@@ -385,6 +426,7 @@ html {
   background: rgba(255, 253, 247, 0.88);
   color: #1c1917;
   outline: none;
+  min-height: 2.75rem;
   transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
@@ -421,7 +463,10 @@ html {
 
 .auth-panel {
   border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 28px;
+  border-top-left-radius: 85px;
+  border-top-right-radius: 85px;
+  border-bottom-right-radius: 85px;
+  border-bottom-left-radius: 195px;
   background: rgba(251, 247, 238, 0.13);
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(20px);
@@ -429,12 +474,27 @@ html {
 
 .dashboard-surface {
   border: 1px solid rgba(255, 255, 255, 0.68);
-  border-radius: 32px;
+  border-radius: clamp(18px, 3vw, 32px);
   background:
     linear-gradient(145deg, rgba(255, 252, 244, 0.9), rgba(238, 227, 207, 0.76));
   color: var(--heritage-forest);
   box-shadow: 0 34px 110px rgba(7, 27, 21, 0.24);
   backdrop-filter: blur(24px) saturate(1.08);
+}
+
+.fluid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.fluid-panel-pad {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.cinematic-ratio {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
 }
 
 .dashboard-surface input,

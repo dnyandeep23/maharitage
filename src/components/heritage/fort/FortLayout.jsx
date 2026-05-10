@@ -76,7 +76,7 @@ export default function FortLayout({ data }) {
       {remainingEntries.length > 0 && (
         <div className="max-w-5xl mx-auto px-6 lg:px-8 py-16">
           <h2 className="text-3xl font-sans uppercase tracking-wider font-bold text-[#1e293b] mb-8 border-b border-gray-400 pb-4">
-            Additional Details
+            Archival Notes
           </h2>
           <div className="space-y-8">
             {remainingEntries.map(([key, value]) => (

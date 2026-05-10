@@ -18,7 +18,7 @@ export default function HistoricalEvents({ events }) {
         <div className="flex items-center justify-center mb-12">
           <Flag className="w-8 h-8 mr-4 text-[#1e293b]" />
           <h2 className="text-3xl lg:text-4xl font-sans uppercase tracking-wider font-bold text-[#1e293b] text-center">
-            Key Historical Events
+            Campaigns and Turning Points
           </h2>
         </div>
 
@@ -27,7 +27,7 @@ export default function HistoricalEvents({ events }) {
             <div key={idx} className="bg-white p-6 rounded-lg shadow-sm border border-gray-300 hover:shadow-md transition-shadow">
               <div className="flex items-center mb-3">
                 <span className="bg-[#1e293b] text-yellow-500 font-mono font-bold px-3 py-1 rounded-sm text-sm mr-3">
-                  {entry.year || entry.date || "Event"}
+                  {entry.year || entry.date || "Turning Point"}
                 </span>
                 {entry.event_name && (
                   <h3 className="font-bold text-gray-800 uppercase tracking-wide text-sm">{entry.event_name}</h3>
