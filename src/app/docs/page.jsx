@@ -203,69 +203,70 @@ curl -X GET \
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
-      <Header />
+    <div className="archive-page text-stone-900">
+      <Header currentPath="/docs" theme="light" />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 sm:px-6 bg-gradient-to-b from-green-100 to-gray-50">
+      <section className="pt-32 pb-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-5xl font-bold mb-6">
-            API Documentation
+          <p className="archive-kicker">Developer archive</p>
+          <h1 className="archive-title mt-4 text-4xl sm:text-6xl">
+            Heritage Data API
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600">
-            Your complete guide to integrating Maharashtra's rich heritage data
-            into your applications.
+          <p className="archive-copy mx-auto mt-6 max-w-2xl">
+            Integrate Maharashtra's heritage records, inscriptions, galleries,
+            search, and site metadata into research tools and cultural products.
           </p>
         </div>
       </section>
 
       <section className="py-12 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8">Quick Start</h2>
+          <h2 className="font-cinzel-decorative text-3xl font-bold text-[#263a2d] mb-8">Quick Start</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                icon: <Key className="w-6 h-6 text-green-600" />,
+                icon: <Key className="w-6 h-6 text-[#8f7244]" />,
                 title: "1. Get API Key",
                 desc: "Generate your personal API key from the dashboard.",
               },
               {
-                icon: <Code className="w-6 h-6 text-green-600" />,
+                icon: <Code className="w-6 h-6 text-[#8f7244]" />,
                 title: "2. Make a Request",
                 desc: "Use our interactive playground or your own tools to call the API.",
               },
               {
-                icon: <Database className="w-6 h-6 text-green-600" />,
+                icon: <Database className="w-6 h-6 text-[#8f7244]" />,
                 title: "3. Get Data",
                 desc: "Receive structured JSON data ready for your application.",
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition"
+                className="museum-card p-6 transition hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-3">
+                <div className="w-12 h-12 bg-[#263a2d]/8 rounded-lg flex items-center justify-center mb-3">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
+                <h3 className="font-cinzel-decorative text-xl font-bold text-[#263a2d] mb-2">{item.title}</h3>
+                <p className="text-stone-600 leading-7">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-12 px-4 sm:px-6 bg-gray-100">
+      <section className="py-12 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white p-6 rounded-2xl shadow-md">
+          <div className="museum-card p-6">
             <div className="flex items-center gap-2 mb-3">
-              <Globe className="w-5 h-5 text-green-600" />
-              <h3 className="text-xl font-semibold">Base URL</h3>
+              <Globe className="w-5 h-5 text-[#8f7244]" />
+              <h3 className="font-cinzel-decorative text-xl font-bold text-[#263a2d]">Base URL</h3>
             </div>
-            <code className="block bg-gray-200 p-4 rounded-md text-sm">
+            <code className="block bg-[#101b15] text-[#f7f0e4] p-4 rounded-md text-sm">
               /api/v1
             </code>
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-stone-500">
               All endpoints are relative to your current domain.
             </p>
           </div>
@@ -275,18 +276,18 @@ curl -X GET \
       {/* Authentication */}
       <section className="py-12 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Authentication</h2>
-          <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-xl font-semibold mb-2">API Key</h3>
-            <p className="text-gray-600 mb-4">
+          <h2 className="font-cinzel-decorative text-3xl font-bold text-[#263a2d] mb-6">Authentication</h2>
+          <div className="museum-card p-6">
+            <h3 className="font-cinzel-decorative text-xl font-bold text-[#263a2d] mb-2">API Key</h3>
+            <p className="text-stone-600 leading-7 mb-4">
               To access the API, you need to include an API key in your request
               headers. You can generate a new key from your dashboard. The test
               key is rate-limited.
             </p>
-            <code className="block bg-gray-200 p-4 rounded-md text-sm">
+            <code className="block bg-[#101b15] text-[#f7f0e4] p-4 rounded-md text-sm">
               Authorization: ApiKey YOUR_API_KEY
             </code>
-            <p className="mt-4 text-sm text-gray-500">
+            <p className="mt-4 text-sm text-stone-500">
               All API requests must be made over HTTPS. Calls made over plain
               HTTP will fail.
             </p>
@@ -295,19 +296,19 @@ curl -X GET \
       </section>
 
       {/* Endpoints */}
-      <section className="py-12 px-4 sm:px-6 bg-gray-100">
+      <section className="py-12 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8">API Endpoints</h2>
+          <h2 className="font-cinzel-decorative text-3xl font-bold text-[#263a2d] mb-8">API Endpoints</h2>
 
           {/* Tabs */}
-          <div className="flex border-b overflow-x-auto whitespace-nowrap">
+          <div className="archive-scroll flex gap-2 overflow-x-auto whitespace-nowrap border-b border-[#263a2d]/12 pb-3">
             {Object.entries(endpoints).map(([key, endpoint]) => (
               <button
                 key={key}
-                className={`px-4 py-2 font-medium text-sm -mb-px ${
+                className={`rounded-full px-4 py-2 font-bold text-sm ${
                   selectedEndpoint === key
-                    ? "border-b-2 border-green-600 text-green-600"
-                    : "text-gray-500 hover:text-green-600"
+                    ? "bg-[#263a2d] text-[#f7f0e4]"
+                    : "bg-[#f7f0e4]/70 text-stone-500 hover:text-[#263a2d]"
                 }`}
                 onClick={() => setSelectedEndpoint(key)}
               >
@@ -325,23 +326,23 @@ curl -X GET \
                 selectedEndpoint === key && (
                   <div
                     key={key}
-                    className="bg-white p-6 rounded-2xl shadow-md space-y-6"
+                    className="museum-card p-6 space-y-6"
                   >
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <span
-                          className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase ${"bg-green-100 text-green-800"}`}
+                          className="px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#263a2d]/10 text-[#263a2d]"
                         >
                           {endpoint.method}
                         </span>
-                        <code className="text-sm font-bold text-gray-800">
+                        <code className="text-sm font-bold text-stone-800">
                           {endpoint.path}
                         </code>
                       </div>
-                      <h3 className="text-2xl font-semibold mb-1">
+                      <h3 className="font-cinzel-decorative text-2xl font-bold text-[#263a2d] mb-1">
                         {endpoint.title}
                       </h3>
-                      <p className="text-gray-600">{endpoint.description}</p>
+                      <p className="text-stone-600 leading-7">{endpoint.description}</p>
                     </div>
 
                     {endpoint.parameters.length > 0 && (
@@ -353,13 +354,13 @@ curl -X GET \
                               key={idx}
                               className="flex gap-3 text-sm items-center"
                             >
-                              <code className="font-mono text-green-700 bg-green-50 px-2 py-1 rounded">
+                              <code className="font-mono text-[#263a2d] bg-[#263a2d]/8 px-2 py-1 rounded">
                                 {param.name}
                               </code>
-                              <span className="px-2 py-0.5 border rounded text-gray-700 text-xs">
+                              <span className="px-2 py-0.5 border rounded text-stone-700 text-xs">
                                 {param.type}
                               </span>
-                              <span className="text-gray-600">
+                              <span className="text-stone-600">
                                 - {param.description}
                               </span>
                             </div>
@@ -372,14 +373,14 @@ curl -X GET \
                       <h4 className="font-semibold mb-3">
                         Request Example (cURL)
                       </h4>
-                      <pre className="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto">
+                      <pre className="bg-[#101b15] text-[#f7f0e4] p-4 rounded-md text-sm overflow-x-auto">
                         <code>{endpoint.requestExample}</code>
                       </pre>
                     </div>
 
                     <div>
                       <h4 className="font-semibold mb-3">Response Example</h4>
-                      <pre className="bg-gray-800 text-white p-4 rounded-md text-sm overflow-x-auto">
+                      <pre className="bg-[#101b15] text-[#f7f0e4] p-4 rounded-md text-sm overflow-x-auto">
                         <code>{endpoint.responseExample}</code>
                       </pre>
                     </div>
@@ -394,12 +395,12 @@ curl -X GET \
       {/* Response Codes */}
       <section className="py-12 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Response Codes</h2>
-          <div className="bg-white p-6 rounded-2xl shadow-md space-y-3">
+          <h2 className="font-cinzel-decorative text-3xl font-bold text-[#263a2d] mb-6">Response Codes</h2>
+          <div className="museum-card p-6 space-y-3">
             {[
               {
                 code: 200,
-                color: "bg-green-500",
+                color: "bg-[#566044]",
                 text: "Success - Request completed successfully.",
               },
               {

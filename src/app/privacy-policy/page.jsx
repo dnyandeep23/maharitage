@@ -6,12 +6,13 @@ import Footer from "../component/Footer";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-green-50 text-gray-800">
+    <div className="archive-page min-h-screen flex flex-col">
       <Header theme="light" />
 
-      <main className="grow container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="max-w-4xl mx-auto bg-white p-6 sm:p-8 md:p-10 rounded-lg shadow-lg">
-          <h1 className="text-3xl sm:text-4xl font-bold text-green-800 mb-6 sm:mb-8 text-center">
+      <main className="grow px-4 sm:px-6 lg:px-8 pb-16 pt-32">
+        <div className="legal-article museum-card max-w-4xl mx-auto p-6 sm:p-8 md:p-10">
+          <p className="archive-kicker text-center">Archive policy</p>
+          <h1 className="archive-title mt-4 text-3xl sm:text-5xl mb-6 sm:mb-8 text-center">
             Privacy Policy
           </h1>
 

@@ -703,22 +703,22 @@ const ProfessionalChatUI = ({
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-6"
             style={{
-              background: "rgba(16,185,129,0.1)",
-              border: "1px solid rgba(16,185,129,0.2)",
-              color: "#34d399",
+              background: "rgba(217,193,138,0.1)",
+              border: "1px solid rgba(217,193,138,0.22)",
+              color: "#d9c18a",
             }}
           >
             <Sparkles className="w-3.5 h-3.5" />
             {mode === "quiz" ? "Quiz Master" : "AI Heritage Assistant"}
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-white">
+          <h1 className="mb-3 font-cinzel-decorative text-3xl font-bold text-white sm:text-4xl">
             {mode === "quiz" ? (
               <>
                 Ready to{" "}
                 <span
                   className="bg-clip-text text-transparent"
                   style={{
-                    backgroundImage: "linear-gradient(135deg, #10b981, #0d9488)",
+                    backgroundImage: "linear-gradient(135deg, #d9c18a, #fbf7ee)",
                   }}
                 >
                   test your knowledge?
@@ -730,7 +730,7 @@ const ProfessionalChatUI = ({
                 <span
                   className="bg-clip-text text-transparent"
                   style={{
-                    backgroundImage: "linear-gradient(135deg, #10b981, #0d9488)",
+                    backgroundImage: "linear-gradient(135deg, #d9c18a, #fbf7ee)",
                   }}
                 >
                   {user?.username || "Explorer"}
@@ -738,7 +738,7 @@ const ProfessionalChatUI = ({
               </>
             )}
           </h1>
-          <p className="text-slate-400 mb-10 max-w-xl text-sm sm:text-base leading-relaxed">
+          <p className="mb-10 max-w-xl text-sm leading-relaxed text-[#fbf7ee]/62 sm:text-base">
             {mode === "quiz"
               ? "Configure your quiz from the sidebar and click 'Start New Quiz', or pick a quick topic below."
               : "Ask anything about Maharashtra's history, monuments, inscriptions, and rich cultural heritage."}
@@ -752,10 +752,10 @@ const ProfessionalChatUI = ({
                 className="group flex items-center gap-4 p-4 rounded-2xl text-left transition-all duration-200 hover:-translate-y-0.5"
                 style={{
                   background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(217,193,138,0.12)",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "rgba(16,185,129,0.08)")
+                  (e.currentTarget.style.background = "rgba(217,193,138,0.09)")
                 }
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.background = "rgba(255,255,255,0.04)")
@@ -763,14 +763,14 @@ const ProfessionalChatUI = ({
               >
                 <div
                   className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: "rgba(16,185,129,0.15)" }}
+                  style={{ background: "rgba(217,193,138,0.13)" }}
                 >
-                  <LightbulbIcon className="w-4 h-4 text-emerald-400" />
+                  <LightbulbIcon className="w-4 h-4 text-[#d9c18a]" />
                 </div>
-                <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
+                <span className="text-sm font-medium text-[#fbf7ee]/72 transition-colors group-hover:text-white">
                   {text}
                 </span>
-                <ChevronRight className="ml-auto w-4 h-4 text-slate-600 group-hover:text-emerald-400 transition-colors shrink-0" />
+                <ChevronRight className="ml-auto w-4 h-4 shrink-0 text-[#fbf7ee]/28 transition-colors group-hover:text-[#d9c18a]" />
               </button>
             ))}
           </div>
@@ -840,8 +840,8 @@ const ProfessionalChatUI = ({
                         <div
                           className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-lg mb-1"
                           style={{
-                            background: "linear-gradient(135deg, #059669, #0d9488)",
-                            boxShadow: "0 4px 12px rgba(5,150,105,0.3)",
+                            background: "linear-gradient(135deg, #b9924a, #123327)",
+                            boxShadow: "0 4px 12px rgba(185,146,74,0.22)",
                           }}
                         >
                           <Bot size={16} className="text-white" />
@@ -874,12 +874,12 @@ const ProfessionalChatUI = ({
                           style={
                             msg.role === "user"
                               ? {
-                                  background: "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
-                                  boxShadow: "0 4px 20px rgba(5,150,105,0.25)",
+                                  background: "linear-gradient(135deg, #123327 0%, #071b15 100%)",
+                                  boxShadow: "0 4px 20px rgba(7,27,21,0.32)",
                                 }
                               : {
-                                  background: "rgba(255,255,255,0.06)",
-                                  border: "1px solid rgba(255,255,255,0.08)",
+                                  background: "rgba(251,247,238,0.07)",
+                                  border: "1px solid rgba(217,193,138,0.12)",
                                   backdropFilter: "blur(8px)",
                                   boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
                                 }
@@ -947,9 +947,9 @@ const ProfessionalChatUI = ({
       <div
         className="shrink-0 px-4 sm:px-6 lg:px-10 py-4 relative z-40"
         style={{
-          background: "rgba(15,17,23,0.8)",
+          background: "rgba(7,27,21,0.82)",
           backdropFilter: "blur(20px)",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
+          borderTop: "1px solid rgba(217,193,138,0.12)",
         }}
       >
         {isPopoverOpen && (
@@ -961,8 +961,8 @@ const ProfessionalChatUI = ({
         <div
           className="relative mx-auto max-w-4xl rounded-[32px] transition-all duration-200 flex flex-col z-40"
           style={{
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.1)",
+            background: "rgba(251,247,238,0.08)",
+            border: "1px solid rgba(217,193,138,0.16)",
             boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
           }}
         >
@@ -1003,7 +1003,7 @@ const ProfessionalChatUI = ({
                   ? "Type your answer (A, B, C or D)…"
                   : "Ask anything about Maharashtra Heritage…"
               }
-              className="w-full bg-transparent border-0 rounded-3xl pl-12 pr-14 py-4 outline-none text-slate-100 placeholder-slate-500 text-sm"
+              className="w-full rounded-3xl border-0 bg-transparent py-4 pl-12 pr-14 text-sm text-[#fbf7ee] outline-none placeholder-[#fbf7ee]/38"
               onKeyDown={(e) => e.key === "Enter" && handleQuery(e)}
               disabled={isAnonymousLimited}
             />
@@ -1015,16 +1015,16 @@ const ProfessionalChatUI = ({
                   type="button"
                   onClick={() => setIsPopoverOpen(!isPopoverOpen)}
                   disabled={isAnonymousLimited}
-                  className="p-2 rounded-full hover:bg-white/10 transition text-slate-400 hover:text-white"
+                  className="rounded-full p-2 text-[#fbf7ee]/58 transition hover:bg-white/10 hover:text-white"
                 >
                   <Plus className="w-5 h-5" />
                 </button>
 
                 {isPopoverOpen && (
-                  <div className="absolute bottom-full left-0 mb-3 w-56 bg-[#1e2532] border border-white/10 rounded-2xl shadow-2xl py-2 z-50 text-left overflow-hidden origin-bottom-left animate-in fade-in zoom-in-95 duration-200">
+                  <div className="animate-in fade-in zoom-in-95 absolute bottom-full left-0 z-50 mb-3 w-56 origin-bottom-left overflow-hidden rounded-2xl border border-[#d9c18a]/14 bg-[#0c211a] py-2 text-left shadow-2xl duration-200">
                     <label className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-white/5 transition-colors group">
-                      <ImageIcon className="w-4 h-4 text-emerald-400/80 group-hover:text-emerald-400" />
-                      <span className="text-sm font-medium text-slate-300 group-hover:text-white">
+                      <ImageIcon className="w-4 h-4 text-[#d9c18a]/80 group-hover:text-[#d9c18a]" />
+                      <span className="text-sm font-medium text-[#fbf7ee]/72 group-hover:text-white">
                         Upload image
                       </span>
                       <input
@@ -1040,8 +1040,8 @@ const ProfessionalChatUI = ({
                       />
                     </label>
                     <div className="px-4 py-3 flex items-center gap-3 opacity-40 cursor-not-allowed border-t border-white/5">
-                      <FileText className="w-4 h-4 text-blue-400" />
-                      <span className="text-sm font-medium text-slate-300">
+                      <FileText className="w-4 h-4 text-[#d9c18a]" />
+                      <span className="text-sm font-medium text-[#fbf7ee]/72">
                         Upload document
                       </span>
                     </div>
@@ -1071,8 +1071,8 @@ const ProfessionalChatUI = ({
                   }
                   className="rounded-xl p-2.5 text-white transition hover:scale-105 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed shadow-lg"
                   style={{
-                    background: "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
-                    boxShadow: "0 4px 12px rgba(5,150,105,0.35)",
+                    background: "linear-gradient(135deg, #b9924a 0%, #123327 100%)",
+                    boxShadow: "0 4px 12px rgba(185,146,74,0.28)",
                   }}
                 >
                   <ArrowUp className="w-4 h-4" />
@@ -1081,10 +1081,10 @@ const ProfessionalChatUI = ({
             </div>
           </div>
         </div>
-        <p className="text-center text-[10px] text-slate-600 mt-2.5">
-          HeritageX was developed to support academic activity at Sardar Patel Institute of Technology.
+        <p className="mt-2.5 text-center text-[10px] text-[#fbf7ee]/32">
+          MahaRitage AI supports archival learning and academic heritage exploration.
         </p>
-        <p className="text-center text-[10px] text-slate-600 mt-1">
+        <p className="mt-1 text-center text-[10px] text-[#fbf7ee]/28">
           Developers: Dnyandeep Gaonkar, Rudrapratapsing Rajput, Shreeya Nemade
         </p>
       </div>

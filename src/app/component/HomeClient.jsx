@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Bot, Search } from "lucide-react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Hero from "./home/Hero";
@@ -18,8 +19,8 @@ export default function HomeClient() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const searchOptions = [
-    { id: "search", label: "Search Sites" },
-    { id: "ai", label: "Ask AI" },
+    { id: "search", label: "Archive Search", icon: <Search className="h-4 w-4" /> },
+    { id: "ai", label: "AI Guide", icon: <Bot className="h-4 w-4" /> },
   ];
 
   const heroData = {
@@ -47,19 +48,11 @@ export default function HomeClient() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans relative">
+    <div className="relative min-h-screen bg-[#f5efe3] font-sans">
       <AIFloatingButton />
       <Header
         variant="full"
         handleNavigation={handleNavigation}
-        bgColor="bg-white"
-        textColor="text-black"
-        buttonColor="bg-green-600 text-white"
-        buttonHover="hover:bg-green-700"
-        navActive="bg-green-100 text-green-700"
-        navInactive="text-black hover:bg-green-100"
-        logoColor="text-black"
-        borderColor="border-gray-200"
         currentPath="/"
         theme="hero"
       />

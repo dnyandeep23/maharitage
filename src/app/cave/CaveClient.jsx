@@ -217,7 +217,7 @@ const SectionHeader = ({ eyebrow, title, description, icon: Icon }) => (
 );
 
 const EmptyState = ({ children }) => (
-  <div className="rounded-[2rem] border border-dashed border-stone-300 bg-white/70 px-6 py-12 text-center text-stone-500 shadow-sm">
+  <div className="museum-card-premium px-5 py-10 text-center text-stone-500 sm:px-6 sm:py-12">
     {children}
   </div>
 );
@@ -227,13 +227,13 @@ const NarrativeText = ({ children, tone = "cave" }) => {
 
   return (
     <div
-      className={`rounded-[2rem] border p-6 shadow-sm sm:p-8 ${
+      className={`museum-card-premium p-5 sm:p-8 ${
         tone === "fort"
-          ? "border-amber-200/80 bg-[#fff9ed] text-stone-800"
-          : "border-emerald-100 bg-white text-stone-800"
+          ? "text-stone-800"
+          : "text-stone-800"
       }`}
     >
-      <p className="max-w-none text-lg leading-9 text-justify first-letter:float-left first-letter:mr-3 first-letter:font-cinzel-decorative first-letter:text-6xl first-letter:font-bold first-letter:leading-[0.85] first-letter:text-stone-900">
+      <p className="max-w-none text-base leading-8 text-left sm:text-lg sm:leading-9 sm:text-justify sm:first-letter:float-left sm:first-letter:mr-3 sm:first-letter:font-cinzel-decorative sm:first-letter:text-6xl sm:first-letter:font-bold sm:first-letter:leading-[0.85] sm:first-letter:text-stone-900">
         {children}
       </p>
     </div>
@@ -249,10 +249,10 @@ const DataPill = ({ icon: Icon, label, value, tone = "cave" }) => {
       className={`flex items-start gap-3 rounded-2xl border px-4 py-3 ${
         tone === "fort"
           ? "border-amber-200 bg-amber-50/80"
-          : "border-emerald-100 bg-emerald-50/80"
+          : "border-[#d8c7a8] bg-[#f7f0e4]/80"
       }`}
     >
-      {Icon && <Icon className={`mt-0.5 h-5 w-5 ${tone === "fort" ? "text-amber-800" : "text-emerald-800"}`} />}
+      {Icon && <Icon className={`mt-0.5 h-5 w-5 ${tone === "fort" ? "text-amber-800" : "text-[#566044]"}`} />}
       <div>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-stone-500">{label}</p>
         <p className="mt-1 text-sm font-semibold leading-6 text-stone-900">{content}</p>
@@ -264,7 +264,7 @@ const DataPill = ({ icon: Icon, label, value, tone = "cave" }) => {
 const IconButton = ({ children, className = "", ...props }) => (
   <button
     {...props}
-    className={`inline-flex h-11 w-11 items-center justify-center rounded-full border border-stone-300 bg-white/90 text-stone-900 shadow-sm transition hover:bg-stone-950 hover:text-white disabled:pointer-events-none disabled:opacity-40 ${className}`}
+    className={`inline-flex h-11 w-11 items-center justify-center rounded-full border border-stone-300/70 bg-white/90 text-stone-900 shadow-sm backdrop-blur transition hover:bg-stone-950 hover:text-white disabled:pointer-events-none disabled:opacity-40 ${className}`}
   >
     {children}
   </button>
@@ -303,7 +303,7 @@ const Hero = ({ site, gallery, isFort }) => {
   )}
 
   {/* Cinematic Overlay Stack */}
-  <div className="absolute inset-0 z-[1] bg-gradient-to-br from-stone-950/55 via-stone-950/25 to-black/40" />
+  <div className="absolute inset-0 z-[1] bg-gradient-to-br from-stone-950/62 via-stone-950/24 to-black/44" />
 
   {/* Left cinematic readability gradient */}
   <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/65 via-black/20 to-transparent" />
@@ -343,7 +343,7 @@ const Hero = ({ site, gallery, isFort }) => {
         <motion.h1
           variants={slideMotion}
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-5xl text-balance font-cinzel-decorative text-5xl font-extrabold leading-[0.94] tracking-normal text-white sm:text-7xl lg:text-8xl"
+          className="max-w-5xl text-balance font-cinzel-decorative text-4xl font-extrabold leading-[0.98] tracking-normal text-white min-[380px]:text-5xl sm:text-7xl lg:text-8xl"
           style={{
             textShadow:
               "0 8px 30px rgba(0,0,0,0.55), 0 2px 10px rgba(0,0,0,0.35)",
@@ -377,21 +377,21 @@ const Hero = ({ site, gallery, isFort }) => {
       <motion.div
         variants={revealMotion}
         transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-        className="rounded-[2rem] border border-white/15 bg-white/10 p-5 text-white shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+        className="museum-dark-panel p-5 text-white"
       >
         <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/65">
           Record Summary
         </p>
 
         <div className="mt-5 grid grid-cols-2 gap-3">
-          <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+          <div className="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-inner">
             <p className="text-3xl font-bold">{gallery.length}</p>
             <p className="mt-1 text-sm text-white/70">
               Gallery assets
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+          <div className="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-inner">
             <p className="text-3xl font-bold">{secondaryCount}</p>
             <p className="mt-1 text-sm text-white/70">
               {isFort
@@ -471,8 +471,32 @@ const GallerySection = ({ gallery, siteName, onImageClick }) => {
 
       {gallery.length ? (
         <>
+          <div className="archive-scroll -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:hidden">
+            {gallery.map((url, itemIndex) => (
+              <button
+                type="button"
+                key={`${url}-mobile-${itemIndex}`}
+                onClick={() => onImageClick(url)}
+                className="touch-card premium-image-frame group relative h-[360px] w-[84vw] shrink-0 snap-center bg-stone-200 text-left"
+              >
+                <LoadingImage
+                  src={url}
+                  alt={`${siteName} gallery ${itemIndex + 1}`}
+                  className="absolute inset-0 h-full w-full"
+                  imgClassName="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/58 via-black/8 to-transparent" />
+                <span className="absolute bottom-4 left-4 rounded-full bg-white/92 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-stone-800 backdrop-blur-sm">
+                  Plate {itemIndex + 1}
+                </span>
+              </button>
+            ))}
+          </div>
           {/* Gallery */}
-          <div className="relative overflow-hidden rounded-[2.35rem]">
+          <div className="relative hidden overflow-hidden rounded-[2.35rem] sm:block">
             <motion.div
               layout
               className="flex h-[360px] gap-4 sm:h-[440px] sm:gap-5 lg:h-[520px]"
@@ -592,7 +616,7 @@ const InscriptionCard = ({ inscription, index, onClick }) => {
     <button
       type="button"
       onClick={() => onClick(inscriptionId)}
-      className="group overflow-hidden rounded-[2rem] border border-emerald-100 bg-white text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+      className="museum-card-premium group text-left transition hover:-translate-y-1"
     >
       <div className="relative h-64 overflow-hidden bg-stone-200">
         {image ? (
@@ -610,7 +634,7 @@ const InscriptionCard = ({ inscription, index, onClick }) => {
             <ScrollText className="h-10 w-10" />
           </div>
         )}
-        <div className="absolute left-4 top-4 rounded-full bg-emerald-950 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
+        <div className="absolute left-4 top-4 rounded-full bg-[#263a2d] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
           Inscription {index + 1}
         </div>
       </div>
@@ -621,7 +645,7 @@ const InscriptionCard = ({ inscription, index, onClick }) => {
         {description && (
           <p className="mt-3 line-clamp-3 text-sm leading-6 text-stone-600">{description}</p>
         )}
-        <div className="mt-5 flex items-center gap-2 text-sm font-bold text-emerald-800">
+        <div className="mt-5 flex items-center gap-2 text-sm font-bold text-[#566044]">
           <BookOpen className="h-4 w-4" />
           Study record
         </div>
@@ -704,7 +728,7 @@ const FeatureCard = ({ title, value, onImageClick }) => {
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="rounded-[2rem] border border-amber-200 bg-white p-6 shadow-sm"
+        className="museum-card-premium p-6"
       >
         <h3 className="flex items-center gap-2 text-xl font-bold text-stone-950">
           <Building2 className="h-5 w-5 text-amber-800" />
@@ -723,7 +747,7 @@ const FeatureCard = ({ title, value, onImageClick }) => {
         whileInView="show"
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="rounded-[2rem] border border-amber-200 bg-white p-6 shadow-sm"
+        className="museum-card-premium p-6"
       >
         <h3 className="flex items-center gap-2 text-xl font-bold text-stone-950">
           <Building2 className="h-5 w-5 text-amber-800" />
@@ -740,7 +764,7 @@ const FeatureCard = ({ title, value, onImageClick }) => {
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: index * 0.04 }}
-                  className="rounded-2xl bg-amber-50 p-4 text-sm leading-6 text-stone-700"
+                  className="rounded-2xl border border-white/60 bg-[#fff9ed]/76 p-4 text-sm leading-6 text-stone-700"
                 >
                   {item}
                 </motion.div>
@@ -760,7 +784,7 @@ const FeatureCard = ({ title, value, onImageClick }) => {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.16 }}
                 transition={{ duration: 0.55, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="rounded-[1.5rem] bg-amber-50 p-5"
+                className="rounded-[1.5rem] border border-white/60 bg-[#fff9ed]/76 p-5"
               >
                 <p className="font-bold text-stone-950">{itemTitle}</p>
                 {itemDescription && <p className="mt-2 text-sm leading-6 text-stone-700">{itemDescription}</p>}
@@ -807,7 +831,7 @@ const FeatureCard = ({ title, value, onImageClick }) => {
         whileInView="show"
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="rounded-[2rem] border border-amber-200 bg-white p-6 shadow-sm"
+        className="museum-card-premium p-6"
       >
         <h3 className="flex items-center gap-2 text-xl font-bold text-stone-950">
           <Building2 className="h-5 w-5 text-amber-800" />
@@ -816,7 +840,7 @@ const FeatureCard = ({ title, value, onImageClick }) => {
         {entries.length > 0 && (
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             {entries.map(([key, nestedValue]) => (
-            <div key={key} className="rounded-2xl bg-amber-50 p-4">
+            <div key={key} className="rounded-2xl border border-white/60 bg-[#fff9ed]/76 p-4">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-800">{labelFor(key)}</p>
               <div className="mt-2">
                 <FieldValue value={nestedValue} />
@@ -893,7 +917,7 @@ const ChronologySection = ({ chronology }) => {
                 </h3>
               )}
             </div>
-            <div className="rounded-2xl border border-amber-200 bg-white p-5 shadow-sm">
+            <div className="museum-card-premium p-5">
               <FieldValue value={entry.details || entry.description || entry} />
             </div>
           </motion.article>
@@ -932,7 +956,7 @@ const HistoricalEventsSection = ({ events }) => {
             whileInView="show"
             viewport={{ once: true, amount: 0.18 }}
             transition={{ duration: 0.5, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-[2rem] border border-amber-200 bg-white p-6 shadow-sm"
+            className="museum-card-premium p-6"
           >
             {(event.year || event.period || event.date) && (
               <span className="inline-flex rounded-full bg-stone-950 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-white">
@@ -998,7 +1022,7 @@ const HistoricalContextSection = ({ site, tone }) => {
         <DataPill icon={Milestone} label="Approximate Date" value={context.approx_date} tone={tone} />
       </div>
       {figures.length > 0 && (
-        <div className="mt-5 rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+        <div className="museum-card-premium mt-5 p-6">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-stone-500">Related Figures</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {figures.map((figure, index) => (
@@ -1010,7 +1034,7 @@ const HistoricalContextSection = ({ site, tone }) => {
         </div>
       )}
       {context.cultural_significance && (
-        <div className="mt-5 rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+        <div className="museum-card-premium mt-5 p-6">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-stone-500">Cultural Significance</p>
           <p className="mt-4 text-base leading-8 text-stone-700 text-justify">{context.cultural_significance}</p>
         </div>
@@ -1032,13 +1056,13 @@ const SourcesSection = ({ site, tone }) => {
         icon={BookOpen}
       />
       <div className="grid gap-5 lg:grid-cols-2">
-        <div className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+        <div className="museum-card-premium p-6">
           <h3 className="text-xl font-bold text-stone-950">Verification Authority</h3>
           {curatedBy.length ? (
             <ul className="mt-5 space-y-3">
               {curatedBy.map((ref, index) => (
                 <li key={index} className="flex gap-3 text-sm leading-6 text-stone-700">
-                  <Sparkles className={`mt-1 h-4 w-4 shrink-0 ${tone === "fort" ? "text-amber-800" : "text-emerald-800"}`} />
+                  <Sparkles className={`mt-1 h-4 w-4 shrink-0 ${tone === "fort" ? "text-amber-800" : "text-[#566044]"}`} />
                   {ref}
                 </li>
               ))}
@@ -1047,7 +1071,7 @@ const SourcesSection = ({ site, tone }) => {
             <p className="mt-5 text-stone-500">No references available.</p>
           )}
         </div>
-        <div className="rounded-[2rem] border border-stone-200 bg-white p-6 shadow-sm">
+        <div className="museum-card-premium p-6">
           <h3 className="text-xl font-bold text-stone-950">Sources</h3>
           {references.length ? (
             <ul className="mt-5 space-y-3">
@@ -1076,7 +1100,7 @@ const SourcesSection = ({ site, tone }) => {
 };
 
 const LoginGate = ({ onLogin, tone }) => (
-  <div className="sticky bottom-6 z-20 mx-auto mt-10 max-w-3xl rounded-[2rem] border border-white/70 bg-white/90 p-4 shadow-2xl backdrop-blur">
+  <div className="museum-card-premium sticky bottom-6 z-20 mx-auto mt-10 max-w-3xl p-4">
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-stone-500">Archive access</p>
@@ -1086,7 +1110,7 @@ const LoginGate = ({ onLogin, tone }) => (
         type="button"
         onClick={onLogin}
         className={`rounded-full px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 ${
-          tone === "fort" ? "bg-amber-800 hover:bg-amber-900" : "bg-emerald-800 hover:bg-emerald-900"
+          tone === "fort" ? "bg-amber-800 hover:bg-amber-900" : "bg-[#263a2d] hover:bg-[#101b15]"
         }`}
       >
         Read More
@@ -1100,7 +1124,7 @@ const Breadcrumb = ({ siteName, inscriptionId, onBack }) => (
     <button
       type="button"
       onClick={onBack}
-      className="inline-flex items-center gap-2 font-bold text-emerald-900 transition hover:text-stone-950"
+      className="inline-flex items-center gap-2 font-bold text-[#263a2d] transition hover:text-stone-950"
     >
       <ArrowLeft className="h-4 w-4" />
       {siteName}
@@ -1163,17 +1187,17 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
     <div>
       <Breadcrumb siteName={siteName} inscriptionId={inscriptionId} onBack={onBack} />
       <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="relative overflow-hidden rounded-[2rem] bg-stone-200 shadow-sm">
+        <div className="premium-image-frame relative bg-stone-200">
           {images.length ? (
             <button type="button" onClick={() => onImageClick(images[currentImage])} className="block h-full w-full">
               <LoadingImage
                 src={images[currentImage]}
                 alt={`${inscriptionId || "Inscription"} image ${currentImage + 1}`}
-                className="h-[620px] w-full"
+                className="h-[360px] w-full sm:h-[520px] lg:h-[620px]"
               />
             </button>
           ) : (
-            <div className="flex h-[620px] items-center justify-center text-stone-400">
+            <div className="flex h-[360px] items-center justify-center text-stone-400 sm:h-[520px] lg:h-[620px]">
               <ScrollText className="h-12 w-12" />
             </div>
           )}
@@ -1188,11 +1212,11 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
             </div>
           )}
         </div>
-        <article className="rounded-[2rem] border border-emerald-100 bg-white p-6 shadow-sm sm:p-8">
+        <article className="museum-card-premium p-5 sm:p-8">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.24em] text-emerald-800">Inscription dossier</p>
-              <h2 className="mt-3 font-cinzel-decorative text-3xl font-bold text-stone-950 sm:text-4xl">
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#566044]">Inscription dossier</p>
+              <h2 className="mt-3 font-cinzel-decorative text-2xl font-bold text-stone-950 sm:text-4xl">
                 {inscriptionId || "Unnamed Inscription"}
               </h2>
             </div>
@@ -1203,7 +1227,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
                   key={code}
                   onClick={() => setLanguage(code)}
                   className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-                    language === code ? "bg-emerald-900 text-white shadow-sm" : "text-stone-600 hover:text-stone-950"
+                    language === code ? "bg-[#263a2d] text-white shadow-sm" : "text-stone-600 hover:text-stone-950"
                   }`}
                 >
                   {code === "en" ? "English" : "Marathi"}
@@ -1211,7 +1235,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
               ))}
             </div>
           </div>
-          <p className="mt-8 text-lg leading-9 text-stone-700 text-justify">
+          <p className="mt-6 text-base leading-8 text-stone-700 sm:mt-8 sm:text-lg sm:leading-9 sm:text-justify">
             {translatedDescription[language]}
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -1299,12 +1323,12 @@ export default function CaveClient({ site }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7f3ea] text-stone-950">
+    <div className="min-h-screen bg-[#f5efe3] text-stone-950">
       <Header theme="dark" />
       <Hero site={site} gallery={gallery} isFort={isFort} />
 
-      <main className="mx-auto -mt-10 max-w-7xl px-5 pb-20 sm:px-10 lg:px-16">
-        <div className="relative z-10 rounded-[2.5rem] border border-white/70 bg-[#f7f3ea]/95 p-5 shadow-[0_30px_90px_rgba(41,37,36,0.14)] backdrop-blur sm:p-8 lg:p-10">
+      <main className="mx-auto -mt-10 max-w-7xl px-3 pb-28 sm:px-10 sm:pb-20 lg:px-16">
+        <div className="relative z-10 rounded-[1.5rem] border border-white/70 bg-[#f8f0e2]/88 p-4 shadow-[0_34px_110px_rgba(41,37,36,0.16)] backdrop-blur-2xl sm:rounded-[2.5rem] sm:p-8 lg:p-10">
           <AnimatePresence mode="wait">
             {selectedInscription ? (
               <motion.div
@@ -1328,7 +1352,7 @@ export default function CaveClient({ site }) {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 24 }}
                 transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-                className="space-y-20"
+                className="space-y-14 sm:space-y-20"
               >
                 <GallerySection gallery={gallery} siteName={site.site_name} onImageClick={handleImageClick} />
 

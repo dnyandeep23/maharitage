@@ -9,6 +9,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        heritage: {
+          cream: "var(--heritage-ivory)",
+          paper: "var(--heritage-paper)",
+          sand: "var(--heritage-sand)",
+          sandstone: "var(--heritage-sandstone)",
+          bronze: "var(--heritage-bronze)",
+          gold: "var(--heritage-gold)",
+          charcoal: "var(--heritage-charcoal)",
+          forest: "var(--heritage-forest)",
+          "forest-deep": "var(--heritage-forest-deep)",
+          olive: "var(--heritage-olive)",
+          line: "var(--heritage-line)",
+        },
         "surface-container-high": "#e6e8ea",
         "on-secondary-fixed-variant": "#5c4300",
         "surface-container-lowest": "#ffffff",

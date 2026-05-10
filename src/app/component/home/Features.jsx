@@ -30,38 +30,38 @@ const Features = () => {
     ];
 
     return (
-        <section className="py-16 bg-white">
-            <div className=" mx-auto px-4 sm:px-6 lg:px-8">            <div className="mx-auto px-4 sm:px-6 lg:px-8 text-center ">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3 font-inter">
-                    Features
-                </h2>
-                <div className='flex justify-center items-center gap-4 sm:gap-8'>
-                    <div className="flex-grow h-0.5 bg-black/20"></div>
-                    <div className="flex-grow h-0.5 bg-black/20"></div>
+        <section className="cinematic-section py-20 md:py-28">
+            <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-14">
+                <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+                <div className="max-w-3xl">
+                    <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#8a6a31]">
+                        Archive Method
+                    </p>
+                    <h2 className="mt-3 font-cinzel-decorative text-4xl font-bold leading-tight text-[#123327] md:text-6xl">
+                        Cultural records with visual depth
+                    </h2>
                 </div>
-                <p className="text-gray-600  max-w-2xl mx-auto leading-relaxed mt-2 text-base">
-                    Immerse yourself in Maharashtra's heritage through our carefully
-                    curated collection of historic sites and cultural stories.
-                </p>
-            </div>
+                    <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700 md:text-base">
+                        MahaRitage brings site photography, geography, inscriptions, and scholarly references into one coherent preservation experience.
+                    </p>
+                </div>
 
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 py-16 gap-8 align-middle items-center px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 gap-5 py-14 md:grid-cols-2">
                     {features.map((feature, index) => (
                         <div
                             key={index}
-                            className="text-center p-8 rounded-xl bg-gradient-to-bl from-white to-green-50 transition-all duration-300 bg-white border border-gray-100"
+                            className="museum-card-premium group p-7 transition duration-300 hover:-translate-y-1"
                         >
-                            <div className="text-green-600 mb-6 flex justify-center">
+                            <div className="relative z-10 mb-8 flex justify-start opacity-90 transition duration-300 group-hover:opacity-100">
                                 {feature.icon}
                             </div>
                             <h3
-                                className="text-4xl font-bold text-[#185602] mb-4"
+                                className="relative z-10 mb-4 font-cinzel-decorative text-2xl font-bold text-[#123327] md:text-3xl"
                             >
                                 {feature.title}
                             </h3>
                             <p
-                                className="text-[#175002] text-center text-base leading-relaxed"
+                                className="relative z-10 max-w-xl text-left text-base leading-7 text-stone-700"
 
                             >
                                 {feature.description}

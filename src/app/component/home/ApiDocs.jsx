@@ -1,26 +1,25 @@
 "use client";
 import React from "react";
-import { FileText } from "lucide-react";
+import { ArrowUpRight, FileText } from "lucide-react";
 
 const ApiDocs = ({ handleNavigation }) => {
   return (
-    <section className="py-20 bg-green-50">
-      <div className="container mx-auto px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-green-600 mb-6 flex justify-center">
-            <FileText className="w-16 h-16" />
+    <section className="cinematic-section py-20 md:py-28">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 text-center sm:px-8 lg:px-14">
+        <div className="museum-card-premium mx-auto max-w-4xl px-6 py-12 sm:px-10 sm:py-16">
+          <div className="relative z-10 mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-2xl border border-[#263a2d]/12 bg-[#263a2d]/8 text-[#263a2d] shadow-inner">
+            <FileText className="h-8 w-8" />
           </div>
           <h2
-            className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6"
+            className="relative z-10 mb-5 font-cinzel-decorative text-3xl font-bold leading-tight text-[#123327] sm:text-5xl"
             style={{
-              fontFamily: "'Playfair Display', 'Times New Roman', serif",
               letterSpacing: "0.02em",
             }}
           >
             Access API Documentation
           </h2>
           <p
-            className="text-gray-600 mb-10 text-lg leading-relaxed"
+            className="relative z-10 mx-auto mb-9 max-w-2xl text-base leading-8 text-stone-600 sm:text-lg"
             style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
           >
             Integrate Maharashtra's heritage data into your applications with
@@ -28,23 +27,11 @@ const ApiDocs = ({ handleNavigation }) => {
           </p>
           <button
             onClick={() => handleNavigation("/docs")}
-            className="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-lg transition-colors duration-200 inline-flex items-center text-lg font-medium shadow-lg hover:shadow-xl"
+            className="archive-button relative z-10 px-8 py-4 text-base"
             style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
           >
             Visit Docs
-            <svg
-              className="w-5 h-5 ml-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            <ArrowUpRight className="h-5 w-5" />
           </button>
         </div>
       </div>

@@ -2,29 +2,33 @@
 
 import React from "react";
 import Link from "next/link";
+import Header from "./component/Header";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1
-          className="text-9xl font-bold text-green-600"
-          style={{ fontFamily: "Cinzel Decorative" }}
-        >
-          404
-        </h1>
-        <h2 className="text-3xl font-semibold mt-4 text-gray-800">
-          Page Not Found
-        </h2>
-        <p className="text-lg mt-2 text-gray-600">
-          The page you are looking for does not exist.
-        </p>
-        <Link href="/">
-          <div className="mt-8 inline-block bg-green-600 text-white px-6 py-3 rounded-md text-lg hover:bg-green-700 transition-colors cursor-pointer">
-            Go Back Home
+    <div className="archive-page flex min-h-screen flex-col">
+      <Header theme="light" />
+      <main className="flex grow items-center justify-center px-5 py-28">
+        <section className="museum-card max-w-2xl p-8 text-center sm:p-12">
+          <p className="archive-kicker">Archive gap</p>
+          <h1 className="archive-title mt-4 text-7xl sm:text-8xl">404</h1>
+          <h2 className="mt-5 font-cinzel-decorative text-3xl font-bold text-[#123327]">
+            Record Not Found
+          </h2>
+          <p className="archive-copy mx-auto mt-4 max-w-md">
+            This page is not part of the current MahaRitage collection. Search
+            the archive or return to the main collection.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link href="/" className="archive-button">
+              Go Home
+            </Link>
+            <Link href="/search" className="archive-button archive-button-secondary">
+              Search Archive
+            </Link>
           </div>
-        </Link>
-      </div>
+        </section>
+      </main>
     </div>
   );
 };

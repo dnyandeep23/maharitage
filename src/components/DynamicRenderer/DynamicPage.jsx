@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 const HeritageClient = dynamic(() => import("../../app/cave/CaveClient"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-screen flex items-center justify-center bg-green-50">
-      <p className="text-green-900 font-semibold text-xl animate-pulse">Loading heritage site...</p>
+    <div className="flex h-screen w-full items-center justify-center bg-[#f4ecdd]">
+      <p className="animate-pulse font-cinzel-decorative text-xl font-semibold text-[#263a2d]">Loading heritage site...</p>
     </div>
   ),
 });
@@ -18,7 +18,7 @@ const HeritageClient = dynamic(() => import("../../app/cave/CaveClient"), {
  */
 export default function DynamicPage({ data }) {
   if (!data) return (
-    <div className="w-full h-screen flex items-center justify-center bg-green-50">
+    <div className="flex h-screen w-full items-center justify-center bg-[#f4ecdd]">
       <p className="text-gray-400 text-xl">Loading data...</p>
     </div>
   );

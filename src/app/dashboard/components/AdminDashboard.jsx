@@ -353,7 +353,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
 
   return (
     <div>
-      <div className="min-h-screen bg-white relative overflow-hidden">
+      <div className="relative min-h-screen overflow-hidden bg-[#101b15]">
         {/* Header */}
         <Header currentPath="/dashboard" theme="dark" />
 
@@ -367,11 +367,11 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
             className="w-full h-screen object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-20" />
+          <div className="absolute inset-0 z-10 bg-[#101b15]/76" />
+          <div className="absolute inset-0 z-20 bg-[radial-gradient(circle_at_25%_20%,rgba(143,114,68,0.2),transparent_32%),linear-gradient(to_top,#f4ecdd,rgba(244,236,221,0.42),transparent)]" />
 
           {/* Dashboard Content */}
-          <div className="absolute inset-0 flex justify-center items-center gap-5 z-30">
+          <div className="absolute inset-0 z-30 flex flex-col items-stretch justify-start gap-4 overflow-y-auto px-3 pb-24 pt-24 sm:px-5 lg:flex-row lg:items-center lg:justify-center lg:gap-5 lg:px-8 lg:pb-0 lg:pt-20">
             <Sidebar
               user={user}
               sidebarSections={sidebarSections}
@@ -380,61 +380,53 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
             />
 
             {/* Main Section */}
-            <div className="w-[75%] h-[80vh] p-10 rounded-4xl bg-[#FFFD99]/50 overflow-y-auto">
+            <div className="dashboard-surface archive-scroll min-h-[64vh] w-full overflow-y-auto p-5 text-stone-900 sm:p-8 lg:h-[80vh] lg:w-[75%] lg:p-10">
               <Notification message={message?.text} type={message?.type} />
               {selectedItem === "Dashboard" && (
-                <>
-                  <p className="text-green-950 font-bold text-xl">
-                    Welcome,
-                    <span className="text-4xl font-extrabold text-green-700">
-                      {" "}
-                      {user?.username}
-                    </span>
-                  </p>
+                <div className="animate-fade-in">
+                  <div className="mb-8">
+                    <p className="text-xs font-bold uppercase tracking-[0.24em] text-stone-500">
+                      Institutional Console
+                    </p>
+                    <h1 className="mt-2 font-cinzel-decorative text-4xl font-bold leading-tight text-stone-900 sm:text-5xl">
+                      Welcome, {user?.username}
+                    </h1>
+                    <p className="mt-4 max-w-3xl text-lg leading-8 text-stone-600">
+                      Manage the MahaRitage archive through structured records, visual evidence, inscription data, and review workflows designed for cultural preservation teams.
+                    </p>
+                  </div>
 
                   {/* Main Content */}
-                  <div className="flex flex-col gap-6 text-green-900 mt-4">
-                    <p className="leading-relaxed text-lg">
-                      As an administrator of{" "}
-                      <span className="font-semibold text-green-800">
-                        Maharitage
-                      </span>
-                      , you have a crucial role in maintaining the integrity and
-                      quality of the platform. Here, you can manage users,
-                      oversee content, and ensure that the heritage of
-                      Maharashtra is represented accurately and respectfully.
-                    </p>
-
-                    <blockquote className="italic border-l-4 border-green-700 pl-4">
-                      “With great power comes great responsibility. Let's build
-                      a platform that stands the test of time.”
-                    </blockquote>
-
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="flex flex-col gap-10">
+                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                       {stats.map((item, idx) => (
                         <div
                           key={idx}
-                          className="border border-dashed border-green-700 rounded-xl p-4 text-center"
+                          className="archive-stat-card p-5"
                         >
-                          <p className="text-2xl font-bold">{item.value}</p>
-                          <p className="text-sm font-medium">{item.label}</p>
+                          <p className="text-4xl font-bold text-stone-900">{item.value}</p>
+                          <p className="mt-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] text-stone-500">{item.label}</p>
                         </div>
                       ))}
                     </div>
 
-                    <blockquote className="italic border-l-4 border-green-700 pl-4">
-                      “The digital preservation of our heritage is a vital task
-                      for future generations.”
-                    </blockquote>
-
-                    <p className="leading-relaxed">
-                      Your administrative actions help ensure a safe and
-                      productive environment for all users. Thank you for your
-                      dedication to preserving Maharashtra's rich cultural
-                      legacy.
-                    </p>
+                    <div>
+                      <h3 className="font-bold text-xl text-stone-900 mb-4">Core Workflows</h3>
+                      <div className="grid gap-4 lg:grid-cols-3">
+                        {[
+                          { title: "Manage Heritage", desc: "Add forts with architecture and preservation metadata" },
+                          { title: "Review Submissions", desc: "Review submitted heritage research records" },
+                          { title: "System Operations", desc: "Maintain galleries, inscriptions, and API access" },
+                        ].map((item) => (
+                          <div key={item.title} className="archive-stat-card group flex cursor-pointer flex-col justify-center p-5 text-left">
+                            <span className="font-bold text-stone-900">{item.title}</span>
+                            <span className="mt-2 text-sm text-stone-500">{item.desc}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </>
+                </div>
               )}
               {selectedItem === "Profile" && <Profile user={user} />}
               {selectedItem === "Manage inscriptions" && (

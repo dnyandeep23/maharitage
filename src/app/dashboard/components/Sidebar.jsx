@@ -22,11 +22,11 @@ const Sidebar = ({ user, sidebarSections, selectedItem }) => {
   return (
     <div
       ref={sidebarRef}
-      className="w-[20%] h-[80vh] rounded-4xl bg-[#FFFD99]/50 flex flex-col items-center gap-3 relative"
+      className="museum-card-premium relative flex max-h-[34vh] w-full shrink-0 flex-col items-center gap-3 overflow-hidden lg:h-[80vh] lg:max-h-none lg:w-[20%]"
     >
       {activeLinkRect && (
         <div
-          className="absolute left-0 w-[89%] bg-[#f9f794]/60 mx-4 rounded-full transition-all duration-300 ease-in-out"
+          className="absolute left-0 mx-4 hidden w-[89%] rounded-full bg-[#263a2d]/10 transition-all duration-300 ease-in-out ring-1 ring-[#263a2d]/10 lg:block"
           style={{
             top: activeLinkRect.top,
             height: activeLinkRect.height,
@@ -34,39 +34,39 @@ const Sidebar = ({ user, sidebarSections, selectedItem }) => {
           }}
         />
       )}
-      <div className="h-[71vh] w-full flex flex-col p-4 rounded-4xl overflow-y-scroll gap-3 z-10">
+      <div className="archive-scroll z-10 flex w-full gap-2 overflow-x-auto p-3 lg:h-[71vh] lg:flex-col lg:gap-3 lg:overflow-y-scroll lg:p-4">
         {sidebarSections.map((section, sectionIndex) => (
-          <div key={sectionIndex}>
+          <div key={sectionIndex} className="flex shrink-0 gap-2 lg:block lg:shrink">
             {section.map((item, itemIndex) => (
               <button
                 key={itemIndex}
                 ref={(el) => (itemRefs.current[item.name] = el)}
                 onClick={item.onClick}
-                className={`w-full text-left px-4 py-3 my-1 cursor-pointer rounded-full flex items-center gap-2 font-bold text-sm ${
+                className={`my-1 flex min-h-11 shrink-0 cursor-pointer items-center gap-2 rounded-full px-4 py-3 text-left text-xs font-bold transition lg:w-full lg:text-sm ${
                   selectedItem === item.name
-                    ? "text-green-900"
+                    ? "bg-[#263a2d]/10 text-[#263a2d]"
                     : item.name === "Logout"
-                    ? "text-green-900  hover:bg-red-300/30"
-                    : "hover:bg-[#f9f794]/30 text-green-900"
+                    ? "text-[#263a2d] hover:bg-red-200/45"
+                    : "text-[#263a2d]/78 hover:bg-[#263a2d]/8"
                 }`}
               >
                 {item.icon} {item.name}
               </button>
             ))}
             {sectionIndex < sidebarSections.length - 1 && (
-              <hr className="border-t border-green-900/50 mt-2" />
+              <hr className="mt-2 hidden border-t border-[#263a2d]/12 lg:block" />
             )}
           </div>
         ))}
       </div>
 
       {/* User Info */}
-      <div className="flex bg-[#FFFD99] w-full max-w-full relative gap-3 rounded-4xl p-2 items-center text-green-950 z-10">
-        <p className="py-0.5 absolute top-2 right-4 px-2 bg-linear-to-br from-green-600/60 to-green-950/60 text-[8px] text-white rounded-full font-medium">
+      <div className="relative z-10 hidden w-full max-w-full items-center gap-3 border border-[#263a2d]/10 bg-[#eadcc4]/58 p-2 text-[#263a2d] backdrop-blur lg:flex">
+        <p className="absolute right-4 top-2 rounded-full bg-[#263a2d] px-2 py-0.5 text-[8px] font-medium text-[#f7f0e4]">
           {user?.role}
         </p>
 
-        <p className="py-2 px-4 uppercase rounded-full bg-linear-to-br from-green-600 to-green-950 text-white text-xl h-12 w-12 font-bold flex justify-center items-center">
+        <p className="flex h-12 w-12 items-center justify-center rounded-full bg-[#263a2d] px-4 py-2 text-xl font-bold uppercase text-[#f7f0e4]">
           {user?.username[0]}
         </p>
 
