@@ -291,6 +291,8 @@ export async function POST(req) {
     chatHistory.shift();
   }
 
+  const hasUploadedImages = Array.isArray(imageDatas) && imageDatas.length > 0;
+
   // Build the current user message (may include images)
   const currentUserParts = [{ text: query }];
 
@@ -478,6 +480,7 @@ ${galleryText}
       const siteQueryString = isQuizMode && quizTopic ? quizTopic : query;
       siteContextNote = `No exact database match found for "${siteQueryString}".
 IMPORTANT: If this topic is clearly related to Maharashtra heritage (e.g., Elephanta Caves, Shivaji Maharaj, Maratha forts, Ajanta, Ellora, etc.), you MUST still answer using your general knowledge about Maharashtra.
+${hasUploadedImages ? "The uploaded image itself may establish the heritage context. If the image appears to show Ajanta Caves, Ellora, Elephanta, a Maharashtra monument, Buddhist mural, sculpture, inscription, deity, Bodhisattva, Buddha figure, royal figure, or Jataka scene, treat it as a valid Maharashtra heritage question and answer it normally." : ""}
 DO NOT refuse a valid Maharashtra heritage question just because it's not in the database.
 Only refuse if the topic is genuinely outside Maharashtra or unrelated to heritage.`;
     }
@@ -736,6 +739,15 @@ the culture, art, monuments, and history of **Maharashtra**.
    - Keep under 200 words unless user asks for detailed explanation
 8. Do not invent facts. If data is unavailable, say it clearly.
 
+🖼️ **Uploaded Image / Ajanta Caves Vision Rules:**
+- If the user asks "Who is in this image?", "Identify this image", or uploads an image related to Ajanta Caves or Maharashtra heritage, DO NOT refuse.
+- Analyze the uploaded image normally and identify the visible person, deity, sculpture, mural, Bodhisattva, Buddha figure, royal figure, or scene if possible.
+- For Ajanta imagery, consider historically common identifications such as Bodhisattva Padmapani or Vajrapani from Cave 1, Buddha in preaching/teaching posture, Jataka tale scenes, donors, attendants, royal figures, or Buddhist narrative murals.
+- If exact identification is uncertain, give the closest historically accurate description and explicitly mark it as likely/possibly.
+- Explain the cultural, artistic, and historical significance in a heritage-learning tone.
+- Mention the likely cave number or mural/sculptural context when recognizable, especially Ajanta Cave 1, Cave 2, Cave 16, Cave 17, or shrine Buddha contexts.
+- Do not say you cannot identify people in images when the image is a historical artwork, sculpture, mural, deity, Buddha/Bodhisattva figure, or heritage scene. Avoid identifying modern private individuals; instead describe them generally if a modern person appears.
+
 🧠 **Database Context (${allContextSites.length} sites loaded):**
 ${siteContext}
 
@@ -751,7 +763,7 @@ Now provide a relevant, structured, and culturally rich answer following the rul
 
     // 🎯 Generate Gemini response using multi-turn chat
     // Add images to the user message if present
-    if (imageDatas && imageDatas.length > 0) {
+    if (hasUploadedImages) {
       imageDatas.forEach(img => {
         currentUserParts.push({ inlineData: { data: img.data, mimeType: img.mimeType } });
       });
@@ -776,7 +788,7 @@ Now provide a relevant, structured, and culturally rich answer following the rul
       }
     }
 
-    const hasImage = imageDatas && imageDatas.length > 0;
+    const hasImage = hasUploadedImages;
     const requestHistory = isStudentQuizMode
       ? trimGeminiHistory(chatHistory, 6)
       : chatHistory;
