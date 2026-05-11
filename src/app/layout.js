@@ -1,7 +1,6 @@
 import { inter, playfairDisplay, cinzelDecorative, lexend } from "./fonts";
 import "./globals.css";
 import { ClientLayout } from "./client-layout";
-import { AuthProvider } from "../contexts/AuthContext";
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://maharitage.vercel.app"),
@@ -60,9 +59,7 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="antialiased">
-        <ClientLayout>
-          <AuthProvider>{children}</AuthProvider>
-        </ClientLayout>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
