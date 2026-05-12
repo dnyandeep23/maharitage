@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
+import { Download, FileDown } from "lucide-react";
 
 const DownloadData = () => {
   const [sites, setSites] = useState([]);
@@ -96,36 +97,51 @@ const DownloadData = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Download Site Data</h2>
+    <div className="dashboard-section mx-auto w-full max-w-4xl">
+      <div className="mb-6">
+        <p className="archive-kicker text-[#8a6a31]">Archive export</p>
+        <h2 className="dashboard-section-title mt-2 text-3xl sm:text-4xl">Download Site Data</h2>
+        <p className="dashboard-section-copy mt-3 text-sm">
+          Export the complete heritage archive or download one selected site as JSON.
+        </p>
+      </div>
       {message && (
         <div
-          className={`p-4 mb-4 text-sm rounded-lg ${
+          className={`mb-4 rounded-2xl border p-4 text-sm font-medium ${
             message.type === "success"
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-700"
+              ? "border-emerald-200 bg-emerald-50/80 text-emerald-800"
+              : "border-red-200 bg-red-50/80 text-red-700"
           }`}
         >
           {message.text}
         </div>
       )}
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Download All Sites</h3>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <div className="dashboard-panel p-5 sm:p-6">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#123327] text-[#fffaf0]">
+            <FileDown className="h-5 w-5" />
+          </div>
+          <h3 className="mb-2 text-lg font-bold text-[#123327]">Download All Sites</h3>
+          <p className="mb-5 text-sm leading-6 text-stone-500">Export every site document currently stored in the archive.</p>
           <button
             onClick={handleDownloadAll}
-            className="px-4 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            className="dashboard-primary-button"
           >
+            <Download className="h-4 w-4" />
             Download All
           </button>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Download Single Site</h3>
-          <div className="flex items-center space-x-4">
+        <div className="dashboard-panel p-5 sm:p-6">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#123327] text-[#fffaf0]">
+            <Download className="h-5 w-5" />
+          </div>
+          <h3 className="mb-2 text-lg font-bold text-[#123327]">Download Single Site</h3>
+          <p className="mb-5 text-sm leading-6 text-stone-500">Choose one record and export its complete JSON payload.</p>
+          <div className="flex flex-col gap-3 sm:flex-row">
             <select
               value={selectedSite}
               onChange={(e) => setSelectedSite(e.target.value)}
-              className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+              className="archive-input block w-full rounded-2xl p-3 text-sm leading-6"
             >
               <option value="" disabled>
                 Select a site
@@ -138,8 +154,9 @@ const DownloadData = () => {
             </select>
             <button
               onClick={handleDownloadSingle}
-              className="px-4 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              className="dashboard-primary-button shrink-0"
             >
+              <Download className="h-4 w-4" />
               Download
             </button>
           </div>

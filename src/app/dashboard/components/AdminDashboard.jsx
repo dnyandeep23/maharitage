@@ -30,11 +30,13 @@ import JSONUpload from "./shared/JSONUpload";
 import Notification from "./Notification";
 import { api } from "@/lib/api";
 import { fetchWithInternalToken } from "../../../lib/fetch";
+import useDashboardStats from "./useDashboardStats";
 
 const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
   const router = useRouter();
   const [token, setToken] = useState(null);
   const [message, setMessage] = useState(null);
+  const { stats: dashboardStats, isLoading: statsLoading } = useDashboardStats();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -43,10 +45,10 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
     }
   }, []);
   const stats = [
-    { label: "Total Users", value: 1250 },
-    { label: "Heritage Sites", value: 150 },
-    { label: "Pending Approvals", value: 15 },
-    { label: "Reported Issues", value: 5 },
+    { label: "Total Users", value: dashboardStats.totalUsers },
+    { label: "Heritage Sites", value: dashboardStats.heritageSites },
+    { label: "Pending Approvals", value: dashboardStats.pendingApprovals },
+    { label: "Research Experts", value: dashboardStats.researchExperts },
   ];
 
   const sidebarSections = [
@@ -371,7 +373,7 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
           <div className="absolute inset-0 z-20 bg-[radial-gradient(circle_at_25%_20%,rgba(143,114,68,0.2),transparent_32%),linear-gradient(to_top,#f4ecdd,rgba(244,236,221,0.42),transparent)]" />
 
           {/* Dashboard Content */}
-          <div className="absolute inset-0 z-30 flex flex-col items-stretch justify-start gap-4 overflow-y-auto px-3 pb-24 pt-24 sm:px-5 lg:flex-row lg:items-center lg:justify-center lg:gap-5 lg:px-8 lg:pb-0 lg:pt-20">
+          <div className="absolute inset-0 z-30 flex flex-col items-stretch justify-start gap-4 overflow-y-auto px-3 pb-24 pt-24 sm:px-5 lg:flex-row lg:items-center lg:justify-center lg:gap-5 lg:px-8 lg:pb-6 lg:pt-28">
             <Sidebar
               user={user}
               sidebarSections={sidebarSections}
@@ -404,7 +406,9 @@ const AdminDashboard = ({ user, selectedItem, handleSelectItem }) => {
                           key={idx}
                           className="archive-stat-card p-5"
                         >
-                          <p className="text-4xl font-bold text-stone-900">{item.value}</p>
+                          <p className="text-4xl font-bold text-stone-900">
+                            {statsLoading ? "--" : item.value.toLocaleString()}
+                          </p>
                           <p className="mt-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] text-stone-500">{item.label}</p>
                         </div>
                       ))}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
-import { Plus, Trash2, Copy, Check, Key, Clock, BarChart2 } from "lucide-react";
+import { Plus, Trash2, Copy, Check, Key, Clock, BarChart2, ShieldCheck } from "lucide-react";
 import { api } from "../../../../lib/api";
 import ProgressBar from "../../../component/ProgressBar";
 import LoadingButton from "../components/LoadingButton";
@@ -15,6 +15,11 @@ const ApiKeyManagement = ({ showToast }) => {
   const [creating, setCreating] = useState(false);
   const [deleting, setDeleting] = useState(null);
   const [copiedKey, setCopiedKey] = useState(null);
+  const notify = (message, type = "success") => {
+    if (showToast) {
+      showToast(message, type);
+    }
+  };
 
   useEffect(() => {
     if (user && token) {
@@ -35,11 +40,11 @@ const ApiKeyManagement = ({ showToast }) => {
       if (response.ok) {
         setApiKeys(data.apiKeys);
       } else {
-        showToast(data.message || "Failed to fetch API keys", "error");
+        notify(data.message || "Failed to fetch API keys", "error");
       }
     } catch (error) {
       console.error("Error fetching API keys:", error);
-      showToast("Error fetching API keys", "error");
+      notify("Error fetching API keys", "error");
     } finally {
       setLoading(false);
     }
@@ -47,7 +52,7 @@ const ApiKeyManagement = ({ showToast }) => {
 
   const createApiKey = async () => {
     if (!newKeyName.trim()) {
-      showToast("API key name cannot be empty", "error");
+      notify("API key name cannot be empty", "error");
       return;
     }
     setCreating(true);
@@ -62,15 +67,15 @@ const ApiKeyManagement = ({ showToast }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        showToast("API key created successfully!", "success");
+        notify("API key created successfully!", "success");
         setNewKeyName("");
         fetchApiKeys();
       } else {
-        showToast(data.message || "Failed to create API key", "error");
+        notify(data.message || "Failed to create API key", "error");
       }
     } catch (error) {
       console.error("Error creating API key:", error);
-      showToast("Error creating API key", "error");
+      notify("Error creating API key", "error");
     } finally {
       setCreating(false);
     }
@@ -87,40 +92,89 @@ const ApiKeyManagement = ({ showToast }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        showToast("API key deleted successfully!", "success");
+        notify("API key deleted successfully!", "success");
         fetchApiKeys();
       } else {
-        showToast(data.message || "Failed to delete API key", "error");
+        notify(data.message || "Failed to delete API key", "error");
       }
     } catch (error) {
       console.error("Error deleting API key:", error);
-      showToast("Error deleting API key", "error");
+      notify("Error deleting API key", "error");
     } finally {
       setDeleting(null);
     }
   };
 
-  const copyToClipboard = (key) => {
-    navigator.clipboard.writeText(key);
-    setCopiedKey(key);
-    showToast("API key copied to clipboard!", "success");
-    setTimeout(() => setCopiedKey(null), 2000);
+  const copyText = async (value) => {
+    if (
+      typeof navigator !== "undefined" &&
+      navigator.clipboard?.writeText &&
+      window.isSecureContext
+    ) {
+      await navigator.clipboard.writeText(value);
+      return;
+    }
+
+    const textArea = document.createElement("textarea");
+    textArea.value = value;
+    textArea.setAttribute("readonly", "");
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    const copied = document.execCommand("copy");
+    document.body.removeChild(textArea);
+
+    if (!copied) {
+      throw new Error("Copy failed");
+    }
+  };
+
+  const copyToClipboard = async (key) => {
+    try {
+      await copyText(key);
+      setCopiedKey(key);
+      notify("API key copied to clipboard!", "success");
+      setTimeout(() => setCopiedKey(null), 2000);
+    } catch (error) {
+      console.error("Error copying API key:", error);
+      notify("Could not copy API key. Please copy it manually.", "error");
+    }
   };
 
   return (
-    <div className="p-6 rounded-lg text-green-800">
-      <h2 className="text-3xl font-bold text-emerald-800 mb-6">
-        API Key Management
-      </h2>
+    <div className="dashboard-section mx-auto w-full max-w-6xl">
+      <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p className="archive-kicker text-[#8a6a31]">Developer access</p>
+          <h2 className="dashboard-section-title mt-2 text-3xl sm:text-4xl">
+            API Key Management
+          </h2>
+          <p className="dashboard-section-copy mt-3 max-w-2xl text-sm">
+            Create scoped keys for the public archive API. Keep keys private and rotate them when they are no longer needed.
+          </p>
+        </div>
+        <div className="dashboard-badge">
+          {apiKeys.length}/3 keys active
+        </div>
+      </div>
 
-      <div className="mb-8 p-6 border border-dashed">
-        <h3 className="text-xl font-semibold text-emerald-800 mb-4">
-          Create New API Key
-        </h3>
-        <div className="flex flex-col sm:flex-row gap-4">
+      <div className="dashboard-panel-quiet mb-8 p-4 sm:p-6">
+        <div className="mb-4 flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#123327] text-[#fffaf0]">
+            <Key className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-[#123327]">Create New API Key</h3>
+            <p className="text-sm text-stone-500">Use a descriptive name like "Research app" or "Portfolio demo".</p>
+          </div>
+        </div>
+        <div className="grid gap-3 lg:grid-cols-[1fr_auto]">
           <input
             type="text"
-            className="flex-grow p-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition duration-200 ease-in-out text-green-900"
+            className="archive-input min-h-12 w-full rounded-2xl px-4 py-3 text-base"
             placeholder="Enter a name for your API key"
             value={newKeyName}
             onChange={(e) => setNewKeyName(e.target.value)}
@@ -128,36 +182,34 @@ const ApiKeyManagement = ({ showToast }) => {
           />
           <button
             onClick={createApiKey}
-            className={`flex items-center justify-center px-5 py-3 rounded-md font-medium transition duration-200 ease-in-out ${
+            className={`dashboard-primary-button px-5 ${
               apiKeys.length >= 3
-                ? "bg-emerald-500/20 cursor-not-allowed"
-                : "bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-gray-900 text-white"
+                ? "cursor-not-allowed opacity-45"
+                : ""
             }`}
             disabled={creating || apiKeys.length >= 3}
           >
-            <Plus className="mr-2 h-5 w-5" />
+            <Plus className="h-5 w-5" />
             {creating ? "Creating..." : "Create Key"}
           </button>
         </div>
         {apiKeys.length >= 3 && (
-          <p className="text-red-500 text-sm mt-3">
+          <p className="mt-3 text-sm font-medium text-red-700">
             You have reached the maximum of 3 API keys.
           </p>
         )}
       </div>
 
       <div>
-        <h3 className="text-2xl font-semibold text-emerald-800 mb-4">
-          Your API Keys
-        </h3>
+        <h3 className="mb-4 text-2xl font-bold text-[#123327]">Your API Keys</h3>
         {loading && <LoadingButton />}
         {!loading && apiKeys.length === 0 && (
-          <div className="text-center py-12 border-2 border-dashed border-gray-700 rounded-lg">
-            <Key className="mx-auto h-12 w-12 text-gray-500" />
-            <h3 className="mt-2 text-lg font-medium text-gray-400">
+          <div className="dashboard-panel-quiet py-12 text-center">
+            <Key className="mx-auto h-12 w-12 text-[#8a6a31]" />
+            <h3 className="mt-3 text-lg font-bold text-[#123327]">
               No API keys
             </h3>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-stone-500">
               Get started by creating a new API key.
             </p>
           </div>
@@ -167,20 +219,24 @@ const ApiKeyManagement = ({ showToast }) => {
             {apiKeys.map((key) => (
               <li
                 key={key._id}
-                className=" p-6 rounded-lg bg-lime-50/40 shadow-md"
+                className="dashboard-list-card p-4 transition sm:p-6"
               >
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div className="flex-grow">
-                    <p className="font-semibold text-xl text-emerald-800">
-                      {key.name}
-                    </p>
-                    <div className="flex items-center mt-2">
-                      <p className="text-sm text-gray-700 break-all font-mono">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-5 w-5 text-[#8a6a31]" />
+                      <p className="font-bold text-xl text-[#123327]">
+                        {key.name}
+                      </p>
+                    </div>
+                    <div className="mt-3 flex items-center rounded-2xl border border-[#123327]/10 bg-[#fffaf0]/62 px-3 py-2">
+                      <p className="break-all font-mono text-sm text-stone-700">
                         {key.key}
                       </p>
                       <button
                         onClick={() => copyToClipboard(key.key)}
-                        className="ml-4 p-2 text-gray-700 hover:text-white transition"
+                        className="ml-3 rounded-full p-2 text-[#123327] transition hover:bg-[#123327]/8"
+                        aria-label="Copy API key"
                       >
                         {copiedKey === key.key ? (
                           <Check className="h-5 w-5 text-emerald-500" />
@@ -193,23 +249,19 @@ const ApiKeyManagement = ({ showToast }) => {
                   <button
                     onClick={() => deleteApiKey(key._id)}
                     disabled={deleting === key._id}
-                    className="group relative flex items-center justify-center rounded-md bg-red-600/50 px-4 py-2 text-sm font-medium text-white transition-all duration-1000 ease-in-out hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  focus:ring-offset-gray-900 disabled:opacity-70"
+                    className="dashboard-danger-button disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {deleting === key._id ? (
                       "Deleting..."
                     ) : (
                       <>
-                        <span className="flex items-center justify-center transition-transform duration-500 ease-in group-hover:-translate-x-2">
-                          <Trash2 className="h-5 w-5 text-red-200 transition-colors duration-500 ease-in-out group-hover:text-white" />
-                        </span>
-                        <span className="absolute opacity-0 translate-x-2 transition-all duration-500 ease-in group-hover:static group-hover:opacity-100 group-hover:translate-x-0 ml-2">
-                          Delete
-                        </span>
+                        <Trash2 className="h-5 w-5" />
+                        Delete
                       </>
                     )}
                   </button>
                 </div>
-                <div className="mt-4 pt-4 border-t border-gray-700 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500">
+                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 border-t border-[#123327]/12 pt-4 text-sm text-stone-500">
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4" />
                     <span>

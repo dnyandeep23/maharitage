@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import DiffViewer from "../components/DiffViewer";
-import { Clock, CheckCircle, XCircle, HelpCircle } from "lucide-react";
+import { Clock, CheckCircle, XCircle, HelpCircle, FileText } from "lucide-react";
 import { api } from "@/lib/api";
 import LoadingButton from "../components/LoadingButton";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
@@ -14,10 +14,10 @@ const statusIcons = {
 };
 
 const statusColors = {
-  pending: "bg-yellow-100 text-yellow-800",
-  approved: "bg-green-100 text-green-800",
-  rejected: "bg-red-100 text-red-800",
-  needs_update: "bg-blue-100 text-blue-800",
+  pending: "border-amber-200 bg-amber-50/80 text-amber-800",
+  approved: "border-emerald-200 bg-emerald-50/80 text-emerald-800",
+  rejected: "border-red-200 bg-red-50/80 text-red-800",
+  needs_update: "border-blue-200 bg-blue-50/80 text-blue-800",
 };
 
 const MySubmissions = () => {
@@ -76,51 +76,59 @@ const MySubmissions = () => {
   }
 
   if (error) {
-    return <div className="text-red-600">Error: {error}</div>;
+    return <div className="dashboard-panel-quiet p-6 text-red-700">Error: {error}</div>;
   }
 
   return (
-    <div className="text-green-950">
-      <h2 className="text-3xl font-bold mb-6 text-green-800">My Submissions</h2>
+    <div className="dashboard-section mx-auto w-full max-w-6xl">
+      <div className="mb-6">
+        <p className="archive-kicker text-[#8a6a31]">Research workflow</p>
+        <h2 className="dashboard-section-title mt-2 text-3xl sm:text-4xl">My Submissions</h2>
+        <p className="dashboard-section-copy mt-3 text-sm">
+          Track your suggested additions and modifications as they move through review.
+        </p>
+      </div>
 
       {submissions.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-lg">You have not submitted any requests yet.</p>
+        <div className="dashboard-panel-quiet py-12 text-center">
+          <FileText className="mx-auto h-12 w-12 text-[#8a6a31]" />
+          <p className="mt-3 text-lg font-bold text-[#123327]">No submissions yet</p>
+          <p className="mt-1 text-sm text-stone-500">Suggested changes will appear here after you submit them.</p>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="grid gap-4">
           {submissions.map((submission) => (
             <div
               key={submission._id}
-              className="bg-white p-6 rounded-2xl shadow-lg border border-green-100 transition-shadow hover:shadow-xl"
+              className="dashboard-list-card p-4 transition sm:p-6"
             >
               <div
-                className="flex justify-between items-center cursor-pointer"
+                className="flex cursor-pointer flex-col justify-between gap-4 sm:flex-row sm:items-center"
                 onClick={() => toggleExpand(submission._id)}
               >
                 <div>
                   <p
                     className={`${
                       submission.action === "modify"
-                        ? "bg-amber-400"
+                        ? "border-amber-200 bg-amber-50 text-amber-800"
                         : submission.action === "add"
-                        ? "bg-green-400"
-                        : "bg-blue-400"
-                    } inline-block px-3 py-1 rounded-full text-white text-sm font-semibold mb-1`}
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                        : "border-blue-200 bg-blue-50 text-blue-800"
+                    } mb-2 inline-block rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide`}
                   >
                     {submission.action}
                   </p>
-                  <p className="font-bold text-lg text-green-900">
+                  <p className="text-lg font-bold text-[#123327]">
                     {submission.site_name}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-stone-500">
                     Request to{" "}
                     <span className="font-semibold">{submission.action}</span> a{" "}
                     <span className="font-semibold">{submission.type}</span>
                   </p>
                 </div>
                 <div
-                  className={`inline-flex items-center py-1 px-3 rounded-full text-xs font-medium ${
+                  className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide ${
                     statusColors[submission.status]
                   }`}
                 >
@@ -130,7 +138,7 @@ const MySubmissions = () => {
               </div>
 
               {expanded === submission._id && (
-                <div className="mt-6 pt-6 border-t border-green-200">
+                <div className="mt-6 border-t border-[#123327]/12 pt-6">
                   {loadingOriginal === submission._id ? (
                     <div className="text-center py-8">
                       Loading original data...
@@ -144,8 +152,8 @@ const MySubmissions = () => {
                     />
                   )}
                   {submission.adminFeedback && (
-                    <div className="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                      <p className="text-sm font-semibold text-yellow-800">
+                    <div className="mt-4 rounded-2xl border border-yellow-200 bg-yellow-50/80 p-4">
+                      <p className="text-sm font-bold text-yellow-800">
                         Admin Feedback:
                       </p>
                       <p className="text-sm mt-1">{submission.adminFeedback}</p>
@@ -157,7 +165,7 @@ const MySubmissions = () => {
           ))}
         </div>
       )}
-      <p className="text-xs text-gray-500 mt-8 text-center">
+      <p className="mt-8 text-center text-xs text-stone-500">
         Rejected records older than 30 days are automatically removed. You can
         find more information in your registered email.
       </p>

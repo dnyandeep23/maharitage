@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 import connectDB from "../../../../lib/mongoose";
-import { paginatedSites } from "../../../../lib/heritageApi";
+import { getFacets } from "../../../../lib/heritageApi";
 
-export async function GET(req) {
+export async function GET() {
   try {
     await connectDB();
-    const { searchParams } = new URL(req.url);
-    return NextResponse.json(await paginatedSites(searchParams));
+    return NextResponse.json(await getFacets());
   } catch (error) {
     return NextResponse.json(
       { message: "Internal Server Error" },
@@ -14,3 +13,4 @@ export async function GET(req) {
     );
   }
 }
+

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import dashboardImage from "../../../assets/images/dashboard-bg.png";
 import Header from "../../component/Header";
-import { LayoutDashboard, User, Key, ChevronRight, Compass, ShieldCheck } from "lucide-react";
+import { Bell, Compass, Key, LayoutDashboard, User, Users, ChevronRight } from "lucide-react";
 import Footer from "../../component/Footer";
 import AIFloatingButton from "../../component/AIFloatingButton";
 import Sidebar from "./Sidebar";
@@ -11,6 +11,7 @@ import Profile from "./shared/Profile";
 import ApiKeyManagement from "./shared/ApiKeyManagement";
 import { fetchWithInternalToken } from "../../../lib/fetch";
 import { motion } from "framer-motion";
+import useDashboardStats from "./useDashboardStats";
 
 const PublicUserDashboard = ({
   user,
@@ -19,11 +20,12 @@ const PublicUserDashboard = ({
   showToast,
 }) => {
   const router = useRouter();
+  const { stats: dashboardStats, isLoading: statsLoading } = useDashboardStats();
   const stats = [
-    { label: "Heritage Sites", value: 5, icon: <Compass className="text-amber-800 h-5 w-5 mb-2" /> },
-    { label: "Active Projects", value: 3, icon: <LayoutDashboard className="text-emerald-800 h-5 w-5 mb-2" /> },
-    { label: "Community", value: 3, icon: <User className="text-blue-800 h-5 w-5 mb-2" /> },
-    { label: "Verified Data", value: 45, icon: <ShieldCheck className="text-stone-800 h-5 w-5 mb-2" /> },
+    { label: "Total Users", value: dashboardStats.totalUsers, icon: <Users className="mb-2 h-5 w-5 text-blue-800" /> },
+    { label: "Heritage Sites", value: dashboardStats.heritageSites, icon: <Compass className="mb-2 h-5 w-5 text-amber-800" /> },
+    { label: "Pending Approvals", value: dashboardStats.pendingApprovals, icon: <Bell className="mb-2 h-5 w-5 text-stone-800" /> },
+    { label: "Research Experts", value: dashboardStats.researchExperts, icon: <LayoutDashboard className="mb-2 h-5 w-5 text-emerald-800" /> },
   ];
 
   const sidebarSections = [
@@ -80,7 +82,7 @@ const PublicUserDashboard = ({
           <div className="absolute inset-0 z-20 bg-[radial-gradient(circle_at_25%_20%,rgba(143,114,68,0.2),transparent_32%),linear-gradient(to_top,#f4ecdd,rgba(244,236,221,0.42),transparent)]" />
 
           {/* Dashboard Content */}
-          <div className="absolute inset-0 z-30 flex flex-col items-stretch justify-start gap-4 overflow-y-auto px-3 pb-24 pt-24 sm:px-5 lg:flex-row lg:items-center lg:justify-center lg:gap-5 lg:px-8 lg:pb-0 lg:pt-20">
+          <div className="absolute inset-0 z-30 flex flex-col items-stretch justify-start gap-4 overflow-y-auto px-3 pb-24 pt-24 sm:px-5 lg:flex-row lg:items-center lg:justify-center lg:gap-5 lg:px-8 lg:pb-6 lg:pt-28">
             <Sidebar
               user={user}
               sidebarSections={sidebarSections}
@@ -122,7 +124,9 @@ const PublicUserDashboard = ({
                           className="archive-stat-card p-5"
                         >
                           {item.icon}
-                          <p className="text-4xl font-bold text-stone-900">{item.value}</p>
+                          <p className="text-4xl font-bold text-stone-900">
+                            {statsLoading ? "--" : item.value.toLocaleString()}
+                          </p>
                           <p className="mt-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] text-stone-500">{item.label}</p>
                         </motion.div>
                       ))}

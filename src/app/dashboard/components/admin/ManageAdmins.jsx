@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
-import { Trash2 } from "lucide-react";
+import { ShieldCheck, Trash2, UserCog } from "lucide-react";
 import ConfirmationModal from "../components/ConfirmationModal";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
@@ -101,41 +101,59 @@ const ManageAdmins = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Manage Admins</h2>
+    <div className="dashboard-section mx-auto w-full max-w-5xl">
+      <div className="mb-6">
+        <p className="archive-kicker text-[#8a6a31]">Access control</p>
+        <h2 className="dashboard-section-title mt-2 text-3xl sm:text-4xl">Manage Admins</h2>
+        <p className="dashboard-section-copy mt-3 text-sm">
+          Review administrative accounts and remove elevated access when required.
+        </p>
+      </div>
       {message && (
         <div
-          className={`p-4 mb-4 text-sm rounded-lg ${
+          className={`mb-4 rounded-2xl border p-4 text-sm font-medium ${
             message.type === "success"
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-700"
+              ? "border-emerald-200 bg-emerald-50/80 text-emerald-800"
+              : "border-red-200 bg-red-50/80 text-red-700"
           }`}
         >
           {message.text}
         </div>
       )}
-      <div className="space-y-4">
+      <div className="grid gap-4">
         {Array.isArray(admins) && admins.length > 0 ? (
           admins.map((admin) => (
             <div
               key={admin._id}
-              className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md"
+              className="dashboard-list-card flex items-center justify-between gap-4 p-4 transition"
             >
-              <div>
-                <p className="font-semibold text-lg">{admin.username}</p>
-                <p className="text-sm text-gray-600">{admin.email}</p>
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#123327] text-[#fffaf0]">
+                  <UserCog className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-lg font-bold text-[#123327]">{admin.username}</p>
+                  <p className="truncate text-sm text-stone-500">{admin.email}</p>
+                </div>
               </div>
+              <div className="flex items-center gap-2">
+                <span className="dashboard-badge hidden sm:inline-flex">
+                  <ShieldCheck className="mr-1 h-3.5 w-3.5" />
+                  admin
+                </span>
               <button
                 onClick={() => handleDeleteClick(admin)}
                 disabled={admin._id === "68f89e38ca0c300f586e70fd"}
-                className="p-2 rounded-full text-red-600 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:text-gray-400 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                className="dashboard-danger-button min-h-10 px-3 disabled:cursor-not-allowed disabled:opacity-45"
+                aria-label={`Remove ${admin.username} admin access`}
               >
                 <Trash2 size={20} />
               </button>
+              </div>
             </div>
           ))
         ) : (
-          <div className="text-gray-500 text-center">No admins found.</div>
+          <div className="dashboard-panel-quiet p-8 text-center text-stone-500">No admins found.</div>
         )}
       </div>
 
