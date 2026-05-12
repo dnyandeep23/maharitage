@@ -668,6 +668,98 @@ const GallerySection = ({ gallery, siteName, onImageClick }) => {
   );
 };
 
+const InscriptionsSection = ({ site, onInscriptionClick }) => {
+  const inscriptions = asArray(site?.inscriptions);
+
+  return (
+    <MotionSection>
+      <SectionHeader
+        eyebrow="Epigraphic archive"
+        title="Inscriptions and Records"
+        description="Documented inscription plates with script, language, and curatorial notes for close reading."
+        icon={ScrollText}
+      />
+
+      {inscriptions.length ? (
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {inscriptions.map((inscription, index) => {
+            const inscriptionId = getInscriptionId(inscription) || `Inscription ${index + 1}`;
+            const description = getInscriptionDescription(inscription);
+            const images = asArray(inscription?.image_urls);
+
+            return (
+              <motion.article
+                key={`${inscriptionId}-${index}`}
+                variants={revealMotion}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.16 }}
+                transition={{ duration: 0.55, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                className="museum-card-premium group overflow-hidden"
+              >
+                <button
+                  type="button"
+                  onClick={() => onInscriptionClick(getInscriptionId(inscription))}
+                  className="block h-full w-full text-left"
+                >
+                  <div className="relative h-64 overflow-hidden bg-stone-200">
+                    {images.length ? (
+                      <LoadingImage
+                        src={images[0]}
+                        alt={`${inscriptionId} inscription`}
+                        className="absolute inset-0 h-full w-full"
+                        imgClassName="transition duration-700 group-hover:scale-105"
+                        onError={(event) => {
+                          event.currentTarget.style.display = "none";
+                        }}
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center bg-[#eee3cf] text-[#566044]">
+                        <ScrollText className="h-12 w-12" />
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/62 via-black/8 to-transparent" />
+                    <span className="absolute bottom-4 left-4 rounded-full bg-white/92 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-stone-800 backdrop-blur-sm">
+                      View dossier
+                    </span>
+                  </div>
+
+                  <div className="p-5">
+                    <h3 className="font-cinzel-decorative text-xl font-bold text-stone-950">
+                      {inscriptionId}
+                    </h3>
+                    {description && (
+                      <p className="mt-3 line-clamp-4 text-sm leading-6 text-stone-700">
+                        {description}
+                      </p>
+                    )}
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {inscription.original_script && (
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef0e7] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#566044]">
+                          <ScrollText className="h-3.5 w-3.5" />
+                          {inscription.original_script}
+                        </span>
+                      )}
+                      {inscription.language_detected && (
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-stone-600">
+                          <Languages className="h-3.5 w-3.5" />
+                          {inscription.language_detected}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              </motion.article>
+            );
+          })}
+        </div>
+      ) : (
+        <EmptyState>No inscriptions found for this site.</EmptyState>
+      )}
+    </MotionSection>
+  );
+};
+
 const FieldValue = ({ value }) => {
   if (value === null || value === undefined || value === "") return null;
   if (Array.isArray(value)) {
