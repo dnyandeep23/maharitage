@@ -63,7 +63,7 @@ function CopyButton({ value, label = "Copy" }) {
       await copyText(value);
       setState("copied");
       setTimeout(() => setState("idle"), 1400);
-    } catch (error) {
+    } catch {
       setState("error");
       setTimeout(() => setState("idle"), 1800);
     }
@@ -93,7 +93,7 @@ function CodeBlock({ value }) {
 
 function EndpointPlayground({ endpoint }) {
   const [apiKey, setApiKey] = useState("");
-  const [path, setPath] = useState(endpoint.examplePath);
+  const [path, setPath] = useState(endpoint.example.path);
   const [state, setState] = useState({
     loading: false,
     status: null,
@@ -198,7 +198,13 @@ function EndpointPlayground({ endpoint }) {
 }
 
 function EndpointDetail({ endpoint }) {
-  const parameters = [...(endpoint.params || []), ...(endpoint.query || [])];
+  const parameters = endpoint.parameters || [];
+  const visibleParameters = parameters.filter(
+    (parameter) => parameter.location !== "header"
+  );
+  const authParameter = parameters.find(
+    (parameter) => parameter.location === "header"
+  );
 
   return (
     <section className="space-y-4">
@@ -206,6 +212,7 @@ function EndpointDetail({ endpoint }) {
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone="get">{endpoint.method}</Badge>
           <Badge>{endpoint.category}</Badge>
+          {endpoint.authRequired && <Badge tone="warn">ApiKey required</Badge>}
         </div>
         <h2 className="mt-4 text-2xl font-bold text-[#123327] sm:text-3xl">
           {endpoint.title}
@@ -224,25 +231,28 @@ function EndpointDetail({ endpoint }) {
             <h3 className="text-sm font-bold uppercase tracking-wide text-[#5f574a]">
               Request
             </h3>
-            <CopyButton value={endpoint.curl} label="Copy curl" />
+            <CopyButton value={endpoint.example.curl} label="Copy curl" />
           </div>
-          <CodeBlock value={endpoint.curl} />
+          <CodeBlock value={endpoint.example.curl} />
         </div>
 
         <div className="rounded-lg border border-[#123327]/12 bg-[#fffaf0]/72 p-4 sm:p-5">
           <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-[#5f574a]">
             Parameters
           </h3>
-          {parameters.length ? (
+          {visibleParameters.length ? (
             <div className="overflow-hidden rounded-md border border-[#123327]/12">
-              {parameters.map(([name, type, description]) => (
+              {visibleParameters.map((parameter) => (
                 <div
-                  key={`${endpoint.id}-${name}`}
-                  className="grid gap-2 border-b border-[#123327]/10 bg-white/52 p-3 text-sm last:border-b-0 sm:grid-cols-[7rem_5rem_1fr]"
+                  key={`${endpoint.id}-${parameter.location}-${parameter.name}`}
+                  className="grid gap-2 border-b border-[#123327]/10 bg-white/52 p-3 text-sm last:border-b-0 sm:grid-cols-[7rem_5rem_6rem_1fr]"
                 >
-                  <code className="text-[#123327]">{name}</code>
-                  <span className="text-[#817866]">{type}</span>
-                  <span className="text-[#5f574a]">{description}</span>
+                  <code className="text-[#123327]">{parameter.name}</code>
+                  <span className="text-[#817866]">{parameter.type}</span>
+                  <span className="text-[#817866]">
+                    {parameter.required ? "required" : parameter.location}
+                  </span>
+                  <span className="text-[#5f574a]">{parameter.description}</span>
                 </div>
               ))}
             </div>
@@ -251,6 +261,35 @@ function EndpointDetail({ endpoint }) {
               No parameters required.
             </div>
           )}
+          {authParameter && (
+            <div className="mt-3 rounded-md border border-[#8a6a31]/20 bg-[#d9c18a]/18 p-3 text-sm text-[#5f574a]">
+              Header: <code className="text-[#123327]">{authParameter.example}</code>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-[#123327]/12 bg-[#fffaf0]/72 p-4 sm:p-5">
+        <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-[#5f574a]">
+          Responses
+        </h3>
+        <div className="grid gap-3 md:grid-cols-2">
+          {(endpoint.responses || []).map((response) => (
+            <div
+              key={`${endpoint.id}-${response.status}`}
+              className="rounded-md border border-[#123327]/10 bg-white/52 p-3"
+            >
+              <Badge tone={response.status < 400 ? "get" : "warn"}>
+                {response.status}
+              </Badge>
+              <p className="mt-2 text-sm text-[#5f574a]">{response.description}</p>
+              {response.example ? (
+                <div className="mt-3">
+                  <CodeBlock value={response.example} />
+                </div>
+              ) : null}
+            </div>
+          ))}
         </div>
       </div>
 
@@ -267,7 +306,7 @@ export default function DocsPortal({ docsData }) {
   const filteredEndpoints = useMemo(() => {
     return docsData.endpoints.filter((endpoint) => {
       const matchesCategory = category === "All" || endpoint.category === category;
-      const searchable = `${endpoint.title} ${endpoint.path} ${endpoint.description} ${endpoint.category}`.toLowerCase();
+      const searchable = `${endpoint.title} ${endpoint.path} ${endpoint.description} ${endpoint.category} ${(endpoint.tags || []).join(" ")}`.toLowerCase();
       return matchesCategory && searchable.includes(query.toLowerCase());
     });
   }, [category, docsData.endpoints, query]);
@@ -287,7 +326,7 @@ export default function DocsPortal({ docsData }) {
               Maharitage API docs
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-[#5f574a]">
-              A simple reference for the available public GET routes. These endpoints are discovered from the current App Router handlers.
+              A simple reference for the available public GET routes. These endpoints come from a production-safe static registry, so the page does not scan source folders at runtime.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -375,7 +414,7 @@ export default function DocsPortal({ docsData }) {
         </div>
 
         <p className="mt-8 text-xs text-[#817866]">
-          Last discovered at {new Date(docsData.generatedAt).toLocaleString()}.
+          Source: static API registry. No runtime filesystem access required.
         </p>
       </section>
     </main>
