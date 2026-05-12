@@ -5,6 +5,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
+import { UserPlus } from "lucide-react";
 
 const AddAdmin = () => {
   const { user } = useAuth();
@@ -63,24 +64,33 @@ const AddAdmin = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Add New Admin</h2>
+    <div className="dashboard-section mx-auto w-full max-w-3xl">
+      <div className="mb-6">
+        <p className="archive-kicker text-[#8a6a31]">Access control</p>
+        <h2 className="dashboard-section-title mt-2 text-3xl sm:text-4xl">Add New Admin</h2>
+        <p className="dashboard-section-copy mt-3 text-sm">
+          Create an administrative account with a temporary password workflow.
+        </p>
+      </div>
       {message && (
         <div
-          className={`p-4 mb-4 text-sm rounded-lg ${
+          className={`mb-4 rounded-2xl border p-4 text-sm font-medium ${
             message.type === "success"
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-700"
+              ? "border-emerald-200 bg-emerald-50/80 text-emerald-800"
+              : "border-red-200 bg-red-50/80 text-red-700"
           }`}
         >
           {message.text}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="dashboard-panel space-y-5 p-5 sm:p-6">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#123327] text-[#fffaf0]">
+          <UserPlus className="h-5 w-5" />
+        </div>
         <div>
           <label
             htmlFor="username"
-            className="block text-sm font-medium text-gray-700"
+            className="archive-label mb-1 block"
           >
             Username
           </label>
@@ -90,13 +100,13 @@ const AddAdmin = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+            className="archive-input mt-1 block w-full rounded-2xl p-3 text-sm leading-6"
           />
         </div>
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
+            className="archive-label mb-1 block"
           >
             Email
           </label>
@@ -106,14 +116,14 @@ const AddAdmin = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 block w-full rounded-full border-green-600 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2 leading-6"
+            className="archive-input mt-1 block w-full rounded-2xl p-3 text-sm leading-6"
           />
         </div>
-        <div className="pt-5">
+        <div className="pt-2">
           <div className="flex justify-end">
             <button
               type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              className="dashboard-primary-button"
             >
               Add Admin
             </button>

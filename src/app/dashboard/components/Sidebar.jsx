@@ -22,11 +22,11 @@ const Sidebar = ({ user, sidebarSections, selectedItem }) => {
   return (
     <div
       ref={sidebarRef}
-      className="museum-card-premium relative flex max-h-[34vh] w-full shrink-0 flex-col items-center gap-3 overflow-hidden lg:h-[80vh] lg:max-h-none lg:w-[20%]"
+      className="museum-card-premium relative flex max-h-[34vh] w-full shrink-0 flex-col items-center gap-3 overflow-hidden lg:h-[80vh] lg:max-h-none lg:w-[20%] lg:min-w-[16rem]"
     >
       {activeLinkRect && (
         <div
-          className="absolute left-0 mx-4 hidden w-[89%] rounded-full bg-[#263a2d]/10 transition-all duration-300 ease-in-out ring-1 ring-[#263a2d]/10 lg:block"
+          className="absolute left-0 mx-4 hidden w-[calc(100%-2rem)] rounded-[1rem] bg-[#263a2d]/10 transition-all duration-300 ease-in-out ring-1 ring-[#263a2d]/10 lg:block"
           style={{
             top: activeLinkRect.top,
             height: activeLinkRect.height,
@@ -34,7 +34,7 @@ const Sidebar = ({ user, sidebarSections, selectedItem }) => {
           }}
         />
       )}
-      <div className="archive-scroll z-10 flex w-full gap-2 overflow-x-auto p-3 lg:h-[71vh] lg:flex-col lg:gap-3 lg:overflow-y-scroll lg:p-4">
+      <div className="archive-scroll z-10 flex w-full gap-2 overflow-x-auto p-3 lg:h-[71vh] lg:flex-col lg:gap-2 lg:overflow-y-auto lg:p-4">
         {sidebarSections.map((section, sectionIndex) => (
           <div key={sectionIndex} className="flex shrink-0 gap-2 lg:block lg:shrink">
             {section.map((item, itemIndex) => (
@@ -42,15 +42,16 @@ const Sidebar = ({ user, sidebarSections, selectedItem }) => {
                 key={itemIndex}
                 ref={(el) => (itemRefs.current[item.name] = el)}
                 onClick={item.onClick}
-                className={`my-1 flex min-h-11 shrink-0 cursor-pointer items-center gap-2 rounded-full px-4 py-3 text-left text-xs font-bold transition lg:w-full lg:text-sm ${
+                className={`my-1 flex min-h-11 shrink-0 cursor-pointer items-center gap-3 rounded-[1rem] px-4 py-3 text-left text-xs font-bold transition lg:w-full lg:text-sm ${
                   selectedItem === item.name
-                    ? "bg-[#263a2d]/10 text-[#263a2d]"
+                    ? "bg-[#263a2d]/10 text-[#263a2d] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)]"
                     : item.name === "Logout"
-                    ? "text-[#263a2d] hover:bg-red-200/45"
-                    : "text-[#263a2d]/78 hover:bg-[#263a2d]/8"
+                    ? "text-[#263a2d] hover:bg-red-200/50 hover:text-red-800"
+                    : "text-[#263a2d]/74 hover:bg-[#263a2d]/8 hover:text-[#123327]"
                 }`}
               >
-                {item.icon} {item.name}
+                <span className="shrink-0">{item.icon}</span>
+                <span className="truncate">{item.name}</span>
               </button>
             ))}
             {sectionIndex < sidebarSections.length - 1 && (
@@ -61,22 +62,18 @@ const Sidebar = ({ user, sidebarSections, selectedItem }) => {
       </div>
 
       {/* User Info */}
-      <div className="relative z-10 hidden w-full max-w-full items-center gap-3 border border-[#263a2d]/10 bg-[#eadcc4]/58 p-2 text-[#263a2d] backdrop-blur lg:flex">
-        <p className="absolute right-4 top-2 rounded-full bg-[#263a2d] px-2 py-0.5 text-[8px] font-medium text-[#f7f0e4]">
+      <div className="relative z-10 hidden w-[calc(100%-1.5rem)] max-w-full items-center gap-3 rounded-[1.15rem] border border-[#263a2d]/10 bg-[#eadcc4]/58 p-3 text-[#263a2d] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur lg:flex">
+        <p className="absolute right-3 top-3 rounded-full bg-[#263a2d] px-2 py-0.5 text-[8px] font-bold text-[#f7f0e4]">
           {user?.role}
         </p>
 
-        <p className="flex h-12 w-12 items-center justify-center rounded-full bg-[#263a2d] px-4 py-2 text-xl font-bold uppercase text-[#f7f0e4]">
-          {user?.username[0]}
+        <p className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#263a2d] text-xl font-bold uppercase text-[#f7f0e4]">
+          {user?.username?.[0] || "U"}
         </p>
 
-        {/* Main text container */}
-        <div className="flex flex-col min-w-0">
-          {" "}
-          {/* <-- IMPORTANT */}
+        <div className="flex min-w-0 flex-col pr-12">
           <p className="text-sm font-bold truncate">{user?.username}</p>
-          {/* Email with truncate */}
-          <p className="text-xs font-medium truncate block max-w-[140px] sm:max-w-[200px] md:max-w-[250px]">
+          <p className="block truncate text-xs font-medium opacity-80">
             {user?.email}
           </p>
         </div>

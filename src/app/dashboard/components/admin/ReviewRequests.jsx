@@ -7,11 +7,11 @@ import {
   Clock,
   CheckCircle,
   XCircle,
+  Inbox,
 } from "lucide-react";
 import DiffViewer from "../components/DiffViewer";
 import { api } from "../../../../lib/api";
 import LoadingButton from "../components/LoadingButton";
-import { set } from "mongoose";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
 
 const statusIcons = {
@@ -22,10 +22,10 @@ const statusIcons = {
 };
 
 const statusColors = {
-  pending: "bg-yellow-100 text-yellow-800",
-  approved: "bg-green-100 text-green-800",
-  rejected: "bg-red-100 text-red-800",
-  needs_update: "bg-blue-100 text-blue-800",
+  pending: "border-yellow-200 bg-yellow-50/80 text-yellow-800",
+  approved: "border-emerald-200 bg-emerald-50/80 text-emerald-800",
+  rejected: "border-red-200 bg-red-50/80 text-red-800",
+  needs_update: "border-blue-200 bg-blue-50/80 text-blue-800",
 };
 
 const ReviewRequests = () => {
@@ -155,35 +155,43 @@ const ReviewRequests = () => {
   }
 
   if (error) {
-    return <div className="text-red-600">Error: {error}</div>;
+    return <div className="dashboard-panel-quiet p-6 text-red-700">Error: {error}</div>;
   }
 
   return (
-    <div className="text-green-950">
-      <h2 className="text-3xl font-bold mb-6 text-green-800">
-        Review Research Expert Requests
-      </h2>
+    <div className="dashboard-section mx-auto w-full max-w-6xl">
+      <div className="mb-6">
+        <p className="archive-kicker text-[#8a6a31]">Review queue</p>
+        <h2 className="dashboard-section-title mt-2 text-3xl sm:text-4xl">
+          Research Expert Requests
+        </h2>
+        <p className="dashboard-section-copy mt-3 text-sm">
+          Compare submitted changes, approve verified data, or request updates with feedback.
+        </p>
+      </div>
 
       {requests.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-lg">No pending requests.</p>
+        <div className="dashboard-panel-quiet py-12 text-center">
+          <Inbox className="mx-auto h-12 w-12 text-[#8a6a31]" />
+          <p className="mt-3 text-lg font-bold text-[#123327]">No pending requests</p>
+          <p className="mt-1 text-sm text-stone-500">New research submissions will appear here.</p>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="grid gap-4">
           {requests.map((request) => (
             <div
               key={request._id}
-              className="bg-white p-6 rounded-2xl shadow-lg border border-green-100 transition-shadow hover:shadow-xl"
+              className="dashboard-list-card p-4 transition sm:p-6"
             >
               <div
-                className="flex justify-between items-center cursor-pointer"
+                className="flex cursor-pointer flex-col justify-between gap-4 sm:flex-row sm:items-center"
                 onClick={() => toggleExpand(request._id)}
               >
                 <div>
-                  <p className="font-bold text-lg text-green-900">
+                  <p className="text-lg font-bold text-[#123327]">
                     {request.site_name}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-stone-500">
                     Request from{" "}
                     <span className="font-semibold">
                       {request.researchExpertId?.username}
@@ -193,7 +201,7 @@ const ReviewRequests = () => {
                   </p>
                 </div>
                 <div
-                  className={`inline-flex items-center py-1 px-3 rounded-full text-xs font-medium ${
+                  className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide ${
                     statusColors[request.status]
                   }`}
                 >
@@ -203,7 +211,7 @@ const ReviewRequests = () => {
               </div>
 
               {expanded === request._id && (
-                <div className="mt-6 pt-6 border-t border-green-200">
+                <div className="mt-6 border-t border-[#123327]/12 pt-6">
                   {loadingOriginal === request._id ? (
                     <div className="text-center py-8">
                       Loading original data...
@@ -217,8 +225,8 @@ const ReviewRequests = () => {
                     />
                   )}
                   {request.adminFeedback && (
-                    <div className="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                      <p className="text-sm font-semibold text-yellow-800">
+                    <div className="mt-4 rounded-2xl border border-yellow-200 bg-yellow-50/80 p-4">
+                      <p className="text-sm font-bold text-yellow-800">
                         Admin Feedback:
                       </p>
                       <p className="text-sm mt-1">{request.adminFeedback}</p>
@@ -226,22 +234,22 @@ const ReviewRequests = () => {
                   )}
 
                   {request.status === "pending" && (
-                    <div className="mt-6 flex space-x-4">
+                    <div className="mt-6 flex flex-wrap gap-3">
                       <button
                         onClick={() => handleAction(request._id, "approved")}
-                        className="inline-flex items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+                        className="dashboard-primary-button"
                       >
                         <Check size={16} className="mr-2" /> Approve
                       </button>
                       <button
                         onClick={() => openFeedbackModal(request, "reject")}
-                        className="inline-flex items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                        className="dashboard-danger-button"
                       >
                         <X size={16} className="mr-2" /> Reject
                       </button>
                       <button
                         onClick={() => openFeedbackModal(request, "update")}
-                        className="inline-flex items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-yellow-400 hover:bg-yellow-500"
+                        className="dashboard-secondary-button"
                       >
                         <RefreshCcw size={16} className="mr-2" /> Request Update
                       </button>
@@ -255,28 +263,28 @@ const ReviewRequests = () => {
       )}
 
       {feedbackModalOpen && (
-        <div className="fixed inset-0 bg-gray-600/10 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-xl w-1/3">
-            <h3 className="text-xl font-bold mb-4 text-green-800">
+        <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center overflow-y-auto bg-[#071b15]/45 p-4 backdrop-blur-sm">
+          <div className="dashboard-panel w-full max-w-lg p-6 shadow-2xl">
+            <h3 className="mb-4 text-xl font-bold text-[#123327]">
               Provide Feedback
             </h3>
             <textarea
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm p-2"
+              className="archive-input mt-1 block w-full rounded-2xl p-3 text-sm"
               rows="4"
               value={adminFeedback}
               onChange={(e) => setAdminFeedback(e.target.value)}
               placeholder="Enter your feedback or reason for rejection/update..."
             ></textarea>
-            <div className="mt-6 flex justify-end space-x-4">
+            <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={closeFeedbackModal}
-                className="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                className="dashboard-secondary-button"
               >
                 Cancel
               </button>
               <button
                 onClick={submitFeedback}
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+                className="dashboard-primary-button"
               >
                 Submit
               </button>

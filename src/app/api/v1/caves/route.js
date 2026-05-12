@@ -6,7 +6,8 @@ export async function GET(req) {
   try {
     await connectDB();
     const { searchParams } = new URL(req.url);
-    return NextResponse.json(await paginatedSites(searchParams));
+    const result = await paginatedSites(searchParams, { h_type: /^cave$/i });
+    return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json(
       { message: "Internal Server Error" },
@@ -14,3 +15,4 @@ export async function GET(req) {
     );
   }
 }
+

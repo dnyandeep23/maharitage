@@ -5,10 +5,10 @@ import Site from "../../../../../models/Site";
 export async function GET(req, { params }) {
   try {
     await connectDB();
-    const { id } = params;
+    const { id } = await params;
 
     const site = await Site.findOne({ site_id: id }).select(
-      "site_name location heritage_type site_discription period historical_context verification_authority gallary"
+      "site_id site_name h_type location heritage_type site_discription period historical_context verification_authority gallary references inscriptions"
     );
 
     if (!site) {

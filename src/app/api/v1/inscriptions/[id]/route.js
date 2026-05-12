@@ -5,9 +5,14 @@ import Site from "../../../../../models/Site";
 export async function GET(req, { params }) {
   try {
     await connectDB();
-    const { id } = params;
+    const { id } = await params;
 
-    const site = await Site.findOne({ "inscriptions.inscription_id": id });
+    const site = await Site.findOne({
+      $or: [
+        { "inscriptions.inscription_id": id },
+        { "inscriptions.Inscription_id": id },
+      ],
+    });
 
     if (!site) {
       return NextResponse.json(
@@ -16,8 +21,8 @@ export async function GET(req, { params }) {
       );
     }
 
-    const inscription = site.inscriptions.find(
-      (insc) => insc.inscription_id === id
+    const inscription = site.inscriptions.find((insc) =>
+      [insc.inscription_id, insc.Inscription_id].includes(id)
     );
 
     if (!inscription) {
@@ -27,7 +32,18 @@ export async function GET(req, { params }) {
       );
     }
 
-    return NextResponse.json(inscription);
+    const inscriptionObject = inscription.toObject?.() || inscription;
+
+    return NextResponse.json({
+      ...inscriptionObject,
+      inscription_id:
+        inscriptionObject.inscription_id || inscriptionObject.Inscription_id,
+      site: {
+        site_id: site.site_id,
+        site_name: site.site_name,
+        district: site.location?.district || null,
+      },
+    });
   } catch (error) {
     return NextResponse.json(
       { message: "Internal Server Error" },

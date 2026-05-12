@@ -7,6 +7,7 @@ import ConfirmationModal from "../components/ConfirmationModal";
 import LoadingButton from "../components/LoadingButton";
 import { api } from "@/lib/api";
 import { fetchWithInternalToken } from "../../../../lib/fetch";
+import { ArrowLeft, FileText, MapPin, Pencil, Trash2 } from "lucide-react";
 
 const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
   const [sites, setSites] = useState([]);
@@ -133,46 +134,54 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
 
   if (selectedSite) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="dashboard-section mx-auto w-full max-w-6xl">
         <button
           onClick={() => setSelectedSite(null)}
-          className="mb-4 text-green-800 hover:underline"
+          className="dashboard-secondary-button mb-6"
         >
-          {" "}
-          &larr; Back to Sites
+          <ArrowLeft className="h-4 w-4" />
+          Back to Sites
         </button>
-        <h2 className="text-2xl font-bold mb-6">
-          Suggest Inscription Changes for {selectedSite.site_name}
-        </h2>
-        <div className="space-y-4">
+        <div className="mb-6">
+          <p className="archive-kicker text-[#8a6a31]">Epigraphy records</p>
+          <h2 className="dashboard-section-title mt-2 text-3xl sm:text-4xl">
+            {selectedSite.site_name}
+          </h2>
+          <p className="dashboard-section-copy mt-3 text-sm">
+            Review, suggest changes, or manage inscriptions linked to this heritage site.
+          </p>
+        </div>
+        <div className="grid gap-4">
           {selectedSite.inscriptions &&
             selectedSite.inscriptions.map((inscription) => (
               <div
-                key={inscription.inscription_id}
-                className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md"
+                key={inscription.inscription_id || inscription.Inscription_id}
+                className="dashboard-list-card flex flex-col justify-between gap-4 p-4 transition lg:flex-row lg:items-center"
               >
-                <div>
-                  <p className="font-semibold text-lg">
-                    {inscription.inscription_id}
+                <div className="min-w-0">
+                  <p className="flex items-center gap-2 text-lg font-bold text-[#123327]">
+                    <FileText className="h-5 w-5 text-[#8a6a31]" />
+                    {inscription.inscription_id || inscription.Inscription_id}
                   </p>
-                  <p className="text-sm text-gray-600">
-                    {inscription.description?.substring(0, 100) ||
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-stone-600">
+                    {(inscription.description || inscription.discription)?.substring(0, 160) ||
                       "No description available"}
-                    ...
                   </p>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => handleModify(inscription)}
-                    className="px-4 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    className="dashboard-primary-button"
                   >
+                    <Pencil className="h-4 w-4" />
                     Suggest Changes
                   </button>
                   {showDelete && (
                     <button
                       onClick={() => handleDeleteClick(inscription)}
-                      className="px-4 py-2 border border-transparent text-sm font-medium rounded-full text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                      className="dashboard-danger-button"
                     >
+                      <Trash2 className="h-4 w-4" />
                       Delete
                     </button>
                   )}
@@ -193,24 +202,32 @@ const ManageInscriptions = ({ showDelete = false, handleSubmit }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">
-        Select a Site to Suggest Inscription Changes
-      </h2>
-      <div className="space-y-4">
+    <div className="dashboard-section mx-auto w-full max-w-6xl">
+      <div className="mb-6">
+        <p className="archive-kicker text-[#8a6a31]">Inscription workflow</p>
+        <h2 className="dashboard-section-title mt-2 text-3xl sm:text-4xl">
+          Select a Site
+        </h2>
+        <p className="dashboard-section-copy mt-3 text-sm">
+          Choose a heritage record to view and manage its inscription data.
+        </p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
         {sites.map((site) => (
-          <div
+          <button
             key={site.site_id}
             onClick={() => handleSiteSelect(site)}
-            className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-50"
+            className="dashboard-list-card flex items-center justify-between p-4 text-left transition"
           >
             <div>
-              <p className="font-semibold text-lg">{site.site_name}</p>
-              <p className="text-sm text-gray-600">
-                {site.location.district}, {site.location.state}
+              <p className="text-lg font-bold text-[#123327]">{site.site_name}</p>
+              <p className="mt-1 flex items-center gap-2 text-sm text-stone-500">
+                <MapPin className="h-4 w-4 text-[#8a6a31]" />
+                {site.location?.district}, {site.location?.state}
               </p>
             </div>
-          </div>
+            <span className="dashboard-badge">{site.inscriptions?.length || 0} inscriptions</span>
+          </button>
         ))}
       </div>
     </div>
