@@ -1,0 +1,28 @@
+{
+  "pilot_name": "Maharitage V2 Benchmark Pilot",
+  "status": "CONDITIONALLY_FROZEN",
+  "version": "v2.0-pilot",
+  "total_questions": 48,
+  "breakdown": {
+    "IMAGE_MCQ": 23,
+    "TEXT_MCQ": 25
+  },
+  "categories": {
+    "HISTORICAL": 8,
+    "CULTURAL_RELIGIOUS": 2,
+    "ARCHITECTURAL": 8,
+    "INSCRIPTION": 4,
+    "CHRONOLOGY": 2,
+    "VISUAL_ARCHITECTURE": 18,
+    "VISUAL_MATERIAL": 2,
+    "VISUAL_SCULPTURE": 2,
+    "VISUAL_INSCRIPTION": 1,
+    "COMPARATIVE_REASONING": 1
+  },
+  "difficulties": {
+    "EASY": 12,
+    "MODERATE": 23,
+    "HARD": 13
+  },
+  "data_file": "pilot_v2_frozen.json"
+}

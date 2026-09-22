@@ -1,0 +1,327 @@
+[
+  {
+    "annotation_id": "v2_db_Ell0001_img_001",
+    "question": "Which monumental architectural sanctuary is visible excavated from the basalt cliff in this photo?",
+    "options": [
+      "A monolithic rock-cut temple complex carved top-down from a single cliff face",
+      "A multi-story timber palace with carved wooden balconies",
+      "A smooth plastered brick dome crowned with a gilded finial",
+      "A freestanding marble mausoleum with four minarets"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_002",
+    "question": "Which continuous sculptured frieze is visible along the base platform of the temple in this view?",
+    "options": [
+      "A continuous frieze of carved stone elephants appearing to support the temple",
+      "A row of mounted Maratha cavalry archers firing arrows",
+      "Carved wooden lattice panels showing geometric shapes",
+      "Brick arches decorated with floral plaster patterns"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676631/IMG20251022124150_skf9qi.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_003",
+    "question": "Which architectural element links the square pavilion to the main temple hall in this photo?",
+    "options": [
+      "A monolithic rock-cut bridge spanning the open courtyard gap",
+      "A suspended steel cable bridge with wooden planks",
+      "A timber walkway featuring rope handrails",
+      "A subterranean stone tunnel beneath a water pool"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676519/IMG20251022131906_tf38n5.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_004",
+    "question": "What visual evidence of top-down cliff excavation is visible on the surrounding rock walls in this photo?",
+    "options": [
+      "Vertical quarry pick-marks and step-scarped basalt cliff walls",
+      "Mortared red brick courses stacked systematically",
+      "Pre-fabricated poured concrete wall slabs",
+      "Smooth polished marble panels with inlaid gems"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675522/IMG20251022113451_is5pxe.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_005",
+    "question": "Which decorative capital design crowns the porch pillars visible in this view?",
+    "options": [
+      "Fluted cushion (amalaka) capitals carved from the basalt rock",
+      "Dorique smooth marble capitals with plain square tops",
+      "Cast-iron lotus capitals featuring riveted joints",
+      "Carved timber bracket posts forming a cantilever"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676584/IMG20251022131500_qvljcm.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_001",
+    "question": "Which visible architectural feature identifies this entrance as part of a rock-cut cave complex?",
+    "options": [
+      "A rock-cut veranda supported by carved stone pillars",
+      "A multi-tiered wooden temple tower",
+      "A brick archway with a tiled roof canopy",
+      "A subterranean iron drainage door"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave17_qckcsr.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_002",
+    "question": "What distinct architectural arch window dominates the upper cave facade in this photo?",
+    "options": [
+      "A large horseshoe chaitya arch (gavaksha) flanked by reliefs",
+      "A pointed Gothic trefoil window arch",
+      "A fortified stone battlement parapet",
+      "A flat timber lintel roof portal"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave19-ajnta_vfjbdc.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_003",
+    "question": "What historic visual art form is preserved on the plastered interior cave wall shown here?",
+    "options": [
+      "Fresco wall painting traces depicting narrative scenes",
+      "Oil on canvas portraiture",
+      "Glazed ceramic tile inlay mosaics",
+      "Incised calligraphic Persian couplets"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/caveimage_rzplhc.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_004",
+    "question": "What structural feature stands inside the apsidal rear sanctuary visible in this hall?",
+    "options": [
+      "A plain monolithic rock-cut stupa surrounded by pillars",
+      "A carved marble throne supported by lions",
+      "A wooden altar table covered with candles",
+      "A subterranean stone water pool"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave9ajntaaa_jacqbn.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_005",
+    "question": "What shaft shape defines the veranda columns visible in this specific cave portico view?",
+    "options": [
+      "Octagonal carved shafts transitioning to square bases",
+      "Fluted Corinthian marble shafts",
+      "Cast-iron cylindrical hollow posts",
+      "Smooth polished poured concrete pillars"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/ajntacave_tuxpwr.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_001",
+    "question": "Which colossal sculptures flank the entrance portico in this photograph of Cave 3?",
+    "options": [
+      "Colossal standing Buddha statues carved into high-relief niches",
+      "Carved dancing Shiva Nataraja reliefs surrounded by flames",
+      "Massive stone elephants guarding a structural timber gateway",
+      "Jain Tirthankara colossi seated in meditative lotus posture"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/Kanheri_Caves_prayer_hall_bcuyot.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_002",
+    "question": "What structural approach leads up to the cave portico in this exterior view?",
+    "options": [
+      "Rock-cut stone staircase ascending to an open pillared veranda in the basalt cliff",
+      "A timber drawbridge suspended over a deep river moat",
+      "A smooth poured concrete ramp designed for wheeled chariot access",
+      "A subterranean brick tunnel emerging from a hidden forest well"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/500px-Kanheri_caves_05_qdbr9l.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_003",
+    "question": "What sculptural elements are carved into the interior rock wall panel in this view?",
+    "options": [
+      "High-relief panels of seated Buddha figures alongside small sculpted votive stupas",
+      "Carved Hindu deities Brahma and Vishnu seated on mythical animal mounts",
+      "Interlocking floral glazed ceramic tiles depicting Islamic paradise gardens",
+      "Plain uncarved plaster coats completely covering the basalt stone"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/Kanheri_Caves_-_Statues_in_cave_02_irvnyv.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_004",
+    "question": "What visual structural characteristic marks the rock-cut cave facade of Cave 1 in this view?",
+    "options": [
+      "A two-storied excavated pillared vihara facade showing partially rough-hewn stone columns",
+      "A completely polished white marble frontage identical to Mughal mausoleums",
+      "Red Vindhyan sandstone brickwork forming a tall defensive gateway",
+      "A modern glass curtain wall enclosing an ancient rock-cut sanctum"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kanheri_Cave1_uag05b.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_005",
+    "question": "What epigraphic layout feature characterizes the ancient Brahmi inscription panel visible in this stone surface?",
+    "options": [
+      "Straight horizontal lines of deeply incised Brahmi characters cut directly into the rock face",
+      "Raised calligraphic Naskh script sculpted into an ornate plaster frieze",
+      "Painted pictorial hieroglyphs arranged in vertical columns",
+      "A completely smooth, uncarved stone surface indicating the inscription eroded entirely"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763192/insc_003_sq2amn.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_001",
+    "question": "Which fortified main entrance gateway flanked by bastions is depicted in this photo?",
+    "options": [
+      "Pali Darwaza, a heavy stone entrance gateway with protective side bastions",
+      "An unfortified wooden farm gate used primarily for livestock",
+      "A modern steel roll-up security portal installed recently",
+      "A low clay brick garden archway lacking any defensive capabilities"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761756543/Pali_darvaja_ggndvg.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_002",
+    "question": "Which fortification layout stretches across the narrow mountain spur crest in this view?",
+    "options": [
+      "Double curtain stone rampart walls constructed directly along the crest of the narrow ridge",
+      "A circular sea moat filled with saltwater surrounding a flat island",
+      "A broad concrete parade ground designed for modern military vehicles",
+      "A subterranean stone tunnel gallery entirely hidden beneath the surface"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761756543/Sanjavni_machi_kiadaf.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_003",
+    "question": "What unique natural rock feature is visible incorporated into the fortified ridge wall in this photograph?",
+    "options": [
+      "A natural circular eye-hole in the rock cliff (Nedhe) flanked by stone ramparts",
+      "An artificial concrete tunnel portal carved perfectly square",
+      "A subterranean water well head surrounded by brick masonry",
+      "A wooden palisade lookout tower built completely free-standing"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761756543/Suvela_machi_Rajgad_fort__Maharashtra_India_July2015_qlmfad.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_004",
+    "question": "What water management reservoir is depicted inside the fort enclosure in this photo?",
+    "options": [
+      "A stone-embanked hilltop fort water storage reservoir (Padmavati Lake)",
+      "A natural deep sea canyon experiencing heavy tidal flows",
+      "A subterranean iron water pipeline connected to modern pumps",
+      "A mud-walled irrigation canal running through a desert plain"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761756542/padmavti_lake_ml6hkh.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_005",
+    "question": "What steep approach portal leads into the highest citadel peak in this view?",
+    "options": [
+      "A steep stone staircase flanked by sheer rock cliffs leading up to a fortified gateway",
+      "An open, wide grassy slope allowing for easy cavalry charge access",
+      "A glass elevator shaft portal built into a flat concrete plateau",
+      "A wooden drawbridge suspended completely over a deep river moat"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761756542/Ballekilla__Rajgad_oqpcne.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_001",
+    "question": "What visual characteristic defines the island fortress profile in this photograph?",
+    "options": [
+      "Imposing heavy stone curtain walls with rounded bastions rising directly out of the sea",
+      "A hilltop timber fort surrounded by dense pine trees and snow",
+      "A mud-brick wall meandering along a shallow, dry riverbank",
+      "A dry mountain moat filled with sharpened iron spikes"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763198/fort_outside_j7tjmf.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_002",
+    "question": "What structural feature commands the marine perimeter in this bastion view?",
+    "options": [
+      "Rounded heavy stone bastions with gun embrasures overlooking the sea",
+      "A modern glass observation deck for tourists",
+      "A delicate timber balcony railing decorated with flowers",
+      "A subterranean brick vault completely devoid of windows"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763198/IMG20260418124647_sg8rmj.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_003",
+    "question": "What water storage feature inside this island sea fort is depicted in this photo?",
+    "options": [
+      "A large stone-lined freshwater tank (lake) located inside the sea-surrounded fort complex",
+      "A dry, rocky mountain moat used strictly for defense",
+      "A fast-flowing coastal saltwater channel passing through the fort",
+      "A modern, subterranean clay pipeline bringing water from the mainland"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763198/basin_bt3tsp.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_004",
+    "question": "What historic military artifact is depicted mounted on the stone bastion embrasure in this view?",
+    "options": [
+      "A massive historical bronze/alloy cannon (Kalak Bangadi) positioned to fire out to sea",
+      "A wooden siege catapult used to launch flaming pitch",
+      "An iron mortar shell embedded tightly into the stone wall",
+      "A modern steel anti-aircraft gun installed during the 20th century"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763199/Kalak_Bangadi_Janjira_Fort_tavxsn.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_005",
+    "question": "What structural ruins are visible inside the fortress perimeter in this view?",
+    "options": [
+      "Multi-storied stone residential palace ruins and arched masonry quarters",
+      "A perfectly preserved modern concrete office building",
+      "A series of small timber log cabins with thatched roofs",
+      "A glass greenhouse structure used for growing exotic plants"
+    ],
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763198/IMG20260418122954_gmhtiu.jpg",
+    "visual_dependency_claim": "HIGH",
+    "ablation_status": "PENDING_EXTERNAL_MODEL"
+  }
+]

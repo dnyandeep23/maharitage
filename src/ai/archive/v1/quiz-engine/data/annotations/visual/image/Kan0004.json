@@ -1,0 +1,210 @@
+[
+  {
+    "annotation_id": "Kan0004_img_001_q001",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/Kanheri_Caves_prayer_hall_bcuyot.jpg",
+    "cloudinary_public_id": "Kanheri_Caves_prayer_hall_bcuyot",
+    "gallery_index": 0,
+    "question": "Which prominent architectural feature is visible in the portico of Cave 3 in this photograph of Kanheri Caves?",
+    "options": [
+      "Colossal 22-foot standing Buddha statues flanking the entrance portico and pillared hall",
+      "Carved dancing Shiva Nataraja relief",
+      "Equestrian Maratha warriors",
+      "Jain Tirthankara colossus"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "Massive standing Buddha sculptures carved into high relief niches stand in the portico of Cave 3.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Colossal 22-foot standing Buddha statues flanking the entrance portico and pillared hall"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_001_q002",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Pillars/Columns",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/Kanheri_Caves_prayer_hall_bcuyot.jpg",
+    "cloudinary_public_id": "Kanheri_Caves_prayer_hall_bcuyot",
+    "gallery_index": 0,
+    "question": "What design features are visible on the internal pillars of the Great Chaitya Hall at Kanheri shown here?",
+    "options": [
+      "Plain square concrete pillars",
+      "Octagonal shafts topped with pot capitals carved with kneeling elephants and stupas",
+      "Fluted Ionic columns",
+      "Rough uncarved boulders"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The interior colonnade features octagonal pillars with detailed capitals depicting elephants and devotees worshipping stupas.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Octagonal shafts topped with pot capitals carved with kneeling elephants and stupas"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_002_q003",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/500px-Kanheri_caves_05_qdbr9l.jpg",
+    "cloudinary_public_id": "500px-Kanheri_caves_05_qdbr9l",
+    "gallery_index": 1,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph '500px-Kanheri_caves_05_qdbr9l' of The Kanheri Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Kanheri Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_002_q004",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/500px-Kanheri_caves_05_qdbr9l.jpg",
+    "cloudinary_public_id": "500px-Kanheri_caves_05_qdbr9l",
+    "gallery_index": 1,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph '500px-Kanheri_caves_05_qdbr9l'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Kanheri Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph '500px-Kanheri_caves_05_qdbr9l' matches The Kanheri Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "The Kanheri Caves"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_004_q005",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17.jpg",
+    "cloudinary_public_id": "Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17",
+    "gallery_index": 3,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17' of The Kanheri Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Kanheri Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_004_q006",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17.jpg",
+    "cloudinary_public_id": "Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17",
+    "gallery_index": 3,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17'?",
+    "options": [
+      "Raigad Fort",
+      "The Kanheri Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17' matches The Kanheri Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "The Kanheri Caves"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_005_q007",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kanheri_Cave1_uag05b.jpg",
+    "cloudinary_public_id": "Kanheri_Cave1_uag05b",
+    "gallery_index": 4,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'Kanheri_Cave1_uag05b' of The Kanheri Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Kanheri Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_005_q008",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kanheri_Cave1_uag05b.jpg",
+    "cloudinary_public_id": "Kanheri_Cave1_uag05b",
+    "gallery_index": 4,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'Kanheri_Cave1_uag05b'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Kanheri Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'Kanheri_Cave1_uag05b' matches The Kanheri Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "The Kanheri Caves"
+    }
+  }
+]

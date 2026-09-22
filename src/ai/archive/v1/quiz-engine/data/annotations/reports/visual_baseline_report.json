@@ -1,0 +1,90 @@
+{
+  "report_timestamp": "2026-08-09T11:37:34.757Z",
+  "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+  "evaluation_mode": "Zero-Shot Base Model (No LoRA, No Fine-Tuning)",
+  "dataset_version": "v1.0.0-frozen",
+  "dataset_summary": {
+    "total_sites": 10,
+    "total_image_annotations": 78,
+    "total_inscription_annotations": 60,
+    "total_visual_annotations": 138,
+    "unique_image_urls": 106
+  },
+  "results": {
+    "summary_metrics": {
+      "total_evaluations": 138,
+      "overall_accuracy_pct": 100,
+      "gallery_image_accuracy_pct": 100,
+      "inscription_accuracy_pct": 100,
+      "split_accuracies": {
+        "train_sites_pct": 100,
+        "validation_sites_pct": 100,
+        "unseen_test_sites_pct": 100
+      },
+      "category_breakdown": {
+        "CORRECT_AND_VISUALLY_SUPPORTED": 138,
+        "CORRECT_BUT_NOT_VISUALLY_SUPPORTED": 0,
+        "INCORRECT": 0,
+        "DATABASE_VERIFICATION_FAILED": 0,
+        "AMBIGUOUS": 0,
+        "ABSTAIN": 0
+      },
+      "option_distribution": {
+        "A": 38,
+        "B": 35,
+        "C": 34,
+        "D": 31,
+        "AMBIGUOUS": 0,
+        "ABSTAIN": 0
+      },
+      "visual_evidence_support_rate_pct": 100,
+      "abstention_rate_pct": 0,
+      "confusion_matrix": {
+        "A": {
+          "A": 38,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "AMBIGUOUS": 0,
+          "ABSTAIN": 0
+        },
+        "B": {
+          "A": 0,
+          "B": 35,
+          "C": 0,
+          "D": 0,
+          "AMBIGUOUS": 0,
+          "ABSTAIN": 0
+        },
+        "C": {
+          "A": 0,
+          "B": 0,
+          "C": 34,
+          "D": 0,
+          "AMBIGUOUS": 0,
+          "ABSTAIN": 0
+        },
+        "D": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 31,
+          "AMBIGUOUS": 0,
+          "ABSTAIN": 0
+        }
+      }
+    },
+    "mode_a_direct_accuracy_pct": 100,
+    "mode_b_visual_evidence_rate_pct": 100,
+    "mode_c_grounded_accuracy_pct": 100,
+    "minimal_text_accuracy_pct": 100,
+    "option_shuffle_consistency_pct": 100,
+    "distractor_robustness_pct": 100,
+    "database_verification_success_pct": 100
+  },
+  "decision_gate": {
+    "baseline_training_justified": "INSUFFICIENT_EVIDENCE",
+    "reason": "Zero-shot evaluation complete. Current unseen-site test size (7 questions) is insufficient for strong statistical conclusions.",
+    "statistical_note": "Current unseen-site test size is insufficient for strong statistical conclusions."
+  }
+}

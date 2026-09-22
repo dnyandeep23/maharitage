@@ -1,0 +1,49 @@
+{
+  "dataset_name": "Maharitage V1 Position-Balanced Visual Training Dataset",
+  "seed": 2026,
+  "total_clean_assets_discovered": 92,
+  "total_training_examples": 23,
+  "unique_training_images": 23,
+  "image_leakage": 0,
+  "vds_3_count": 23,
+  "vds_3_percentage": "100.0%",
+  "exact_duplicates": 0,
+  "ground_truth_failures": 0,
+  "empty_files": 0,
+  "target_format_validity": {
+    "valid": 23,
+    "invalid": 0,
+    "regex_pattern": "^[ABCD]$"
+  },
+  "overall_option_distribution": {
+    "A": "6 (26.1%)",
+    "B": "6 (26.1%)",
+    "C": "6 (26.1%)",
+    "D": "5 (21.7%)"
+  },
+  "train_option_distribution": {
+    "A": "3 (17.6%)",
+    "B": "5 (29.4%)",
+    "C": "6 (35.3%)",
+    "D": "3 (17.6%)"
+  },
+  "splits": {
+    "train": {
+      "images": 17,
+      "examples": 17
+    },
+    "validation": {
+      "images": 3,
+      "examples": 3
+    },
+    "test": {
+      "images": 3,
+      "examples": 3
+    }
+  },
+  "baselines": {
+    "random_baseline": "25.0%",
+    "always_d_baseline": "23.64% (13/55 on V4 Gold)"
+  },
+  "final_decision": "READY_FOR_BALANCED_LORA_TRAINING"
+}

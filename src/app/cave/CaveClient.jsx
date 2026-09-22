@@ -87,10 +87,59 @@ const getSiteDescription = (site) =>
   site?.site_description || site?.site_discription || site?.description || "";
 
 const getInscriptionId = (inscription) =>
-  inscription?.inscription_id || inscription?.Inscription_id || inscription?.Inscription_Id || "";
+  inscription?.inscription_id ||
+  inscription?.Inscription_id ||
+  inscription?.Inscription_Id ||
+  inscription?.inscriptionId ||
+  inscription?.id ||
+  "";
 
 const getInscriptionDescription = (inscription) =>
-  inscription?.description || inscription?.discription || inscription?.Discription || "";
+  inscription?.description ||
+  inscription?.discription ||
+  inscription?.Discription ||
+  inscription?.translations?.english ||
+  "";
+
+const getInscriptionImages = (inscription) =>
+  asArray(
+    inscription?.image_urls ||
+      inscription?.imageUrls ||
+      inscription?.images ||
+      inscription?.image_url ||
+      inscription?.image
+  );
+
+const getInscriptionScript = (inscription) =>
+  inscription?.original_script || inscription?.script || inscription?.inscription_script || "";
+
+const getInscriptionLanguage = (inscription) =>
+  inscription?.language_detected || inscription?.language || inscription?.detected_language || "";
+
+const normalizeInscription = (inscription, index) => ({
+  ...inscription,
+  inscription_id: getInscriptionId(inscription) || `inscription-${index + 1}`,
+  description: getInscriptionDescription(inscription),
+  image_urls: getInscriptionImages(inscription),
+  original_script: getInscriptionScript(inscription),
+  language_detected: getInscriptionLanguage(inscription),
+});
+
+const getSiteInscriptions = (site) => {
+  const candidates = [
+    site?.inscriptions,
+    site?.inscription,
+    site?.inscription_records,
+    site?.inscriptionRecords,
+    site?.inscription_metadata?.inscriptions,
+    site?.inscription_metadata?.records,
+  ];
+
+  return candidates
+    .flatMap((value) => asArray(value))
+    .filter((value) => value && typeof value === "object")
+    .map(normalizeInscription);
+};
 
 const getHeroImage = (site, gallery) =>
   site?.banner_image ||
@@ -668,9 +717,7 @@ const GallerySection = ({ gallery, siteName, onImageClick }) => {
   );
 };
 
-const InscriptionsSection = ({ site, onInscriptionClick }) => {
-  const inscriptions = asArray(site?.inscriptions);
-
+const InscriptionsSection = ({ inscriptions, onInscriptionClick }) => {
   return (
     <MotionSection>
       <SectionHeader
@@ -685,7 +732,9 @@ const InscriptionsSection = ({ site, onInscriptionClick }) => {
           {inscriptions.map((inscription, index) => {
             const inscriptionId = getInscriptionId(inscription) || `Inscription ${index + 1}`;
             const description = getInscriptionDescription(inscription);
-            const images = asArray(inscription?.image_urls);
+            const images = getInscriptionImages(inscription);
+            const script = getInscriptionScript(inscription);
+            const language = getInscriptionLanguage(inscription);
 
             return (
               <motion.article
@@ -699,7 +748,7 @@ const InscriptionsSection = ({ site, onInscriptionClick }) => {
               >
                 <button
                   type="button"
-                  onClick={() => onInscriptionClick(getInscriptionId(inscription))}
+                  onClick={() => onInscriptionClick(inscriptionId)}
                   className="block h-full w-full text-left"
                 >
                   <div className="relative h-64 overflow-hidden bg-stone-200">
@@ -734,16 +783,16 @@ const InscriptionsSection = ({ site, onInscriptionClick }) => {
                       </p>
                     )}
                     <div className="mt-5 flex flex-wrap gap-2">
-                      {inscription.original_script && (
+                      {script && (
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef0e7] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#566044]">
                           <ScrollText className="h-3.5 w-3.5" />
-                          {inscription.original_script}
+                          {script}
                         </span>
                       )}
-                      {inscription.language_detected && (
+                      {language && (
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-stone-600">
                           <Languages className="h-3.5 w-3.5" />
-                          {inscription.language_detected}
+                          {language}
                         </span>
                       )}
                     </div>
@@ -1268,7 +1317,7 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [language, setLanguage] = useState("en");
   const description = getInscriptionDescription(inscription);
-  const images = asArray(inscription?.image_urls);
+  const images = getInscriptionImages(inscription);
   const inscriptionId = getInscriptionId(inscription);
   const [translatedDescription, setTranslatedDescription] = useState({
     en: description,
@@ -1365,8 +1414,8 @@ const InscriptionDetail = ({ inscription, siteName, onBack, onImageClick }) => {
             {translatedDescription[language]}
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <DataPill icon={ScrollText} label="Original Script" value={inscription.original_script} />
-            <DataPill icon={Languages} label="Language Detected" value={inscription.language_detected} />
+            <DataPill icon={ScrollText} label="Original Script" value={getInscriptionScript(inscription)} />
+            <DataPill icon={Languages} label="Language Detected" value={getInscriptionLanguage(inscription)} />
           </div>
         </article>
       </div>
@@ -1389,7 +1438,7 @@ export default function CaveClient({ site }) {
   const description = getSiteDescription(site);
   const hasArchiveAccess = Boolean(user);
   const visibleDescription = hasArchiveAccess ? description : getPreviewDescription(description);
-  const inscriptions = asArray(site?.inscriptions);
+  const inscriptions = useMemo(() => getSiteInscriptions(site), [site]);
   const selectedInscriptionRecord = inscriptions.find(
     (inscription) => getInscriptionId(inscription) === selectedInscription
   );
@@ -1424,7 +1473,7 @@ export default function CaveClient({ site }) {
     setSelectedInscriptionImage(null);
   };
 
-  const selectedInscriptionImages = asArray(selectedInscriptionRecord?.image_urls);
+  const selectedInscriptionImages = getInscriptionImages(selectedInscriptionRecord);
 
   const handleNextInscriptionImage = () => {
     const currentIndex = selectedInscriptionImages.findIndex((img) => img === selectedInscriptionImage);
@@ -1503,14 +1552,13 @@ export default function CaveClient({ site }) {
                   </div>
                 </MotionSection>
 
+                {!isFort && (
+                  <InscriptionsSection inscriptions={inscriptions} onInscriptionClick={handleInscriptionClick} />
+                )}
+
                 {hasArchiveAccess ? (
                   <>
-                    {isFort ? (
-                      <FortSections site={site} onImageClick={handleImageClick} />
-                    ) : (
-                      <InscriptionsSection site={site} onInscriptionClick={handleInscriptionClick} />
-                    )}
-
+                    {isFort && <FortSections site={site} onImageClick={handleImageClick} />}
                     <HistoricalContextSection site={site} tone={tone} />
                     <SourcesSection site={site} tone={tone} />
                   </>

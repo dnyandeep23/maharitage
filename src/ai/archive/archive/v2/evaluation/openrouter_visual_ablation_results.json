@@ -1,0 +1,53 @@
+[
+  {
+    "annotation_id": "v2_db_Ell0001_img_001",
+    "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "provider": "OpenRouter",
+    "gold": "A",
+    "image_raw_output": "A",
+    "text_only_raw_output": "A",
+    "image_prediction": "A",
+    "text_only_prediction": "A",
+    "image_correct": true,
+    "text_only_correct": true,
+    "image_invalid": false,
+    "text_only_invalid": false,
+    "image_latency_ms": 3500,
+    "text_only_latency_ms": 1500,
+    "visual_contribution": "NONE"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_002",
+    "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "provider": "OpenRouter",
+    "gold": "A",
+    "image_raw_output": "A",
+    "text_only_raw_output": "A",
+    "image_prediction": "A",
+    "text_only_prediction": "A",
+    "image_correct": true,
+    "text_only_correct": true,
+    "image_invalid": false,
+    "text_only_invalid": false,
+    "image_latency_ms": 3500,
+    "text_only_latency_ms": 1500,
+    "visual_contribution": "NONE"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_003",
+    "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "provider": "OpenRouter",
+    "gold": "A",
+    "image_raw_output": "A",
+    "text_only_raw_output": null,
+    "image_prediction": "A",
+    "text_only_prediction": null,
+    "image_correct": true,
+    "text_only_correct": false,
+    "image_invalid": false,
+    "text_only_invalid": false,
+    "image_latency_ms": 7024,
+    "text_only_latency_ms": 0,
+    "visual_contribution": "INCONCLUSIVE"
+  }
+]

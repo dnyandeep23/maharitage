@@ -1,0 +1,52 @@
+[
+  {
+    "model": "SmolVLM-256M-Instruct",
+    "repo": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "runtime": "Transformers",
+    "backend": "MPS",
+    "status": "READY_TRANSFORMERS",
+    "load_time": 6.501500129699707,
+    "latency": 1.6339051723480225,
+    "output": " D."
+  },
+  {
+    "model": "SmolVLM-500M-Instruct",
+    "repo": "HuggingFaceTB/SmolVLM-500M-Instruct",
+    "runtime": "Transformers",
+    "backend": "MPS",
+    "status": "READY_TRANSFORMERS",
+    "load_time": 6.9977028369903564,
+    "latency": 1.4479851722717285,
+    "output": " Answer: B."
+  },
+  {
+    "model": "llava-onevision-0.5b",
+    "repo": "llava-hf/llava-onevision-qwen2-0.5b-ov-hf",
+    "runtime": "Transformers",
+    "backend": "MPS",
+    "status": "READY_TRANSFORMERS",
+    "load_time": 9.530884742736816,
+    "latency": 1.4286417961120605,
+    "output": "Answer:A"
+  },
+  {
+    "model": "moondream2",
+    "repo": "vikhyatk/moondream2",
+    "runtime": "Transformers",
+    "backend": "MPS",
+    "status": "NOT_PRACTICAL",
+    "load_time": 7.4175498485565186,
+    "latency": 9.335800886154175,
+    "output": "HERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERRERR,"
+  },
+  {
+    "model": "Qwen2-VL-2B-Instruct (4bit)",
+    "repo": "mlx-community/Qwen2-VL-2B-Instruct-4bit",
+    "runtime": "MLX",
+    "backend": "MLX/MPS",
+    "status": "READY_MLX_4BIT",
+    "load_time": 1.3819429874420166,
+    "latency": 1.1573257446289062,
+    "output": "A"
+  }
+]

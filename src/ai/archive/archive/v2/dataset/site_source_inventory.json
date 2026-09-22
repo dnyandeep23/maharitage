@@ -1,0 +1,263 @@
+[
+  {
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "heritage_type": "cave",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type",
+      "inscriptions"
+    ],
+    "usable_image_count": 14,
+    "selected_image_ids": [
+      "IMG20251022120741_kbusjk",
+      "IMG_20251028_222042_dmi8uw",
+      "IMG20251022120323_p0dple",
+      "IMG20251022123019_m33tuw",
+      "IMG20251022124327_gazbk8",
+      "IMG20251022124150_skf9qi",
+      "IMG20251022132830_smf1wd",
+      "IMG20251022131500_qvljcm",
+      "IMG20251022131509_pnpr4j",
+      "IMG20251022131906_tf38n5",
+      "IMG20251022132835_khcu2p",
+      "IMG20251022124648_fs5cct",
+      "IMG20251022115704_fvpoj3",
+      "IMG20251022113451_is5pxe"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type",
+      "inscriptions"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Pit0002",
+    "site_name": "The Pitalkhora Caves",
+    "heritage_type": "cave",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type"
+    ],
+    "usable_image_count": 5,
+    "selected_image_ids": [
+      "IMG20251020094702-min_uf4vao",
+      "IMG20251020094940_01-min_ad0pze",
+      "IMG20251020094200_aqnzuc",
+      "IMG20251020093701_cjwbxc",
+      "peepds7zltzsxs3pjuu8"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "heritage_type": "cave",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type",
+      "inscriptions"
+    ],
+    "usable_image_count": 7,
+    "selected_image_ids": [
+      "cave17_qckcsr",
+      "caveimage_rzplhc",
+      "cave19-ajnta_vfjbdc",
+      "Ajanta_viewpoint_erudxh",
+      "cave9ajntaaa_jacqbn",
+      "ajntacave_tuxpwr",
+      "cave9ajnta_lckxsl"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type",
+      "inscriptions"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "heritage_type": "cave",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type",
+      "inscriptions"
+    ],
+    "usable_image_count": 5,
+    "selected_image_ids": [
+      "Kanheri_Caves_prayer_hall_bcuyot",
+      "500px-Kanheri_caves_05_qdbr9l",
+      "Kanheri_Caves_-_Statues_in_cave_02_irvnyv",
+      "Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17",
+      "Kanheri_Cave1_uag05b"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type",
+      "inscriptions"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Ele0005",
+    "site_name": "Elephanta Cave",
+    "heritage_type": "cave",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type"
+    ],
+    "usable_image_count": 1,
+    "selected_image_ids": [
+      "z2pn9x9xls5oaqnbt5k7"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "site_discription",
+      "heritage_type"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "heritage_type": "fort",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "usable_image_count": 4,
+    "selected_image_ids": [
+      "Nagarkhana__Raigad_Fort__India_timvhn",
+      "Inscripted_name_of_the_architect_of_Raigad_zc3y3n",
+      "Raigad_fort_towers_f1gbn4",
+      "Raigad_fort_walls_hidden_in_the_green_jpbuer"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "heritage_type": "fort",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "usable_image_count": 6,
+    "selected_image_ids": [
+      "Pali_darvaja_ggndvg",
+      "Sanjavni_machi_kiadaf",
+      "Suvela_machi_Rajgad_fort__Maharashtra_India_July2015_qlmfad",
+      "padmavti_lake_ml6hkh",
+      "Bali_Khila_Rajgad_Maharashtra_aojiub",
+      "Ballekilla__Rajgad_oqpcne"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "heritage_type": "fort",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "usable_image_count": 4,
+    "selected_image_ids": [
+      "Daulatabad_Fort_llhfkr",
+      "main_yxekvh",
+      "Daulatabad__Aurangabad_-_panoramio__106_oypjrt",
+      "Daulatabad_Fort-51_gsjvsm"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "heritage_type": "fort",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "usable_image_count": 4,
+    "selected_image_ids": [
+      "fort_kpwust",
+      "wall_dml4fo",
+      "temple_drntne",
+      "main_gate_zhudwr"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "concepts_extracted": []
+  },
+  {
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "heritage_type": "fort",
+    "available_source_categories": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "usable_image_count": 5,
+    "selected_image_ids": [
+      "fort_outside_j7tjmf",
+      "IMG20260418124647_sg8rmj",
+      "basin_bt3tsp",
+      "Kalak_Bangadi_Janjira_Fort_tavxsn",
+      "IMG20260418122954_gmhtiu"
+    ],
+    "source_fields_used": [
+      "historical_context",
+      "period",
+      "heritage_type"
+    ],
+    "concepts_extracted": []
+  }
+]

@@ -1,0 +1,299 @@
+{
+  "audit_timestamp": "2026-08-09T12:01:15.458Z",
+  "benchmark_status": "INVALID",
+  "invalidation_reason": "Catastrophic correct_option_index imbalance (100% of questions had correct_option_index = 0 / Option A)",
+  "summary": {
+    "total_questions": 55,
+    "correct_option_index_distribution": {
+      "A": 55,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "predicted_option_distribution": {
+      "A": 55,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "category_distribution": {
+      "Architectural Feature": 32,
+      "Defensive Architecture": 21,
+      "Water Management": 2
+    },
+    "site_distribution": {
+      "Pit0002": 5,
+      "Ell0001": 14,
+      "Aja0003": 7,
+      "Kan0004": 5,
+      "Ele0005": 1,
+      "Fort0001": 4,
+      "Fort0002": 6,
+      "Fort0003": 4,
+      "Fort0004": 4,
+      "Fort0005": 5
+    }
+  },
+  "sample_20_questions": [
+    {
+      "benchmark_id": "gold_v1_001",
+      "site_id": "Pit0002",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251020094702-min_uf4vao' of The Pitalkhora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_002",
+      "site_id": "Pit0002",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251020094940_01-min_ad0pze' of The Pitalkhora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_003",
+      "site_id": "Pit0002",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251020094200_aqnzuc' of The Pitalkhora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_004",
+      "site_id": "Pit0002",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251020093701_cjwbxc' of The Pitalkhora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_005",
+      "site_id": "Pit0002",
+      "question": "Which distinct visual structural feature is visible in photograph 'sites/peepds7zltzsxs3pjuu8' of The Pitalkhora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_006",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022120741_kbusjk' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_007",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG_20251028_222042_dmi8uw' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_008",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022120323_p0dple' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_009",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022123019_m33tuw' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_010",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022124327_gazbk8' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_011",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022124150_skf9qi' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_012",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022132830_smf1wd' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_013",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022131500_qvljcm' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_014",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022131509_pnpr4j' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_015",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022131906_tf38n5' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_016",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022132835_khcu2p' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_017",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022124648_fs5cct' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_018",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022115704_fvpoj3' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_019",
+      "site_id": "Ell0001",
+      "question": "Which distinct visual structural feature is visible in photograph 'IMG20251022113451_is5pxe' of The Ellora Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    },
+    {
+      "benchmark_id": "gold_v1_020",
+      "site_id": "Aja0003",
+      "question": "Which distinct visual structural feature is visible in photograph 'cave17_qckcsr' of The Ajanta Caves?",
+      "options": [
+        "Rock-cut entrance portico supported by stone pillars carved directly into the cliff",
+        "A multi-story timber palace with wooden balconies",
+        "A smooth plastered dome with a gold finial",
+        "A dry-stone watchtower with iron embrasures"
+      ],
+      "correct_option_index": 0,
+      "predicted_option": "A"
+    }
+  ]
+}

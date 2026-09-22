@@ -1,0 +1,106 @@
+[
+  {
+    "annotation_id": "Fort0005_img_002_q001",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288516/IMG20260418124647_sg8rmj.jpg",
+    "cloudinary_public_id": "IMG20260418124647_sg8rmj",
+    "gallery_index": 1,
+    "question": "What structural entrance design is depicted in photograph 'IMG20260418124647_sg8rmj' of Murud-Janjira Fort?",
+    "options": [
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Murud-Janjira Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0005_img_003_q002",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/basin_bt3tsp.jpg",
+    "cloudinary_public_id": "basin_bt3tsp",
+    "gallery_index": 2,
+    "question": "What structural entrance design is depicted in photograph 'basin_bt3tsp' of Murud-Janjira Fort?",
+    "options": [
+      "An unfortified wooden gate post",
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Murud-Janjira Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0005_img_004_q003",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "question_type": "image",
+    "category": "Military Artifact",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288075/Kalak_Bangadi_Janjira_Fort_tavxsn.jpg",
+    "cloudinary_public_id": "Kalak_Bangadi_Janjira_Fort_tavxsn",
+    "gallery_index": 3,
+    "question": "What historic artillery weapon is depicted mounted on the bastion in this photograph at Murud-Janjira Fort?",
+    "options": [
+      "A wooden siege catapult",
+      "An iron mortar shell",
+      "Kalak Bangadi (A massive 3-ton bronze/alloy cannon)",
+      "A modern steel anti-aircraft gun"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a large historical cannon (Kalak Bangadi) positioned on the stone bastion embrasure.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Kalak Bangadi (A massive 3-ton bronze/alloy cannon)"
+    }
+  },
+  {
+    "annotation_id": "Fort0005_img_005_q004",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288514/IMG20260418122954_gmhtiu.jpg",
+    "cloudinary_public_id": "IMG20260418122954_gmhtiu",
+    "gallery_index": 4,
+    "question": "What structural entrance design is depicted in photograph 'IMG20260418122954_gmhtiu' of Murud-Janjira Fort?",
+    "options": [
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "A low brick garden archway",
+      "Fortified stone gateway flanked by heavy masonry bastions"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Murud-Janjira Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  }
+]

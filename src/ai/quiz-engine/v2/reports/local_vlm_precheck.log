@@ -1,0 +1,21 @@
+--- Local VLM Availability Precheck ---
+[22:44:58] HuggingFaceTB/SmolVLM-256M-Instruct | Transformers | DOWNLOAD/LOAD | START
+[22:45:05] HuggingFaceTB/SmolVLM-256M-Instruct | Transformers | DOWNLOAD/LOAD | SUCCESS | 6.5s
+[22:45:05] HuggingFaceTB/SmolVLM-256M-Instruct | Transformers | INFERENCE | START
+[22:45:07] HuggingFaceTB/SmolVLM-256M-Instruct | Transformers | INFERENCE | SUCCESS | 1.6s
+[22:45:07] HuggingFaceTB/SmolVLM-500M-Instruct | Transformers | DOWNLOAD/LOAD | START
+[22:45:14] HuggingFaceTB/SmolVLM-500M-Instruct | Transformers | DOWNLOAD/LOAD | SUCCESS | 7.0s
+[22:45:14] HuggingFaceTB/SmolVLM-500M-Instruct | Transformers | INFERENCE | START
+[22:45:15] HuggingFaceTB/SmolVLM-500M-Instruct | Transformers | INFERENCE | SUCCESS | 1.4s
+[22:45:15] llava-hf/llava-onevision-qwen2-0.5b-ov-hf | Transformers | DOWNLOAD/LOAD | START
+[22:45:25] llava-hf/llava-onevision-qwen2-0.5b-ov-hf | Transformers | DOWNLOAD/LOAD | SUCCESS | 9.5s
+[22:45:25] llava-hf/llava-onevision-qwen2-0.5b-ov-hf | Transformers | INFERENCE | START
+[22:45:26] llava-hf/llava-onevision-qwen2-0.5b-ov-hf | Transformers | INFERENCE | SUCCESS | 1.4s
+[22:45:26] vikhyatk/moondream2 | Transformers | DOWNLOAD/LOAD | START
+[22:45:33] vikhyatk/moondream2 | Transformers | DOWNLOAD/LOAD | SUCCESS | 7.4s
+[22:45:33] vikhyatk/moondream2 | Transformers | INFERENCE | START
+[22:45:43] vikhyatk/moondream2 | Transformers | INFERENCE | SUCCESS | 9.3s
+[22:45:43] mlx-community/Qwen2-VL-2B-Instruct-4bit | MLX | DOWNLOAD/LOAD | START
+[22:45:44] mlx-community/Qwen2-VL-2B-Instruct-4bit | MLX | DOWNLOAD/LOAD | SUCCESS | 1.4s
+[22:45:44] mlx-community/Qwen2-VL-2B-Instruct-4bit | MLX | INFERENCE | START
+[22:45:45] mlx-community/Qwen2-VL-2B-Instruct-4bit | MLX | INFERENCE | SUCCESS | 1.2s

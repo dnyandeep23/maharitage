@@ -1,0 +1,210 @@
+[
+  {
+    "annotation_id": "Fort0001_img_001_q001",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Nagarkhana__Raigad_Fort__India_timvhn.jpg",
+    "cloudinary_public_id": "Nagarkhana__Raigad_Fort__India_timvhn",
+    "gallery_index": 0,
+    "question": "Which historic structure at Raigad Fort is depicted in this photograph featuring monumental stone arches?",
+    "options": [
+      "The Nagarkhana (Royal Drum House & Gateway)",
+      "The Hirkani Buruj Bastion",
+      "The Takmak Tok Execution Cliff",
+      "The Gangasagar Water Reservoir"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows the massive stone-built Nagarkhana gateway with large pointed arches overlooking the royal enclosure.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "The Nagarkhana (Royal Drum House & Gateway)"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_001_q002",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Nagarkhana__Raigad_Fort__India_timvhn.jpg",
+    "cloudinary_public_id": "Nagarkhana__Raigad_Fort__India_timvhn",
+    "gallery_index": 0,
+    "question": "What architectural style characterizes the arched openings visible in this Nagarkhana photograph?",
+    "options": [
+      "Reinforced concrete lintels with glass glazing",
+      "Multi-lobed stone arches flanked by massive fortified masonry walls",
+      "Wooden timber post-and-beam portals",
+      "Dwarfed rock-cut cave doorways"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The structure consists of wide multi-lobed stone arches crafted from heavy dressed basalt blocks.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Multi-lobed stone arches flanked by massive fortified masonry walls"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_001_q003",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Material/Surface",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Nagarkhana__Raigad_Fort__India_timvhn.jpg",
+    "cloudinary_public_id": "Nagarkhana__Raigad_Fort__India_timvhn",
+    "gallery_index": 0,
+    "question": "What construction material and style are visible in the walls of this Nagarkhana structure?",
+    "options": [
+      "Red sun-dried mud bricks",
+      "White marble slabs with inlay work",
+      "Dressed basaltic stone blocks joined with mortar in thick coursed masonry",
+      "Monolithic carved limestone cliffs"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The masonry consists of thick courses of dark, dressed basalt blocks typical of 17th-century Maratha fort construction.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Dressed basaltic stone blocks joined with mortar in thick coursed masonry"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_002_q004",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Inscripted_name_of_the_architect_of_Raigad_zc3y3n.jpg",
+    "cloudinary_public_id": "Inscripted_name_of_the_architect_of_Raigad_zc3y3n",
+    "gallery_index": 1,
+    "question": "Which defensive fortification element is visible in photograph 'Inscripted_name_of_the_architect_of_Raigad_zc3y3n' of Raigad Fort?",
+    "options": [
+      "A wooden palisade fence surrounding a farm",
+      "A glass-clad modern curtain wall",
+      "Subterranean clay pipe drainage channels",
+      "Massive coursed stone fortification walls and rounded defensive bastions"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph displays thick stone ramparts and defensive bastions typical of Maratha fort engineering at Raigad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Massive coursed stone fortification walls and rounded defensive bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_002_q005",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Inscripted_name_of_the_architect_of_Raigad_zc3y3n.jpg",
+    "cloudinary_public_id": "Inscripted_name_of_the_architect_of_Raigad_zc3y3n",
+    "gallery_index": 1,
+    "question": "What structural entrance design is depicted in photograph 'Inscripted_name_of_the_architect_of_Raigad_zc3y3n' of Raigad Fort?",
+    "options": [
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Raigad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_002_q006",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Inscripted_name_of_the_architect_of_Raigad_zc3y3n.jpg",
+    "cloudinary_public_id": "Inscripted_name_of_the_architect_of_Raigad_zc3y3n",
+    "gallery_index": 1,
+    "question": "Which historic fort complex in Maharashtra is depicted in gallery photograph 'Inscripted_name_of_the_architect_of_Raigad_zc3y3n'?",
+    "options": [
+      "The Ajanta Caves",
+      "Raigad Fort",
+      "The Ellora Caves",
+      "The Kanheri Caves"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The heavy stone rampart and bastion architecture shown in photograph 'Inscripted_name_of_the_architect_of_Raigad_zc3y3n' uniquely belongs to Raigad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Raigad Fort"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_003_q007",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Spatial Arrangement",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Raigad_fort_towers_f1gbn4.jpg",
+    "cloudinary_public_id": "Raigad_fort_towers_f1gbn4",
+    "gallery_index": 2,
+    "question": "How are the bastions positioned in relation to the mountain terrain in this photograph?",
+    "options": [
+      "Arranged in a flat grid on a river floodplain",
+      "Submerged along a coastal shoreline",
+      "Strategically anchored along the steep cliff contours to command views over the valley",
+      "Built on timber pilings over a lake"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The stone towers follow the natural contour of the steep mountain ridge overlooking deep valleys.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Strategically anchored along the steep cliff contours to command views over the valley"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_004_q008",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Raigad_fort_walls_hidden_in_the_green_jpbuer.jpg",
+    "cloudinary_public_id": "Raigad_fort_walls_hidden_in_the_green_jpbuer",
+    "gallery_index": 3,
+    "question": "What structural feature is visible amidst the lush monsoon foliage in this photograph of Raigad Fort?",
+    "options": [
+      "A series of white marble domes",
+      "A suspended iron bridge",
+      "A wooden watchtower spire",
+      "Crenellated stone fortification ramparts following the mountain crest"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The thick stone rampart wall with defensive loop-holes extends across the green hill slope.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Crenellated stone fortification ramparts following the mountain crest"
+    }
+  }
+]

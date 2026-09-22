@@ -44,6 +44,77 @@ const chatSchema = new mongoose.Schema({
       },
     },
   ],
+  quizState: {
+    topic: {
+      type: String,
+      default: "",
+    },
+    difficulty: {
+      type: String,
+      default: "Medium",
+    },
+    questionCount: {
+      type: Number,
+      default: 5,
+    },
+    questionType: {
+      type: String,
+      default: "MCQ",
+    },
+    questions: {
+      type: Array,
+      default: [],
+    },
+    currentQuestionIndex: {
+      type: Number,
+      default: 0,
+    },
+    currentIndex: {
+      type: Number,
+      default: 0,
+    },
+    answeredQuestions: {
+      type: Array,
+      default: [],
+    },
+    selectedAnswers: {
+      type: Object,
+      default: {},
+    },
+    score: {
+      type: Number,
+      default: 0,
+    },
+    totalQuestions: {
+      type: Number,
+      default: 0,
+    },
+    accuracy: {
+      type: Number,
+      default: 0,
+    },
+    xp: {
+      type: Number,
+      default: 0,
+    },
+    isComplete: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: String,
+      enum: ["NOT_STARTED", "IN_PROGRESS", "COMPLETED"],
+      default: "NOT_STARTED",
+    },
+    completedAt: {
+      type: Date,
+      default: null,
+    },
+    config: {
+      type: Object,
+      default: {},
+    }
+  },
   createdAt: {
     type: Date,
     default: Date.now,

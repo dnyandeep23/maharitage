@@ -1,0 +1,67 @@
+{
+  "dataset_validity": "VALID",
+  "v4_questions": 55,
+  "v4_valid_items": 55,
+  "v4_invalid_items": 0,
+  "v4_gold_label_distribution": {
+    "A": 14,
+    "B": 14,
+    "C": 14,
+    "D": 13
+  },
+  "base_model": {
+    "v4_base_accuracy": 25.45,
+    "v4_base_correct": 14,
+    "v4_base_distribution": {
+      "A": 55,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "UNKNOWN": 0
+    },
+    "hard_base_accuracy": 24.0,
+    "hard_base_correct": 12,
+    "hard_base_distribution": {
+      "A": 50,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "UNKNOWN": 0
+    },
+    "validation_base_accuracy": 33.33,
+    "validation_base_correct": 1
+  },
+  "lora_model": {
+    "v4_lora_accuracy": 25.45,
+    "v4_lora_correct": 14,
+    "v4_lora_distribution": {
+      "A": 55,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "UNKNOWN": 0
+    },
+    "hard_lora_accuracy": 24.0,
+    "hard_lora_correct": 12,
+    "hard_lora_distribution": {
+      "A": 50,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "UNKNOWN": 0
+    },
+    "validation_lora_accuracy": 33.33,
+    "validation_lora_correct": 1
+  },
+  "changes": {
+    "v4_change": 0.0,
+    "hard_change": 0.0,
+    "validation_change": 0.0
+  },
+  "checkpoint": {
+    "adapter_loaded": true,
+    "adapter_parameters": 0,
+    "checkpoint_path": "/Users/dnyandeep/Dnyandeep/Project/maharitage/src/ai/quiz-engine/v1/training/checkpoints/smolvlm_lora_v1"
+  },
+  "final_decision": "LORA_NO_SIGNIFICANT_IMPROVEMENT"
+}

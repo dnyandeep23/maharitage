@@ -1,0 +1,1252 @@
+[
+  {
+    "annotation_id": "diag_01_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245008/Daulatabad_Fort-51_gsjvsm.jpg",
+    "cloudinary_public_id": "HardGal_01",
+    "diagnostic_group_id": "hardimg_01",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_01_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245008/Daulatabad_Fort-51_gsjvsm.jpg",
+    "cloudinary_public_id": "HardGal_01",
+    "diagnostic_group_id": "hardimg_01",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_01_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245008/Daulatabad_Fort-51_gsjvsm.jpg",
+    "cloudinary_public_id": "HardGal_01",
+    "diagnostic_group_id": "hardimg_01",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_01_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245008/Daulatabad_Fort-51_gsjvsm.jpg",
+    "cloudinary_public_id": "HardGal_01",
+    "diagnostic_group_id": "hardimg_01",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_01_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245008/Daulatabad_Fort-51_gsjvsm.jpg",
+    "cloudinary_public_id": "HardGal_01",
+    "diagnostic_group_id": "hardimg_01",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Intricately carved floral sandstone motifs",
+      "Weathered, coarsely chiseled basalt rock face",
+      "Geometric Islamic stucco strapwork",
+      "Polished granite mirror finish"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_02_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/fort_kpwust.jpg",
+    "cloudinary_public_id": "HardGal_02",
+    "diagnostic_group_id": "hardimg_02",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_02_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/fort_kpwust.jpg",
+    "cloudinary_public_id": "HardGal_02",
+    "diagnostic_group_id": "hardimg_02",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_02_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/fort_kpwust.jpg",
+    "cloudinary_public_id": "HardGal_02",
+    "diagnostic_group_id": "hardimg_02",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_02_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/fort_kpwust.jpg",
+    "cloudinary_public_id": "HardGal_02",
+    "diagnostic_group_id": "hardimg_02",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_02_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/fort_kpwust.jpg",
+    "cloudinary_public_id": "HardGal_02",
+    "diagnostic_group_id": "hardimg_02",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Intricately carved floral sandstone motifs",
+      "Geometric Islamic stucco strapwork",
+      "Weathered, coarsely chiseled basalt rock face",
+      "Polished granite mirror finish"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_03_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/wall_dml4fo.jpg",
+    "cloudinary_public_id": "HardGal_03",
+    "diagnostic_group_id": "hardimg_03",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_03_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/wall_dml4fo.jpg",
+    "cloudinary_public_id": "HardGal_03",
+    "diagnostic_group_id": "hardimg_03",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_03_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/wall_dml4fo.jpg",
+    "cloudinary_public_id": "HardGal_03",
+    "diagnostic_group_id": "hardimg_03",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_03_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/wall_dml4fo.jpg",
+    "cloudinary_public_id": "HardGal_03",
+    "diagnostic_group_id": "hardimg_03",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_03_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/wall_dml4fo.jpg",
+    "cloudinary_public_id": "HardGal_03",
+    "diagnostic_group_id": "hardimg_03",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Intricately carved floral sandstone motifs",
+      "Geometric Islamic stucco strapwork",
+      "Polished granite mirror finish",
+      "Weathered, coarsely chiseled basalt rock face"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_04_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/temple_drntne.jpg",
+    "cloudinary_public_id": "HardGal_04",
+    "diagnostic_group_id": "hardimg_04",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_04_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/temple_drntne.jpg",
+    "cloudinary_public_id": "HardGal_04",
+    "diagnostic_group_id": "hardimg_04",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_04_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/temple_drntne.jpg",
+    "cloudinary_public_id": "HardGal_04",
+    "diagnostic_group_id": "hardimg_04",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_04_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/temple_drntne.jpg",
+    "cloudinary_public_id": "HardGal_04",
+    "diagnostic_group_id": "hardimg_04",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_04_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/temple_drntne.jpg",
+    "cloudinary_public_id": "HardGal_04",
+    "diagnostic_group_id": "hardimg_04",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Weathered, coarsely chiseled basalt rock face",
+      "Intricately carved floral sandstone motifs",
+      "Geometric Islamic stucco strapwork",
+      "Polished granite mirror finish"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_05_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280993/main_gate_zhudwr.jpg",
+    "cloudinary_public_id": "HardGal_05",
+    "diagnostic_group_id": "hardimg_05",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_05_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280993/main_gate_zhudwr.jpg",
+    "cloudinary_public_id": "HardGal_05",
+    "diagnostic_group_id": "hardimg_05",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_05_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280993/main_gate_zhudwr.jpg",
+    "cloudinary_public_id": "HardGal_05",
+    "diagnostic_group_id": "hardimg_05",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_05_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280993/main_gate_zhudwr.jpg",
+    "cloudinary_public_id": "HardGal_05",
+    "diagnostic_group_id": "hardimg_05",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_05_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280993/main_gate_zhudwr.jpg",
+    "cloudinary_public_id": "HardGal_05",
+    "diagnostic_group_id": "hardimg_05",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Intricately carved floral sandstone motifs",
+      "Weathered, coarsely chiseled basalt rock face",
+      "Geometric Islamic stucco strapwork",
+      "Polished granite mirror finish"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_06_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/fort_outside_j7tjmf.jpg",
+    "cloudinary_public_id": "HardGal_06",
+    "diagnostic_group_id": "hardimg_06",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_06_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/fort_outside_j7tjmf.jpg",
+    "cloudinary_public_id": "HardGal_06",
+    "diagnostic_group_id": "hardimg_06",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_06_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/fort_outside_j7tjmf.jpg",
+    "cloudinary_public_id": "HardGal_06",
+    "diagnostic_group_id": "hardimg_06",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_06_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/fort_outside_j7tjmf.jpg",
+    "cloudinary_public_id": "HardGal_06",
+    "diagnostic_group_id": "hardimg_06",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_06_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/fort_outside_j7tjmf.jpg",
+    "cloudinary_public_id": "HardGal_06",
+    "diagnostic_group_id": "hardimg_06",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Intricately carved floral sandstone motifs",
+      "Geometric Islamic stucco strapwork",
+      "Weathered, coarsely chiseled basalt rock face",
+      "Polished granite mirror finish"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_07_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288516/IMG20260418124647_sg8rmj.jpg",
+    "cloudinary_public_id": "HardGal_07",
+    "diagnostic_group_id": "hardimg_07",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_07_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288516/IMG20260418124647_sg8rmj.jpg",
+    "cloudinary_public_id": "HardGal_07",
+    "diagnostic_group_id": "hardimg_07",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_07_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288516/IMG20260418124647_sg8rmj.jpg",
+    "cloudinary_public_id": "HardGal_07",
+    "diagnostic_group_id": "hardimg_07",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_07_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288516/IMG20260418124647_sg8rmj.jpg",
+    "cloudinary_public_id": "HardGal_07",
+    "diagnostic_group_id": "hardimg_07",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_07_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288516/IMG20260418124647_sg8rmj.jpg",
+    "cloudinary_public_id": "HardGal_07",
+    "diagnostic_group_id": "hardimg_07",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Intricately carved floral sandstone motifs",
+      "Geometric Islamic stucco strapwork",
+      "Polished granite mirror finish",
+      "Weathered, coarsely chiseled basalt rock face"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_08_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/basin_bt3tsp.jpg",
+    "cloudinary_public_id": "HardGal_08",
+    "diagnostic_group_id": "hardimg_08",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_08_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/basin_bt3tsp.jpg",
+    "cloudinary_public_id": "HardGal_08",
+    "diagnostic_group_id": "hardimg_08",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_08_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/basin_bt3tsp.jpg",
+    "cloudinary_public_id": "HardGal_08",
+    "diagnostic_group_id": "hardimg_08",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_08_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/basin_bt3tsp.jpg",
+    "cloudinary_public_id": "HardGal_08",
+    "diagnostic_group_id": "hardimg_08",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_08_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/basin_bt3tsp.jpg",
+    "cloudinary_public_id": "HardGal_08",
+    "diagnostic_group_id": "hardimg_08",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Weathered, coarsely chiseled basalt rock face",
+      "Intricately carved floral sandstone motifs",
+      "Geometric Islamic stucco strapwork",
+      "Polished granite mirror finish"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_09_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288075/Kalak_Bangadi_Janjira_Fort_tavxsn.jpg",
+    "cloudinary_public_id": "HardGal_09",
+    "diagnostic_group_id": "hardimg_09",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_09_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288075/Kalak_Bangadi_Janjira_Fort_tavxsn.jpg",
+    "cloudinary_public_id": "HardGal_09",
+    "diagnostic_group_id": "hardimg_09",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_09_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288075/Kalak_Bangadi_Janjira_Fort_tavxsn.jpg",
+    "cloudinary_public_id": "HardGal_09",
+    "diagnostic_group_id": "hardimg_09",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_09_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288075/Kalak_Bangadi_Janjira_Fort_tavxsn.jpg",
+    "cloudinary_public_id": "HardGal_09",
+    "diagnostic_group_id": "hardimg_09",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_09_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288075/Kalak_Bangadi_Janjira_Fort_tavxsn.jpg",
+    "cloudinary_public_id": "HardGal_09",
+    "diagnostic_group_id": "hardimg_09",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Intricately carved floral sandstone motifs",
+      "Weathered, coarsely chiseled basalt rock face",
+      "Geometric Islamic stucco strapwork",
+      "Polished granite mirror finish"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_10_0",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288514/IMG20260418122954_gmhtiu.jpg",
+    "cloudinary_public_id": "HardGal_10",
+    "diagnostic_group_id": "hardimg_10",
+    "diagnostic_mode": "DIRECT_IDENTIFICATION",
+    "question": "What primary architectural feature is directly visible in this image?",
+    "options": [
+      "A robust defensive masonry structure with distinct geometric edges",
+      "A modern steel bridge",
+      "A wooden timber roof",
+      "A painted plaster interior"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "A robust defensive masonry structure with distinct geometric edges",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_10_1",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288514/IMG20260418122954_gmhtiu.jpg",
+    "cloudinary_public_id": "HardGal_10",
+    "diagnostic_group_id": "hardimg_10",
+    "diagnostic_mode": "ATTRIBUTE",
+    "question": "What shape or texture best describes the surface of the visible structure?",
+    "options": [
+      "Smooth polished marble",
+      "Rough, uneven stone block courses",
+      "Corrugated iron sheeting",
+      "Glazed ceramic tiling"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Rough, uneven stone block courses",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_10_2",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288514/IMG20260418122954_gmhtiu.jpg",
+    "cloudinary_public_id": "HardGal_10",
+    "diagnostic_group_id": "hardimg_10",
+    "diagnostic_mode": "COMPARISON",
+    "question": "Which of the following best describes how the stone blocks are fitted together?",
+    "options": [
+      "Perfectly square ashlar masonry",
+      "Brickwork bonded with thick mortar",
+      "Dry-stone irregular interlocking blocks",
+      "Monolithic cast concrete form"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Dry-stone irregular interlocking blocks",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_10_3",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288514/IMG20260418122954_gmhtiu.jpg",
+    "cloudinary_public_id": "HardGal_10",
+    "diagnostic_group_id": "hardimg_10",
+    "diagnostic_mode": "SPATIAL",
+    "question": "Where is the dominant structural projection positioned relative to the wall?",
+    "options": [
+      "Recessed deeply into a central cave",
+      "Suspended above without supports",
+      "Buried entirely underground",
+      "Extending outward from the main structural line"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Extending outward from the main structural line",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  },
+  {
+    "annotation_id": "diag_10_4",
+    "benchmark_id": "hard_image_diagnostic",
+    "site_id": "Fort0005",
+    "site_name": "Murud-Janjira Fort",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288514/IMG20260418122954_gmhtiu.jpg",
+    "cloudinary_public_id": "HardGal_10",
+    "diagnostic_group_id": "hardimg_10",
+    "diagnostic_mode": "FINE_GRAINED",
+    "question": "Which specific type of masonry or carving pattern is visibly present on the surface?",
+    "options": [
+      "Intricately carved floral sandstone motifs",
+      "Geometric Islamic stucco strapwork",
+      "Weathered, coarsely chiseled basalt rock face",
+      "Polished granite mirror finish"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Weathered, coarsely chiseled basalt rock face",
+    "visual_evidence": "The specific structural arrangement and texture is directly visible in the image.",
+    "visual_dependency_score": 3,
+    "ground_truth": {
+      "verification_method": "independent_visual_audit",
+      "visual_claim_verified": true
+    }
+  }
+]

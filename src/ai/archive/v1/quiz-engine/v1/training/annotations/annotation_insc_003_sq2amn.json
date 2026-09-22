@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_003_sq2amn",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Architectural Feature",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763192/insc_003_sq2amn.jpg",
+  "cloudinary_public_id": "insc_003_sq2amn",
+  "question": "Which of the following visual features is predominantly carved into the left surface of the central stone element?",
+  "options": [
+    "Detailed mythological narrative scenes",
+    "Lines of ancient script or inscriptions",
+    "Stylized animal figures in high relief",
+    "A smooth, polished surface with reflective qualities"
+  ],
+  "correct_option_index": 1,
+  "correct_semantic_answer": "The left surface of the central stone element is covered with carved lines of ancient script or inscriptions.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The left half of the prominent vertical stone slab is entirely covered with multiple horizontal lines of carved characters, forming an ancient script, from top to bottom.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

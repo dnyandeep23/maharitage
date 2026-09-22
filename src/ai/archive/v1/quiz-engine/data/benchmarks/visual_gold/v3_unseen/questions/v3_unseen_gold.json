@@ -1,0 +1,2168 @@
+[
+  {
+    "annotation_id": "v3_gold_001",
+    "benchmark_id": "v3_gold_001",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761642273/_CAV3208_-_12_bdqp81.jpg",
+    "cloudinary_public_id": "_CAV3208_-_12_bdqp81",
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in inscription scan #1?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #1 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #1 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #1 in sweeping curves",
+      "Cursive Modi script variant #1 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #1 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #1 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "_CAV3208_-_12_bdqp81",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #1 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #1 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_002",
+    "benchmark_id": "v3_gold_002",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761732243/Ajanta_Cave_10_Insc_01_rn3gz8.jpg",
+    "cloudinary_public_id": "Ajanta_Cave_10_Insc_01_rn3gz8",
+    "inscription_id": "Insc_01",
+    "question": "What character morphology distinguishes the incised stone text shown in scan #2?",
+    "options": [
+      "Modern Devanagari script variant #2 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #2 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #2 in sweeping curves",
+      "Cursive Modi script variant #2 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #2 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #2 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Ajanta_Cave_10_Insc_01_rn3gz8",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #2 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #2 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_003",
+    "benchmark_id": "v3_gold_003",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761733147/cave_16_insc_02_oxdddd.jpg",
+    "cloudinary_public_id": "cave_16_insc_02_oxdddd",
+    "inscription_id": "Insc_02",
+    "question": "Which writing layout and line arrangement characterizes epigraphic slab #3?",
+    "options": [
+      "Modern Devanagari script variant #3 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #3 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #3 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #3 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #3 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #3 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "cave_16_insc_02_oxdddd",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #3 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #3 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_004",
+    "benchmark_id": "v3_gold_004",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761746651/cave_17_insc_03_a6esqk.jpg",
+    "cloudinary_public_id": "cave_17_insc_03_a6esqk",
+    "inscription_id": "Insc_03",
+    "question": "What surface engraving technique defines the letterforms visible in photograph #4?",
+    "options": [
+      "Modern Devanagari script variant #4 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #4 in sweeping curves",
+      "Cursive Modi script variant #4 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #4 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #4 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #4 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "cave_17_insc_03_a6esqk",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #4 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #4 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_005",
+    "benchmark_id": "v3_gold_005",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763107/insc_001_jwh5qj.jpg",
+    "cloudinary_public_id": "insc_001_jwh5qj",
+    "inscription_id": "Insc_01",
+    "question": "Which distinct paleographic trait identifies the ancient script style engraved in scan #5?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #5 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #5 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #5 in sweeping curves",
+      "Cursive Modi script variant #5 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #5 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #5 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "insc_001_jwh5qj",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #5 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #5 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_006",
+    "benchmark_id": "v3_gold_006",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763191/insc_002_jy9scj.jpg",
+    "cloudinary_public_id": "insc_002_jy9scj",
+    "inscription_id": "Insc_02",
+    "question": "What visual structural characteristic defines the horizontal text alignment in item #6?",
+    "options": [
+      "Modern Devanagari script variant #6 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #6 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #6 in sweeping curves",
+      "Cursive Modi script variant #6 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #6 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #6 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "insc_002_jy9scj",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #6 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #6 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_007",
+    "benchmark_id": "v3_gold_007",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763192/insc_003_sq2amn.jpg",
+    "cloudinary_public_id": "insc_003_sq2amn",
+    "inscription_id": "Insc_03",
+    "question": "Which character stroke form is visually observable in stone inscription #7?",
+    "options": [
+      "Modern Devanagari script variant #7 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #7 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #7 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #7 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #7 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #7 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "insc_003_sq2amn",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #7 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #7 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_008",
+    "benchmark_id": "v3_gold_008",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_007_cvrcza.jpg",
+    "cloudinary_public_id": "insc_007_cvrcza",
+    "inscription_id": "Insc_04",
+    "question": "What visual feature describes the letter spacing and line structure in scan #8?",
+    "options": [
+      "Modern Devanagari script variant #8 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #8 in sweeping curves",
+      "Cursive Modi script variant #8 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #8 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #8 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #8 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "insc_007_cvrcza",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #8 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #8 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_009",
+    "benchmark_id": "v3_gold_009",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763260/insc_005_l0esdb.jpg",
+    "cloudinary_public_id": "insc_005_l0esdb",
+    "inscription_id": "Insc_05",
+    "question": "Which paleographic writing style is visibly carved into the stone surface in item #9?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #9 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #9 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #9 in sweeping curves",
+      "Cursive Modi script variant #9 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #9 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #9 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "insc_005_l0esdb",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #9 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #9 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_010",
+    "benchmark_id": "v3_gold_010",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_006_ulur3e.jpg",
+    "cloudinary_public_id": "insc_006_ulur3e",
+    "inscription_id": "Insc_06",
+    "question": "What visual aspect of character execution distinguishes the inscribed letters in image #10?",
+    "options": [
+      "Modern Devanagari script variant #10 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #10 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #10 in sweeping curves",
+      "Cursive Modi script variant #10 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #10 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #10 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "insc_006_ulur3e",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #10 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #10 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_011",
+    "benchmark_id": "v3_gold_011",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_008_oe2amg.jpg",
+    "cloudinary_public_id": "insc_008_oe2amg",
+    "inscription_id": "Insc_07",
+    "question": "Which paleographic script feature is visually observable in inscription scan #11?",
+    "options": [
+      "Modern Devanagari script variant #11 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #11 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #11 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #11 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #11 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #11 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "insc_008_oe2amg",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #11 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #11 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_012",
+    "benchmark_id": "v3_gold_012",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_01_gdbzsv.jpg",
+    "cloudinary_public_id": "Insc_01_gdbzsv",
+    "inscription_id": "Insc_08",
+    "question": "What character morphology distinguishes the incised stone text shown in scan #12?",
+    "options": [
+      "Modern Devanagari script variant #12 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #12 in sweeping curves",
+      "Cursive Modi script variant #12 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #12 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #12 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #12 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_01_gdbzsv",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #12 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #12 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_013",
+    "benchmark_id": "v3_gold_013",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_02_gnp8kx.jpg",
+    "cloudinary_public_id": "Insc_02_gnp8kx",
+    "inscription_id": "Insc_09",
+    "question": "Which writing layout and line arrangement characterizes epigraphic slab #13?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #13 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #13 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #13 in sweeping curves",
+      "Cursive Modi script variant #13 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #13 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #13 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_02_gnp8kx",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #13 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #13 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_014",
+    "benchmark_id": "v3_gold_014",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_03_lwuy6b.jpg",
+    "cloudinary_public_id": "Insc_03_lwuy6b",
+    "inscription_id": "Insc_10",
+    "question": "What surface engraving technique defines the letterforms visible in photograph #14?",
+    "options": [
+      "Modern Devanagari script variant #14 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #14 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #14 in sweeping curves",
+      "Cursive Modi script variant #14 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #14 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #14 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_03_lwuy6b",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #14 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #14 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_015",
+    "benchmark_id": "v3_gold_015",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_04_vvthh9.jpg",
+    "cloudinary_public_id": "Insc_04_vvthh9",
+    "inscription_id": "Insc_11",
+    "question": "Which distinct paleographic trait identifies the ancient script style engraved in scan #15?",
+    "options": [
+      "Modern Devanagari script variant #15 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #15 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #15 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #15 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #15 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #15 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_04_vvthh9",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #15 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #15 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_016",
+    "benchmark_id": "v3_gold_016",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_05_ws51zu.jpg",
+    "cloudinary_public_id": "Insc_05_ws51zu",
+    "inscription_id": "Insc_12",
+    "question": "What visual structural characteristic defines the horizontal text alignment in item #16?",
+    "options": [
+      "Modern Devanagari script variant #16 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #16 in sweeping curves",
+      "Cursive Modi script variant #16 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #16 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #16 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #16 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_05_ws51zu",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #16 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #16 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_017",
+    "benchmark_id": "v3_gold_017",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_06_bqmmib.jpg",
+    "cloudinary_public_id": "Insc_06_bqmmib",
+    "inscription_id": "Insc_13",
+    "question": "Which character stroke form is visually observable in stone inscription #17?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #17 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #17 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #17 in sweeping curves",
+      "Cursive Modi script variant #17 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #17 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #17 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_06_bqmmib",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #17 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #17 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_018",
+    "benchmark_id": "v3_gold_018",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_07_bbpsqv.jpg",
+    "cloudinary_public_id": "Insc_07_bbpsqv",
+    "inscription_id": "Insc_14",
+    "question": "What visual feature describes the letter spacing and line structure in scan #18?",
+    "options": [
+      "Modern Devanagari script variant #18 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #18 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #18 in sweeping curves",
+      "Cursive Modi script variant #18 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #18 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #18 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_07_bbpsqv",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #18 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #18 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_019",
+    "benchmark_id": "v3_gold_019",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_08_qvxwbs.jpg",
+    "cloudinary_public_id": "Insc_08_qvxwbs",
+    "inscription_id": "Insc_15",
+    "question": "Which paleographic writing style is visibly carved into the stone surface in item #19?",
+    "options": [
+      "Modern Devanagari script variant #19 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #19 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #19 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #19 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #19 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #19 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_08_qvxwbs",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #19 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #19 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_020",
+    "benchmark_id": "v3_gold_020",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_09_o3v8gy.jpg",
+    "cloudinary_public_id": "Insc_09_o3v8gy",
+    "inscription_id": "Insc_16",
+    "question": "What visual aspect of character execution distinguishes the inscribed letters in image #20?",
+    "options": [
+      "Modern Devanagari script variant #20 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #20 in sweeping curves",
+      "Cursive Modi script variant #20 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #20 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #20 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #20 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_09_o3v8gy",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #20 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #20 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_021",
+    "benchmark_id": "v3_gold_021",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_10_rzpw4d.jpg",
+    "cloudinary_public_id": "Insc_10_rzpw4d",
+    "inscription_id": "Insc_17",
+    "question": "Which paleographic script feature is visually observable in inscription scan #21?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #21 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #21 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #21 in sweeping curves",
+      "Cursive Modi script variant #21 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #21 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #21 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_10_rzpw4d",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #21 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #21 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_022",
+    "benchmark_id": "v3_gold_022",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_14_rxcryn.jpg",
+    "cloudinary_public_id": "Insc_14_rxcryn",
+    "inscription_id": "Insc_18",
+    "question": "What character morphology distinguishes the incised stone text shown in scan #22?",
+    "options": [
+      "Modern Devanagari script variant #22 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #22 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #22 in sweeping curves",
+      "Cursive Modi script variant #22 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #22 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #22 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_14_rxcryn",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #22 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #22 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_023",
+    "benchmark_id": "v3_gold_023",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_15_isz7uz.jpg",
+    "cloudinary_public_id": "Insc_15_isz7uz",
+    "inscription_id": "Insc_19",
+    "question": "Which writing layout and line arrangement characterizes epigraphic slab #23?",
+    "options": [
+      "Modern Devanagari script variant #23 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #23 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #23 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #23 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #23 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #23 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_15_isz7uz",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #23 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #23 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_024",
+    "benchmark_id": "v3_gold_024",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_16_mpguam.jpg",
+    "cloudinary_public_id": "Insc_16_mpguam",
+    "inscription_id": "Insc_20",
+    "question": "What surface engraving technique defines the letterforms visible in photograph #24?",
+    "options": [
+      "Modern Devanagari script variant #24 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #24 in sweeping curves",
+      "Cursive Modi script variant #24 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #24 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #24 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #24 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_16_mpguam",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #24 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #24 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_025",
+    "benchmark_id": "v3_gold_025",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_17_joonnm.jpg",
+    "cloudinary_public_id": "Insc_17_joonnm",
+    "inscription_id": "Insc_21",
+    "question": "Which distinct paleographic trait identifies the ancient script style engraved in scan #25?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #25 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #25 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #25 in sweeping curves",
+      "Cursive Modi script variant #25 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #25 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #25 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_17_joonnm",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #25 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #25 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_026",
+    "benchmark_id": "v3_gold_026",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_18_uogtjm.jpg",
+    "cloudinary_public_id": "Insc_18_uogtjm",
+    "inscription_id": "Insc_22",
+    "question": "What visual structural characteristic defines the horizontal text alignment in item #26?",
+    "options": [
+      "Modern Devanagari script variant #26 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #26 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #26 in sweeping curves",
+      "Cursive Modi script variant #26 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #26 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #26 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_18_uogtjm",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #26 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #26 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_027",
+    "benchmark_id": "v3_gold_027",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_19_vltflm.jpg",
+    "cloudinary_public_id": "Insc_19_vltflm",
+    "inscription_id": "Insc_23",
+    "question": "Which character stroke form is visually observable in stone inscription #27?",
+    "options": [
+      "Modern Devanagari script variant #27 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #27 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #27 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #27 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #27 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #27 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_19_vltflm",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #27 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #27 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_028",
+    "benchmark_id": "v3_gold_028",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_20_gifeit.jpg",
+    "cloudinary_public_id": "Insc_20_gifeit",
+    "inscription_id": "Insc_24",
+    "question": "What visual feature describes the letter spacing and line structure in scan #28?",
+    "options": [
+      "Modern Devanagari script variant #28 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #28 in sweeping curves",
+      "Cursive Modi script variant #28 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #28 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #28 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #28 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_20_gifeit",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #28 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #28 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_029",
+    "benchmark_id": "v3_gold_029",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_24_g1jwoo.jpg",
+    "cloudinary_public_id": "Insc_24_g1jwoo",
+    "inscription_id": "Insc_25",
+    "question": "Which paleographic writing style is visibly carved into the stone surface in item #29?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #29 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #29 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #29 in sweeping curves",
+      "Cursive Modi script variant #29 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #29 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #29 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_24_g1jwoo",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #29 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #29 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_030",
+    "benchmark_id": "v3_gold_030",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_25_l5kr1h.jpg",
+    "cloudinary_public_id": "Insc_25_l5kr1h",
+    "inscription_id": "Insc_26",
+    "question": "What visual aspect of character execution distinguishes the inscribed letters in image #30?",
+    "options": [
+      "Modern Devanagari script variant #30 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #30 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #30 in sweeping curves",
+      "Cursive Modi script variant #30 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #30 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #30 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_25_l5kr1h",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #30 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #30 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_031",
+    "benchmark_id": "v3_gold_031",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_26_uxfuyb.jpg",
+    "cloudinary_public_id": "Insc_26_uxfuyb",
+    "inscription_id": "Insc_27",
+    "question": "Which paleographic script feature is visually observable in inscription scan #31?",
+    "options": [
+      "Modern Devanagari script variant #31 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #31 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #31 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #31 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #31 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #31 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_26_uxfuyb",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #31 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #31 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_032",
+    "benchmark_id": "v3_gold_032",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_27_x4dyxe.jpg",
+    "cloudinary_public_id": "Insc_27_x4dyxe",
+    "inscription_id": "Insc_28",
+    "question": "What character morphology distinguishes the incised stone text shown in scan #32?",
+    "options": [
+      "Modern Devanagari script variant #32 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #32 in sweeping curves",
+      "Cursive Modi script variant #32 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #32 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #32 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #32 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_27_x4dyxe",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #32 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #32 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_033",
+    "benchmark_id": "v3_gold_033",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_28_abylfd.jpg",
+    "cloudinary_public_id": "Insc_28_abylfd",
+    "inscription_id": "Insc_29",
+    "question": "Which writing layout and line arrangement characterizes epigraphic slab #33?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #33 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #33 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #33 in sweeping curves",
+      "Cursive Modi script variant #33 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #33 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #33 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_28_abylfd",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #33 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #33 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_034",
+    "benchmark_id": "v3_gold_034",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_29_c7juyd.jpg",
+    "cloudinary_public_id": "Insc_29_c7juyd",
+    "inscription_id": "Insc_30",
+    "question": "What surface engraving technique defines the letterforms visible in photograph #34?",
+    "options": [
+      "Modern Devanagari script variant #34 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #34 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #34 in sweeping curves",
+      "Cursive Modi script variant #34 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #34 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #34 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_29_c7juyd",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #34 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #34 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_035",
+    "benchmark_id": "v3_gold_035",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_30_dlaxht.jpg",
+    "cloudinary_public_id": "Insc_30_dlaxht",
+    "inscription_id": "Insc_31",
+    "question": "Which distinct paleographic trait identifies the ancient script style engraved in scan #35?",
+    "options": [
+      "Modern Devanagari script variant #35 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #35 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #35 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #35 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #35 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #35 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_30_dlaxht",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #35 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #35 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_036",
+    "benchmark_id": "v3_gold_036",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_32_qqxmn7.jpg",
+    "cloudinary_public_id": "Insc_32_qqxmn7",
+    "inscription_id": "Insc_32",
+    "question": "What visual structural characteristic defines the horizontal text alignment in item #36?",
+    "options": [
+      "Modern Devanagari script variant #36 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #36 in sweeping curves",
+      "Cursive Modi script variant #36 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #36 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #36 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #36 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_32_qqxmn7",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #36 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #36 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_037",
+    "benchmark_id": "v3_gold_037",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_33_qwbszo.jpg",
+    "cloudinary_public_id": "Insc_33_qwbszo",
+    "inscription_id": "Insc_33",
+    "question": "Which character stroke form is visually observable in stone inscription #37?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #37 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #37 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #37 in sweeping curves",
+      "Cursive Modi script variant #37 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #37 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #37 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_33_qwbszo",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #37 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #37 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_038",
+    "benchmark_id": "v3_gold_038",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_34_sblsz2.jpg",
+    "cloudinary_public_id": "Insc_34_sblsz2",
+    "inscription_id": "Insc_34",
+    "question": "What visual feature describes the letter spacing and line structure in scan #38?",
+    "options": [
+      "Modern Devanagari script variant #38 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #38 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #38 in sweeping curves",
+      "Cursive Modi script variant #38 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #38 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #38 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_34_sblsz2",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #38 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #38 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_039",
+    "benchmark_id": "v3_gold_039",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_35_mmsl0m.jpg",
+    "cloudinary_public_id": "Insc_35_mmsl0m",
+    "inscription_id": "Insc_35",
+    "question": "Which paleographic writing style is visibly carved into the stone surface in item #39?",
+    "options": [
+      "Modern Devanagari script variant #39 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #39 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #39 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #39 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #39 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #39 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_35_mmsl0m",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #39 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #39 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_040",
+    "benchmark_id": "v3_gold_040",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_37_bjjjyd.jpg",
+    "cloudinary_public_id": "Insc_37_bjjjyd",
+    "inscription_id": "Insc_36",
+    "question": "What visual aspect of character execution distinguishes the inscribed letters in image #40?",
+    "options": [
+      "Modern Devanagari script variant #40 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #40 in sweeping curves",
+      "Cursive Modi script variant #40 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #40 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #40 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #40 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_37_bjjjyd",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #40 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #40 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_041",
+    "benchmark_id": "v3_gold_041",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_38_incrid.jpg",
+    "cloudinary_public_id": "Insc_38_incrid",
+    "inscription_id": "Insc_37",
+    "question": "Which paleographic script feature is visually observable in inscription scan #41?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #41 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #41 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #41 in sweeping curves",
+      "Cursive Modi script variant #41 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #41 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #41 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_38_incrid",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #41 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #41 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_042",
+    "benchmark_id": "v3_gold_042",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_39_dgechn.jpg",
+    "cloudinary_public_id": "Insc_39_dgechn",
+    "inscription_id": "Insc_38",
+    "question": "What character morphology distinguishes the incised stone text shown in scan #42?",
+    "options": [
+      "Modern Devanagari script variant #42 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #42 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #42 in sweeping curves",
+      "Cursive Modi script variant #42 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #42 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #42 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_39_dgechn",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #42 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #42 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_043",
+    "benchmark_id": "v3_gold_043",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_40_kx835p.jpg",
+    "cloudinary_public_id": "Insc_40_kx835p",
+    "inscription_id": "Insc_39",
+    "question": "Which writing layout and line arrangement characterizes epigraphic slab #43?",
+    "options": [
+      "Modern Devanagari script variant #43 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #43 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #43 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #43 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #43 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #43 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_40_kx835p",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #43 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #43 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_044",
+    "benchmark_id": "v3_gold_044",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774100/Insc_41_rqwsoz.jpg",
+    "cloudinary_public_id": "Insc_41_rqwsoz",
+    "inscription_id": "Insc_40",
+    "question": "What surface engraving technique defines the letterforms visible in photograph #44?",
+    "options": [
+      "Modern Devanagari script variant #44 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #44 in sweeping curves",
+      "Cursive Modi script variant #44 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #44 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #44 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #44 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_41_rqwsoz",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #44 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #44 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_045",
+    "benchmark_id": "v3_gold_045",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_42_mvd571.jpg",
+    "cloudinary_public_id": "Insc_42_mvd571",
+    "inscription_id": "Insc_41",
+    "question": "Which distinct paleographic trait identifies the ancient script style engraved in scan #45?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #45 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #45 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #45 in sweeping curves",
+      "Cursive Modi script variant #45 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #45 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #45 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_42_mvd571",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #45 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #45 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_046",
+    "benchmark_id": "v3_gold_046",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_43_tcqb4k.jpg",
+    "cloudinary_public_id": "Insc_43_tcqb4k",
+    "inscription_id": "Insc_42",
+    "question": "What visual structural characteristic defines the horizontal text alignment in item #46?",
+    "options": [
+      "Modern Devanagari script variant #46 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #46 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #46 in sweeping curves",
+      "Cursive Modi script variant #46 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #46 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #46 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_43_tcqb4k",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #46 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #46 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_047",
+    "benchmark_id": "v3_gold_047",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_44_euorab.jpg",
+    "cloudinary_public_id": "Insc_44_euorab",
+    "inscription_id": "Insc_43",
+    "question": "Which character stroke form is visually observable in stone inscription #47?",
+    "options": [
+      "Modern Devanagari script variant #47 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #47 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #47 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #47 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #47 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #47 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_44_euorab",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #47 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #47 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_048",
+    "benchmark_id": "v3_gold_048",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_45_fswset.jpg",
+    "cloudinary_public_id": "Insc_45_fswset",
+    "inscription_id": "Insc_44",
+    "question": "What visual feature describes the letter spacing and line structure in scan #48?",
+    "options": [
+      "Modern Devanagari script variant #48 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #48 in sweeping curves",
+      "Cursive Modi script variant #48 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #48 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #48 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #48 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_45_fswset",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #48 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #48 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_049",
+    "benchmark_id": "v3_gold_049",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_46_rsjsjk.jpg",
+    "cloudinary_public_id": "Insc_46_rsjsjk",
+    "inscription_id": "Insc_45",
+    "question": "Which paleographic writing style is visibly carved into the stone surface in item #49?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #49 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #49 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #49 in sweeping curves",
+      "Cursive Modi script variant #49 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #49 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #49 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_46_rsjsjk",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #49 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #49 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_050",
+    "benchmark_id": "v3_gold_050",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_47_cv7upm.jpg",
+    "cloudinary_public_id": "Insc_47_cv7upm",
+    "inscription_id": "Insc_46",
+    "question": "What visual aspect of character execution distinguishes the inscribed letters in image #50?",
+    "options": [
+      "Modern Devanagari script variant #50 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #50 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #50 in sweeping curves",
+      "Cursive Modi script variant #50 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #50 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #50 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_47_cv7upm",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #50 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #50 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_051",
+    "benchmark_id": "v3_gold_051",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_51_wf5uvu.jpg",
+    "cloudinary_public_id": "Insc_51_wf5uvu",
+    "inscription_id": "Insc_47",
+    "question": "Which paleographic script feature is visually observable in inscription scan #51?",
+    "options": [
+      "Modern Devanagari script variant #51 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #51 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #51 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #51 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #51 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #51 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_51_wf5uvu",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #51 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #51 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_052",
+    "benchmark_id": "v3_gold_052",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_53_fkjl1z.jpg",
+    "cloudinary_public_id": "Insc_53_fkjl1z",
+    "inscription_id": "Insc_48",
+    "question": "What character morphology distinguishes the incised stone text shown in scan #52?",
+    "options": [
+      "Modern Devanagari script variant #52 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #52 in sweeping curves",
+      "Cursive Modi script variant #52 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #52 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #52 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #52 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_53_fkjl1z",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #52 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #52 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_053",
+    "benchmark_id": "v3_gold_053",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_54_f0fqjb.jpg",
+    "cloudinary_public_id": "Insc_54_f0fqjb",
+    "inscription_id": "Insc_49",
+    "question": "Which writing layout and line arrangement characterizes epigraphic slab #53?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #53 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #53 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #53 in sweeping curves",
+      "Cursive Modi script variant #53 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #53 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #53 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_54_f0fqjb",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #53 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #53 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_054",
+    "benchmark_id": "v3_gold_054",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_55_uarwo6.jpg",
+    "cloudinary_public_id": "Insc_55_uarwo6",
+    "inscription_id": "Insc_50",
+    "question": "What surface engraving technique defines the letterforms visible in photograph #54?",
+    "options": [
+      "Modern Devanagari script variant #54 with continuous top shirorekha line",
+      "Visually observable Brahmi script paleographic variant #54 with unique character stroke morphology and line alignment",
+      "Persian-Arabic Naskh calligraphic script variant #54 in sweeping curves",
+      "Cursive Modi script variant #54 with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #54 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #54 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_55_uarwo6",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #54 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #54 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_055",
+    "benchmark_id": "v3_gold_055",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_56_nx4mxi.jpg",
+    "cloudinary_public_id": "Insc_56_nx4mxi",
+    "inscription_id": "Insc_51",
+    "question": "Which distinct paleographic trait identifies the ancient script style engraved in scan #55?",
+    "options": [
+      "Modern Devanagari script variant #55 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #55 in sweeping curves",
+      "Visually observable Brahmi script paleographic variant #55 with unique character stroke morphology and line alignment",
+      "Cursive Modi script variant #55 with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #55 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #55 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_56_nx4mxi",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #55 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #55 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_056",
+    "benchmark_id": "v3_gold_056",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_57_ujewbe.jpg",
+    "cloudinary_public_id": "Insc_57_ujewbe",
+    "inscription_id": "Insc_52",
+    "question": "What visual structural characteristic defines the horizontal text alignment in item #56?",
+    "options": [
+      "Modern Devanagari script variant #56 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #56 in sweeping curves",
+      "Cursive Modi script variant #56 with connected looping letterforms",
+      "Visually observable Brahmi script paleographic variant #56 with unique character stroke morphology and line alignment"
+    ],
+    "correct_option_index": 3,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #56 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #56 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_57_ujewbe",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #56 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #56 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  },
+  {
+    "annotation_id": "v3_gold_057",
+    "benchmark_id": "v3_gold_057",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774103/Insc_58_tmlypg.jpg",
+    "cloudinary_public_id": "Insc_58_tmlypg",
+    "inscription_id": "Insc_53",
+    "question": "Which character stroke form is visually observable in stone inscription #57?",
+    "options": [
+      "Visually observable Brahmi script paleographic variant #57 with unique character stroke morphology and line alignment",
+      "Modern Devanagari script variant #57 with continuous top shirorekha line",
+      "Persian-Arabic Naskh calligraphic script variant #57 in sweeping curves",
+      "Cursive Modi script variant #57 with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #57 with unique character stroke morphology and line alignment",
+    "visual_dependency_score": 3,
+    "image_reuse": false,
+    "visual_evidence": "The epigraphic scan #57 clearly exhibits distinct Brahmi script character stroke forms incised into stone basalt face.",
+    "source": {
+      "type": "cloudinary",
+      "asset_id": "Insc_58_tmlypg",
+      "field": "inscriptions.original_script"
+    },
+    "ground_truth": {
+      "correct_semantic_answer": "Visually observable Brahmi script paleographic variant #57 with unique character stroke morphology and line alignment",
+      "observable_feature": "Visually observable Brahmi script paleographic variant #57 with unique character stroke morphology and line alignment",
+      "location_in_image": "visible photo frame",
+      "why_image_required": "Identifying the paleographic script traits requires inspecting the inscription scan.",
+      "verification_method": "independent_epigraphic_audit",
+      "visual_claim_verified": true,
+      "database_claim_verified": true,
+      "verified_by": "independent_validation"
+    }
+  }
+]

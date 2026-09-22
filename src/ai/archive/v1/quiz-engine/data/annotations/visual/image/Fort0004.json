@@ -1,0 +1,80 @@
+[
+  {
+    "annotation_id": "Fort0004_img_002_q001",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/wall_dml4fo.jpg",
+    "cloudinary_public_id": "wall_dml4fo",
+    "gallery_index": 1,
+    "question": "What structural entrance design is depicted in photograph 'wall_dml4fo' of Sindhudurg Fort?",
+    "options": [
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Sindhudurg Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_img_003_q002",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/temple_drntne.jpg",
+    "cloudinary_public_id": "temple_drntne",
+    "gallery_index": 2,
+    "question": "What structural entrance design is depicted in photograph 'temple_drntne' of Sindhudurg Fort?",
+    "options": [
+      "An unfortified wooden gate post",
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Sindhudurg Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_img_004_q003",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280993/main_gate_zhudwr.jpg",
+    "cloudinary_public_id": "main_gate_zhudwr",
+    "gallery_index": 3,
+    "question": "How is the main entrance (Dilli Darwaza) of Sindhudurg Fort strategically designed as seen in this photograph?",
+    "options": [
+      "A high white archway visible from miles out at sea",
+      "A straight open gap in a low stone wall",
+      "Concealed between two curving bastions so it is invisible from the open sea until approached closely",
+      "A wooden drawbridge spanning a river"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The gateway is cleverly tucked in an S-curve between two curved bastions, disguising its location from ships.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Concealed between two curving bastions so it is invisible from the open sea until approached closely"
+    }
+  }
+]

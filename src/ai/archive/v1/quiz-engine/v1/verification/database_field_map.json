@@ -1,0 +1,55 @@
+{
+  "common_fields": {
+    "site_id": { "path": "site_id", "type": "string", "category": "Identification", "question_template": "What is the unique site identifier for {site_name}?" },
+    "site_name": { "path": "site_name", "type": "string", "category": "Identification", "question_template": "What is the official name of this heritage site?" },
+    "heritage_type": { "path": "heritage_type", "type": "string", "category": "Classification", "question_template": "What is the official heritage classification of {site_name}?" },
+    "h_type": { "path": "h_type", "type": "string", "category": "Classification", "question_template": "What broad category does {site_name} belong to?" },
+    "period": { "path": "period", "type": "string", "category": "Chronology", "question_template": "What historical period is associated with {site_name}?" },
+    "site_discription": { "path": "site_discription", "type": "string", "category": "Description", "skip_question": true },
+    "site_description": { "path": "site_description", "type": "string", "category": "Description", "skip_question": true }
+  },
+  "location_fields": {
+    "district": { "path": "location.district", "type": "string", "category": "Location", "question_template": "In which district of Maharashtra is {site_name} located?" },
+    "state": { "path": "location.state", "type": "string", "category": "Location", "question_template": "In which Indian state is {site_name} located?" },
+    "country": { "path": "location.country", "type": "string", "category": "Location", "question_template": "In which country is {site_name} located?" },
+    "latitude": { "path": "location.latitude", "type": "number", "category": "Location", "question_template": "What is the approximate latitude of {site_name}?" },
+    "longitude": { "path": "location.longitude", "type": "number", "category": "Location", "question_template": "What is the approximate longitude of {site_name}?" },
+    "region": { "path": "location.region", "type": "string", "category": "Location", "question_template": "In which region of Maharashtra is {site_name} situated?" },
+    "terrain": { "path": "location.terrain", "type": "string", "category": "Location", "question_template": "What type of terrain characterizes {site_name}?" }
+  },
+  "historical_context_fields": {
+    "ruler_or_dynasty": { "path": "historical_context.ruler_or_dynasty", "type": "string", "category": "Historical Context", "question_template": "Which ruler or dynasty is primarily associated with {site_name}?" },
+    "approx_date": { "path": "historical_context.approx_date", "type": "string", "category": "Chronology", "question_template": "What is the approximate date of major activity at {site_name}?" },
+    "cultural_significance": { "path": "historical_context.cultural_significance", "type": "string", "category": "Cultural Significance", "question_template": "What is the cultural significance of {site_name}?" },
+    "related_figures": { "path": "historical_context.related_figures", "type": "array", "category": "Historical Context", "question_template": "Which historical figures are associated with {site_name}?" },
+    "original_name": { "path": "historical_context.original_name", "type": "string", "category": "Historical Context", "question_template": "What was the original historical name of {site_name}?" },
+    "constructed_by": { "path": "historical_context.constructed_by", "type": "string", "category": "Historical Context", "question_template": "Who constructed or rebuilt {site_name}?" },
+    "political_role": { "path": "historical_context.political_role", "type": "string", "category": "Historical Context", "question_template": "What political role did {site_name} serve?" }
+  },
+  "fort_specific_fields": {
+    "elevation_meters": { "path": "elevation.meters", "type": "number", "category": "Geography", "question_template": "What is the elevation of {site_name} in meters?" },
+    "elevation_feet": { "path": "elevation.feet", "type": "number", "category": "Geography", "question_template": "What is the elevation of {site_name} in feet?" },
+    "area_description": { "path": "area_description", "type": "string", "category": "Geography", "question_template": "How is the area of {site_name} described?" }
+  },
+  "verification_fields": {
+    "verification_authority": { "path": "verification_authority", "type": "object", "category": "Authority", "question_template": "Which authority curates and protects {site_name}?" }
+  },
+  "fort_architectural_feature_types": [
+    "entrances",
+    "bastions",
+    "water_management",
+    "structures"
+  ],
+  "fort_chronology_fields": {
+    "ruling_powers_chronology": { "path": "ruling_powers_chronology", "type": "array_of_objects", "category": "Chronology", "object_keys": ["power", "period"] },
+    "historical_events": { "path": "historical_events", "type": "array_of_objects", "category": "Historical Events", "object_keys": ["event", "year", "description"] }
+  },
+  "inscription_fields": {
+    "Inscription_id": { "category": "Epigraphy" },
+    "original_script": { "category": "Epigraphy" },
+    "language_detected": { "category": "Epigraphy" },
+    "discription": { "category": "Epigraphy" },
+    "translations.english": { "category": "Epigraphy" },
+    "translations.hindi": { "category": "Epigraphy" }
+  }
+}

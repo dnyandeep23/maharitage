@@ -1,0 +1,534 @@
+{
+  "audit_timestamp": "2026-08-09T11:11:17.166Z",
+  "dataset_totals": {
+    "text": 602,
+    "image": 550,
+    "inscription": 624,
+    "total": 1776
+  },
+  "sample_sizes": {
+    "site_balanced": {
+      "text": 100,
+      "image": 100,
+      "inscription": 30
+    },
+    "random_cross_dataset": 50,
+    "total_sampled": 280
+  },
+  "text_audit": {
+    "pass": 82,
+    "fail": 0,
+    "ambiguous": 18,
+    "failures": []
+  },
+  "image_audit": {
+    "total_sampled": 100,
+    "url_accessibility": {
+      "accessible": 100,
+      "failed": 0
+    },
+    "visual_dependency_classification": {
+      "TRUE_VISUAL": 40,
+      "DATABASE_ONLY": 49,
+      "MIXED": 11,
+      "INVALID": 0
+    },
+    "image_dependency_scores": {
+      "0": 8,
+      "1": 41,
+      "2": 11,
+      "3": 40
+    },
+    "category_distribution": {
+      "Geographical Context": 8,
+      "Historical Patron": 10,
+      "Visual Material": 6,
+      "Chronological Era": 9,
+      "Visual Identification": 15,
+      "Heritage Classification": 11,
+      "Architectural Feature": 12,
+      "Monument Component": 7,
+      "Site Scale": 11,
+      "Cultural Context": 11
+    },
+    "option_index": {
+      "correct": 100,
+      "failed": 0
+    },
+    "template_usage": [
+      {
+        "template": "Which heritage site is depicted in gallery photograph #N?",
+        "count": 15
+      },
+      {
+        "template": "What primary architectural feature is visible in gallery photograph #N of {SITE}?",
+        "count": 12
+      },
+      {
+        "template": "Based on the structure visible in photograph #N, what type of heritage monument is {SITE}?",
+        "count": 11
+      },
+      {
+        "template": "Based on photograph #N, what is the approximate scale or extent of {SITE}?",
+        "count": 11
+      },
+      {
+        "template": "What cultural or religious tradition does the monument shown in photograph #N of {SITE} represent?",
+        "count": 11
+      },
+      {
+        "template": "Which dynasty or ruler patronized the construction depicted in photograph #N of {SITE}?",
+        "count": 10
+      },
+      {
+        "template": "To which historical period does the architecture shown in photograph #N of {SITE} belong?",
+        "count": 9
+      },
+      {
+        "template": "The structure shown in photograph #N of {SITE} is located in which district?",
+        "count": 8
+      },
+      {
+        "template": "What structural component is prominently visible in photograph #N of {SITE}?",
+        "count": 7
+      },
+      {
+        "template": "What natural rock or building material is visible in photograph #N of {SITE}?",
+        "count": 6
+      }
+    ]
+  },
+  "inscription_audit": {
+    "total_sampled": 30,
+    "url_accessibility": {
+      "accessible": 30,
+      "failed": 0
+    },
+    "visual_dependency_classification": {
+      "VISUALLY_ANSWERABLE": 0,
+      "DATABASE_GROUNDED_IMAGE_CONTEXTUAL": 26,
+      "DATABASE_ONLY": 0,
+      "INVALID": 0,
+      "MIXED": 4
+    },
+    "dependency_scores": {
+      "0": 0,
+      "1": 4,
+      "2": 26,
+      "3": 0
+    },
+    "category_distribution": {
+      "Epigraphy": 30
+    },
+    "ground_truth": {
+      "pass": 30,
+      "fail": 0,
+      "failures": []
+    }
+  },
+  "distractor_audit": {
+    "GOOD": 226,
+    "WEAK": 4,
+    "INVALID": 0,
+    "sample_issues": [
+      {
+        "annotation_id": "Aja0003_insc_003_q034",
+        "quality": "WEAK",
+        "issues": [
+          "3 generic/nonsense distractor(s)"
+        ]
+      },
+      {
+        "annotation_id": "Aja0003_insc_001_q010",
+        "quality": "WEAK",
+        "issues": [
+          "2 generic/nonsense distractor(s)"
+        ]
+      },
+      {
+        "annotation_id": "Aja0003_insc_002_q022",
+        "quality": "WEAK",
+        "issues": [
+          "3 generic/nonsense distractor(s)"
+        ]
+      },
+      {
+        "annotation_id": "Kan0004_insc_029_q302",
+        "quality": "WEAK",
+        "issues": [
+          "2 generic/nonsense distractor(s)"
+        ]
+      }
+    ]
+  },
+  "option_distribution": {
+    "text": {
+      "0": 154,
+      "1": 151,
+      "2": 150,
+      "3": 147
+    },
+    "image": {
+      "0": 140,
+      "1": 140,
+      "2": 135,
+      "3": 135
+    },
+    "inscription": {
+      "0": 156,
+      "1": 156,
+      "2": 156,
+      "3": 156
+    },
+    "global": {
+      "0": 450,
+      "1": 447,
+      "2": 441,
+      "3": 438
+    }
+  },
+  "duplicate_audit": {
+    "exact_duplicates": 0,
+    "normalized_duplicates": 0,
+    "semantic_duplicates": 208,
+    "sample_pairs": [
+      {
+        "type": "semantic(0.78)",
+        "a": "Aja0003_text_007",
+        "b": "Aja0003_text_008",
+        "qa": "What is the approximate latitude of The Ajanta Caves?",
+        "qb": "What is the approximate longitude of The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.78)",
+        "a": "Aja0003_text_026",
+        "b": "Aja0003_text_027",
+        "qa": "Is Buddha historically connected to The Ajanta Caves?",
+        "qb": "Is Bodhisattvas historically connected to The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_029",
+        "b": "Aja0003_text_032",
+        "qa": "What script is used in Insc_01 at The Ajanta Caves?",
+        "qb": "What script is used in Insc_02 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_029",
+        "b": "Aja0003_text_035",
+        "qa": "What script is used in Insc_01 at The Ajanta Caves?",
+        "qb": "What script is used in Insc_03 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_030",
+        "b": "Aja0003_text_033",
+        "qa": "What language is detected in Insc_01 at The Ajanta Caves?",
+        "qb": "What language is detected in Insc_02 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_030",
+        "b": "Aja0003_text_036",
+        "qa": "What language is detected in Insc_01 at The Ajanta Caves?",
+        "qb": "What language is detected in Insc_03 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_031",
+        "b": "Aja0003_text_034",
+        "qa": "What is the English translation of Insc_01 at The Ajanta Caves?",
+        "qb": "What is the English translation of Insc_02 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_031",
+        "b": "Aja0003_text_037",
+        "qa": "What is the English translation of Insc_01 at The Ajanta Caves?",
+        "qb": "What is the English translation of Insc_03 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_032",
+        "b": "Aja0003_text_035",
+        "qa": "What script is used in Insc_02 at The Ajanta Caves?",
+        "qb": "What script is used in Insc_03 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_033",
+        "b": "Aja0003_text_036",
+        "qa": "What language is detected in Insc_02 at The Ajanta Caves?",
+        "qb": "What language is detected in Insc_03 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.82)",
+        "a": "Aja0003_text_034",
+        "b": "Aja0003_text_037",
+        "qa": "What is the English translation of Insc_02 at The Ajanta Caves?",
+        "qb": "What is the English translation of Insc_03 at The Ajanta Caves?"
+      },
+      {
+        "type": "semantic(0.78)",
+        "a": "Ele0005_text_007",
+        "b": "Ele0005_text_008",
+        "qa": "What is the approximate latitude of Elephanta Cave?",
+        "qb": "What is the approximate longitude of Elephanta Cave?"
+      },
+      {
+        "type": "semantic(0.78)",
+        "a": "Ell0001_text_007",
+        "b": "Ell0001_text_008",
+        "qa": "What is the approximate latitude of The Ellora Caves?",
+        "qb": "What is the approximate longitude of The Ellora Caves?"
+      },
+      {
+        "type": "semantic(0.78)",
+        "a": "Ell0001_text_026",
+        "b": "Ell0001_text_027",
+        "qa": "Is Shiva historically connected to The Ellora Caves?",
+        "qb": "Is Vishnu historically connected to The Ellora Caves?"
+      },
+      {
+        "type": "semantic(0.78)",
+        "a": "Ell0001_text_026",
+        "b": "Ell0001_text_028",
+        "qa": "Is Shiva historically connected to The Ellora Caves?",
+        "qb": "Is Buddha historically connected to The Ellora Caves?"
+      }
+    ]
+  },
+  "source_field_audit": {
+    "valid": 602,
+    "missing_field": 0,
+    "value_mismatch": 0,
+    "failures": []
+  },
+  "option_index_verification": {
+    "valid": 1776,
+    "invalid": 0,
+    "failures": []
+  },
+  "uniqueness_audit": {
+    "UNIQUE": 187,
+    "PARAPHRASE": 32,
+    "DUPLICATE": 11
+  },
+  "llm_generation_audit": {
+    "grounded": 1776,
+    "potentially_unsupported": 0,
+    "flagged": []
+  },
+  "site_summary": {
+    "Aja0003": {
+      "site_name": "The Ajanta Caves",
+      "heritage_type": "Buddhist Rock-Cut Monastic Complex",
+      "text": 36,
+      "image": 70,
+      "inscription": 36,
+      "total": 142
+    },
+    "Ele0005": {
+      "site_name": "Elephanta Cave",
+      "heritage_type": "Hindu Rock-Cut Cave Temple Complex",
+      "text": 26,
+      "image": 10,
+      "inscription": 0,
+      "total": 36
+    },
+    "Ell0001": {
+      "site_name": "The Ellora Caves",
+      "heritage_type": "Multi-Religious Rock-Cut Cave Complex (Buddhist, Hindu, and Jain)",
+      "text": 31,
+      "image": 140,
+      "inscription": 44,
+      "total": 215
+    },
+    "Fort0001": {
+      "site_name": "Raigad Fort",
+      "heritage_type": "Hill Fort",
+      "text": 93,
+      "image": 40,
+      "inscription": 0,
+      "total": 133
+    },
+    "Fort0002": {
+      "site_name": "Rajgad Fort",
+      "heritage_type": "Hill Fort",
+      "text": 72,
+      "image": 60,
+      "inscription": 0,
+      "total": 132
+    },
+    "Fort0003": {
+      "site_name": "Devgiri Fort (Daulatabad Fort)",
+      "heritage_type": "Hill Fort (conical rock)",
+      "text": 104,
+      "image": 40,
+      "inscription": 0,
+      "total": 144
+    },
+    "Fort0004": {
+      "site_name": "Sindhudurg Fort",
+      "heritage_type": "Sea Fort (Island)",
+      "text": 73,
+      "image": 40,
+      "inscription": 0,
+      "total": 113
+    },
+    "Fort0005": {
+      "site_name": "Murud-Janjira Fort",
+      "heritage_type": "Sea Fort (Island)",
+      "text": 81,
+      "image": 50,
+      "inscription": 0,
+      "total": 131
+    },
+    "Kan0004": {
+      "site_name": "The Kanheri Caves",
+      "heritage_type": "Buddhist Rock-Cut Monastic and University Complex",
+      "text": 59,
+      "image": 50,
+      "inscription": 544,
+      "total": 653
+    },
+    "Pit0002": {
+      "site_name": "The Pitalkhora Caves",
+      "heritage_type": "Buddhist Rock-Cut Monastic Complex",
+      "text": 27,
+      "image": 50,
+      "inscription": 0,
+      "total": 77
+    }
+  },
+  "empty_files_found": [
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Ele0005.json",
+      "type": "inscription",
+      "site_id": "Ele0005",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0001.json",
+      "type": "inscription",
+      "site_id": "Fort0001",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0002.json",
+      "type": "inscription",
+      "site_id": "Fort0002",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0003.json",
+      "type": "inscription",
+      "site_id": "Fort0003",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0004.json",
+      "type": "inscription",
+      "site_id": "Fort0004",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0005.json",
+      "type": "inscription",
+      "site_id": "Fort0005",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Pit0002.json",
+      "type": "inscription",
+      "site_id": "Pit0002",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    }
+  ],
+  "empty_files_removed": [
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Ele0005.json",
+      "type": "inscription",
+      "site_id": "Ele0005",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0001.json",
+      "type": "inscription",
+      "site_id": "Fort0001",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0002.json",
+      "type": "inscription",
+      "site_id": "Fort0002",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0003.json",
+      "type": "inscription",
+      "site_id": "Fort0003",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0004.json",
+      "type": "inscription",
+      "site_id": "Fort0004",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Fort0005.json",
+      "type": "inscription",
+      "site_id": "Fort0005",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    },
+    {
+      "path": "src/ai/quiz-engine/data/annotations/visual/inscription/Pit0002.json",
+      "type": "inscription",
+      "site_id": "Pit0002",
+      "reason": "Site has no applicable inscriptions — empty is expected",
+      "size_bytes": 2,
+      "legitimate_empty": true
+    }
+  ],
+  "empty_json_files_removed": 7,
+  "post_cleanup": {
+    "remaining_empty": 0,
+    "valid_files": 23,
+    "sites_represented": 10
+  },
+  "training_readiness": {
+    "decision": "NOT READY",
+    "issues": [
+      "49.0% of sampled image questions are DATABASE_ONLY (image irrelevant)",
+      "208 semantic duplicates detected"
+    ]
+  }
+}

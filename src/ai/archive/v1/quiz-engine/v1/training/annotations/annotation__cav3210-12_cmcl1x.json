@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img__cav3210-12_cmcl1x",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Architectural Feature",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3210-12_cmcl1x.jpg",
+  "cloudinary_public_id": "_cav3210-12_cmcl1x",
+  "question": "Based on the visible stone inscription, how many distinct lines of carved text are present?",
+  "options": [
+    "Four",
+    "Six",
+    "Five",
+    "Seven"
+  ],
+  "correct_option_index": 2,
+  "correct_semantic_answer": "Five distinct lines of carved text.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The inscription clearly displays five horizontal rows of carved characters, starting from the top of the inscribed area and extending downwards across the stone slab.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

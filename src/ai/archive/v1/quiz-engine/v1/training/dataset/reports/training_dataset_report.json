@@ -1,0 +1,8 @@
+{
+  "status": "INSUFFICIENT_DATA",
+  "clean_candidates": 91,
+  "threshold": 100,
+  "shortfall": 9,
+  "image_leakage": 0,
+  "decision": "DO_NOT_TRAIN"
+}

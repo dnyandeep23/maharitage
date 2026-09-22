@@ -1,0 +1,2945 @@
+[
+  {
+    "annotation_id": "Ell0001_img_001_q001",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "cloudinary_public_id": "IMG20251022120741_kbusjk",
+    "gallery_index": 0,
+    "question": "Which colossal monolithic rock-cut monument is depicted in this photograph of Ellora Caves?",
+    "options": [
+      "The Kailasa Temple (Cave 16) carved top-down from a single basaltic cliff face",
+      "Cave 10 (Visvakarma Chaitya)",
+      "Cave 32 (Indra Sabha)",
+      "Great Chaitya Hall of Kanheri"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows the stupendous monolithic Kailasa temple complex carved out of the solid basalt mountain.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "The Kailasa Temple (Cave 16) carved top-down from a single basaltic cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_001_q002",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Sculpture/Relief",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "cloudinary_public_id": "IMG20251022120741_kbusjk",
+    "gallery_index": 0,
+    "question": "What monumental architectural detail is visible supporting the main temple platform in this Kailasa photo?",
+    "options": [
+      "A row of iron pillars",
+      "A frieze of life-sized carved stone elephants appearing to hold up the entire temple superstructure",
+      "A series of smooth marble columns",
+      "Brick arches resting on wooden beams"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The plinth of the main sanctuary features a dramatic continuous frieze of carved stone elephants supporting the structure.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "A frieze of life-sized carved stone elephants appearing to hold up the entire temple superstructure"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_002_q003",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670797/IMG_20251028_222042_dmi8uw.jpg",
+    "cloudinary_public_id": "IMG_20251028_222042_dmi8uw",
+    "gallery_index": 1,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG_20251028_222042_dmi8uw' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_002_q004",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670797/IMG_20251028_222042_dmi8uw.jpg",
+    "cloudinary_public_id": "IMG_20251028_222042_dmi8uw",
+    "gallery_index": 1,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG_20251028_222042_dmi8uw'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG_20251028_222042_dmi8uw' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_003_q005",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670572/IMG20251022120323_p0dple.jpg",
+    "cloudinary_public_id": "IMG20251022120323_p0dple",
+    "gallery_index": 2,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022120323_p0dple' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_003_q006",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670572/IMG20251022120323_p0dple.jpg",
+    "cloudinary_public_id": "IMG20251022120323_p0dple",
+    "gallery_index": 2,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022120323_p0dple'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022120323_p0dple' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_004_q007",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676763/IMG20251022123019_m33tuw.jpg",
+    "cloudinary_public_id": "IMG20251022123019_m33tuw",
+    "gallery_index": 3,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022123019_m33tuw' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_004_q008",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676763/IMG20251022123019_m33tuw.jpg",
+    "cloudinary_public_id": "IMG20251022123019_m33tuw",
+    "gallery_index": 3,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022123019_m33tuw'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022123019_m33tuw' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_005_q009",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676689/IMG20251022124327_gazbk8.jpg",
+    "cloudinary_public_id": "IMG20251022124327_gazbk8",
+    "gallery_index": 4,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022124327_gazbk8' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_005_q010",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676689/IMG20251022124327_gazbk8.jpg",
+    "cloudinary_public_id": "IMG20251022124327_gazbk8",
+    "gallery_index": 4,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022124327_gazbk8'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022124327_gazbk8' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_006_q011",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676631/IMG20251022124150_skf9qi.jpg",
+    "cloudinary_public_id": "IMG20251022124150_skf9qi",
+    "gallery_index": 5,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022124150_skf9qi' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[5]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_006_q012",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676631/IMG20251022124150_skf9qi.jpg",
+    "cloudinary_public_id": "IMG20251022124150_skf9qi",
+    "gallery_index": 5,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022124150_skf9qi'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022124150_skf9qi' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[5]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_007_q013",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676598/IMG20251022132830_smf1wd.jpg",
+    "cloudinary_public_id": "IMG20251022132830_smf1wd",
+    "gallery_index": 6,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022132830_smf1wd' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[6]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_007_q014",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676598/IMG20251022132830_smf1wd.jpg",
+    "cloudinary_public_id": "IMG20251022132830_smf1wd",
+    "gallery_index": 6,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022132830_smf1wd'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022132830_smf1wd' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[6]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_008_q015",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676584/IMG20251022131500_qvljcm.jpg",
+    "cloudinary_public_id": "IMG20251022131500_qvljcm",
+    "gallery_index": 7,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022131500_qvljcm' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[7]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_008_q016",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676584/IMG20251022131500_qvljcm.jpg",
+    "cloudinary_public_id": "IMG20251022131500_qvljcm",
+    "gallery_index": 7,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022131500_qvljcm'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022131500_qvljcm' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[7]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_009_q017",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676568/IMG20251022131509_pnpr4j.jpg",
+    "cloudinary_public_id": "IMG20251022131509_pnpr4j",
+    "gallery_index": 8,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022131509_pnpr4j' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[8]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_009_q018",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676568/IMG20251022131509_pnpr4j.jpg",
+    "cloudinary_public_id": "IMG20251022131509_pnpr4j",
+    "gallery_index": 8,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022131509_pnpr4j'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022131509_pnpr4j' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[8]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_010_q019",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676519/IMG20251022131906_tf38n5.jpg",
+    "cloudinary_public_id": "IMG20251022131906_tf38n5",
+    "gallery_index": 9,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022131906_tf38n5' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[9]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_010_q020",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676519/IMG20251022131906_tf38n5.jpg",
+    "cloudinary_public_id": "IMG20251022131906_tf38n5",
+    "gallery_index": 9,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022131906_tf38n5'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022131906_tf38n5' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[9]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_011_q021",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676498/IMG20251022132835_khcu2p.jpg",
+    "cloudinary_public_id": "IMG20251022132835_khcu2p",
+    "gallery_index": 10,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022132835_khcu2p' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[10]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_011_q022",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676498/IMG20251022132835_khcu2p.jpg",
+    "cloudinary_public_id": "IMG20251022132835_khcu2p",
+    "gallery_index": 10,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022132835_khcu2p'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022132835_khcu2p' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[10]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_012_q023",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676464/IMG20251022124648_fs5cct.jpg",
+    "cloudinary_public_id": "IMG20251022124648_fs5cct",
+    "gallery_index": 11,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022124648_fs5cct' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[11]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_012_q024",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676464/IMG20251022124648_fs5cct.jpg",
+    "cloudinary_public_id": "IMG20251022124648_fs5cct",
+    "gallery_index": 11,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022124648_fs5cct'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022124648_fs5cct' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[11]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_013_q025",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675821/IMG20251022115704_fvpoj3.jpg",
+    "cloudinary_public_id": "IMG20251022115704_fvpoj3",
+    "gallery_index": 12,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022115704_fvpoj3' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[12]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_013_q026",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675821/IMG20251022115704_fvpoj3.jpg",
+    "cloudinary_public_id": "IMG20251022115704_fvpoj3",
+    "gallery_index": 12,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022115704_fvpoj3'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022115704_fvpoj3' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[12]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_014_q027",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675522/IMG20251022113451_is5pxe.jpg",
+    "cloudinary_public_id": "IMG20251022113451_is5pxe",
+    "gallery_index": 13,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022113451_is5pxe' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[13]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_014_q028",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675522/IMG20251022113451_is5pxe.jpg",
+    "cloudinary_public_id": "IMG20251022113451_is5pxe",
+    "gallery_index": 13,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022113451_is5pxe'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022113451_is5pxe' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[13]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_insc_001_q001",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761642273/_CAV3208_-_12_bdqp81.jpg",
+    "cloudinary_public_id": "_CAV3208_-_12_bdqp81",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ellora Caves (Insc_01)?",
+    "options": [
+      "Horizontal lines of incised characters arranged in a neat rectangular block",
+      "Concentric circular text spiraling around a central emblem",
+      "Vertical columns read from right to left",
+      "Randomly scattered individual letters across the rock face"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image shows characters incised in orderly horizontal rows across the stone panel.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_insc_001_q003",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3209-12_djnckc.jpg",
+    "cloudinary_public_id": "_CAV3209-12_djnckc",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ellora Caves (Insc_01)?",
+    "options": [
+      "Concentric circular text spiraling around a central emblem",
+      "Horizontal lines of incised characters arranged in a neat rectangular block",
+      "Vertical columns read from right to left",
+      "Randomly scattered individual letters across the rock face"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image shows characters incised in orderly horizontal rows across the stone panel.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_insc_001_q005",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3210-12_cmcl1x.jpg",
+    "cloudinary_public_id": "_CAV3210-12_cmcl1x",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ellora Caves (Insc_01)?",
+    "options": [
+      "Concentric circular text spiraling around a central emblem",
+      "Vertical columns read from right to left",
+      "Horizontal lines of incised characters arranged in a neat rectangular block",
+      "Randomly scattered individual letters across the rock face"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image shows characters incised in orderly horizontal rows across the stone panel.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_insc_001_q007",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3211-12_mchavi.jpg",
+    "cloudinary_public_id": "_CAV3211-12_mchavi",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ellora Caves (Insc_01)?",
+    "options": [
+      "Concentric circular text spiraling around a central emblem",
+      "Vertical columns read from right to left",
+      "Randomly scattered individual letters across the rock face",
+      "Horizontal lines of incised characters arranged in a neat rectangular block"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image shows characters incised in orderly horizontal rows across the stone panel.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_001_q001",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/Kanheri_Caves_prayer_hall_bcuyot.jpg",
+    "cloudinary_public_id": "Kanheri_Caves_prayer_hall_bcuyot",
+    "gallery_index": 0,
+    "question": "Which prominent architectural feature is visible in the portico of Cave 3 in this photograph of Kanheri Caves?",
+    "options": [
+      "Colossal 22-foot standing Buddha statues flanking the entrance portico and pillared hall",
+      "Carved dancing Shiva Nataraja relief",
+      "Equestrian Maratha warriors",
+      "Jain Tirthankara colossus"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "Massive standing Buddha sculptures carved into high relief niches stand in the portico of Cave 3.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Colossal 22-foot standing Buddha statues flanking the entrance portico and pillared hall"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_001_q002",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Pillars/Columns",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/Kanheri_Caves_prayer_hall_bcuyot.jpg",
+    "cloudinary_public_id": "Kanheri_Caves_prayer_hall_bcuyot",
+    "gallery_index": 0,
+    "question": "What design features are visible on the internal pillars of the Great Chaitya Hall at Kanheri shown here?",
+    "options": [
+      "Plain square concrete pillars",
+      "Octagonal shafts topped with pot capitals carved with kneeling elephants and stupas",
+      "Fluted Ionic columns",
+      "Rough uncarved boulders"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The interior colonnade features octagonal pillars with detailed capitals depicting elephants and devotees worshipping stupas.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Octagonal shafts topped with pot capitals carved with kneeling elephants and stupas"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_002_q003",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/500px-Kanheri_caves_05_qdbr9l.jpg",
+    "cloudinary_public_id": "500px-Kanheri_caves_05_qdbr9l",
+    "gallery_index": 1,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph '500px-Kanheri_caves_05_qdbr9l' of The Kanheri Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Kanheri Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_002_q004",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/500px-Kanheri_caves_05_qdbr9l.jpg",
+    "cloudinary_public_id": "500px-Kanheri_caves_05_qdbr9l",
+    "gallery_index": 1,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph '500px-Kanheri_caves_05_qdbr9l'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Kanheri Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph '500px-Kanheri_caves_05_qdbr9l' matches The Kanheri Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "The Kanheri Caves"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_004_q005",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17.jpg",
+    "cloudinary_public_id": "Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17",
+    "gallery_index": 3,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17' of The Kanheri Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Kanheri Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_004_q006",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17.jpg",
+    "cloudinary_public_id": "Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17",
+    "gallery_index": 3,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17'?",
+    "options": [
+      "Raigad Fort",
+      "The Kanheri Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'Kandheri_Caves__Mumbai_Maharashtra__India_dmxz17' matches The Kanheri Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "The Kanheri Caves"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_005_q007",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kanheri_Cave1_uag05b.jpg",
+    "cloudinary_public_id": "Kanheri_Cave1_uag05b",
+    "gallery_index": 4,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'Kanheri_Cave1_uag05b' of The Kanheri Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Kanheri Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_img_005_q008",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751259/Kanheri_Cave1_uag05b.jpg",
+    "cloudinary_public_id": "Kanheri_Cave1_uag05b",
+    "gallery_index": 4,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'Kanheri_Cave1_uag05b'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Kanheri Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'Kanheri_Cave1_uag05b' matches The Kanheri Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "The Kanheri Caves"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_001_q001",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763107/insc_001_jwh5qj.jpg",
+    "cloudinary_public_id": "insc_001_jwh5qj",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_01)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Brahmi script"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_002_q003",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763191/insc_002_jy9scj.jpg",
+    "cloudinary_public_id": "insc_002_jy9scj",
+    "inscription_index": 1,
+    "inscription_id": "Insc_02",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_02)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[1].original_script",
+      "value": "Brahmi script"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_003_q005",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763192/insc_003_sq2amn.jpg",
+    "cloudinary_public_id": "insc_003_sq2amn",
+    "inscription_index": 2,
+    "inscription_id": "Insc_03",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_03)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[2].original_script",
+      "value": "Brahmi script"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_004_q007",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_007_cvrcza.jpg",
+    "cloudinary_public_id": "insc_007_cvrcza",
+    "inscription_index": 3,
+    "inscription_id": "Insc_04",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_04)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[3].original_script",
+      "value": "Latin script"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_005_q009",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763260/insc_005_l0esdb.jpg",
+    "cloudinary_public_id": "insc_005_l0esdb",
+    "inscription_index": 4,
+    "inscription_id": "Insc_05",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_05)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[4].original_script",
+      "value": "Brahmi script"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_006_q011",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_006_ulur3e.jpg",
+    "cloudinary_public_id": "insc_006_ulur3e",
+    "inscription_index": 5,
+    "inscription_id": "Insc_06",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_06)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[5].original_script",
+      "value": "Brahmi script"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_007_q013",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_008_oe2amg.jpg",
+    "cloudinary_public_id": "insc_008_oe2amg",
+    "inscription_index": 6,
+    "inscription_id": "Insc_07",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_07)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[6].original_script",
+      "value": "Brahmi script"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_008_q015",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_01_gdbzsv.jpg",
+    "cloudinary_public_id": "Insc_01_gdbzsv",
+    "inscription_index": 7,
+    "inscription_id": "Insc_08",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_08)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[7].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_009_q017",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_02_gnp8kx.jpg",
+    "cloudinary_public_id": "Insc_02_gnp8kx",
+    "inscription_index": 8,
+    "inscription_id": "Insc_09",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_09)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[8].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_010_q019",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_03_lwuy6b.jpg",
+    "cloudinary_public_id": "Insc_03_lwuy6b",
+    "inscription_index": 9,
+    "inscription_id": "Insc_10",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_10)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[9].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_011_q021",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_04_vvthh9.jpg",
+    "cloudinary_public_id": "Insc_04_vvthh9",
+    "inscription_index": 10,
+    "inscription_id": "Insc_11",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_11)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[10].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_012_q023",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_05_ws51zu.jpg",
+    "cloudinary_public_id": "Insc_05_ws51zu",
+    "inscription_index": 11,
+    "inscription_id": "Insc_12",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_12)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[11].original_script",
+      "value": "Brahmi (Nasik style)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_013_q025",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_06_bqmmib.jpg",
+    "cloudinary_public_id": "Insc_06_bqmmib",
+    "inscription_index": 12,
+    "inscription_id": "Insc_13",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_13)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[12].original_script",
+      "value": "Brahmi (similar to Nahapana inscriptions)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_014_q027",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_07_bbpsqv.jpg",
+    "cloudinary_public_id": "Insc_07_bbpsqv",
+    "inscription_index": 13,
+    "inscription_id": "Insc_14",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_14)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[13].original_script",
+      "value": "Brahmi (Nail-headed variety, 5th century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_015_q029",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_08_qvxwbs.jpg",
+    "cloudinary_public_id": "Insc_08_qvxwbs",
+    "inscription_index": 14,
+    "inscription_id": "Insc_15",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_15)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[14].original_script",
+      "value": "Brahmi (5th century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_016_q031",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_09_o3v8gy.jpg",
+    "cloudinary_public_id": "Insc_09_o3v8gy",
+    "inscription_index": 15,
+    "inscription_id": "Insc_16",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_16)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[15].original_script",
+      "value": "Brahmi (Nail-headed variety, 5th century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_017_q033",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_10_rzpw4d.jpg",
+    "cloudinary_public_id": "Insc_10_rzpw4d",
+    "inscription_index": 16,
+    "inscription_id": "Insc_17",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_17)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[16].original_script",
+      "value": "Brahmi (Nail-headed variety, 5th century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_018_q035",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_14_rxcryn.jpg",
+    "cloudinary_public_id": "Insc_14_rxcryn",
+    "inscription_index": 17,
+    "inscription_id": "Insc_18",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_18)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[17].original_script",
+      "value": "Brahmi (Late Variety, ca. 494–495 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_019_q037",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_15_isz7uz.jpg",
+    "cloudinary_public_id": "Insc_15_isz7uz",
+    "inscription_index": 18,
+    "inscription_id": "Insc_19",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_19)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[18].original_script",
+      "value": "Brahmi (Early Variety, 2nd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_020_q039",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_16_mpguam.jpg",
+    "cloudinary_public_id": "Insc_16_mpguam",
+    "inscription_index": 19,
+    "inscription_id": "Insc_20",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_20)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[19].original_script",
+      "value": "Brahmi (Early Western Variety, 2nd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_021_q041",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_17_joonnm.jpg",
+    "cloudinary_public_id": "Insc_17_joonnm",
+    "inscription_index": 20,
+    "inscription_id": "Insc_21",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_21)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[20].original_script",
+      "value": "Brahmi (Early Western Style, 2nd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_022_q043",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_18_uogtjm.jpg",
+    "cloudinary_public_id": "Insc_18_uogtjm",
+    "inscription_index": 21,
+    "inscription_id": "Insc_22",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_22)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[21].original_script",
+      "value": "Brahmi (Western Indian, 2nd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_023_q045",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_19_vltflm.jpg",
+    "cloudinary_public_id": "Insc_19_vltflm",
+    "inscription_index": 22,
+    "inscription_id": "Insc_23",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_23)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[22].original_script",
+      "value": "Brahmi (Western Indian, 2nd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_024_q047",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_20_gifeit.jpg",
+    "cloudinary_public_id": "Insc_20_gifeit",
+    "inscription_index": 23,
+    "inscription_id": "Insc_24",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_24)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[23].original_script",
+      "value": "Brahmi (Western Indian, 2nd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_025_q049",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_24_g1jwoo.jpg",
+    "cloudinary_public_id": "Insc_24_g1jwoo",
+    "inscription_index": 24,
+    "inscription_id": "Insc_25",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_25)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[24].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_026_q051",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_25_l5kr1h.jpg",
+    "cloudinary_public_id": "Insc_25_l5kr1h",
+    "inscription_index": 25,
+    "inscription_id": "Insc_26",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_26)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[25].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_027_q053",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_26_uxfuyb.jpg",
+    "cloudinary_public_id": "Insc_26_uxfuyb",
+    "inscription_index": 26,
+    "inscription_id": "Insc_27",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_27)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[26].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_028_q055",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_27_x4dyxe.jpg",
+    "cloudinary_public_id": "Insc_27_x4dyxe",
+    "inscription_index": 27,
+    "inscription_id": "Insc_28",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_28)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[27].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_029_q057",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_28_abylfd.jpg",
+    "cloudinary_public_id": "Insc_28_abylfd",
+    "inscription_index": 28,
+    "inscription_id": "Insc_29",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_29)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[28].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_030_q059",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_29_c7juyd.jpg",
+    "cloudinary_public_id": "Insc_29_c7juyd",
+    "inscription_index": 29,
+    "inscription_id": "Insc_30",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_30)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[29].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_031_q061",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_30_dlaxht.jpg",
+    "cloudinary_public_id": "Insc_30_dlaxht",
+    "inscription_index": 30,
+    "inscription_id": "Insc_31",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_31)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[30].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_032_q063",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_32_qqxmn7.jpg",
+    "cloudinary_public_id": "Insc_32_qqxmn7",
+    "inscription_index": 31,
+    "inscription_id": "Insc_32",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_32)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[31].original_script",
+      "value": "Brahmi"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_033_q065",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_33_qwbszo.jpg",
+    "cloudinary_public_id": "Insc_33_qwbszo",
+    "inscription_index": 32,
+    "inscription_id": "Insc_33",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_33)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[32].original_script",
+      "value": "Brahmi (Southern variety, 3rd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_034_q067",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_34_sblsz2.jpg",
+    "cloudinary_public_id": "Insc_34_sblsz2",
+    "inscription_index": 33,
+    "inscription_id": "Insc_34",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_34)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[33].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_035_q069",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_35_mmsl0m.jpg",
+    "cloudinary_public_id": "Insc_35_mmsl0m",
+    "inscription_index": 34,
+    "inscription_id": "Insc_35",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_35)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[34].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_036_q071",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_37_bjjjyd.jpg",
+    "cloudinary_public_id": "Insc_37_bjjjyd",
+    "inscription_index": 35,
+    "inscription_id": "Insc_36",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_36)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[35].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_037_q073",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_38_incrid.jpg",
+    "cloudinary_public_id": "Insc_38_incrid",
+    "inscription_index": 36,
+    "inscription_id": "Insc_37",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_37)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[36].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_038_q075",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_39_dgechn.jpg",
+    "cloudinary_public_id": "Insc_39_dgechn",
+    "inscription_index": 37,
+    "inscription_id": "Insc_38",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_38)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[37].original_script",
+      "value": "Brahmi (circa 2nd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_039_q077",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_40_kx835p.jpg",
+    "cloudinary_public_id": "Insc_40_kx835p",
+    "inscription_index": 38,
+    "inscription_id": "Insc_39",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_39)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[38].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_040_q079",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774100/Insc_41_rqwsoz.jpg",
+    "cloudinary_public_id": "Insc_41_rqwsoz",
+    "inscription_index": 39,
+    "inscription_id": "Insc_40",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_40)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[39].original_script",
+      "value": "Brahmi (circa 3rd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_041_q081",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_42_mvd571.jpg",
+    "cloudinary_public_id": "Insc_42_mvd571",
+    "inscription_index": 40,
+    "inscription_id": "Insc_41",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_41)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[40].original_script",
+      "value": "Brahmi (circa 3rd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_042_q083",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_43_tcqb4k.jpg",
+    "cloudinary_public_id": "Insc_43_tcqb4k",
+    "inscription_index": 41,
+    "inscription_id": "Insc_42",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_42)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[41].original_script",
+      "value": "Brahmi (circa late 2nd–early 3rd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_043_q085",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_44_euorab.jpg",
+    "cloudinary_public_id": "Insc_44_euorab",
+    "inscription_index": 42,
+    "inscription_id": "Insc_43",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_43)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[42].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_044_q087",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_45_fswset.jpg",
+    "cloudinary_public_id": "Insc_45_fswset",
+    "inscription_index": 43,
+    "inscription_id": "Insc_44",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_44)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[43].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_045_q089",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_46_rsjsjk.jpg",
+    "cloudinary_public_id": "Insc_46_rsjsjk",
+    "inscription_index": 44,
+    "inscription_id": "Insc_45",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_45)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[44].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_046_q091",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_47_cv7upm.jpg",
+    "cloudinary_public_id": "Insc_47_cv7upm",
+    "inscription_index": 45,
+    "inscription_id": "Insc_46",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_46)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[45].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_047_q093",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_51_wf5uvu.jpg",
+    "cloudinary_public_id": "Insc_51_wf5uvu",
+    "inscription_index": 46,
+    "inscription_id": "Insc_47",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_47)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[46].original_script",
+      "value": "Brahmi (2nd Century CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_048_q095",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_53_fkjl1z.jpg",
+    "cloudinary_public_id": "Insc_53_fkjl1z",
+    "inscription_index": 47,
+    "inscription_id": "Insc_48",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_48)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[47].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_049_q097",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_54_f0fqjb.jpg",
+    "cloudinary_public_id": "Insc_54_f0fqjb",
+    "inscription_index": 48,
+    "inscription_id": "Insc_49",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_49)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[48].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_050_q099",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_55_uarwo6.jpg",
+    "cloudinary_public_id": "Insc_55_uarwo6",
+    "inscription_index": 49,
+    "inscription_id": "Insc_50",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_50)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[49].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_051_q101",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_56_nx4mxi.jpg",
+    "cloudinary_public_id": "Insc_56_nx4mxi",
+    "inscription_index": 50,
+    "inscription_id": "Insc_51",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_51)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[50].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_052_q103",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_57_ujewbe.jpg",
+    "cloudinary_public_id": "Insc_57_ujewbe",
+    "inscription_index": 51,
+    "inscription_id": "Insc_52",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_52)?",
+    "options": [
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms",
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[51].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Kan0004_insc_053_q105",
+    "site_id": "Kan0004",
+    "site_name": "The Kanheri Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774103/Insc_58_tmlypg.jpg",
+    "cloudinary_public_id": "Insc_58_tmlypg",
+    "inscription_index": 52,
+    "inscription_id": "Insc_53",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Kanheri Caves (Insc_53)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[52].original_script",
+      "value": "Brahmi (circa 200 CE)"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_001_q001",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Nagarkhana__Raigad_Fort__India_timvhn.jpg",
+    "cloudinary_public_id": "Nagarkhana__Raigad_Fort__India_timvhn",
+    "gallery_index": 0,
+    "question": "Which historic structure at Raigad Fort is depicted in this photograph featuring monumental stone arches?",
+    "options": [
+      "The Nagarkhana (Royal Drum House & Gateway)",
+      "The Hirkani Buruj Bastion",
+      "The Takmak Tok Execution Cliff",
+      "The Gangasagar Water Reservoir"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows the massive stone-built Nagarkhana gateway with large pointed arches overlooking the royal enclosure.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "The Nagarkhana (Royal Drum House & Gateway)"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_001_q002",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Nagarkhana__Raigad_Fort__India_timvhn.jpg",
+    "cloudinary_public_id": "Nagarkhana__Raigad_Fort__India_timvhn",
+    "gallery_index": 0,
+    "question": "What architectural style characterizes the arched openings visible in this Nagarkhana photograph?",
+    "options": [
+      "Reinforced concrete lintels with glass glazing",
+      "Multi-lobed stone arches flanked by massive fortified masonry walls",
+      "Wooden timber post-and-beam portals",
+      "Dwarfed rock-cut cave doorways"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The structure consists of wide multi-lobed stone arches crafted from heavy dressed basalt blocks.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Multi-lobed stone arches flanked by massive fortified masonry walls"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_001_q003",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Material/Surface",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Nagarkhana__Raigad_Fort__India_timvhn.jpg",
+    "cloudinary_public_id": "Nagarkhana__Raigad_Fort__India_timvhn",
+    "gallery_index": 0,
+    "question": "What construction material and style are visible in the walls of this Nagarkhana structure?",
+    "options": [
+      "Red sun-dried mud bricks",
+      "White marble slabs with inlay work",
+      "Dressed basaltic stone blocks joined with mortar in thick coursed masonry",
+      "Monolithic carved limestone cliffs"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The masonry consists of thick courses of dark, dressed basalt blocks typical of 17th-century Maratha fort construction.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Dressed basaltic stone blocks joined with mortar in thick coursed masonry"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_002_q004",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Inscripted_name_of_the_architect_of_Raigad_zc3y3n.jpg",
+    "cloudinary_public_id": "Inscripted_name_of_the_architect_of_Raigad_zc3y3n",
+    "gallery_index": 1,
+    "question": "Which defensive fortification element is visible in photograph 'Inscripted_name_of_the_architect_of_Raigad_zc3y3n' of Raigad Fort?",
+    "options": [
+      "A wooden palisade fence surrounding a farm",
+      "A glass-clad modern curtain wall",
+      "Subterranean clay pipe drainage channels",
+      "Massive coursed stone fortification walls and rounded defensive bastions"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph displays thick stone ramparts and defensive bastions typical of Maratha fort engineering at Raigad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Massive coursed stone fortification walls and rounded defensive bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_002_q005",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Inscripted_name_of_the_architect_of_Raigad_zc3y3n.jpg",
+    "cloudinary_public_id": "Inscripted_name_of_the_architect_of_Raigad_zc3y3n",
+    "gallery_index": 1,
+    "question": "What structural entrance design is depicted in photograph 'Inscripted_name_of_the_architect_of_Raigad_zc3y3n' of Raigad Fort?",
+    "options": [
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Raigad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_002_q006",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Inscripted_name_of_the_architect_of_Raigad_zc3y3n.jpg",
+    "cloudinary_public_id": "Inscripted_name_of_the_architect_of_Raigad_zc3y3n",
+    "gallery_index": 1,
+    "question": "Which historic fort complex in Maharashtra is depicted in gallery photograph 'Inscripted_name_of_the_architect_of_Raigad_zc3y3n'?",
+    "options": [
+      "The Ajanta Caves",
+      "Raigad Fort",
+      "The Ellora Caves",
+      "The Kanheri Caves"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The heavy stone rampart and bastion architecture shown in photograph 'Inscripted_name_of_the_architect_of_Raigad_zc3y3n' uniquely belongs to Raigad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Raigad Fort"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_003_q007",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Spatial Arrangement",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Raigad_fort_towers_f1gbn4.jpg",
+    "cloudinary_public_id": "Raigad_fort_towers_f1gbn4",
+    "gallery_index": 2,
+    "question": "How are the bastions positioned in relation to the mountain terrain in this photograph?",
+    "options": [
+      "Arranged in a flat grid on a river floodplain",
+      "Submerged along a coastal shoreline",
+      "Strategically anchored along the steep cliff contours to command views over the valley",
+      "Built on timber pilings over a lake"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The stone towers follow the natural contour of the steep mountain ridge overlooking deep valleys.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Strategically anchored along the steep cliff contours to command views over the valley"
+    }
+  },
+  {
+    "annotation_id": "Fort0001_img_004_q008",
+    "site_id": "Fort0001",
+    "site_name": "Raigad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Raigad_fort_walls_hidden_in_the_green_jpbuer.jpg",
+    "cloudinary_public_id": "Raigad_fort_walls_hidden_in_the_green_jpbuer",
+    "gallery_index": 3,
+    "question": "What structural feature is visible amidst the lush monsoon foliage in this photograph of Raigad Fort?",
+    "options": [
+      "A series of white marble domes",
+      "A suspended iron bridge",
+      "A wooden watchtower spire",
+      "Crenellated stone fortification ramparts following the mountain crest"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The thick stone rampart wall with defensive loop-holes extends across the green hill slope.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Crenellated stone fortification ramparts following the mountain crest"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_001_q001",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242472/Pali_darvaja_ggndvg.jpg",
+    "cloudinary_public_id": "Pali_darvaja_ggndvg",
+    "gallery_index": 0,
+    "question": "Which historic gateway of Rajgad Fort is depicted in this photograph?",
+    "options": [
+      "Pali Darwaza (Main Fortified Gateway)",
+      "Maha Darwaza of Raigad Fort",
+      "Naane Darwaza",
+      "Ghorpad Darwaza"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph displays the monumental stone gateway structure of Pali Darwaza with bastions flanking the entrance approach.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Pali Darwaza (Main Fortified Gateway)"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_001_q002",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242472/Pali_darvaja_ggndvg.jpg",
+    "cloudinary_public_id": "Pali_darvaja_ggndvg",
+    "gallery_index": 0,
+    "question": "What defensive architectural feature is visible at this gateway in the photograph?",
+    "options": [
+      "A modern steel turnstile gate",
+      "Flanking defensive stone bastions designed to create a protected narrow entrance approach",
+      "An open unfortified archway with no side walls",
+      "A wooden palisade fence"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "Massive stone bastions flank the gateway on both sides to cover the entering pathway.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Flanking defensive stone bastions designed to create a protected narrow entrance approach"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_002_q003",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242472/Sanjavni_machi_kiadaf.jpg",
+    "cloudinary_public_id": "Sanjavni_machi_kiadaf",
+    "gallery_index": 1,
+    "question": "What structural entrance design is depicted in photograph 'Sanjavni_machi_kiadaf' of Rajgad Fort?",
+    "options": [
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Rajgad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_003_q004",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242473/Suvela_machi_Rajgad_fort__Maharashtra_India_July2015_qlmfad.jpg",
+    "cloudinary_public_id": "Suvela_machi_Rajgad_fort__Maharashtra_India_July2015_qlmfad",
+    "gallery_index": 2,
+    "question": "What unique natural and architectural feature is visible along the ridge of Suvela Machi in this photograph?",
+    "options": [
+      "A broad open parade ground with concrete barracks",
+      "A circular sea moat filled with saltwater",
+      "A subterranean stone tunnel complex",
+      "A narrow fortified ridge leading towards a natural circular hole in the rock cliff (Nedhe)"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows the long, narrow fortified arm (machi) culminating near the natural rock eye-hole known as Nedhe.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "A narrow fortified ridge leading towards a natural circular hole in the rock cliff (Nedhe)"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_006_q005",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242715/Ballekilla__Rajgad_oqpcne.jpg",
+    "cloudinary_public_id": "Ballekilla__Rajgad_oqpcne",
+    "gallery_index": 5,
+    "question": "What structural entrance design is depicted in photograph 'Ballekilla__Rajgad_oqpcne' of Rajgad Fort?",
+    "options": [
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Rajgad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[5]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0003_img_001_q001",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245009/Daulatabad_Fort_llhfkr.jpg",
+    "cloudinary_public_id": "Daulatabad_Fort_llhfkr",
+    "gallery_index": 0,
+    "question": "Which famous tall monumental tower is visible standing near the base of the conical fort hill in this photograph?",
+    "options": [
+      "Chand Minar (The 210-foot pinkish-red victory minaret)",
+      "Hirkani Buruj",
+      "Kalaram Temple Spire",
+      "Balle Killa Tower"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph prominently displays the tall cylindrical Chand Minar victory tower with balcony bands.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Chand Minar (The 210-foot pinkish-red victory minaret)"
+    }
+  },
+  {
+    "annotation_id": "Fort0003_img_002_q002",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245009/main_yxekvh.jpg",
+    "cloudinary_public_id": "main_yxekvh",
+    "gallery_index": 1,
+    "question": "What structural entrance design is depicted in photograph 'main_yxekvh' of Devgiri Fort (Daulatabad Fort)?",
+    "options": [
+      "An unfortified wooden gate post",
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Devgiri Fort (Daulatabad Fort).",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0003_img_003_q003",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245007/Daulatabad__Aurangabad_-_panoramio__106_oypjrt.jpg",
+    "cloudinary_public_id": "Daulatabad__Aurangabad_-_panoramio__106_oypjrt",
+    "gallery_index": 2,
+    "question": "What structural entrance design is depicted in photograph 'Daulatabad__Aurangabad_-_panoramio__106_oypjrt' of Devgiri Fort (Daulatabad Fort)?",
+    "options": [
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Devgiri Fort (Daulatabad Fort).",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0003_img_004_q004",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245008/Daulatabad_Fort-51_gsjvsm.jpg",
+    "cloudinary_public_id": "Daulatabad_Fort-51_gsjvsm",
+    "gallery_index": 3,
+    "question": "What defensive system is visible in this structural view of Daulatabad Fort?",
+    "options": [
+      "A single square wooden palisade",
+      "An unfortified open orchard pathway",
+      "A single low brick retaining wall",
+      "Triple concentric fortification walls (Amberkot, Mahakot, and Kalakot) with staggered gateways"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photo reveals multiple successive stone defensive walls and arched gateways designed to entrap invaders.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Triple concentric fortification walls (Amberkot, Mahakot, and Kalakot) with staggered gateways"
+    }
+  },
+  {
+    "annotation_id": "Pit0002_img_001_q001",
+    "site_id": "Pit0002",
+    "site_name": "The Pitalkhora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761693536/IMG20251020094702-min_uf4vao.jpg",
+    "cloudinary_public_id": "IMG20251020094702-min_uf4vao",
+    "gallery_index": 0,
+    "question": "What unique sculptured feature is visible flanking the rock-cut entrance staircase in this photograph of Pitalkhora?",
+    "options": [
+      "A row of carved elephant forequarters appearing to emerge from the rock wall beside the steps",
+      "Two iron cannons on wheeled carriages",
+      "A pair of standing winged lions with crowns",
+      "A marble fountain with lotus carvings"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The entrance stairs are flanked by sculpted elephant heads and forequarters carved directly into the basalt rock.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "A row of carved elephant forequarters appearing to emerge from the rock wall beside the steps"
+    }
+  }
+]

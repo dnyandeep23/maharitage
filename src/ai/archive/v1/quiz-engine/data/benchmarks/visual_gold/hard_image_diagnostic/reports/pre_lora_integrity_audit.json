@@ -1,0 +1,19 @@
+{
+  "model_config": "PASS",
+  "image_loading": "PASS",
+  "answer_parser": "PASS",
+  "gold_labels": "PASS",
+  "prompt_isolation": "PASS",
+  "text_only_isolation": "PASS",
+  "runner_reproducibility": "PASS",
+  "hard_image_selection": "PASS",
+  "genuine_model_failures": 39,
+  "pipeline_errors": 0,
+  "ambiguous_cases": 0,
+  "v4_accuracy": 84.5,
+  "hard_diagnostic_accuracy": 22,
+  "accuracy_difference": 62.5,
+  "root_cause": "GENUINE_HARD_IMAGE_EFFECT",
+  "lora_experiment_justified": "YES",
+  "training": "DO_NOT_TRAIN"
+}

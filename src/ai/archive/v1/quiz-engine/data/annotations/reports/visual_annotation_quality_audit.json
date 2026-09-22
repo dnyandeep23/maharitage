@@ -1,0 +1,79 @@
+{
+  "audit_timestamp": "2026-08-09T11:39:25.258Z",
+  "dataset_totals": {
+    "text": 569,
+    "image": 78,
+    "inscription": 60,
+    "total": 707
+  },
+  "gates": {
+    "quality_gate": "PASS",
+    "text_coverage_gate": "PARTIAL",
+    "image_coverage_gate": "NO",
+    "inscription_coverage_gate": "NO",
+    "split_gate": "PASS",
+    "overall_coverage_complete": "NO",
+    "overall_dataset_ready": "YES",
+    "visual_training_ready": "YES"
+  },
+  "visual_dependency": {
+    "scores": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 138
+    },
+    "classification": {
+      "TRUE_VISUAL": 138,
+      "DATABASE_ONLY": 0,
+      "MIXED": 0,
+      "INVALID": 0
+    },
+    "true_visual_percentage": 100,
+    "database_only_percentage": 0,
+    "visual_evidence_present": 138
+  },
+  "ground_truth": {
+    "pass": 707,
+    "fail": 0
+  },
+  "distractors": {
+    "good": 705,
+    "bad": 2
+  },
+  "option_distribution": {
+    "text": {
+      "0": 146,
+      "1": 143,
+      "2": 141,
+      "3": 139
+    },
+    "visual": {
+      "0": 38,
+      "1": 35,
+      "2": 34,
+      "3": 31
+    },
+    "global": {
+      "0": 184,
+      "1": 178,
+      "2": 175,
+      "3": 170
+    }
+  },
+  "duplicates": {
+    "exact": 0,
+    "normalized": 0,
+    "semantic": 0
+  },
+  "empty_files_removed": [],
+  "export_result": {
+    "exported": true,
+    "splits": {
+      "train": 111,
+      "validation": 20,
+      "test": 7,
+      "total": 138
+    }
+  }
+}

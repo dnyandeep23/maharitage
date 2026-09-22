@@ -1,0 +1,13 @@
+{
+  "benchmark_id": "v4_gallery_reasoning",
+  "generated_at": "2026-08-09T12:55:38.203Z",
+  "total_questions": 55,
+  "option_distribution": {
+    "A": 14,
+    "B": 14,
+    "C": 14,
+    "D": 13
+  },
+  "schema_version": "4.0.0",
+  "description": "Strictly visually-dependent gallery benchmark for true image reasoning"
+}

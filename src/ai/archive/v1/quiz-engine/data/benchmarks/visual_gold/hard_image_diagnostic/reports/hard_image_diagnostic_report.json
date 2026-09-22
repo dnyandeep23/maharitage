@@ -1,0 +1,10 @@
+{
+  "normal_accuracy": 0.22,
+  "text_only_accuracy": 0.25,
+  "rephrased_accuracy": 0.24,
+  "shuffled_accuracy": 0.21,
+  "crop_accuracy": 0.2,
+  "primary_failure": "VISUAL_PERCEPTION_FAILURE",
+  "potential_limitation": "YES",
+  "recommendation": "CONSIDER_FUTURE_LORA_EXPERIMENT"
+}

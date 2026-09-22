@@ -1,0 +1,122 @@
+[
+  {
+    "question_id": "Q1",
+    "benchmark_id": "v4_gold_008",
+    "question": "What visible sculptural or masonry composition appears in image #8?",
+    "gold_answer": "D",
+    "base_raw_output": "B.\n\n#",
+    "base_parsed_answer": "B",
+    "base_correct": false,
+    "lora_raw_output": "B.\n\n#",
+    "lora_parsed_answer": "B",
+    "lora_correct": false
+  },
+  {
+    "question_id": "Q2",
+    "benchmark_id": "v4_gold_021",
+    "question": "Which architectural element is most prominently visible in gallery photograph #21?",
+    "gold_answer": "A",
+    "base_raw_output": "B.\n\nThe",
+    "base_parsed_answer": "B",
+    "base_correct": false,
+    "lora_raw_output": "B.\n\nThe",
+    "lora_parsed_answer": "B",
+    "lora_correct": false
+  },
+  {
+    "question_id": "Q3",
+    "benchmark_id": "v4_gold_033",
+    "question": "Which carved or built feature characterizes the monument shown in photo #33?",
+    "gold_answer": "A",
+    "base_raw_output": "D\n\nAnswer:",
+    "base_parsed_answer": "D",
+    "base_correct": false,
+    "lora_raw_output": "D\n\nAnswer:",
+    "lora_parsed_answer": "D",
+    "lora_correct": false
+  },
+  {
+    "question_id": "Q4",
+    "benchmark_id": "v4_gold_053",
+    "question": "Which carved or built feature characterizes the monument shown in photo #53?",
+    "gold_answer": "A",
+    "base_raw_output": "D.\n\nAnswer",
+    "base_parsed_answer": "D",
+    "base_correct": false,
+    "lora_raw_output": "D.\n\nAnswer",
+    "lora_parsed_answer": "D",
+    "lora_correct": false
+  },
+  {
+    "question_id": "Q5",
+    "benchmark_id": "v4_gold_042",
+    "question": "What type of structural or defensive form is shown in image #42?",
+    "gold_answer": "B",
+    "base_raw_output": "B\n\nA",
+    "base_parsed_answer": "B",
+    "base_correct": true,
+    "lora_raw_output": "B\n\nA",
+    "lora_parsed_answer": "B",
+    "lora_correct": true
+  },
+  {
+    "question_id": "Q6",
+    "benchmark_id": "v4_gold_007",
+    "question": "Which type of opening, arch, or bastion is visible in this photograph (#7)?",
+    "gold_answer": "C",
+    "base_raw_output": "B.\n\nThe",
+    "base_parsed_answer": "B",
+    "base_correct": false,
+    "lora_raw_output": "B.\n\nThe",
+    "lora_parsed_answer": "B",
+    "lora_correct": false
+  },
+  {
+    "question_id": "Q7",
+    "benchmark_id": "v4_gold_015",
+    "question": "Which geometric or construction element is visually observable in this picture #15?",
+    "gold_answer": "C",
+    "base_raw_output": "C.\n\nAnswer",
+    "base_parsed_answer": "C",
+    "base_correct": true,
+    "lora_raw_output": "C.\n\nAnswer",
+    "lora_parsed_answer": "C",
+    "lora_correct": true
+  },
+  {
+    "question_id": "Q8",
+    "benchmark_id": "v4_gold_039",
+    "question": "Which architectural geometry characterizes the scene captured in photo #39?",
+    "gold_answer": "C",
+    "base_raw_output": "B.\n\nAnswer",
+    "base_parsed_answer": "B",
+    "base_correct": false,
+    "lora_raw_output": "B.\n\nAnswer",
+    "lora_parsed_answer": "B",
+    "lora_correct": false
+  },
+  {
+    "question_id": "Q9",
+    "benchmark_id": "v4_gold_040",
+    "question": "What structural configuration distinguishes the form shown in this image (#40)?",
+    "gold_answer": "D",
+    "base_raw_output": "D\n\nAnswer:",
+    "base_parsed_answer": "D",
+    "base_correct": true,
+    "lora_raw_output": "D\n\nAnswer:",
+    "lora_parsed_answer": "D",
+    "lora_correct": true
+  },
+  {
+    "question_id": "Q10",
+    "benchmark_id": "v4_gold_036",
+    "question": "What specific physical feature defines the structure seen in gallery scan #36?",
+    "gold_answer": "D",
+    "base_raw_output": "D.\n\nAnswer",
+    "base_parsed_answer": "D",
+    "base_correct": true,
+    "lora_raw_output": "D.\n\nAnswer",
+    "lora_parsed_answer": "D",
+    "lora_correct": true
+  }
+]

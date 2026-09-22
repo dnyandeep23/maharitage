@@ -1,0 +1,11 @@
+# Model Availability
+
+- SmolVLM-256M: LOAD_FAILED
+- SmolVLM-500M: LOAD_FAILED
+- llava-onevision-0.5b: LOAD_FAILED
+- Qwen2-VL-2B-MLX: DOWNLOAD_FAILED
+- Qwen3-VL-2B: LOAD_FAILED
+- Qwen2.5-VL-3B: LOAD_FAILED
+- Qwen3-VL-4B: LOAD_FAILED
+- InternVL3-2B: LOAD_FAILED
+- gemma-3-4b-it: LOAD_FAILED

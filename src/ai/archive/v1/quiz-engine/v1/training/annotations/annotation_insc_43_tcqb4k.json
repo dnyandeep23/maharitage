@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_43_tcqb4k",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_43_tcqb4k.jpg",
+  "cloudinary_public_id": "insc_43_tcqb4k",
+  "question": "Which statement best describes the visual characteristics of the script carved into the stone slab?",
+  "options": [
+    "The script is composed entirely of sharp, geometric forms with no rounded elements.",
+    "The script consists of a mix of angular and curvilinear characters, appearing heavily weathered and somewhat eroded.",
+    "The inscription displays clearly defined, deeply incised pictographic symbols arranged vertically.",
+    "The characters are uniformly smooth and perfectly preserved, showing no signs of erosion."
+  ],
+  "correct_option_index": 1,
+  "correct_semantic_answer": "The script shows a combination of angular and curvilinear forms, and its surface is visibly degraded by weathering.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The entire surface of the image is covered by carved characters. Close inspection reveals that individual characters incorporate both straight lines and rounded curves. The edges of these characters are not sharp but appear softened and irregular, indicating significant weathering and erosion across the stone surface.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

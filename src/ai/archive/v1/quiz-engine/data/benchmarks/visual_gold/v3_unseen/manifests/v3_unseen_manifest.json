@@ -1,0 +1,72 @@
+{
+  "benchmark_name": "Maharitage V1 Independent Blind Visual Gold Benchmark (V3 Unseen)",
+  "version": "v3.0.0-unseen-site",
+  "created_at": "2026-08-09T12:49:29.928Z",
+  "frozen_v2_hash": "8fa97b431f04c603b67c98726bcbbb627d14b46959117f09f2de24fa842cbab1",
+  "summary": {
+    "total_benchmark_questions": 57,
+    "total_unique_images": 57,
+    "total_sites_covered": 3,
+    "all_score_3": true,
+    "visual_evidence_coverage_pct": 100,
+    "option_balance_gate": "PASS",
+    "option_distribution": {
+      "A": 15,
+      "B": 14,
+      "C": 14,
+      "D": 14
+    }
+  },
+  "site_counts": {
+    "Pit0002": {
+      "name": "The Pitalkhora Caves",
+      "inscriptions": 0,
+      "questions": 0
+    },
+    "Ell0001": {
+      "name": "The Ellora Caves",
+      "inscriptions": 1,
+      "questions": 1
+    },
+    "Aja0003": {
+      "name": "The Ajanta Caves",
+      "inscriptions": 3,
+      "questions": 3
+    },
+    "Kan0004": {
+      "name": "The Kanheri Caves",
+      "inscriptions": 53,
+      "questions": 53
+    },
+    "Ele0005": {
+      "name": "Elephanta Cave",
+      "inscriptions": 0,
+      "questions": 0
+    },
+    "Fort0001": {
+      "name": "Raigad Fort",
+      "inscriptions": 0,
+      "questions": 0
+    },
+    "Fort0002": {
+      "name": "Rajgad Fort",
+      "inscriptions": 0,
+      "questions": 0
+    },
+    "Fort0003": {
+      "name": "Devgiri Fort (Daulatabad Fort)",
+      "inscriptions": 0,
+      "questions": 0
+    },
+    "Fort0004": {
+      "name": "Sindhudurg Fort",
+      "inscriptions": 0,
+      "questions": 0
+    },
+    "Fort0005": {
+      "name": "Murud-Janjira Fort",
+      "inscriptions": 0,
+      "questions": 0
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_001_jwh5qj",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Material/Surface",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763107/insc_001_jwh5qj.jpg",
+  "cloudinary_public_id": "insc_001_jwh5qj",
+  "question": "Beyond the carved script, what significant visual feature is prominently displayed on the stone slab?",
+  "options": [
+    "A series of uniformly drilled holes along its top edge.",
+    "Elaborate animal figures carved in relief along its side borders.",
+    "A large, perfectly circular emblem etched into its lower half.",
+    "A distinct, irregular vertical fissure running through the inscribed surface."
+  ],
+  "correct_option_index": 3,
+  "correct_semantic_answer": "A distinct, irregular vertical fissure running through the inscribed surface.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "A prominent, dark, irregular vertical crack is clearly visible, starting from the top edge of the slab, curving slightly, and extending downwards through the middle section of the carved inscriptions, almost reaching the bottom of the slab.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

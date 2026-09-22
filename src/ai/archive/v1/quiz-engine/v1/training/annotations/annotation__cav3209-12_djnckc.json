@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img__cav3209-12_djnckc",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3209-12_djnckc.jpg",
+  "cloudinary_public_id": "_cav3209-12_djnckc",
+  "question": "Based on the image, how many distinct horizontal lines of carved inscription are visible on the stone slab?",
+  "options": [
+    "Two",
+    "Three",
+    "Four",
+    "Five"
+  ],
+  "correct_option_index": 1,
+  "correct_semantic_answer": "There are three distinct horizontal lines of carved inscription.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The stone slab prominently displays three separate, parallel rows of carved characters, each forming a complete line of text from left to right across the visible surface of the stone.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

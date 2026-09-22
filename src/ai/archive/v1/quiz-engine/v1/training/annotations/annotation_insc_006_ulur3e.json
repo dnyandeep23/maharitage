@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_006_ulur3e",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_006_ulur3e.jpg",
+  "cloudinary_public_id": "insc_006_ulur3e",
+  "question": "Among the numbered inscriptions presented, which one distinctly features a swastika symbol?",
+  "options": [
+    "Inscription 13",
+    "Inscription 6",
+    "Inscription 7",
+    "Inscription 12"
+  ],
+  "correct_option_index": 0,
+  "correct_semantic_answer": "Inscription 13",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The swastika symbol is clearly visible at the bottom right of the block labeled '13', below the lines of text.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

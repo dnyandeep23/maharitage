@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img__cav3208_-_12_bdqp81",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761642273/_CAV3208_-_12_bdqp81.jpg",
+  "cloudinary_public_id": "_cav3208_-_12_bdqp81",
+  "question": "Which of the following statements accurately describes the presence and location of distinct circular features on the carved stone slab?",
+  "options": [
+    "Two distinct circular holes are present, one in the upper right and one in the lower left of the slab's visible surface.",
+    "A single large circular medallion is carved centrally above the inscription.",
+    "Multiple small, evenly spaced circular indentations form a decorative border around the text.",
+    "No distinct circular features are visible anywhere on the stone slab."
+  ],
+  "correct_option_index": 0,
+  "correct_semantic_answer": "Two distinct circular holes are visible on the slab, one in the upper right and one in the lower left.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "There is a clearly visible, roughly circular hole in the top right corner of the stone slab, slightly above the main block of inscription. Another similar, roughly circular hole is visible in the bottom left corner of the slab, below the inscription.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

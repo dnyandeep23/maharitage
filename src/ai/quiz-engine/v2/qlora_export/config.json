@@ -1,0 +1,21 @@
+{
+  "base_model": "Qwen/Qwen2-VL-2B-Instruct",
+  "load_in_4bit": true,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "learning_rate": 2e-05,
+  "batch_size": 1,
+  "gradient_accumulation_steps": 4,
+  "epochs": 2,
+  "vision_encoder_frozen": true,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ]
+}

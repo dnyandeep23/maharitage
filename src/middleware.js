@@ -16,9 +16,10 @@ const PUBLIC_ROUTES = [
   "/api/sites/:id",
   "/api/ai",
   "/api/ai/chat",
+  "/api/ai/quiz",
   "/api/contact",
   "/api/visitors",
-  "api/v1/:path*",
+  "/api/v1/:path*",
   "/",
   "/search",
   "/login",
@@ -32,6 +33,10 @@ const PUBLIC_ROUTES = [
   "/cave/:path*",
   "/heritage/:path*",
   "/api/auth/verify-apikey",
+  "/api/quiz-engine",   //block this page in prod
+  "/api/quiz-engine/:path*",  //block this page in prod
+  "/quiz-engine-test",    //block this page in prod
+  "/quiz-engine-test/:path*",   //block this page in prod
 ];
 
 const PROTECTED_ROUTES = ["/dashboard/:path*", "/api/:path*"];
@@ -121,7 +126,7 @@ export async function middleware(request) {
 
   const authHeader = request.headers.get("Authorization");
 
-  if (pathname.startsWith("/api/v1/")) {
+  if (pathname.startsWith("/api/v1/") && pathname !== "/api/v1/quiz/submit-answer") {
     if (authHeader?.startsWith("ApiKey ")) {
       console.log("API Key:", authHeader);
       const apiKey = authHeader.split(" ")[1];

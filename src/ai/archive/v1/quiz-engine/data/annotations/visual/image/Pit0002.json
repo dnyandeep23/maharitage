@@ -1,0 +1,28 @@
+[
+  {
+    "annotation_id": "Pit0002_img_001_q001",
+    "site_id": "Pit0002",
+    "site_name": "The Pitalkhora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761693536/IMG20251020094702-min_uf4vao.jpg",
+    "cloudinary_public_id": "IMG20251020094702-min_uf4vao",
+    "gallery_index": 0,
+    "question": "What unique sculptured feature is visible flanking the rock-cut entrance staircase in this photograph of Pitalkhora?",
+    "options": [
+      "A row of carved elephant forequarters appearing to emerge from the rock wall beside the steps",
+      "Two iron cannons on wheeled carriages",
+      "A pair of standing winged lions with crowns",
+      "A marble fountain with lotus carvings"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The entrance stairs are flanked by sculpted elephant heads and forequarters carved directly into the basalt rock.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "A row of carved elephant forequarters appearing to emerge from the rock wall beside the steps"
+    }
+  }
+]

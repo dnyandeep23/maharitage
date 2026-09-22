@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from "next/server";
 import { withAuth } from "../../../../../middleware/auth";
 import Chat from "../../../../../models/Chat";
@@ -31,6 +32,7 @@ export async function GET(request, context) {
         audienceType: chat.audienceType,
         score: chat.score,
         progress: chat.progress,
+        quizState: chat.quizState,
       },
     });
   } catch (error) {

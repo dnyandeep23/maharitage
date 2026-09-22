@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_01_gdbzsv",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Sculpture/Relief",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_01_gdbzsv.jpg",
+  "cloudinary_public_id": "insc_01_gdbzsv",
+  "question": "What is the primary direction of the prominent, roughly horizontal projection emanating from the mid-section of the main carved figure on the right side of the image?",
+  "options": [
+    "Towards the right",
+    "Diagonally upwards",
+    "Towards the left",
+    "Vertically downwards"
+  ],
+  "correct_option_index": 2,
+  "correct_semantic_answer": "The projection extends horizontally towards the left.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "A clear, somewhat rectangular projection extends from the left side of the main vertical carved figure, roughly at its mid-height, pointing distinctly towards the left.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

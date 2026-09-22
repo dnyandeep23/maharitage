@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_ajanta_cave_10_insc_01_rn3gz8",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761732243/Ajanta_Cave_10_Insc_01_rn3gz8.jpg",
+  "cloudinary_public_id": "ajanta_cave_10_insc_01_rn3gz8",
+  "question": "Which of the following geometric elements is clearly incorporated into at least two distinct characters within the visible inscription?",
+  "options": [
+    "A complete circular shape.",
+    "A perfect equilateral triangle.",
+    "A five-pointed star.",
+    "A complete spiral."
+  ],
+  "correct_option_index": 0,
+  "correct_semantic_answer": "A complete circular shape.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "A distinct circular shape is visible as the second character from the left in the first row. The last character in the second row also clearly incorporates a prominent circular form.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

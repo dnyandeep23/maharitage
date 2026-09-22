@@ -3,74 +3,103 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
-const QuizSkeleton = ({ label, variant = "full" }) => {
+const QuizSkeleton = ({ variant = "full" }) => {
   const isInline = variant === "inline";
 
   return (
     <div
-      className={`relative overflow-hidden border border-white/10 bg-white/5 ${
-        isInline ? "mt-4 rounded-2xl p-4" : "rounded-[2rem] px-5 py-8 sm:px-7"
+      className={`relative overflow-hidden border border-white/5 bg-[#05110d] ${
+        isInline ? "mt-4 rounded-2xl p-4" : "rounded-3xl p-8 sm:p-10"
       }`}
+      style={{
+        boxShadow: "0 0 80px rgba(0,0,0,0.8), inset 0 0 40px rgba(217,193,138,0.02)",
+      }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.14),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(245,158,11,0.12),transparent_36%)]" />
-      <div className="relative flex flex-col gap-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-amber-400/20 bg-amber-500/15">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1.1, ease: "linear" }}
+      {/* Background glow effects matching the screenshot */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#d9c18a]/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-emerald-900/10 blur-[100px] rounded-full pointer-events-none" />
+      
+      {/* Subtle top glare */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+      <div className="relative flex flex-col gap-6">
+        {/* Header Section */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-5">
+            {/* Logo Icon */}
+            <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[18px] border border-[#d9c18a]/20 bg-gradient-to-br from-[#d9c18a]/10 to-transparent shadow-[0_0_20px_rgba(217,193,138,0.1)]">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+              >
+                <Sparkles className="h-6 w-6 text-[#d9c18a]" />
+              </motion.div>
+            </div>
+            
+            {/* Brand Text */}
+            <div className="flex flex-col">
+              <h1 className="text-[26px] font-sans font-bold text-white tracking-wide leading-tight">
+                HeritageX
+              </h1>
+              <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-[#d9c18a]/80 mt-1">
+                Maharitage AI
+              </p>
+            </div>
+          </div>
+
+          {/* Analyzing Badge */}
+          <div className="hidden shrink-0 rounded-[2rem] border border-[#d9c18a]/30 bg-transparent px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#d9c18a]/80 sm:block shadow-[0_0_15px_rgba(217,193,138,0.1)]">
+            <motion.span
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
             >
-              <Sparkles className="h-4 w-4 text-amber-300" />
-            </motion.div>
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-white">{label}</p>
-            <p className="mt-1 text-xs text-white/45">AI is thinking through the next quiz step.</p>
-          </div>
-          <div className="hidden shrink-0 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-300 sm:block">
-            Thinking
+              Analyzing
+            </motion.span>
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-full bg-white/8">
-          <motion.div
-            className="h-1.5 rounded-full bg-[linear-gradient(90deg,#f59e0b,#10b981,#ec4899)]"
-            animate={{ x: ["-35%", "125%"] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          />
+        {/* Separator Line with Left Glow */}
+        <div className="relative h-[2px] w-full bg-white/5 rounded-full mt-2 mb-2">
+          <div className="absolute left-0 top-0 h-full w-[40%] bg-gradient-to-r from-[#d9c18a] via-[#d9c18a]/50 to-transparent rounded-full shadow-[0_0_15px_rgba(217,193,138,0.6)]" />
         </div>
 
-        <div className="grid gap-3">
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-black/15 p-5">
+        {/* Content Skeleton */}
+        <div className="grid gap-4">
+          {/* Main Question Box */}
+          <div className="overflow-hidden rounded-2xl bg-[#091b15] border border-white/[0.03] p-6 shadow-inner">
             <motion.div
-              className="h-4 rounded-full bg-white/10"
-              animate={{ opacity: [0.45, 0.95, 0.45] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              className="h-[18px] w-[95%] rounded-lg bg-white/[0.04]"
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
             />
             <motion.div
-              className="mt-3 h-4 w-2/3 rounded-full bg-white/8"
-              animate={{ opacity: [0.35, 0.8, 0.35] }}
+              className="mt-4 h-[18px] w-[70%] rounded-lg bg-white/[0.04]"
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{
                 repeat: Infinity,
-                duration: 1.5,
-                delay: 0.15,
+                duration: 2,
+                delay: 0.2,
                 ease: "easeInOut",
               }}
             />
           </div>
-          {[0, 1, 2, 3].map((i) => (
-            <motion.div
-              key={i}
-              className="h-[68px] rounded-2xl border border-white/8 bg-white/5"
-              animate={{ opacity: [0.4, 0.85, 0.4] }}
-              transition={{
-                repeat: Infinity,
-                duration: 1.35,
-                delay: i * 0.1,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
+          
+          {/* Options Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+            {[0, 1, 2, 3].map((i) => (
+              <motion.div
+                key={i}
+                className="h-[76px] rounded-2xl border border-white/[0.03] bg-[#091b15] shadow-inner"
+                animate={{ opacity: [0.4, 0.8, 0.4] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2,
+                  delay: i * 0.15,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

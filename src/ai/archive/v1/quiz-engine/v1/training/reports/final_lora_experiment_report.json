@@ -1,0 +1,42 @@
+{
+  "dataset": {
+    "clean_images": 23,
+    "total_annotations": 23,
+    "vds_3": 23,
+    "database_only": 0,
+    "ground_truth_failures": 0,
+    "image_leakage": 0,
+    "exact_duplicates": 0,
+    "semantic_duplicates": 0
+  },
+  "splits": {
+    "train": 17,
+    "val": 3,
+    "test": 3
+  },
+  "training": {
+    "base_model": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "lora_rank": 8,
+    "device": "mps",
+    "training_time_seconds": 18.32,
+    "epochs": 1,
+    "checkpoint_path": "/Users/dnyandeep/Dnyandeep/Project/maharitage/src/ai/quiz-engine/v1/training/checkpoints/smolvlm_lora_v1",
+    "successful_batches": 17,
+    "failed_batches": 0,
+    "max_mps_allocated_gib": 0.68,
+    "avg_loss": 11.1198
+  },
+  "results": {
+    "val_baseline": 0.0,
+    "val_lora": 0.0,
+    "v4_baseline": 25.45,
+    "v4_lora": 25.45,
+    "hard_baseline": 24.0,
+    "hard_lora": 24.0,
+    "absolute_gain": 0.0
+  },
+  "overfitting": "NO",
+  "regression": "NO",
+  "final_decision": "LORA_NO_SIGNIFICANT_IMPROVEMENT",
+  "lora_benefit": "NO"
+}

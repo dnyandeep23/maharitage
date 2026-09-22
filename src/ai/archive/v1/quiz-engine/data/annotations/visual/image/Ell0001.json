@@ -1,0 +1,730 @@
+[
+  {
+    "annotation_id": "Ell0001_img_001_q001",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "cloudinary_public_id": "IMG20251022120741_kbusjk",
+    "gallery_index": 0,
+    "question": "Which colossal monolithic rock-cut monument is depicted in this photograph of Ellora Caves?",
+    "options": [
+      "The Kailasa Temple (Cave 16) carved top-down from a single basaltic cliff face",
+      "Cave 10 (Visvakarma Chaitya)",
+      "Cave 32 (Indra Sabha)",
+      "Great Chaitya Hall of Kanheri"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows the stupendous monolithic Kailasa temple complex carved out of the solid basalt mountain.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "The Kailasa Temple (Cave 16) carved top-down from a single basaltic cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_001_q002",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Sculpture/Relief",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "cloudinary_public_id": "IMG20251022120741_kbusjk",
+    "gallery_index": 0,
+    "question": "What monumental architectural detail is visible supporting the main temple platform in this Kailasa photo?",
+    "options": [
+      "A row of iron pillars",
+      "A frieze of life-sized carved stone elephants appearing to hold up the entire temple superstructure",
+      "A series of smooth marble columns",
+      "Brick arches resting on wooden beams"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The plinth of the main sanctuary features a dramatic continuous frieze of carved stone elephants supporting the structure.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "A frieze of life-sized carved stone elephants appearing to hold up the entire temple superstructure"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_002_q003",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670797/IMG_20251028_222042_dmi8uw.jpg",
+    "cloudinary_public_id": "IMG_20251028_222042_dmi8uw",
+    "gallery_index": 1,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG_20251028_222042_dmi8uw' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_002_q004",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670797/IMG_20251028_222042_dmi8uw.jpg",
+    "cloudinary_public_id": "IMG_20251028_222042_dmi8uw",
+    "gallery_index": 1,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG_20251028_222042_dmi8uw'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG_20251028_222042_dmi8uw' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_003_q005",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670572/IMG20251022120323_p0dple.jpg",
+    "cloudinary_public_id": "IMG20251022120323_p0dple",
+    "gallery_index": 2,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022120323_p0dple' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_003_q006",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670572/IMG20251022120323_p0dple.jpg",
+    "cloudinary_public_id": "IMG20251022120323_p0dple",
+    "gallery_index": 2,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022120323_p0dple'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022120323_p0dple' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_004_q007",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676763/IMG20251022123019_m33tuw.jpg",
+    "cloudinary_public_id": "IMG20251022123019_m33tuw",
+    "gallery_index": 3,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022123019_m33tuw' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_004_q008",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676763/IMG20251022123019_m33tuw.jpg",
+    "cloudinary_public_id": "IMG20251022123019_m33tuw",
+    "gallery_index": 3,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022123019_m33tuw'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022123019_m33tuw' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_005_q009",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676689/IMG20251022124327_gazbk8.jpg",
+    "cloudinary_public_id": "IMG20251022124327_gazbk8",
+    "gallery_index": 4,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022124327_gazbk8' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_005_q010",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676689/IMG20251022124327_gazbk8.jpg",
+    "cloudinary_public_id": "IMG20251022124327_gazbk8",
+    "gallery_index": 4,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022124327_gazbk8'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022124327_gazbk8' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_006_q011",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676631/IMG20251022124150_skf9qi.jpg",
+    "cloudinary_public_id": "IMG20251022124150_skf9qi",
+    "gallery_index": 5,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022124150_skf9qi' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[5]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_006_q012",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676631/IMG20251022124150_skf9qi.jpg",
+    "cloudinary_public_id": "IMG20251022124150_skf9qi",
+    "gallery_index": 5,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022124150_skf9qi'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022124150_skf9qi' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[5]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_007_q013",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676598/IMG20251022132830_smf1wd.jpg",
+    "cloudinary_public_id": "IMG20251022132830_smf1wd",
+    "gallery_index": 6,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022132830_smf1wd' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[6]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_007_q014",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676598/IMG20251022132830_smf1wd.jpg",
+    "cloudinary_public_id": "IMG20251022132830_smf1wd",
+    "gallery_index": 6,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022132830_smf1wd'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022132830_smf1wd' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[6]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_008_q015",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676584/IMG20251022131500_qvljcm.jpg",
+    "cloudinary_public_id": "IMG20251022131500_qvljcm",
+    "gallery_index": 7,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022131500_qvljcm' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[7]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_008_q016",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676584/IMG20251022131500_qvljcm.jpg",
+    "cloudinary_public_id": "IMG20251022131500_qvljcm",
+    "gallery_index": 7,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022131500_qvljcm'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022131500_qvljcm' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[7]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_009_q017",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676568/IMG20251022131509_pnpr4j.jpg",
+    "cloudinary_public_id": "IMG20251022131509_pnpr4j",
+    "gallery_index": 8,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022131509_pnpr4j' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[8]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_009_q018",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676568/IMG20251022131509_pnpr4j.jpg",
+    "cloudinary_public_id": "IMG20251022131509_pnpr4j",
+    "gallery_index": 8,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022131509_pnpr4j'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022131509_pnpr4j' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[8]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_010_q019",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676519/IMG20251022131906_tf38n5.jpg",
+    "cloudinary_public_id": "IMG20251022131906_tf38n5",
+    "gallery_index": 9,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022131906_tf38n5' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[9]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_010_q020",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676519/IMG20251022131906_tf38n5.jpg",
+    "cloudinary_public_id": "IMG20251022131906_tf38n5",
+    "gallery_index": 9,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022131906_tf38n5'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022131906_tf38n5' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[9]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_011_q021",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676498/IMG20251022132835_khcu2p.jpg",
+    "cloudinary_public_id": "IMG20251022132835_khcu2p",
+    "gallery_index": 10,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022132835_khcu2p' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[10]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_011_q022",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676498/IMG20251022132835_khcu2p.jpg",
+    "cloudinary_public_id": "IMG20251022132835_khcu2p",
+    "gallery_index": 10,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022132835_khcu2p'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022132835_khcu2p' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[10]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_012_q023",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676464/IMG20251022124648_fs5cct.jpg",
+    "cloudinary_public_id": "IMG20251022124648_fs5cct",
+    "gallery_index": 11,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022124648_fs5cct' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[11]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_012_q024",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676464/IMG20251022124648_fs5cct.jpg",
+    "cloudinary_public_id": "IMG20251022124648_fs5cct",
+    "gallery_index": 11,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022124648_fs5cct'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022124648_fs5cct' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[11]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_013_q025",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675821/IMG20251022115704_fvpoj3.jpg",
+    "cloudinary_public_id": "IMG20251022115704_fvpoj3",
+    "gallery_index": 12,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022115704_fvpoj3' of The Ellora Caves?",
+    "options": [
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[12]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_013_q026",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675821/IMG20251022115704_fvpoj3.jpg",
+    "cloudinary_public_id": "IMG20251022115704_fvpoj3",
+    "gallery_index": 12,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022115704_fvpoj3'?",
+    "options": [
+      "Raigad Fort",
+      "The Ellora Caves",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022115704_fvpoj3' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[12]",
+      "value": "The Ellora Caves"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_014_q027",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675522/IMG20251022113451_is5pxe.jpg",
+    "cloudinary_public_id": "IMG20251022113451_is5pxe",
+    "gallery_index": 13,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'IMG20251022113451_is5pxe' of The Ellora Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ellora Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[13]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_img_014_q028",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675522/IMG20251022113451_is5pxe.jpg",
+    "cloudinary_public_id": "IMG20251022113451_is5pxe",
+    "gallery_index": 13,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'IMG20251022113451_is5pxe'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort",
+      "The Ellora Caves"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'IMG20251022113451_is5pxe' matches The Ellora Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[13]",
+      "value": "The Ellora Caves"
+    }
+  }
+]

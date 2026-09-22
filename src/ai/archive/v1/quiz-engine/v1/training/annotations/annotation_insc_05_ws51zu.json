@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_05_ws51zu",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Material/Surface",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_05_ws51zu.jpg",
+  "cloudinary_public_id": "insc_05_ws51zu",
+  "question": "What is the most evident visual difference in the condition of the inscribed text between the left and right panels?",
+  "options": [
+    "The left panel features a decorative border not present on the right panel.",
+    "The right panel displays a completely different script style than the left panel.",
+    "The inscription on the right panel is significantly more distinct and legible due to better preservation, while the left panel's text is heavily eroded and indistinct.",
+    "Both panels show uniformly preserved text with no significant signs of erosion."
+  ],
+  "correct_option_index": 2,
+  "correct_semantic_answer": "The inscription on the right panel is significantly more distinct and legible due to better preservation, while the left panel's text is heavily eroded and indistinct.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The right panel clearly shows rows of deeply carved, distinct characters, allowing for partial readability, especially in the upper and middle sections. In contrast, the left panel's surface is extensively eroded, rendering most of its characters shallow, blurred, and largely illegible.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

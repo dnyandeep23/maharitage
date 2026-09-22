@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_06_bqmmib",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Material/Surface",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_06_bqmmib.jpg",
+  "cloudinary_public_id": "insc_06_bqmmib",
+  "question": "Which of the following describes a significant physical characteristic visible on the surface of the inscribed stone slab?",
+  "options": [
+    "A series of uniformly spaced horizontal grooves across the entire surface.",
+    "A large, perfectly circular indentation at the center of the slab.",
+    "Evidence of recent repair work with a contrasting material.",
+    "A prominent, irregular vertical crack extending through the inscribed text."
+  ],
+  "correct_option_index": 3,
+  "correct_semantic_answer": "A significant, irregular vertical crack is present on the stone slab, traversing the inscribed text.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "A distinct, dark, irregular line runs vertically from the upper left portion of the stone, curving slightly to the right as it descends, passing directly through multiple lines of the carved inscription. It is clearly visible against the lighter stone surface.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

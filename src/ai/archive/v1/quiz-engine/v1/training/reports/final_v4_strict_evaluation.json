@@ -1,0 +1,253 @@
+{
+  "benchmark": "v4_gallery_gold.json",
+  "total_questions": 55,
+  "final_decision": "BASELINE_ESTABLISHED",
+  "base_model": {
+    "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "correct": 26,
+    "accuracy": 47.27,
+    "wilson_ci_95": [
+      34.69,
+      60.21
+    ],
+    "prediction_distribution": {
+      "A": 6,
+      "B": 0,
+      "C": 16,
+      "D": 33,
+      "INVALID": 0
+    }
+  },
+  "lora_model": {
+    "checkpoint": "/Users/dnyandeep/Dnyandeep/Project/maharitage/src/ai/quiz-engine/v1/training/checkpoints/smolvlm_lora_v1",
+    "correct": 26,
+    "accuracy": 47.27,
+    "wilson_ci_95": [
+      34.69,
+      60.21
+    ],
+    "prediction_distribution": {
+      "A": 6,
+      "B": 0,
+      "C": 16,
+      "D": 33,
+      "INVALID": 0
+    }
+  },
+  "comparison": {
+    "absolute_improvement": 0.0,
+    "relative_improvement": 0.0,
+    "improved_count": 0,
+    "regressed_count": 0,
+    "unchanged_count": 55,
+    "mcnemar_table": {
+      "both_correct": 26,
+      "base_correct_lora_wrong": 0,
+      "base_wrong_lora_correct": 0,
+      "both_wrong": 29
+    }
+  },
+  "accuracy_by_gold": {
+    "A": {
+      "total": 14,
+      "base_accuracy": 21.43,
+      "lora_accuracy": 21.43
+    },
+    "B": {
+      "total": 14,
+      "base_accuracy": 0.0,
+      "lora_accuracy": 0.0
+    },
+    "C": {
+      "total": 14,
+      "base_accuracy": 100.0,
+      "lora_accuracy": 100.0
+    },
+    "D": {
+      "total": 13,
+      "base_accuracy": 69.23,
+      "lora_accuracy": 69.23
+    }
+  },
+  "accuracy_by_site": {
+    "Pit0002": {
+      "total": 5,
+      "base_acc": 40.0,
+      "lora_acc": 40.0
+    },
+    "Ell0001": {
+      "total": 14,
+      "base_acc": 50.0,
+      "lora_acc": 50.0
+    },
+    "Aja0003": {
+      "total": 7,
+      "base_acc": 42.86,
+      "lora_acc": 42.86
+    },
+    "Kan0004": {
+      "total": 5,
+      "base_acc": 60.0,
+      "lora_acc": 60.0
+    },
+    "Ele0005": {
+      "total": 1,
+      "base_acc": 0.0,
+      "lora_acc": 0.0
+    },
+    "Fort0001": {
+      "total": 4,
+      "base_acc": 75.0,
+      "lora_acc": 75.0
+    },
+    "Fort0002": {
+      "total": 6,
+      "base_acc": 33.33,
+      "lora_acc": 33.33
+    },
+    "Fort0003": {
+      "total": 4,
+      "base_acc": 25.0,
+      "lora_acc": 25.0
+    },
+    "Fort0004": {
+      "total": 4,
+      "base_acc": 50.0,
+      "lora_acc": 50.0
+    },
+    "Fort0005": {
+      "total": 5,
+      "base_acc": 60.0,
+      "lora_acc": 60.0
+    }
+  },
+  "accuracy_by_category": {
+    "Architecture & Structural Elements": {
+      "total": 55,
+      "base_acc": 47.27,
+      "lora_acc": 47.27
+    }
+  },
+  "visual_failure_analysis_10": [
+    {
+      "question_index": 0,
+      "benchmark_id": "v4_gold_001",
+      "question": "Which architectural element is most prominently visible in gallery photograph #1?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761693536/IMG20251020094702-min_uf4vao.jpg",
+      "gold": "A",
+      "base_prediction": "D",
+      "lora_prediction": "D",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Pit0002",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 1,
+      "benchmark_id": "v4_gold_002",
+      "question": "What type of structural or defensive form is shown in image #2?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761693546/IMG20251020094940_01-min_ad0pze.jpg",
+      "gold": "B",
+      "base_prediction": "D",
+      "lora_prediction": "D",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Pit0002",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 4,
+      "benchmark_id": "v4_gold_005",
+      "question": "Which geometric or construction element is visually observable in this picture #5?",
+      "image_url": "https://res.cloudinary.com/dscwv82o2/image/upload/v1764014826/sites/peepds7zltzsxs3pjuu8.jpg",
+      "gold": "A",
+      "base_prediction": "D",
+      "lora_prediction": "D",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Pit0002",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 5,
+      "benchmark_id": "v4_gold_006",
+      "question": "What specific physical feature defines the structure seen in gallery scan #6?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+      "gold": "B",
+      "base_prediction": "A",
+      "lora_prediction": "A",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Ell0001",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 7,
+      "benchmark_id": "v4_gold_008",
+      "question": "What visible sculptural or masonry composition appears in image #8?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670572/IMG20251022120323_p0dple.jpg",
+      "gold": "D",
+      "base_prediction": "A",
+      "lora_prediction": "A",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Ell0001",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 9,
+      "benchmark_id": "v4_gold_010",
+      "question": "What structural configuration distinguishes the form shown in this image (#10)?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676689/IMG20251022124327_gazbk8.jpg",
+      "gold": "B",
+      "base_prediction": "D",
+      "lora_prediction": "D",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Ell0001",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 13,
+      "benchmark_id": "v4_gold_014",
+      "question": "What structural arrangement distinguishes the building visible in this image (#14)?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676568/IMG20251022131509_pnpr4j.jpg",
+      "gold": "B",
+      "base_prediction": "D",
+      "lora_prediction": "D",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Ell0001",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 15,
+      "benchmark_id": "v4_gold_016",
+      "question": "What specific physical feature defines the structure seen in gallery scan #16?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676498/IMG20251022132835_khcu2p.jpg",
+      "gold": "D",
+      "base_prediction": "A",
+      "lora_prediction": "A",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Ell0001",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 16,
+      "benchmark_id": "v4_gold_017",
+      "question": "Which type of opening, arch, or bastion is visible in this photograph (#17)?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676464/IMG20251022124648_fs5cct.jpg",
+      "gold": "A",
+      "base_prediction": "D",
+      "lora_prediction": "D",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Ell0001",
+      "primary_failure_factor": "fine-grained architecture"
+    },
+    {
+      "question_index": 17,
+      "benchmark_id": "v4_gold_018",
+      "question": "What visible sculptural or masonry composition appears in image #18?",
+      "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675821/IMG20251022115704_fvpoj3.jpg",
+      "gold": "B",
+      "base_prediction": "D",
+      "lora_prediction": "D",
+      "category": "Architecture & Structural Elements",
+      "site_id": "Ell0001",
+      "primary_failure_factor": "fine-grained architecture"
+    }
+  ]
+}

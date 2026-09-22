@@ -1,0 +1,6 @@
+Model,Backend,Evaluations,Errors,Overall Acc,Text Acc,Image Acc,Easy Acc,Moderate Acc,Hard Acc,Avg Conf,Correct Conf,Wrong Conf,Invalid %,Avg Latency (ms),P95 Latency (ms)
+google/gemma-3-12b-it,openrouter,48/48,0,100.0,100.0,100.0,100.0,100.0,100.0,0.000,0.000,0.000,0.0,815,2480
+qwen/qwen3-vl-8b-instruct,openrouter,48/48,0,97.9,96.0,100.0,91.7,100.0,100.0,0.973,0.979,0.729,0.0,957,1893
+mlx-community/Qwen2-VL-2B-Instruct-4bit,mlx,48/48,0,85.4,76.0,95.7,75.0,95.7,76.9,0.000,0.000,0.000,0.0,285,634
+HuggingFaceTB/SmolVLM-500M-Instruct,transformers,48/48,0,56.2,32.0,82.6,50.0,60.9,53.8,0.382,0.442,0.297,2.1,780,1551
+HuggingFaceTB/SmolVLM-256M-Instruct,transformers,48/48,0,6.2,0.0,13.0,8.3,4.3,7.7,0.710,0.699,0.710,2.1,654,1404

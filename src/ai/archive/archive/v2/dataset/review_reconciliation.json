@@ -1,0 +1,352 @@
+[
+  {
+    "annotation_id": "v2_db_Ell0001_text_001",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_text_002",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_text_003",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_text_004",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_text_005",
+    "gemini": "REVISE",
+    "claude": "KEEP",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_001",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_002",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_003",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_004",
+    "gemini": "REVISE",
+    "claude": "REVISE",
+    "human": "REVISE",
+    "status": "CONSENSUS_REVISE"
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_005",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_text_001",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_text_002",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_text_003",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_text_004",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_text_005",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_001",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_002",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_003",
+    "gemini": "KEEP",
+    "claude": "REJECT",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_004",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_005",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_text_001",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_text_002",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_text_003",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_text_004",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_text_005",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_001",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_002",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_003",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_004",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_005",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_text_001",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_text_002",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_text_003",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_text_004",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_text_005",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_001",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_002",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_003",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_004",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_img_005",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_text_001",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_text_002",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_text_003",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_text_004",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_text_005",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_001",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_002",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_003",
+    "gemini": "KEEP",
+    "claude": "REVISE",
+    "human": "PENDING",
+    "status": "DISAGREEMENT_REQUIRES_HUMAN"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_004",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_005",
+    "gemini": "KEEP",
+    "claude": "KEEP",
+    "human": "KEEP",
+    "status": "CONSENSUS_KEEP"
+  }
+]

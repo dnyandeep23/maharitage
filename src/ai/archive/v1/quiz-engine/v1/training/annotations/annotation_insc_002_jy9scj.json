@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_002_jy9scj",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Architectural Feature",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763191/insc_002_jy9scj.jpg",
+  "cloudinary_public_id": "insc_002_jy9scj",
+  "question": "What is the primary method employed to create the textual characters visible on the stone surface?",
+  "options": [
+    "The characters are incised, cut into the stone.",
+    "The characters are carved in high relief, projecting from the surface.",
+    "The characters are painted onto a smooth, prepared layer.",
+    "The characters are formed by small, embedded ceramic tiles."
+  ],
+  "correct_option_index": 0,
+  "correct_semantic_answer": "The characters are incised, cut into the stone.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The image clearly shows that the textual characters are recessed into the stone, forming distinct grooves and depressions rather than standing out from the surface. This indicates an incised carving technique.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

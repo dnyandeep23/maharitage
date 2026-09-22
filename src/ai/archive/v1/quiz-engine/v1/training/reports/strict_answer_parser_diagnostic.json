@@ -1,0 +1,162 @@
+{
+  "final_classification": "MODEL_OUTPUT_COLLAPSE",
+  "explanation": "The model is generating malformed text, repeated options, or question repetitions instead of clean A/B/C/D option characters.",
+  "parser_control_tests": [
+    {
+      "input": "A",
+      "expected": "A",
+      "got": "A",
+      "status": "PASS"
+    },
+    {
+      "input": "B",
+      "expected": "B",
+      "got": "B",
+      "status": "PASS"
+    },
+    {
+      "input": "C",
+      "expected": "C",
+      "got": "C",
+      "status": "PASS"
+    },
+    {
+      "input": "D",
+      "expected": "D",
+      "got": "D",
+      "status": "PASS"
+    },
+    {
+      "input": "Answer: A",
+      "expected": "A",
+      "got": "A",
+      "status": "PASS"
+    },
+    {
+      "input": "Answer: B",
+      "expected": "B",
+      "got": "B",
+      "status": "PASS"
+    },
+    {
+      "input": "Answer: C",
+      "expected": "C",
+      "got": "C",
+      "status": "PASS"
+    },
+    {
+      "input": "Answer: D",
+      "expected": "D",
+      "got": "D",
+      "status": "PASS"
+    },
+    {
+      "input": "Option C",
+      "expected": "C",
+      "got": "C",
+      "status": "PASS"
+    },
+    {
+      "input": "The correct answer is D",
+      "expected": "D",
+      "got": "D",
+      "status": "PASS"
+    },
+    {
+      "input": "Based on the image, option B is correct",
+      "expected": "B",
+      "got": "B",
+      "status": "PASS"
+    },
+    {
+      "input": "Question: ... Answer",
+      "expected": "INVALID",
+      "got": "INVALID",
+      "status": "PASS"
+    }
+  ],
+  "base_model": {
+    "raw_distribution": {
+      "A": 1,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "OTHER": 19,
+      "EMPTY": 0
+    },
+    "parsed_distribution": {
+      "A": 5,
+      "B": 0,
+      "C": 4,
+      "D": 11,
+      "INVALID": 0
+    },
+    "accuracy": 45.0,
+    "correct": 9,
+    "total": 20,
+    "invalid_rate": 0.0
+  },
+  "lora_model": {
+    "raw_distribution": {
+      "A": 1,
+      "B": 0,
+      "C": 0,
+      "D": 0,
+      "OTHER": 19,
+      "EMPTY": 0
+    },
+    "parsed_distribution": {
+      "A": 5,
+      "B": 0,
+      "C": 4,
+      "D": 11,
+      "INVALID": 0
+    },
+    "accuracy": 45.0,
+    "correct": 9,
+    "total": 20,
+    "invalid_rate": 0.0
+  },
+  "representative_examples": [
+    {
+      "question": "Which architectural element is most prominently visible in gallery photograph #1?",
+      "gold": "A",
+      "raw_base": "'D\\n\\nAnswer:'",
+      "parsed_base": "D",
+      "raw_lora": "'D\\n\\nAnswer:'",
+      "parsed_lora": "D"
+    },
+    {
+      "question": "Which geometric or construction element is visually observable in this picture #5?",
+      "gold": "A",
+      "raw_base": "'D\\n\\nAnswer:'",
+      "parsed_base": "D",
+      "raw_lora": "'D\\n\\nAnswer:'",
+      "parsed_lora": "D"
+    },
+    {
+      "question": "Which architectural geometry characterizes the scene captured in photo #9?",
+      "gold": "A",
+      "raw_base": "'A'",
+      "parsed_base": "A",
+      "raw_lora": "'A'",
+      "parsed_lora": "A"
+    },
+    {
+      "question": "Which carved or built feature characterizes the monument shown in photo #13?",
+      "gold": "A",
+      "raw_base": "'A.\\n\\nHow'",
+      "parsed_base": "A",
+      "raw_lora": "'A.\\n\\nHow'",
+      "parsed_lora": "A"
+    },
+    {
+      "question": "Which type of opening, arch, or bastion is visible in this photograph (#17)?",
+      "gold": "A",
+      "raw_base": "'D\\n\\nAnswer:'",
+      "parsed_base": "D",
+      "raw_lora": "'D\\n\\nAnswer:'",
+      "parsed_lora": "D"
+    }
+  ]
+}

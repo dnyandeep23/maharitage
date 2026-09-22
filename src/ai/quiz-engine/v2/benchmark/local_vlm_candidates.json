@@ -1,0 +1,47 @@
+[
+  {
+    "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "family": "Unknown",
+    "parameters": "Unknown",
+    "quantization": "None",
+    "device": "mps",
+    "DOWNLOAD_STATUS": "SUCCESS",
+    "RUNTIME_STATUS": "SUCCESS",
+    "MODEL_STATUS": "READY",
+    "load_time": 5.471395969390869,
+    "avg_latency": 2.159440517425537,
+    "parse_success": 2,
+    "error": null,
+    "backend": "transformers"
+  },
+  {
+    "model_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+    "family": "Unknown",
+    "parameters": "Unknown",
+    "quantization": "None",
+    "device": "mps",
+    "DOWNLOAD_STATUS": "SUCCESS",
+    "RUNTIME_STATUS": "SUCCESS",
+    "MODEL_STATUS": "READY",
+    "load_time": 5.8471839427948,
+    "avg_latency": 1.7881275415420532,
+    "parse_success": 2,
+    "error": null,
+    "backend": "transformers"
+  },
+  {
+    "model_id": "mlx-community/Qwen2-VL-2B-Instruct-4bit",
+    "family": "Unknown",
+    "parameters": "Unknown",
+    "quantization": "4bit",
+    "device": "mps",
+    "DOWNLOAD_STATUS": "SUCCESS",
+    "RUNTIME_STATUS": "SUCCESS",
+    "MODEL_STATUS": "READY",
+    "load_time": 1.1469647884368896,
+    "avg_latency": 0.7798395156860352,
+    "parse_success": 2,
+    "error": null,
+    "backend": "mlx"
+  }
+]

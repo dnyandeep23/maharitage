@@ -1,0 +1,14 @@
+{
+  "status": "TRAINING_FAILED",
+  "root_cause": "COMPLETE_IMAGE_LEAKAGE",
+  "total_annotations": 138,
+  "leaking_annotations": 78,
+  "clean_annotations": 60,
+  "leakage_pct": 56.52173913043478,
+  "v4_baseline_accuracy": 84.5,
+  "hard_diagnostic_accuracy": 22.0,
+  "lora_v4_accuracy": null,
+  "lora_hard_accuracy": null,
+  "decision": "DO_NOT_TRAIN",
+  "required_action": "Expand annotation dataset with images not in evaluation benchmarks"
+}

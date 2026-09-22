@@ -1,0 +1,316 @@
+{
+  "report_name": "Maharitage V1 Independent Blind Visual Benchmark Baseline Report",
+  "timestamp": "2026-08-09T12:43:33.237Z",
+  "model_config": {
+    "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "evaluation_mode": "Strict Blind Mode (Zero-Shot Base Model, No LoRA)",
+    "exposed_inputs": [
+      "image",
+      "question",
+      "options"
+    ]
+  },
+  "dataset_summary": {
+    "total_benchmark_questions": 55,
+    "sites_covered": 10,
+    "images_evaluated": 55,
+    "unused_images_count": 9,
+    "reused_images_count": 46,
+    "all_score_3": true
+  },
+  "results": {
+    "benchmark_status": "VALID",
+    "option_balance_gate": "PASS",
+    "image_dependency_gate": "PASS",
+    "position_bias_detected": false,
+    "benchmark_statistical_status": "INSUFFICIENT",
+    "total_benchmark_questions": 55,
+    "baselines": {
+      "random_guess_pct": 25,
+      "always_A_pct": 25.5,
+      "always_B_pct": 25.5,
+      "always_C_pct": 25.5,
+      "always_D_pct": 23.6,
+      "majority_class_pct": 25.5
+    },
+    "accuracy": {
+      "accuracy_with_image_pct": 100,
+      "accuracy_without_image_pct": 47.3,
+      "image_gain_pct": 52.7,
+      "seen_site_accuracy_pct": 100,
+      "unseen_site_accuracy_pct": 100,
+      "unseen_site_question_count": 9
+    },
+    "robustness": {
+      "option_shuffle_consistency_pct": 100,
+      "distractor_robustness_pct": 100,
+      "site_context_sensitivity_pct": 0
+    },
+    "verification": {
+      "visual_evidence_supported_rate_pct": 100,
+      "database_verification_rate_pct": 100
+    },
+    "option_distribution": {
+      "A": 14,
+      "B": 14,
+      "C": 14,
+      "D": 13
+    },
+    "predicted_distribution": {
+      "A": 14,
+      "B": 14,
+      "C": 14,
+      "D": 13
+    },
+    "confusion_matrix": {
+      "A": {
+        "A": 14,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "B": {
+        "A": 0,
+        "B": 14,
+        "C": 0,
+        "D": 0
+      },
+      "C": {
+        "A": 0,
+        "B": 0,
+        "C": 14,
+        "D": 0
+      },
+      "D": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 13
+      }
+    },
+    "categories": {
+      "CORRECT_AND_VISUALLY_SUPPORTED": 55,
+      "CORRECT_BUT_NOT_VISUALLY_SUPPORTED": 0,
+      "INCORRECT": 0,
+      "DATABASE_VERIFICATION_FAILED": 0,
+      "AMBIGUOUS": 0,
+      "ABSTAIN": 0
+    },
+    "per_site_accuracy": {
+      "Pit0002": {
+        "correct": 5,
+        "total": 5
+      },
+      "Ell0001": {
+        "correct": 14,
+        "total": 14
+      },
+      "Aja0003": {
+        "correct": 7,
+        "total": 7
+      },
+      "Kan0004": {
+        "correct": 5,
+        "total": 5
+      },
+      "Ele0005": {
+        "correct": 1,
+        "total": 1
+      },
+      "Fort0001": {
+        "correct": 4,
+        "total": 4
+      },
+      "Fort0002": {
+        "correct": 6,
+        "total": 6
+      },
+      "Fort0003": {
+        "correct": 4,
+        "total": 4
+      },
+      "Fort0004": {
+        "correct": 4,
+        "total": 4
+      },
+      "Fort0005": {
+        "correct": 5,
+        "total": 5
+      }
+    },
+    "per_category_accuracy": {
+      "Sculptural Entrance": {
+        "correct": 2,
+        "total": 2
+      },
+      "Architectural Feature": {
+        "correct": 4,
+        "total": 4
+      },
+      "Chaitya Architecture": {
+        "correct": 1,
+        "total": 1
+      },
+      "Water Management": {
+        "correct": 3,
+        "total": 3
+      },
+      "Spatial Landscape": {
+        "correct": 1,
+        "total": 1
+      },
+      "Monolithic Architecture": {
+        "correct": 1,
+        "total": 1
+      },
+      "Entrance/Façade": {
+        "correct": 2,
+        "total": 2
+      },
+      "Sculpture/Relief": {
+        "correct": 2,
+        "total": 2
+      },
+      "Pillars/Columns": {
+        "correct": 3,
+        "total": 3
+      },
+      "Sculptural Frieze": {
+        "correct": 1,
+        "total": 1
+      },
+      "Sculptural Shrine": {
+        "correct": 1,
+        "total": 1
+      },
+      "Sculptural Panel": {
+        "correct": 2,
+        "total": 2
+      },
+      "Façade Ornamentation": {
+        "correct": 2,
+        "total": 2
+      },
+      "Interior Colonnade": {
+        "correct": 1,
+        "total": 1
+      },
+      "Rock-Cut Excavation": {
+        "correct": 1,
+        "total": 1
+      },
+      "Wall Painting/Mural": {
+        "correct": 1,
+        "total": 1
+      },
+      "Spatial Layout": {
+        "correct": 1,
+        "total": 1
+      },
+      "Sanctuary Architecture": {
+        "correct": 1,
+        "total": 1
+      },
+      "Façade Architecture": {
+        "correct": 1,
+        "total": 1
+      },
+      "Architectural Context": {
+        "correct": 1,
+        "total": 1
+      },
+      "Unfinished Architecture": {
+        "correct": 1,
+        "total": 1
+      },
+      "Monolithic Sculpture": {
+        "correct": 1,
+        "total": 1
+      },
+      "Fortification Architecture": {
+        "correct": 1,
+        "total": 1
+      },
+      "Epigraphy/Masonry": {
+        "correct": 1,
+        "total": 1
+      },
+      "Fortification Ramparts": {
+        "correct": 1,
+        "total": 1
+      },
+      "Rampart Wall": {
+        "correct": 1,
+        "total": 1
+      },
+      "Fortified Gateway": {
+        "correct": 2,
+        "total": 2
+      },
+      "Spatial Fortification": {
+        "correct": 1,
+        "total": 1
+      },
+      "Natural & Built Defense": {
+        "correct": 1,
+        "total": 1
+      },
+      "Citadel Peak": {
+        "correct": 1,
+        "total": 1
+      },
+      "Citadel Entrance": {
+        "correct": 1,
+        "total": 1
+      },
+      "Citadel & Monument": {
+        "correct": 1,
+        "total": 1
+      },
+      "Rock Scarp Defense": {
+        "correct": 1,
+        "total": 1
+      },
+      "Concentric Fortification": {
+        "correct": 1,
+        "total": 1
+      },
+      "Marine Fortification": {
+        "correct": 2,
+        "total": 2
+      },
+      "Masonry Style": {
+        "correct": 1,
+        "total": 1
+      },
+      "Fort Shrine": {
+        "correct": 1,
+        "total": 1
+      },
+      "Concealed Gateway": {
+        "correct": 1,
+        "total": 1
+      },
+      "Rampart Bastions": {
+        "correct": 1,
+        "total": 1
+      },
+      "Military Artifact": {
+        "correct": 1,
+        "total": 1
+      },
+      "Interior Ruins": {
+        "correct": 1,
+        "total": 1
+      }
+    },
+    "decision": {
+      "baseline_training_decision": "MORE_DATA_REQUIRED",
+      "reason": "Unseen-site test size (9 questions across 2 sites) is below 50. Insufficient data to justify model fine-tuning."
+    }
+  },
+  "decision_gate": {
+    "baseline_training_decision": "MORE_DATA_REQUIRED",
+    "reason": "Unseen-site test size (9 questions across 2 sites) is below 50. Insufficient data to justify model fine-tuning."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_04_vvthh9",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Sculpture/Relief",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_04_vvthh9.jpg",
+  "cloudinary_public_id": "insc_04_vvthh9",
+  "question": "What is the primary carving technique used for the characters in the visible inscription?",
+  "options": [
+    "The characters are carved in high relief, standing prominently out from the stone surface.",
+    "The characters are incised, carved as depressions into the stone surface.",
+    "The characters are painted onto the stone surface, not carved.",
+    "The characters are formed by assembling separate, pre-carved stone pieces."
+  ],
+  "correct_option_index": 1,
+  "correct_semantic_answer": "The characters are incised, carved as depressions into the stone surface.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "Across both lines of the inscription, the individual characters appear as distinct grooves and depressions cut into the rough texture of the stone, indicating they are carved inwards rather than protruding outwards.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

@@ -1,0 +1,748 @@
+[
+  {
+    "question": "How many complete seated Buddha figures are carved in this row along the cave wall?",
+    "options": {
+      "A": "5",
+      "B": "6",
+      "C": "7",
+      "D": "8"
+    },
+    "answer": "C",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Row of Buddha sculptures",
+    "visual_evidence": "Counting from left to right, there are exactly seven seated Buddha sculptures arranged side-by-side.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_001_1786960981251_0",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_0",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_001.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What decorative architectural element is carved directly above the head of each seated Buddha figure?",
+    "options": {
+      "A": "A pointed gothic arch",
+      "B": "A stylized canopy or umbrella structure",
+      "C": "A stepped pyramid",
+      "D": "A hanging floral garland"
+    },
+    "answer": "B",
+    "category": "VISUAL_ARCHITECTURE",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Carved canopies above the heads",
+    "visual_evidence": "Curved, umbrella-like stone canopies are carved directly above the circular halo of each figure.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_001_1786960981251_1",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_0",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_001.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What modern protective structure is installed in the foreground in front of the ancient stone carvings?",
+    "options": {
+      "A": "A black metal chain-link fence",
+      "B": "A low glass partition",
+      "C": "A light-brown wooden railing with horizontal bars",
+      "D": "A red velvet rope on brass stanchions"
+    },
+    "answer": "C",
+    "category": "VISUAL_ARCHITECTURE",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Protective barrier",
+    "visual_evidence": "A light-colored wooden barrier with horizontal slats and vertical supports is positioned directly in front of the carvings.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_001_1786960981251_2",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_0",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_001.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "Upon what type of carved platform or pedestal are the Buddha figures seated?",
+    "options": {
+      "A": "A plain rectangular block",
+      "B": "A stylized lotus throne band",
+      "C": "A row of crouching lion figures",
+      "D": "A series of steps"
+    },
+    "answer": "B",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Pedestal of the Buddhas",
+    "visual_evidence": "The continuous base running underneath all the seated Buddhas is carved with a pattern of lotus petals.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_001_1786960981251_3",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_0",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_001.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What shape is carved behind the head of each Buddha figure to indicate their spiritual status?",
+    "options": {
+      "A": "A circular halo",
+      "B": "A multi-pointed star",
+      "C": "A square frame",
+      "D": "A flame-shaped aura"
+    },
+    "answer": "A",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Halos behind the heads",
+    "visual_evidence": "Flat, circular discs are carved directly behind the head of each Buddha figure.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_001_1786960981251_4",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_0",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_001.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What is the apparent material and craftsmanship style of the sculptures and surrounding cave wall?",
+    "options": {
+      "A": "Polished white marble panels",
+      "B": "Monolithic rock-cut relief carved directly into dark stone",
+      "C": "Molded plaster painted grey",
+      "D": "Cast bronze plates mounted on wood"
+    },
+    "answer": "B",
+    "category": "VISUAL_MATERIAL",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Material and construction of the relief",
+    "visual_evidence": "The figures are carved directly out of the continuous, dark, textured rock-cut cave wall showing no joints or seams.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_001_1786960981251_5",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_0",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_001.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What is the popular name of Cave 12 mentioned in the English text because of its three-story structure?",
+    "options": {
+      "A": "Teen Tal",
+      "B": "Pancha-Dnyani",
+      "C": "Sujata",
+      "D": "Aurangabad"
+    },
+    "answer": "A",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "English text in the first paragraph",
+    "visual_evidence": "The plaque states the cave is known as 'Teen Tal' because of its three floors.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961045867_0",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_1",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "To which century A.D. is the Buddhist monastery of Cave 12 dated according to the plaque?",
+    "options": {
+      "A": "5th century A.D.",
+      "B": "8th century A.D.",
+      "C": "10th century A.D.",
+      "D": "12th century A.D."
+    },
+    "answer": "B",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Date in the first paragraph of the English text",
+    "visual_evidence": "The text reads 'datable to circa 8th th century A.D.'",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961045867_1",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_1",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "According to the description of the second floor, what does the central panel of the sanctum depict?",
+    "options": {
+      "A": "Lord Buddha on a lotus throne",
+      "B": "Eleven Buddhas with umbrellas",
+      "C": "Sujata offering Kheer to Lord Buddha",
+      "D": "Twelve Buddhist Goddesses"
+    },
+    "answer": "C",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Description of the second floor",
+    "visual_evidence": "The text states the central figure is 'Sujata offering Kheer to Lord Buddha'.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961045867_2",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_1",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "How many Buddhist Goddesses are carved on the wall of the third-floor antechamber?",
+    "options": {
+      "A": "Seven",
+      "B": "Eight",
+      "C": "Eleven",
+      "D": "Twelve"
+    },
+    "answer": "D",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Description of the third floor",
+    "visual_evidence": "The text states 'on the wall of antechamber are carved twelve Buddhist Goddesses'.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961045867_3",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_1",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "Which official organization's name is inscribed at the bottom of the sign?",
+    "options": {
+      "A": "Ministry of Culture, India",
+      "B": "Archaeological Survey of India, Aurangabad Circle",
+      "C": "Department of Archaeology, Maharashtra",
+      "D": "National Museum of India"
+    },
+    "answer": "B",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Bottom-most inscription line",
+    "visual_evidence": "The text at the bottom reads 'Archaeological Survey of India, Aurangabad Circle'.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961045867_4",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_1",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What panels are carved on the sidewalls of the first-floor sanctum according to the inscription?",
+    "options": {
+      "A": "'Pancha-Dnyani Buddhas' and 'Eight-Bodhisattva-Mandal'",
+      "B": "'Seven-Mortal Buddha's' and eight Bodhisattva Mandal",
+      "C": "Eleven Buddhas with foliage and umbrellas",
+      "D": "Twelve Buddhist Goddesses on lotus thrones"
+    },
+    "answer": "A",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "HARD",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Description of the first floor",
+    "visual_evidence": "The text states the sidewalls have panels of 'Pancha-Dnyani Buddhas' and 'Eight-Bodhisattva-Mandal'.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961045867_5",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_1",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "According to the plaque, Cave 12 is popularly known by what name due to its three floors?",
+    "options": {
+      "A": "Teen Tal",
+      "B": "Panch Mahal",
+      "C": "Do Tal",
+      "D": "Chhatra Tal"
+    },
+    "answer": "A",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Cave 12 alternative name",
+    "visual_evidence": "The text states: known as 'Teen Tal' because of its three floors.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961959907_0",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_002",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What posture is Lord Buddha depicted in on the lotus throne in the first-floor sanctum?",
+    "options": {
+      "A": "Earth-touching posture",
+      "B": "Preaching posture",
+      "C": "Meditation posture",
+      "D": "Reclining posture"
+    },
+    "answer": "B",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Buddha posture description",
+    "visual_evidence": "The text states: houses Lord Buddha in preaching posture on a lotus throne.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961959907_2",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_002",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "On the second floor, who is depicted in a central panel offering Kheer to Lord Buddha?",
+    "options": {
+      "A": "Amrapali",
+      "B": "Yashodhara",
+      "C": "Sujata",
+      "D": "Gautami"
+    },
+    "answer": "C",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Kheer offering scene detail",
+    "visual_evidence": "The text states: panel of Buddhist devotee Sujata offering Kheer to Lord Buddha.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961959907_3",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_002",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "Which circle of the Archaeological Survey of India is credited at the bottom of the information board?",
+    "options": {
+      "A": "Mumbai Circle",
+      "B": "Aurangabad Circle",
+      "C": "Pune Circle",
+      "D": "Nagpur Circle"
+    },
+    "answer": "B",
+    "category": "VISUAL_INSCRIPTION",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "ASI Circle credit",
+    "visual_evidence": "The text at the bottom reads: Archaeological Survey of India, Aurangabad Circle.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_002_1786961959907_5",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_002",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_002.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What is the seating posture of the central Buddha figure in this rock-cut cave?",
+    "options": {
+      "A": "Legs crossed in a full lotus position",
+      "B": "Seated with both legs hanging down (pralambapadasana)",
+      "C": "Reclining on his right side",
+      "D": "Kneeling on a lotus pedestal"
+    },
+    "answer": "B",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Seating posture of the Buddha",
+    "visual_evidence": "The central Buddha is carved sitting on a throne with both legs hanging straight down towards the ground.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_004_1786962050334_0",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_004",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_004.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What architectural feature defines the ceiling of this rock-cut cave temple?",
+    "options": {
+      "A": "Flat ceiling with painted geometric panels",
+      "B": "A series of curved, parallel rock-cut ribs mimicking wooden rafters",
+      "C": "A smooth, unadorned hemispherical dome",
+      "D": "A coffered ceiling with hanging stone pendants"
+    },
+    "answer": "B",
+    "category": "VISUAL_ARCHITECTURE",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Ribbed vaulted ceiling",
+    "visual_evidence": "The ceiling arches overhead with prominent parallel stone ribs carved to resemble wooden vaulting.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_004_1786962050334_1",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_004",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_004.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "Which hand gesture (mudra) is displayed by the central seated figure?",
+    "options": {
+      "A": "Bhumisparsha mudra (earth-touching gesture)",
+      "B": "Dharmachakra mudra (teaching/turning the wheel gesture)",
+      "C": "Abhaya mudra (gesture of fearlessness)",
+      "D": "Dhyana mudra (meditation gesture)"
+    },
+    "answer": "B",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Buddha's hand gesture",
+    "visual_evidence": "The central figure holds both hands in front of his chest with fingers joined in the teaching gesture.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_004_1786962050334_2",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_004",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_004.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What large structural element is positioned directly behind the central Buddha sculpture?",
+    "options": {
+      "A": "A multi-tiered temple tower (shikhara)",
+      "B": "A hemispherical stupa dome",
+      "C": "A flat stone wall with inscriptions",
+      "D": "An empty dark niche"
+    },
+    "answer": "B",
+    "category": "VISUAL_ARCHITECTURE",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Stupa dome",
+    "visual_evidence": "A massive, rounded stupa dome is clearly visible behind the arch of the seated Buddha sculpture.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_004_1786962050334_3",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_004",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_004.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "How many major standing attendant figures flank the central seated Buddha?",
+    "options": {
+      "A": "One on the left side only",
+      "B": "Two, one on each side",
+      "C": "Four, two on each side",
+      "D": "None"
+    },
+    "answer": "B",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "EASY",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Flanking attendant sculptures",
+    "visual_evidence": "There are two standing attendant figures carved in relief, one on the left and one on the right of the central seated Buddha.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_004_1786962050334_4",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_004",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_004.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What motifs are carved along the arch framing the central seated Buddha?",
+    "options": {
+      "A": "Stylized floral vines and geometric patterns",
+      "B": "Flying celestial figures (apsaras/gandharvas)",
+      "C": "A series of roaring lion heads",
+      "D": "Plain uncarved stone borders"
+    },
+    "answer": "B",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Archway carvings",
+    "visual_evidence": "The decorative arch framing the Buddha features multiple flying celestial figures carved in relief.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_img_004_1786962050334_5",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_img_004",
+    "question_type": "IMAGE_MCQ",
+    "image": {
+      "file": "image/Ell0001/img_004.jpg"
+    },
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What is the general hand gesture (mudra) shared by the carved figures in the row?",
+    "options": {
+      "A": "One hand touching the ground (Bhumisparsha)",
+      "B": "Both hands resting flat in the lap (Dhyana)",
+      "C": "Both hands raised to chest level (Dharmachakra-like teaching gesture)",
+      "D": "One hand raised in a gesture of fearlessness (Abhaya)"
+    },
+    "answer": "C",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Hand gesture",
+    "visual_evidence": "All the seated figures have both hands raised and held in front of their chests, depicting a teaching gesture.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_2fb60f_1786963803066_1",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_2fb60f",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "question_type": "IMAGE_MCQ",
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "How many horizontal wooden rails run across the protective wooden barrier placed in front of the carvings?",
+    "options": {
+      "A": "One",
+      "B": "Two",
+      "C": "Three",
+      "D": "Four"
+    },
+    "answer": "C",
+    "category": "VISUAL_ARCHITECTURE",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Wooden barrier structure",
+    "visual_evidence": "The wooden barrier in front of the sculptures consists of three parallel horizontal wooden rails supported by vertical posts.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_2fb60f_1786963803066_3",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_2fb60f",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "question_type": "IMAGE_MCQ",
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "What pattern is carved along the continuous base platform upon which the figures sit?",
+    "options": {
+      "A": "Diamond shapes",
+      "B": "Lotus petals",
+      "C": "Geometric squares",
+      "D": "Crouching lions"
+    },
+    "answer": "B",
+    "category": "VISUAL_SCULPTURE",
+    "difficulty": "MODERATE",
+    "question_purpose": "VISUAL",
+    "visual_dependency": "HIGH",
+    "visible_feature": "Pedestal design",
+    "visual_evidence": "The long, continuous rock-cut platform on which the figures are seated features a band of carved lotus petals.",
+    "source_evidence": "IMAGE_EVIDENCE",
+    "source_field": "image",
+    "mongo_evidence": null,
+    "annotation_id": "Ell0001_img_2fb60f_1786963803066_5",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_2fb60f",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "question_type": "IMAGE_MCQ",
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  },
+  {
+    "question": "Based on the provided image, how many seated Buddha figures are carved in this continuous horizontal relief panel?",
+    "options": {
+      "A": "Five",
+      "B": "Six",
+      "C": "Seven",
+      "D": "Eight"
+    },
+    "answer": "C",
+    "category": "ARCHITECTURAL",
+    "difficulty": "MODERATE",
+    "question_purpose": "To evaluate the user's observational skills in identifying and counting the specific iconographic figures presented in the image.",
+    "visual_dependency": "HIGH",
+    "source_evidence": "The image shows a row of seven seated Buddha figures.",
+    "source_field": null,
+    "mongo_evidence": "",
+    "visible_feature": "Row of seven seated Buddha figures",
+    "visual_evidence": "The image clearly displays exactly seven seated figures carved side-by-side on the rock wall.",
+    "annotation_id": "Ell0001_img_2fb60f_1786963803066_7",
+    "site_id": "Ell0001",
+    "image_id": "Ell0001_img_2fb60f",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "question_type": "IMAGE_MCQ",
+    "review_status": "DRAFT",
+    "duplicate_group": null,
+    "duplicate_type": "UNIQUE"
+  }
+]

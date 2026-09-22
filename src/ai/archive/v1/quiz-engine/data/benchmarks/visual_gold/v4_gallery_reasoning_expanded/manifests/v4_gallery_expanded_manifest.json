@@ -1,0 +1,13 @@
+{
+  "benchmark_id": "v4_gallery_reasoning_expanded",
+  "generated_at": "2026-08-09T13:00:26.799Z",
+  "total_questions": 110,
+  "option_distribution": {
+    "A": 27,
+    "B": 28,
+    "C": 27,
+    "D": 28
+  },
+  "schema_version": "4.1.0",
+  "description": "Expanded strictly visually-dependent gallery benchmark (110 items)"
+}

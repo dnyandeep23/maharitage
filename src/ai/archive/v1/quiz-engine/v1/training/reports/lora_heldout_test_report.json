@@ -1,0 +1,42 @@
+{
+  "test_name": "Held-Out Visual LoRA Model Test",
+  "test_questions_count": 10,
+  "training_image_overlap": 0,
+  "base_model": {
+    "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "correct_count": 4,
+    "accuracy": 40.0,
+    "invalid_rate": 0.0
+  },
+  "lora_model": {
+    "checkpoint": "/Users/dnyandeep/Dnyandeep/Project/maharitage/src/ai/quiz-engine/v1/training/checkpoints/smolvlm_lora_v1",
+    "correct_count": 4,
+    "accuracy": 40.0,
+    "invalid_rate": 0.0
+  },
+  "comparison": {
+    "improvement_pp": 0.0,
+    "improved_questions": [],
+    "regressed_questions": [],
+    "unchanged_questions": [
+      "Q1",
+      "Q2",
+      "Q3",
+      "Q4",
+      "Q5",
+      "Q6",
+      "Q7",
+      "Q8",
+      "Q9",
+      "Q10"
+    ]
+  },
+  "hardware_performance": {
+    "device": "mps",
+    "peak_mps_memory_gib": 1.29,
+    "total_inference_time_sec": 11.71,
+    "avg_time_per_question_sec": 0.59
+  },
+  "adapter_verified": true,
+  "final_decision": "LORA_NO_CHANGE"
+}

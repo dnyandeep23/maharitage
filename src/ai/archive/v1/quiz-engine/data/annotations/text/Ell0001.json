@@ -1,0 +1,582 @@
+[
+  {
+    "annotation_id": "Ell0001_text_001",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Location",
+    "question": "In which district of Maharashtra is The Ellora Caves located?",
+    "options": [
+      "Chhatrapati Sambhaji Nagar",
+      "Ratnagiri",
+      "Raigad",
+      "Solapur"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "location.district",
+      "value": "Chhatrapati Sambhaji Nagar"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_002",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Location",
+    "question": "Which district serves as the administrative region for The Ellora Caves?",
+    "options": [
+      "Nashik",
+      "Chhatrapati Sambhaji Nagar",
+      "Sindhudurg",
+      "Thane"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "location.district",
+      "value": "Chhatrapati Sambhaji Nagar"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_003",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Location",
+    "question": "The Ellora Caves is situated in which district?",
+    "options": [
+      "Satara",
+      "Solapur",
+      "Chhatrapati Sambhaji Nagar",
+      "Sindhudurg"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "location.district",
+      "value": "Chhatrapati Sambhaji Nagar"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_004",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Location",
+    "question": "In which Indian state is The Ellora Caves located?",
+    "options": [
+      "Rajasthan",
+      "Karnataka",
+      "Tamil Nadu",
+      "Maharashtra"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "location.state",
+      "value": "Maharashtra"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_005",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Location",
+    "question": "The Ellora Caves is part of which state in India?",
+    "options": [
+      "Maharashtra",
+      "Madhya Pradesh",
+      "Gujarat",
+      "Karnataka"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "location.state",
+      "value": "Maharashtra"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_006",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Location",
+    "question": "In which country is The Ellora Caves located?",
+    "options": [
+      "Nepal",
+      "India",
+      "Myanmar",
+      "Sri Lanka"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "location.country",
+      "value": "India"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_007",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Location",
+    "question": "What is the approximate latitude of The Ellora Caves?",
+    "options": [
+      "Konkan",
+      "Gujarat",
+      "20.022638",
+      "Coastal Island"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "location.latitude",
+      "value": "20.022638"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_009",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "What is the official heritage classification of The Ellora Caves?",
+    "options": [
+      "Plateau Fort",
+      "Cave Temple",
+      "Sea Fort",
+      "Multi-Religious Rock-Cut Cave Complex (Buddhist, Hindu, and Jain)"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "heritage_type",
+      "value": "Multi-Religious Rock-Cut Cave Complex (Buddhist, Hindu, and Jain)"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_010",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "The Ellora Caves is classified as what type of heritage monument?",
+    "options": [
+      "Multi-Religious Rock-Cut Cave Complex (Buddhist, Hindu, and Jain)",
+      "Plateau Fort",
+      "Island Fortress",
+      "Hindu Cave Temple"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "heritage_type",
+      "value": "Multi-Religious Rock-Cut Cave Complex (Buddhist, Hindu, and Jain)"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_011",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "What heritage category does The Ellora Caves belong to?",
+    "options": [
+      "Jain Rock-Cut Shrine",
+      "Multi-Religious Rock-Cut Cave Complex (Buddhist, Hindu, and Jain)",
+      "Hill Fort",
+      "Medieval Palace"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "heritage_type",
+      "value": "Multi-Religious Rock-Cut Cave Complex (Buddhist, Hindu, and Jain)"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_012",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "What broad monument category does The Ellora Caves fall under?",
+    "options": [
+      "Medieval Palace",
+      "Buddhist Rock-Cut Monastic Complex",
+      "cave",
+      "Hill Fort"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "h_type",
+      "value": "cave"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_013",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "What historical period is associated with The Ellora Caves?",
+    "options": [
+      "3rd Century BCE",
+      "1656–1674 CE",
+      "5th–10th Century CE",
+      "5th Century CE – 10th Century CE"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "period",
+      "value": "5th Century CE – 10th Century CE"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_014",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "During which era was The Ellora Caves primarily active?",
+    "options": [
+      "5th Century CE – 10th Century CE",
+      "2nd Century BCE – 480 CE",
+      "8th Century CE",
+      "3rd Century BCE"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "period",
+      "value": "5th Century CE – 10th Century CE"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_015",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "What time period defines the major phase of The Ellora Caves?",
+    "options": [
+      "5th–10th Century CE",
+      "5th Century CE – 10th Century CE",
+      "15th–17th Century CE",
+      "8th Century CE"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "period",
+      "value": "5th Century CE – 10th Century CE"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_016",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "What is the approximate date of major construction or activity at The Ellora Caves?",
+    "options": [
+      "1656–1674 CE",
+      "19th Century CE",
+      "8th Century CE",
+      "2nd Century BCE – 480 CE"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.approx_date",
+      "value": "8th Century CE"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_017",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "When was the major phase of development at The Ellora Caves?",
+    "options": [
+      "19th Century CE",
+      "2nd Century BCE – 480 CE",
+      "1818 CE",
+      "8th Century CE"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.approx_date",
+      "value": "8th Century CE"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_018",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Which ruler or dynasty is primarily associated with The Ellora Caves?",
+    "options": [
+      "Rashtrakuta Dynasty",
+      "Maratha Empire",
+      "Chhatrapati Shivaji Maharaj",
+      "Malik Ambar"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.ruler_or_dynasty",
+      "value": "Rashtrakuta Dynasty"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_019",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Under whose patronage did The Ellora Caves flourish?",
+    "options": [
+      "Malik Ambar",
+      "Rashtrakuta Dynasty",
+      "Chhatrapati Shivaji Maharaj",
+      "British East India Company"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.ruler_or_dynasty",
+      "value": "Rashtrakuta Dynasty"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_020",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Which dynasty played a central role in the history of The Ellora Caves?",
+    "options": [
+      "Aurangzeb",
+      "Vakataka Dynasty",
+      "Rashtrakuta Dynasty",
+      "Malik Ambar"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.ruler_or_dynasty",
+      "value": "Rashtrakuta Dynasty"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_021",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Cultural Significance",
+    "question": "What is the cultural significance of The Ellora Caves?",
+    "options": [
+      "UNESCO World Heritage Site",
+      "Masterpiece of religious art",
+      "Trade route fortress",
+      "Represents the artistic and spiritual zenith of the Rashtrakuta period, symbolizing the coexistence of Buddhism, Hinduism, and Jainism through monumental rock-cut architecture and sculpture."
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.cultural_significance",
+      "value": "Represents the artistic and spiritual zenith of the Rashtrakuta period, symbolizing the coexistence of Buddhism, Hinduism, and Jainism through monumental rock-cut architecture and sculpture."
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_022",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Cultural Significance",
+    "question": "Why is The Ellora Caves considered culturally important?",
+    "options": [
+      "Represents the artistic and spiritual zenith of the Rashtrakuta period, symbolizing the coexistence of Buddhism, Hinduism, and Jainism through monumental rock-cut architecture and sculpture.",
+      "Ancient center of learning",
+      "Masterpiece of religious art",
+      "Trade route fortress"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.cultural_significance",
+      "value": "Represents the artistic and spiritual zenith of the Rashtrakuta period, symbolizing the coexistence of Buddhism, Hinduism, and Jainism through monumental rock-cut architecture and sculpture."
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_023",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Authority",
+    "question": "Which national authority or organization protects and maintains The Ellora Caves?",
+    "options": [
+      "Forest Department of Maharashtra",
+      "Archaeological Survey of India, UNESCO World Heritage Centre",
+      "Archaeological Survey of India",
+      "UNESCO World Heritage Centre"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "verification_authority",
+      "value": "Archaeological Survey of India, UNESCO World Heritage Centre"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_024",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Authority",
+    "question": "Who is responsible for the curation and preservation of The Ellora Caves?",
+    "options": [
+      "Archaeological Survey of India",
+      "UNESCO World Heritage Centre",
+      "Archaeological Survey of India, UNESCO World Heritage Centre",
+      "Maharashtra State Archaeology Department"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "verification_authority",
+      "value": "Archaeological Survey of India, UNESCO World Heritage Centre"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_025",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Which historical or religious figures are associated with The Ellora Caves?",
+    "options": [
+      "Rashtrakuta Dynasty",
+      "Malik Ambar",
+      "Mughal Empire",
+      "Shiva, Vishnu, Buddha, Mahavira"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.related_figures",
+      "value": "Shiva, Vishnu, Buddha, Mahavira"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_026",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Is Shiva historically connected to The Ellora Caves?",
+    "options": [
+      "Yes, Shiva is associated with The Ellora Caves",
+      "Malik Ambar",
+      "Maratha Empire",
+      "Yadava Dynasty"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.related_figures",
+      "value": "Shiva"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_030",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Epigraphy",
+    "question": "What script is used in Insc_01 at The Ellora Caves?",
+    "options": [
+      "Prakrit",
+      "Likely Sanskrit or Prakrit",
+      "Sanskrit in Brahmi script",
+      "Modi script"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_031",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Epigraphy",
+    "question": "What language is detected in Insc_01 at The Ellora Caves?",
+    "options": [
+      "Kannada",
+      "Tamil",
+      "Likely Sanskrit or Prakrit",
+      "Sanskrit in Brahmi script"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "inscriptions[0].language_detected",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_032",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "How many gallery photographs are documented for The Ellora Caves?",
+    "options": [
+      "Hindu Cave Temple",
+      "Cave Temple",
+      "Sea Fort",
+      "14"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "gallary.length",
+      "value": "14"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_text_063",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "text",
+    "category": "Authority",
+    "question": "Which authoritative body curates and verifies historical documentation for The Ellora Caves?",
+    "options": [
+      "Archaeological Survey of India, UNESCO World Heritage Centre",
+      "Archaeological Survey of India",
+      "UNESCO World Heritage Centre",
+      "Maharashtra Tourism Development Corporation"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "verification_authority",
+      "value": "Archaeological Survey of India, UNESCO World Heritage Centre"
+    }
+  }
+]

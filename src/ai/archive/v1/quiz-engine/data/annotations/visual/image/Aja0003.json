@@ -1,0 +1,392 @@
+[
+  {
+    "annotation_id": "Aja0003_img_001_q001",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave17_qckcsr.jpg",
+    "cloudinary_public_id": "cave17_qckcsr",
+    "gallery_index": 0,
+    "question": "Which distinct architectural feature is visible at the entrance of Cave 17 depicted in this photograph?",
+    "options": [
+      "A rock-cut veranda supported by carved stone pillars with bracket capitals",
+      "A zig-zag defensive stone gateway",
+      "A circular brick stupa dome",
+      "A multi-tiered wooden gopuram"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows the rock-cut cave entrance leading into a shaded veranda supported by vertical carved stone pillars.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "A rock-cut veranda supported by carved stone pillars with bracket capitals"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_001_q002",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Pillars/Columns",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave17_qckcsr.jpg",
+    "cloudinary_public_id": "cave17_qckcsr",
+    "gallery_index": 0,
+    "question": "What structural design characterizes the pillars visible along the veranda in this photograph?",
+    "options": [
+      "Plain smooth cylindrical granite columns",
+      "Square base transitioning to octagonal carved shafts with pot-and-foliage capitals",
+      "Cast-iron structural posts",
+      "Fluted Corinthian columns with acanthus leaves"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The visible veranda pillars have square bases, octagonal mid-sections, and decorative carved capitals.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Square base transitioning to octagonal carved shafts with pot-and-foliage capitals"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_001_q003",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave17_qckcsr.jpg",
+    "cloudinary_public_id": "cave17_qckcsr",
+    "gallery_index": 0,
+    "question": "How is the entrance façade arranged in this photograph of Cave 17?",
+    "options": [
+      "A single narrow pointed arched gateway",
+      "A freestanding circular stone tower",
+      "A horizontal rock-cut portico with multiple pillared bays giving access to inner doorways",
+      "A fortress curtain wall with crenellations"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph displays a wide horizontal rock-cut portico opening into multiple pillared bays.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "A horizontal rock-cut portico with multiple pillared bays giving access to inner doorways"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_002_q004",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/caveimage_rzplhc.jpg",
+    "cloudinary_public_id": "caveimage_rzplhc",
+    "gallery_index": 1,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'caveimage_rzplhc' of The Ajanta Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ajanta Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_002_q005",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/caveimage_rzplhc.jpg",
+    "cloudinary_public_id": "caveimage_rzplhc",
+    "gallery_index": 1,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'caveimage_rzplhc'?",
+    "options": [
+      "The Ajanta Caves",
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'caveimage_rzplhc' matches The Ajanta Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "The Ajanta Caves"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_003_q006",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave19-ajnta_vfjbdc.jpg",
+    "cloudinary_public_id": "cave19-ajnta_vfjbdc",
+    "gallery_index": 2,
+    "question": "What prominent architectural element dominates the upper façade in this photograph of Cave 19?",
+    "options": [
+      "A pointed Gothic trefoil arch",
+      "A large sun-window horseshoe (gavaksha) chaitya arch",
+      "A fortified battlement parapet",
+      "A flat timber lintel roof"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The upper section of the cave façade features a prominent horse-shoe shaped chaitya arch (gavaksha window).",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "A large sun-window horseshoe (gavaksha) chaitya arch"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_003_q007",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Sculpture/Relief",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave19-ajnta_vfjbdc.jpg",
+    "cloudinary_public_id": "cave19-ajnta_vfjbdc",
+    "gallery_index": 2,
+    "question": "Which sculptural figures flank the central entrance arch in this photograph of Cave 19?",
+    "options": [
+      "Equestrian Maratha warriors holding lances",
+      "Mounted cavalry archers",
+      "Large standing Buddha figures carved in high relief within pillared niches",
+      "Carved elephant trunks holding lotus flowers"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "On either side of the central doorway, large standing Buddha figures are sculpted within recessed stone niches.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Large standing Buddha figures carved in high relief within pillared niches"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_003_q008",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave19-ajnta_vfjbdc.jpg",
+    "cloudinary_public_id": "cave19-ajnta_vfjbdc",
+    "gallery_index": 2,
+    "question": "What structural layout characterizes the frontal porch of Cave 19 visible here?",
+    "options": [
+      "A plain uncarved cliff face with a single square door",
+      "A defensive curtain wall with gun ports",
+      "A stepped masonry reservoir with water channels",
+      "A sculptured chaitya-griha front with courtyards, pillared portico, and elaborate relief panels"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The entrance displays a decorated chaitya-griha façade covered with elaborate sculptural relief bands.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "A sculptured chaitya-griha front with courtyards, pillared portico, and elaborate relief panels"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_003_q009",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave19-ajnta_vfjbdc.jpg",
+    "cloudinary_public_id": "cave19-ajnta_vfjbdc",
+    "gallery_index": 2,
+    "question": "Which cave at Ajanta is depicted in this photograph featuring a grand horseshoe chaitya window and standing Buddha reliefs?",
+    "options": [
+      "Cave 19 (Chaitya Hall)",
+      "Cave 1 (Vihara)",
+      "Cave 17 (Vihara)",
+      "Cave 2 (Vihara)"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive horseshoe chaitya arch and monumental standing Buddha sculptures are the hallmark visual traits of Cave 19.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Cave 19 (Chaitya Hall)"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_004_q010",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Spatial Arrangement",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/Ajanta_viewpoint_erudxh.jpg",
+    "cloudinary_public_id": "Ajanta_viewpoint_erudxh",
+    "gallery_index": 3,
+    "question": "What natural landscape setting is visible in this panoramic photograph of Ajanta?",
+    "options": [
+      "A flat desert plain with isolated stone towers",
+      "A horseshoe-shaped basaltic river gorge with cave entrances carved along the cliff face",
+      "A coastal island fort surrounded by ocean waves",
+      "A forested mountain peak crowned by a hilltop citadel"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The wide landscape photograph clearly shows the crescent-shaped cliff gorge of the Waghur river with cave openings along the arc.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "A horseshoe-shaped basaltic river gorge with cave entrances carved along the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_005_q011",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave9ajntaaa_jacqbn.jpg",
+    "cloudinary_public_id": "cave9ajntaaa_jacqbn",
+    "gallery_index": 4,
+    "question": "What structural feature is visible inside the hall in this photograph of Cave 9?",
+    "options": [
+      "A central marble throne supported by lions",
+      "A timber staircase reaching an upper floor",
+      "Colonnaded rows of octagonal pillars leading towards a monolithic stone stupa",
+      "A rectangular water pool surrounded by arches"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The interior view shows parallel colonnades of plain octagonal stone pillars terminating around a monolithic stupa.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[4]",
+      "value": "Colonnaded rows of octagonal pillars leading towards a monolithic stone stupa"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_006_q012",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/ajntacave_tuxpwr.jpg",
+    "cloudinary_public_id": "ajntacave_tuxpwr",
+    "gallery_index": 5,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'ajntacave_tuxpwr' of The Ajanta Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ajanta Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[5]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_006_q013",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/ajntacave_tuxpwr.jpg",
+    "cloudinary_public_id": "ajntacave_tuxpwr",
+    "gallery_index": 5,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'ajntacave_tuxpwr'?",
+    "options": [
+      "The Ajanta Caves",
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'ajntacave_tuxpwr' matches The Ajanta Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[5]",
+      "value": "The Ajanta Caves"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_007_q014",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731373/cave9ajnta_lckxsl.jpg",
+    "cloudinary_public_id": "cave9ajnta_lckxsl",
+    "gallery_index": 6,
+    "question": "Which rock-cut architectural feature is visible in gallery photograph 'cave9ajnta_lckxsl' of The Ajanta Caves?",
+    "options": [
+      "A multi-story brick residential palace with timber balconies",
+      "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face",
+      "A sea-fort bastion with bronze cannon ports",
+      "A freestanding marble mausoleum dome"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph of The Ajanta Caves shows rock-cut architectural elements carved directly into the natural cliff face.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[6]",
+      "value": "Rock-cut cave entrance portico supported by stone pillars carved into the cliff face"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_img_007_q015",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "image",
+    "category": "Visual Identification",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731373/cave9ajnta_lckxsl.jpg",
+    "cloudinary_public_id": "cave9ajnta_lckxsl",
+    "gallery_index": 6,
+    "question": "Which heritage monument is identified by this rock-cut cave architecture visible in gallery photograph 'cave9ajnta_lckxsl'?",
+    "options": [
+      "Raigad Fort",
+      "Sindhudurg Fort",
+      "The Ajanta Caves",
+      "Murud-Janjira Fort"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The distinctive rock-cut cave facade and pillar architecture in photograph 'cave9ajnta_lckxsl' matches The Ajanta Caves.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[6]",
+      "value": "The Ajanta Caves"
+    }
+  }
+]

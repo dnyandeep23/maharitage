@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_03_lwuy6b",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_03_lwuy6b.jpg",
+  "cloudinary_public_id": "insc_03_lwuy6b",
+  "question": "Based on the provided image, how many distinct horizontal lines of carved inscription are clearly visible on the stone surface?",
+  "options": [
+    "Three",
+    "Two",
+    "Four",
+    "One"
+  ],
+  "correct_option_index": 0,
+  "correct_semantic_answer": "Three distinct horizontal lines of carved text are visible.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The image clearly displays a stone surface with three separate and distinct horizontal rows of carved characters. The top line, middle line, and bottom line of text are all discernible across the width of the inscription.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

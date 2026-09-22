@@ -14,8 +14,8 @@ import { useAudience } from "../../contexts/AudienceContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import ChatSpin from "./ChatSpin";
-import StudentGameUI from "./StudentGameUI";
 import ProfessionalChatUI from "./ProfessionalChatUI";
+import PremiumQuizUI from "./PremiumQuizUI";
 import {
   Plus,
   MessageSquare,
@@ -36,6 +36,7 @@ import {
   User,
   ChevronDown,
   ChevronUp,
+  Info,
 } from "lucide-react";
 import Toast from "../component/Toast";
 import Image from "next/image";
@@ -67,6 +68,7 @@ const AIComponent = () => {
   const toastTimeoutRef = useRef(null);
   const hasInitializedModeViewRef = useRef(false);
   const suppressModeResetRef = useRef(false);
+  const isCreatingQuizRef = useRef(false);
   const skipStoredChatRestoreRef = useRef(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -79,6 +81,7 @@ const AIComponent = () => {
   const [isAudienceModalOpen, setIsAudienceModalOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const [toast, setToast] = useState({ type: "", message: "" });
+  const [deleteConfirmId, setDeleteConfirmId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [fingerprint, setFingerprint] = useState(null);
   const [chats, setChats] = useState([]);
@@ -161,8 +164,9 @@ const AIComponent = () => {
 
   useEffect(() => {
     if (!isAudienceReady) return;
-    setIsAudienceModalOpen(!audience);
-  }, [audience, isAudienceReady]);
+    if (!audience) selectAudience("general");
+    setIsAudienceModalOpen(false);
+  }, [audience, isAudienceReady, selectAudience]);
 
   const handleNewChat = useCallback(() => {
     stopActiveRequest();
@@ -185,13 +189,28 @@ const AIComponent = () => {
     sessionStorage.removeItem(getChatStorageKey(audienceType, "quiz"));
   }, [audienceType, mode, stopActiveRequest]);
 
-  const redirectToNewQuizPage = useCallback(
+  const handleOpenQuizHome = useCallback(
     (targetAudience = audienceType) => {
-      const normalizedAudience = normalizeAudienceParam(targetAudience);
-      router.push(getQuizRoute(normalizedAudience));
+      stopActiveRequest();
+      const storageAudience =
+        typeof targetAudience === "string"
+          ? normalizeAudienceParam(targetAudience)
+          : audienceType;
+
+      if (mode !== "quiz") {
+        suppressModeResetRef.current = true;
+      }
+      setMode("quiz");
+      setCurrentChatId(null);
+      setCurrentChatMeta(null);
+      setMessages([]);
+      setIsChatActive(true);
+      setQuizSessionActive(false);
+      sessionStorage.removeItem(getChatStorageKey(storageAudience, "quiz"));
     },
-    [audienceType, router]
+    [audienceType, mode, stopActiveRequest]
   );
+
 
   useEffect(() => {
     if (!isAudienceReady) return;
@@ -214,7 +233,9 @@ const AIComponent = () => {
     );
 
     if (requestedMode !== mode) {
-      suppressModeResetRef.current = true;
+      if (mode !== "quiz") {
+        suppressModeResetRef.current = true;
+      }
       setMode(requestedMode);
     }
 
@@ -261,9 +282,7 @@ const AIComponent = () => {
     });
   }, [audience, currentChatStorageKey, fetchChats, isAudienceReady, user]);
 
-  useEffect(() => {
-    if (!user) setMode("chat");
-  }, [user]);
+
 
   useEffect(() => {
     if (mode !== "quiz") {
@@ -469,6 +488,14 @@ const AIComponent = () => {
 
     // If quiz mode and (no query text or starting a new quiz), build a meaningful quiz prompt
     if ((!actualQuery.trim() || startNewChat) && mode === "quiz") {
+      // PremiumQuizUI handles its own fetching via /api/ai/quiz for all users. Do not pollute chat.
+      if (startNewChat) {
+        handleNewChat();
+        setQuizSessionActive(true);
+        setIsChatActive(true);
+        setQuery("");
+        return;
+      }
       const topicText = quizTopic.trim() || "diverse Maharashtra Heritage topics spanning monuments, dynasties, culture, and inscriptions";
       actualQuery = `Generate a ${quizDifficulty} ${quizQuestionType} quiz with ${quizQuestionCount} questions on ${topicText}.`;
       setQuery("");
@@ -479,10 +506,7 @@ const AIComponent = () => {
       return;
     }
 
-    if (mode === "quiz" && !user) {
-      showToast("warning", "Please log in to access the quiz feature.");
-      return;
-    }
+
 
     if (startNewChat) handleNewChat();
     if (audienceType === "student" && mode === "quiz") {
@@ -720,11 +744,78 @@ const AIComponent = () => {
     }
   };
 
+  const redirectToNewQuizPage = useCallback(
+    async (config = null) => {
+      if (isCreatingQuizRef.current) return;
+      isCreatingQuizRef.current = true;
+      const quizConfig =
+        config && typeof config === "object"
+          ? {
+              topic: config.topic || "",
+              difficulty: config.difficulty || "Medium",
+              questionCount: config.questionCount || 5,
+              questionType: config.questionType || "MCQ",
+            }
+          : null;
+      
+      if (mode !== "quiz") {
+        suppressModeResetRef.current = true;
+      }
+      setMode("quiz");
+      setIsChatActive(true);
+      setQuizSessionActive(true);
+      setMessages([]);
+      
+      if (user) {
+        try {
+          const token = localStorage.getItem("auth-token");
+          const res = await fetchWithInternalToken("/api/ai/chats", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify({
+              mode: "quiz",
+              audienceType: audienceType || "general",
+              title: quizConfig?.topic ? `Quiz: ${quizConfig.topic}` : "New Quiz",
+              config: quizConfig,
+            }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success) {
+              setCurrentChatId(data.chat._id);
+              setCurrentChatMeta(data.chat);
+              sessionStorage.setItem(
+                getChatStorageKey(data.chat.audienceType || audienceType, "quiz"),
+                data.chat._id
+              );
+              await fetchChats();
+            }
+          }
+        } catch (error) {
+          console.error("Failed to create quiz chat:", error);
+        } finally {
+          isCreatingQuizRef.current = false;
+        }
+      } else {
+        handleNewChat();
+        isCreatingQuizRef.current = false;
+      }
+    },
+    [audienceType, fetchChats, handleNewChat, mode, user]
+  );
+
   const handleSuggestion = (text) => {
     if (mode === "quiz") {
       setQuizTopic(text);
-      // Auto-start the quiz with the selected topic
-      setTimeout(() => handleQuery(null, "", true), 50);
+      redirectToNewQuizPage({
+        topic: text,
+        difficulty: quizDifficulty,
+        questionCount: quizQuestionCount,
+        questionType: quizQuestionType,
+      });
     } else {
       setQuery(text);
       startTransition(() => {
@@ -798,60 +889,7 @@ const AIComponent = () => {
         />
       )}
 
-      {/* Audience Selection Modal */}
-      {isAudienceModalOpen && (
-        <div className="animate-in fade-in fixed inset-0 z-[60] flex items-center justify-center bg-[#071b15]/68 p-4 backdrop-blur-sm duration-200">
-          <div className="museum-dark-panel relative w-full max-w-lg overflow-hidden">
-            <div className="p-8">
-              <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.24em] text-[#d9c18a]">
-                AI Archive
-              </p>
-              <h2 className="mb-2 text-center font-cinzel-decorative text-2xl font-bold text-white">Choose Your Audience</h2>
-              <p className="mb-8 text-center text-sm text-[#fbf7ee]/62">Select how the assistant should guide the heritage experience.</p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <button
-                  onClick={() => {
-                    selectAudience("general");
-                    setMode("chat");
-                    setIsAudienceModalOpen(false);
-                  }}
-                  className={`flex flex-col items-center text-center p-6 rounded-2xl border transition-all duration-200 ${
-                    audienceType === "general"
-                      ? "border-[#d9c18a]/60 bg-[#d9c18a]/10"
-                      : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#d9c18a]/30"
-                  }`}
-                >
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#d9c18a]/14 text-[#d9c18a]">
-                    <User size={28} />
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">General</h3>
-                  <p className="text-xs text-[#fbf7ee]/58">Professional, standard heritage exploration.</p>
-                </button>
-
-                <button
-                  onClick={() => {
-                    selectAudience("student");
-                    setMode("quiz");
-                    setIsAudienceModalOpen(false);
-                  }}
-                  className={`flex flex-col items-center text-center p-6 rounded-2xl border transition-all duration-200 ${
-                    audienceType === "student"
-                      ? "border-[#d9c18a]/60 bg-[#d9c18a]/10"
-                      : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#d9c18a]/30"
-                  }`}
-                >
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#b9924a]/18 text-[#d9c18a]">
-                    <GraduationCap size={28} />
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">Student</h3>
-                  <p className="text-xs text-[#fbf7ee]/58">Focused heritage learning with guided quizzes.</p>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {imagePreview.isOpen && (
         <ImagePreviewModal
@@ -886,10 +924,10 @@ const AIComponent = () => {
                 </div>
                 <div>
                   <h1 className="font-cinzel-decorative text-base font-bold tracking-tight text-white">
-                    MahaRitage
+                    HeritageX
                   </h1>
                   <p className="text-[10px] font-medium uppercase tracking-widest text-[#d9c18a]/74">
-                    Heritage AI
+                    Maharitage AI
                   </p>
                 </div>
               </div>
@@ -940,194 +978,7 @@ const AIComponent = () => {
                       ))}
                     </div>
 
-                    {/* Audience Switcher */}
-                    <div className="mt-4 flex items-center justify-between p-3 rounded-xl border border-white/5 bg-white/5">
-                      <div>
-                        <p className="text-xs font-semibold text-slate-300">Audience</p>
-                        <p className="text-[10px] capitalize text-[#d9c18a]">{audienceType} Mode</p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setIsAudienceModalOpen(true)}
-                        className="rounded-lg border border-[#d9c18a]/24 bg-[#d9c18a]/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#d9c18a] transition hover:bg-[#d9c18a]/18"
-                      >
-                        Switch Audience
-                      </button>
-                    </div>
-
-                    {/* Quiz Config */}
-                    {mode === "quiz" && audienceType === "general" && (
-                      <div className="mt-3">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setIsQuizConfigExpanded((prev) => !prev)
-                          }
-                          className="w-full flex items-center justify-between rounded-xl border border-white/8 bg-white/5 px-3 py-3 text-left transition hover:bg-white/8"
-                        >
-                          <div>
-                            <p className="text-xs font-semibold text-slate-200">
-                              Quiz Setup
-                            </p>
-                            <p className="text-[11px] text-slate-500 mt-1">
-                              {quizTopic?.trim() || "All heritage topics"} ·{" "}
-                              {quizDifficulty} · {quizQuestionType} ·{" "}
-                              {quizQuestionCount} Qs
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            {!isQuizConfigExpanded && (
-                              <button
-                                disabled={isLoading}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleQuery(e, "", true);
-                                }}
-                                className={`px-2 py-1 text-[10px] font-bold rounded transition shadow-sm ${
-                                  isLoading
-                                    ? "bg-emerald-500/10 text-emerald-400/50 cursor-not-allowed"
-                                    : "bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 cursor-pointer"
-                                }`}
-                              >
-                                {isLoading ? "..." : "START"}
-                              </button>
-                            )}
-                            {isQuizConfigExpanded ? (
-                              <ChevronUp className="w-4 h-4 text-slate-400 shrink-0" />
-                            ) : (
-                              <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
-                            )}
-                          </div>
-                        </button>
-
-                        {isQuizConfigExpanded && (
-                          <div className="mt-3 space-y-2.5 max-h-[46vh] overflow-y-auto pr-1 scrollbar-thin">
-                            <p className="text-xs text-slate-500">
-                              Leave topic blank for a full-dataset quiz.
-                            </p>
-                            <div className="relative">
-                              <input
-                                type="text"
-                                value={quizTopic}
-                                onChange={(e) => setQuizTopic(e.target.value)}
-                                placeholder="Topic (optional)"
-                                className="w-full px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200 placeholder-slate-500"
-                                style={{
-                                  background: "rgba(255,255,255,0.06)",
-                                  border: "1px solid rgba(255,255,255,0.1)",
-                                }}
-                                onFocus={(e) =>
-                                  (e.target.style.borderColor =
-                                    "rgba(16,185,129,0.5)")
-                                }
-                                onBlur={(e) =>
-                                  (e.target.style.borderColor =
-                                    "rgba(255,255,255,0.1)")
-                                }
-                              />
-                            </div>
-                            <div className="grid grid-cols-2 gap-2">
-                              <select
-                                value={quizDifficulty}
-                                onChange={(e) => setQuizDifficulty(e.target.value)}
-                                className="px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200"
-                                style={{
-                                  background: "rgba(255,255,255,0.06)",
-                                  border: "1px solid rgba(255,255,255,0.1)",
-                                }}
-                              >
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
-                              </select>
-                              <select
-                                value={quizQuestionType}
-                                onChange={(e) => setQuizQuestionType(e.target.value)}
-                                className="px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200"
-                                style={{
-                                  background: "rgba(255,255,255,0.06)",
-                                  border: "1px solid rgba(255,255,255,0.1)",
-                                }}
-                              >
-                                <option value="MCQ">MCQ</option>
-                                <option value="Short Answer">Short Ans.</option>
-                                <option value="Mixed">Mixed</option>
-                              </select>
-                            </div>
-                            <input
-                              type="number"
-                              min={1}
-                              max={20}
-                              value={quizQuestionCount}
-                              onChange={(e) => {
-                                const v = parseInt(e.target.value || "1", 10);
-                                setQuizQuestionCount(
-                                  Number.isFinite(v)
-                                    ? Math.min(Math.max(v, 1), 20)
-                                    : 5
-                                );
-                              }}
-                              className="w-full px-3 py-2.5 rounded-xl text-sm outline-none text-slate-200 placeholder-slate-500"
-                              placeholder="Questions (1-20)"
-                              style={{
-                                background: "rgba(255,255,255,0.06)",
-                                border: "1px solid rgba(255,255,255,0.1)",
-                              }}
-                            />
-                            <button
-                              type="button"
-                              onClick={(e) => handleQuery(e, "", true)}
-                              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm rounded-xl font-semibold text-white transition-all duration-200 active:scale-[0.97] shadow-lg"
-                              style={{
-                                background:
-                                  "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
-                                boxShadow: "0 4px 15px rgba(5,150,105,0.35)",
-                              }}
-                              onMouseEnter={(e) =>
-                                (e.currentTarget.style.boxShadow =
-                                  "0 6px 20px rgba(5,150,105,0.5)")
-                              }
-                              onMouseLeave={(e) =>
-                                (e.currentTarget.style.boxShadow =
-                                  "0 4px 15px rgba(5,150,105,0.35)")
-                              }
-                            >
-                              <BookOpenCheck className="w-4 h-4" />
-                              Start New Quiz
-                            </button>
-
-                            <div>
-                              <p className="text-[10px] text-slate-500 uppercase tracking-widest mb-1.5">
-                                Quick topics
-                              </p>
-                              <div className="flex flex-wrap gap-1.5">
-                                {quizSuggestions.map((s) => (
-                                  <button
-                                    key={s}
-                                    onClick={() => setQuizTopic(s)}
-                                    className="text-xs px-2.5 py-1 rounded-lg text-emerald-400 transition-all"
-                                    style={{
-                                      background: "rgba(16,185,129,0.1)",
-                                      border: "1px solid rgba(16,185,129,0.2)",
-                                    }}
-                                    onMouseEnter={(e) =>
-                                      (e.currentTarget.style.background =
-                                        "rgba(16,185,129,0.2)")
-                                    }
-                                    onMouseLeave={(e) =>
-                                      (e.currentTarget.style.background =
-                                        "rgba(16,185,129,0.1)")
-                                    }
-                                  >
-                                    {s}
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
+                    {/* Quiz Config has been moved to PremiumQuizUI main view */}
                   </div>
 
                   {/* Chat List */}
@@ -1136,10 +987,10 @@ const AIComponent = () => {
                       type="button"
                       onClick={() => {
                         if (audienceType === "student" && mode === "quiz") {
-                          redirectToNewQuizPage("student");
+                          handleOpenQuizHome("student");
                         } else {
                           mode === "quiz"
-                            ? redirectToNewQuizPage(audienceType)
+                            ? handleOpenQuizHome(audienceType)
                             : handleStartFreshChat();
                         }
                       }}
@@ -1165,8 +1016,14 @@ const AIComponent = () => {
                     </button>
                   </div>
                   <div className="flex justify-between items-center px-1 shrink-0">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
+                    <span 
+                      className="group/tooltip relative flex items-center gap-1.5 text-xs font-semibold text-slate-500 uppercase tracking-widest cursor-pointer"
+                    >
                       Conversations
+                      <Info className="w-3.5 h-3.5" />
+                      <div className="absolute left-0 top-full mt-2 hidden group-hover/tooltip:block w-max bg-[#1a1a1a] text-xs text-slate-300 border border-white/10 rounded-lg py-1.5 px-3 shadow-xl z-50 normal-case tracking-normal">
+                        This chat remains only for 30 days
+                      </div>
                     </span>
                     <span className="text-[10px] text-slate-600 capitalize">
                       {audienceType} only
@@ -1212,6 +1069,27 @@ const AIComponent = () => {
                           <MessageSquare className="w-3.5 h-3.5 shrink-0 text-emerald-500/60" />
                           <div className="min-w-0 flex-1">
                             <span className="text-xs truncate block">{chat.title}</span>
+                            
+                            {chat.mode === "quiz" && chat.quizStatus && (
+                              <div className="flex items-center gap-1.5 mt-1 mb-1">
+                                {chat.quizStatus === "COMPLETED" ? (
+                                  <>
+                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                                    <span className="text-[10px] font-medium text-emerald-400">
+                                      Completed · {Math.round((chat.score / chat.totalQuestions) * 100) || 0}%
+                                    </span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[#d9c18a] animate-pulse"></div>
+                                    <span className="text-[10px] font-medium text-[#d9c18a]">
+                                      In Progress
+                                    </span>
+                                  </>
+                                )}
+                              </div>
+                            )}
+
                             <div className="flex items-center gap-1.5 mt-1">
                               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/8 text-slate-300 capitalize">
                                 {chat.audienceType || "general"}
@@ -1231,12 +1109,28 @@ const AIComponent = () => {
                             type="button"
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleDeleteChat(chat._id);
+                              if (deleteConfirmId === chat._id) {
+                                handleDeleteChat(chat._id);
+                                setDeleteConfirmId(null);
+                              } else {
+                                setDeleteConfirmId(chat._id);
+                                // reset after 3 seconds if not clicked again
+                                setTimeout(() => {
+                                  setDeleteConfirmId((prev) => (prev === chat._id ? null : prev));
+                                }, 3000);
+                              }
                             }}
-                            className="p-1.5 rounded-lg text-slate-500 hover:text-red-300 hover:bg-red-500/10 transition opacity-0 group-hover:opacity-100"
+                            className={`group/btn relative p-1.5 rounded-lg transition opacity-0 group-hover:opacity-100 ${
+                              deleteConfirmId === chat._id
+                                ? "text-red-500 bg-red-500/20 opacity-100"
+                                : "text-slate-500 hover:text-red-300 hover:bg-red-500/10"
+                            }`}
                             aria-label="Delete chat"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
+                            <div className="absolute right-0 bottom-full mb-2 hidden group-hover/btn:block w-max bg-[#1a1a1a] text-xs text-slate-300 border border-white/10 rounded-lg py-1 px-2 shadow-xl z-50 pointer-events-none">
+                              {deleteConfirmId === chat._id ? "Click again to delete" : "Delete chat"}
+                            </div>
                           </button>
                         </div>
                       ))
@@ -1331,7 +1225,7 @@ const AIComponent = () => {
             >
               {isSidebarOpen ? <PanelLeft size={18} /> : <PanelRight size={18} />}
             </button>
-            {quizSessionActive && (
+            {quizSessionActive && currentChatMeta?.quizState?.status !== "COMPLETED" && (
               <div
                 className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
                 style={{
@@ -1348,7 +1242,7 @@ const AIComponent = () => {
               <button
                 type="button"
                 onClick={() => {
-                  redirectToNewQuizPage(audienceType);
+                  handleOpenQuizHome(audienceType);
                 }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-slate-400 hover:text-white transition"
                 style={{ border: "1px solid rgba(255,255,255,0.1)" }}
@@ -1374,25 +1268,28 @@ const AIComponent = () => {
         </div>
 
         {/* ── Conditional UI Rendering ─────────────────────── */}
-        {audienceType === "student" && mode === "quiz" ? (
-          <StudentGameUI
-            messages={messages}
-            isLoading={isLoading}
-            handleQuery={handleQuery}
-            handleStop={handleStop}
+        {mode === "quiz" ? (
+          <PremiumQuizUI
+            chatId={currentChatId}
             chatMeta={currentChatMeta}
-            onNewQuiz={() => redirectToNewQuizPage("student")}
             quizConfig={{
               topic: quizTopic,
               difficulty: quizDifficulty,
               questionCount: quizQuestionCount,
               questionType: quizQuestionType,
             }}
-            setQuizTopic={setQuizTopic}
             setQuizDifficulty={setQuizDifficulty}
             setQuizQuestionCount={setQuizQuestionCount}
-            setQuizQuestionType={setQuizQuestionType}
-            requestErrorSignal={studentRequestError}
+            onQuizSaved={(quizState, savedChatId) => {
+              if (quizState && savedChatId === currentChatId) {
+                setCurrentChatMeta((prev) =>
+                  prev ? { ...prev, quizState } : prev
+                );
+              }
+              fetchChats();
+            }}
+            onAttemptSimilar={redirectToNewQuizPage}
+            onStartNewQuiz={redirectToNewQuizPage}
           />
         ) : (
           <ProfessionalChatUI

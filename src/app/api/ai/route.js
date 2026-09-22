@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import connectDB from "../../../lib/mongoose";
@@ -235,14 +236,7 @@ export async function POST(req) {
     }
   }
 
-  // Quiz mode requires login
-  if (isQuizMode && !user) {
-    return NextResponse.json({
-      success: false,
-      error: "Please log in to access the quiz feature.",
-      chatId: null,
-    });
-  }
+
 
   // 🚫 Handle anonymous usage limits
   if (!user) {

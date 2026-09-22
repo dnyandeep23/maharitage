@@ -1,0 +1,12 @@
+{
+  "annotation_id": "",
+  "reviewer": "GEMINI | CLAUDE | HUMAN",
+  "decision": "KEEP | REVISE | REJECT",
+  "site_relevance": "",
+  "answer_validity": "",
+  "difficulty_validity": "",
+  "distractor_quality": "",
+  "visual_dependency_validity": "",
+  "duplicate_concern": "",
+  "reason": ""
+}

@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_005_l0esdb",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Sculpture/Relief",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763260/insc_005_l0esdb.jpg",
+  "cloudinary_public_id": "insc_005_l0esdb",
+  "question": "What is the predominant visual feature carved onto the surface of the stone slab?",
+  "options": [
+    "A complex relief depicting mythological figures and scenes.",
+    "A series of geometric patterns forming a continuous decorative frieze.",
+    "A large, singular emblem or symbol at the center of the slab.",
+    "An extensive inscription consisting of multiple horizontal lines of an ancient script."
+  ],
+  "correct_option_index": 3,
+  "correct_semantic_answer": "The slab is covered with carved text arranged in horizontal lines, forming an extensive inscription.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The entire surface of the dark, rectangular stone slab is filled with numerous rows of distinct, white characters. These characters are clearly arranged in horizontal lines, stacked vertically from the top to the bottom of the slab, forming an extensive inscription.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "annotation_id": "v2_db_Ell0001_text_005",
+    "difficulty": "EASY",
+    "reasoning_type": "CHRONOLOGICAL_REASONING",
+    "flag": "EASY but requires multi-step reasoning."
+  },
+  {
+    "annotation_id": "v2_db_Ell0001_img_002",
+    "difficulty": "HARD",
+    "reasoning_type": "VISUAL_RECOGNITION",
+    "flag": "HARD but direct recall."
+  },
+  {
+    "annotation_id": "v2_db_Kan0004_img_005",
+    "difficulty": "HARD",
+    "reasoning_type": "VISUAL_RECOGNITION",
+    "flag": "HARD but direct recall."
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_text_001",
+    "difficulty": "MODERATE",
+    "reasoning_type": "DIRECT_RECALL",
+    "flag": "MODERATE but direct recall."
+  }
+]

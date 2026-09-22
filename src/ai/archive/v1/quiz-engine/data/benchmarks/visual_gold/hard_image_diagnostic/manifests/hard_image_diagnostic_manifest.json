@@ -1,0 +1,10 @@
+{
+  "total_questions": 50,
+  "hard_images": 10,
+  "option_distribution": {
+    "A": 12,
+    "B": 13,
+    "C": 13,
+    "D": 12
+  }
+}

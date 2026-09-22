@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_008_oe2amg",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_008_oe2amg.jpg",
+  "cloudinary_public_id": "insc_008_oe2amg",
+  "question": "Among the various Kanheri Cave inscription fragments depicted, which specific fragment exhibits a prominent, irregular white void that significantly obscures the engraved text?",
+  "options": [
+    "The fragment labeled '1'.",
+    "The fragment labeled '6'.",
+    "The fragment labeled '9'.",
+    "The fragment labeled '10'."
+  ],
+  "correct_option_index": 1,
+  "correct_semantic_answer": "The fragment labeled '6' displays a large, irregular white void obscuring its text.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The fragment labeled '6' is positioned on the right side of the image and clearly shows a substantial, jagged white area cutting diagonally through the body of the inscription, rendering a significant portion of the engraved characters unreadable.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

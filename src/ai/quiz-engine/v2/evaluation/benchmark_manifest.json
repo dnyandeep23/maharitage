@@ -1,0 +1,65 @@
+{
+    "benchmark_version": "v2.0.1",
+    "timestamp": "2026-08-22T22:41:20.848785Z",
+    "dataset_path": "src/ai/quiz-engine/v2/benchmark/v2.0.1_master.json",
+    "dataset_sha256": "3951af0d0c4de8874e6ef963645ecd0110b359f03c246cc692ec4ee4f3e97b63",
+    "dataset_question_count": 734,
+    "text_count": 152,
+    "image_count": 582,
+    "site_count": 8,
+    "models": {
+        "SmolVLM-256M-Instruct": {
+            "id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+            "precision": "bfloat16",
+            "backend": "transformers"
+        },
+        "SmolVLM-500M-Instruct": {
+            "id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+            "precision": "bfloat16",
+            "backend": "transformers"
+        },
+        "llava-onevision-qwen2-0.5b": {
+            "id": "llava-hf/llava-onevision-qwen2-0.5b-ov-hf",
+            "precision": "float16",
+            "backend": "transformers"
+        },
+        "Qwen2-VL-2B-Instruct-MLX": {
+            "id": "mlx-community/Qwen2-VL-2B-Instruct-4bit",
+            "precision": "4-bit",
+            "backend": "mlx_vlm"
+        },
+        "Qwen3-VL-2B-Instruct": {
+            "id": "Qwen/Qwen3-VL-2B-Instruct",
+            "precision": "bfloat16",
+            "backend": "transformers(isolated)"
+        },
+        "Qwen2.5-VL-3B-Instruct": {
+            "id": "Qwen/Qwen2.5-VL-3B-Instruct",
+            "precision": "bfloat16",
+            "backend": "transformers"
+        },
+        "Qwen3-VL-4B-Instruct": {
+            "id": "Qwen/Qwen3-VL-4B-Instruct",
+            "precision": "bfloat16",
+            "backend": "transformers(isolated)"
+        },
+        "InternVL3-2B": {
+            "id": "OpenGVLab/InternVL3-2B",
+            "precision": "bfloat16",
+            "backend": "transformers(isolated)"
+        },
+        "gemma-3-4b-it": {
+            "id": "google/gemma-3-4b-it",
+            "precision": "bfloat16",
+            "backend": "transformers"
+        }
+    },
+    "calibration_status": "PASS",
+    "environment": {
+        "python_version": "3.13.9",
+        "torch_version": "2.13.0 (from venv)",
+        "transformers_version": "4.44.2 (from venv)",
+        "mlx_version": "latest",
+        "mlx_vlm_version": "latest"
+    }
+}

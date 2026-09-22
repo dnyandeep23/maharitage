@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_10_rzpw4d",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_10_rzpw4d.jpg",
+  "cloudinary_public_id": "insc_10_rzpw4d",
+  "question": "Which description best characterizes the visual pattern displayed in the image?",
+  "options": [
+    "A high-contrast, irregular, and organic mottled pattern.",
+    "A repeating geometric pattern with sharp angles.",
+    "A detailed figurative carving of human or animal forms.",
+    "A series of parallel lines forming a striped texture."
+  ],
+  "correct_option_index": 0,
+  "correct_semantic_answer": "A high-contrast, irregular, and organic mottled pattern.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The entire image is composed of dark and light areas forming interconnected, non-uniform, and curvilinear shapes, resembling a natural or organic texture rather than a structured or linear design.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

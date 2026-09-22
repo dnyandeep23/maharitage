@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_007_cvrcza",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_007_cvrcza.jpg",
+  "cloudinary_public_id": "insc_007_cvrcza",
+  "question": "What type of surface modification is most prominently visible on the large, rounded stone structure in the foreground?",
+  "options": [
+    "Intricate relief sculptures depicting mythological figures.",
+    "Smooth, painted frescoes with geometric designs.",
+    "Deeply carved alphanumeric inscriptions, including names and dates.",
+    "Naturally occurring mineral streaks and erosion patterns."
+  ],
+  "correct_option_index": 2,
+  "correct_semantic_answer": "The stone surface is covered with various carved inscriptions, including legible names like 'N. Christian', 'A.J. Roy', 'W.F.M' and dates such as '1810' and '1873'.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The entire visible surface of the rounded stone object in the foreground is covered with numerous etched and carved letters and numbers, forming names and dates, particularly visible in the center and upper left portions of the object.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

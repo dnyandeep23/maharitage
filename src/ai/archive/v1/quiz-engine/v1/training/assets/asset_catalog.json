@@ -1,0 +1,839 @@
+{
+  "generated_at": "2026-08-09T14:07:54.002Z",
+  "total_discovered": 1193,
+  "unique_assets": 147,
+  "duplicate_count": 1046,
+  "invalid_count": 0,
+  "eval_locked": 55,
+  "clean_assets": 92,
+  "assets": [
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761642273/_CAV3208_-_12_bdqp81.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/_cav3208_-_12_bdqp81.jpg",
+      "cloudinary_public_id": "_cav3208_-_12_bdqp81",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3209-12_djnckc.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/_cav3209-12_djnckc.jpg",
+      "cloudinary_public_id": "_cav3209-12_djnckc",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3210-12_cmcl1x.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/_cav3210-12_cmcl1x.jpg",
+      "cloudinary_public_id": "_cav3210-12_cmcl1x",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3211-12_mchavi.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/_cav3211-12_mchavi.jpg",
+      "cloudinary_public_id": "_cav3211-12_mchavi",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761732243/Ajanta_Cave_10_Insc_01_rn3gz8.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/ajanta_cave_10_insc_01_rn3gz8.jpg",
+      "cloudinary_public_id": "ajanta_cave_10_insc_01_rn3gz8",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761733147/cave_16_insc_02_oxdddd.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/cave_16_insc_02_oxdddd.jpg",
+      "cloudinary_public_id": "cave_16_insc_02_oxdddd",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761746651/cave_17_insc_03_a6esqk.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/cave_17_insc_03_a6esqk.jpg",
+      "cloudinary_public_id": "cave_17_insc_03_a6esqk",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763107/insc_001_jwh5qj.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_001_jwh5qj.jpg",
+      "cloudinary_public_id": "insc_001_jwh5qj",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763191/insc_002_jy9scj.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_002_jy9scj.jpg",
+      "cloudinary_public_id": "insc_002_jy9scj",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763192/insc_003_sq2amn.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_003_sq2amn.jpg",
+      "cloudinary_public_id": "insc_003_sq2amn",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_007_cvrcza.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_007_cvrcza.jpg",
+      "cloudinary_public_id": "insc_007_cvrcza",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763260/insc_005_l0esdb.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_005_l0esdb.jpg",
+      "cloudinary_public_id": "insc_005_l0esdb",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_006_ulur3e.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_006_ulur3e.jpg",
+      "cloudinary_public_id": "insc_006_ulur3e",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761763250/insc_008_oe2amg.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_008_oe2amg.jpg",
+      "cloudinary_public_id": "insc_008_oe2amg",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_01_gdbzsv.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_01_gdbzsv.jpg",
+      "cloudinary_public_id": "insc_01_gdbzsv",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_02_gnp8kx.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_02_gnp8kx.jpg",
+      "cloudinary_public_id": "insc_02_gnp8kx",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_03_lwuy6b.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_03_lwuy6b.jpg",
+      "cloudinary_public_id": "insc_03_lwuy6b",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_04_vvthh9.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_04_vvthh9.jpg",
+      "cloudinary_public_id": "insc_04_vvthh9",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_05_ws51zu.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_05_ws51zu.jpg",
+      "cloudinary_public_id": "insc_05_ws51zu",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_06_bqmmib.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_06_bqmmib.jpg",
+      "cloudinary_public_id": "insc_06_bqmmib",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_07_bbpsqv.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_07_bbpsqv.jpg",
+      "cloudinary_public_id": "insc_07_bbpsqv",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_08_qvxwbs.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_08_qvxwbs.jpg",
+      "cloudinary_public_id": "insc_08_qvxwbs",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_09_o3v8gy.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_09_o3v8gy.jpg",
+      "cloudinary_public_id": "insc_09_o3v8gy",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_10_rzpw4d.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_10_rzpw4d.jpg",
+      "cloudinary_public_id": "insc_10_rzpw4d",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_14_rxcryn.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_14_rxcryn.jpg",
+      "cloudinary_public_id": "insc_14_rxcryn",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_15_isz7uz.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_15_isz7uz.jpg",
+      "cloudinary_public_id": "insc_15_isz7uz",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_16_mpguam.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_16_mpguam.jpg",
+      "cloudinary_public_id": "insc_16_mpguam",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_17_joonnm.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_17_joonnm.jpg",
+      "cloudinary_public_id": "insc_17_joonnm",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_18_uogtjm.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_18_uogtjm.jpg",
+      "cloudinary_public_id": "insc_18_uogtjm",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774066/Insc_19_vltflm.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_19_vltflm.jpg",
+      "cloudinary_public_id": "insc_19_vltflm",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_20_gifeit.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_20_gifeit.jpg",
+      "cloudinary_public_id": "insc_20_gifeit",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774067/Insc_24_g1jwoo.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_24_g1jwoo.jpg",
+      "cloudinary_public_id": "insc_24_g1jwoo",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774068/Insc_25_l5kr1h.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_25_l5kr1h.jpg",
+      "cloudinary_public_id": "insc_25_l5kr1h",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_26_uxfuyb.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_26_uxfuyb.jpg",
+      "cloudinary_public_id": "insc_26_uxfuyb",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_27_x4dyxe.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_27_x4dyxe.jpg",
+      "cloudinary_public_id": "insc_27_x4dyxe",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_28_abylfd.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_28_abylfd.jpg",
+      "cloudinary_public_id": "insc_28_abylfd",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774069/Insc_29_c7juyd.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_29_c7juyd.jpg",
+      "cloudinary_public_id": "insc_29_c7juyd",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_30_dlaxht.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_30_dlaxht.jpg",
+      "cloudinary_public_id": "insc_30_dlaxht",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_32_qqxmn7.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_32_qqxmn7.jpg",
+      "cloudinary_public_id": "insc_32_qqxmn7",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_33_qwbszo.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_33_qwbszo.jpg",
+      "cloudinary_public_id": "insc_33_qwbszo",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_34_sblsz2.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_34_sblsz2.jpg",
+      "cloudinary_public_id": "insc_34_sblsz2",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774070/Insc_35_mmsl0m.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_35_mmsl0m.jpg",
+      "cloudinary_public_id": "insc_35_mmsl0m",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_37_bjjjyd.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_37_bjjjyd.jpg",
+      "cloudinary_public_id": "insc_37_bjjjyd",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_38_incrid.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_38_incrid.jpg",
+      "cloudinary_public_id": "insc_38_incrid",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_39_dgechn.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_39_dgechn.jpg",
+      "cloudinary_public_id": "insc_39_dgechn",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774071/Insc_40_kx835p.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_40_kx835p.jpg",
+      "cloudinary_public_id": "insc_40_kx835p",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774100/Insc_41_rqwsoz.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_41_rqwsoz.jpg",
+      "cloudinary_public_id": "insc_41_rqwsoz",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_42_mvd571.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_42_mvd571.jpg",
+      "cloudinary_public_id": "insc_42_mvd571",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_43_tcqb4k.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_43_tcqb4k.jpg",
+      "cloudinary_public_id": "insc_43_tcqb4k",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_44_euorab.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_44_euorab.jpg",
+      "cloudinary_public_id": "insc_44_euorab",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_45_fswset.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_45_fswset.jpg",
+      "cloudinary_public_id": "insc_45_fswset",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_46_rsjsjk.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_46_rsjsjk.jpg",
+      "cloudinary_public_id": "insc_46_rsjsjk",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_47_cv7upm.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_47_cv7upm.jpg",
+      "cloudinary_public_id": "insc_47_cv7upm",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_51_wf5uvu.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_51_wf5uvu.jpg",
+      "cloudinary_public_id": "insc_51_wf5uvu",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774101/Insc_53_fkjl1z.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_53_fkjl1z.jpg",
+      "cloudinary_public_id": "insc_53_fkjl1z",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_54_f0fqjb.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_54_f0fqjb.jpg",
+      "cloudinary_public_id": "insc_54_f0fqjb",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_55_uarwo6.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_55_uarwo6.jpg",
+      "cloudinary_public_id": "insc_55_uarwo6",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_56_nx4mxi.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_56_nx4mxi.jpg",
+      "cloudinary_public_id": "insc_56_nx4mxi",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_57_ujewbe.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_57_ujewbe.jpg",
+      "cloudinary_public_id": "insc_57_ujewbe",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774103/Insc_58_tmlypg.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/insc_58_tmlypg.jpg",
+      "cloudinary_public_id": "insc_58_tmlypg",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241174/Maha-darvaja_xzvwwo.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/maha-darvaja_xzvwwo.jpg",
+      "cloudinary_public_id": "maha-darvaja_xzvwwo",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241182/Naane_darvaja_vrrgxr.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/naane_darvaja_vrrgxr.jpg",
+      "cloudinary_public_id": "naane_darvaja_vrrgxr",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241174/hirkani-buruj-raigad_erxgll.avif",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/hirkani-buruj-raigad_erxgll.avif",
+      "cloudinary_public_id": "hirkani-buruj-raigad_erxgll",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241173/takmak_tok_rycyue.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/takmak_tok_rycyue.jpg",
+      "cloudinary_public_id": "takmak_tok_rycyue",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241177/Gangasagar_lake_ahwln5.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/gangasagar_lake_ahwln5.jpg",
+      "cloudinary_public_id": "gangasagar_lake_ahwln5",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241175/rajavad_gsoyyf.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/rajavad_gsoyyf.jpg",
+      "cloudinary_public_id": "rajavad_gsoyyf",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241174/bajarpeth_bdfjka.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/bajarpeth_bdfjka.jpg",
+      "cloudinary_public_id": "bajarpeth_bdfjka",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241175/jagdeshvar_mandir_egsakb.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/jagdeshvar_mandir_egsakb.jpg",
+      "cloudinary_public_id": "jagdeshvar_mandir_egsakb",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Inscription_at_jagdihwart_temple_pqvvap.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/inscription_at_jagdihwart_temple_pqvvap.jpg",
+      "cloudinary_public_id": "inscription_at_jagdihwart_temple_pqvvap",
+      "asset_type": "INSCRIPTION"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241173/smadhi_j0gttt.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/smadhi_j0gttt.jpg",
+      "cloudinary_public_id": "smadhi_j0gttt",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241173/Chhatrapati_Shivaji_Maharaj_Samadhi_Raigad_r1uv91.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/chhatrapati_shivaji_maharaj_samadhi_raigad_r1uv91.jpg",
+      "cloudinary_public_id": "chhatrapati_shivaji_maharaj_samadhi_raigad_r1uv91",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241175/Map_wdyjsi.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/map_wdyjsi.jpg",
+      "cloudinary_public_id": "map_wdyjsi",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241175/raigad_defence_vensch.avif",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/raigad_defence_vensch.avif",
+      "cloudinary_public_id": "raigad_defence_vensch",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242471/padmavti_temple_rlk9pm.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/padmavti_temple_rlk9pm.jpg",
+      "cloudinary_public_id": "padmavti_temple_rlk9pm",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245009/main-gate_fbmy8w.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/main-gate_fbmy8w.jpg",
+      "cloudinary_public_id": "main-gate_fbmy8w",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245008/Gateway_to_Daulatabad_Fort_-_Daulatabad_-_Maharashtra_-_1_qwfygn.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/gateway_to_daulatabad_fort_-_daulatabad_-_maharashtra_-_1_qwfygn.jpg",
+      "cloudinary_public_id": "gateway_to_daulatabad_fort_-_daulatabad_-_maharashtra_-_1_qwfygn",
+      "asset_type": "GALLERY"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245006/Chand_minar21_tpzqzn.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/chand_minar21_tpzqzn.jpg",
+      "cloudinary_public_id": "chand_minar21_tpzqzn",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245013/water_tekada.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/water_tekada.jpg",
+      "cloudinary_public_id": "water_tekada",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245012/water_lkxg4g.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/water_lkxg4g.jpg",
+      "cloudinary_public_id": "water_lkxg4g",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245006/chcini_mahal_jcujgf.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/chcini_mahal_jcujgf.jpg",
+      "cloudinary_public_id": "chcini_mahal_jcujgf",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245006/bharat_mata_temple_fkaoq0.webp",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/bharat_mata_temple_fkaoq0.webp",
+      "cloudinary_public_id": "bharat_mata_temple_fkaoq0",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245010/period_hall_drexly.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/period_hall_drexly.jpg",
+      "cloudinary_public_id": "period_hall_drexly",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280994/water_well_fevcqw.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/water_well_fevcqw.jpg",
+      "cloudinary_public_id": "water_well_fevcqw",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280993/hand-print_aikztx.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/hand-print_aikztx.jpg",
+      "cloudinary_public_id": "hand-print_aikztx",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280993/foot-print_qollij.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/foot-print_qollij.jpg",
+      "cloudinary_public_id": "foot-print_qollij",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288075/Gate_to_Murud_Janjira_Fort_v8eo2z.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/gate_to_murud_janjira_fort_v8eo2z.jpg",
+      "cloudinary_public_id": "gate_to_murud_janjira_fort_v8eo2z",
+      "asset_type": "GALLERY"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288075/inside_complex_jxb9t8.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/inside_complex_jxb9t8.jpg",
+      "cloudinary_public_id": "inside_complex_jxb9t8",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/freshwater_omcysf.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/freshwater_omcysf.jpg",
+      "cloudinary_public_id": "freshwater_omcysf",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288515/IMG20260418124345_km1g9h.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/img20260418124345_km1g9h.jpg",
+      "cloudinary_public_id": "img20260418124345_km1g9h",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288514/IMG20260418124415_zrb4be.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/img20260418124415_zrb4be.jpg",
+      "cloudinary_public_id": "img20260418124415_zrb4be",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288512/ruins_i0ns56.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/ddstiusga/image/upload/ruins_i0ns56.jpg",
+      "cloudinary_public_id": "ruins_i0ns56",
+      "asset_type": "OTHER"
+    },
+    {
+      "site_id": "FILE",
+      "url": "https://res.cloudinary.com/.../v123/cave17_qckcsr.jpg",
+      "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/src/ai/quiz-engine/v1/verification/mongodb_verifier.js",
+      "source": "repo_file",
+      "normalized_url": "https://res.cloudinary.com/.../cave17_qckcsr.jpg",
+      "cloudinary_public_id": null,
+      "asset_type": "GALLERY"
+    }
+  ]
+}

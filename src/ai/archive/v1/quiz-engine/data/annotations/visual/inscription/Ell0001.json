@@ -1,0 +1,110 @@
+[
+  {
+    "annotation_id": "Ell0001_insc_001_q001",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761642273/_CAV3208_-_12_bdqp81.jpg",
+    "cloudinary_public_id": "_CAV3208_-_12_bdqp81",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ellora Caves (Insc_01)?",
+    "options": [
+      "Horizontal lines of incised characters arranged in a neat rectangular block",
+      "Concentric circular text spiraling around a central emblem",
+      "Vertical columns read from right to left",
+      "Randomly scattered individual letters across the rock face"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image shows characters incised in orderly horizontal rows across the stone panel.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_insc_001_q003",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3209-12_djnckc.jpg",
+    "cloudinary_public_id": "_CAV3209-12_djnckc",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ellora Caves (Insc_01)?",
+    "options": [
+      "Concentric circular text spiraling around a central emblem",
+      "Horizontal lines of incised characters arranged in a neat rectangular block",
+      "Vertical columns read from right to left",
+      "Randomly scattered individual letters across the rock face"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image shows characters incised in orderly horizontal rows across the stone panel.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_insc_001_q005",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3210-12_cmcl1x.jpg",
+    "cloudinary_public_id": "_CAV3210-12_cmcl1x",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ellora Caves (Insc_01)?",
+    "options": [
+      "Concentric circular text spiraling around a central emblem",
+      "Vertical columns read from right to left",
+      "Horizontal lines of incised characters arranged in a neat rectangular block",
+      "Randomly scattered individual letters across the rock face"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image shows characters incised in orderly horizontal rows across the stone panel.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  },
+  {
+    "annotation_id": "Ell0001_insc_001_q007",
+    "site_id": "Ell0001",
+    "site_name": "The Ellora Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3211-12_mchavi.jpg",
+    "cloudinary_public_id": "_CAV3211-12_mchavi",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ellora Caves (Insc_01)?",
+    "options": [
+      "Concentric circular text spiraling around a central emblem",
+      "Vertical columns read from right to left",
+      "Randomly scattered individual letters across the rock face",
+      "Horizontal lines of incised characters arranged in a neat rectangular block"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image shows characters incised in orderly horizontal rows across the stone panel.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Likely Sanskrit or Prakrit"
+    }
+  }
+]

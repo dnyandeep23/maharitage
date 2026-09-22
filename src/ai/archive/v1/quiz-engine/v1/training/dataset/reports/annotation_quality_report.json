@@ -1,0 +1,18 @@
+{
+  "total_clean_assets_discovered": 92,
+  "annotation_files_found": 23,
+  "valid_annotations": 23,
+  "vds_3_count": 23,
+  "vds_3_percentage": "100.0%",
+  "ground_truth_failures": 0,
+  "exact_duplicates": 0,
+  "empty_files": 0,
+  "image_leakage": 0,
+  "option_distribution": {
+    "A": "26.1%",
+    "B": "26.1%",
+    "C": "26.1%",
+    "D": "21.7%"
+  },
+  "annotation_quality_gate": "PASS"
+}

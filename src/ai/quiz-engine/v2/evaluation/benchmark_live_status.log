@@ -1,0 +1,27 @@
+--- LIVE BENCHMARK STATUS (23:54:19) ---
+Total global inferences completed: 2956
+
+[HuggingFaceTB/SmolVLM-256M-Instruct]
+Completed: 739 / 739
+Running Accuracy: 13.3%
+Invalid: 4
+Timeout: 0
+
+[HuggingFaceTB/SmolVLM-500M-Instruct]
+Completed: 739 / 739
+Running Accuracy: 46.8%
+Invalid: 83
+Timeout: 0
+
+[llava-hf/llava-onevision-qwen2-0.5b-ov-hf]
+Completed: 739 / 739
+Running Accuracy: 53.3%
+Invalid: 13
+Timeout: 0
+
+[mlx-community/Qwen2-VL-2B-Instruct-4bit]
+Completed: 739 / 739
+Running Accuracy: 62.8%
+Invalid: 25
+Timeout: 0
+

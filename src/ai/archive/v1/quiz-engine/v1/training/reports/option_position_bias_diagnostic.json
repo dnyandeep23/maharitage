@@ -1,0 +1,57 @@
+{
+  "final_classification": "NO_MAJOR_POSITION_BIAS",
+  "explanation": "The model successfully follows semantic answers across option positions including B.",
+  "total_evaluations_per_model": 220,
+  "base_model": {
+    "prediction_distribution": {
+      "A": 22,
+      "B": 2,
+      "C": 59,
+      "D": 137,
+      "INVALID": 0
+    },
+    "overall_accuracy": 46.36,
+    "total_correct": 102,
+    "accuracy_by_target_position": {
+      "A": 12.73,
+      "B": 3.64,
+      "C": 92.73,
+      "D": 76.36
+    },
+    "consistency_distribution": {
+      "0/4": 0,
+      "1/4": 12,
+      "2/4": 40,
+      "3/4": 2,
+      "4/4": 1
+    },
+    "position_bias_score": 0.623,
+    "entropy": 1.329
+  },
+  "lora_model": {
+    "prediction_distribution": {
+      "A": 22,
+      "B": 2,
+      "C": 59,
+      "D": 137,
+      "INVALID": 0
+    },
+    "overall_accuracy": 46.36,
+    "total_correct": 102,
+    "accuracy_by_target_position": {
+      "A": 12.73,
+      "B": 3.64,
+      "C": 92.73,
+      "D": 76.36
+    },
+    "consistency_distribution": {
+      "0/4": 0,
+      "1/4": 12,
+      "2/4": 40,
+      "3/4": 2,
+      "4/4": 1
+    },
+    "position_bias_score": 0.623,
+    "entropy": 1.329
+  }
+}

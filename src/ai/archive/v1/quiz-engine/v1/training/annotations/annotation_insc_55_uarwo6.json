@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_insc_55_uarwo6",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Sculpture/Relief",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761774102/Insc_55_uarwo6.jpg",
+  "cloudinary_public_id": "insc_55_uarwo6",
+  "question": "Which distinct symbol or element is clearly visible towards the right end of the upper inscribed band?",
+  "options": [
+    "A depiction of a lotus flower.",
+    "A geometric pattern of interlocking squares.",
+    "A curved, horn-like or conch-like symbol.",
+    "A human figure in profile."
+  ],
+  "correct_option_index": 2,
+  "correct_semantic_answer": "A curved, horn-like or conch-like symbol is visible.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "In the upper horizontal band of the inscription, towards the right side, a prominent, raised, curved symbol resembling a conch shell or a horn is clearly discernible against the textured stone surface.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

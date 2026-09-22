@@ -1,0 +1,87 @@
+{
+  "dataset_version": "v1.0.0-frozen",
+  "generation_timestamp": "2026-08-09T11:34:19.624Z",
+  "read_only": true,
+  "summary": {
+    "total_sites": 10,
+    "total_image_annotations": 78,
+    "total_inscription_annotations": 60,
+    "total_visual_annotations": 138,
+    "unique_image_urls": 106
+  },
+  "splits": {
+    "train_sites": [
+      "Ell0001",
+      "Kan0004",
+      "Fort0001",
+      "Fort0002",
+      "Fort0003",
+      "Pit0002"
+    ],
+    "validation_sites": [
+      "Aja0003",
+      "Ele0005"
+    ],
+    "test_sites": [
+      "Fort0005",
+      "Fort0004"
+    ]
+  },
+  "site_breakdown": {
+    "Aja0003": {
+      "image": 15,
+      "inscription": 3
+    },
+    "Ele0005": {
+      "image": 2,
+      "inscription": 0
+    },
+    "Ell0001": {
+      "image": 28,
+      "inscription": 4
+    },
+    "Fort0001": {
+      "image": 8,
+      "inscription": 0
+    },
+    "Fort0002": {
+      "image": 5,
+      "inscription": 0
+    },
+    "Fort0003": {
+      "image": 4,
+      "inscription": 0
+    },
+    "Fort0004": {
+      "image": 3,
+      "inscription": 0
+    },
+    "Fort0005": {
+      "image": 4,
+      "inscription": 0
+    },
+    "Kan0004": {
+      "image": 8,
+      "inscription": 53
+    },
+    "Pit0002": {
+      "image": 1,
+      "inscription": 0
+    }
+  },
+  "annotation_file_hashes": {
+    "image/Aja0003.json": "2ff8cf8c62c3f05642628d883246748a57e565afa748dbf36a9d05c773c9ba57",
+    "image/Ele0005.json": "b10a6050c11e47b408391fde5c0b61505b7502fd18b9e787f78bd309f32ad571",
+    "image/Ell0001.json": "9ea66693e2b7dbecded60f1fbcba4e88f0b87085fa90d139d8c939b2477912fe",
+    "image/Fort0001.json": "457888fff2e40a9e84fe7c7a296758d9fe660633b0c4a9ef6cf0e3deaa4ce3b8",
+    "image/Fort0002.json": "6371697b0c4bb2ad5eb589f2e749d3504830da697d4574baef77b81e25bfb7a1",
+    "image/Fort0003.json": "1bd7f96806888629e241becefb2e0db9a724dc5e70e1a0a21e42fbb5e3553b42",
+    "image/Fort0004.json": "07bf999975dade848ac5243f23be9900be073c46caeb863e431bc46eb7a32b49",
+    "image/Fort0005.json": "c852021210d4efb4e07983ae4c57cad7d4b1a88640cc86dc002660d5f12ce18c",
+    "image/Kan0004.json": "9fdf169fe7186ffb07b06665b852dc690b5f6039b540d9d6524e5fc41af7e1ac",
+    "image/Pit0002.json": "015f07e38e193972b9cce056df9a22b451f5a113e77e494a73a641bc57661836",
+    "inscription/Aja0003.json": "b7a45d40d5342c75ccbb7be25044e37b13218d4712e9ad8478439dbfcc1b895d",
+    "inscription/Ell0001.json": "f5f3c6044be5e0f59688afcf78f51077ae9e201e3b72e12c135712c8df6d7382",
+    "inscription/Kan0004.json": "4b1edcdd763084a3f5a989ea6aa072afcb3110060c4a48288e4ba6515eb42cc2"
+  }
+}

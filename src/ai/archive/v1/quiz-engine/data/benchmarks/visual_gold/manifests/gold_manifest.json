@@ -1,0 +1,97 @@
+{
+  "benchmark_name": "Maharitage V1 Independent Blind Visual Gold Benchmark (Adversarial Clean)",
+  "version": "v2.1.0-adversarial-clean",
+  "created_at": "2026-08-09T12:43:16.002Z",
+  "random_seed": 42,
+  "summary": {
+    "total_benchmark_questions": 55,
+    "total_sites_covered": 10,
+    "total_images_evaluated": 55,
+    "unused_images_count": 9,
+    "reused_images_count": 46,
+    "all_score_3": true,
+    "visual_evidence_coverage_pct": 100,
+    "option_balance_gate": "PASS",
+    "option_distribution": {
+      "A": 14,
+      "B": 14,
+      "C": 14,
+      "D": 13
+    }
+  },
+  "split_counts": {
+    "train": 38,
+    "validation": 8,
+    "test": 9
+  },
+  "splits": {
+    "train": [
+      "Ell0001",
+      "Kan0004",
+      "Fort0001",
+      "Fort0002",
+      "Fort0003",
+      "Pit0002"
+    ],
+    "validation": [
+      "Aja0003",
+      "Ele0005"
+    ],
+    "test": [
+      "Fort0005",
+      "Fort0004"
+    ]
+  },
+  "per_site_counts": {
+    "Pit0002": {
+      "name": "The Pitalkhora Caves",
+      "gallery": 5,
+      "benchmark_questions": 5
+    },
+    "Ell0001": {
+      "name": "The Ellora Caves",
+      "gallery": 14,
+      "benchmark_questions": 14
+    },
+    "Aja0003": {
+      "name": "The Ajanta Caves",
+      "gallery": 7,
+      "benchmark_questions": 7
+    },
+    "Kan0004": {
+      "name": "The Kanheri Caves",
+      "gallery": 5,
+      "benchmark_questions": 5
+    },
+    "Ele0005": {
+      "name": "Elephanta Cave",
+      "gallery": 1,
+      "benchmark_questions": 1
+    },
+    "Fort0001": {
+      "name": "Raigad Fort",
+      "gallery": 4,
+      "benchmark_questions": 4
+    },
+    "Fort0002": {
+      "name": "Rajgad Fort",
+      "gallery": 6,
+      "benchmark_questions": 6
+    },
+    "Fort0003": {
+      "name": "Devgiri Fort (Daulatabad Fort)",
+      "gallery": 4,
+      "benchmark_questions": 4
+    },
+    "Fort0004": {
+      "name": "Sindhudurg Fort",
+      "gallery": 4,
+      "benchmark_questions": 4
+    },
+    "Fort0005": {
+      "name": "Murud-Janjira Fort",
+      "gallery": 5,
+      "benchmark_questions": 5
+    }
+  }
+}

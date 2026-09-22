@@ -1,0 +1,72 @@
+[
+  {
+    "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "family": "SmolVLM",
+    "parameters": "~256M",
+    "backend": "transformers_mps",
+    "load_time": 8.040190935134888,
+    "avg_latency": 1.602488398551941,
+    "est_memory_mb": 489.2061767578125,
+    "parse_success": 2,
+    "success_count": 2,
+    "conf_avail": true,
+    "DOWNLOAD_STATUS": "SUCCESS",
+    "RUNTIME_STATUS": "SUCCESS",
+    "MODEL_STATUS": "READY"
+  },
+  {
+    "model_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+    "family": "SmolVLM",
+    "parameters": "~500M",
+    "backend": "transformers_mps",
+    "load_time": 89.96941804885864,
+    "avg_latency": 1.5965379476547241,
+    "est_memory_mb": 967.9456787109375,
+    "parse_success": 2,
+    "success_count": 2,
+    "conf_avail": true,
+    "DOWNLOAD_STATUS": "SUCCESS",
+    "RUNTIME_STATUS": "SUCCESS",
+    "MODEL_STATUS": "READY"
+  },
+  {
+    "model_id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+    "family": "SmolVLM2",
+    "parameters": "~2.2B",
+    "backend": "transformers_mps",
+    "error": "CAS Client Error: Format error / I/O error",
+    "DOWNLOAD_STATUS": "FAILED",
+    "RUNTIME_STATUS": "NOT_TESTED",
+    "MODEL_STATUS": "DOWNLOAD_FAILED"
+  },
+  {
+    "model_id": "Qwen/Qwen2.5-VL-3B-Instruct",
+    "family": "Qwen-VL",
+    "parameters": "~3B",
+    "backend": "transformers_mps",
+    "DOWNLOAD_STATUS": "FAILED",
+    "RUNTIME_STATUS": "NOT_TESTED",
+    "MODEL_STATUS": "DOWNLOAD_FAILED",
+    "error": "FAILED_IN_CURRENT_ENVIRONMENT (Stalled)"
+  },
+  {
+    "model_id": "google/gemma-3-4b-it",
+    "family": "Gemma",
+    "parameters": "~4B",
+    "backend": "transformers_mps",
+    "DOWNLOAD_STATUS": "FAILED",
+    "RUNTIME_STATUS": "NOT_TESTED",
+    "MODEL_STATUS": "DOWNLOAD_FAILED",
+    "error": "Gated repo: 403 Client Error"
+  },
+  {
+    "model_id": "vikhyatk/moondream2",
+    "family": "Moondream",
+    "parameters": "~1.8B",
+    "backend": "transformers_mps",
+    "DOWNLOAD_STATUS": "SUCCESS",
+    "RUNTIME_STATUS": "FAILED",
+    "MODEL_STATUS": "RUNTIME_FAILED",
+    "error": "'HfMoondream' object has no attribute 'all_tied_weights_keys'"
+  }
+]

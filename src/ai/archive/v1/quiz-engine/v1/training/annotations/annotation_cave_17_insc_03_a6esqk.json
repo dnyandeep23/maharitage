@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_cave_17_insc_03_a6esqk",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761746651/cave_17_insc_03_a6esqk.jpg",
+  "cloudinary_public_id": "cave_17_insc_03_a6esqk",
+  "question": "What is the most prominent visual feature covering the majority of the flat stone surface depicted in the image?",
+  "options": [
+    "A large, detailed relief sculpture of deities.",
+    "A smooth, polished surface with a reflective sheen.",
+    "Numerous lines of carved text or inscriptions.",
+    "A complex geometric mosaic pattern."
+  ],
+  "correct_option_index": 2,
+  "correct_semantic_answer": "The stone surface is covered with extensive carved inscriptions.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "The entire central flat stone panel, which occupies a significant portion of the image, is covered with densely packed, small characters carved into its surface, forming multiple horizontal lines of text. These inscriptions are visible across the majority of the panel's area.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}

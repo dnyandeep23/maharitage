@@ -1,0 +1,111 @@
+{
+  "final_classification": "MIXED_PIPELINE_PROBLEM",
+  "explanation": "Combination of prompt decoding inclusion and raw output format variations. Full parsed: {'A': 20, 'B': 0, 'C': 0, 'D': 0, 'UNKNOWN': 0}, Sliced parsed: {'A': 20, 'B': 0, 'C': 0, 'D': 0, 'UNKNOWN': 0}, Raw sliced: {'A': 9, 'B': 0, 'C': 0, 'D': 0, 'OTHER': 11, 'EMPTY': 0}",
+  "base_raw_distribution": {
+    "A": 9,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "OTHER": 11,
+    "EMPTY": 0
+  },
+  "lora_raw_distribution": {
+    "A": 9,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "OTHER": 11,
+    "EMPTY": 0
+  },
+  "base_full_parsed_distribution": {
+    "A": 20,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "UNKNOWN": 0
+  },
+  "lora_full_parsed_distribution": {
+    "A": 20,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "UNKNOWN": 0
+  },
+  "base_sliced_parsed_distribution": {
+    "A": 20,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "UNKNOWN": 0
+  },
+  "lora_sliced_parsed_distribution": {
+    "A": 20,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "UNKNOWN": 0
+  },
+  "config_audit": {
+    "model_id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "model_class": "SmolVLMForConditionalGeneration",
+    "processor_class": "Idefics3Processor",
+    "do_image_splitting": false,
+    "max_new_tokens": 15,
+    "do_sample": false,
+    "prompt_structure": "<image>\\nQuestion: ...\\nOptions:\\nA. ...\\nB. ...\\nC. ...\\nD. ...\\nAnswer:",
+    "prompt_contains_option_A": true,
+    "bug_mechanism": "processor.batch_decode(generated_ids) decodes prompt tokens containing 'Options:\\nA.'. Checking 'if \"A\" in full_decoded' matches 'A.' inside the prompt string for 100% of questions."
+  },
+  "representative_examples": [
+    {
+      "question": "Which architectural element is most prominently visible in gallery photograph #1?",
+      "gold": "A",
+      "raw_base_output": "'A\\nB. Divided by stone masonry\\nC. Divided by'",
+      "parsed_base_legacy": "A",
+      "parsed_base_sliced": "A",
+      "raw_lora_output": "'A\\nB. Divided by stone masonry\\nC. Divided by'",
+      "parsed_lora_legacy": "A",
+      "parsed_lora_sliced": "A"
+    },
+    {
+      "question": "Which geometric or construction element is visually observable in this picture #5?",
+      "gold": "A",
+      "raw_base_output": "'A\\nB. C. D. D. D. D. D'",
+      "parsed_base_legacy": "A",
+      "parsed_base_sliced": "A",
+      "raw_lora_output": "'A\\nB. C. D. D. D. D. D'",
+      "parsed_lora_legacy": "A",
+      "parsed_lora_sliced": "A"
+    },
+    {
+      "question": "Which architectural geometry characterizes the scene captured in photo #9?",
+      "gold": "A",
+      "raw_base_output": "'A'",
+      "parsed_base_legacy": "A",
+      "parsed_base_sliced": "A",
+      "raw_lora_output": "'A'",
+      "parsed_lora_legacy": "A",
+      "parsed_lora_sliced": "A"
+    },
+    {
+      "question": "Which carved or built feature characterizes the monument shown in photo #13?",
+      "gold": "A",
+      "raw_base_output": "'A.\\n\\nHow can one tell by the image alone?\\nA'",
+      "parsed_base_legacy": "A",
+      "parsed_base_sliced": "A",
+      "raw_lora_output": "'A.\\n\\nHow can one tell by the image alone?\\nA'",
+      "parsed_lora_legacy": "A",
+      "parsed_lora_sliced": "A"
+    },
+    {
+      "question": "Which type of opening, arch, or bastion is visible in this photograph (#17)?",
+      "gold": "A",
+      "raw_base_output": "'D\\n\\nQuestion: What is the name of the cave?\\nAnswer'",
+      "parsed_base_legacy": "A",
+      "parsed_base_sliced": "A",
+      "raw_lora_output": "'D\\n\\nQuestion: What is the name of the cave?\\nAnswer'",
+      "parsed_lora_legacy": "A",
+      "parsed_lora_sliced": "A"
+    }
+  ]
+}

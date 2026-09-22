@@ -1,0 +1,54 @@
+[
+  {
+    "annotation_id": "Ele0005_img_001_q001",
+    "site_id": "Ele0005",
+    "site_name": "Elephanta Cave",
+    "question_type": "image",
+    "category": "Sculpture/Relief",
+    "image_url": "https://res.cloudinary.com/dscwv82o2/image/upload/v1764047184/sites/z2pn9x9xls5oaqnbt5k7.jpg",
+    "cloudinary_public_id": "sites/z2pn9x9xls5oaqnbt5k7",
+    "gallery_index": 0,
+    "question": "Which monumental 20-foot relief sculpture is visible in the main sanctum wall in this photograph of Elephanta Cave?",
+    "options": [
+      "The Trimurti (Three-headed Sadashiva) representing creator, preserver, and destroyer aspects",
+      "Standing Buddha in Abhaya mudra",
+      "Jain Tirthankara Bahubali colossus",
+      "Dancing Nataraja in a circle of flames"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The background of the cavernous pillared hall displays the famous three-headed Trimurti colossal relief.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "The Trimurti (Three-headed Sadashiva) representing creator, preserver, and destroyer aspects"
+    }
+  },
+  {
+    "annotation_id": "Ele0005_img_001_q002",
+    "site_id": "Ele0005",
+    "site_name": "Elephanta Cave",
+    "question_type": "image",
+    "category": "Pillars/Columns",
+    "image_url": "https://res.cloudinary.com/dscwv82o2/image/upload/v1764047184/sites/z2pn9x9xls5oaqnbt5k7.jpg",
+    "cloudinary_public_id": "sites/z2pn9x9xls5oaqnbt5k7",
+    "gallery_index": 0,
+    "question": "What architectural style defines the cave pillars visible supporting the ceiling in this Elephanta photograph?",
+    "options": [
+      "Slender wooden posts with brass trim",
+      "Massive square stone pillars with fluted cushion (amalaka) capitals resting on raised plinths",
+      "Polished red sandstone pillars",
+      "Concrete hexagonal columns"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The rock-cut interior features square pillars topped with ribbed, cushion-shaped amalaka capitals.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Massive square stone pillars with fluted cushion (amalaka) capitals resting on raised plinths"
+    }
+  }
+]

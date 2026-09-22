@@ -1,0 +1,50 @@
+[
+  {
+    "annotation_id": "v2_db_Aja0003_text_003",
+    "flag": "Correct option is >1.5x longer than mean distractor.",
+    "c_len": 123,
+    "mean_d": 81.66666666666667
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_text_005",
+    "flag": "Correct option is >1.5x longer than mean distractor.",
+    "c_len": 135,
+    "mean_d": 87.0
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_002",
+    "flag": "Correct option is >1.5x longer than mean distractor.",
+    "c_len": 60,
+    "mean_d": 34.666666666666664
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_003",
+    "flag": "Correct option is >1.5x longer than mean distractor.",
+    "c_len": 54,
+    "mean_d": 31.666666666666668
+  },
+  {
+    "annotation_id": "v2_db_Aja0003_img_005",
+    "flag": "Correct option is >1.5x longer than mean distractor.",
+    "c_len": 53,
+    "mean_d": 34.666666666666664
+  },
+  {
+    "annotation_id": "v2_db_Fort0002_text_001",
+    "flag": "Correct option is >1.5x longer than mean distractor.",
+    "c_len": 27,
+    "mean_d": 16.333333333333332
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_text_005",
+    "flag": "Correct option is >1.5x longer than mean distractor.",
+    "c_len": 131,
+    "mean_d": 86.33333333333333
+  },
+  {
+    "annotation_id": "v2_db_Fort0005_img_001",
+    "flag": "Correct option is >1.5x longer than mean distractor.",
+    "c_len": 87,
+    "mean_d": 57.333333333333336
+  }
+]

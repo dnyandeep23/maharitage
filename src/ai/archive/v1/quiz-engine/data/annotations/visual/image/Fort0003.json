@@ -1,0 +1,106 @@
+[
+  {
+    "annotation_id": "Fort0003_img_001_q001",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245009/Daulatabad_Fort_llhfkr.jpg",
+    "cloudinary_public_id": "Daulatabad_Fort_llhfkr",
+    "gallery_index": 0,
+    "question": "Which famous tall monumental tower is visible standing near the base of the conical fort hill in this photograph?",
+    "options": [
+      "Chand Minar (The 210-foot pinkish-red victory minaret)",
+      "Hirkani Buruj",
+      "Kalaram Temple Spire",
+      "Balle Killa Tower"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph prominently displays the tall cylindrical Chand Minar victory tower with balcony bands.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Chand Minar (The 210-foot pinkish-red victory minaret)"
+    }
+  },
+  {
+    "annotation_id": "Fort0003_img_002_q002",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245009/main_yxekvh.jpg",
+    "cloudinary_public_id": "main_yxekvh",
+    "gallery_index": 1,
+    "question": "What structural entrance design is depicted in photograph 'main_yxekvh' of Devgiri Fort (Daulatabad Fort)?",
+    "options": [
+      "An unfortified wooden gate post",
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Devgiri Fort (Daulatabad Fort).",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0003_img_003_q003",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245007/Daulatabad__Aurangabad_-_panoramio__106_oypjrt.jpg",
+    "cloudinary_public_id": "Daulatabad__Aurangabad_-_panoramio__106_oypjrt",
+    "gallery_index": 2,
+    "question": "What structural entrance design is depicted in photograph 'Daulatabad__Aurangabad_-_panoramio__106_oypjrt' of Devgiri Fort (Daulatabad Fort)?",
+    "options": [
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Devgiri Fort (Daulatabad Fort).",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0003_img_004_q004",
+    "site_id": "Fort0003",
+    "site_name": "Devgiri Fort (Daulatabad Fort)",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245008/Daulatabad_Fort-51_gsjvsm.jpg",
+    "cloudinary_public_id": "Daulatabad_Fort-51_gsjvsm",
+    "gallery_index": 3,
+    "question": "What defensive system is visible in this structural view of Daulatabad Fort?",
+    "options": [
+      "A single square wooden palisade",
+      "An unfortified open orchard pathway",
+      "A single low brick retaining wall",
+      "Triple concentric fortification walls (Amberkot, Mahakot, and Kalakot) with staggered gateways"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photo reveals multiple successive stone defensive walls and arched gateways designed to entrap invaders.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[3]",
+      "value": "Triple concentric fortification walls (Amberkot, Mahakot, and Kalakot) with staggered gateways"
+    }
+  }
+]

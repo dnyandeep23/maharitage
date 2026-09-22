@@ -1,0 +1,25 @@
+{
+  "dataset": "V2 Pilot Annotation Dataset - MongoDB Grounded",
+  "total_questions": 50,
+  "sites_selected": [
+    "Aja0003",
+    "Kan0004",
+    "Fort0005",
+    "Fort0002",
+    "Ell0001"
+  ],
+  "images_inspected": 97,
+  "images_accepted": 97,
+  "images_rejected": 0,
+  "types": {
+    "TEXT_MCQ": 25,
+    "IMAGE_MCQ": 25
+  },
+  "difficulty_distribution": {
+    "EASY": 13,
+    "MODERATE": 23,
+    "HARD": 14
+  },
+  "source_summary": "Generated directly from MongoDB Site collection and validated Cloudinary URLs. No V1 data used.",
+  "status": "AUTO_VALIDATED"
+}

@@ -1,0 +1,385 @@
+[
+  {
+    "image_id": "Pit0002_img_0",
+    "site_id": "Pit0002",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761693536/IMG20251020094702-min_uf4vao.jpg",
+    "status": "FAILED_QUOTA",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": "2026-08-17T09:34:51.448Z",
+    "error": "429 Too Many Requests",
+    "retry_count": 1
+  },
+  {
+    "image_id": "Pit0002_img_1",
+    "site_id": "Pit0002",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761693546/IMG20251020094940_01-min_ad0pze.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0001_img_0",
+    "site_id": "Fort0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Nagarkhana__Raigad_Fort__India_timvhn.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0001_img_1",
+    "site_id": "Fort0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777241759/Inscripted_name_of_the_architect_of_Raigad_zc3y3n.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0003_img_0",
+    "site_id": "Fort0003",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245009/Daulatabad_Fort_llhfkr.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0003_img_1",
+    "site_id": "Fort0003",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777245009/main_yxekvh.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Ell0001_img_0",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "status": "COMPLETE",
+    "candidates_generated": 12,
+    "accepted": 6,
+    "rejected": 6,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0,
+    "text_status": "COMPLETE"
+  },
+  {
+    "image_id": "Ell0001_img_1",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670797/IMG_20251028_222042_dmi8uw.jpg",
+    "status": "COMPLETE",
+    "candidates_generated": 12,
+    "accepted": 6,
+    "rejected": 6,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0005_img_0",
+    "site_id": "Fort0005",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288074/fort_outside_j7tjmf.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0005_img_1",
+    "site_id": "Fort0005",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777288516/IMG20260418124647_sg8rmj.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0004_img_0",
+    "site_id": "Fort0004",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/fort_kpwust.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0004_img_1",
+    "site_id": "Fort0004",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777280992/wall_dml4fo.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Ele0005_img_0",
+    "site_id": "Ele0005",
+    "image_url": "https://res.cloudinary.com/dscwv82o2/image/upload/v1764047184/sites/z2pn9x9xls5oaqnbt5k7.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0002_img_0",
+    "site_id": "Fort0002",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242472/Pali_darvaja_ggndvg.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Fort0002_img_1",
+    "site_id": "Fort0002",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242472/Sanjavni_machi_kiadaf.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Kan0004_img_0",
+    "site_id": "Kan0004",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/Kanheri_Caves_prayer_hall_bcuyot.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Kan0004_img_1",
+    "site_id": "Kan0004",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761751258/500px-Kanheri_caves_05_qdbr9l.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Aja0003_img_0",
+    "site_id": "Aja0003",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/cave17_qckcsr.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Aja0003_img_1",
+    "site_id": "Aja0003",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761731374/caveimage_rzplhc.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "last_attempt": null,
+    "error": null,
+    "retry_count": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_001",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670713/IMG20251022120741_kbusjk.jpg",
+    "local_file": "image/Ell0001/img_001.jpg",
+    "status": "COMPLETE",
+    "candidates_generated": 4
+  },
+  {
+    "image_id": "Ell0001_img_img_002",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670797/IMG_20251028_222042_dmi8uw.jpg",
+    "local_file": "image/Ell0001/img_002.jpg",
+    "status": "COMPLETE",
+    "candidates_generated": 6
+  },
+  {
+    "image_id": "Ell0001_img_img_003",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761670572/IMG20251022120323_p0dple.jpg",
+    "local_file": "image/Ell0001/img_003.jpg",
+    "status": "COMPLETE",
+    "candidates_generated": 4
+  },
+  {
+    "image_id": "Ell0001_img_img_004",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676763/IMG20251022123019_m33tuw.jpg",
+    "local_file": "image/Ell0001/img_004.jpg",
+    "status": "COMPLETE",
+    "candidates_generated": 6
+  },
+  {
+    "image_id": "Ell0001_img_img_005",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676689/IMG20251022124327_gazbk8.jpg",
+    "local_file": "image/Ell0001/img_005.jpg",
+    "status": "COMPLETE",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_006",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676631/IMG20251022124150_skf9qi.jpg",
+    "local_file": "image/Ell0001/img_006.jpg",
+    "status": "FAILED_QUOTA",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_007",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676598/IMG20251022132830_smf1wd.jpg",
+    "local_file": "image/Ell0001/img_007.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_008",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676584/IMG20251022131500_qvljcm.jpg",
+    "local_file": "image/Ell0001/img_008.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_009",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676568/IMG20251022131509_pnpr4j.jpg",
+    "local_file": "image/Ell0001/img_009.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_010",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676519/IMG20251022131906_tf38n5.jpg",
+    "local_file": "image/Ell0001/img_010.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_011",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676498/IMG20251022132835_khcu2p.jpg",
+    "local_file": "image/Ell0001/img_011.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_012",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761676464/IMG20251022124648_fs5cct.jpg",
+    "local_file": "image/Ell0001/img_012.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_013",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675821/IMG20251022115704_fvpoj3.jpg",
+    "local_file": "image/Ell0001/img_013.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_014",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761675522/IMG20251022113451_is5pxe.jpg",
+    "local_file": "image/Ell0001/img_014.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_015",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761642273/_CAV3208_-_12_bdqp81.jpg",
+    "local_file": "image/Ell0001/img_015.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_016",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3209-12_djnckc.jpg",
+    "local_file": "image/Ell0001/img_016.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_017",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3210-12_cmcl1x.jpg",
+    "local_file": "image/Ell0001/img_017.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "image_id": "Ell0001_img_img_018",
+    "site_id": "Ell0001",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761666339/_CAV3211-12_mchavi.jpg",
+    "local_file": "image/Ell0001/img_018.jpg",
+    "status": "PENDING",
+    "candidates_generated": 0
+  },
+  {
+    "site_id": "Ell0001",
+    "type": "TEXT_TRACKER",
+    "completed_batches": [
+      "ARCHITECTURAL",
+      "CULTURAL_RELIGIOUS",
+      "INSCRIPTION",
+      "COMPARATIVE_REASONING"
+    ]
+  }
+]

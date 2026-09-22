@@ -1,0 +1,132 @@
+[
+  {
+    "annotation_id": "Fort0002_img_001_q001",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242472/Pali_darvaja_ggndvg.jpg",
+    "cloudinary_public_id": "Pali_darvaja_ggndvg",
+    "gallery_index": 0,
+    "question": "Which historic gateway of Rajgad Fort is depicted in this photograph?",
+    "options": [
+      "Pali Darwaza (Main Fortified Gateway)",
+      "Maha Darwaza of Raigad Fort",
+      "Naane Darwaza",
+      "Ghorpad Darwaza"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph displays the monumental stone gateway structure of Pali Darwaza with bastions flanking the entrance approach.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Pali Darwaza (Main Fortified Gateway)"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_001_q002",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242472/Pali_darvaja_ggndvg.jpg",
+    "cloudinary_public_id": "Pali_darvaja_ggndvg",
+    "gallery_index": 0,
+    "question": "What defensive architectural feature is visible at this gateway in the photograph?",
+    "options": [
+      "A modern steel turnstile gate",
+      "Flanking defensive stone bastions designed to create a protected narrow entrance approach",
+      "An open unfortified archway with no side walls",
+      "A wooden palisade fence"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "Massive stone bastions flank the gateway on both sides to cover the entering pathway.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[0]",
+      "value": "Flanking defensive stone bastions designed to create a protected narrow entrance approach"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_002_q003",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242472/Sanjavni_machi_kiadaf.jpg",
+    "cloudinary_public_id": "Sanjavni_machi_kiadaf",
+    "gallery_index": 1,
+    "question": "What structural entrance design is depicted in photograph 'Sanjavni_machi_kiadaf' of Rajgad Fort?",
+    "options": [
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Rajgad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[1]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_003_q004",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Architectural Feature",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242473/Suvela_machi_Rajgad_fort__Maharashtra_India_July2015_qlmfad.jpg",
+    "cloudinary_public_id": "Suvela_machi_Rajgad_fort__Maharashtra_India_July2015_qlmfad",
+    "gallery_index": 2,
+    "question": "What unique natural and architectural feature is visible along the ridge of Suvela Machi in this photograph?",
+    "options": [
+      "A broad open parade ground with concrete barracks",
+      "A circular sea moat filled with saltwater",
+      "A subterranean stone tunnel complex",
+      "A narrow fortified ridge leading towards a natural circular hole in the rock cliff (Nedhe)"
+    ],
+    "correct_option_index": 3,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows the long, narrow fortified arm (machi) culminating near the natural rock eye-hole known as Nedhe.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[2]",
+      "value": "A narrow fortified ridge leading towards a natural circular hole in the rock cliff (Nedhe)"
+    }
+  },
+  {
+    "annotation_id": "Fort0002_img_006_q005",
+    "site_id": "Fort0002",
+    "site_name": "Rajgad Fort",
+    "question_type": "image",
+    "category": "Entrance/Façade",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1777242715/Ballekilla__Rajgad_oqpcne.jpg",
+    "cloudinary_public_id": "Ballekilla__Rajgad_oqpcne",
+    "gallery_index": 5,
+    "question": "What structural entrance design is depicted in photograph 'Ballekilla__Rajgad_oqpcne' of Rajgad Fort?",
+    "options": [
+      "Fortified stone gateway flanked by heavy masonry bastions",
+      "An unfortified wooden gate post",
+      "A modern steel roll-up door",
+      "A low brick garden archway"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question asks about visually observable physical elements in the photograph.",
+    "visual_evidence": "The photograph shows a heavy stone gateway flanked by defensive bastions at Rajgad Fort.",
+    "source": {
+      "type": "cloudinary",
+      "field": "gallary[5]",
+      "value": "Fortified stone gateway flanked by heavy masonry bastions"
+    }
+  }
+]

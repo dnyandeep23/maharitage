@@ -1,0 +1,1522 @@
+[
+  {
+    "annotation_id": "Fort0004_text_001",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "In which district of Maharashtra is Sindhudurg Fort located?",
+    "options": [
+      "Sindhudurg",
+      "Satara",
+      "Raigad",
+      "Solapur"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "location.district",
+      "value": "Sindhudurg"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_002",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "Which district serves as the administrative region for Sindhudurg Fort?",
+    "options": [
+      "Raigad",
+      "Sindhudurg",
+      "Pune",
+      "Solapur"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "location.district",
+      "value": "Sindhudurg"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_003",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "Sindhudurg Fort is situated in which district?",
+    "options": [
+      "Pune",
+      "Raigad",
+      "Sindhudurg",
+      "Nashik"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "location.district",
+      "value": "Sindhudurg"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_004",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "In which Indian state is Sindhudurg Fort located?",
+    "options": [
+      "Gujarat",
+      "Rajasthan",
+      "Madhya Pradesh",
+      "Maharashtra"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "location.state",
+      "value": "Maharashtra"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_005",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "Sindhudurg Fort is part of which state in India?",
+    "options": [
+      "Maharashtra",
+      "Karnataka",
+      "Gujarat",
+      "Rajasthan"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "location.state",
+      "value": "Maharashtra"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_006",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "In which country is Sindhudurg Fort located?",
+    "options": [
+      "Nepal",
+      "India",
+      "Pakistan",
+      "Myanmar"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "location.country",
+      "value": "India"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_007",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "In which geographical region of Maharashtra is Sindhudurg Fort situated?",
+    "options": [
+      "Vidarbha",
+      "Konkan",
+      "Konkan (Arabian Sea coast)",
+      "Marathwada"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "location.region",
+      "value": "Konkan (Arabian Sea coast)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_008",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "Sindhudurg Fort falls under which region of Maharashtra?",
+    "options": [
+      "Western Ghats",
+      "Marathwada",
+      "Vidarbha",
+      "Konkan (Arabian Sea coast)"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "location.region",
+      "value": "Konkan (Arabian Sea coast)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_009",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "What type of terrain or landform characterizes Sindhudurg Fort?",
+    "options": [
+      "Sea Fort (Island Fort)",
+      "Plateau",
+      "Sea Fort",
+      "Mountain Pass"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "location.terrain",
+      "value": "Sea Fort (Island Fort)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_010",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "How is the terrain of Sindhudurg Fort classified?",
+    "options": [
+      "Mountain Pass",
+      "Sea Fort (Island Fort)",
+      "Plateau",
+      "Coastal Island"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "location.terrain",
+      "value": "Sea Fort (Island Fort)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_011",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Location",
+    "question": "What is the approximate latitude of Sindhudurg Fort?",
+    "options": [
+      "Ratnagiri",
+      "Nepal",
+      "16.0393",
+      "Pakistan"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "location.latitude",
+      "value": "16.0393"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_013",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "What is the official heritage classification of Sindhudurg Fort?",
+    "options": [
+      "Island Fortress",
+      "Hill Fort",
+      "Plateau Fort",
+      "Sea Fort (Island)"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "heritage_type",
+      "value": "Sea Fort (Island)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_014",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "Sindhudurg Fort is classified as what type of heritage monument?",
+    "options": [
+      "Sea Fort (Island)",
+      "Hill Fort",
+      "Cave Temple",
+      "Ancient University"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "heritage_type",
+      "value": "Sea Fort (Island)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_015",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "What heritage category does Sindhudurg Fort belong to?",
+    "options": [
+      "Cave Temple",
+      "Sea Fort (Island)",
+      "Sea Fort",
+      "Jain Rock-Cut Shrine"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "heritage_type",
+      "value": "Sea Fort (Island)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_016",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Classification",
+    "question": "What broad monument category does Sindhudurg Fort fall under?",
+    "options": [
+      "Cave Temple",
+      "Ancient University",
+      "fort",
+      "Hill Fort"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "h_type",
+      "value": "fort"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_017",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "What historical period is associated with Sindhudurg Fort?",
+    "options": [
+      "15th–17th Century CE",
+      "2nd Century BCE – 480 CE",
+      "1656–1674 CE",
+      "17th Century CE"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "period",
+      "value": "17th Century CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_018",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "During which era was Sindhudurg Fort primarily active?",
+    "options": [
+      "17th Century CE",
+      "8th Century CE",
+      "3rd Century BCE",
+      "19th Century CE"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "period",
+      "value": "17th Century CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_019",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "What time period defines the major phase of Sindhudurg Fort?",
+    "options": [
+      "8th Century CE",
+      "17th Century CE",
+      "1818 CE",
+      "19th Century CE"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "period",
+      "value": "17th Century CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_020",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "What is the approximate date of major construction or activity at Sindhudurg Fort?",
+    "options": [
+      "12th Century CE",
+      "3rd Century BCE",
+      "1664–1667 CE",
+      "8th Century CE"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.approx_date",
+      "value": "1664–1667 CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_021",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "When was the major phase of development at Sindhudurg Fort?",
+    "options": [
+      "8th Century CE",
+      "5th–10th Century CE",
+      "15th–17th Century CE",
+      "1664–1667 CE"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.approx_date",
+      "value": "1664–1667 CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_022",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Which ruler or dynasty is primarily associated with Sindhudurg Fort?",
+    "options": [
+      "Maratha Empire",
+      "Mughal Empire",
+      "Vakataka Dynasty",
+      "Chhatrapati Shivaji Maharaj"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.ruler_or_dynasty",
+      "value": "Maratha Empire"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_023",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Under whose patronage did Sindhudurg Fort flourish?",
+    "options": [
+      "Rashtrakuta Dynasty",
+      "Maratha Empire",
+      "King Harishena",
+      "Yadava Dynasty"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.ruler_or_dynasty",
+      "value": "Maratha Empire"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_024",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Which dynasty played a central role in the history of Sindhudurg Fort?",
+    "options": [
+      "Chalukya Dynasty",
+      "Rashtrakuta Dynasty",
+      "Maratha Empire",
+      "King Harishena"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.ruler_or_dynasty",
+      "value": "Maratha Empire"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_025",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Cultural Significance",
+    "question": "What is the cultural significance of Sindhudurg Fort?",
+    "options": [
+      "Strategic military stronghold",
+      "Masterpiece of religious art",
+      "Trade route fortress",
+      "Epitome of Shivaji Maharaj's naval vision; foundation of Maratha naval power"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.cultural_significance",
+      "value": "Epitome of Shivaji Maharaj's naval vision; foundation of Maratha naval power"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_026",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Cultural Significance",
+    "question": "Why is Sindhudurg Fort considered culturally important?",
+    "options": [
+      "Epitome of Shivaji Maharaj's naval vision; foundation of Maratha naval power",
+      "Masterpiece of religious art",
+      "UNESCO World Heritage Site",
+      "Trade route fortress"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.cultural_significance",
+      "value": "Epitome of Shivaji Maharaj's naval vision; foundation of Maratha naval power"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_027",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "What was the original historical name of Sindhudurg Fort?",
+    "options": [
+      "King Harishena",
+      "Sindhudurg",
+      "Yadava Dynasty",
+      "British East India Company"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.original_name",
+      "value": "Sindhudurg"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_028",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Before being renamed, Sindhudurg Fort was known as what?",
+    "options": [
+      "Chalukya Dynasty",
+      "Vakataka Dynasty",
+      "Sindhudurg",
+      "King Harishena"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.original_name",
+      "value": "Sindhudurg"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_029",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Who constructed or significantly rebuilt Sindhudurg Fort?",
+    "options": [
+      "Chhatrapati Shivaji Maharaj",
+      "King Harishena",
+      "Aurangzeb",
+      "Chhatrapati Shivaji Maharaj; construction supervised by Hiroji Indulkar"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.constructed_by",
+      "value": "Chhatrapati Shivaji Maharaj; construction supervised by Hiroji Indulkar"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_030",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Sindhudurg Fort was built or expanded by whom?",
+    "options": [
+      "Chhatrapati Shivaji Maharaj; construction supervised by Hiroji Indulkar",
+      "Satavahana Dynasty",
+      "Vakataka Dynasty",
+      "Aurangzeb"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.constructed_by",
+      "value": "Chhatrapati Shivaji Maharaj; construction supervised by Hiroji Indulkar"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_031",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "What political role did Sindhudurg Fort serve in its era?",
+    "options": [
+      "Aurangzeb",
+      "Naval headquarters; defense against Portuguese, British, and Siddi fleets",
+      "Chhatrapati Shivaji Maharaj",
+      "Yadava Dynasty"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.political_role",
+      "value": "Naval headquarters; defense against Portuguese, British, and Siddi fleets"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_032",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Historically, Sindhudurg Fort functioned as what kind of political center?",
+    "options": [
+      "Emperor Ashoka",
+      "Chhatrapati Shivaji Maharaj",
+      "Naval headquarters; defense against Portuguese, British, and Siddi fleets",
+      "Chalukya Dynasty"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.political_role",
+      "value": "Naval headquarters; defense against Portuguese, British, and Siddi fleets"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_033",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Authority",
+    "question": "Which national authority or organization protects and maintains Sindhudurg Fort?",
+    "options": [
+      "Indian Navy",
+      "Maharashtra State Archaeology Department",
+      "UNESCO World Heritage Centre",
+      "Archaeological Survey of India, UNESCO World Heritage Centre"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "verification_authority",
+      "value": "Archaeological Survey of India, UNESCO World Heritage Centre"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_034",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Authority",
+    "question": "Who is responsible for the curation and preservation of Sindhudurg Fort?",
+    "options": [
+      "Archaeological Survey of India, UNESCO World Heritage Centre",
+      "Archaeological Survey of India",
+      "Forest Department of Maharashtra",
+      "UNESCO World Heritage Centre"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "verification_authority",
+      "value": "Archaeological Survey of India, UNESCO World Heritage Centre"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_035",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Which historical or religious figures are associated with Sindhudurg Fort?",
+    "options": [
+      "Satavahana Dynasty",
+      "Chhatrapati Shivaji Maharaj, Hiroji Indulkar (chief architect), Kanhoji Angre (later commander)",
+      "Chhatrapati Shivaji Maharaj",
+      "Maratha Empire"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.related_figures",
+      "value": "Chhatrapati Shivaji Maharaj, Hiroji Indulkar (chief architect), Kanhoji Angre (later commander)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_036",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Is Chhatrapati Shivaji Maharaj historically connected to Sindhudurg Fort?",
+    "options": [
+      "Satavahana Dynasty",
+      "Chalukya Dynasty",
+      "Yes, Chhatrapati Shivaji Maharaj is associated with Sindhudurg Fort",
+      "Yadava Dynasty"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.related_figures",
+      "value": "Chhatrapati Shivaji Maharaj"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_037",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Is Hiroji Indulkar (chief architect) historically connected to Sindhudurg Fort?",
+    "options": [
+      "Malik Ambar",
+      "Vakataka Dynasty",
+      "King Harishena",
+      "Yes, Hiroji Indulkar (chief architect) is associated with Sindhudurg Fort"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.related_figures",
+      "value": "Hiroji Indulkar (chief architect)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_038",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Context",
+    "question": "Is Kanhoji Angre (later commander) historically connected to Sindhudurg Fort?",
+    "options": [
+      "Yes, Kanhoji Angre (later commander) is associated with Sindhudurg Fort",
+      "Mughal Empire",
+      "Aurangzeb",
+      "Yadava Dynasty"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_context.related_figures",
+      "value": "Kanhoji Angre (later commander)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_039",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "During the period 1667–1818 CE, which power controlled Sindhudurg Fort?",
+    "options": [
+      "2nd Century BCE – 480 CE",
+      "Maratha Empire",
+      "5th–10th Century CE",
+      "1818 CE"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "ruling_powers_chronology",
+      "value": "Maratha Empire (1667–1818 CE)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_040",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "In which period did Maratha Empire control Sindhudurg Fort?",
+    "options": [
+      "17th Century CE",
+      "1818 CE",
+      "1667–1818 CE",
+      "19th Century CE"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "ruling_powers_chronology",
+      "value": "Maratha Empire (1667–1818 CE)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_042",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "In which period did British East India Company control Sindhudurg Fort?",
+    "options": [
+      "1818 CE",
+      "8th Century CE",
+      "2nd Century BCE – 480 CE",
+      "1818-1947 CE"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "ruling_powers_chronology",
+      "value": "British East India Company (1818-1947 CE)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_043",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "In which year did the event \"Foundation laying\" occur at Sindhudurg Fort?",
+    "options": [
+      "1664 CE",
+      "Fort construction",
+      "Treaty signing",
+      "Rediscovery by British officers"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events",
+      "value": "Foundation laying (1664 CE)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_044",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "What significant event happened at Sindhudurg Fort in 1664 CE?",
+    "options": [
+      "Rediscovery by British officers",
+      "Foundation laying",
+      "Treaty signing",
+      "Fort construction"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events",
+      "value": "Foundation laying (1664 CE)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_045",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "What is the description of the event \"Foundation laying\" at Sindhudurg Fort?",
+    "options": [
+      "Fort construction",
+      "Siege and capture",
+      "Chhatrapati Shivaji Maharaj laid the foundation; embedded his handprint and footprint in the wall",
+      "Rediscovery by British officers"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events",
+      "value": "Chhatrapati Shivaji Maharaj laid the foundation; embedded his handprint and footprint in the wall"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_048",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "What is the description of the event \"Construction completed\" at Sindhudurg Fort?",
+    "options": [
+      "Battle between rival kingdoms",
+      "Coronation ceremony",
+      "Siege and capture",
+      "Fort completed using iron, lead, and lime mortar for sea-resistant construction"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events",
+      "value": "Fort completed using iron, lead, and lime mortar for sea-resistant construction"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_049",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "In which year did the event \"Kanhoji Angre's command\" occur at Sindhudurg Fort?",
+    "options": [
+      "Early 18th century CE",
+      "Fort construction",
+      "Treaty signing",
+      "Battle between rival kingdoms"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events",
+      "value": "Kanhoji Angre's command (Early 18th century CE)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_050",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "What significant event happened at Sindhudurg Fort in Early 18th century CE?",
+    "options": [
+      "Coronation ceremony",
+      "Kanhoji Angre's command",
+      "Rediscovery by British officers",
+      "Fort construction"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events",
+      "value": "Kanhoji Angre's command (Early 18th century CE)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_051",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "What is the description of the event \"Kanhoji Angre's command\" at Sindhudurg Fort?",
+    "options": [
+      "Siege and capture",
+      "Treaty signing",
+      "Admiral Kanhoji Angre used Sindhudurg as a key base for Maratha naval operations against Europeans",
+      "Fort construction"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events",
+      "value": "Admiral Kanhoji Angre used Sindhudurg as a key base for Maratha naval operations against Europeans"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_052",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What is the name of the Concealed Entrance at Sindhudurg Fort described as: \"Primary entry gate of the fort, designed with a concealed approach path hidden b...\"?",
+    "options": [
+      "Yadava Dynasty",
+      "Vakataka Dynasty",
+      "Mughal Empire",
+      "Main Sea Gate"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.entrances",
+      "value": "Main Sea Gate"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_053",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What type of structure is Main Sea Gate at Sindhudurg Fort?",
+    "options": [
+      "Concealed Entrance",
+      "Satavahana Dynasty",
+      "Maratha Empire",
+      "Chalukya Dynasty"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.entrances",
+      "value": "Concealed Entrance"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_054",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What strategic role does Main Sea Gate serve at Sindhudurg Fort?",
+    "options": [
+      "British East India Company",
+      "Controlled and hidden access point to prevent direct enemy entry from the coastline",
+      "Chalukya Dynasty",
+      "Vakataka Dynasty"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.entrances",
+      "value": "Controlled and hidden access point to prevent direct enemy entry from the coastline"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_055",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "How is Main Sea Gate at Sindhudurg Fort described?",
+    "options": [
+      "Malik Ambar",
+      "Yadava Dynasty",
+      "Primary entry gate of the fort, designed with a concealed approach path hidden by projecting walls to confuse attackers arriving from the sea",
+      "Rashtrakuta Dynasty"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.entrances",
+      "value": "Primary entry gate of the fort, designed with a concealed approach path hidden by projecting walls to confuse attackers arriving from the sea"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_056",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "To which period does Main Sea Gate at Sindhudurg Fort date?",
+    "options": [
+      "8th Century CE",
+      "15th–17th Century CE",
+      "19th Century CE",
+      "17th Century CE (Maratha period under Chhatrapati Shivaji Maharaj)"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.entrances",
+      "value": "17th Century CE (Maratha period under Chhatrapati Shivaji Maharaj)"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_057",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What is the name of the bastions at Sindhudurg Fort described as: \"Series of 52 bastions distributed along the outer fort wall providing all-round ...\"?",
+    "options": [
+      "Perimeter Bastions",
+      "British East India Company",
+      "Yadava Dynasty",
+      "Rashtrakuta Dynasty"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.bastions",
+      "value": "Perimeter Bastions"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_058",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What strategic role does Perimeter Bastions serve at Sindhudurg Fort?",
+    "options": [
+      "Maratha Empire",
+      "Continuous defensive coverage against naval attacks",
+      "Rashtrakuta Dynasty",
+      "Chalukya Dynasty"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.bastions",
+      "value": "Continuous defensive coverage against naval attacks"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_059",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "How is Perimeter Bastions at Sindhudurg Fort described?",
+    "options": [
+      "Mughal Empire",
+      "Vakataka Dynasty",
+      "Series of 52 bastions distributed along the outer fort wall providing all-round defense",
+      "Chhatrapati Shivaji Maharaj"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.bastions",
+      "value": "Series of 52 bastions distributed along the outer fort wall providing all-round defense"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_060",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What is the name of the Natural water source at Sindhudurg Fort described as: \"Three freshwater wells located within the fort despite being surrounded by seawa...\"?",
+    "options": [
+      "Chalukya Dynasty",
+      "Chhatrapati Shivaji Maharaj",
+      "Vakataka Dynasty",
+      "Freshwater Wells"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.water_management",
+      "value": "Freshwater Wells"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_061",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What type of structure is Freshwater Wells at Sindhudurg Fort?",
+    "options": [
+      "Natural water source",
+      "Vakataka Dynasty",
+      "British East India Company",
+      "Aurangzeb"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.water_management",
+      "value": "Natural water source"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_062",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "How is Freshwater Wells at Sindhudurg Fort described?",
+    "options": [
+      "Yadava Dynasty",
+      "Three freshwater wells located within the fort despite being surrounded by seawater",
+      "Aurangzeb",
+      "Rashtrakuta Dynasty"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.water_management",
+      "value": "Three freshwater wells located within the fort despite being surrounded by seawater"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_063",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What is the name of the Religious Structure at Sindhudurg Fort described as: \"Temple dedicated to Chhatrapati Shivaji Maharaj, where he is worshipped as the m...\"?",
+    "options": [
+      "Vakataka Dynasty",
+      "Rashtrakuta Dynasty",
+      "Shivaji Maharaj Temple",
+      "King Harishena"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.structures",
+      "value": "Shivaji Maharaj Temple"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_064",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What type of structure is Shivaji Maharaj Temple at Sindhudurg Fort?",
+    "options": [
+      "Maratha Empire",
+      "Satavahana Dynasty",
+      "Yadava Dynasty",
+      "Religious Structure"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.structures",
+      "value": "Religious Structure"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_065",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "How is Shivaji Maharaj Temple at Sindhudurg Fort described?",
+    "options": [
+      "Temple dedicated to Chhatrapati Shivaji Maharaj, where he is worshipped as the main deity",
+      "Vakataka Dynasty",
+      "Satavahana Dynasty",
+      "Aurangzeb"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.structures",
+      "value": "Temple dedicated to Chhatrapati Shivaji Maharaj, where he is worshipped as the main deity"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_066",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What is the name of the Cultural Marking at Sindhudurg Fort described as: \"Impressions believed to be of Chhatrapati Shivaji Maharaj embedded in the fort w...\"?",
+    "options": [
+      "Aurangzeb",
+      "Handprint and Footprint Impressions",
+      "British East India Company",
+      "Vakataka Dynasty"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.structures",
+      "value": "Handprint and Footprint Impressions"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_067",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What type of structure is Handprint and Footprint Impressions at Sindhudurg Fort?",
+    "options": [
+      "British East India Company",
+      "Satavahana Dynasty",
+      "Cultural Marking",
+      "Chalukya Dynasty"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.structures",
+      "value": "Cultural Marking"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_068",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "How is Handprint and Footprint Impressions at Sindhudurg Fort described?",
+    "options": [
+      "Vakataka Dynasty",
+      "Rashtrakuta Dynasty",
+      "Mughal Empire",
+      "Impressions believed to be of Chhatrapati Shivaji Maharaj embedded in the fort walls"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.structures",
+      "value": "Impressions believed to be of Chhatrapati Shivaji Maharaj embedded in the fort walls"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_069",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What is the name of the Defensive Structure at Sindhudurg Fort described as: \"Approximately 3 km long fortified wall enclosing the fort...\"?",
+    "options": [
+      "Fort Perimeter Wall",
+      "Vakataka Dynasty",
+      "Rashtrakuta Dynasty",
+      "Chalukya Dynasty"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.structures",
+      "value": "Fort Perimeter Wall"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_070",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What type of structure is Fort Perimeter Wall at Sindhudurg Fort?",
+    "options": [
+      "Emperor Ashoka",
+      "Defensive Structure",
+      "Satavahana Dynasty",
+      "Aurangzeb"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.structures",
+      "value": "Defensive Structure"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_072",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What type of defensive design does Sindhudurg Fort employ?",
+    "options": [
+      "Mughal Empire",
+      "Vakataka Dynasty",
+      "Marine Fort Defense System",
+      "Chalukya Dynasty"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.defensive_design",
+      "value": "Marine Fort Defense System"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_073",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "How is the defensive design of Sindhudurg Fort described?",
+    "options": [
+      "Chhatrapati Shivaji Maharaj",
+      "King Harishena",
+      "Yadava Dynasty",
+      "Island-based fortification utilizing natural sea isolation, submerged rock reefs, concealed entrance design, and thick lime-mortar walls to resist naval attacks"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.defensive_design",
+      "value": "Island-based fortification utilizing natural sea isolation, submerged rock reefs, concealed entrance design, and thick lime-mortar walls to resist naval attacks"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_147",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "In which year is the event \"Foundation laying\" recorded in the history of Sindhudurg Fort?",
+    "options": [
+      "1664 CE",
+      "1656 CE",
+      "1674 CE",
+      "1689 CE"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events[0].year",
+      "value": "1664 CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_148",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "Which historical event occurred at Sindhudurg Fort in the year 1664 CE?",
+    "options": [
+      "Coronation of Shivaji Maharaj",
+      "Foundation laying",
+      "Siege by Aurangzeb",
+      "British bombardment"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events[0].event",
+      "value": "Foundation laying"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_151",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Historical Events",
+    "question": "In which year is the event \"Kanhoji Angre's command\" recorded in the history of Sindhudurg Fort?",
+    "options": [
+      "1656 CE",
+      "1674 CE",
+      "Early 18th century CE",
+      "1689 CE"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "historical_events[2].year",
+      "value": "Early 18th century CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_153",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "Which ruling power held control over Sindhudurg Fort during the period 1667–1818 CE?",
+    "options": [
+      "Mughal Empire",
+      "Siddi Dynasty of Janjira",
+      "British East India Company",
+      "Maratha Empire"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "ruling_powers_chronology[0].power",
+      "value": "Maratha Empire"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_154",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "What was the historical period during which Maratha Empire controlled Sindhudurg Fort?",
+    "options": [
+      "1667–1818 CE",
+      "Before 1656 CE",
+      "1656–1818 CE",
+      "1818–1947 CE"
+    ],
+    "correct_option_index": 0,
+    "source": {
+      "type": "mongodb",
+      "field": "ruling_powers_chronology[0].period",
+      "value": "1667–1818 CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_156",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Chronology",
+    "question": "What was the historical period during which British East India Company controlled Sindhudurg Fort?",
+    "options": [
+      "Before 1656 CE",
+      "1818-1947 CE",
+      "1656–1818 CE",
+      "1818–1947 CE"
+    ],
+    "correct_option_index": 1,
+    "source": {
+      "type": "mongodb",
+      "field": "ruling_powers_chronology[1].period",
+      "value": "1818-1947 CE"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_157",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Architecture",
+    "question": "What is the name of the prominent entrances feature at Sindhudurg Fort identified as 'ENT_01'?",
+    "options": [
+      "Maha Darwaza",
+      "Pali Darwaza",
+      "Main Sea Gate",
+      "Hirkani Buruj"
+    ],
+    "correct_option_index": 2,
+    "source": {
+      "type": "mongodb",
+      "field": "architectural_features.entrances[0].name",
+      "value": "Main Sea Gate"
+    }
+  },
+  {
+    "annotation_id": "Fort0004_text_170",
+    "site_id": "Fort0004",
+    "site_name": "Sindhudurg Fort",
+    "question_type": "text",
+    "category": "Authority",
+    "question": "Which authoritative body curates and verifies historical documentation for Sindhudurg Fort?",
+    "options": [
+      "Archaeological Survey of India",
+      "UNESCO World Heritage Centre",
+      "Maharashtra Tourism Development Corporation",
+      "Archaeological Survey of India, UNESCO World Heritage Centre"
+    ],
+    "correct_option_index": 3,
+    "source": {
+      "type": "mongodb",
+      "field": "verification_authority",
+      "value": "Archaeological Survey of India, UNESCO World Heritage Centre"
+    }
+  }
+]

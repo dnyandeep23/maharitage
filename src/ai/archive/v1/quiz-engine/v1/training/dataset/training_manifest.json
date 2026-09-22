@@ -1,0 +1,45 @@
+{
+  "clean_catalog_assets": 92,
+  "total_annotations": 23,
+  "image_leakage": 0,
+  "vds_3_count": 23,
+  "splits": {
+    "train": {
+      "images": 17,
+      "examples": 17
+    },
+    "validation": {
+      "images": 3,
+      "examples": 3
+    },
+    "test": {
+      "images": 3,
+      "examples": 3
+    }
+  },
+  "by_group": {
+    "insc_10_rzpw4d": 1,
+    "insc_05_ws51zu": 1,
+    "insc_008_oe2amg": 1,
+    "insc_007_cvrcza": 1,
+    "ajanta_cave_10_insc_01_rn3gz8": 1,
+    "_cav3209-12_djnckc": 1,
+    "insc_04_vvthh9": 1,
+    "_cav3208_-_12_bdqp81": 1,
+    "insc_01_gdbzsv": 1,
+    "cave_16_insc_02_oxdddd": 1,
+    "insc_02_gnp8kx": 1,
+    "insc_03_lwuy6b": 1,
+    "insc_55_uarwo6": 1,
+    "cave_17_insc_03_a6esqk": 1,
+    "insc_005_l0esdb": 1,
+    "insc_43_tcqb4k": 1,
+    "_cav3211-12_mchavi": 1,
+    "insc_06_bqmmib": 1,
+    "_cav3210-12_cmcl1x": 1,
+    "insc_001_jwh5qj": 1,
+    "insc_002_jy9scj": 1,
+    "insc_006_ulur3e": 1,
+    "insc_003_sq2amn": 1
+  }
+}

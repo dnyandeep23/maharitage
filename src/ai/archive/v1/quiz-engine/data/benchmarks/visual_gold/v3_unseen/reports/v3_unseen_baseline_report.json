@@ -1,0 +1,44 @@
+{
+  "benchmark_version": "v3.0.0-unseen-site",
+  "timestamp": "2026-08-09T12:49:38.101Z",
+  "metrics": {
+    "total_questions": 57,
+    "unique_images": 57,
+    "sites_covered": 3,
+    "option_distribution": {
+      "A": 15,
+      "B": 14,
+      "C": 14,
+      "D": 14
+    },
+    "unique_concepts": 57,
+    "text_only_accuracy": 100,
+    "image_accuracy": 100,
+    "image_gain": 0,
+    "image_swap_gate": "PASS",
+    "wilson_95_ci": {
+      "lowerPct": "93.7",
+      "upperPct": "100.0",
+      "formatted": "[93.7%, 100.0%]"
+    },
+    "statistical_sufficiency": "PASS",
+    "final_baseline_decision": "BASELINE_EVIDENCE_SUFFICIENT"
+  },
+  "per_site_accuracy": {
+    "Ell0001": {
+      "name": "The Ellora Caves",
+      "total": 1,
+      "correct": 1
+    },
+    "Aja0003": {
+      "name": "The Ajanta Caves",
+      "total": 3,
+      "correct": 3
+    },
+    "Kan0004": {
+      "name": "The Kanheri Caves",
+      "total": 53,
+      "correct": 53
+    }
+  }
+}

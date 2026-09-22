@@ -1,0 +1,83 @@
+[
+  {
+    "annotation_id": "Aja0003_insc_001_q001",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761732243/Ajanta_Cave_10_Insc_01_rn3gz8.jpg",
+    "cloudinary_public_id": "Ajanta_Cave_10_Insc_01_rn3gz8",
+    "inscription_index": 0,
+    "inscription_id": "Insc_01",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ajanta Caves (Insc_01)?",
+    "options": [
+      "Ancient Brahmi script with angular vertical strokes and simple geometric letter forms",
+      "Modern Devanagari script with a continuous top horizontal line (shirorekha)",
+      "Persian-Arabic calligraphic Naskh script written in sweeping curves",
+      "Cursive Modi script with connected looping letterforms"
+    ],
+    "correct_option_index": 0,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The inscription image displays early Brahmi characters with unadorned vertical stems and geometric loops incised directly into the stone.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[0].original_script",
+      "value": "Sanskrit in Brahmi script"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_insc_002_q003",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761733147/cave_16_insc_02_oxdddd.jpg",
+    "cloudinary_public_id": "cave_16_insc_02_oxdddd",
+    "inscription_index": 1,
+    "inscription_id": "Insc_02",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ajanta Caves (Insc_02)?",
+    "options": [
+      "Square Kufic Arabic script with dense block grid layout",
+      "Late Brahmi (Gupta period) script featuring decorative rounded curves and small horizontal head-marks",
+      "Tamil-Brahmi script with vertical dots (pulli)",
+      "Modern printed Latin typography"
+    ],
+    "correct_option_index": 1,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The characters exhibit the characteristic rounded curves and initial head-ticks of the 5th-century Gupta script phase.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[1].original_script",
+      "value": "Sanskrit in Gupta script"
+    }
+  },
+  {
+    "annotation_id": "Aja0003_insc_003_q005",
+    "site_id": "Aja0003",
+    "site_name": "The Ajanta Caves",
+    "question_type": "inscription",
+    "category": "Script & Paleography",
+    "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761746651/cave_17_insc_03_a6esqk.jpg",
+    "cloudinary_public_id": "cave_17_insc_03_a6esqk",
+    "inscription_index": 2,
+    "inscription_id": "Insc_03",
+    "question": "Which paleographic script feature is visually observable in this inscription scan from The Ajanta Caves (Insc_03)?",
+    "options": [
+      "Square Kufic Arabic script with dense block grid layout",
+      "Tamil-Brahmi script with vertical dots (pulli)",
+      "Late Brahmi (Gupta period) script featuring decorative rounded curves and small horizontal head-marks",
+      "Modern printed Latin typography"
+    ],
+    "correct_option_index": 2,
+    "visual_dependency_score": 3,
+    "visual_dependency_reason": "Question evaluates visually observable paleographic script traits in the scan.",
+    "visual_evidence": "The characters exhibit the characteristic rounded curves and initial head-ticks of the 5th-century Gupta script phase.",
+    "source": {
+      "type": "cloudinary",
+      "field": "inscriptions[2].original_script",
+      "value": "Sanskrit in Gupta script"
+    }
+  }
+]

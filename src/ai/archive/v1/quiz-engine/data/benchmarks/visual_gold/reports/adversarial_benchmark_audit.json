@@ -1,0 +1,23 @@
+{
+  "audit_timestamp": "2026-08-09T12:43:24.675Z",
+  "final_benchmark_status": "VALID_WITH_LIMITATIONS",
+  "gates": {
+    "image_to_answer_validity": "PASS",
+    "cross_site_sanity": "PASS",
+    "evidence_quality": "PASS",
+    "question_diversity": "PASS",
+    "concept_diversity": "PASS",
+    "option_family_independence": "PASS",
+    "image_swap_test": "PASS",
+    "site_balance": "PASS",
+    "statistical_sufficiency": "FAIL"
+  },
+  "metrics": {
+    "raw_questions": 55,
+    "unique_images": 55,
+    "unique_visual_concepts": 55,
+    "effective_question_count": 55,
+    "boilerplate_evidence_percentage": 0,
+    "invalid_cross_site_items": []
+  }
+}

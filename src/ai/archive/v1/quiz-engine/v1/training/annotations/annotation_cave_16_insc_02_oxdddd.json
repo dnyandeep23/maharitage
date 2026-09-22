@@ -1,0 +1,31 @@
+{
+  "annotation_id": "FILE_img_cave_16_insc_02_oxdddd",
+  "site_id": "FILE",
+  "site_name": "Maharashtra Heritage Site",
+  "question_type": "image",
+  "category": "Visual Identification",
+  "image_url": "https://res.cloudinary.com/ddstiusga/image/upload/v1761733147/cave_16_insc_02_oxdddd.jpg",
+  "cloudinary_public_id": "cave_16_insc_02_oxdddd",
+  "question": "Which of the following describes a prominent visual feature indicating damage or missing content within the main body of the inscription?",
+  "options": [
+    "A series of distinct vertical cracks extends from top to bottom.",
+    "A large, irregular white patch is visible in the lower-left quadrant.",
+    "The entire central section of the inscription is completely blank.",
+    "Numerous small, uniformly circular holes are scattered across the surface."
+  ],
+  "correct_option_index": 1,
+  "correct_semantic_answer": "A large, irregular white patch is visible in the lower-left quadrant.",
+  "visual_dependency_score": 3,
+  "visual_dependency_class": "IMAGE_ESSENTIAL",
+  "visual_evidence": "A distinct, irregularly shaped white area, indicative of a lacuna or damage, is clearly visible within the inscribed text, positioned towards the bottom-left portion of the main inscription block.",
+  "ground_truth": {
+    "visual_claim_verified": true,
+    "database_asset_verified": true,
+    "verification_method": "image_first_ground_truth_verification"
+  },
+  "source": {
+    "type": "cloudinary",
+    "field": "file:/Users/dnyandeep/Dnyandeep/Project/maharitage/all_cloudinary_refs.json",
+    "site_id": "FILE"
+  }
+}
