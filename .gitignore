@@ -48,3 +48,4 @@ src/ai/archive/v1/quiz-engine/v1/training/checkpoints/
 *.safetensors
 src/ai/archive/v1/quiz-engine/v1/training/dataset/inspect_and_deploy_lora.py
 src/ai/archive/v1/quiz-engine/v1/training/dataset/inspect_and_deploy_lora.py
+src/ai/archive/v1/quiz-engine/v1/training/dataset/inspect_and_deploy_lora.py
