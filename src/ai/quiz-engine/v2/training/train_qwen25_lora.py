@@ -193,6 +193,21 @@ def run_smoke_test(config):
     smoke_dataset = concatenate_datasets([img_ds, txt_ds])
     smoke_dataset = concatenate_datasets([smoke_dataset] * 80)
     
+    # --- PRE-TRAINING LABEL MASKING VERIFICATION ---
+    print("\n--- VERIFYING LABEL MASKING ---")
+    for label, ds in [("IMAGE_MCQ", img_ds), ("TEXT_MCQ", txt_ds)]:
+        batch = collator([ds[0]])
+        labels = batch["labels"][0]
+        unmasked = (labels != -100).nonzero(as_tuple=True)[0]
+        num_unmasked = len(unmasked)
+        seq_len = len(labels)
+        decoded = processor.tokenizer.decode(labels[unmasked].tolist()) if num_unmasked > 0 else "<NONE>"
+        print(f"  {label}: seq_len={seq_len}, unmasked_labels={num_unmasked}, decoded={repr(decoded)}")
+        assert num_unmasked > 0, f"{label}: All labels masked!"
+        assert num_unmasked < 10, f"{label}: Too many unmasked labels ({num_unmasked}), masking is broken!"
+        assert "ANSWER:" in decoded, f"{label}: Unmasked labels don't contain 'ANSWER:': {decoded}"
+    print("Label masking verified: only assistant answer tokens are trainable.")
+    
     training_args = SFTConfig(
         output_dir=os.path.join(os.path.dirname(__file__), 'checkpoints_smoke'),
         per_device_train_batch_size=config['batch_size'],
@@ -202,7 +217,7 @@ def run_smoke_test(config):
         fp16=True,
         bf16=False,
         max_length=None,
-        dataset_kwargs={"skip_prepare_dataset": False},
+        dataset_kwargs={"skip_prepare_dataset": True},
         save_strategy="no",
         remove_unused_columns=False,
         gradient_checkpointing=config['gradient_checkpointing'],
@@ -229,13 +244,19 @@ def run_smoke_test(config):
     print(f"\nSmoke test completed in {duration:.2f} seconds.")
     if torch.cuda.is_available():
         print(f"Peak Memory Allocation: {torch.cuda.max_memory_allocated() / (1024**3):.2f} GB")
-        
-    has_grad = any(p.grad is not None and p.grad.abs().sum() > 0 for p in model.parameters() if p.requires_grad)
-    assert has_grad, "No valid gradients found after training step!"
-    print("Gradients verified successfully.")
     
-    trainer.model.save_pretrained(os.path.join(os.path.dirname(__file__), 'checkpoints_smoke', 'adapter'))
-    print("Smoke test adapter saved successfully.")
+    # Verify gradients via logged grad_norm (post-train .grad is cleared by optimizer)
+    grad_norms = [entry.get('grad_norm', 0) for entry in trainer.state.log_history if 'grad_norm' in entry]
+    has_nonzero_grad = any(g > 0 for g in grad_norms)
+    print(f"Logged grad_norms: {grad_norms[:5]}... (total {len(grad_norms)} entries)")
+    assert has_nonzero_grad, f"No non-zero grad_norm found in training logs! grad_norms={grad_norms}"
+    print("Gradient flow verified via logged grad_norms.")
+    
+    # Save and verify adapter
+    adapter_path = os.path.join(os.path.dirname(__file__), 'checkpoints_smoke', 'adapter')
+    trainer.model.save_pretrained(adapter_path)
+    assert os.path.exists(os.path.join(adapter_path, 'adapter_config.json')), "adapter_config.json missing!"
+    print(f"Smoke test adapter saved and verified at {adapter_path}.")
 
 def run_full_training(config):
     from trl import SFTTrainer, SFTConfig
@@ -255,7 +276,7 @@ def run_full_training(config):
         fp16=True, 
         bf16=False,
         max_length=None,
-        dataset_kwargs={"skip_prepare_dataset": False},
+        dataset_kwargs={"skip_prepare_dataset": True},
         save_strategy="epoch",
         eval_strategy="epoch",
         remove_unused_columns=False,
