@@ -183,7 +183,7 @@ def run_smoke_test(config):
         max_steps=20,
         fp16=True,
         bf16=False,
-        max_seq_length=None,
+        max_length=None,
         dataset_kwargs={"skip_prepare_dataset": False},
         save_strategy="no",
         remove_unused_columns=False,
@@ -222,17 +222,20 @@ def run_full_training(config):
     from trl import SFTTrainer, SFTConfig
     model, processor, collator, dataset = setup_training(config, mode="full")
     
+    total_steps = (len(dataset['train']) // (config['batch_size'] * config['gradient_accumulation_steps'])) * config['epochs']
+    warmup_steps = int(total_steps * config.get('warmup_ratio', 0.1))
+    
     training_args = SFTConfig(
         output_dir=os.path.join(os.path.dirname(__file__), 'checkpoints'),
         per_device_train_batch_size=config['batch_size'],
         gradient_accumulation_steps=config['gradient_accumulation_steps'],
         learning_rate=config['learning_rate'],
         lr_scheduler_type=config['scheduler'],
-        warmup_ratio=config['warmup_ratio'],
+        warmup_steps=warmup_steps,
         num_train_epochs=config['epochs'],
         fp16=True, 
         bf16=False,
-        max_seq_length=None,
+        max_length=None,
         dataset_kwargs={"skip_prepare_dataset": False},
         save_strategy="epoch",
         eval_strategy="epoch",
