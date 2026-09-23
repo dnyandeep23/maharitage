@@ -69,7 +69,7 @@ def prepare_split(master_map, manifest_data, split_path, split_name, expected_co
                 print(f"ERROR: Corrupted image: {img_path} - {e}")
                 sys.exit(1)
             abs_img_path = os.path.abspath(img_path)
-            content.append({"type": "image", "image": f"file://{abs_img_path}"})
+            content.append({"type": "image"})
             
         content.append({"type": "text", "text": prompt_text})
         target_text = f"ANSWER: {q['answer']}"
@@ -84,6 +84,8 @@ def prepare_split(master_map, manifest_data, split_path, split_name, expected_co
         if abs_img_path:
             # Explicit images column for robust TRL loading
             record["images"] = [abs_img_path]
+        else:
+            record["images"] = []
             
         output_records.append(record)
         
