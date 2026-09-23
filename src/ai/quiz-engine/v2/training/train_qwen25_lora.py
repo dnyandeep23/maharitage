@@ -109,6 +109,24 @@ def run_mac_validation(config):
         assert len(vision_matches) == 0, f"Vision tower modules matched: {vision_matches}"
         print("Vision tower correctly excluded from LoRA targets.")
         
+        # Verify SFTTrainer initialization
+        from trl import SFTTrainer, SFTConfig
+        from datasets import Dataset
+        print("\nVerifying SFTTrainer Initialization...")
+        dummy_config = SFTConfig(
+            output_dir="dummy",
+            loss_type="nll",
+            max_length=None,
+        )
+        dummy_dataset = Dataset.from_dict({"messages": [[{"role": "user", "content": [{"type": "text", "text": "Hi"}]}]]})
+        trainer = SFTTrainer(
+            model=model,
+            args=dummy_config,
+            train_dataset=dummy_dataset,
+            processing_class=processor,
+        )
+        print("SFTTrainer instantiated successfully.")
+        
     except ImportError:
         print("Skipping module match validation because it requires loading the model.")
 
@@ -190,7 +208,8 @@ def run_smoke_test(config):
         gradient_checkpointing=config['gradient_checkpointing'],
         gradient_checkpointing_kwargs={"use_reentrant": False} if config['gradient_checkpointing'] else None,
         logging_steps=1,
-        report_to="none"
+        report_to="none",
+        loss_type="nll"
     )
     
     trainer = SFTTrainer(
@@ -243,6 +262,7 @@ def run_full_training(config):
         gradient_checkpointing=config['gradient_checkpointing'],
         gradient_checkpointing_kwargs={"use_reentrant": False} if config['gradient_checkpointing'] else None,
         logging_steps=10,
+        loss_type="nll"
     )
 
     trainer = SFTTrainer(
