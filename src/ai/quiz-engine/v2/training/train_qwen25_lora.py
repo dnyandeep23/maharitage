@@ -4,20 +4,28 @@ import argparse
 import yaml
 import json
 import torch
+import time
+import hashlib
+
+# Constants
+V2_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+MASTER_JSON = os.path.join(V2_DIR, 'benchmark', 'v2.0.1_master.json')
 
 def load_config():
     config_path = os.path.join(os.path.dirname(__file__), 'config.yaml')
     with open(config_path, 'r') as f:
         return yaml.safe_load(f)
 
-def run_mac_validation(config):
-    """
-    Validation mode explicitly for Mac to verify tensor shapes, dataset counts, 
-    and label masking without installing GPU-heavy TRL/PEFT stacks locally.
-    """
-    print("\n--- MAC-SIDE STATIC VALIDATION ---")
+def verify_data_integrity():
+    print("\n--- VERIFYING DATA INTEGRITY ---")
     
-    # Verify datasets without loading HF `datasets` library if missing
+    with open(MASTER_JSON, 'rb') as f:
+        data_bytes = f.read()
+    sha = hashlib.sha256(data_bytes).hexdigest()
+    expected_sha = "3951af0d0c4de8874e6ef963645ecd0110b359f03c246cc692ec4ee4f3e97b63"
+    assert sha == expected_sha, f"Hash mismatch: expected {expected_sha}, got {sha}"
+    print(f"Dataset hash verified: {sha}")
+
     data_dir = os.path.join(os.path.dirname(__file__), 'data')
     train_file = os.path.join(data_dir, 'train.jsonl')
     val_file = os.path.join(data_dir, 'validation.jsonl')
@@ -27,159 +35,193 @@ def run_mac_validation(config):
     with open(val_file) as f: val_data = [json.loads(l) for l in f]
     with open(test_file) as f: test_data = [json.loads(l) for l in f]
         
+    assert len(train_data) == 657, f"Expected 657 train examples, got {len(train_data)}"
+    assert len(val_data) == 23, f"Expected 23 validation examples, got {len(val_data)}"
+    assert len(test_data) == 54, f"Expected 54 test examples, got {len(test_data)}"
     print(f"Dataset Counts -> Train: {len(train_data)}, Val: {len(val_data)}, Test: {len(test_data)}")
-    assert len(train_data) == 657
-    assert len(val_data) == 23
-    assert len(test_data) == 54
+
+    for item in train_data + val_data + test_data:
+        # Excluded record check
+        ann_id = item.get("annotation_id", "")
+        # Note: dataset prepared without annotation_id in messages, but we check if it was retained.
+        # Wait, the prepare_dataset script does not save annotation_id in the JSONL! It only saves messages and images.
+        # Let's verify images instead.
+        if "images" in item and item["images"]:
+            for img in item["images"]:
+                assert os.path.exists(img), f"Image missing: {img}"
+                
+    print("Data integrity verified successfully.")
+    return train_data, val_data, test_data
+
+class AssistantOnlyVLMCollator:
+    def __init__(self, processor):
+        from trl.trainer.sft_trainer import DataCollatorForVisionLanguageModeling
+        self.processor = processor
+        self.base_collator = DataCollatorForVisionLanguageModeling(processor=processor)
+        self.assistant_prefix = "<|im_start|>assistant\n"
+        self.assistant_tokens = self.processor.tokenizer.encode(self.assistant_prefix, add_special_tokens=False)
+
+    def __call__(self, examples):
+        batch = self.base_collator(examples)
+        labels = batch["labels"].clone()
+        prefix_len = len(self.assistant_tokens)
+        
+        for i in range(len(labels)):
+            seq = batch["input_ids"][i].tolist()
+            match_idx = -1
+            for j in range(len(seq) - prefix_len + 1):
+                if seq[j:j+prefix_len] == self.assistant_tokens:
+                    match_idx = j + prefix_len
+                    break
+            if match_idx != -1:
+                labels[i, :match_idx] = -100
+        batch["labels"] = labels
+        return batch
+
+def run_mac_validation(config):
+    print("\n--- MAC-SIDE STATIC VALIDATION ---")
+    train_data, val_data, test_data = verify_data_integrity()
     
-    print("\nSelecting samples for verification...")
-    img_item = next(item for item in train_data if "images" in item)
-    txt_item = next(item for item in train_data if "images" not in item)
-    
-    print(f"IMAGE sample has 'images' column: {img_item.get('images')}")
-    print(f"IMAGE sample messages structure:\n{json.dumps(img_item['messages'], indent=2)}")
-    
-    # Test AutoProcessor locally (transformers is installed)
     try:
         from transformers import AutoProcessor
-        from qwen_vl_utils import process_vision_info
     except ImportError:
-        print("Missing 'transformers' or 'qwen_vl_utils'. Cannot verify tensors locally.")
+        print("Missing transformers. Cannot verify locally.")
         return
 
     print(f"\nLoading processor for {config['model_id']}...")
     processor = AutoProcessor.from_pretrained(config['model_id'])
     
-    # Process IMAGE example
-    print("\nApplying chat template to IMAGE example...")
-    text_img = processor.apply_chat_template(img_item['messages'], tokenize=False, add_generation_prompt=False)
-    image_inputs, video_inputs = process_vision_info(img_item['messages'])
-    
-    inputs_img = processor(
-        text=[text_img],
-        images=image_inputs,
-        videos=video_inputs,
-        padding=True,
-        return_tensors="pt"
-    )
-    
-    print("IMAGE sample shapes:")
-    print(f" - input_ids: {inputs_img.input_ids.shape}")
-    print(f" - attention_mask: {inputs_img.attention_mask.shape}")
-    if "pixel_values" in inputs_img:
-        print(f" - pixel_values: {inputs_img.pixel_values.shape}")
-        print(f" - image_grid_thw: {inputs_img.image_grid_thw.shape}")
-        
-    # Process TEXT example
-    print("\nApplying chat template to TEXT example...")
-    text_txt = processor.apply_chat_template(txt_item['messages'], tokenize=False, add_generation_prompt=False)
-    inputs_txt = processor(
-        text=[text_txt],
-        padding=True,
-        return_tensors="pt"
-    )
-    
-    print("TEXT sample shapes:")
-    print(f" - input_ids: {inputs_txt.input_ids.shape}")
-    print(f" - attention_mask: {inputs_txt.attention_mask.shape}")
-    
-    # Verify assistant masking logic mathematically
-    # Qwen2.5-VL assistant response starts after "<|im_start|>assistant\n"
-    # and ends at "<|im_end|>"
-    print("\nVerifying label masking boundaries...")
-    assistant_prefix = "<|im_start|>assistant\n"
-    assistant_tokens = processor.tokenizer.encode(assistant_prefix, add_special_tokens=False)
-    print(f"Assistant Prefix Tokens: {assistant_tokens}")
-    
-    labels = inputs_img.input_ids.clone()
-    
-    # Basic search for the assistant boundary
-    prefix_len = len(assistant_tokens)
-    seq = inputs_img.input_ids[0].tolist()
-    
-    match_idx = -1
-    for i in range(len(seq) - prefix_len + 1):
-        if seq[i:i+prefix_len] == assistant_tokens:
-            match_idx = i + prefix_len
-            break
-            
-    if match_idx != -1:
-        labels[0, :match_idx] = -100 # Mask everything up to the assistant response
-        # verify image tokens are masked
-        image_pad_token = processor.tokenizer.convert_tokens_to_ids("<|image_pad|>")
-        vision_start = processor.tokenizer.convert_tokens_to_ids("<|vision_start|>")
-        has_vision = (vision_start in seq)
-        
-        masked_region = labels[0, :match_idx]
-        masked_img_tokens = (masked_region == image_pad_token).sum().item()
-        
-        print(f"Boundary found at index {match_idx}.")
-        print(f"Image tokens masked with -100: {masked_img_tokens > 0} (Count: {masked_img_tokens})")
-        print(f"Assistant loss configuration is perfectly compatible.")
-    else:
-        print("ERROR: Assistant boundary not found. Masking would fail.")
-
-    # Check PEFT Modules
     print("\nVerifying Target Modules...")
     try:
-        from transformers import AutoModelForCausalLM
-        model = AutoModelForCausalLM.from_pretrained(config['model_id'], device_map="cpu", torch_dtype=torch.float32)
+        from transformers import Qwen2_5_VLForConditionalGeneration
+        model = Qwen2_5_VLForConditionalGeneration.from_pretrained(config['model_id'], device_map="cpu", torch_dtype=torch.float32)
         matched_modules = set()
         for name, module in model.named_modules():
+            if "visual" in name.lower() or "vision" in name.lower():
+                continue
             if any(target in name for target in config['lora_target_modules']):
                 matched_modules.add(name)
         print(f"Found {len(matched_modules)} instances of {config['lora_target_modules']} in model architecture.")
-        print("Target modules successfully verified on LLM backbone.")
-    except ImportError:
-        print("Skipping module match validation because it requires loading the 3B model locally.")
-    except Exception as e:
-        print(f"Error loading model for inspection: {e}")
+        assert len(matched_modules) > 0, "No LoRA modules matched!"
         
-    print("\nMac validation successfully proved tensor compatibility and dataset integrity.")
+        # Verify vision tower is NOT in target modules
+        vision_matches = [m for m in matched_modules if "visual" in m.lower() or "vision" in m.lower()]
+        assert len(vision_matches) == 0, f"Vision tower modules matched: {vision_matches}"
+        print("Vision tower correctly excluded from LoRA targets.")
+        
+    except ImportError:
+        print("Skipping module match validation because it requires loading the model.")
 
-def run_full_training(config):
-    from datasets import load_dataset, Image
-    from transformers import AutoModelForCausalLM, AutoProcessor
-    from peft import LoraConfig
-    from trl import SFTTrainer, SFTConfig, DataCollatorForVisionLanguageModeling
+    print("\nMac validation successfully completed.")
 
-    print("Loading datasets...")
+def setup_training(config, mode="full"):
+    from datasets import load_dataset, Image, Sequence
+    from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
+    from peft import LoraConfig, get_peft_model
+    
+    print(f"\n--- SETTING UP {mode.upper()} ---")
     data_dir = os.path.join(os.path.dirname(__file__), 'data')
     dataset = load_dataset('json', data_files={
         'train': os.path.join(data_dir, 'train.jsonl'),
         'validation': os.path.join(data_dir, 'validation.jsonl')
     })
     
-    # Cast images column to PIL Images so TRL and processor can natively resolve them
-    dataset = dataset.cast_column("images", Image(decode=True))
+    dataset = dataset.cast_column("images", Sequence(Image(decode=True)))
     
     print(f"Loading processor: {config['model_id']}")
     processor = AutoProcessor.from_pretrained(config['model_id'])
     
-    print(f"Loading model: {config['model_id']}")
-    model = AutoModelForCausalLM.from_pretrained(
+    # Kaggle T4 configuration: fp16
+    torch_dtype = torch.float16
+    print(f"Loading model: {config['model_id']} with dtype {torch_dtype}")
+    
+    model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         config['model_id'], 
         device_map="auto", 
-        torch_dtype=torch.bfloat16
+        torch_dtype=torch_dtype
     )
     
+    peft_target_modules = set()
+    for name, module in model.named_modules():
+        if "visual" in name.lower() or "vision" in name.lower():
+            continue
+        if any(t in name for t in config['lora_target_modules']):
+            peft_target_modules.add(name)
+            
     peft_config = LoraConfig(
         r=config['lora_r'],
         lora_alpha=config['lora_alpha'],
         lora_dropout=config['lora_dropout'],
         bias="none",
-        target_modules=config['lora_target_modules'],
+        target_modules=list(peft_target_modules),
         task_type="CAUSAL_LM"
     )
+    
+    model = get_peft_model(model, peft_config)
+    model.print_trainable_parameters()
+    
+    collator = AssistantOnlyVLMCollator(processor=processor)
+    
+    return model, processor, collator, dataset
 
-    # Use native TRL VLM Collator
-    response_template = "<|im_start|>assistant\n"
-    # Modern TRL uses DataCollatorForVisionLanguageModeling
-    collator = DataCollatorForVisionLanguageModeling(
-        tokenizer=processor.tokenizer,
-        response_template=response_template,
+def run_smoke_test(config):
+    from trl import SFTTrainer, SFTConfig
+    model, processor, collator, dataset = setup_training(config, mode="smoke test")
+    
+    img_ds = dataset['train'].filter(lambda x: len(x['images']) > 0).select(range(1))
+    txt_ds = dataset['train'].filter(lambda x: len(x['images']) == 0).select(range(1))
+    
+    from datasets import concatenate_datasets
+    smoke_dataset = concatenate_datasets([img_ds, txt_ds])
+    smoke_dataset = concatenate_datasets([smoke_dataset] * 80)
+    
+    training_args = SFTConfig(
+        output_dir=os.path.join(os.path.dirname(__file__), 'checkpoints_smoke'),
+        per_device_train_batch_size=config['batch_size'],
+        gradient_accumulation_steps=config['gradient_accumulation_steps'],
+        learning_rate=config['learning_rate'],
+        max_steps=20,
+        fp16=True,
+        bf16=False,
+        max_seq_length=None,
+        dataset_kwargs={"skip_prepare_dataset": False},
+        save_strategy="no",
+        remove_unused_columns=False,
+        gradient_checkpointing=config['gradient_checkpointing'],
+        gradient_checkpointing_kwargs={"use_reentrant": False} if config['gradient_checkpointing'] else None,
+        logging_steps=1,
+        report_to="none"
     )
+    
+    trainer = SFTTrainer(
+        model=model,
+        args=training_args,
+        train_dataset=smoke_dataset,
+        peft_config=None,
+        processing_class=processor,
+        data_collator=collator,
+    )
+    
+    print("\n--- STARTING SMOKE TEST ---")
+    start_t = time.time()
+    trainer.train()
+    duration = time.time() - start_t
+    
+    print(f"\nSmoke test completed in {duration:.2f} seconds.")
+    if torch.cuda.is_available():
+        print(f"Peak Memory Allocation: {torch.cuda.max_memory_allocated() / (1024**3):.2f} GB")
+        
+    has_grad = any(p.grad is not None and p.grad.abs().sum() > 0 for p in model.parameters() if p.requires_grad)
+    assert has_grad, "No valid gradients found after training step!"
+    print("Gradients verified successfully.")
+    
+    trainer.model.save_pretrained(os.path.join(os.path.dirname(__file__), 'checkpoints_smoke', 'adapter'))
+    print("Smoke test adapter saved successfully.")
 
+def run_full_training(config):
+    from trl import SFTTrainer, SFTConfig
+    model, processor, collator, dataset = setup_training(config, mode="full")
+    
     training_args = SFTConfig(
         output_dir=os.path.join(os.path.dirname(__file__), 'checkpoints'),
         per_device_train_batch_size=config['batch_size'],
@@ -188,16 +230,16 @@ def run_full_training(config):
         lr_scheduler_type=config['scheduler'],
         warmup_ratio=config['warmup_ratio'],
         num_train_epochs=config['epochs'],
-        bf16=True, 
-        max_seq_length=None, # Explicitly preserving None for VLM
+        fp16=True, 
+        bf16=False,
+        max_seq_length=None,
         dataset_kwargs={"skip_prepare_dataset": False},
         save_strategy="epoch",
         eval_strategy="epoch",
         remove_unused_columns=False,
         gradient_checkpointing=config['gradient_checkpointing'],
         gradient_checkpointing_kwargs={"use_reentrant": False} if config['gradient_checkpointing'] else None,
-        # Native TRL requires explicit dataset_text_field for standard SFT, but for VLM conversational 
-        # it infers it if skip_prepare_dataset=False.
+        logging_steps=10,
     )
 
     trainer = SFTTrainer(
@@ -205,12 +247,12 @@ def run_full_training(config):
         args=training_args,
         train_dataset=dataset['train'],
         eval_dataset=dataset['validation'],
-        peft_config=peft_config,
+        peft_config=None,
         processing_class=processor,
         data_collator=collator,
     )
 
-    print("Starting full trainer...")
+    print("\n--- STARTING FULL TRAINING ---")
     trainer.train()
     
     final_output = os.path.join(os.path.dirname(__file__), 'checkpoints', 'final_adapter')
@@ -220,15 +262,23 @@ def run_full_training(config):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--full-training", action="store_true")
+    parser.add_argument("--validate", action="store_true", help="Run local Mac validation")
+    parser.add_argument("--smoke-test", action="store_true", help="Run 20-50 step smoke test")
+    parser.add_argument("--full-training", action="store_true", help="Run full training")
     args = parser.parse_args()
 
     config = load_config()
 
-    if not args.full_training:
+    if args.validate:
         run_mac_validation(config)
-    else:
+    elif args.smoke_test:
+        verify_data_integrity()
+        run_smoke_test(config)
+    elif args.full_training:
+        verify_data_integrity()
         run_full_training(config)
+    else:
+        print("Please specify --validate, --smoke-test, or --full-training")
 
 if __name__ == "__main__":
     main()
