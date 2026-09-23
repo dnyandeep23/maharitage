@@ -11,6 +11,10 @@ import hashlib
 V2_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 MASTER_JSON = os.path.join(V2_DIR, 'benchmark', 'v2.0.1_master.json')
 
+# Qwen2.5-VL image resolution limits for T4 (16GB VRAM)
+MIN_PIXELS = 256 * 28 * 28    # 200,704
+MAX_PIXELS = 1024 * 28 * 28   # 802,816
+
 def load_config():
     config_path = os.path.join(os.path.dirname(__file__), 'config.yaml')
     with open(config_path, 'r') as f:
@@ -89,7 +93,12 @@ def run_mac_validation(config):
         return
 
     print(f"\nLoading processor for {config['model_id']}...")
-    processor = AutoProcessor.from_pretrained(config['model_id'])
+    processor = AutoProcessor.from_pretrained(
+        config['model_id'],
+        min_pixels=MIN_PIXELS,
+        max_pixels=MAX_PIXELS
+    )
+    print(f"  Processor min_pixels={MIN_PIXELS}, max_pixels={MAX_PIXELS}")
     
     print("\nVerifying Target Modules...")
     try:
@@ -147,7 +156,35 @@ def setup_training(config, mode="full"):
     dataset = dataset.cast_column("images", Sequence(Image(decode=True)))
     
     print(f"Loading processor: {config['model_id']}")
-    processor = AutoProcessor.from_pretrained(config['model_id'])
+    processor = AutoProcessor.from_pretrained(
+        config['model_id'],
+        min_pixels=MIN_PIXELS,
+        max_pixels=MAX_PIXELS
+    )
+    print(f"  Processor min_pixels={MIN_PIXELS}, max_pixels={MAX_PIXELS}")
+    
+    # Preflight: report image sizes in training data
+    print("\n--- IMAGE PREFLIGHT CHECK ---")
+    img_count = 0
+    max_w, max_h = 0, 0
+    for item in dataset['train']:
+        if item.get('images'):
+            for img in item['images']:
+                if img is not None:
+                    w, h = img.size
+                    img_count += 1
+                    max_w = max(max_w, w)
+                    max_h = max(max_h, h)
+    if img_count > 0:
+        max_raw_pixels = max_w * max_h
+        effective_pixels = min(max_raw_pixels, MAX_PIXELS)
+        grid_tokens = effective_pixels // (28 * 28)
+        print(f"  Images: {img_count}, max raw size: {max_w}x{max_h} ({max_raw_pixels:,} px)")
+        print(f"  Effective max pixels after clamping: {effective_pixels:,} -> ~{grid_tokens} vision tokens")
+    else:
+        print("  No images found in training data.")
+    print("Image preflight complete.")
+
     
     # Kaggle T4 configuration: fp16
     torch_dtype = torch.float16
